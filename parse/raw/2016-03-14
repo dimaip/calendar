@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml" >
+<head>
+  <meta http-equiv="x-dns-prefetch-control" content="on" />
+  <link rel="dns-prefetch" href="http://p2.patriarchia.ru" />
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+  <meta http-equiv='Content-Language' content='ru' />
+  <title>Ошибка 500 / Патриархия.ru</title>
+  <meta name='description' content='Ошибка 500 / Патриархия.ru' />
+  <link rel="stylesheet" href="/css/style.css?v71" type="text/css" />
+  <link rel="stylesheet" href="/css/print.css?v3" type="text/css" media="print" />
+  <script src="/js/archive2.js" type="text/javascript"></script>
+  <link rel='shortcut icon' href='/favicon.ico' type='image/x-icon' />
+  <script type="text/javascript">
+        var writeCalendar2Args = {rubric:null, cid:"News", current:"dbxy11yxnews", date:null};
+	function resize_main() {
+    var w;
+    var left_w  = document.getElementsByClassName("menubar")[0] ? document.getElementsByClassName("menubar")[0].offsetWidth : 0;
+    var right_w = document.getElementsByClassName("sidebar")[0] ? document.getElementsByClassName("sidebar")[0].offsetWidth : 0;
+    var ww = 20 + 6 + right_w + left_w;
+    if(document.body.offsetWidth <= 1000) w = (1000 - ww) +"px";
+      else if(document.body.offsetWidth >= 1256)  w = (1256 - ww) + "px";
+        else w = document.body.offsetWidth - ww + "px";
+    document.getElementById("main").style.width = w;
+	}
+  </script>
+  <link rel="alternate" type="application/rss+xml" title="Все материалы"  href="http://www.patriarchia.ru/rss/rss_all.rss" />
+  <link rel="alternate" type="application/rss+xml" title="Новости"        href="http://www.patriarchia.ru/rss/rss_news.rss" />
+  <link rel="alternate" type="application/rss+xml" title="Служение Патриарха" href="http://www.patriarchia.ru/rss/rss_patriarch.rss" />
+  <link rel="alternate" type="application/rss+xml" title="Видеоматериалы" href="http://www.patriarchia.ru/rss/rss_video.rss" />
+  <link rel="alternate" type="application/rss+xml" title="Анонсы"         href="http://www.patriarchia.ru/rss/rss_anns.rss" />
+  <link rel="alternate" type="application/rss+xml" title="Статьи"         href="http://www.patriarchia.ru/rss/rss_items.rss" />
+  <link rel="search"    type="application/opensearchdescription+xml" title="Патриархия.ru" href="http://www.patriarchia.ru/opensearch.xml" />
+  <meta property="og:title"       content="Ошибка 500 / Патриархия.ru" />
+  <meta property="og:description" content="Ошибка 500 / Патриархия.ru" />
+  <meta property="og:site_name"   content="Патриархия.ru" />
+  <link rel="image_src" href="http://www.patriarchia.ru/images/patr_banner_100_2.gif" />
+  <meta property="og:image"       content="http://www.patriarchia.ru/images/patr_banner_100_2.gif" />
+</head>
+<body id="Patriarchia.Ru"   onresize="resize_main();" onload="resize_main();">
+<div class="header header_ru">
+ <h1><a href="/index.html">Русская Православная Церковь<span></span></a></h1>
+ <h2>Официальный сайт Московского Патриархата<span></span></h2>
+ <div class="search">   
+ <form action="/search/">
+  <input name="text" type="search" onClick="if (this.value=='поиск') this.value= ''" value="поиск" size="30" class="textfield" />
+  <input name="" type="image" src="/images/search_btn3.png" alt="Найти" lass="btn" />
+ </form>
+</div>    
+
+ <div class="lang"><a href="/"><img src="/images/flag_ru.gif" alt="Русская версия" title="Русская версия" width='16' height='11' /></a><a href="/ua/"><img src="/images/flag_ua.gif" alt="Украинская версия" title="Украинская версия" width='16' height='11' /></a><a href="/md/"><img src="/images/flag_md.gif" alt="Молдавская версия" title="Молдавская версия" width='16' height='11' /></a></div>
+</div>
+
+<div class="menu_box"><div class="menu">
+ <ul>
+  <li id="menu_ithem_patriarch"><a href="/patriarch/">Патриарх</a></li>
+  <li id="menu_ithem_news"><a href="/db/news/">Новости</a></li>
+  <li id="menu_ithem_document"><a href="/db/document/">Документы</a></li>
+  <li id="menu_ithem_intersobor"><a href="/db/intersobor/">Межсоборное присутствие</a></li>
+  <li id="menu_ithem_publications"><a href="/db/publications/">Публикации</a></li>
+  <li id="menu_ithem_organizations"><a href="/db/organizations/">Организации</a></li>
+  <li id="menu_ithem_persons"><a href="/db/persons/">Персоналии</a></li>
+  <li id="menu_ithem_photo"><a href="/db/photo/">Фото</a></li>
+  <li id="menu_ithem_video"><a href="/db/video/">Видео</a></li>
+  <li id="menu_ithem_audio"><a href="/db/audio/">Аудио</a></li>
+  <li id="menu_ithem_annonces"><a href="/db/annonces/">Анонсы</a></li>
+  <li id="menu_ithem_vladimir_small"><a href="http://vladimir.patriarchia.ru">1000-летие</a></li>
+  <li id="menu_ithem_vladimir"><a href="http://vladimir.patriarchia.ru">1000-летие</a></li>
+  <li id="menu_ithem_vladimir_full" style="display: none; position: absolute; width: 405px; background: url('/images/gradient_bg.gif') repeat-x scroll left -86px #e2e2e2; text-shadow: 2px 1px #ccc;"><a href='http://vladimir.patriarchia.ru'>Тысячелетие преставления равноапостольного князя Владимира</a></li>
+ </ul>
+</div></div>
+<div class="sobor"><a href="/index.html" title="Главная страница"><img src="/images/sobor.gif" alt="Патриархия" title="Патриархия" /></a></div>
+<script src="http://yastatic.net/jquery/1.8.3/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){ 
+    $('#menu_ithem_vladimir_small, #menu_ithem_vladimir').mouseenter(function(){
+      $("#menu_ithem_vladimir_full").fadeIn();
+    });
+    $('#menu_ithem_vladimir_full').mouseleave(function(){
+      $("#menu_ithem_vladimir_full").fadeOut();
+    });
+  });
+</script>
+<style>
+
+</style>
+
+
+<div class="wrap">
+<div class="menubar">
+ 
+<ul class="submenu"><li><a href="http://www.patriarchia.ru/db/news/4251478/">Архиерейский Собор-2016</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/2767364/">Архиерейский Собор-2013</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/1392881/">Архиерейский Собор-2011</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/510720/">Поместный Собор-2009</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/510719/">Архиерейский Собор-2009</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/224/">Патриарх</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/2831736/">Высший Церковный Совет</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/1113805/">Межсоборное присутствие</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/230/">Синодальные учреждения</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/1415983/">Московская Патриархия</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/231/">Епархии и Экзархаты</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/232/">Поместные Церкви</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/233/">Церковь и государство</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/234/">Церковь и общество</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/3608/">Наука и образование</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/235/">Издательства и СМИ</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/1264/">Памятные даты</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/60524/">Старообрядчество</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/86406/">Межрелигиозные отношения</a></li>
+<li><a href="http://www.patriarchia.ru/db/news/17362/">Инославие</a></li></ul>
+
+
+ 
+
+<div class="section">
+ <h3>Главные новости</h3>
+ 
+ <h4 class="title"><a href="/db/text/4355912.html">В Представительстве Российской Федерации при ООН в Женеве был дан торжественный обед в честь Святейшего Патриарха Кирилла</a></h4>
+<h4 class="title"><a href="/db/text/4355411.html">Началась работа XXIV Международных Рождественских образовательных чтений</a></h4>
+<h4 class="title"><a href="/db/text/4354891.html">Святейший Патриарх Кирилл поздравил пользователей сети «ВКонтакте» с Днем российского студенчества</a></h4>
+<h4 class="title"><a href="/db/text/4354854.html">Перед началом работы Рождественских чтений в Храме Христа Спасителя была совершена Божественная литургия</a></h4>
+<h4 class="title"><a href="/db/text/4354554.html">Святейший Патриарх Кирилл посетил представительство Московского Патриархата при Всемирном совете церквей в Женеве</a></h4>
+
+</div>
+   
+
+ 
+<div class="section">
+ 
+ 
+ <div class="archive">
+<h3>Архив</h3>
+<div id="arch_container"></div>
+<form>
+ <table class="calendar_select"><tr>
+  <td><select onchange="writeCalendar2('ru')" id="arch_mm" class="calendar_select"><option selected="selected" value="1">январь</option><option value="2">февраль</option><option value="3">март</option><option value="4">апрель</option><option value="5">май</option><option value="6">июнь</option><option value="7">июль</option><option value="8">август</option><option value="9">сентябрь</option><option value="10">октябрь</option><option value="11">ноябрь</option><option value="12">декабрь</option></select></td>
+  <td><select onchange="writeCalendar2('ru')" id="arch_yy" class="calendar_select"><option value="2004">2004</option><option value="2005">2005</option><option value="2006">2006</option><option value="2007">2007</option><option value="2008">2008</option><option value="2009">2009</option><option value="2010">2010</option><option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option selected="selected" value="2016">2016</option></select></td>
+ </tr></table>
+</form>
+</div>
+<script type="text/javascript">
+  writeCalendar2('ru');
+</script>
+
+ <div>&nbsp;</div>
+ 
+<div class="rss_links leftside">
+ <ul>
+  <li><a href="http://pda.patriarchia.ru/" target="_blank">PDA-версия сайта</a></li>
+  <li><a href="/db/banners.html">Наши баннеры</a></li>
+  <li><a href="/rss/">Экспорт новостей</a>  <a href="/rss/"><img src="/images/rss2.gif" alt="Экспорт новостей" title="Экспорт новостей" /></a></li>
+  <li><a href="http://sinfo-mp.ru/stamp/" target="_blank">Список печатных СМИ, получивших гриф "Одобрено Синодальным информационным отделом Русской Православной Церкви"</a></li>
+ </ul>
+</div>
+
+
+</div>
+
+
+</div>
+
+<div class="main" id="main">                                
+ <div class="section">
+ <h3>Произошла ошибка</h3>
+ 
+  Произошла ошибка <span>500</span>. Просим прощения.
+ 
+</div>
+
+</div>
+
+ 
+<div class="sidebar">
+ 
+<div class="side_banner">
+ <a href="http://1000vladimir.ru/"><img src="/images/ssites/vladimir274x56-3.jpg" title="Официальный сайт 1000-летия преставления святого равноапостольного князя Владимира" alt="Официальный сайт 1000-летия преставления святого равноапостольного князя Владимира" /></a>
+</div>
+<div class="side_banner">
+ <div><a href="http://eparchia.patriarchia.ru/"><img src="/images/ssites/letopis_small.jpg" title="Летопись епархиальной жизни" alt="Летопись епархиальной жизни" /></a></div>
+</div>
+<div class="side_banner">
+ <a href="http://map.patriarhia.ru/"><img src="/images/ssites/map1.jpg" title="Официальная карта храмов Русской Православной Церкви" alt="Официальная карта храмов Русской Православной Церкви" /></a>
+</div>
+<div class="moscow_banner">
+ <a href="http://e-vestnik.ru/?utm_source=patriarchia&utm_medium=banner&utm_campaign=b1"><img src="/images/jmp/banner-jmp-inner.png" title="Журнал Московской Патриархии" alt="Журнал Московской Патриархии" /></a>
+</div>
+<div class="moscow_banner">
+ <a href="http://www.moseparh.ru"><img src="/images/m-ep/banner-moscow-276.jpg?v2" title="Епархия города Москвы" alt="Епархия города Москвы" /></a>
+</div>
+
+
+ 
+
+<div class="section">
+ <h3>Календарь</h3>
+ <script>
+  function kld_date(date) {
+    var kld_url = "/rpc/date="+date+"/kld.xml";
+    server_call(null,{},function(resp) {
+      var resp_objects = xml_getObjectList(resp);
+      if (resp_objects && resp_objects[0] && resp_objects[0]["html"]) {
+        var container = document.getElementById('calendar_container');
+        container.innerHTML = resp_objects[0]["html"];
+      }
+    },kld_url,null,"GET",1);
+  }
+</script>
+<div id="calendar_container">
+
+    <div class="illustr"><img src="http://p2.patriarchia.ru/620/839/1234/Header.jpg" border="0"  width="109" height="150" alt="Нина равноап." title="Нина равноап." /></div>
+
+ <div class="calendar">
+  <div class="day"><b><a href="#" class="next_prev_kld" onClick="kld_date('2016-01-26');return false">&#8592;</a> 14 января / 27 января <a href="#" class="next_prev_kld" onClick="kld_date('2016-01-28');return false">&#8594;</a></b></div><br>
+  <div class="saints"><b>Отдание праздника Богоявления.</b> Преподобных отец, в Синае и Раифе избиенных. <b>Равноап. <a href="http://www.patriarchia.ru/db/text/909662.html">Нины</a>, просветительницы Грузии </b>(335)<b>.</b></div>
+  <div class="saints">Прп. <a href="http://www.patriarchia.ru/db/text/909659.html">Иосифа</a> Аналитина Раифского (IV). Прп. <a href="http://www.patriarchia.ru/db/text/909656.html">Феодула</a> (V). Прп. <a href="http://www.patriarchia.ru/db/text/909687.html">Стефана</a> (VIII).</div>
+  <div class="saints">Прп. Иоанна Кевролетина исп. (1961).</div>
+  <div class="read">Утр. - <a href="http://www.patriarchia.ru/bible/mf/10/index.html#mf-34p-10.1~8">Мф., 34 зач. (от полу&#769;), X, 1-8*.</a> &nbsp;Лит. - <a href="http://www.patriarchia.ru/bible/heb/10/index.html#heb-323-10.1~18">Евр., 323 зач., X, 1-18.</a> &nbsp;<a href="http://www.patriarchia.ru/bible/mk/8/index.html#mk-36-8.30~34">Мк., 36 зач., VIII, 30-34.</a> &nbsp;Равноап.: <a href="http://www.patriarchia.ru/bible/co1/4/index.html#co1-131-4.9~16">1 Кор., 131 зач., IV, 9-16.</a> &nbsp;<a href="http://www.patriarchia.ru/bible/mf/25/index.html#mf-104-25.1~13">Мф., 104 зач., XXV, 1-13.</a><div style='color:Gray;text-align:justify;font-size:10px;'>* Чтения равноап. Нины (на утрене и литургии) читаются, если ей совершается служба.</div></div>
+  <div class="comm">При соединении службы отдания Богоявления с полиелейной службой равноап. Нины следует руководствоваться Марковой главой Типикона под 25 мая о соединении службы отдания Вознесения со службой Обре&#769;тения главы Иоанна Предтечи.</div>
+
+    <div class="sluzh">
+      <a href="http://www.patriarchia.ru/bu/today">Богослужебные указания на сегодня</a>
+      &nbsp; <a href="http://www.patriarchia.ru/bu/tomorrow">на&nbsp;завтра</a>
+      &nbsp; <a href="http://www.yandex.ru/?add=134478" target="_blank" style=" color:#0D44A0;font-size:10px;text-decoration:none;">[виджет&nbsp;на&nbsp;яндексе]</a>
+    </div>
+
+  <div class="rop">Официальный церковный календарь.<br>Предоставлен Издательством Московской Патриархии &nbsp; <a href="http://www.rop.ru/" target="_blank">www.rop.ru</a>.</div>
+
+ </div>
+
+</div>
+
+</div>
+
+ 
+<div class="section">
+ <h3><a href="/db/photo/">Фотоальбомы</a></h3>
+ 
+ <div class="illustr"><a href="/db/text/4355446.html"><img src="http://p2.patriarchia.ru/2016/01/25/1238661028/1P20160125-VSN_1491-1200.jpg" border="0"  width="170" height="113" alt="Торжественное открытие XXIV Международных Рождественских образовательных чтений" title="Торжественное открытие XXIV Международных Рождественских образовательных чтений" /></a></div>
+ <div class="photo">
+  <div class="date">25 января 2016 г.</div>
+  <h4 class="title"><a href="/db/text/4355446.html">Торжественное открытие XXIV Международных Рождественских образовательных чтений</a></h4>
+  <div class="all_photo"><a href="/db/photo/" class="a_photo">Другие фотоальбомы</a></div>
+ </div>
+
+</div>
+
+
+ 
+<div class="section">
+ <h3><a href="/db/video/">Видеоматериалы</a></h3>
+ 
+ <div class="illustr"><a href="/db/text/4355265.html"><img src="http://p2.patriarchia.ru/2016/01/25/1238660627/2.jpg" border="0"  width="170" height="103" alt="Обращение Святейшего Патриарха Кирилла к участникам и гостям XXIV Международных Рождественских чтений" title="Обращение Святейшего Патриарха Кирилла к участникам и гостям XXIV Международных Рождественских чтений" /></a></div>
+ <div class="photo">
+  <div class="date">25 января 2016 г.</div>
+  <h4 class="title"><a href="/db/text/4355265.html">Обращение Святейшего Патриарха Кирилла к участникам и гостям XXIV Международных Рождественских чтений</a></h4>
+  <div class="all_photo"><a href="/db/video/" class="a_video">Другие видеоматериалы</a></div>
+ </div>
+
+</div>
+
+
+ 
+<div class="section">
+ <h3><a href="/db/audio/">Аудиоматериалы</a></h3>
+ 
+ <div class="illustr"><a href="/db/text/3785681.html"><img src="http://p2.patriarchia.ru/2014/10/09/1236254979/3P20141008-PAL_1851-1200.jpg" border="0"  width="170" height="113" alt="Слово Святейшего Патриарха Кирилла в день памяти преподобного Сергия Радонежского с балкона Патриарших покоев Троице-Сергиевой лавры" title="Слово Святейшего Патриарха Кирилла в день памяти преподобного Сергия Радонежского с балкона Патриарших покоев Троице-Сергиевой лавры" /></a></div>
+ <div class="photo">
+  <div class="date">8 октября 2014 г.</div>
+  <h4 class="title"><a href="/db/text/3785681.html">Слово Святейшего Патриарха Кирилла в день памяти преподобного Сергия Радонежского с балкона Патриарших покоев Троице-Сергиевой лавры</a></h4>
+  <div class="all_photo"><a href="/db/audio/" class="a_audio">Другие аудиоматериалы</a></div>
+ </div>
+
+</div>
+
+
+ 
+<div class="section">
+ <h3><a href="/db/annonces/">Анонсы</a></h3>
+ 
+ <div class="announce">
+  <div class="date">25 января 2016 г. &mdash; 27 января 2016 г.</div>
+  <h4 class="title"><a href="/db/text/4331492.html">XXIV Международные Рождественские образовательные чтения</a></h4>
+  
+ </div>
+ <div class="announce">
+  <div class="date">1 февраля 2016 г.</div>
+  <h4 class="title"><a href="/db/text/4355778.html">Служение Святейшего Патриарха Кирилла в годовщину интронизации</a></h4>
+  
+ </div>
+
+</div>
+
+
+ 
+<div class="section">
+ <h3>Актуально</h3>
+ 
+ <div class="top_papers"><div class="paper"><h4 class="title"><a href="/db/text/4128428.html">Летопись Патриаршего служения в 2015 году</a><div>Патриарх</div></h4></div><div class="paper"><h4 class="title"><a href="/db/text/4304773.html">ЖУРНАЛЫ заседания Священного Синода от 24 декабря 2015 года</a><div>Документы</div></h4></div><div class="paper"><h4 class="title"><a href="/db/text/4250871.html">Очередной Архиерейский Собор Русской Православной Церкви пройдет 2-3 февраля 2016 года</a></h4></div><div class="paper"><h4 class="title"><a href="/db/text/3981166.html">Об участии верных в Евхаристии</a><div>Документы</div></h4></div><div class="paper"><h4 class="title"><a href="/db/text/3675015.html">Обращение Святейшего Патриарха Кирилла к Полноте Русской Православной Церкви</a><div>Патриарх : Послания</div></h4></div></div>
+
+</div>
+
+ 
+ 
+<div class="section">
+ <h3><a href="/db/interview/">Интервью</a></h3>
+ 
+ <div class="interview">
+  <ul><li><a href="/db/text/4354822.html">Митрополит Волоколамский Иларион: Через произведения изобразительного искусства мы лучше узнаём самих себя</a></li>
+<li><a href="/db/text/4350181.html">Игумения Ксения (Чернега): «Я не жалею, что продолжаю заниматься профессиональной деятельностью»</a></li>
+<li><a href="/db/text/4349485.html">Интервью председателя Отдела внешних церковных связей Московского Патриархата сербскому изданию «Вечерние новости»</a></li></ul>
+ </div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="footer">
+ 
+ <div class="copy">
+  &copy Patriarchia.ru<br />
+  <span class="rights">Все права защищены</span>
+  <div>&copy Сделано в <a href="http://www.stack.net/">Stack Group</a>, 2005 &ndash; 2016</div>
+ </div>
+
+ <div class="links"><a href="/txt/about.html">О проекте</a> | <a href="/txt/legal.html">Правовая информация</a> | <a href="/txt/contacts.html">Контакты</a></div>
+ 
+ <div class="counters">
+<a href="http://top100.rambler.ru/top100/"><img src="http://top100-images.rambler.ru/top100/banner-88x31-rambler-gray2.gif" alt="Rambler's Top100" width=88 height=31 border=0></a><a href="http://top100.rambler.ru/top100/"><img src="http://counter.rambler.ru/top100.cnt?730049" alt="" width=1 height=1 border=0></a><!-- Yandex.Metrika counter --><div style="display:none;"><script type="text/javascript">(function(w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter13010452 = new Ya.Metrika({id:13010452, trackLinks:true, clickmap:true, trackHash:false, webvisor:false, accurateTrackBounce:false}); } catch(e) { } }); })(window, "yandex_metrika_callbacks");</script></div><script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript" defer="defer"></script><noscript><div><img src="//mc.yandex.ru/watch/13010452" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+ </div>
+
+ <div class="search">   
+ <form action="/search/">
+  <input name="text" type="search" onClick="if (this.value=='поиск') this.value= ''" value="поиск" size="30" class="textfield" />
+  <input name="" type="image" src="/images/search_foot_btn.gif" alt="Найти" lass="btn" />
+ </form>
+</div>    
+
+</div>
+
+
+</body>
+</html>
+
