@@ -1,13 +1,15 @@
 import React from 'react';
 import {Route, IndexRedirect} from 'react-router';
-import dateFormat from 'dateformat';
 import Main from 'containers/Main/Main';
+import Reading from 'containers/Reading/Reading';
 import Root from 'containers/Root';
+import today from 'helpers/today';
 
 const routes = (
-  <Route path='/' component={Root} >
-    <IndexRedirect to={'/' + dateFormat(new Date(), 'yyyy-mm-dd')} />
-    <Route path=':date' component={Main} />
+  <Route path='/' component={Root}>
+    <IndexRedirect to={today} />
+    <Route path='/:date' component={Main} />
+    <Route path='/:date/read/:service' component={Reading} />
   </Route>
 );
 

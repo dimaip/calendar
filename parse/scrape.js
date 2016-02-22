@@ -8,6 +8,7 @@ module.exports = (dateString) => {
 	request({
 		uri: url
 	}, function (error, response, body) {
-		FS.write(path.join('raw', dateString), body).then(() => console.log('OK'), error => console.log(error));
+		const filePath = path.join('raw', dateString);
+		FS.exists(filePath).then(value => value ? console.log('file exists') : FS.write(filePath, body)).catch(error => console.log(error));
 	});
 };

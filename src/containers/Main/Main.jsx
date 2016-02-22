@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
-import {routeActions} from 'react-router-redux';
+import {connect} from 'react-redux';
+import {browserHistory} from 'react-router';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import dateFormat from 'dateformat';
@@ -10,30 +11,35 @@ import 'rc-collapse/assets/index.css';
 import {fetchDate} from 'redux/modules/main';
 import ReadingList from 'containers/Main/ReadingList';
 
+@connect(state => ({
+  state,
+  data: state.main.get('data')
+}))
 export default class Main extends Component {
   static propTypes = {
     data: PropTypes.object,
-    dateString: PropTypes.string,
+    params: PropTypes.object,
     dispatch: PropTypes.func
   };
   componentDidMount() {
-    this.props.dispatch(fetchDate(this.props.dateString));
+    this.props.dispatch(fetchDate(this.props.params.date));
   }
   handleDayClick(e, day) {
     const dateString = dateFormat(day, 'yyyy-mm-dd');
-    this.props.dispatch(routeActions.push(`/${dateString}`));
     this.props.dispatch(fetchDate(dateString));
+    browserHistory.push(`/${dateString}`);
   }
   render() {
-    const innerContent = this.props.data ? (
+    const dayData = this.props.data ? this.props.data.get(this.props.params.date) : null;
+    const innerContent = dayData ? (
       <div>
-        <h1 dangerouslySetInnerHTML={{__html: this.props.data.title}} />
+        <h1 dangerouslySetInnerHTML={{__html: dayData.title}} />
         <Collapse accordion={true} defaultActiveKey='1'>
           <Panel header='Чтения' key='1'>
-            <ReadingList readings={this.props.data.readings} />
+            <ReadingList readings={dayData.get('readings')} date={this.props.params.date} />
           </Panel>
           <Panel header='Святые' key='2'>
-            <div dangerouslySetInnerHTML={{__html: this.props.data.saints}} />
+            <div dangerouslySetInnerHTML={{__html: dayData.get('saints')}} />
           </Panel>
           <Panel header='Проповедь' key='3'>
             Проповедь

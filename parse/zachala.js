@@ -7,7 +7,7 @@ const downloadZachala = gid => {
 	return HTTP.read(url)
 		.then(body => FS.write(path.join('cache', gid + '.csv'), body))
 		.catch(error => console.log(error))
-		.then(value => value);
+		.then(() => FS.read(path.join('cache', gid + '.csv')));
 };
 
 const readZachala = gid => FS.read(path.join('cache', gid + '.csv')).catch(() => downloadZachala(gid));
@@ -31,13 +31,16 @@ const zachalaPromise = Promise.all([readZachala('3'), readZachala('18')])
 module.exports = zachalaPromise
 	.then(zachala => {
 		return z => {
-			z = z.replace(' (от полу́)', '').replace(/\*/g, '');
+			const zr = z.replace(/(,|;)$/, '.').replace(/\s?\(.*?\)/g, '').replace(/\*/g, '');
 			var result = null;
 			Object.keys(zachala).forEach(function (key) {
-				if (zachala[key].indexOf(z) !== -1) {
+				if (zachala[key].indexOf(zr) !== -1) {
 					result = key;
 				}
 			});
+			if (!result) {
+				console.log('error resolving:', z, 'processed:', zr);
+			}
 			return result;
 		};
 	})

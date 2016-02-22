@@ -1,33 +1,36 @@
 import React from 'react';
+import {Link} from 'react-router';
 
 const ReadingGroup = ({title, readingVerses}) => {
-  const parsedVerses = readingVerses.replace(/<a href="(.*)">/g, '<a href="http://bible.psmb.ru/bible/book/$1">');
+  console.log(readingVerses.toJS());
+  const verses = readingVerses.map((value, key) => <div key={key}>{value.get('verse')}</div>).toArray();
   return (
     <div>
       <h3>{title}</h3>
-      <div dangerouslySetInnerHTML={{__html: parsedVerses}} />
+      {verses}
     </div>
   );
 };
 ReadingGroup.propTypes = {
   title: React.PropTypes.string.isRequired,
-  readingVerses: React.PropTypes.string.isRequired,
+  readingVerses: React.PropTypes.object.isRequired
 };
 
-const ReadingsForService = ({title, readingsForService}) => {
-  const rendredReadingGroups = Object.keys(readingsForService).map(key =>
-    <ReadingGroup title={key} readingVerses={readingsForService[key]} key={key} />
-  );
+const ReadingsForService = ({title, readingsForService, date}) => {
+  const rendredReadingGroups = readingsForService.map((value, key) =>
+    <ReadingGroup title={key} readingVerses={value} key={key} />
+  ).toArray();
   return (
-    <div>
+    <Link to={`/${date}/read/${title}`}>
       <h2>{title}</h2>
       {rendredReadingGroups}
-    </div>
+    </Link>
   );
 };
 ReadingsForService.propTypes = {
   title: React.PropTypes.string.isRequired,
   readingsForService: React.PropTypes.object.isRequired,
+  date: React.PropTypes.string.isRequired
 };
 
 export default ReadingsForService;

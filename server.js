@@ -24,6 +24,7 @@ if (isDev) {
 
   app.use(require('webpack-hot-middleware')(compiler));
 }
+app.use('/static', express.static(path.join(__dirname, 'static'), {maxAge: 2678400000}));
 app.use('/api', express.static(path.join(__dirname, 'parse/processed'), {maxAge: 2678400000}));
 // app.use(favicon(path.join(__dirname, '/static/favicons/favicon.ico')));
 
