@@ -5,14 +5,13 @@ import {Provider} from 'react-redux';
 import {Router} from 'react-router';
 import routes from 'redux/routes';
 import getStore from 'redux/store';
-import getHistory from 'redux/history';
+import {browserHistory} from 'react-router';
 
-const history = getHistory();
 const store = getStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history} routes={routes} />
+    <Router history={browserHistory} routes={routes} />
   </Provider>
   , document.getElementById('app')
 );
