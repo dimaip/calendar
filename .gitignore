@@ -1,2 +1,5 @@
 node_modules
 static/build
+parse/processed
+parse/raw
+parse/cache
