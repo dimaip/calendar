@@ -1,5 +1,6 @@
 import express from 'express';
 import compression from 'compression';
+import FS from 'q-io/fs';
 // import favicon from 'serve-favicon';
 import path from 'path';
 
@@ -19,18 +20,40 @@ if (isDev) {
 
   app.use(require('webpack-dev-middleware')(compiler, {
     noInfo: true,
-    publicPath: config.output.publicPath,
+    publicPath: config.output.publicPath
   }));
 
   app.use(require('webpack-hot-middleware')(compiler));
 }
 app.use('/static', express.static(path.join(__dirname, 'static'), {maxAge: 2678400000}));
 app.use('/api', express.static(path.join(__dirname, 'parse/processed'), {maxAge: 2678400000}));
+app.use('/bible', express.static(path.join(__dirname, 'convertBibleQuote/new'), {maxAge: 2678400000}));
 // app.use(favicon(path.join(__dirname, '/static/favicons/favicon.ico')));
 
 function handleRender(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 }
 
+function getTranslations(req, res) {
+  const matchTranslations = req.url.match(/\/translations\/(.+)/);
+  if (matchTranslations) {
+    let translations;
+    FS.list(path.join(__dirname, 'convertBibleQuote/new'))
+      .then(r => {
+        translations = r;
+        return r;
+      })
+      .then(r => r.map(trKey => {
+        const readingPath = path.join(__dirname, 'convertBibleQuote/new', trKey, matchTranslations[1]);
+        return FS.exists(readingPath);
+      }))
+      .then(r => Promise.all(r))
+      .then(r => res.send(translations.filter((value, i) => r[i])));
+  } else {
+    FS.list(path.join(__dirname, 'convertBibleQuote/new')).then(r => res.send(r));
+  }
+}
+
+app.get('/translations/*', getTranslations);
 app.get('*', handleRender);
 app.listen(port);

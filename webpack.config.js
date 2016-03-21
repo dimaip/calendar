@@ -19,29 +19,22 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          env: {
-            development: {
-              presets: ['react-hmre']
-            }
-          }
-        }
+        loader: 'babel'
       },
       {
         test: /\.css$/,
         loader: 'style!css!'
-      },
-    ],
+      }
+    ]
   },
   resolve: {
     root: path.join(__dirname, 'src'),
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js'],
     modulesDirectories: [
       'app',
-      'node_modules',
-    ],
-  },
+      'node_modules'
+    ]
+  }
 };

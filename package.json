@@ -4,7 +4,7 @@
   "description": "Orthodox calendar",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_ENV=development NODE_PATH=./node_modules:./src nodemon --exec babel-node server",
+    "dev": "NODE_ENV=development NODE_PATH=./node_modules:./src babel-node server",
     "start": "NODE_ENV=production NODE_PATH=./node_modules:./src babel-node server",
     "compile": "./node_modules/.bin/babel-node compile.js",
     "test": "./node_modules/.bin/mocha --require babel-core/register --recursive  src/**/*.spec.js"
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-polyfill": "^6.7.2",
     "compression": "^1.6.1",
     "dateformat": "^1.0.12",
     "deromanize": "^0.1.0",
@@ -21,6 +22,7 @@
     "isomorphic-fetch": "^2.2.1",
     "moment": "^2.11.1",
     "path": "^0.12.7",
+    "q-io": "^1.13.2",
     "rc-collapse": "^1.4.4",
     "react": "^0.14.3",
     "react-day-picker": "^1.2.0",
@@ -49,6 +51,7 @@
     "eslint": "^1.10.3",
     "eslint-config-xo": "^0.9.1",
     "eslint-config-xo-react": "^0.3.0",
+    "eslint-plugin-babel": "^3.1.0",
     "eslint-plugin-react": "^3.14.0",
     "filesize": "^3.2.1",
     "mocha": "^2.4.5",

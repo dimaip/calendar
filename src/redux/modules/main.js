@@ -35,7 +35,6 @@ export const fetchDate = createAction(FETCH_DATE, async date => {
               readings[serviceType][readingType] = readings[serviceType][readingType].match(/<a.*?>.+?<\/a>/ig).map(i => {
                 return {
                   verse: i.replace(/<a.*?>/, '').replace('</a>', ''),
-                  text: 'adsfasdfasdf asdjflaksdjfla sdfasd',
                   title: readingType
                 };
               });
