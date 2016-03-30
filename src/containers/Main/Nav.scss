@@ -1,0 +1,42 @@
+@value blue, gray, grayDark, grayBg, transition, shadow from 'styles/constants.scss';
+
+.root {
+    display: flex;
+    align-items: center;
+    background-color: grayBg;
+    padding: 18px 0;
+}
+.date {
+    flex-grow: 1;
+}
+.dateNew {
+    font-size: 18px;
+    color: grayDark;
+}
+.dateOld {
+    font-size: 14px;
+    color: gray;
+}
+
+.toggle {
+    composes: root from 'components/Button.scss';
+    color: blue;
+    padding-top: 7px;
+    margin-right: 12px;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.arrows {
+    font-size: 2em;
+    color: gray;
+    cursor: pointer;
+    transition: transition;
+    padding: 6px;
+    @media (min-width: 360px) {
+        padding: 18px;
+    }
+}
+.arrows:hover {
+    color: grayDark;
+}

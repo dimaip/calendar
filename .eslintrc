@@ -116,7 +116,7 @@
         "computed-property-spacing": [2, "never"],
         "eol-last": 2,
         "indent": [2, 2, {"SwitchCase": 1}],
-        "jsx-quotes": 2,
+        "jsx-quotes": [2, "prefer-single"],
         "key-spacing": [2, {beforeColon: false, afterColon: true}],
         "linebreak-style": [2, "unix"],
         "max-nested-callbacks": [1, 4],

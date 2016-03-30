@@ -4,10 +4,14 @@ let prevVerse;
 const renderVerse = ({verse, content}, key) => {
   let elipsis = '';
   if (Number(prevVerse) + 1 !== Number(verse)) {
-    elipsis = <div>...</div>;
+    elipsis = <span>...<br/></span>;
   }
   prevVerse = verse;
-  return (<div key={`${key}${verse}`}>{elipsis}<em>{verse}:</em> {content}</div>);
+  const style = {
+    lineHeight: '1.5',
+    marginRight: '3px'
+  };
+  return (<span style={style} key={`${key}${verse}`}>{elipsis}<strong>{verse}</strong>&nbsp;<span dangerouslySetInnerHTML={{__html: content}} /></span>);
 };
 
 const findVerse = (chapter, verseNumber) => chapter.find(i => Number(i.verse) === verseNumber);
@@ -56,9 +60,14 @@ export default class Chapter extends Component {
   }
   render() {
     prevVerse = 0;
+    const style = {
+      fontSize: '1.5rem',
+      marginTop: '12px',
+      marginBottom: '6px'
+    };
     return (
       <div>
-        <h3>Глава {this.props.chapterNumber}</h3>
+        <h3 style={style}>Глава {this.props.chapterNumber}</h3>
         {this.state.chapter && this.state.chapter.map(renderVerse)}
       </div>
     );

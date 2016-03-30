@@ -6,8 +6,8 @@ import filesize from 'filesize';
 const config = require(path.join(__dirname, 'webpack.config.js'));
 const compiler = webpack(config);
 
-compiler.run(function Compile(err, stats) {
-  console.log('Completed in ' + ((stats.endTime - stats.startTime) / 1000));
+compiler.run((err, stats) => {
+  console.log(`Completed in ${((stats.endTime - stats.startTime) / 1000)}`);
 
   const errors = stats.compilation.errors;
   if (errors && errors.length) {

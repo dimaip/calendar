@@ -1,0 +1,45 @@
+body {
+  // Needed for slide transitions
+  overflow-y: hidden;
+}
+
+.slide {
+  transition: all 0.3s ease-out;
+  position: relative;
+  overflow: hidden;
+  min-height: 100px;
+}
+.slide-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-transition-group {
+  overflow: hidden;
+}
+.slide-right-enter {
+  transform: translate3d(100%, 0, 0);
+}
+.slide-left-enter {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.slide-right-enter-active,
+.slide-left-enter-active,
+.slide-right-leave,
+.slide-left-leave {
+  transform: translate3d(0, 0, 0);
+}
+
+.slide-right-leave-active {
+  transform: translate3d(-100%, 0, 0);
+}
+.slide-left-leave-active {
+  transform: translate3d(100%, 0, 0);
+}
+
+.slide-right-leave,
+.slide-left-leave {
+  top: 0;
+  position: absolute;
+}

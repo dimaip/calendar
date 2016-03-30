@@ -1,28 +1,15 @@
 import React from 'react';
 import {Link} from 'react-router';
-
-const ReadingGroup = ({title, readingVerses}) => {
-  console.log(readingVerses.toJS());
-  const verses = readingVerses.map((value, key) => <div key={key}>{value.get('verse')}</div>).toArray();
-  return (
-    <div>
-      <h3>{title}</h3>
-      {verses}
-    </div>
-  );
-};
-ReadingGroup.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  readingVerses: React.PropTypes.object.isRequired
-};
+import ReadingGroup from './ReadingGroup';
+import s from './ReadingsForService.scss';
 
 const ReadingsForService = ({title, readingsForService, date}) => {
   const rendredReadingGroups = readingsForService.map((value, key) =>
     <ReadingGroup title={key} readingVerses={value} key={key} />
   ).toArray();
   return (
-    <Link to={`/${date}/read/${title}`}>
-      <h2>{title}</h2>
+    <Link className={s.root} to={`/${date}/read/${title}`}>
+      <h2 className={s.title}>{title}</h2>
       {rendredReadingGroups}
     </Link>
   );

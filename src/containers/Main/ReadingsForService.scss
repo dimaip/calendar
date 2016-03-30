@@ -1,0 +1,12 @@
+@value blue from 'styles/constants.scss';
+
+.root {
+    composes: root from 'components/Button.scss';
+    display: block;
+    padding: 18px;
+    margin: 12px 0;
+}
+
+.title {
+    color: blue;
+}

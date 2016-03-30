@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
+import Dropdown from 'react-dropdown';
 import verseParse from 'helpers/verseParse';
+import translations from 'constants/translations';
 import Chapter from './Chapter';
+import 'styles/Dropdown.css';
+import s from './ReadingItem.scss';
 
 export default class ReadingItem extends Component {
   static propTypes = {
@@ -20,22 +24,31 @@ export default class ReadingItem extends Component {
     const {bookKey} = verseParse(this.props.verse);
     fetch(`http://localhost:3000/translations/${bookKey}/`)
       .then(response => response.json())
-      .then(response => this.setState({translations: response}));
+      .then(response => this.setState(
+        {
+          translations: response,
+          activeTranslation: response[0]
+        }
+      ));
   }
 
-  renderTranslationButton(key) {
-    const clickHandler = (key) => () => this.setState({activeTranslation: key});
-    return <li key={key}><button onClick={clickHandler.bind(this)(key)}>{key}</button></li>;
-  }
   render() {
+    const clickHandler = ({value}) => this.setState({activeTranslation: value});
     const {bookKey, segments} = verseParse(this.props.verse);
-    const activeTranslation = this.state.activeTranslation ? this.state.activeTranslation : this.state.translations[0];
-    console.log(activeTranslation);
+    const activeTranslation = this.state.activeTranslation && translations[this.state.activeTranslation].title;
+    const options = this.state.translations.map(i => (
+      {
+        value: i,
+        label: translations[i].title
+      }
+    ));
     return (
-      <div key={this.props.title}>
-        <ul>{this.state.translations.map(this.renderTranslationButton.bind(this))}</ul>
-        <h2><em>{this.props.title}:</em> {this.props.verse}</h2>
-        {activeTranslation && Object.keys(segments).map((i, key) => <Chapter key={key} chapterNumber={Number(i)} translation={activeTranslation} segments={segments[i]} bookKey={bookKey} />)}
+      <div>
+        <div className={s.root}>
+          <div className={s.translationLabel}>Перевод: </div>
+          <Dropdown options={options} onChange={clickHandler} value={activeTranslation} />
+        </div>
+        {this.state.activeTranslation && Object.keys(segments).map((i, key) => <Chapter key={key} chapterNumber={Number(i)} translation={this.state.activeTranslation} segments={segments[i]} bookKey={bookKey} />)}
       </div>
     );
   }

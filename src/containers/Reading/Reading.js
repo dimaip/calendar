@@ -1,9 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
+import Collapse, {Panel} from 'rc-collapse';
 import {fetchDate} from 'redux/modules/main';
+import Loader from 'components/Loader';
 import ReadingItem from 'containers/Reading/ReadingItem';
-import 'rc-collapse/assets/index.css';
+import HeadingBar from './HeadingBar';
+import 'styles/Collapse.scss';
 
 @connect(state => ({
   state,
@@ -26,13 +28,25 @@ export default class Reading extends Component {
       readings.map(i => {
         readingsArray.push(...i.toJS());
       });
-      renderedReadings = readingsArray.map(i => <ReadingItem key={i.verse} {...i} />);
+      renderedReadings = (
+        <Collapse accordion={true} defaultActiveKey='0'>
+          {readingsArray.map((i, j) => (
+            <Panel header={`${i.title} ${i.verse}`} key={j}>
+              <ReadingItem {...i} />
+            </Panel>
+          ))}
+        </Collapse>
+      );
     } else {
-      renderedReadings = 'Загрузка...';
+      renderedReadings = <Loader />;
     }
+
     return (
       <div>
-        <div><Link to={`/${this.props.params.date}`}>Назад</Link></div>
+        <HeadingBar
+            date={this.props.params.date}
+            service={this.props.params.service}
+            />
         {renderedReadings}
       </div>
     );
