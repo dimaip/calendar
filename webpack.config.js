@@ -14,7 +14,6 @@ const config = {
     filename: 'index.js',
     publicPath: '/static/build/'
   },
-  target: 'node',
   plugins: [],
   module: {
     loaders: [

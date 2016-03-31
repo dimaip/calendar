@@ -5,7 +5,6 @@ import CalendarIcon from 'react-icons/lib/fa/calendar.js';
 import CircleLeftIcon from 'react-icons/lib/fa/arrow-circle-o-left.js';
 import CircleRightIcon from 'react-icons/lib/fa/arrow-circle-o-right.js';
 import Button from 'components/Button';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import s from './Nav.scss';
 
 const Nav = ({
@@ -31,4 +30,4 @@ Nav.propTypes = {
   date: React.PropTypes.string.isRequired
 };
 
-export default withStyles(Nav, s);
+export default Nav;

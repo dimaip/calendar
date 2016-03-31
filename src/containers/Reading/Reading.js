@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Collapse, {Panel} from 'rc-collapse';
+import Loader from 'react-loader';
 import {fetchDate} from 'redux/modules/main';
-import Loader from 'components/Loader';
 import ReadingItem from 'containers/Reading/ReadingItem';
 import HeadingBar from './HeadingBar';
 import 'styles/Collapse.scss';
@@ -37,8 +37,6 @@ export default class Reading extends Component {
           ))}
         </Collapse>
       );
-    } else {
-      renderedReadings = <Loader />;
     }
 
     return (
@@ -47,7 +45,9 @@ export default class Reading extends Component {
             date={this.props.params.date}
             service={this.props.params.service}
             />
-        {renderedReadings}
+        <Loader loaded={Boolean(this.props.data)} >
+          {renderedReadings}
+        </Loader>
       </div>
     );
   }
