@@ -7,7 +7,7 @@ import dateFormat from 'dateformat';
 import LocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/ru';
 import Collapse, {Panel} from 'rc-collapse';
-import {fetchDate} from 'redux/modules/main';
+import {fetchDate} from 'reducers/modules/main';
 import ReadingList from 'containers/Main/ReadingList';
 import moment from 'moment';
 import Nav from './Nav';

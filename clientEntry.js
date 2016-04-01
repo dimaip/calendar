@@ -3,8 +3,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {Router} from 'react-router';
-import routes from 'redux/routes';
-import getStore from 'redux/store';
+import routes from 'reducers/routes';
+import getStore from 'reducers/store';
 import {browserHistory} from 'react-router';
 
 const store = getStore();

@@ -66,6 +66,7 @@
     "filesize": "^3.2.1",
     "isomorphic-style-loader": "0.0.12",
     "mocha": "^2.4.5",
+    "null-loader": "^0.1.1",
     "postcss-loader": "^0.8.2",
     "postcss-nested": "^1.0.0",
     "react-transform": "0.0.3",

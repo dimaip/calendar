@@ -2,13 +2,7 @@ import express from 'express';
 import compression from 'compression';
 import FS from 'q-io/fs';
 import path from 'path';
-
-// import React from 'react';
-// import ReactDOMServer from 'react-dom/server';
-// import {RoutingContext, match} from 'react-router';
-// import {Provider} from 'react-redux';
-// import routes from 'redux/routes';
-// import getStore from 'redux/store';
+import handleRender from './static/build/server.js';
 
 delete process.env.BROWSER;
 
@@ -34,44 +28,6 @@ if (isDev) {
 app.use('/static', express.static(path.join(__dirname, 'static'), {maxAge: 2678400000}));
 app.use('/api', express.static(path.join(__dirname, 'parse/processed'), {maxAge: 2678400000}));
 app.use('/bible', express.static(path.join(__dirname, 'convertBibleQuote/new'), {maxAge: 2678400000}));
-
-function handleRender(req, res) {
-  res.sendFile(path.join(__dirname, 'index.html'));
-}
-
-// function handleRender(req, res) {
-//   const store = getStore(true);
-//   match({routes, location}, (error, redirectLocation, renderProps) => {
-//     if (redirectLocation) {
-//       res.redirect(301, redirectLocation.pathname + redirectLocation.search);
-//     } else if (error) {
-//       res.status(500).send(error.message);
-//     } else if (renderProps === null) {
-//       res.status(404).send('Not found');
-//     } else {
-//       const promises = ['asdf'];
-//       renderProps.routes.map(route => {
-//         if (route.onEnter) {
-//           promises.push(route.onEnter(renderProps));
-//         }
-//       });
-//       Promise.all(promises).then(
-//         () => {
-//           const html = ReactDOMServer.renderToString(
-//             <div>
-//               <Provider store={store}>
-//                 <RoutingContext {...renderProps}/>
-//               </Provider>
-//             </div>
-//           );
-//           res.send(html);
-//           // const initialState = store.getState();
-//           // res.send(renderFullPage(html, initialState));
-//         }
-//       );
-//     }
-//   });
-// }
 
 function getTranslations(req, res) {
   const matchTranslations = req.url.match(/\/translations\/(.+)/);

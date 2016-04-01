@@ -2,16 +2,16 @@ const path = require('path');
 const webpack = require('webpack');
 const postcssNested = require('postcss-nested');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 const isDev = process.env.NODE_ENV === 'development';
 
 const config = {
-  entry: [
-    './main.js'
-  ],
+  name: 'client',
+  entry: ['./clientEntry.js'],
   output: {
     path: path.join(__dirname, 'static/build/'),
-    filename: 'index.js',
+    filename: 'client.js',
     publicPath: '/static/build/'
   },
   plugins: [],
@@ -29,7 +29,7 @@ const config = {
     root: path.join(__dirname, 'src'),
     extensions: ['', '.js'],
     modulesDirectories: [
-      'app',
+      'src',
       'node_modules'
     ]
   }
@@ -70,4 +70,48 @@ if (isDev) {
   );
 }
 
-module.exports = config;
+const serverConfig = {
+  name: 'server',
+  target: 'node',
+  externals: [nodeExternals()],
+  entry: ['./serverEntry.js'],
+  output: {
+    path: path.join(__dirname, 'static/build/'),
+    filename: 'server.js',
+    publicPath: '/static/build/',
+    libraryTarget: 'commonjs2'
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel'
+      },
+      {
+        test: /\.css$/,
+        loader: 'null'
+      },
+      {
+        test: /\.scss$/,
+        loader: 'css-loader/locals?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
+      }
+    ]
+  },
+  node: {
+    __filename: true,
+    __dirname: true,
+    console: true
+  },
+  postcss: () => [postcssNested],
+  resolve: {
+    root: path.join(__dirname, 'src'),
+    extensions: ['', '.js'],
+    modulesDirectories: [
+      'src',
+      'node_modules'
+    ]
+  }
+};
+
+module.exports = [config, serverConfig];
