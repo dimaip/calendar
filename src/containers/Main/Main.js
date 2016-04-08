@@ -9,11 +9,10 @@ import 'moment/locale/ru';
 import Collapse, {Panel} from 'rc-collapse';
 import {fetchDate} from 'reducers/modules/main';
 import ReadingList from 'containers/Main/ReadingList';
-import moment from 'moment';
 import Nav from './Nav';
 import HeadingBar from './HeadingBar';
-import Loader from 'react-loader';
-import 'react-day-picker/lib/style.css';
+import Loader from 'components/Loader';
+import 'styles/DayPicker.css';
 import 'styles/Collapse.scss';
 import 'styles/Slides.css';
 
@@ -34,9 +33,6 @@ export default class Main extends Component {
       direction: 'mount'
     };
   }
-  componentDidMount() {
-    this.props.dispatch(fetchDate(this.props.params.date));
-  }
   componentWillReceiveProps(newProps) {
     // Compare dates and set the slide direction for animation
     if (newProps.params.date !== this.props.params.date) {
@@ -52,18 +48,6 @@ export default class Main extends Component {
     this.setState({
       calendarShown: false
     });
-  }
-  handleNextDayClick() {
-    const date = moment(this.props.params.date).add(1, 'days');
-    const dateString = dateFormat(date, 'yyyy-mm-dd');
-    this.props.dispatch(fetchDate(dateString));
-    browserHistory.push(`/${dateString}`);
-  }
-  handlePrevDayClick() {
-    const date = moment(this.props.params.date).subtract(1, 'days');
-    const dateString = dateFormat(date, 'yyyy-mm-dd');
-    this.props.dispatch(fetchDate(dateString));
-    browserHistory.push(`/${dateString}`);
   }
   handleToggleClick() {
     this.setState({
@@ -99,8 +83,6 @@ export default class Main extends Component {
         <Nav
             date={this.props.params.date}
             handleToggleClick={this.handleToggleClick.bind(this)}
-            handlePrevDayClick={this.handlePrevDayClick.bind(this)}
-            handleNextDayClick={this.handleNextDayClick.bind(this)}
             />
         {this.state.calendarShown && <DayPicker onDayClick={this.handleDayClick.bind(this)} locale='ru' localeUtils={LocaleUtils} />}
         <div className='slide-wrap'>

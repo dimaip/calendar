@@ -1,17 +1,17 @@
 import 'babel-polyfill';
+import 'babel-core/register';
 import FS from 'q-io/fs';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import {Provider} from 'react-redux';
-import {RoutingContext, match} from 'react-router';
-import routes from 'reducers/routes';
+import {RouterContext, match} from 'react-router';
+import getRoutes from 'reducers/routes';
 import getStore from 'reducers/store';
 import createLocation from 'history/lib/createLocation';
 
-const store = getStore();
-
-function sendResponse(res, html) {
+function sendResponse(res, html, initialState) {
   FS.read('index.html')
+    .then(r => r.replace(/window\.__INITIAL_STATE__ = {};/, `window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};`))
     .then(r => r.replace(/<div id="app"><\/div>/, `<div id="app">${html}</div>`))
     .then(r => res.send(r))
     .catch(e => console.log(e));
@@ -19,6 +19,7 @@ function sendResponse(res, html) {
 
 function handleRender(req, res) {
   const store = getStore(true);
+  const routes = getRoutes(store);
   const location = createLocation(req.url);
   match({routes, location}, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
@@ -29,7 +30,7 @@ function handleRender(req, res) {
       res.status(404).send('Not found');
     } else {
       const promises = ['asdf'];
-      renderProps.routes.map(route => {
+      renderProps && renderProps.routes.map(route => {
         if (route.onEnter) {
           promises.push(route.onEnter(renderProps));
         }
@@ -38,12 +39,11 @@ function handleRender(req, res) {
         () => {
           const html = ReactDOMServer.renderToString(
             <Provider store={store}>
-              <RoutingContext {...renderProps}/>
+              <RouterContext {...renderProps}/>
             </Provider>
           );
-          sendResponse(res, html);
-          // const initialState = store.getState();
-          // res.send(renderFullPage(html, initialState));
+          const initialState = store.getState();
+          sendResponse(res, html, initialState);
         }
       );
     }

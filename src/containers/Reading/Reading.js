@@ -17,9 +17,6 @@ export default class Reading extends Component {
     params: PropTypes.object,
     dispatch: PropTypes.func
   };
-  componentDidMount() {
-    this.props.dispatch(fetchDate(this.props.params.date));
-  }
   render() {
     let renderedReadings;
     if (this.props.data) {

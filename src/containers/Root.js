@@ -11,16 +11,14 @@ export default class Root extends Component {
   render() {
     return (
       <div>
-        <header className={s.root}>
-          <Link to='/' title='На главную'>
+        <header>
+          <Link to='/' title='На главную' className={s.root}>
             <Logo className={s.logo} />
-          </Link>
-          <a href='http://psmb.ru' title='Перейти на сайт Преображенского братства'>
             <div className={s.title}>
               Православный<br />
               календарь
             </div>
-          </a>
+          </Link>
         </header>
         {this.props.children}
         <footer>c.psmb.ru</footer>

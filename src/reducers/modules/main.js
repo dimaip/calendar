@@ -23,8 +23,9 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export const setDate = createAction(SET_DATE, date => date);
-export const fetchDate = createAction(FETCH_DATE, async date => {
-  return await fetch(`http://localhost:3000/api/${date}`)
+const fetchDateSync = createAction(FETCH_DATE, (date, data) => data, date => date);
+export const fetchDate = date => dispatch => {
+  return fetch(`http://localhost:3000/api/${date}`)
     .then(response => response.json())
     .then(response => {
       const readings = response.readings;
@@ -47,5 +48,6 @@ export const fetchDate = createAction(FETCH_DATE, async date => {
     })
     .then(response => {
       return fromJS(response);
-    });
-}, date => date);
+    })
+    .then(data => dispatch(fetchDateSync(date, data)));
+};

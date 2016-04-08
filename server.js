@@ -2,32 +2,7 @@ import express from 'express';
 import compression from 'compression';
 import FS from 'q-io/fs';
 import path from 'path';
-import handleRender from './static/build/server.js';
-
-delete process.env.BROWSER;
-
-const app = express();
-const port = process.env.PORT || 3000;
-
-const isDev = process.env.NODE_ENV === 'development';
-
-app.use(compression());
-
-if (isDev) {
-  const webpack = require('webpack');
-  const config = require(path.join(__dirname, 'webpack.config.js'));
-  const compiler = webpack(config);
-
-  app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-  }));
-
-  app.use(require('webpack-hot-middleware')(compiler));
-}
-app.use('/static', express.static(path.join(__dirname, 'static'), {maxAge: 2678400000}));
-app.use('/api', express.static(path.join(__dirname, 'parse/processed'), {maxAge: 2678400000}));
-app.use('/bible', express.static(path.join(__dirname, 'convertBibleQuote/new'), {maxAge: 2678400000}));
+import favicon from 'express-favicon';
 
 function getTranslations(req, res) {
   const matchTranslations = req.url.match(/\/translations\/(.+)/);
@@ -49,6 +24,30 @@ function getTranslations(req, res) {
   }
 }
 
+const app = express();
+const port = process.env.PORT || 3000;
+
+let handleRender;
+if (process.env.NODE_ENV === 'development') {
+  handleRender = (req, res) => res.sendFile(path.join(__dirname, 'index.html'));
+  const webpack = require('webpack');
+  const config = require(path.join(__dirname, 'webpack.config.js'));
+  const compiler = webpack(config);
+
+  app.use(require('webpack-dev-middleware')(compiler, {
+    noInfo: true,
+    publicPath: config.output.publicPath
+  }));
+  app.use(require('webpack-hot-middleware')(compiler));
+} else {
+  handleRender = require(path.join(__dirname, './static/build/server.js')).default;
+}
+
+app.use(compression());
+app.use(favicon(path.join(__dirname, 'static/favicon.ico')));
+app.use('/static', express.static(path.join(__dirname, 'static'), {maxAge: 2678400000}));
+app.use('/api', express.static(path.join(__dirname, 'parse/processed'), {maxAge: 2678400000}));
+app.use('/bible', express.static(path.join(__dirname, 'convertBibleQuote/new'), {maxAge: 2678400000}));
 app.get('/translations/*', getTranslations);
 app.get('*', handleRender);
 app.listen(port);

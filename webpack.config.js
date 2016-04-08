@@ -39,6 +39,9 @@ if (isDev) {
   config.entry.unshift('webpack-hot-middleware/client');
   config.devtool = 'cheap-module-eval-source-map';
   config.plugins.push(
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"development"'
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   );
@@ -53,10 +56,19 @@ if (isDev) {
     }
   );
 } else {
+  config.devtool = null;
+  config.sourcemaps = null;
   config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
     new webpack.optimize.DedupePlugin(),
-    new ExtractTextPlugin('styles.css'),
+    new ExtractTextPlugin('styles.css')
   );
   config.module.loaders.push(
     {
@@ -74,13 +86,20 @@ const serverConfig = {
   name: 'server',
   target: 'node',
   externals: [nodeExternals()],
-  entry: ['./serverEntry.js'],
+  entry: [
+    './serverEntry.js'
+  ],
   output: {
     path: path.join(__dirname, 'static/build/'),
     filename: 'server.js',
     publicPath: '/static/build/',
     libraryTarget: 'commonjs2'
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    })
+  ],
   module: {
     loaders: [
       {
@@ -114,4 +133,4 @@ const serverConfig = {
   }
 };
 
-module.exports = [config, serverConfig];
+module.exports = isDev ? config : [config, serverConfig];
