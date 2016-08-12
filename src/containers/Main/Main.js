@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
+import Transmit from 'react-transmit';
+import {fromJS} from 'immutable';
+import fetch from 'isomorphic-fetch';
 import {browserHistory} from 'react-router';
 import DayPicker from 'react-day-picker';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
@@ -7,7 +9,6 @@ import dateFormat from 'dateformat';
 import LocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/ru';
 import Collapse, {Panel} from 'rc-collapse';
-import {fetchDate} from 'reducers/modules/main';
 import ReadingList from 'containers/Main/ReadingList';
 import Nav from './Nav';
 import HeadingBar from './HeadingBar';
@@ -16,15 +17,10 @@ import 'styles/DayPicker.css';
 import 'styles/Collapse.scss';
 import 'styles/Slides.css';
 
-@connect(state => ({
-  state,
-  data: state.main.get('data')
-}))
-export default class Main extends Component {
+class Main extends Component {
   static propTypes = {
     data: PropTypes.object,
-    params: PropTypes.object,
-    dispatch: PropTypes.func
+    params: PropTypes.object
   };
   constructor() {
     super();
@@ -43,7 +39,6 @@ export default class Main extends Component {
   }
   handleDayClick(e, day) {
     const dateString = dateFormat(day, 'yyyy-mm-dd');
-    this.props.dispatch(fetchDate(dateString));
     browserHistory.push(`/${dateString}`);
     this.setState({
       calendarShown: false
@@ -55,7 +50,7 @@ export default class Main extends Component {
     });
   }
   render() {
-    const dayData = this.props.data ? this.props.data.get(this.props.params.date) : null;
+    const dayData = this.props.data;
     const innerContent = dayData && (
       <Loader loaded={Boolean(dayData)} >
         <div>
@@ -101,3 +96,42 @@ export default class Main extends Component {
     );
   }
 }
+
+export default Transmit.createContainer(Main, {
+  initialVariables: {
+    date: '2015-01-01'
+  },
+  fragments: {
+    data({date}) {
+      console.log(this.props);
+      if (!date) {
+        throw new Error('Date query param is required in main');
+      }
+      return fetch(`http://localhost:3000/api/${date}`)
+        .then(response => response.json())
+        .then(response => {
+          const readings = response.readings;
+          for (const serviceType in readings) {
+            if (readings.hasOwnProperty(serviceType)) {
+              for (const readingType in readings[serviceType]) {
+                if (readings[serviceType].hasOwnProperty(readingType)) {
+                  readings[serviceType][readingType] = readings[serviceType][readingType].match(/<a.*?>.+?<\/a>/ig).map(i => {
+                    return {
+                      verse: i.replace(/<a.*?>/, '').replace('</a>', ''),
+                      title: readingType
+                    };
+                  });
+                }
+              }
+            }
+          }
+          response.readings = readings;
+          return response;
+        })
+        .then(response => {
+          return fromJS(response);
+        })
+        .catch(e => console.log(e));
+    }
+  }
+});

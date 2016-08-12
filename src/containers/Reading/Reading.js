@@ -1,16 +1,10 @@
 import React, {Component, PropTypes} from 'react';
-import {connect} from 'react-redux';
 import Collapse, {Panel} from 'rc-collapse';
 import Loader from 'react-loader';
-import {fetchDate} from 'reducers/modules/main';
 import ReadingItem from 'containers/Reading/ReadingItem';
 import HeadingBar from './HeadingBar';
 import 'styles/Collapse.scss';
 
-@connect(state => ({
-  state,
-  data: state.main.get('data')
-}))
 export default class Reading extends Component {
   static propTypes = {
     data: PropTypes.object,

@@ -3,6 +3,7 @@ import compression from 'compression';
 import FS from 'q-io/fs';
 import path from 'path';
 import favicon from 'express-favicon';
+import proxy from 'express-http-proxy';
 
 function getTranslations(req, res) {
   const matchTranslations = req.url.match(/\/translations\/(.+)/);
@@ -45,8 +46,10 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(compression());
 app.use(favicon(path.join(__dirname, 'static/favicon.ico')));
+app.use('/api', proxy('http://c.psmb.ru', {
+  forwardPath: (req) => `/pravoslavnyi-kalendar/date/${req.url.replace(/[^0-9]/g, '')}/?tx_orthodox_orthodox[format]=json&type=555`
+}));
 app.use('/static', express.static(path.join(__dirname, 'static'), {maxAge: 2678400000}));
-app.use('/api', express.static(path.join(__dirname, 'parse/processed'), {maxAge: 2678400000}));
 app.use('/bible', express.static(path.join(__dirname, 'convertBibleQuote/new'), {maxAge: 2678400000}));
 app.get('/translations/*', getTranslations);
 app.get('*', handleRender);
