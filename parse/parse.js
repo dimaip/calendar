@@ -43,7 +43,7 @@ const parseReadings = (html, zachalaResolver) => {
 			allowedAttributes: {}
 		}
 	);
-	readings = readings.replace(/<div>.*<\/div>/g, '');
+	readings = readings.replace(/<div>.*<\/div>/g, '').replace(/\*/g, '');
 	var splitByServiceType = readings.replace(/((?:[^\x00-\x7F]{3}.\s-\s)|(?:На \d-м часе:)|(?:На веч\.))/g, '###$1').split('###');
 	if (splitByServiceType.length > 1) {
 		splitByServiceType.map(item => {
