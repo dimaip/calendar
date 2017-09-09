@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Transmit from 'react-transmit';
 import {fromJS} from 'immutable';
 import fetch from 'isomorphic-fetch';
@@ -103,7 +104,7 @@ export default Transmit.createContainer(Main, {
   },
   fragments: {
     data({date}) {
-      console.log(this.props);
+      //console.log('this.props',this.props);
       if (!date) {
         throw new Error('Date query param is required in main');
       }
@@ -131,7 +132,7 @@ export default Transmit.createContainer(Main, {
         .then(response => {
           return fromJS(response);
         })
-        .catch(e => console.log(e));
+        .catch(e => console.log('catch',e));
     }
   }
 });

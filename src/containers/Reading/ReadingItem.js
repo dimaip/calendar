@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Dropdown from 'react-dropdown';
 import verseParse from 'helpers/verseParse';
 import translations from 'constants/translations';
@@ -8,8 +9,8 @@ import s from './ReadingItem.scss';
 
 export default class ReadingItem extends Component {
   static propTypes = {
-    title: React.PropTypes.string.isRequired,
-    verse: React.PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    verse: PropTypes.string.isRequired
   };
 
   constructor() {

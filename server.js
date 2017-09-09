@@ -46,8 +46,11 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(compression());
 app.use(favicon(path.join(__dirname, 'static/favicon.ico')));
+app.get('/favicon.ico', function(req, res) {
+  res.status(204);
+});
 app.use('/api', proxy('http://c.psmb.ru', {
-  forwardPath: (req) => `/pravoslavnyi-kalendar/date/${req.url.replace(/[^0-9]/g, '')}/?tx_orthodox_orthodox[format]=json&type=555`
+  proxyReqPathResolver: (req) => `/pravoslavnyi-kalendar/date/${req.url.replace(/[^0-9]/g, '')}/?tx_orthodox_orthodox[format]=json&type=555`
 }));
 app.use('/static', express.static(path.join(__dirname, 'static'), {maxAge: 2678400000}));
 app.use('/bible', express.static(path.join(__dirname, 'convertBibleQuote/new'), {maxAge: 2678400000}));

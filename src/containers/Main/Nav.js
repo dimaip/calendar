@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router';
 import dateFormat from 'dateformat';
 import moment from 'moment';
@@ -28,8 +29,8 @@ const Nav = ({
   );
 };
 Nav.propTypes = {
-  handleToggleClick: React.PropTypes.func.isRequired,
-  date: React.PropTypes.string.isRequired
+  handleToggleClick: PropTypes.func.isRequired,
+  date: PropTypes.string.isRequired
 };
 
 export default Nav;

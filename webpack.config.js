@@ -3,61 +3,93 @@ const webpack = require('webpack');
 const postcssNested = require('postcss-nested');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const
+    PATHS = {
+      nodeModules: path.join(__dirname, 'node_modules'),
+      app: path.join(__dirname, 'src')
+    };
+
 
 const isDev = process.env.NODE_ENV === 'development';
 
 const config = {
   name: 'client',
-  entry: ['./clientEntry.js'],
+  entry: [
+    //     'webpack-hot-middleware/client',
+    './clientEntry.js'
+  ],
   output: {
     path: path.join(__dirname, 'static/build/'),
     filename: 'client.js',
     publicPath: '/static/build/'
   },
-  plugins: [],
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
+      options: {
+        context: __dirname
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      test: /\.scss$/,
+      options: {
+        postcss: () => [postcssNested]
+      }
+    })
+  ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        use: [{
+          loader: 'babel-loader'
+        }]
       }
     ]
   },
-  postcss: () => [postcssNested],
   resolve: {
-    root: path.join(__dirname, 'src'),
-    extensions: ['', '.js'],
-    modulesDirectories: [
-      'src',
-      'node_modules'
-    ]
+    extensions: ['.js'],
+    modules: [PATHS.nodeModules, PATHS.app]
   }
 };
 
 if (isDev) {
-  config.entry.unshift('webpack-hot-middleware/client');
+  //config.entry.unshift('webpack-hot-middleware/client');
   config.devtool = 'cheap-module-eval-source-map';
   config.plugins.push(
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"development"'
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   );
-  config.module.loaders.push(
-    {
-      test: /\.css$/,
-      loader: 'style!css!'
-    },
-    {
-      test: /\.scss$/,
-      loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
-    }
+  config.module.rules.push(
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader"
+          }
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { modules: true, importLoaders: 1, localIdentName: '[name]__[local]___[hash:base64:5]' } },
+          'postcss-loader'
+        ]
+      }
   );
 } else {
-  config.devtool = null;
-  config.sourcemaps = null;
+  config.devtool = false;
   config.plugins.push(
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
@@ -67,18 +99,24 @@ if (isDev) {
         warnings: false
       }
     }),
-    new webpack.optimize.DedupePlugin(),
-    new ExtractTextPlugin('styles.css')
+    new ExtractTextPlugin({filename:'styles.css'})
   );
-  config.module.loaders.push(
-    {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css!')
-    },
-    {
-      test: /\.scss$/,
-      loader: ExtractTextPlugin.extract('style', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader')
-    }
+  config.module.rules.push(
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { modules: true, importLoaders: 1  } },
+          'postcss-loader'
+        ]
+      }
   );
 }
 
@@ -98,22 +136,34 @@ const serverConfig = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
+    }),
+    new HtmlWebpackPlugin({
+      //template: path.join(__dirname, 'index.ejs'),// <= notice the .ejs extension
+      template: path.join(__dirname, 'index.html'),// <= notice the .ejs extension
+      inject: true
     })
   ],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel'
+        use: ['babel-loader']
       },
       {
         test: /\.css$/,
-        loader: 'null'
+        use: [
+          'isomorphic-style-loader',
+          'css-loader'
+        ]
       },
       {
         test: /\.scss$/,
-        loader: 'css-loader/locals?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader'
+        use: [
+          'isomorphic-style-loader',
+          { loader: 'css-loader', options: { modules: true, importLoaders: 1  } },
+          'postcss-loader'
+        ]
       }
     ]
   },
@@ -122,14 +172,9 @@ const serverConfig = {
     __dirname: true,
     console: true
   },
-  postcss: () => [postcssNested],
   resolve: {
-    root: path.join(__dirname, 'src'),
-    extensions: ['', '.js'],
-    modulesDirectories: [
-      'src',
-      'node_modules'
-    ]
+    extensions: ['.js'],
+    modules: [PATHS.nodeModules, PATHS.app]
   }
 };
 

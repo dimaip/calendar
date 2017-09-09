@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 let prevVerse;
 const renderVerse = ({verse, content}, key) => {
@@ -34,10 +35,10 @@ const filterChapter = (chapter, segments) => {
 
 export default class Chapter extends Component {
   static propTypes = {
-    segments: React.PropTypes.array.isRequired,
-    chapterNumber: React.PropTypes.number.isRequired,
-    bookKey: React.PropTypes.string.isRequired,
-    translation: React.PropTypes.string.isRequired
+    segments: PropTypes.array.isRequired,
+    chapterNumber: PropTypes.number.isRequired,
+    bookKey: PropTypes.string.isRequired,
+    translation: PropTypes.string.isRequired
   };
   constructor() {
     super();

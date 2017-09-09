@@ -1,6 +1,6 @@
 @value blue from 'styles/constants.scss';
 
-.root {
+:local(.root) {
     composes: root from 'components/Button.scss';
     display: block;
     padding: 18px;

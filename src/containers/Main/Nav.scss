@@ -18,7 +18,7 @@
     color: gray;
 }
 
-.toggle {
+:local(.toggle) {
     composes: root from 'components/Button.scss';
     color: blue;
     padding-top: 7px;

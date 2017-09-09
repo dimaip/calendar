@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router';
 import dateFormat from 'dateformat';
 import CircleLeftIcon from 'react-icons/lib/fa/arrow-circle-o-left.js';
@@ -15,8 +16,8 @@ const HeadingBar = ({date, service}) => (
   </div>
 );
 HeadingBar.propTypes = {
-  date: React.PropTypes.string.isRequired,
-  service: React.PropTypes.string.isRequired
+  date: PropTypes.string.isRequired,
+  service: PropTypes.string.isRequired
 };
 
 export default HeadingBar;

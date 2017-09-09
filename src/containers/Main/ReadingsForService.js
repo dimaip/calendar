@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Link} from 'react-router';
 import ReadingGroup from './ReadingGroup';
 import s from './ReadingsForService.scss';
@@ -15,9 +16,9 @@ const ReadingsForService = ({title, readingsForService, date}) => {
   );
 };
 ReadingsForService.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  readingsForService: React.PropTypes.object.isRequired,
-  date: React.PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  readingsForService: PropTypes.object.isRequired,
+  date: PropTypes.string.isRequired
 };
 
 export default ReadingsForService;

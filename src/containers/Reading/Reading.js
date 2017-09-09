@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Collapse, {Panel} from 'rc-collapse';
 import Loader from 'react-loader';
 import ReadingItem from 'containers/Reading/ReadingItem';

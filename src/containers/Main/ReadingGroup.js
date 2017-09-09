@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import s from './ReadingGroup.scss';
 
 const ReadingGroup = ({title, readingVerses}) => {
@@ -11,8 +12,8 @@ const ReadingGroup = ({title, readingVerses}) => {
   );
 };
 ReadingGroup.propTypes = {
-  title: React.PropTypes.string.isRequired,
-  readingVerses: React.PropTypes.object.isRequired
+  title: PropTypes.string.isRequired,
+  readingVerses: PropTypes.object.isRequired
 };
 
 export default ReadingGroup;

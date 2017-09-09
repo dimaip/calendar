@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReadingsForService from 'containers/Main/ReadingsForService';
 
 const ReadingList = ({readings, date}) => {
@@ -10,8 +11,8 @@ const ReadingList = ({readings, date}) => {
   );
 };
 ReadingList.propTypes = {
-  readings: React.PropTypes.object.isRequired,
-  date: React.PropTypes.string.isRequired
+  readings: PropTypes.object.isRequired,
+  date: PropTypes.string.isRequired
 };
 
 export default ReadingList;
