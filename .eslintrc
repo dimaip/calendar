@@ -143,7 +143,7 @@
         "quotes": [2, "single"],
         "semi-spacing": [2, {before: false, after: true}],
         "semi": [2, "always"],
-        "space-before-keywords": 2,
+        "keyword-spacing": 2,
         "space-before-blocks": [2, "always"],
         "space-before-function-paren": [2, {anonymous: "always", named: "never"}],
         "space-in-parens": [2, "never"],
@@ -190,9 +190,7 @@
         "react/no-unknown-property": 2,
         "react/prop-types": 2,
         "react/react-in-jsx-scope": 2,
-        "react/require-extension": [1, {extensions: [".js", ".jsx"]}],
         "react/self-closing-comp": 2,
-        "react/sort-comp": 0,
-        "react/wrap-multilines": 2
+        "react/sort-comp": 0
     }
 }
