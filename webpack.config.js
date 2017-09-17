@@ -4,9 +4,8 @@ const postcssNested = require('postcss-nested');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const
-    PATHS = {
+    paths = {
       nodeModules: path.join(__dirname, 'node_modules'),
       app: path.join(__dirname, 'src')
     };
@@ -17,7 +16,6 @@ const isDev = process.env.NODE_ENV === 'development';
 const config = {
   name: 'client',
   entry: [
-    //     'webpack-hot-middleware/client',
     './clientEntry.js'
   ],
   output: {
@@ -53,12 +51,11 @@ const config = {
   },
   resolve: {
     extensions: ['.js'],
-    modules: [PATHS.nodeModules, PATHS.app]
+    modules: [paths.nodeModules, paths.app]
   }
 };
 
 if (isDev) {
-  //config.entry.unshift('webpack-hot-middleware/client');
   config.devtool = 'cheap-module-eval-source-map';
   config.plugins.push(
     new webpack.DefinePlugin({
@@ -138,8 +135,7 @@ const serverConfig = {
       'process.env.NODE_ENV': '"production"'
     }),
     new HtmlWebpackPlugin({
-      //template: path.join(__dirname, 'index.ejs'),// <= notice the .ejs extension
-      template: path.join(__dirname, 'index.html'),// <= notice the .ejs extension
+      template: path.join(__dirname, 'index.html'),
       inject: true
     })
   ],
@@ -174,7 +170,7 @@ const serverConfig = {
   },
   resolve: {
     extensions: ['.js'],
-    modules: [PATHS.nodeModules, PATHS.app]
+    modules: [paths.nodeModules, paths.app]
   }
 };
 

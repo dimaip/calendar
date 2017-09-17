@@ -104,7 +104,6 @@ export default Transmit.createContainer(Main, {
   },
   fragments: {
     data({date}) {
-      //console.log('this.props',this.props);
       if (!date) {
         throw new Error('Date query param is required in main');
       }
