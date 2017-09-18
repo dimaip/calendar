@@ -1,6 +1,6 @@
 import express from 'express';
 import compression from 'compression';
-import FS from 'q-io/fs';
+import fs from 'fs';
 import path from 'path';
 import favicon from 'express-favicon';
 import proxy from 'express-http-proxy';
@@ -9,19 +9,19 @@ function getTranslations(req, res) {
   const matchTranslations = req.url.match(/\/translations\/(.+)/);
   if (matchTranslations) {
     let translations;
-    FS.list(path.join(__dirname, 'convertBibleQuote/new'))
+    fs.list(path.join(__dirname, 'convertBibleQuote/new'))
       .then(r => {
         translations = r;
         return r;
       })
       .then(r => r.map(trKey => {
         const readingPath = path.join(__dirname, 'convertBibleQuote/new', trKey, matchTranslations[1]);
-        return FS.exists(readingPath);
+        return fs.exists(readingPath);
       }))
       .then(r => Promise.all(r))
       .then(r => res.send(translations.filter((value, i) => r[i])));
   } else {
-    FS.list(path.join(__dirname, 'convertBibleQuote/new')).then(r => res.send(r));
+    fs.list(path.join(__dirname, 'convertBibleQuote/new')).then(r => res.send(r));
   }
 }
 
