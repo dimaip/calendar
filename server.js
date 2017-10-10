@@ -1,59 +1,23 @@
-import express from 'express';
-import compression from 'compression';
-import fs from 'fs';
-import path from 'path';
-import favicon from 'express-favicon';
-import proxy from 'express-http-proxy';
+const express = require('express')
+const webpack = require('webpack')
+const proxy = require('express-http-proxy');
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+const webpackHotServerMiddleware = require('webpack-hot-server-middleware')
+const config = require('./webpack.config')
+const api = require('./server/api')
 
-function getTranslations(req, res) {
-  const matchTranslations = req.url.match(/\/translations\/(.+)/);
-  if (matchTranslations) {
-    let translations;
-    fs.list(path.join(__dirname, 'convertBibleQuote/new'))
-      .then(r => {
-        translations = r;
-        return r;
-      })
-      .then(r => r.map(trKey => {
-        const readingPath = path.join(__dirname, 'convertBibleQuote/new', trKey, matchTranslations[1]);
-        return fs.exists(readingPath);
-      }))
-      .then(r => Promise.all(r))
-      .then(r => res.send(translations.filter((value, i) => r[i])));
-  } else {
-    fs.list(path.join(__dirname, 'convertBibleQuote/new')).then(r => res.send(r));
-  }
-}
+const app = express()
+const compiler = webpack(config)
+const port = process.env.NODE_PORT || 3000
 
-const app = express();
-const port = process.env.PORT || 3000;
-
-let handleRender;
-if (process.env.NODE_ENV === 'development') {
-  handleRender = (req, res) => res.sendFile(path.join(__dirname, 'index.html'));
-  const webpack = require('webpack');
-  const config = require(path.join(__dirname, 'webpack.config.js'));
-  const compiler = webpack(config);
-
-  app.use(require('webpack-dev-middleware')(compiler, {
-    noInfo: true,
-    publicPath: config.output.publicPath
-  }));
-  app.use(require('webpack-hot-middleware')(compiler));
-} else {
-  handleRender = require(path.join(__dirname, './static/build/server.js')).default;
-}
-
-app.use(compression());
-app.use(favicon(path.join(__dirname, 'static/favicon.ico')));
-app.get('/favicon.ico', function(req, res) {
-  res.status(204);
-});
+//app.use('/api/', api())
 app.use('/api', proxy('http://c.psmb.ru', {
-  proxyReqPathResolver: (req) => `/pravoslavnyi-kalendar/date/${req.url.replace(/[^0-9]/g, '')}/?tx_orthodox_orthodox[format]=json&type=555`
+    proxyReqPathResolver: (req) => `/pravoslavnyi-kalendar/date/${req.url.replace(/[^0-9]/g, '')}/?tx_orthodox_orthodox[format]=json&type=555`
 }));
-app.use('/static', express.static(path.join(__dirname, 'static'), {maxAge: 2678400000}));
-app.use('/bible', express.static(path.join(__dirname, 'convertBibleQuote/new'), {maxAge: 2678400000}));
-app.get('/translations/*', getTranslations);
-app.get('*', handleRender);
-app.listen(port);
+app.use(webpackDevMiddleware(compiler))
+// NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
+app.use(webpackHotMiddleware(compiler.compilers.find(compiler => compiler.name === 'client')))
+app.use(webpackHotServerMiddleware(compiler))
+
+app.listen(port, () => console.log(`=== Go to http://localhost:${port} ===`))
