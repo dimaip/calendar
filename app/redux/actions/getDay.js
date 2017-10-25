@@ -9,8 +9,12 @@ import {
 
 export function fetchDay(date) {
     return fetch(`http://localhost:3000/api/${date}`)
-        .then(
-            response =>response.json()
+        .then(response => {
+                if(response.status > 400)
+                    throw new Error("Error on fetch day.");
+
+                return response.json();
+            }
         )
         .then(res => {
                 const {

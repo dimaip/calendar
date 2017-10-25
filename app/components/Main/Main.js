@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { withRouter } from "react-router-dom";
 import moment from 'moment';
-import DayPicker from '../DayPicker/DatePicker.js';
+import DayPicker from '../DayPicker/DayPicker.js';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import dateFormat from 'dateformat';
 import LocaleUtils from 'react-day-picker/moment';
@@ -48,7 +48,7 @@ class Main extends Component {
         this.props.getDay(dateString);
     }
 
-    handleDayClick(day) {
+    handleDayClick = day => {
         const dateString = dateFormat(day, 'yyyy-mm-dd');
         const direction = dateString > this.props.date ? 'right' : 'left';
 
@@ -59,7 +59,7 @@ class Main extends Component {
         });
     }
 
-    handleToggleClick() {
+    handleToggleClick = () => {
         this.setState({
             calendarShown: !this.state.calendarShown
         });
@@ -107,11 +107,11 @@ class Main extends Component {
             <div>
                 <Nav
                     date={date}
-                    handleToggleClick={this.handleToggleClick.bind(this)}
+                    handleToggleClick={this.handleToggleClick}
                     handleClickShift={this.handleClickShift}
                 />
                 {this.state.calendarShown &&
-                <DayPicker onDayClick={this.handleDayClick.bind(this)} locale='ru' localeUtils={LocaleUtils} />}
+                <DayPicker onDayClick={this.handleDayClick} locale='ru' localeUtils={LocaleUtils} />}
                 <div className='slide-wrap'>
                     <ReactCSSTransitionGroup
                         className='slide-transition-group'
@@ -129,16 +129,7 @@ class Main extends Component {
     }
 }
 
-
-function mapStateToProps(state) {
-    return {
-        date: state.days.date,
-        day: state.days.day,
-        days: state.days.days,
-        error: state.days.error,
-        loaded: state.days.loaded
-    }
-}
+const mapStateToProps = state => state.days;
 
 function mapDispatchToProps(dispatch) {
     return {

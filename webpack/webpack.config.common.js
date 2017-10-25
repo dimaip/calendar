@@ -19,6 +19,7 @@ module.exports = {
         test: /\.global\.scss$/, //global - without modules
         use: ExtractTextPlugin.extract([
             'css-loader',
+            'postcss-loader',
             'sass-loader'
           ]),
       },
@@ -26,6 +27,7 @@ module.exports = {
         test: /^((?!\.global).)*scss$/,
         use: ExtractTextPlugin.extract([
             'css-loader?modules&camelCase&localIdentName=[name]_[local]',//TODO [name]__[local]___[hash:base64:5] => error: ssr code has different hash
+            'postcss-loader',
             'sass-loader'
           ]),
       },

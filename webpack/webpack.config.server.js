@@ -2,7 +2,6 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 const webpackMerge = require('webpack-merge')
 const commonConfig = require('./webpack.config.common')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin // eslint-disable-line no-unused-vars
 
 module.exports = webpackMerge(commonConfig, {
 
@@ -29,7 +28,6 @@ module.exports = webpackMerge(commonConfig, {
   },
 
   plugins: [
-      // new BundleAnalyzerPlugin() // Uncomment this line to analyze the size of your bundle
   ]
 
 })
