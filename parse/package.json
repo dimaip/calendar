@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node _scrape.js && node _parse.js"
+    "start": "node _scrape.js && node _parse.js",
+    "parse": "node _parse.js",
+    "scrape": "node _scrape.js"
   },
   "author": "",
   "license": "ISC",

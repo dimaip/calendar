@@ -1,10 +1,13 @@
 const path = require('path');
 const request = require('request');
 const FS = require('q-io/fs');
+const dateFormat = require('dateformat');
 
-module.exports = (dateString) => {
-	const url = 'http://www.patriarchia.ru/rpc/date=' + dateString + '/kld.xml';
+module.exports = (date) => {
+	const dateString = dateFormat(date, 'yyyy-mm-dd');
+	const url = 'http://days.pravoslavie.ru/Days/' + dateFormat(new Date(date - 13*24*60*60*1000 ), 'yyyymmdd') + '.html';// Julian caledar correction
 	console.log(dateString);
+
 	request({
 		uri: url
 	}, function (error, response, body) {
