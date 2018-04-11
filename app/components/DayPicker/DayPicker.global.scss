@@ -81,8 +81,6 @@
     cursor: pointer;
     vertical-align: middle;
 
-    /* Default modifiers */
-
     &--today {
       color: #d0021b;
       font-weight: 500;
@@ -97,13 +95,6 @@
     &--outside {
       cursor: default;
       color: #dce0e0;
-    }
-
-    /* Example modifiers */
-
-    &--sunday {
-      color: #dce0e0;
-      background-color: #f7f8f8;
     }
 
     &--selected:not(&--disabled):not(&--outside) {

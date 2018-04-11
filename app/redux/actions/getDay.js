@@ -10,26 +10,26 @@ import {
 export function fetchDay(date) {
     return fetch(`http://localhost:3000/api/${date}`)
         .then(response => {
-                if(response.status > 400)
+                if (response.status > 400)
                     throw new Error("Error on fetch day.");
 
                 return response.json();
             }
         )
         .then(res => {
-                const {
-                    comment,
-                    lent,
-                    prayers,
-                    readings,
-                    saints,
-                    seromns,
-                    title
-                } = res;
+                let day = {};
+                if (res) {
+                    const {
+                        comment,
+                        lent,
+                        prayers,
+                        readings,
+                        saints,
+                        seromns,
+                        title
+                    } = res;
 
-                return {
-                    date: date,
-                    day: {
+                    day = {
                         comment,
                         lent,
                         prayers,
@@ -38,6 +38,11 @@ export function fetchDay(date) {
                         seromns,
                         title
                     }
+                }
+
+                return {
+                    date: date,
+                    day
                 };
             }
         );
