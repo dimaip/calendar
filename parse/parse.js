@@ -17,9 +17,13 @@ const parseSaints = html => {
 };
 
 const createReadingLinks = (reading, zachalaResolver) => {
-    return reading.replace(/<a[^>]*>(.*?)<\/a>/g, (match, linkBody) => {
-        return '<a href="' + zachalaResolver(linkBody) + '">' + linkBody + '</a>';
-    });
+    var myRe = /<a[^>]*>(.*?)<\/a>/g,
+        item,
+        res = [];
+    while ((item = myRe.exec(reading)) !== null) {
+        res.push(item[1]);
+    }
+    return res;
 };
 
 module.exports = (date) => {
