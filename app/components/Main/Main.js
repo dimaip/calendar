@@ -9,14 +9,13 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import dateFormat from 'dateformat';
 import LocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/ru';
-import Collapse, { Panel } from 'rc-collapse';
 import { isEmpty, pathOr } from 'ramda';
+import ChapterCollapse from '../ChapterCollapse/ChapterCollapse.js';
 import ReadingList from '../ReadingList/ReadingList.js';
 import Nav from '../Nav/Nav.js';
 import HeadingBar from '../HeadingBar/HeadingBar.js';
 import Loader from '../Loader/Loader.js';
 
-import '../../styles/Collapse.global.scss';
 import '../../styles/Slides.css';
 
 import getDay from '../../redux/actions/getDay';
@@ -86,20 +85,18 @@ class Main extends Component {
                 <div>
                     {(day.title || day.fast)
                     && <HeadingBar title={day.title} subTitle={day.fast} />}
-                    <Collapse accordion={true} defaultActiveKey='1'>
-                        <Panel header='Чтения' key='1'>
-                            <ReadingList readings={ day.readings || {}} date={date} />
-                        </Panel>
-                        <Panel header='Святые' key='2'>
-                            <div dangerouslySetInnerHTML={{__html: day.saints}} />
-                        </Panel>
-                        <Panel header='Проповедь' key='3'>
-                            Проповедь
-                        </Panel>
-                        <Panel header='Тропари' key='4'>
-                            Тропари
-                        </Panel>
-                    </Collapse>
+                    <ChapterCollapse header="Чтения" key='1'>
+                        <ReadingList readings={ day.readings || {}} date={date} />
+                    </ChapterCollapse>
+                    <ChapterCollapse header="Святые" key='2'>
+                        <div dangerouslySetInnerHTML={{__html: day.saints}} />
+                    </ChapterCollapse>
+                    <ChapterCollapse header="Проповедь" key='3'>
+                        Проповедь
+                    </ChapterCollapse>
+                    <ChapterCollapse header="Тропари" key='4'>
+                        Тропари
+                    </ChapterCollapse>
                 </div>
             </Loader>
         );
