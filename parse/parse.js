@@ -56,7 +56,7 @@ module.exports = (date) => {
 
                     let values = {};
                     const keyMap = {
-                        "default": "По умолчанию",
+                        "default": "Основное",
                         "Утр.": "Утреня",
                         "Лит.": "Литургия"
                     };

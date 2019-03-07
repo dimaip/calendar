@@ -19,6 +19,7 @@
 .contentbox {
     margin-top: 12px;
     margin-bottom: 12px;
+    position: relative;
 }
 
 
@@ -93,4 +94,35 @@
     cursor: pointer;
 }
 
+.perevod {
+    position: absolute;
+    top: 0;
+    right: 0px;
+}
+
+.perevodSelect {
+    border: solid 1px #AAA;
+    border-top: 0px;
+    background-color: #ffffff;
+}
+
+.perevodSelected {
+    font-style: italic;
+    border-bottom: 1px dashed #000;
+    text-align: right;
+    cursor: pointer;
+    &:hover {
+      color: #444;
+    }
+}
+
+.perevodItem {
+    display: block;
+    width: 100%;
+    text-align: right;
+    cursor: pointer;
+    &:hover {
+        background-color: #AAA;
+    }
+}
 

@@ -21,19 +21,40 @@ class ReadingItem extends Component {
     constructor(props) {
         super(props);
         const {isOpened, getReading, reading, readings} = this.props;
-        this.state = {isOpened: this.props.isOpened};
+        this.state = {isOpened, isPerevodSelectOpened: false};
         if (readings && !readings[reading])
-            getReading(reading);
+            getReading(reading, 'default');
     }
 
     handleHeaderClick = () => {
         this.setState({
             isOpened: !this.state.isOpened
         });
-    }
+    };
+
+    handlePerevodItemClick = perevod => () => {
+        const {getReading, reading} = this.props;
+        getReading(reading, perevod);
+
+        this.setState({
+            isPerevodSelectOpened: false
+        });
+    };
+
+    handlePerevodMouseOver = () => {
+        this.setState({
+            isPerevodSelectOpened: true
+        });
+    };
+
+    handlePerevodMouseOut = () => {
+        this.setState({
+            isPerevodSelectOpened: false
+        });
+    };
 
     render() {
-        const {isOpened} = this.state;
+        const {isOpened, isPerevodSelectOpened} = this.state;
         const readingLink = this.props.reading;
         const {readings} = this.props;
         let reading = false;
@@ -56,10 +77,28 @@ class ReadingItem extends Component {
                 case "hidden":
                     return s.hidden;
             }
-        }
+        };
+
 
         if (reading !== false && reading.fragments) {
             readingText = [];
+            let translationCurrentName;
+
+            const perevodItems = reading.translationList.map((item, i) => {
+                if(item.id == reading.translationCurrent)
+                    translationCurrentName =  item.name;
+
+                return <button className={s.perevodItem} onClick={this.handlePerevodItemClick(item.id)} key={'pi'+i}>{item.name}</button>
+            });
+
+            readingText.push(
+                <div className={s.perevod} onMouseOver={this.handlePerevodMouseOver} onMouseLeave={this.handlePerevodMouseOut} key="prvd">
+                    <div className={s.perevodSelected}>Перевод {translationCurrentName}</div>
+                    <Collapse className={s.perevodSelect} isOpened={isPerevodSelectOpened}>
+                        {perevodItems}
+                    </Collapse>
+                </div>
+            );
             reading.fragments.map((fragment, fi) => {
                 if (fragment.type != 'hidden') {
                     readingText.push((

@@ -7,8 +7,8 @@ import {
 } from '../../constants/actionTypes';
 
 
-export function fetchReading(link) {
-    return fetch(`http://localhost:3000/api/reading/` + encodeURI(link))
+export function fetchReading(link, translation) {
+    return fetch(`http://localhost:3000/api/reading/` + encodeURI(link) + "&translation=" + translation)
         .then(response => {
                 if (response.status > 400)
                     throw new Error("Error on fetch reading.");
@@ -49,13 +49,13 @@ export function fetchReading(link) {
 
 }
 
-export default function getReading(link) {
+export default function getReading(link, translation) {
     return dispatch => {
         dispatch({
             type: GET_READING
         });
 
-        return fetchReading(link)
+        return fetchReading(link, translation)
             .then(payload => {
                     return dispatch({
                         type: GET_READING_SUCCESS,
