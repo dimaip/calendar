@@ -1,0 +1,128 @@
+@value blue, gray, grayDark, grayBg, transition, shadow from '../../styles/constants.scss';
+
+.wrapper {
+    border-top: 1px solid #d9d9d9;
+}
+
+.header {
+    line-height: 1.5;
+    padding: 12px 12px;
+    cursor: pointer;
+    color: #444;
+}
+
+.content {
+    padding: 1px 12px;
+    background-color: #ebe7e4;
+}
+
+.contentbox {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+
+.arrow {
+    display: inline-block;
+    content: ' ';
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid #868686;
+    vertical-align: middle;
+    margin-right: 8px;
+    -webkit-transition: translation;
+    transition: translation;
+}
+
+.arrowOpened {
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+    border-top: 6px solid #868686 !important;
+    margin-right: 6px;
+    margin-top: 2px;
+}
+
+.arrowUp {
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+    border-bottom: 6px solid #868686 !important;
+    margin-right: 6px;
+    margin-bottom: 5px;
+}
+
+
+.notFound {
+
+}
+
+.fragmentChapter {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.fragmentVerse {
+    margin-bottom: 5px;
+}
+.fragmentVerseNo {
+    vertical-align: super;
+    display: inline-block;
+    font-size: 10px;
+    color: #c71515;
+    margin-right: 3px;
+    width: 10px;
+    text-align: right;
+}
+
+.optional {
+    color: #888;
+    font-size: 12px;
+}
+.hidden {
+    color: #888;
+    font-size: 12px;
+}
+
+.slideUp {
+    border: solid 1px #aaa;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.perevod {
+    position: absolute;
+    top: 0;
+    right: 0px;
+}
+
+.perevodSelect {
+    border: solid 1px #AAA;
+    border-top: 0px;
+    background-color: #ffffff;
+}
+
+.perevodSelected {
+    font-style: italic;
+    border-bottom: 1px dashed #000;
+    text-align: right;
+    cursor: pointer;
+    &:hover {
+      color: #444;
+    }
+}
+
+.perevodItem {
+    display: block;
+    width: 100%;
+    text-align: right;
+    cursor: pointer;
+    &:hover {
+        background-color: #AAA;
+    }
+}
+

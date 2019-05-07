@@ -1,0 +1,47 @@
+@value blue, gray, grayDark, grayBg, transition, shadow from '../../styles/constants.scss';
+
+.wrapper {
+    border-top: 1px solid #d9d9d9;
+}
+
+.header {
+    line-height: 1.5;
+    padding: 12px 12px;
+    cursor: pointer;
+    color: #444;
+}
+
+.content {
+    padding: 1px 12px;
+    background-color: #ebe7e4;
+}
+
+.contentbox {
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+
+.arrow {
+    display: inline-block;
+    content: ' ';
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 6px solid #868686;
+    vertical-align: middle;
+    margin-right: 8px;
+    -webkit-transition: translation;
+    transition: translation;
+}
+
+.arrowOpened {
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+    border-top: 6px solid #868686 !important;
+    margin-right: 6px;
+    margin-top: 2px;
+}

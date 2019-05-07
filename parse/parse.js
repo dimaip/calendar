@@ -5,82 +5,127 @@ const FS = require('q-io/fs');
 const cheerio = require('cheerio');
 const sanitizeHtml = require('sanitize-html');
 const zachala = require('./zachala.js');
+const dateFormat = require('dateformat');
 
 const parseSaints = html => {
-	return sanitizeHtml(
-		html.replace(/<b>/g, '<strong>').replace(/<\/b>/g, '</strong>'),
-		{
-			allowedTags: ['div', 'a', 'strong']
-		}
-	).replace(/<div>/g, '<p>').replace(/<\/div>/g, '</p>');
+    return sanitizeHtml(
+        html.replace(/<b>/g, '<strong>').replace(/<\/b>/g, '</strong>'),
+        {
+            allowedTags: ['div', 'a', 'strong']
+        }
+    ).replace(/<div>/g, '<p>').replace(/<\/div>/g, '</p>');
 };
 
 const createReadingLinks = (reading, zachalaResolver) => {
-	return reading.replace(/<a>(.*?)<\/a>/g, (match, linkBody) => {
-		return '<a href="' + zachalaResolver(linkBody) + '">' + linkBody + '</a>';
-	});
+    var myRe = /<a[^>]*>(.*?)<\/a>/g,
+        item,
+        res = [];
+    while ((item = myRe.exec(reading)) !== null) {
+        res.push(item[1]);
+    }
+    return res;
 };
 
-const parseReadingsByServiceType = (i, zachalaResolver) => {
-	var readingByServiceObject = {};
-	i.replace(/([^>]*\:)/g, '###$1').split('###').map(item => {
-		const splitItem = item.split(':');
-		if (splitItem.length > 1) {
-			readingByServiceObject[splitItem[0].trim()] = createReadingLinks(splitItem[1].trim(), zachalaResolver);
-		} else if (splitItem.length === 1 && splitItem[0].trim() !== '') {
-			readingByServiceObject['Рядовое'] = createReadingLinks(splitItem[0].trim(), zachalaResolver);
-		}
-	});
-	return readingByServiceObject;
-};
+module.exports = (date) => {
+    const dateString = dateFormat(date, 'yyyy-mm-dd');
+    console.log('parse', dateString);
+    return zachala.then(zachalaResolver => {
+        return FS.read(path.join('raw', dateString))
+            .then(value => {
+                    let rows = value.split("\r\n");
+                    let readings = '';
+                    let comments = [];
 
-const parseReadings = (html, zachalaResolver) => {
-	var readingsObject = {};
-	var readings = sanitizeHtml(
-		html,
-		{
-			allowedTags: ['div', 'a', 'strong'],
-			allowedAttributes: {}
-		}
-	);
-	readings = readings.replace(/<div>.*<\/div>/g, '').replace(/\*/g, '');
-	var splitByServiceType = readings.replace(/((?:[^\x00-\x7F]{3}.\s-\s)|(?:На \d-м часе:)|(?:На веч\.))/g, '###$1').split('###');
-	if (splitByServiceType.length > 1) {
-		splitByServiceType.map(item => {
-			if (item !== '') {
-				const matches = item.match(/((?:[^\x00-\x7F]{3})|(?:На \d-м часе)|(?:На веч\.))(?:(?:\.\s-\s)|(?:\:\s))(.*)/);
-				const serviceType = matches[1].replace('Утр', 'Утреня').replace('Лит', 'Литургия');
-				readingsObject[serviceType] = parseReadingsByServiceType(matches[2], zachalaResolver);
-			}
-		});
-	} else if (splitByServiceType.length === 1) {
-		readingsObject['Литургия'] = parseReadingsByServiceType(splitByServiceType[0], zachalaResolver);
-	}
-	return readingsObject;
-};
+                    for (let i = 0; i < rows.length; i++) {
+                        if (rows[i].indexOf('<h2>Евангельские Чтения</h2>') === 0) {
+                            readings = rows[i].substr(28); //remove <h2>Евангельские Чтения</h2>
+                            break;
+                        }
+                    }
 
-module.exports = (dateString) => {
-	return zachala.then(zachalaResolver => {
-		return FS.read(path.join('raw', dateString))
-			.then(value => value.match(/<\!\[CDATA\[(.*)\]\]>/)[1])
-			.catch(e => console.log('no CDATA found', e, dateString))
-			.then(value => cheerio.load(value, {decodeEntities: false}))
-			.then($ => {
-				return {
-					title: $('.sedm, .nedel').text(),
-					readings: parseReadings($('.read').html(), zachalaResolver),
-					saints: parseSaints($('<p/>').append($('.saints')).html()),
-					comments: $('.comm').text(),
-					movedIn: $('.moved_in').text(),
-					movedOut: $('.moved_out').text(),
-					fast: $('.fast').text(),
-					feast: $('.feast').text()
-				};
-			})
-			.then(value => JSON.stringify(value, null, 2))
-			.then(value => FS.write(path.join('processed', dateString), value).catch(e => console.log('can\'t write', e, dateString)))
-			.catch(e => console.log('global error', e, dateString));
-	});
+                    let originalReadings = readings;
+
+                    readings = readings.replace(/<div class='DAYS_snoska' style='display:none'>(.*?)<\/div>/g,function(str,innerText) {
+                        innerText = sanitizeHtml(innerText, { allowedTags: ['a', 'strong'] });
+                        comments.push(createReadingLinks(innerText, zachalaResolver));
+                        return '';
+                    });
+
+                    readings = sanitizeHtml(readings, { allowedTags: ['a', 'strong'] });
+
+
+                    let values = {};
+                    const keyMap = {
+                        "default": "Основное",
+                        "Утр.": "Утреня",
+                        "Лит.": "Литургия"
+                    };
+                    const subKeyMap = {
+                        "default": "Рядовое",
+                        "Прп.": "Преподобному",
+                        //"Прав.": "Праведному",
+                        // "Свт.": "Преподобному",
+                        // "Вмц.": "Преподобному",
+                        "На веч.": "На вечерне"
+                    };
+
+                    readings.replace(/\s*((?:Утр\.|Лит\.))\s*-\s*/g, '|$1@').split('|').map(item => {
+
+                        let [key,val] = item.split("@");
+                        let subValues = {};
+                        if (!val) {
+                            val = key;
+                            key = 'default';
+                        }
+
+                        val.replace(/Ев.\s\d-е,/g, '').replace(/\s*((Прп\.|[а-яА-Я0-9 .-]+))\s*[:]\s*/g, '|$1@').split('|').map(item => {
+                            let [subKey,subVal] = item.split("@");
+                            if (!subVal) {
+                                subVal = subKey;
+                                subKey = 'default';
+                            }
+
+                            if (subVal)
+                                subValues[subKeyMap[subKey] || subKey] = createReadingLinks(subVal, zachalaResolver);
+                        });
+
+                        if (Object.keys(subValues).length > 0)
+                            values[keyMap[key]] = subValues;
+                    });
+
+                    return {
+                        cheerio: cheerio.load(value, { decodeEntities: false }),
+                        readings: values,
+                        comments,
+                        originalReadings
+                    }
+                }
+            )
+            .then(data => {
+                let $ = data.cheerio;
+
+                let saints = [];
+                $('.DP_TEXT a.DA').map(function(i, elem) {
+                    if ($(this).find('img').length === 0 && $(this).attr('title').length > 0)
+                        saints.push($(this).attr('title'));
+                });
+
+                return {
+                    title: $('.DD_NED').text().trim().replace(/\.$/, ''),
+                    glas: $('.DD_GLAS').text().trim().replace(/\D/g, ''),
+                    fast: $('.DD_POST').text().trim().replace(/\.$/, ''),
+                    fast_detail: $('.DD_TPTXT').text().trim().replace(/\.$/, ''),
+                    originalTitle: $('.DP_TEXT.DPN_-1 .DNAME a').text().trim().replace(/\.$/, ''),
+                    originalReadings: data.originalReadings,
+                    readings: data.readings,
+                    comments: data.comments,
+                    saints
+                };
+            })
+            .then(value => JSON.stringify(value, null, 2))
+            .then(value => FS.write(path.join('processed', dateString), value).catch(e => console.log('can\'t write', e, dateString)))
+            .catch(e => console.log('global error', e, dateString));
+    });
 };
 
 // kld_font
