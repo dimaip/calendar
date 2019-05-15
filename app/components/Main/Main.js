@@ -35,11 +35,21 @@ class Main extends Component {
 
     componentWillReceiveProps(newProps) {
         if (newProps.days !== this.props.days) {
-            const day = pathOr(null, ['days', newProps.date], newProps);
+            const day = pathOr(null, ['days', this.getDate(newProps)], newProps);
             if (isEmpty(this.state.day) && day) {
                 this.setState({ day });
             }
         }
+    }
+
+    componentDidMount() {
+        if (isEmpty(this.props.day)) {
+            this.props.getDay(this.getDate(this.props));
+        }
+    }
+
+    getDate(props) {
+        return props.match.params.date || dateFormat(new Date(), 'yyyy-mm-dd');
     }
 
     setNewDate(dateString) {
@@ -65,7 +75,7 @@ class Main extends Component {
     }
 
     handleClickShift = direction => () => {
-        const { date } =this.props;
+        const date = this.getDate(this.props);
         switch (direction) {
             case 'left':
                 this.setNewDate(dateFormat(moment(date).subtract(1, 'days'), 'yyyy-mm-dd'));
@@ -78,7 +88,8 @@ class Main extends Component {
     }
 
     render() {
-        let { day, date } = this.props;
+        let { day } = this.props;
+        const date = this.getDate(this.props);
 
         const innerContent = (
             <Loader loaded={!isEmpty(day)}>
@@ -135,5 +146,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Main))
-
-

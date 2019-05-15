@@ -6,19 +6,16 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "debug": "node --inspect --debug-brk server.js",
-    "lint": "standard || true",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rimraf dist/",
-    "watch-server": "webpack --watch --config webpack/webpack.config.server.js",
-    "watch-client": "webpack --watch --config webpack/webpack.config.client.js",
-    "bundle-server": "webpack --config webpack/webpack.config.server.js",
-    "bundle-client": "webpack --display-modules --config webpack/webpack.config.client.js"
+    "build": "webpack && cap sync"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@capacitor/android": "^1.0.0-beta.24",
+    "@capacitor/cli": "^1.0.0-beta.22",
+    "@capacitor/core": "^1.0.0-beta.22",
     "autoprefixer": "^7.1.6",
+    "cors": "^2.8.5",
     "dateformat": "^3.0.2",
     "express": "^4.15.2",
     "express-http-proxy": "^1.0.7",

@@ -1,0 +1,7 @@
+{
+  "appId": "com.orthodox.app",
+  "appName": "orthodox",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www"
+}
