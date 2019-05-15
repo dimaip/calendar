@@ -6,8 +6,7 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "debug": "node --inspect --debug-brk server.js",
-    "build": "webpack"
+    "build": "webpack && cap sync"
   },
   "author": "",
   "license": "ISC",
