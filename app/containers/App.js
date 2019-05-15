@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { BrowserRouter, StaticRouter } from 'react-router-dom'
+import { HashRouter, StaticRouter } from 'react-router-dom'
 import routes from 'routes'
 
 export default ({ server, location, context, store }) => {
@@ -17,9 +17,9 @@ export default ({ server, location, context, store }) => {
     )
   } else {
     router = (
-      <BrowserRouter>
+      <HashRouter>
         {routes}
-      </BrowserRouter>
+      </HashRouter>
     )
   }
 
