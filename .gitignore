@@ -6,3 +6,5 @@ convertBibleQuote/new
 convertBibleQuote/bible
 /.idea
 /www
+/electron/app
+/android/app

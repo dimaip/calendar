@@ -12,6 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@capacitor/android": "^1.0.0-beta.24",
+    "@capacitor/cli": "^1.0.0-beta.22",
+    "@capacitor/core": "^1.0.0-beta.22",
     "autoprefixer": "^7.1.6",
     "cors": "^2.8.5",
     "dateformat": "^3.0.2",
