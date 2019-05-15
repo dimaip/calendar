@@ -11,7 +11,5 @@ export default (
             <Route exact path='/date/:date' component={Root} />
             <Route component={NotFound} />
         </Switch>
-
-
     </div>
 )
