@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { withRouter } from "react-router-dom";
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import moment from 'moment';
 import DayPicker from '../DayPicker/DayPicker.js';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
@@ -22,14 +22,14 @@ import getDay from '../../redux/actions/getDay';
 
 class Main extends Component {
     static propTypes = {
-        params: PropTypes.object
+        params: PropTypes.object,
     };
 
     constructor() {
         super();
         this.state = {
             calendarShown: false,
-            direction: 'mount'
+            direction: 'mount',
         };
     }
 
@@ -64,15 +64,15 @@ class Main extends Component {
         this.setNewDate(dateString);
         this.setState({
             calendarShown: false,
-            direction
+            direction,
         });
-    }
+    };
 
     handleToggleClick = () => {
         this.setState({
-            calendarShown: !this.state.calendarShown
+            calendarShown: !this.state.calendarShown,
         });
-    }
+    };
 
     handleClickShift = direction => () => {
         const date = this.getDate(this.props);
@@ -85,7 +85,7 @@ class Main extends Component {
                 break;
         }
         this.setState({ direction });
-    }
+    };
 
     render() {
         let { day } = this.props;
@@ -94,40 +94,26 @@ class Main extends Component {
         const innerContent = (
             <Loader loaded={!isEmpty(day)}>
                 <div>
-                    {(day.title || day.fast)
-                    && <HeadingBar title={day.title} subTitle={day.fast} />}
-                    <ChapterCollapse header="Чтения" key='1'>
-                        <ReadingList readings={ day.readings || {}} date={date} />
-                    </ChapterCollapse>
-                    <ChapterCollapse header="Святые" key='2'>
-                        <div dangerouslySetInnerHTML={{__html: day.saints}} />
-                    </ChapterCollapse>
-                    <ChapterCollapse header="Проповедь" key='3'>
-                        Проповедь
-                    </ChapterCollapse>
-                    <ChapterCollapse header="Тропари" key='4'>
-                        Тропари
-                    </ChapterCollapse>
+                    {(day.title || day.fast) && <HeadingBar title={day.title} subTitle={day.fast} />}
+                    <ReadingList readings={day.readings || {}} date={date} />
+                    <div dangerouslySetInnerHTML={{ __html: day.saints }} />
                 </div>
             </Loader>
         );
         return (
             <div>
-                <Nav
-                    date={date}
-                    handleToggleClick={this.handleToggleClick}
-                    handleClickShift={this.handleClickShift}
-                />
-                {this.state.calendarShown &&
-                <DayPicker onDayClick={this.handleDayClick} locale='ru' localeUtils={LocaleUtils} />}
-                <div className='slide-wrap'>
+                <Nav date={date} handleToggleClick={this.handleToggleClick} handleClickShift={this.handleClickShift} />
+                {this.state.calendarShown && (
+                    <DayPicker onDayClick={this.handleDayClick} locale="ru" localeUtils={LocaleUtils} />
+                )}
+                <div className="slide-wrap">
                     <ReactCSSTransitionGroup
-                        className='slide-transition-group'
+                        className="slide-transition-group"
                         transitionName={`slide-${this.state.direction}`}
                         transitionEnterTimeout={400}
                         transitionLeaveTimeout={400}
                     >
-                        <div className='slide' key={date}>
+                        <div className="slide" key={date}>
                             {innerContent}
                         </div>
                     </ReactCSSTransitionGroup>
@@ -141,8 +127,8 @@ const mapStateToProps = state => state.days;
 
 function mapDispatchToProps(dispatch) {
     return {
-        getDay: bindActionCreators(getDay, dispatch)
-    }
+        getDay: bindActionCreators(getDay, dispatch),
+    };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Main))
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Main));

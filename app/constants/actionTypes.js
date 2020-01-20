@@ -1,5 +1,4 @@
-export const
-    GET_DAY = 'GET_DAY',
+export const GET_DAY = 'GET_DAY',
     GET_DAY_SUCCESS = 'GET_DAY_SUCCESS',
     GET_DAY_ERROR = 'GET_DAY_ERROR',
     GET_READING = 'GET_DAY',

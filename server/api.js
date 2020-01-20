@@ -1,5 +1,3 @@
-module.exports = function api () {
-  return (req, res, next) => {
-
-  }
-}
+module.exports = function api() {
+    return (req, res, next) => {};
+};

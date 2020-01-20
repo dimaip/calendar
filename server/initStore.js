@@ -1,6 +1,5 @@
-import {fetchDay} from '../app/redux/actions/getDay';
+import { fetchDay } from '../app/redux/actions/getDay';
 import dateFormat from 'dateformat';
-
 
 export default function initStore(route) {
     let date;
@@ -14,13 +13,12 @@ export default function initStore(route) {
         default:
             date = dateFormat(new Date(), 'yyyy-mm-dd');
             break;
-
     }
     return fetchDay(date).then(dayResult => {
         const days = {},
             day = dayResult.day;
         days[dayResult.date] = day;
-        
+
         // Compile an initial state
         return {
             days: {
@@ -28,9 +26,8 @@ export default function initStore(route) {
                 days,
                 day,
                 error: '',
-                loaded: true
-            }
+                loaded: true,
+            },
         };
     });
-
 }

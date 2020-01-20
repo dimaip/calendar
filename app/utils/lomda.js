@@ -1,13 +1,6 @@
-import {
-    forEach,
-    addIndex,
-    map,
-    is,
-    reduce
-} from 'ramda';
+import { forEach, addIndex, map, is, reduce } from 'ramda';
 
-const
-    noop = () => {},
+const noop = () => {},
     isFunction = is(Function),
     isString = is(String),
     isArray = is(Array),
@@ -15,22 +8,20 @@ const
     forEachIndex = addIndex(forEach),
     mapIndex = addIndex(map),
     keyBy = (getProp, list) => {
-        const
-            reducer = (assocList, element) => {
-                const prop = isFunction(getProp) ? getProp(element) : getProp;
+        const reducer = (assocList, element) => {
+            const prop = isFunction(getProp) ? getProp(element) : getProp;
 
-                assocList[element[prop]] = element;
+            assocList[element[prop]] = element;
 
-                return assocList;
-            };
+            return assocList;
+        };
 
         return list ? reduce(reducer, {}, list) : reduce(reducer, {});
     },
-    startsWith = (needle, haystack, position = 0) => (
-        isFunction(haystack.startsWith) ?
-            haystack.startsWith(needle, position) :
-            haystack.lastIndexOf(needle, position) === position
-    );
+    startsWith = (needle, haystack, position = 0) =>
+        isFunction(haystack.startsWith)
+            ? haystack.startsWith(needle, position)
+            : haystack.lastIndexOf(needle, position) === position;
 
 export {
     noop,
@@ -38,8 +29,8 @@ export {
     isString,
     isArray,
     isObject,
-    forEachIndex,  // array only
+    forEachIndex, // array only
     mapIndex, // array only
     keyBy,
-    startsWith
+    startsWith,
 };

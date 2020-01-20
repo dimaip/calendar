@@ -1,8 +1,4 @@
-import {
-    GET_READING,
-    GET_READING_SUCCESS,
-    GET_READING_ERROR
-} from '../../constants/actionTypes';
+import { GET_READING, GET_READING_SUCCESS, GET_READING_ERROR } from '../../constants/actionTypes';
 
 const initialState = {
     // FORMAT:
@@ -13,23 +9,21 @@ const initialState = {
     //     ...
     // }
     readings: {},
-    error: ''
+    error: '',
 };
-
 
 export default function readingsState(state = initialState, action) {
     switch (action.type) {
-
         case GET_READING:
             return {
                 ...state,
-                error: ''
+                error: '',
             };
 
         case GET_READING_ERROR:
             return {
                 ...state,
-                error: action.payload.error
+                error: action.payload.error,
             };
 
         case GET_READING_SUCCESS: {

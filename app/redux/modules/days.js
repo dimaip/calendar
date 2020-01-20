@@ -1,8 +1,4 @@
-import {
-    GET_DAY,
-    GET_DAY_SUCCESS,
-    GET_DAY_ERROR
-} from '../../constants/actionTypes';
+import { GET_DAY, GET_DAY_SUCCESS, GET_DAY_ERROR } from '../../constants/actionTypes';
 
 const initialState = {
     loaded: false,
@@ -27,25 +23,23 @@ const initialState = {
     date: '',
     day: {},
     days: {},
-    error: ''
+    error: '',
 };
-
 
 export default function daysState(state = initialState, action) {
     switch (action.type) {
-
         case GET_DAY:
             return {
                 ...state,
                 loaded: false,
-                error: ''
+                error: '',
             };
 
         case GET_DAY_ERROR:
             return {
                 ...state,
                 loaded: true,
-                error: action.payload.error
+                error: action.payload.error,
             };
 
         case GET_DAY_SUCCESS: {

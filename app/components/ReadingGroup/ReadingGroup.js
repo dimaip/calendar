@@ -5,22 +5,21 @@ import ReadingItem from '../ReadingItem/ReadingItem.js';
 
 import s from './ReadingGroup.scss';
 
-const ReadingGroup = ({title, readingVerses}) => {
-
+const ReadingGroup = ({ title, readingVerses }) => {
     var items = readingVerses.map((el, i) => {
-        return <ReadingItem reading={el} key={i}/>;
+        return <ReadingItem reading={el} key={i} />;
     });
 
     return (
         <div className={s.root}>
             <em>{title}</em>
-                {items}
+            {items}
         </div>
     );
 };
 ReadingGroup.propTypes = {
     title: PropTypes.string.isRequired,
-    readingVerses: PropTypes.array.isRequired
+    readingVerses: PropTypes.array.isRequired,
 };
 
 export default ReadingGroup;
