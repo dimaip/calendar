@@ -10,13 +10,10 @@ import dateFormat from 'dateformat';
 import LocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/ru';
 import { isEmpty, pathOr } from 'ramda';
-import ChapterCollapse from '../ChapterCollapse/ChapterCollapse.js';
 import ReadingList from '../ReadingList/ReadingList.js';
 import Nav from '../Nav/Nav.js';
 import HeadingBar from '../HeadingBar/HeadingBar.js';
 import Loader from '../Loader/Loader.js';
-
-import '../../styles/Slides.css';
 
 import getDay from '../../redux/actions/getDay';
 
@@ -25,13 +22,10 @@ class Main extends Component {
         params: PropTypes.object,
     };
 
-    constructor() {
-        super();
-        this.state = {
-            calendarShown: false,
-            direction: 'mount',
-        };
-    }
+    state = {
+        calendarShown: false,
+        direction: 'mount',
+    };
 
     componentWillReceiveProps(newProps) {
         if (newProps.days !== this.props.days) {
@@ -94,7 +88,7 @@ class Main extends Component {
         const innerContent = (
             <Loader loaded={!isEmpty(day)}>
                 <div>
-                    {(day.title || day.fast) && <HeadingBar title={day.title} subTitle={day.fast} />}
+                    <HeadingBar title={day.title} glas={day.glas} />
                     <ReadingList readings={day.readings || {}} date={date} />
                     <div dangerouslySetInnerHTML={{ __html: day.saints }} />
                 </div>

@@ -12,7 +12,7 @@ export function fetchDay(date) {
         .then(res => {
             let day = {};
             if (res) {
-                const { comment, lent, prayers, readings, saints, seromns, title } = res;
+                const { comment, lent, prayers, readings, saints, seromns, title, glas, week } = res;
 
                 day = {
                     comment,
@@ -22,6 +22,8 @@ export function fetchDay(date) {
                     saints,
                     seromns,
                     title,
+                    glas,
+                    week,
                 };
             }
 

@@ -1,35 +1,68 @@
 import React from 'react';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
-import dateFormat from 'dateformat';
 import moment from 'moment';
-import 'moment/locale/ru';
+import LeftIcon from '../LeftIcon/LeftIcon';
+import RightIcon from '../RightIcon/RightIcon';
 import CalendarIcon from 'react-icons/lib/fa/calendar.js';
-import CircleLeftIcon from 'react-icons/lib/fa/arrow-circle-o-left.js';
-import CircleRightIcon from 'react-icons/lib/fa/arrow-circle-o-right.js';
 import Button from '../Button/Button.js';
-import s from './Nav.scss';
+import theme from '../../styles/theme';
 
 const Nav = ({ handleToggleClick, handleClickShift, date }) => {
     return (
-        <div className={s.root}>
-            <Button className={s.arrows} onClick={handleClickShift('left')}>
-                <CircleLeftIcon />
+        <div
+            className={css`
+                display: flex;
+            `}
+        >
+            <Button
+                onClick={handleClickShift('left')}
+                className={css`
+                    padding-left: 24px;
+                    padding-right: 24px;
+                `}
+            >
+                <LeftIcon />
             </Button>
-            <Button className={s.toggle} onClick={handleToggleClick}>
+            {/* <Button onClick={handleToggleClick}>
                 <CalendarIcon />
-            </Button>
-            <div className={s.date}>
-                <div className={s.dateNew}>
-                    {dateFormat(date, 'dddd,')}
-                    <br />
-                    {dateFormat(date, 'dS mmmm yyyy')}
+            </Button> */}
+            <div
+                className={css`
+                    flex-grow: 1;
+                    margin: 18px 0;
+                `}
+            >
+                <div
+                    className={css`
+                        font-size: 20px;
+                        color: ${theme.colors.primary};
+                        line-height: 1.2;
+                    `}
+                >
+                    {moment(date).format('D MMMM YYYY, ddd')}
                 </div>
-                <div className={s.dateOld}>
-                    {dateFormat(moment(date).subtract(-13, 'days'), 'dS mmmm')} по старому стилю
+                <div
+                    className={css`
+                        font-size: 12px;
+                        color: ${theme.colors.gray};
+                        line-height: 1.2;
+                    `}
+                >
+                    {moment(date)
+                        .subtract(-13, 'days')
+                        .format('D MMMM')}{' '}
+                    по старому стилю
                 </div>
             </div>
-            <Button className={s.arrows} onClick={handleClickShift('right')}>
-                <CircleRightIcon />
+            <Button
+                onClick={handleClickShift('right')}
+                className={css`
+                    padding-left: 24px;
+                    padding-right: 24px;
+                `}
+            >
+                <RightIcon />
             </Button>
         </div>
     );
