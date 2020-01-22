@@ -41,6 +41,10 @@ button:focus {
 }
 
 /* TODO: fix this, probably serverside */
-a.main {
+.saints a {
     color: #aa945f;
+}
+
+.saints img {
+    margin-right: 12px;
 }

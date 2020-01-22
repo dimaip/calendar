@@ -21,7 +21,10 @@ export function fetchDay(date) {
                     readings,
                     saints: saints
                         // TODO: move this server-side
-                        .replace(/\/typo3conf\/ext\/orthodox\/Resources\/Public\/Icons/g, '/static/icons')
+                        .replace(
+                            /\/typo3conf\/ext\/orthodox\/Resources\/Public\/Icons\/(\w).gif/g,
+                            '/static/icons/$1.svg'
+                        )
                         .replace(/(?:\r\n|\r|\n)/g, '<br>'),
                     seromns,
                     title,

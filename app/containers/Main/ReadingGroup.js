@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
 import theme from '../../styles/theme';
-import ReadingItem from '../ReadingItem/ReadingItem.js';
+import ReadingItem from './ReadingItem';
 
 const ReadingGroup = ({ title, readingVerses }) => {
     var items = readingVerses.map((el, i) => {

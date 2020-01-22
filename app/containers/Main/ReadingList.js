@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { forEachObjIndexed } from 'ramda';
-import ReadingsForService from '../ReadingsForService/ReadingsForService.js';
+import ReadingsForService from './ReadingsForService';
 
-const ReadingList = ({ readings, date }) => {
+const ReadingList = ({ readings }) => {
     const renderedReadings = [];
 
     forEachObjIndexed((value, key) => {
@@ -14,7 +14,6 @@ const ReadingList = ({ readings, date }) => {
 };
 ReadingList.propTypes = {
     readings: PropTypes.object.isRequired,
-    date: PropTypes.string.isRequired,
 };
 
 export default ReadingList;

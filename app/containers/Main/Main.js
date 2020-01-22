@@ -5,19 +5,20 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import moment from 'moment';
-import DayPicker from '../DayPicker/DayPicker.js';
+import DayPicker from 'components/DayPicker/DayPicker.js';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import dateFormat from 'dateformat';
 import LocaleUtils from 'react-day-picker/moment';
 import 'moment/locale/ru';
 import { isEmpty, pathOr } from 'ramda';
-import ReadingList from '../ReadingList/ReadingList.js';
-import Nav from '../Nav/Nav.js';
-import HeadingBar from '../HeadingBar/HeadingBar.js';
-import Loader from '../Loader/Loader.js';
-import theme from '../../styles/theme';
+import ReadingList from './ReadingList.js';
+import Header from 'components/Header/Header';
+import Nav from 'components/Nav/Nav.js';
+import HeadingBar from 'components/HeadingBar/HeadingBar.js';
+import Loader from 'components/Loader/Loader.js';
+import theme from 'styles/theme';
 
-import getDay from '../../redux/actions/getDay';
+import getDay from 'redux/actions/getDay';
 
 const Heading = ({ children }) => (
     <h2
@@ -59,7 +60,7 @@ class Main extends Component {
     }
 
     getDate(props) {
-        return props.match.params.date || dateFormat(new Date(), 'yyyy-mm-dd');
+        return props.match.params.date;
     }
 
     setNewDate(dateString) {
@@ -101,8 +102,8 @@ class Main extends Component {
         let { day } = this.props;
         const date = this.getDate(this.props);
 
-        const innerContent = (
-            <Loader loaded={!isEmpty(day)}>
+        const InnerContent = () =>
+            Boolean(day) ? (
                 <div>
                     <HeadingBar title={day.title} glas={day.glas} lent={day.lent} />
                     <div
@@ -111,37 +112,48 @@ class Main extends Component {
                         `}
                     >
                         <Heading>Чтение дня</Heading>
-                        <ReadingList readings={day.readings || {}} date={date} />
+                        <ReadingList readings={day.readings || {}} />
                         <Heading>Святые дня</Heading>
                         <div
                             dangerouslySetInnerHTML={{ __html: day.saints }}
-                            className={css`
-                                font-size: 14px;
-                                line-height: 1.5;
-                                color: ${theme.colors.gray};
-                            `}
+                            className={
+                                'saints ' +
+                                css`
+                                    font-size: 14px;
+                                    line-height: 1.5;
+                                    color: ${theme.colors.gray};
+                                `
+                            }
                         />
                     </div>
                 </div>
-            </Loader>
-        );
+            ) : (
+                <Loader />
+            );
         return (
             <div>
-                <Nav date={date} handleToggleClick={this.handleToggleClick} handleClickShift={this.handleClickShift} />
-                {this.state.calendarShown && (
-                    <DayPicker onDayClick={this.handleDayClick} locale="ru" localeUtils={LocaleUtils} />
-                )}
-                <div className="slide-wrap">
-                    <ReactCSSTransitionGroup
-                        className="slide-transition-group"
-                        transitionName={`slide-${this.state.direction}`}
-                        transitionEnterTimeout={400}
-                        transitionLeaveTimeout={400}
-                    >
-                        <div className="slide" key={date}>
-                            {innerContent}
-                        </div>
-                    </ReactCSSTransitionGroup>
+                <Header />
+                <div>
+                    <Nav
+                        date={date}
+                        handleToggleClick={this.handleToggleClick}
+                        handleClickShift={this.handleClickShift}
+                    />
+                    {this.state.calendarShown && (
+                        <DayPicker onDayClick={this.handleDayClick} locale="ru" localeUtils={LocaleUtils} />
+                    )}
+                    <div className="slide-wrap">
+                        <ReactCSSTransitionGroup
+                            className="slide-transition-group"
+                            transitionName={`slide-${this.state.direction}`}
+                            transitionEnterTimeout={400}
+                            transitionLeaveTimeout={400}
+                        >
+                            <div className="slide" key={date}>
+                                <InnerContent />
+                            </div>
+                        </ReactCSSTransitionGroup>
+                    </div>
                 </div>
             </div>
         );
