@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import theme from '../../styles/theme';
 
-const HeadingBar = ({ title, glas }) => (
+const HeadingBar = ({ title, glas, lent }) => (
     <div
         className={css`
             color: white;
@@ -28,7 +28,8 @@ const HeadingBar = ({ title, glas }) => (
                 line-height: 1.5;
             `}
         >
-            {glas && `Глас ${glas}`}
+            {glas && <div>Глас {glas}</div>}
+            {lent}
         </div>
     </div>
 );

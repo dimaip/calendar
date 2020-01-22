@@ -7,7 +7,7 @@ const ReadingList = ({ readings, date }) => {
     const renderedReadings = [];
 
     forEachObjIndexed((value, key) => {
-        renderedReadings.push(<ReadingsForService title={key} readingsForService={value} key={key} date={date} />);
+        renderedReadings.push(<ReadingsForService title={String(key)} readingsForService={value} key={String(key)} />);
     }, readings);
 
     return <div>{renderedReadings}</div>;

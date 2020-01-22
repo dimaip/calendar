@@ -4,7 +4,6 @@ const proxy = require('express-http-proxy');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const config = require('./webpack.config');
-const api = require('./server/api');
 var cors = require('cors');
 
 const app = express();
@@ -13,7 +12,8 @@ const port = process.env.NODE_PORT || 3000;
 
 app.use(cors());
 
-//app.use('/api/', api())
+app.use('/static', express.static('app/assets/public'));
+
 app.use(
     '/api/day',
     proxy('http://localhost:9999', {

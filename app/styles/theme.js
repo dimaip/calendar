@@ -3,5 +3,6 @@ export default {
         primary: '#AA945F',
         primaryTint: '#FAF3E1',
         gray: '#9D9D9D',
+        darkGray: '#484848',
     },
 };

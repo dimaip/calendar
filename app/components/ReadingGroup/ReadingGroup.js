@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { forEachObjIndexed } from 'ramda';
+import { css } from 'emotion';
+import theme from '../../styles/theme';
 import ReadingItem from '../ReadingItem/ReadingItem.js';
-
-import s from './ReadingGroup.scss';
 
 const ReadingGroup = ({ title, readingVerses }) => {
     var items = readingVerses.map((el, i) => {
@@ -11,8 +10,20 @@ const ReadingGroup = ({ title, readingVerses }) => {
     });
 
     return (
-        <div className={s.root}>
-            <em>{title}</em>
+        <div
+            className={css`
+                margin-bottom: 12px;
+            `}
+        >
+            <em
+                className={css`
+                    font-size: 14px;
+                    color: ${theme.colors.darkGray};
+                    line-height: 1.5;
+                `}
+            >
+                {title}
+            </em>
             {items}
         </div>
     );

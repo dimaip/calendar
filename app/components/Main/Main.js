@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { css } from 'emotion';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -14,8 +15,23 @@ import ReadingList from '../ReadingList/ReadingList.js';
 import Nav from '../Nav/Nav.js';
 import HeadingBar from '../HeadingBar/HeadingBar.js';
 import Loader from '../Loader/Loader.js';
+import theme from '../../styles/theme';
 
 import getDay from '../../redux/actions/getDay';
+
+const Heading = ({ children }) => (
+    <h2
+        className={css`
+            font-size: 20px;
+            font-weight: bold;
+            color: ${theme.colors.darkGray};
+            margin-top: 24px;
+            margin-bottom: 12px;
+        `}
+    >
+        {children}
+    </h2>
+);
 
 class Main extends Component {
     static propTypes = {
@@ -88,9 +104,24 @@ class Main extends Component {
         const innerContent = (
             <Loader loaded={!isEmpty(day)}>
                 <div>
-                    <HeadingBar title={day.title} glas={day.glas} />
-                    <ReadingList readings={day.readings || {}} date={date} />
-                    <div dangerouslySetInnerHTML={{ __html: day.saints }} />
+                    <HeadingBar title={day.title} glas={day.glas} lent={day.lent} />
+                    <div
+                        className={css`
+                            padding: 0 18px;
+                        `}
+                    >
+                        <Heading>Чтение дня</Heading>
+                        <ReadingList readings={day.readings || {}} date={date} />
+                        <Heading>Святые дня</Heading>
+                        <div
+                            dangerouslySetInnerHTML={{ __html: day.saints }}
+                            className={css`
+                                font-size: 14px;
+                                line-height: 1.5;
+                                color: ${theme.colors.gray};
+                            `}
+                        />
+                    </div>
                 </div>
             </Loader>
         );

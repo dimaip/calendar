@@ -19,7 +19,10 @@ export function fetchDay(date) {
                     lent,
                     prayers,
                     readings,
-                    saints,
+                    saints: saints
+                        // TODO: move this server-side
+                        .replace(/\/typo3conf\/ext\/orthodox\/Resources\/Public\/Icons/g, '/static/icons')
+                        .replace(/(?:\r\n|\r|\n)/g, '<br>'),
                     seromns,
                     title,
                     glas,

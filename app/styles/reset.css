@@ -1,6 +1,19 @@
+@font-face {
+    font-family: 'PTRootUI';
+    src: url('/static/fonts/PTRootUI_Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'PTRootUI';
+    src: url('/static/fonts/PTRootUI_Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
 body {
     margin: 0;
-    font-family: 'Helvetica', sans-serif;
+    font-family: 'PTRootUI', 'Helvetica', sans-serif;
 }
 a {
     color: inherit;
@@ -25,4 +38,9 @@ button {
 }
 button:focus {
     outline: none;
+}
+
+/* TODO: fix this, probably serverside */
+a.main {
+    color: #aa945f;
 }
