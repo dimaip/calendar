@@ -30,6 +30,7 @@ const ReadingsForService = ({ title, readingsForService }) => {
                         font-size: 12px;
                         font-weight: bold;
                         color: ${theme.colors.gray};
+                        margin-top: 2px;
                         margin-bottom: 12px;
                     `}
                 >
