@@ -17,27 +17,56 @@ const ReadingItem = ({ readingVerse, type }) => {
     if (!reading?.fragments) {
         return <div>Отрывок не найден</div>;
     }
-    let translationCurrentName;
-
-    const perevodItems = reading.translationList.map((item, i) => {
-        if (item.id == reading.translationCurrent) translationCurrentName = item.name;
-
-        return (
-            <button
-                // onClick={this.handlePerevodItemClick(item.id)}
-                key={item.id}
-            >
-                {item.name}
-            </button>
-        );
-    });
 
     const translationSelector = (
-        <div>
-            <div>Перевод {translationCurrentName}</div>
-            {perevodItems}
-        </div>
+        <select
+            className={css`
+                display: block;
+                font-size: 14px;
+                color: ${theme.colors.gray};
+                line-height: 1;
+                padding: 6px 22px 6px 12px;
+                width: 100%;
+                box-sizing: border-box;
+                margin: 0;
+                border: 0;
+                border-radius: 10px;
+                appearance: none;
+                background-color: ${theme.colors.bgGray};
+                background-position: top 10px right 8px;
+                background-repeat: no-repeat;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11.268' height='6.832' viewBox='0 0 11.268 6.832'%3E%3Cpath d='M59,233.668H70.269l-5.75-6.832Z' transform='translate(70.269 233.668) rotate(180)' fill='%23A2A2A2'/%3E%3C/svg%3E");
+                &::-ms-expand {
+                    display: none;
+                }
+                &:hover {
+                    opacity: 0.8;
+                    cursor: pointer;
+                }
+                &:focus {
+                    border-color: #aaa;
+                    box-shadow: 0 0 3px 1px ${theme.colors.primary};
+                    box-shadow: 0 0 0 1px -moz-mac-focusring;
+                    color: ${theme.colors.darkGray};
+                    outline: none;
+                }
+                & option {
+                    font-weight: normal;
+                }
+            `}
+            value={reading.translationCurrent}
+            onChange={e => dispatch(getReading(readingVerse, e.target.value))}
+        >
+            {reading.translationList.map((item, i) => {
+                return (
+                    <option key={item.id} value={item.id}>
+                        {item.name}
+                    </option>
+                );
+            })}
+        </select>
     );
+
     const readingText = reading.fragments.map((fragment, index) => {
         if (fragment.type != 'hidden') {
             return (
@@ -95,29 +124,44 @@ const ReadingItem = ({ readingVerse, type }) => {
                     position: sticky;
                     top: 0;
                     background-color: white;
+                    display: flex;
                 `}
             >
                 <div
                     className={css`
-                        font-size: 14px;
-                        font-weight: bold;
-                        color: ${theme.colors.darkGray};
+                        flex-grow: 1;
                     `}
                 >
-                    {type}
-                </div>
-                <div
-                    className={css`
-                        font-size: 18px;
-                        font-weight: bold;
-                        color: ${theme.colors.darkGray};
-                        line-height: 1.5;
-                        margin-bottom: 12px;
-                    `}
-                >
-                    {readingVerse}
+                    <div
+                        className={css`
+                            font-size: 14px;
+                            font-weight: bold;
+                            color: ${theme.colors.darkGray};
+                        `}
+                    >
+                        {type}
+                    </div>
+                    <div
+                        className={css`
+                            font-size: 18px;
+                            font-weight: bold;
+                            color: ${theme.colors.darkGray};
+                            line-height: 1.5;
+                        `}
+                    >
+                        {readingVerse}
+                    </div>
                 </div>
             </div>
+            <div
+                className={css`
+                    margin-top: 8px;
+                    margin-bottom: 12px;
+                `}
+            >
+                {translationSelector}
+            </div>
+
             {readingText}
         </div>
     );

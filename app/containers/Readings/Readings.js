@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react';
 import Header from 'components/Header/Header';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import LeftIcon from 'components/LeftIcon/LeftIcon';
 import { css } from 'emotion';
-import theme from 'styles/theme';
 import { useDispatch, useSelector } from 'react-redux';
 import getDay from 'redux/actions/getDay';
 import Loader from 'components/Loader/Loader';
 import ReadingsForService from './ReadingsForService';
+import ServiceSelector from './ServiceSelector';
 
 const Readings = () => {
     const { service, date } = useParams();
+    const history = useHistory();
     const days = useSelector(state => state?.days?.days);
     const day = days[date];
     const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const Readings = () => {
         }
     }, []);
     const readingsForService = day?.readings?.[service];
+    const services = Object.keys(day?.readings || {});
 
     return (
         <div>
@@ -35,28 +37,26 @@ const Readings = () => {
                         position: absolute;
                     `}
                 >
-                    <Link to="/" title="Назад">
+                    <Link to={`/date/${date}`} title="Назад">
                         <div
                             className={css`
                                 padding: 18px;
+                                &:hover {
+                                    opacity: 0.8;
+                                }
                             `}
                         >
                             <LeftIcon />
                         </div>
                     </Link>
                 </div>
-                <h2
-                    className={css`
-                        color: ${theme.colors.primary};
-                        flex-grow: 1;
-                        font-size: 30px;
-                        line-height: 1.5;
-                        text-align: center;
-                        padding: 9px;
-                    `}
-                >
-                    {service}
-                </h2>
+                <ServiceSelector
+                    {...{
+                        service,
+                        services,
+                        onChange: e => history.push(`/date/${date}/readings/${e.target.value}`),
+                    }}
+                />
             </div>
             {Boolean(day) ? (
                 <div
