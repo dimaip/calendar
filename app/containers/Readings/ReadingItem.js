@@ -97,7 +97,15 @@ const ReadingItem = ({ readingVerse, type }) => {
                     background-color: white;
                 `}
             >
-                <em>{type}</em>
+                <div
+                    className={css`
+                        font-size: 14px;
+                        font-weight: bold;
+                        color: ${theme.colors.darkGray};
+                    `}
+                >
+                    {type}
+                </div>
                 <div
                     className={css`
                         font-size: 18px;
