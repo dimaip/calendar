@@ -1,6 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
-import { highlightDays } from './feasts';
+import getDayInfo from 'domain/getDayInfo';
 import theme from 'styles/theme';
 import { DatePickerCalendar } from 'react-nice-dates';
 import { ru } from 'date-fns/locale';
@@ -9,24 +9,24 @@ import './Calendar.scss';
 const Calendar = ({ date, handleDayClick }) => {
     const modifiers = {
         h12: date => {
-            const [className] = highlightDays(date);
-            return className === 'highlight-12';
+            const { feastType } = getDayInfo(date);
+            return feastType === '12';
         },
         hGreat: date => {
-            const [className] = highlightDays(date);
-            return className === 'highlight-great';
+            const { feastType } = getDayInfo(date);
+            return feastType === 'great';
         },
         p123: date => {
-            const [className] = highlightDays(date);
-            return className === 'highlight-post123';
+            const { fastingLevel } = getDayInfo(date);
+            return fastingLevel === 1 || fastingLevel === 2 || fastingLevel === 3;
         },
         p7: date => {
-            const [className] = highlightDays(date);
-            return className === 'highlight-post7';
+            const { fastingLevel } = getDayInfo(date);
+            return fastingLevel === 7;
         },
         p: date => {
-            const [className] = highlightDays(date);
-            return className === 'highlight-post';
+            const { fastingLevel } = getDayInfo(date);
+            return fastingLevel && fastingLevel !== 8;
         },
     };
     const baseStyle = css`

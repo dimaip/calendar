@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { css } from 'emotion';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useParams, useHistory } from 'react-router-dom';
 import moment from 'moment';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import dateFormat from 'dateformat';
 import 'moment/locale/ru';
-import { isEmpty, pathOr } from 'ramda';
 import ReadingList from './ReadingList';
 import Header from 'components/Header/Header';
 import Nav from 'components/Nav/Nav';
@@ -17,6 +14,8 @@ import Loader from 'components/Loader/Loader';
 import theme from 'styles/theme';
 import getDay from 'redux/actions/getDay';
 import Calendar from './Calendar';
+import getDayInfo from 'domain/getDayInfo';
+import useDay from 'hooks/useDay';
 
 const Heading = ({ children }) => (
     <h2
@@ -33,59 +32,26 @@ const Heading = ({ children }) => (
     </h2>
 );
 
-class Main extends Component {
-    static propTypes = {
-        params: PropTypes.object,
+const Main = () => {
+    const { date } = useParams();
+    const day = useDay();
+    const [calendarShown, setCalendarShown] = useState(false);
+    const [direction, setDirection] = useState('mount');
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const setNewDate = dateString => {
+        history.push(`/date/${dateString}`);
+        dispatch(getDay(dateString));
     };
-
-    state = {
-        calendarShown: false,
-        direction: 'mount',
-    };
-
-    componentWillReceiveProps(newProps) {
-        if (newProps.days !== this.props.days) {
-            const day = pathOr(null, ['days', this.getDate(newProps)], newProps);
-            if (isEmpty(this.state.day) && day) {
-                this.setState({ day });
-            }
-        }
-    }
-
-    componentDidMount() {
-        if (isEmpty(this.props.day)) {
-            this.props.getDay(this.getDate(this.props));
-        }
-    }
-
-    getDate(props) {
-        return props.match.params.date;
-    }
-
-    setNewDate(dateString) {
-        this.props.history.push(`/date/${dateString}`);
-        this.props.getDay(dateString);
-    }
-
-    handleDayClick = day => {
+    const handleDayClick = day => {
         const dateString = dateFormat(day, 'yyyy-mm-dd');
         const direction = dateString > this.props.date ? 'right' : 'left';
 
-        this.setNewDate(dateString);
-        this.setState({
-            calendarShown: false,
-            direction,
-        });
+        setNewDate(dateString);
+        setDirection(direction);
+        setCalendarShown(false);
     };
-
-    handleToggleClick = () => {
-        this.setState(prevProps => ({
-            calendarShown: !prevProps.calendarShown,
-        }));
-    };
-
-    handleClickShift = direction => () => {
-        const date = this.getDate(this.props);
+    const makeHandleClickShift = direction => () => {
         switch (direction) {
             case 'left':
                 this.setNewDate(dateFormat(moment(date).subtract(1, 'days'), 'yyyy-mm-dd'));
@@ -94,83 +60,63 @@ class Main extends Component {
                 this.setNewDate(dateFormat(moment(date).add(1, 'days'), 'yyyy-mm-dd'));
                 break;
         }
-        this.setState({ direction });
+        setDirection(direction);
     };
+    const handleToggleClick = () => setCalendarShown(!calendarShown);
+    const { colour } = getDayInfo(new Date(date));
+    console.log(colour);
 
-    renderCalendar = () => {};
-
-    render() {
-        let { day } = this.props;
-        const date = this.getDate(this.props);
-
-        const InnerContent = () =>
-            Boolean(day) ? (
-                <div>
-                    <HeadingBar title={day.title} glas={day.glas} lent={day.lent} />
-                    <div
-                        className={css`
-                            padding: 0 18px;
-                        `}
-                    >
-                        <Heading>Чтение дня</Heading>
-                        <ReadingList readings={day.readings || {}} />
-                        <Heading>Святые дня</Heading>
-                        <div
-                            dangerouslySetInnerHTML={{ __html: day.saints }}
-                            className={css`
-                                font-size: 16px;
-                                line-height: 1.5;
-                                color: ${theme.colors.darkGray};
-
-                                & a {
-                                    color: ${theme.colors.primary};
-                                }
-
-                                & img {
-                                    margin-right: 12px;
-                                }
-                            `}
-                        />
-                    </div>
-                </div>
-            ) : (
-                <Loader />
-            );
-
-        return (
+    return (
+        <div>
+            <Header handleToggleClick={handleToggleClick} calendarShown={calendarShown} />
             <div>
-                <Header handleToggleClick={this.handleToggleClick} calendarShown={this.state.calendarShown} />
-                <div>
-                    {this.state.calendarShown && <Calendar date={date} handleDayClick={this.handleDayClick} />}
-                    <Nav
-                        date={date}
-                        handleToggleClick={this.handleToggleClick}
-                        handleClickShift={this.handleClickShift}
-                    />
-                    <div className="slide-wrap">
-                        <ReactCSSTransitionGroup
-                            className="slide-transition-group"
-                            transitionName={`slide-${this.state.direction}`}
-                            transitionEnterTimeout={400}
-                            transitionLeaveTimeout={400}
-                        >
-                            <div className="slide" key={date}>
-                                <InnerContent />
-                            </div>
-                        </ReactCSSTransitionGroup>
-                    </div>
+                {calendarShown && <Calendar date={date} handleDayClick={handleDayClick} />}
+                <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
+                <div className="slide-wrap">
+                    <ReactCSSTransitionGroup
+                        className="slide-transition-group"
+                        transitionName={`slide-${direction}`}
+                        transitionEnterTimeout={400}
+                        transitionLeaveTimeout={400}
+                    >
+                        <div className="slide" key={date}>
+                            {Boolean(day) ? (
+                                <div>
+                                    <HeadingBar title={day.title} glas={day.glas} lent={day.lent} />
+                                    <div
+                                        className={css`
+                                            padding: 0 18px;
+                                        `}
+                                    >
+                                        <Heading>Чтение дня</Heading>
+                                        <ReadingList readings={day.readings || {}} />
+                                        <Heading>Святые дня</Heading>
+                                        <div
+                                            dangerouslySetInnerHTML={{ __html: day.saints }}
+                                            className={css`
+                                                font-size: 16px;
+                                                line-height: 1.5;
+                                                color: ${theme.colors.darkGray};
+
+                                                & a {
+                                                    color: ${theme.colors.primary};
+                                                }
+
+                                                & img {
+                                                    margin-right: 12px;
+                                                }
+                                            `}
+                                        />
+                                    </div>
+                                </div>
+                            ) : (
+                                <Loader />
+                            )}
+                        </div>
+                    </ReactCSSTransitionGroup>
                 </div>
             </div>
-        );
-    }
-}
-
-const mapStateToProps = state => state.days;
-
-function mapDispatchToProps(dispatch) {
-    return {
-        getDay: bindActionCreators(getDay, dispatch),
-    };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Main));
+        </div>
+    );
+};
+export default Main;
