@@ -41,6 +41,7 @@ export function getLentInfo(date) {
     const d = date.getDate();
     let fastingLevel = 8;
     let fastName = 'Постный день';
+    let colour = null;
 
     const pascha = calculateEasterDate(y);
 
@@ -221,6 +222,7 @@ export function getLentInfo(date) {
         }
 
         fastName = 'Великий пост';
+        colour = '#6c3293';
     }
     if (current_date.valueOf() == great_lent_begin.valueOf()) {
         fastingLevel = 1;
@@ -336,6 +338,7 @@ export function getLentInfo(date) {
             fastName: fastingLevel !== 8 ? fastName : 'Поста нет',
             fastingLevel,
             fastingLevelName: fastingLevels[fastingLevel],
+            colour,
         };
     }
 
@@ -365,7 +368,7 @@ export function getFeastInfo(_date) {
         return {
             title: 'Вход Господень в Иерусалим',
             feastType: '12',
-            colour: '#A2A2A2',
+            colour: '#5C985C',
         };
     }
 

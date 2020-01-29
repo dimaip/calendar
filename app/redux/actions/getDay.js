@@ -15,8 +15,8 @@ export function fetchDay(date) {
             if (res) {
                 const { comment, prayers, readings, saints, seromns, title, glas, week } = res;
 
-                const { colour } = getFeastInfo(new Date(date));
-                const { fastName, fastingLevelName } = getLentInfo(new Date(date));
+                const { colour: feastColour } = getFeastInfo(new Date(date));
+                const { fastName, fastingLevelName, colour: lentColour } = getLentInfo(new Date(date));
 
                 day = {
                     comment,
@@ -35,7 +35,7 @@ export function fetchDay(date) {
                     title,
                     glas,
                     week,
-                    colour,
+                    colour: feastColour || lentColour,
                 };
             }
 
