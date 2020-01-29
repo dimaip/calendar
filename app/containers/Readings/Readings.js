@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { ThemeProvider } from 'emotion-theming';
-import LeftIcon from 'components/LeftIcon/LeftIcon';
+import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
 import Loader from 'components/Loader/Loader';
 import ReadingsForService from './ReadingsForService';

@@ -2,9 +2,9 @@ import React from 'react';
 import { css } from 'emotion';
 import { Link } from 'react-router-dom';
 
-import CalendarIcon from 'components/Svgs/CalendarIcon';
+import CalendarIcon from 'components/svgs/CalendarIcon';
 import Button from 'components/Button/Button';
-import Cross from 'components/Svgs/Cross';
+import Cross from 'components/svgs/Cross';
 
 const Header = ({ handleToggleClick, calendarShown }) => (
     <header

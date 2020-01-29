@@ -2,8 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import LeftIcon from '../LeftIcon/LeftIcon';
-import RightIcon from '../RightIcon/RightIcon';
+import LeftIcon from 'components/svgs/LeftIcon';
+import RightIcon from 'components/svgs/RightIcon';
 import Button from '../Button/Button.js';
 import { useTheme } from 'emotion-theming';
 
