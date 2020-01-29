@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import theme from '../../styles/theme';
 import ReadingItem from './ReadingItem';
+import { useTheme } from 'emotion-theming';
 
 const ReadingGroup = ({ title, readingVerses }) => {
     var items = readingVerses.map((el, i) => {
         return <ReadingItem reading={el} key={i} />;
     });
+
+    const theme = useTheme();
 
     return (
         <div
@@ -18,7 +20,7 @@ const ReadingGroup = ({ title, readingVerses }) => {
             <div
                 className={css`
                     font-size: 14px;
-                    color: ${theme.colors.gray};
+                    color: ${theme.colours.gray};
                     line-height: 1.5;
                 `}
             >

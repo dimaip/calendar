@@ -4,7 +4,7 @@ import { css } from 'emotion';
 import { Link, useParams } from 'react-router-dom';
 import { forEachObjIndexed } from 'ramda';
 import ReadingGroup from './ReadingGroup';
-import theme from '../../styles/theme';
+import { useTheme } from 'emotion-theming';
 
 const ReadingsForService = ({ title, readingsForService }) => {
     const rendredReadingGroups = [];
@@ -13,6 +13,7 @@ const ReadingsForService = ({ title, readingsForService }) => {
     }, readingsForService);
 
     const { date } = useParams();
+    const theme = useTheme();
 
     return (
         <Link to={`/date/${date}/readings/${title}`}>
@@ -29,7 +30,7 @@ const ReadingsForService = ({ title, readingsForService }) => {
                         text-transform: uppercase;
                         font-size: 14px;
                         font-weight: bold;
-                        color: ${theme.colors.primary};
+                        color: ${theme.colours.primary};
                         margin-bottom: -4px;
                         display: flex;
                     `}
@@ -49,7 +50,7 @@ const ReadingsForService = ({ title, readingsForService }) => {
                     >
                         <svg
                             className={css`
-                                stroke: ${theme.colors.primary};
+                                stroke: ${theme.colours.primary};
                             `}
                             xmlns="http://www.w3.org/2000/svg"
                             width="19.412"

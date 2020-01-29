@@ -5,9 +5,10 @@ import moment from 'moment';
 import LeftIcon from '../LeftIcon/LeftIcon';
 import RightIcon from '../RightIcon/RightIcon';
 import Button from '../Button/Button.js';
-import theme from '../../styles/theme';
+import { useTheme } from 'emotion-theming';
 
 const Nav = ({ handleToggleClick, handleClickShift, date }) => {
+    const theme = useTheme();
     return (
         <div
             className={css`
@@ -33,7 +34,7 @@ const Nav = ({ handleToggleClick, handleClickShift, date }) => {
             >
                 <div
                     className={css`
-                        color: ${theme.colors.primary};
+                        color: ${theme.colours.primary};
                         line-height: 1;
                         margin-bottom: 8px;
                         font-size: 22px;
@@ -50,7 +51,7 @@ const Nav = ({ handleToggleClick, handleClickShift, date }) => {
                 <div
                     className={css`
                         font-size: 14px;
-                        color: ${theme.colors.gray};
+                        color: ${theme.colours.gray};
                         line-height: 1;
                     `}
                 >

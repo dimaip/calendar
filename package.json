@@ -8,7 +8,7 @@
     "start": "node server.js",
     "build": "webpack && cap sync"
   },
-  "author": "",
+  "author": "PSMB.ru",
   "license": "ISC",
   "dependencies": {
     "@capacitor/android": "^1.0.0-beta.24",

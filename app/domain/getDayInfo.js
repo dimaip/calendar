@@ -35,7 +35,7 @@ const calculateEasterDate = year => {
     return new Date(year, pascha_m, pascha_d); // Set Pascha Date
 };
 
-export function lent(date) {
+export function getLentInfo(date) {
     const y = date.getFullYear();
     const m = date.getMonth();
     const d = date.getDate();
@@ -342,7 +342,7 @@ export function lent(date) {
     return null;
 }
 
-export default function(_date) {
+export function getFeastInfo(_date) {
     const y = _date.getFullYear();
     const m = _date.getMonth();
     const d = _date.getDate();
@@ -365,6 +365,7 @@ export default function(_date) {
         return {
             title: 'Вход Господень в Иерусалим',
             feastType: '12',
+            colour: '#A2A2A2',
         };
     }
 
@@ -375,6 +376,7 @@ export default function(_date) {
         return {
             title: 'Вознесение',
             feastType: '12',
+            colour: '#A2A2A2',
         };
     }
 
@@ -385,13 +387,7 @@ export default function(_date) {
         return {
             title: 'Пятидесятница',
             feastType: '12',
-        };
-    }
-
-    if (pentecost.getTime() == date.getTime()) {
-        return {
-            title: 'Пятидесятница',
-            feastType: '12',
+            colour: '#5C985C',
         };
     }
 
@@ -399,6 +395,7 @@ export default function(_date) {
         return {
             title: 'Рождество Богородицы',
             feastType: '12',
+            colour: '#4169E1',
         };
     }
 
@@ -406,6 +403,7 @@ export default function(_date) {
         return {
             title: 'Воздвижение Креста Господня',
             feastType: '12',
+            colour: '#A2A2A2',
         };
     }
 
@@ -413,6 +411,7 @@ export default function(_date) {
         return {
             title: 'Введение во храм Пресвятой Богородицы',
             feastType: '12',
+            colour: '#4169E1',
         };
     }
 
@@ -420,6 +419,7 @@ export default function(_date) {
         return {
             title: 'Рождество Христово',
             feastType: '12',
+            colour: '#A2A2A2',
         };
     }
 
@@ -427,6 +427,7 @@ export default function(_date) {
         return {
             title: 'Крещение Господне',
             feastType: '12',
+            colour: '#A2A2A2',
         };
     }
 
@@ -434,6 +435,7 @@ export default function(_date) {
         return {
             title: 'Сретение Господне',
             feastType: '12',
+            colour: '#A2A2A2',
         };
     }
 
@@ -441,6 +443,7 @@ export default function(_date) {
         return {
             title: 'Благовещение Пресвятой Богородицы',
             feastType: '12',
+            colour: '#4169E1',
         };
     }
 
@@ -448,6 +451,7 @@ export default function(_date) {
         return {
             title: 'Преображение Господне',
             feastType: '12',
+            colour: '#A2A2A2',
         };
     }
 
@@ -455,6 +459,7 @@ export default function(_date) {
         return {
             title: 'Успение Богородицы',
             feastType: '12',
+            colour: '#4169E1',
         };
     }
 
@@ -462,6 +467,7 @@ export default function(_date) {
         return {
             title: 'Покров Пресвятой Богородицы',
             feastType: 'great',
+            colour: '#4169E1',
         };
     }
 
@@ -469,6 +475,7 @@ export default function(_date) {
         return {
             title: 'Обрезание Господне',
             feastType: 'great',
+            colour: '#A2A2A2',
         };
     }
 
@@ -493,7 +500,5 @@ export default function(_date) {
         };
     }
 
-    const lentCheck = lent(date);
-
-    return lentCheck || {};
+    return {};
 }

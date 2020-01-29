@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
 import { GET_DAY, GET_DAY_ERROR, GET_DAY_SUCCESS } from '../../constants/actionTypes';
+import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
 
 export function fetchDay(date) {
     return fetch(`/api/day/${date}`)
@@ -12,11 +13,15 @@ export function fetchDay(date) {
         .then(res => {
             let day = {};
             if (res) {
-                const { comment, lent, prayers, readings, saints, seromns, title, glas, week } = res;
+                const { comment, prayers, readings, saints, seromns, title, glas, week } = res;
+
+                const { colour } = getFeastInfo(new Date(date));
+                const { fastName, fastingLevelName } = getLentInfo(new Date(date));
 
                 day = {
                     comment,
-                    lent,
+                    fastName,
+                    fastingLevelName,
                     prayers,
                     readings,
                     saints: saints
@@ -30,6 +35,7 @@ export function fetchDay(date) {
                     title,
                     glas,
                     week,
+                    colour,
                 };
             }
 

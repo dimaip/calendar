@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { css } from 'emotion';
-import theme from 'styles/theme';
 import getReading from 'redux/actions/getReading';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTheme } from 'emotion-theming';
 
 const ReadingItem = ({ readingVerse, type }) => {
     const readings = useSelector(state => state?.readings?.readings);
@@ -13,6 +13,7 @@ const ReadingItem = ({ readingVerse, type }) => {
             dispatch(getReading(readingVerse, 'default'));
         }
     }, []);
+    const theme = useTheme();
 
     if (!reading?.fragments) {
         return <div>Отрывок не найден</div>;
@@ -23,7 +24,7 @@ const ReadingItem = ({ readingVerse, type }) => {
             className={css`
                 display: block;
                 font-size: 14px;
-                color: ${theme.colors.gray};
+                color: ${theme.colours.gray};
                 line-height: 1;
                 padding: 6px 22px 6px 12px;
                 width: 100%;
@@ -32,7 +33,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                 border: 0;
                 border-radius: 10px;
                 appearance: none;
-                background-color: ${theme.colors.bgGray};
+                background-color: ${theme.colours.bgGray};
                 background-position: top 10px right 8px;
                 background-repeat: no-repeat;
                 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11.268' height='6.832' viewBox='0 0 11.268 6.832'%3E%3Cpath d='M59,233.668H70.269l-5.75-6.832Z' transform='translate(70.269 233.668) rotate(180)' fill='%23A2A2A2'/%3E%3C/svg%3E");
@@ -45,9 +46,9 @@ const ReadingItem = ({ readingVerse, type }) => {
                 }
                 &:focus {
                     border-color: #aaa;
-                    box-shadow: 0 0 3px 1px ${theme.colors.gray};
+                    box-shadow: 0 0 3px 1px ${theme.colours.gray};
                     box-shadow: 0 0 0 1px -moz-mac-focusring;
-                    color: ${theme.colors.darkGray};
+                    color: ${theme.colours.darkGray};
                     outline: none;
                 }
                 & option {
@@ -76,7 +77,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                             className={css`
                                 margin-bottom: 12px;
                                 font-weight: bold;
-                                color: ${theme.colors.darkGray};
+                                color: ${theme.colours.darkGray};
                             `}
                         >
                             Глава {fragment.chapter}
@@ -90,13 +91,13 @@ const ReadingItem = ({ readingVerse, type }) => {
                                         <div
                                             className={css`
                                                 margin-bottom: 12px;
-                                                color: ${theme.colors.darkGray};
+                                                color: ${theme.colours.darkGray};
                                             `}
                                         >
                                             <span
                                                 className={css`
                                                     font-size: 16px;
-                                                    color: ${theme.colors.darkGray};
+                                                    color: ${theme.colours.darkGray};
                                                 `}
                                             >
                                                 {verse.verse}
@@ -136,7 +137,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                     <div
                         className={css`
                             font-size: 14px;
-                            color: ${theme.colors.gray};
+                            color: ${theme.colours.gray};
                         `}
                     >
                         {type}
@@ -145,7 +146,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                         className={css`
                             font-size: 18px;
                             font-weight: bold;
-                            color: ${theme.colors.darkGray};
+                            color: ${theme.colours.darkGray};
                             line-height: 1.5;
                         `}
                     >

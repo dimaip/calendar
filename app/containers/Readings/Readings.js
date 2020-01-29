@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import Header from 'components/Header/Header';
+import React from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
+import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/LeftIcon/LeftIcon';
 import { css } from 'emotion';
-import { useDispatch } from 'react-redux';
-import getDay from 'redux/actions/getDay';
 import Loader from 'components/Loader/Loader';
 import ReadingsForService from './ReadingsForService';
 import ServiceSelector from './ServiceSelector';
 import useDay from 'hooks/useDay';
+import getTheme from 'styles/theme';
 
 const Readings = () => {
     const { service, date } = useParams();
@@ -17,52 +16,56 @@ const Readings = () => {
     const readingsForService = day?.readings?.[service];
     const services = Object.keys(day?.readings || {});
 
+    const theme = getTheme(day?.colour);
+
     return (
-        <div>
-            <div
-                className={css`
-                    display: flex;
-                    align-items: center;
-                `}
-            >
+        <ThemeProvider theme={theme}>
+            <div>
                 <div
                     className={css`
-                        position: absolute;
+                        display: flex;
+                        align-items: center;
                     `}
                 >
-                    <Link to={`/date/${date}`} title="Назад">
-                        <div
-                            className={css`
-                                padding: 18px;
-                                &:hover {
-                                    opacity: 0.8;
-                                }
-                            `}
-                        >
-                            <LeftIcon />
-                        </div>
-                    </Link>
+                    <div
+                        className={css`
+                            position: absolute;
+                        `}
+                    >
+                        <Link to={`/date/${date}`} title="Назад">
+                            <div
+                                className={css`
+                                    padding: 18px;
+                                    &:hover {
+                                        opacity: 0.8;
+                                    }
+                                `}
+                            >
+                                <LeftIcon />
+                            </div>
+                        </Link>
+                    </div>
+                    <ServiceSelector
+                        {...{
+                            service,
+                            services,
+                            onChange: e => history.push(`/date/${date}/readings/${e.target.value}`),
+                        }}
+                    />
                 </div>
-                <ServiceSelector
-                    {...{
-                        service,
-                        services,
-                        onChange: e => history.push(`/date/${date}/readings/${e.target.value}`),
-                    }}
-                />
+                {Boolean(day) ? (
+                    <div
+                        className={css`
+                            padding: 0 18px;
+                        `}
+                    >
+                        <ReadingsForService readingsForService={readingsForService} />
+                    </div>
+                ) : (
+                    <Loader />
+                )}
             </div>
-            {Boolean(day) ? (
-                <div
-                    className={css`
-                        padding: 0 18px;
-                    `}
-                >
-                    <ReadingsForService readingsForService={readingsForService} />
-                </div>
-            ) : (
-                <Loader />
-            )}
-        </div>
+        </ThemeProvider>
     );
 };
 export default Readings;

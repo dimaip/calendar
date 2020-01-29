@@ -1,31 +1,32 @@
 import React from 'react';
 import { css } from 'emotion';
-import getDayInfo from 'domain/getDayInfo';
-import theme from 'styles/theme';
+import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
 import { DatePickerCalendar } from 'react-nice-dates';
 import { ru } from 'date-fns/locale';
 import './Calendar.scss';
+import { useTheme } from 'emotion-theming';
 
 const Calendar = ({ date, handleDayClick }) => {
+    const theme = useTheme();
     const modifiers = {
         h12: date => {
-            const { feastType } = getDayInfo(date);
+            const { feastType } = getFeastInfo(date);
             return feastType === '12';
         },
         hGreat: date => {
-            const { feastType } = getDayInfo(date);
+            const { feastType } = getFeastInfo(date);
             return feastType === 'great';
         },
         p123: date => {
-            const { fastingLevel } = getDayInfo(date);
+            const { fastingLevel } = getLentInfo(date);
             return fastingLevel === 1 || fastingLevel === 2 || fastingLevel === 3;
         },
         p7: date => {
-            const { fastingLevel } = getDayInfo(date);
+            const { fastingLevel } = getLentInfo(date);
             return fastingLevel === 7;
         },
         p: date => {
-            const { fastingLevel } = getDayInfo(date);
+            const { fastingLevel } = getLentInfo(date);
             return fastingLevel && fastingLevel !== 8;
         },
     };
@@ -41,7 +42,7 @@ const Calendar = ({ date, handleDayClick }) => {
         selected: css`
         & .nice-dates-day_date {
             ${baseStyle}
-            background-color: ${theme.colors.primary};
+            background-color: ${theme.colours.primary};
             color: white;
         }
     `,
@@ -67,7 +68,7 @@ const Calendar = ({ date, handleDayClick }) => {
         p7: css`
         & .nice-dates-day_date {
             ${baseStyle}
-            border-color: ${theme.colors.primary};
+            border-color: ${theme.colours.primary};
         }
     `,
         p123: css`
