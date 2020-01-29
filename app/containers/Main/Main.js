@@ -16,6 +16,8 @@ import getTheme from 'styles/theme';
 import getDay from 'redux/actions/getDay';
 import Calendar from './Calendar';
 import useDay from 'hooks/useDay';
+import BottomNav from 'components/BottomNav/BottomNav';
+import Saints from './Saints';
 
 const Heading = ({ children }) => {
     const theme = useTheme();
@@ -86,7 +88,12 @@ const Main = () => {
                             <div className="slide" key={date}>
                                 {Boolean(day) ? (
                                     <div>
-                                        <HeadingBar title={day.title} glas={day.glas} lent={day.lent} />
+                                        <HeadingBar
+                                            title={day.title}
+                                            glas={day.glas}
+                                            fastName={day.fastName}
+                                            fastingLevelName={day.fastingLevelName}
+                                        />
                                         <div
                                             className={css`
                                                 padding: 0 18px;
@@ -95,22 +102,7 @@ const Main = () => {
                                             <Heading>Чтение дня</Heading>
                                             <ReadingList readings={day.readings || {}} />
                                             <Heading>Святые дня</Heading>
-                                            <div
-                                                dangerouslySetInnerHTML={{ __html: day.saints }}
-                                                className={css`
-                                                    font-size: 16px;
-                                                    line-height: 1.5;
-                                                    color: ${theme.colours.darkGray};
-
-                                                    & a {
-                                                        color: ${theme.colours.primary};
-                                                    }
-
-                                                    & img {
-                                                        margin-right: 12px;
-                                                    }
-                                                `}
-                                            />
+                                            <Saints saints={day.saints} />
                                         </div>
                                     </div>
                                 ) : (
@@ -120,6 +112,7 @@ const Main = () => {
                         </ReactCSSTransitionGroup>
                     </div>
                 </div>
+                <BottomNav active="calendar" />
             </div>
         </ThemeProvider>
     );
