@@ -13,10 +13,17 @@ const HeadingBar = ({ title, glas, lent }) => (
         <h2
             className={css`
                 color: white;
-                font-size: 24px;
-                line-height: 1.5;
+                line-height: 1.4;
+                letter-spacing: 0.5px;
                 font-weight: bold;
                 margin-bottom: 12px;
+                font-size: 22px;
+                @media (min-width: 360px) {
+                    font-size: 26px;
+                }
+                @media (min-width: 375px) {
+                    font-size: 28px;
+                }
             `}
         >
             {title}

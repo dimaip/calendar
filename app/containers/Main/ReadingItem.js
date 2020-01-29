@@ -6,7 +6,7 @@ import theme from '../../styles/theme';
 const ReadingItem = ({ reading }) => (
     <div
         className={css`
-            font-size: 14px;
+            font-size: 16px;
             color: ${theme.colors.darkGray};
             line-height: 1.5;
         `}

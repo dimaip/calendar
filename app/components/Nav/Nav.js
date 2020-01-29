@@ -24,29 +24,35 @@ const Nav = ({ handleToggleClick, handleClickShift, date }) => {
             >
                 <LeftIcon />
             </Button>
-            {/* <Button onClick={handleToggleClick}>
-                <CalendarIcon />
-            </Button> */}
-            <div
+            <Button
+                onClick={handleToggleClick}
                 className={css`
                     flex-grow: 1;
                     margin: 18px 0;
+                    text-align: center;
                 `}
             >
                 <div
                     className={css`
-                        font-size: 20px;
                         color: ${theme.colors.primary};
-                        line-height: 1.2;
+                        line-height: 1;
+                        margin-bottom: 8px;
+                        font-size: 22px;
+                        @media (min-width: 360px) {
+                            font-size: 26px;
+                        }
+                        @media (min-width: 375px) {
+                            font-size: 28px;
+                        }
                     `}
                 >
                     {moment(date).format('D MMMM YYYY, ddd')}
                 </div>
                 <div
                     className={css`
-                        font-size: 12px;
+                        font-size: 14px;
                         color: ${theme.colors.gray};
-                        line-height: 1.2;
+                        line-height: 1;
                     `}
                 >
                     {moment(date)
@@ -54,7 +60,7 @@ const Nav = ({ handleToggleClick, handleClickShift, date }) => {
                         .format('D MMMM')}{' '}
                     по старому стилю
                 </div>
-            </div>
+            </Button>
             <Button
                 onClick={handleClickShift('right')}
                 className={css`

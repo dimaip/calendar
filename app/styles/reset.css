@@ -40,12 +40,3 @@ button {
 button:focus {
     outline: none;
 }
-
-/* TODO: fix this, probably serverside */
-.saints a {
-    color: #aa945f;
-}
-
-.saints img {
-    margin-right: 12px;
-}

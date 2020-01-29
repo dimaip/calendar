@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { css } from 'emotion';
 
 const Button = props => (
@@ -9,16 +8,16 @@ const Button = props => (
             ${props.className}
             cursor: pointer;
             padding: 12px;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
             &:hover {
                 opacity: 0.8;
+                cursor: pointer;
             }
         `}
     >
         {props.children}
     </button>
 );
-Button.propTypes = {
-    children: PropTypes.object,
-};
 
 export default Button;

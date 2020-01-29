@@ -13,6 +13,7 @@ const port = process.env.NODE_PORT || 3000;
 app.use(cors());
 
 app.use('/static', express.static('app/assets/public'));
+app.use('/manifest.json', express.static('manifest.json'));
 
 app.use(
     '/api/day',

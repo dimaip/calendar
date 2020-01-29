@@ -12,14 +12,13 @@ const ReadingGroup = ({ title, readingVerses }) => {
     return (
         <div
             className={css`
-                margin-bottom: 12px;
+                margin-top: 8px;
             `}
         >
             <div
                 className={css`
                     font-size: 14px;
-                    font-weight: bold;
-                    color: ${theme.colors.darkGray};
+                    color: ${theme.colors.gray};
                     line-height: 1.5;
                 `}
             >

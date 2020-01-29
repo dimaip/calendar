@@ -25,7 +25,6 @@ const Readings = () => {
 
     return (
         <div>
-            <Header />
             <div
                 className={css`
                     display: flex;

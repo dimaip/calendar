@@ -95,8 +95,8 @@ const ReadingItem = ({ readingVerse, type }) => {
                                         >
                                             <span
                                                 className={css`
-                                                    font-size: 14px;
-                                                    color: ${theme.colors.gray};
+                                                    font-size: 16px;
+                                                    color: ${theme.colors.darkGray};
                                                 `}
                                             >
                                                 {verse.verse}
@@ -125,6 +125,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                     top: 0;
                     background-color: white;
                     display: flex;
+                    padding: 8px 0;
                 `}
             >
                 <div
@@ -135,8 +136,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                     <div
                         className={css`
                             font-size: 14px;
-                            font-weight: bold;
-                            color: ${theme.colors.darkGray};
+                            color: ${theme.colors.gray};
                         `}
                     >
                         {type}
@@ -155,7 +155,6 @@ const ReadingItem = ({ readingVerse, type }) => {
             </div>
             <div
                 className={css`
-                    margin-top: 8px;
                     margin-bottom: 12px;
                 `}
             >

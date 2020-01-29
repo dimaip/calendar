@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import { GET_READING, GET_READING_ERROR, GET_READING_SUCCESS } from '../../constants/actionTypes';
 
 export function fetchReading(link, translation) {
-    return fetch(`http://localhost:3000/api/reading/` + encodeURI(link) + '&translation=' + translation)
+    return fetch(`/api/reading/` + encodeURI(link) + '&translation=' + translation)
         .then(response => {
             if (response.status > 400) throw new Error('Error on fetch reading.');
 

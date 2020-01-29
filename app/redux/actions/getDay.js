@@ -3,7 +3,7 @@ import fetch from 'isomorphic-fetch';
 import { GET_DAY, GET_DAY_ERROR, GET_DAY_SUCCESS } from '../../constants/actionTypes';
 
 export function fetchDay(date) {
-    return fetch(`http://localhost:3000/api/day/${date}`)
+    return fetch(`/api/day/${date}`)
         .then(response => {
             if (response.status > 400) throw new Error('Error on fetch day.');
 
