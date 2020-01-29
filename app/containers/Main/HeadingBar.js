@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
-const HeadingBar = ({ title, glas, lent }) => {
+const HeadingBar = ({ title, glas, fastName, fastingLevelName }) => {
     const theme = useTheme();
     return (
         <div
@@ -38,7 +38,11 @@ const HeadingBar = ({ title, glas, lent }) => {
                 `}
             >
                 {glas && <div>Глас {glas}</div>}
-                {lent}
+                {fastName && (
+                    <div>
+                        {fastName}: {fastingLevelName}
+                    </div>
+                )}
             </div>
         </div>
     );
