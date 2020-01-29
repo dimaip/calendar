@@ -1,10 +1,18 @@
 import React from 'react';
+import theme from 'styles/theme';
+import { css } from 'emotion';
 
 export default () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16.564" viewBox="0 0 16.564 13.679">
+    <svg
+        className={css`
+            stroke: ${theme.colors.primary};
+        `}
+        xmlns="http://www.w3.org/2000/svg"
+        width="16.564"
+        viewBox="0 0 16.564 13.679"
+    >
         <path
             fill="none"
-            stroke="#AE841A"
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"

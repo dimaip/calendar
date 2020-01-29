@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import LeftIcon from '../LeftIcon/LeftIcon';
 import RightIcon from '../RightIcon/RightIcon';
-import CalendarIcon from 'react-icons/lib/fa/calendar.js';
 import Button from '../Button/Button.js';
 import theme from '../../styles/theme';
 

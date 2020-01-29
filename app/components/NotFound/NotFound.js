@@ -16,7 +16,7 @@ const Status = ({ code, children }) => (
 const NotFound = () => (
     <Status code={404}>
         <div>
-            <h1>Извините, страница не найдена.</h1>
+            <h1>Страница не найдена</h1>
         </div>
     </Status>
 );

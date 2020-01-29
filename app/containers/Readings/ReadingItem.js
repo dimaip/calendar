@@ -45,7 +45,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                 }
                 &:focus {
                     border-color: #aaa;
-                    box-shadow: 0 0 3px 1px ${theme.colors.primary};
+                    box-shadow: 0 0 3px 1px ${theme.colors.gray};
                     box-shadow: 0 0 0 1px -moz-mac-focusring;
                     color: ${theme.colors.darkGray};
                     outline: none;
