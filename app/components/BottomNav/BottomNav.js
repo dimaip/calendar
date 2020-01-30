@@ -9,19 +9,20 @@ const BottomNav = ({ active }) => {
 
     const itemClass = css`
         font-size: 14px;
-        padding: 6px 12px;
+        padding: 12px;
         border-bottom: 3px solid white;
         color: ${theme.colours.gray};
     `;
     const activeClass = css`
-        border-bottom-color: ${theme.colours.primary};
-        color: ${theme.colours.darkGray};
+        border-bottom-color: ${theme.colours.primary} !important;
+        color: ${theme.colours.darkGray} !important;
     `;
 
     return (
         <div
             className={css`
                 display: flex;
+                justify-content: space-evenly;
                 position: sticky;
                 bottom: 0;
                 background-color: white;

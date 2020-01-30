@@ -222,7 +222,7 @@ export function getLentInfo(date) {
         }
 
         fastName = 'Великий пост';
-        colour = '#6c3293';
+        colour = '#7b68ee';
     }
     if (current_date.valueOf() == great_lent_begin.valueOf()) {
         fastingLevel = 1;

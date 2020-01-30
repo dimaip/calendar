@@ -4,7 +4,7 @@ import { AppContainer } from 'react-hot-loader';
 import configureStore from 'redux/store/configureStore';
 import App from 'containers/App';
 
-const preloadedState = window.__PRELOADED_STATE__;
+const preloadedState = localStorage.getItem('persistedState') ? JSON.parse(localStorage.getItem('persistedState')) : {};
 const store = configureStore(preloadedState);
 const rootElement = document.getElementById('react-root');
 

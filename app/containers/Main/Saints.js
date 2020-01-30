@@ -8,7 +8,7 @@ const Saints = ({ saints }) => {
         <div
             dangerouslySetInnerHTML={{ __html: saints }}
             className={css`
-                font-size: 16px;
+                font-size: 18px;
                 line-height: 1.5;
                 color: ${theme.colours.darkGray};
 

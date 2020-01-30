@@ -3,6 +3,7 @@ import { css } from 'emotion';
 import getReading from 'redux/actions/getReading';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'emotion-theming';
+import Zoom from 'components/Zoom/Zoom';
 
 const ReadingItem = ({ readingVerse, type }) => {
     const readings = useSelector(state => state?.readings?.readings);
@@ -24,14 +25,15 @@ const ReadingItem = ({ readingVerse, type }) => {
             className={css`
                 display: block;
                 font-size: 14px;
-                color: ${theme.colours.gray};
+                color: #7d7d7d;
                 line-height: 1;
                 padding: 6px 22px 6px 12px;
                 width: 100%;
                 box-sizing: border-box;
-                margin: 0;
+                margin: 4px 0 16px 0;
                 border: 0;
-                border-radius: 10px;
+                box-shadow: 0px 0px 2px 0px #ccc;
+                border-radius: 4px;
                 appearance: none;
                 background-color: ${theme.colours.bgGray};
                 background-position: top 10px right 8px;
@@ -76,6 +78,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                         <div
                             className={css`
                                 margin-bottom: 12px;
+                                font-size: 18px;
                                 font-weight: bold;
                                 color: ${theme.colours.darkGray};
                             `}
@@ -90,14 +93,16 @@ const ReadingItem = ({ readingVerse, type }) => {
                                     {verse.type !== 'hidden' && (
                                         <div
                                             className={css`
+                                                font-size: 18px;
+                                                line-height: 1.6;
                                                 margin-bottom: 12px;
                                                 color: ${theme.colours.darkGray};
                                             `}
                                         >
                                             <span
                                                 className={css`
-                                                    font-size: 16px;
-                                                    color: ${theme.colours.darkGray};
+                                                    font-size: 12px;
+                                                    color: ${theme.colours.gray};
                                                 `}
                                             >
                                                 {verse.verse}
@@ -126,7 +131,9 @@ const ReadingItem = ({ readingVerse, type }) => {
                     top: 0;
                     background-color: white;
                     display: flex;
-                    padding: 8px 0;
+                    margin: 0 -17px;
+                    padding: 8px 17px;
+                    /* box-shadow: 0px 0px 3px #bbb; */
                 `}
             >
                 <div
@@ -136,7 +143,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                 >
                     <div
                         className={css`
-                            font-size: 14px;
+                            font-size: 16px;
                             color: ${theme.colours.gray};
                         `}
                     >
@@ -154,15 +161,8 @@ const ReadingItem = ({ readingVerse, type }) => {
                     </div>
                 </div>
             </div>
-            <div
-                className={css`
-                    margin-bottom: 12px;
-                `}
-            >
-                {translationSelector}
-            </div>
-
-            {readingText}
+            <div>{translationSelector}</div>
+            <Zoom>{readingText}</Zoom>
         </div>
     );
 };

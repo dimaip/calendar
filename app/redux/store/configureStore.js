@@ -1,9 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import rootReducer from 'redux/modules/root';
 import thunkMiddleware from 'redux-thunk';
+import localStorageMiddleware from './localStorageMiddleware';
 
 const configureStore = preloadedState => {
-    const store = compose(applyMiddleware(thunkMiddleware))(createStore)(rootReducer, preloadedState);
+    const store = compose(applyMiddleware(thunkMiddleware, localStorageMiddleware))(createStore)(
+        rootReducer,
+        preloadedState
+    );
 
     if (module.hot) {
         // Enable Webpack hot module replacement for reducers

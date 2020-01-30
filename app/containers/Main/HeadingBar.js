@@ -33,14 +33,16 @@ const HeadingBar = ({ title, glas, fastName, fastingLevelName }) => {
             <div
                 className={css`
                     color: ${theme.colours.primaryTint};
-                    font-size: 16px;
+                    font-size: 18px;
                     line-height: 1.5;
                 `}
             >
                 {glas && <div>Глас {glas}</div>}
                 {fastName && (
                     <div>
-                        {fastName}: {fastingLevelName}
+                        {fastName}
+                        {fastingLevelName && ': '}
+                        {fastingLevelName}
                     </div>
                 )}
             </div>

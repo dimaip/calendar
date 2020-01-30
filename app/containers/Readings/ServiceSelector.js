@@ -14,7 +14,7 @@ const ServiceSelector = ({ service, services, onChange }) => {
             <select
                 className={css`
                     /* Adopt to the width of the selected service, kinda hackish... */
-                    width: ${service.length * 17 + 25}px;
+                    width: ${service.length * 17 + 30}px;
                     color: ${theme.colours.primary};
                     flex-grow: 1;
                     font-size: 30px;
@@ -26,7 +26,7 @@ const ServiceSelector = ({ service, services, onChange }) => {
                     display: inline-block;
                     background: white no-repeat;
                     background-position: right 58%;
-                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11.268' height='6.832' viewBox='0 0 11.268 6.832'%3E%3Cpath d='M59,233.668H70.269l-5.75-6.832Z' transform='translate(70.269 233.668) rotate(180)' fill='%23AE841A'/%3E%3C/svg%3E");
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 13.668 8.823' width='13.668'%3E%3Cg stroke-width='2' stroke='%23ae841a' stroke-linecap='round' stroke-linejoin='round' fill='none'%3E%3Cpath d='M6.84 7.411L1.413 1.413M6.829 7.411l5.427-5.998'/%3E%3C/g%3E%3C/svg%3E");
                     box-sizing: border-box;
                     border: 0;
                     appearance: none;
@@ -39,6 +39,7 @@ const ServiceSelector = ({ service, services, onChange }) => {
                     }
                     &:focus {
                         outline: none;
+                        opacity: 0.8;
                     }
                     & option {
                         font-weight: normal;

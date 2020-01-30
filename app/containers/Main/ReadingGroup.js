@@ -19,7 +19,7 @@ const ReadingGroup = ({ title, readingVerses }) => {
         >
             <div
                 className={css`
-                    font-size: 14px;
+                    font-size: 16px;
                     color: ${theme.colours.gray};
                     line-height: 1.5;
                 `}

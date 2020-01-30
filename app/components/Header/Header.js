@@ -5,45 +5,38 @@ import { Link } from 'react-router-dom';
 import CalendarIcon from 'components/svgs/CalendarIcon';
 import Button from 'components/Button/Button';
 import Cross from 'components/svgs/Cross';
+import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 
-const Header = ({ handleToggleClick, calendarShown }) => (
-    <header
-        className={css`
-            height: 60px;
-            display: flex;
-            align-items: center;
-            padding-left: 10px;
-            border-bottom: 1px solid #ccc;
-        `}
-    >
-        <Link
-            to="/"
-            title="На главную"
+const Header = ({ handleToggleClick, calendarShown }) => {
+    return (
+        <header
             className={css`
-                flex-grow: 1;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                padding-left: 10px;
+                border-bottom: 1px solid #ccc;
             `}
-        ></Link>
-        {handleToggleClick && (
-            <Button
-                onClick={handleToggleClick}
+        >
+            <Link
+                to="/"
+                title="На главную"
                 className={css`
-                    padding: 10px 18px;
+                    flex-grow: 1;
                 `}
-            >
-                {calendarShown ? (
-                    <div
-                        className={css`
-                            margin-top: 6px;
-                            margin-right: -10px;
-                        `}
-                    >
-                        <Cross />
-                    </div>
-                ) : (
-                    <CalendarIcon />
-                )}
-            </Button>
-        )}
-    </header>
-);
+            ></Link>
+            <ZoomControlToggle />
+            {handleToggleClick && (
+                <Button
+                    onClick={handleToggleClick}
+                    className={css`
+                        padding: 10px 18px;
+                    `}
+                >
+                    {calendarShown ? <Cross /> : <CalendarIcon />}
+                </Button>
+            )}
+        </header>
+    );
+};
 export default Header;

@@ -9,7 +9,7 @@ const books = require('./books.json');
 const writeFile = (filePath, content) =>
     FS.makeTree(path.dirname(filePath))
         .then(() => FS.write(filePath, content))
-        .catch(e => console.log(e));
+        .catch(e => console.error(e));
 
 const parseVerseContent = verse =>
     verse
@@ -35,7 +35,7 @@ const parseChapterContent = (chapterContent, verseSign) =>
                       }
                     : null;
             } catch (e) {
-                console.log(e);
+                console.error(e);
                 return null;
             }
         });
@@ -59,7 +59,7 @@ const parseBookContent = (bookContent, translationKey, bookKey, chapterSign, ver
                     JSON.stringify(chapterArray, null, 2)
                 );
             } catch (e) {
-                console.log(e);
+                console.error(e);
                 return null;
             }
         });
@@ -89,14 +89,14 @@ const convert = translationKey => {
                             .then(v => iconv.decode(v, 'win1251'))
                             .then(v => v.replace(/\n/g, ''))
                             .then(v => parseBookContent(v, translationKey, book.key, chapterSign, verseSign))
-                            .catch(e => console.log(e));
+                            .catch(e => console.error(e));
                     } else {
                         throw new Error(`BookKey for ${v[i].FullName} - ${translationKey} not resolved`);
                     }
                 }
             });
         })
-        .catch(e => console.log(e));
+        .catch(e => console.error(e));
 };
 
 ['1Aver', '2Kass', '3RBO2011', '4RST'].map(i => convert(i));

@@ -8,7 +8,7 @@ const ReadingItem = ({ reading }) => {
     return (
         <div
             className={css`
-                font-size: 16px;
+                font-size: 18px;
                 color: ${theme.colours.darkGray};
                 line-height: 1.5;
             `}

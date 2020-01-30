@@ -8,6 +8,7 @@ import ReadingsForService from './ReadingsForService';
 import ServiceSelector from './ServiceSelector';
 import useDay from 'hooks/useDay';
 import getTheme from 'styles/theme';
+import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 
 const Readings = () => {
     const { service, date } = useParams();
@@ -25,6 +26,7 @@ const Readings = () => {
                     className={css`
                         display: flex;
                         align-items: center;
+                        margin-top: 12px;
                     `}
                 >
                     <div
@@ -52,6 +54,14 @@ const Readings = () => {
                             onChange: e => history.push(`/date/${date}/readings/${e.target.value}`),
                         }}
                     />
+                    <div
+                        className={css`
+                            position: absolute;
+                            right: 12px;
+                        `}
+                    >
+                        <ZoomControlToggle />
+                    </div>
                 </div>
                 {Boolean(day) ? (
                     <div

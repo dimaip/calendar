@@ -15,6 +15,7 @@ body {
     margin: 0 auto;
     font-family: 'PTRootUI', 'Helvetica', sans-serif;
     max-width: 640px;
+    color: #484848;
 }
 a {
     color: inherit;

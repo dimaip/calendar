@@ -18,24 +18,9 @@ import Calendar from './Calendar';
 import useDay from 'hooks/useDay';
 import BottomNav from 'components/BottomNav/BottomNav';
 import Saints from './Saints';
-
-const Heading = ({ children }) => {
-    const theme = useTheme();
-    return (
-        <h2
-            className={css`
-                font-size: 21px;
-                line-height: 1;
-                font-weight: bold;
-                color: ${theme.colours.darkGray};
-                margin-top: 24px;
-                margin-bottom: 12px;
-            `}
-        >
-            {children}
-        </h2>
-    );
-};
+import SectionHeading from './SectionHeading';
+import Links from './Links';
+import Zoom from 'components/Zoom/Zoom';
 
 const Main = () => {
     const { date } = useParams();
@@ -78,7 +63,7 @@ const Main = () => {
                 <div>
                     {calendarShown && <Calendar date={date} handleDayClick={handleDayClick} />}
                     <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
-                    <div className="slide-wrap">
+                    <div>
                         <ReactCSSTransitionGroup
                             className="slide-transition-group"
                             transitionName={`slide-${direction}`}
@@ -94,16 +79,18 @@ const Main = () => {
                                             fastName={day.fastName}
                                             fastingLevelName={day.fastingLevelName}
                                         />
-                                        <div
-                                            className={css`
-                                                padding: 0 18px;
-                                            `}
-                                        >
-                                            <Heading>Чтение дня</Heading>
-                                            <ReadingList readings={day.readings || {}} />
-                                            <Heading>Святые дня</Heading>
-                                            <Saints saints={day.saints} />
-                                        </div>
+                                        <Zoom>
+                                            <div
+                                                className={css`
+                                                    padding: 0 18px;
+                                                `}
+                                            >
+                                                <SectionHeading>Чтение дня</SectionHeading>
+                                                <ReadingList readings={day.readings || {}} />
+                                                <SectionHeading>Святые дня</SectionHeading>
+                                                <Saints saints={day.saints} />
+                                            </div>
+                                        </Zoom>
                                     </div>
                                 ) : (
                                     <Loader />
@@ -112,6 +99,7 @@ const Main = () => {
                         </ReactCSSTransitionGroup>
                     </div>
                 </div>
+                <Links />
                 <BottomNav active="calendar" />
             </div>
         </ThemeProvider>

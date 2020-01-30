@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { forEachObjIndexed } from 'ramda';
 import ReadingGroup from './ReadingGroup';
 import { useTheme } from 'emotion-theming';
+import RightIcon from 'components/svgs/RightIcon';
 
 const ReadingsForService = ({ title, readingsForService }) => {
     const rendredReadingGroups = [];
@@ -48,18 +49,7 @@ const ReadingsForService = ({ title, readingsForService }) => {
                             margin-top: 3px;
                         `}
                     >
-                        <svg
-                            className={css`
-                                stroke: ${theme.colours.primary};
-                            `}
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="19.412"
-                            viewBox="0 0 19.412 15.864"
-                        >
-                            <g fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
-                                <path d="M1 7.932h17l-7.205-6.519M18 7.932l-7.205 6.519" />
-                            </g>
-                        </svg>
+                        <RightIcon />
                     </div>
                 </h2>
                 {rendredReadingGroups}

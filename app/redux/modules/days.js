@@ -26,7 +26,7 @@ const initialState = {
     error: '',
 };
 
-export default function daysState(state = initialState, action) {
+export default function reducer(state = initialState, action) {
     switch (action.type) {
         case GET_DAY:
             return {
