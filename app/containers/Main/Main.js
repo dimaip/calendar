@@ -21,6 +21,7 @@ import Saints from './Saints';
 import SectionHeading from './SectionHeading';
 import Links from './Links';
 import Zoom from 'components/Zoom/Zoom';
+import Hymns from './Hymns';
 
 const Main = () => {
     const { date } = useParams();
@@ -89,6 +90,12 @@ const Main = () => {
                                                 <ReadingList readings={day.readings || {}} />
                                                 <SectionHeading>Святые дня</SectionHeading>
                                                 <Saints saints={day.saints} />
+                                                {day.prayers && (
+                                                    <>
+                                                        <SectionHeading>Тропари</SectionHeading>
+                                                        <Hymns hymns={day.prayers} />
+                                                    </>
+                                                )}
                                             </div>
                                         </Zoom>
                                     </div>
