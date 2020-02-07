@@ -5,14 +5,19 @@ import getDay from 'redux/actions/getDay';
 
 const useDay = () => {
     const { date } = useParams();
-    const days = useSelector(state => state?.days?.days);
-    const day = days[date];
+    const days = useSelector(state => state?.days);
+    const day = days?.[date];
     const dispatch = useDispatch();
     useEffect(() => {
         if (!day) {
             dispatch(getDay(date));
         }
-    }, []);
-    return day;
+    }, [date]);
+
+    if (day && !day.loading) {
+        return day.data;
+    }
+
+    return null;
 };
 export default useDay;

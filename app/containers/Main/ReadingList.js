@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { forEachObjIndexed } from 'ramda';
 import ReadingsForService from './ReadingsForService';
 
-const ReadingList = ({ readings }) => {
+const ReadingList = ({ readings, brother = false }) => {
     const renderedReadings = [];
 
     forEachObjIndexed((value, key) => {
-        renderedReadings.push(<ReadingsForService title={String(key)} readingsForService={value} key={String(key)} />);
+        renderedReadings.push(
+            <ReadingsForService brother={brother} title={String(key)} readingsForService={value} key={String(key)} />
+        );
     }, readings);
 
     return <div>{renderedReadings}</div>;

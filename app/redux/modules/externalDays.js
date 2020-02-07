@@ -1,10 +1,10 @@
-import { GET_DAY, GET_DAY_SUCCESS, GET_DAY_ERROR } from '../../constants/actionTypes';
+import { GET_EXTERNAL_DAY, GET_EXTERNAL_DAY_SUCCESS, GET_EXTERNAL_DAY_ERROR } from '../../constants/actionTypes';
 
 const initialState = {};
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
-        case GET_DAY: {
+        case GET_EXTERNAL_DAY: {
             const { date } = action.payload;
             return {
                 ...state,
@@ -16,7 +16,7 @@ export default function reducer(state = initialState, action) {
             };
         }
 
-        case GET_DAY_ERROR: {
+        case GET_EXTERNAL_DAY_ERROR: {
             const { date, error } = action.payload;
             return {
                 ...state,
@@ -28,13 +28,13 @@ export default function reducer(state = initialState, action) {
             };
         }
 
-        case GET_DAY_SUCCESS: {
-            const { date, day } = action.payload;
+        case GET_EXTERNAL_DAY_SUCCESS: {
+            const { date, externalDay } = action.payload;
             return {
                 ...state,
                 [date]: {
                     ...(state?.[date] || {}),
-                    data: day,
+                    data: externalDay,
                     loading: false,
                 },
             };

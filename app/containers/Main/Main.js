@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
-import { ThemeProvider, useTheme } from 'emotion-theming';
-import { useDispatch } from 'react-redux';
+import { ThemeProvider } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
 import moment from 'moment';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
@@ -13,7 +12,6 @@ import Nav from 'components/Nav/Nav';
 import HeadingBar from './HeadingBar';
 import Loader from 'components/Loader/Loader';
 import getTheme from 'styles/theme';
-import getDay from 'redux/actions/getDay';
 import Calendar from './Calendar';
 import useDay from 'hooks/useDay';
 import BottomNav from 'components/BottomNav/BottomNav';
@@ -22,17 +20,19 @@ import SectionHeading from './SectionHeading';
 import Links from './Links';
 import Zoom from 'components/Zoom/Zoom';
 import Hymns from './Hymns';
+import Sermons from './Sermons';
+import ThisDays from './ThisDays';
+import useExternalDay from 'hooks/useExternalDay';
 
 const Main = () => {
     const { date } = useParams();
     const day = useDay();
+    const { sermons, thisDays } = useExternalDay() || {};
     const [calendarShown, setCalendarShown] = useState(false);
     const [direction, setDirection] = useState('mount');
     const history = useHistory();
-    const dispatch = useDispatch();
     const setNewDate = dateString => {
         history.push(`/date/${dateString}`);
-        dispatch(getDay(dateString));
     };
     const handleDayClick = day => {
         const dateString = dateFormat(day, 'yyyy-mm-dd');
@@ -79,6 +79,7 @@ const Main = () => {
                                             glas={day.glas}
                                             fastName={day.fastName}
                                             fastingLevelName={day.fastingLevelName}
+                                            icon={day.icon}
                                         />
                                         <Zoom>
                                             <div
@@ -86,16 +87,21 @@ const Main = () => {
                                                     padding: 0 18px;
                                                 `}
                                             >
-                                                <SectionHeading>Чтение дня</SectionHeading>
+                                                <SectionHeading>Богослужебные чтения</SectionHeading>
                                                 <ReadingList readings={day.readings || {}} />
+
                                                 <SectionHeading>Святые дня</SectionHeading>
                                                 <Saints saints={day.saints} />
+                                                <ThisDays thisDays={thisDays} />
                                                 {day.prayers && (
                                                     <>
-                                                        <SectionHeading>Тропари</SectionHeading>
+                                                        <SectionHeading>Песнопения</SectionHeading>
                                                         <Hymns hymns={day.prayers} />
                                                     </>
                                                 )}
+                                                <SectionHeading>Душеполезные чтения</SectionHeading>
+                                                <ReadingList brother readings={day.bReadings || {}} />
+                                                <Sermons date={date} sermons={sermons} />
                                             </div>
                                         </Zoom>
                                     </div>

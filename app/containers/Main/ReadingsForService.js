@@ -7,7 +7,7 @@ import ReadingGroup from './ReadingGroup';
 import { useTheme } from 'emotion-theming';
 import RightIcon from 'components/svgs/RightIcon';
 
-const ReadingsForService = ({ title, readingsForService }) => {
+const ReadingsForService = ({ title, readingsForService, brother }) => {
     const rendredReadingGroups = [];
     forEachObjIndexed((value, key) => {
         rendredReadingGroups.push(<ReadingGroup title={String(key)} readingVerses={value} key={String(key)} />);
@@ -17,7 +17,7 @@ const ReadingsForService = ({ title, readingsForService }) => {
     const theme = useTheme();
 
     return (
-        <Link to={`/date/${date}/readings/${title}`}>
+        <Link to={`/date/${date}/${brother ? 'bReadings' : 'readings'}/${title}`}>
             <div
                 className={css`
                     border: 1px solid #d9dde5;

@@ -17,15 +17,17 @@ const ReadingGroup = ({ title, readingVerses }) => {
                 margin-top: 8px;
             `}
         >
-            <div
-                className={css`
-                    font-size: 16px;
-                    color: ${theme.colours.gray};
-                    line-height: 1.5;
-                `}
-            >
-                {title}
-            </div>
+            {title !== 'unnamed' && (
+                <div
+                    className={css`
+                        font-size: 16px;
+                        color: ${theme.colours.gray};
+                        line-height: 1.5;
+                    `}
+                >
+                    {title}
+                </div>
+            )}
             {items}
         </div>
     );

@@ -1,10 +1,11 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import rootReducer from 'redux/modules/root';
 import thunkMiddleware from 'redux-thunk';
 import localStorageMiddleware from './localStorageMiddleware';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const configureStore = preloadedState => {
-    const store = compose(applyMiddleware(thunkMiddleware, localStorageMiddleware))(createStore)(
+    const store = composeWithDevTools(applyMiddleware(thunkMiddleware, localStorageMiddleware))(createStore)(
         rootReducer,
         preloadedState
     );

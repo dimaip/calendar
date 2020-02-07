@@ -31,6 +31,14 @@ app.use(
         },
     })
 );
+app.use(
+    '/api/external-day',
+    proxy('http://dev.localhost:10000', {
+        proxyReqPathResolver: req => {
+            return `/?calendarDate=${req.url.substring(1)}`;
+        },
+    })
+);
 app.use(webpackDevMiddleware(compiler));
 // NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
 app.use(webpackHotMiddleware(compiler));

@@ -141,14 +141,16 @@ const ReadingItem = ({ readingVerse, type }) => {
                         flex-grow: 1;
                     `}
                 >
-                    <div
-                        className={css`
-                            font-size: 16px;
-                            color: ${theme.colours.gray};
-                        `}
-                    >
-                        {type}
-                    </div>
+                    {type != 'unnamed' && (
+                        <div
+                            className={css`
+                                font-size: 16px;
+                                color: ${theme.colours.gray};
+                            `}
+                        >
+                            {type}
+                        </div>
+                    )}
                     <div
                         className={css`
                             font-size: 18px;
@@ -157,11 +159,11 @@ const ReadingItem = ({ readingVerse, type }) => {
                             line-height: 1.5;
                         `}
                     >
-                        {readingVerse}
+                        {readingVerse.replace('@', '')}
                     </div>
                 </div>
             </div>
-            <div>{translationSelector}</div>
+            {reading.translationList?.length ? <div>{translationSelector}</div> : null}
             <Zoom>{readingText}</Zoom>
         </div>
     );

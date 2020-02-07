@@ -10,13 +10,13 @@ import useDay from 'hooks/useDay';
 import getTheme from 'styles/theme';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 
-const Readings = () => {
+const Readings = ({ brother = false }) => {
     const { service, date } = useParams();
     const history = useHistory();
     const day = useDay();
-    const readingsForService = day?.readings?.[service];
-    const services = Object.keys(day?.readings || {});
-
+    const readings = brother ? day?.bReadings : day?.readings;
+    const readingsForService = readings?.[service];
+    const services = Object.keys(readings || {});
     const theme = getTheme(day?.colour);
 
     return (
@@ -51,7 +51,8 @@ const Readings = () => {
                         {...{
                             service,
                             services,
-                            onChange: e => history.push(`/date/${date}/readings/${e.target.value}`),
+                            onChange: e =>
+                                history.push(`/date/${date}/${brother ? 'bReadings' : 'readings'}/${e.target.value}`),
                         }}
                     />
                     <div

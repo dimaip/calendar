@@ -357,7 +357,8 @@ export function getFeastInfo(_date) {
         return {
             title: 'Пасха',
             feastType: '12',
-            colour: '#D02020',
+            colour: '#ff4e4e',
+            icon: 'easter.jpg',
         };
     }
 

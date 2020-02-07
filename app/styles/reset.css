@@ -14,6 +14,7 @@
 body {
     margin: 0 auto;
     font-family: 'PTRootUI', 'Helvetica', sans-serif;
+    font-size: 18px;
     max-width: 640px;
     color: #484848;
 }
@@ -41,4 +42,7 @@ button {
 }
 button:focus {
     outline: none;
+}
+* {
+    box-sizing: border-box;
 }

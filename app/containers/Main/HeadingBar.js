@@ -2,13 +2,17 @@ import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
-const HeadingBar = ({ title, glas, fastName, fastingLevelName }) => {
+const HeadingBar = ({ title, glas, fastName, fastingLevelName, icon }) => {
     const theme = useTheme();
     return (
         <div
             className={css`
                 color: white;
                 background-color: ${theme.colours.primary};
+                background-image: ${icon && `url("/static/icons/${icon}")`};
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
                 padding: 18px;
             `}
         >

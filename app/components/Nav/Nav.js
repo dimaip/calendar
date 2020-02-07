@@ -56,7 +56,7 @@ const Nav = ({ handleToggleClick, handleClickShift, date }) => {
                     `}
                 >
                     {moment(date)
-                        .subtract(-13, 'days')
+                        .subtract(13, 'days')
                         .format('D MMMM')}{' '}
                     по старому стилю
                 </div>

@@ -13,10 +13,10 @@ export function fetchDay(date) {
         .then(res => {
             let day = {};
             if (res) {
-                const { comment, prayers, readings, saints, seromns, title, glas, week } = res;
+                const { comment, prayers, readings, bReadings, saints, seromns, title, glas, week } = res;
 
-                const { colour: feastColour } = getFeastInfo(new Date(date));
-                const { fastName, fastingLevelName, colour: lentColour } = getLentInfo(new Date(date));
+                const { colour: feastColour, icon: feastIcon } = getFeastInfo(new Date(date));
+                const { fastName, fastingLevelName, colour: lentColour, icon: lentIcon } = getLentInfo(new Date(date));
 
                 day = {
                     comment,
@@ -24,6 +24,7 @@ export function fetchDay(date) {
                     fastingLevelName,
                     prayers,
                     readings,
+                    bReadings,
                     saints: saints
                         // TODO: move this server-side
                         .replace(
@@ -36,6 +37,7 @@ export function fetchDay(date) {
                     glas,
                     week,
                     colour: feastColour || lentColour,
+                    icon: feastIcon || lentIcon,
                 };
             }
 
@@ -50,6 +52,7 @@ export default function getDay(date) {
     return dispatch => {
         dispatch({
             type: GET_DAY,
+            payload: { date },
         });
 
         return fetchDay(date)
@@ -63,7 +66,7 @@ export default function getDay(date) {
                 const errorMessage = error.message || 'Ошибка при загрузке чтений';
                 dispatch({
                     type: GET_DAY_ERROR,
-                    payload: { error: errorMessage },
+                    payload: { date, error: errorMessage },
                 });
 
                 throw new Error(errorMessage);
