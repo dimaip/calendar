@@ -1,0 +1,10 @@
+node_modules
+parse/processed
+parse/raw
+parse/cache
+convertBibleQuote/new
+convertBibleQuote/bible
+/.idea
+/electron
+/android
+/.circleci

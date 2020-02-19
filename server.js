@@ -8,6 +8,7 @@ var cors = require('cors');
 
 const app = express();
 const compiler = webpack(config);
+const isProd = process.env.NODE_ENV === 'production';
 const port = process.env.NODE_PORT || 3000;
 
 app.use(cors());
@@ -33,14 +34,18 @@ app.use(
 );
 app.use(
     '/api/external-day',
-    proxy('http://dev.localhost:10000', {
+    proxy('https://psmb.ru', {
         proxyReqPathResolver: req => {
             return `/?calendarDate=${req.url.substring(1)}`;
         },
     })
 );
-app.use(webpackDevMiddleware(compiler));
-// NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
-app.use(webpackHotMiddleware(compiler));
+if (isProd) {
+    app.use('/', express.static('www'));
+} else {
+    app.use(webpackDevMiddleware(compiler));
+    // NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
+    app.use(webpackHotMiddleware(compiler));
+}
 
 app.listen(port, () => console.log(`=== Go to http://localhost:${port} ===`));

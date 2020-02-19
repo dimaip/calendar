@@ -6,7 +6,9 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "build": "webpack && cap sync"
+    "serve": "NODE_PORT=80 NODE_ENV=production node server.js",
+    "build": "NODE_ENV=production webpack",
+    "build-cap": "NODE_ENV=production cap sync"
   },
   "author": "PSMB.ru",
   "license": "ISC",
