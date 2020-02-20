@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "serve": "NODE_PORT=80 NODE_ENV=production node server.js",
-    "build": "NODE_ENV=production webpack",
+    "build": "NODE_ENV=production webpack --config webpack.prod.js",
     "build-cap": "NODE_ENV=production cap sync"
   },
   "author": "PSMB.ru",

@@ -23,6 +23,10 @@ module.exports = {
 
     devtool: 'eval-source-map',
 
+    optimization: {
+        usedExports: true,
+    },
+
     devServer: {
         historyApiFallback: {
             index: 'www/index.html',
