@@ -31,6 +31,9 @@ const Sermon = () => {
                         align-items: center;
                         height: 60px;
                         border-bottom: 1px solid #ccc;
+                        position: sticky;
+                        top: 0;
+                        background-color: white;
                     `}
                 >
                     <div
