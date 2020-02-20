@@ -93,14 +93,18 @@ const Main = () => {
                                                 <SectionHeading>Святые дня</SectionHeading>
                                                 <Saints saints={day.saints} />
                                                 <ThisDays thisDays={thisDays} />
-                                                {day.prayers && (
+                                                {day.prayers && day.prayers.length > 0 && (
                                                     <>
                                                         <SectionHeading>Песнопения</SectionHeading>
                                                         <Hymns hymns={day.prayers} />
                                                     </>
                                                 )}
-                                                <SectionHeading>Душеполезные чтения</SectionHeading>
-                                                <ReadingList brother readings={day.bReadings || {}} />
+                                                {day.bReadings && day.bReadings.length > 0 && (
+                                                    <>
+                                                        <SectionHeading>Душеполезные чтения</SectionHeading>
+                                                        <ReadingList brother readings={day.bReadings} />
+                                                    </>
+                                                )}
                                                 <Sermons date={date} sermons={sermons} />
                                             </div>
                                         </Zoom>
