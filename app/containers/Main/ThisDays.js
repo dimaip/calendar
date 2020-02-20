@@ -44,7 +44,8 @@ const ThisDays = ({ thisDays }) => {
                                     className={css`
                                         color: white;
                                         font-weight: bold;
-                                        text-shadow: 0px 0px 20px #ccc;
+                                        text-shadow: -0.3px -0.3px 0 #000, 0.3px -0.3px 0 #000, -0.3px 0.3px 0 #000,
+                                            0.3px 0.3px 0 #000;
                                     `}
                                 >
                                     {thisDay.title}
