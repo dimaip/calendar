@@ -17,6 +17,8 @@ body {
     font-size: 18px;
     max-width: 640px;
     color: #484848;
+    /* Disable double-tap zoom on iOS */
+    touch-action: manipulation;
 }
 a {
     color: inherit;
