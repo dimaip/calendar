@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const proxy = require('express-http-proxy');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require('./webpack.config');
+const config = require('./webpack.dev');
 var cors = require('cors');
 
 const app = express();

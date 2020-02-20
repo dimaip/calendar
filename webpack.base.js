@@ -7,8 +7,6 @@ const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 module.exports = {
     name: 'client',
 
-    entry: ['webpack-hot-middleware/client', 'react-hot-loader/patch', 'client.js'],
-
     context: path.resolve(__dirname, './app'),
 
     output: {
@@ -18,10 +16,6 @@ module.exports = {
     },
 
     target: 'web',
-
-    mode: 'development',
-
-    devtool: 'eval-source-map',
 
     optimization: {
         usedExports: true,
@@ -38,7 +32,6 @@ module.exports = {
             localesToKeep: ['ru'],
         }),
         new ExtractTextPlugin('styles.css'),
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new HtmlWebpackPlugin({
             title: 'Православный календарь',
