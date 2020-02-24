@@ -10,6 +10,9 @@ RUN yarn
 
 COPY . .
 
+RUN ls /usr/src/app
+RUN ls /usr/src/app/app/containers/Main
+
 RUN yarn build
 
 EXPOSE 80
