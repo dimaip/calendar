@@ -91,7 +91,7 @@ const Main = () => {
                                                 <ReadingList readings={day.readings || {}} />
 
                                                 <SectionHeading>Святые дня</SectionHeading>
-                                                <Saints saints={day.saints} />
+                                                <Saints saints={day.saints} date={date} />
                                                 <ThisDays thisDays={thisDays} />
                                                 {day.prayers && day.prayers.length > 0 && (
                                                     <>

@@ -39,6 +39,14 @@ app.use(
         },
     })
 );
+app.use(
+    '/api/saint',
+    proxy('https://psmb.ru', {
+        proxyReqPathResolver: req => {
+            return `https://psmb.ru/sv/${req.url.substring(1)}.html?json=1`;
+        },
+    })
+);
 if (isProd) {
     app.use('/', express.static('www'));
 } else {
