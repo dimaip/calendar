@@ -10,7 +10,7 @@ services:
             - default
             - main
         ports:
-            - '80:80'
+            - '80'
         depends_on:
             - calendar-backend
         environment:
