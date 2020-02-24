@@ -210,7 +210,7 @@ export function getLentInfo(date) {
     const theotocos = new Date(y, 3, 7);
     const great_lent_end = calculateEasterDate(y);
 
-    if (current_date > great_lent_begin && current_date < great_lent_end) {
+    if (current_date >= great_lent_begin && current_date <= great_lent_end) {
         if (current_day_of_week == 0 || current_day_of_week == 6) {
             fastingLevel = 4;
         }
@@ -235,7 +235,7 @@ export function getLentInfo(date) {
     }
     if (
         current_date.valueOf() == theotocos.valueOf() &&
-        current_date > great_lent_begin &&
+        current_date >= great_lent_begin &&
         current_date <= palm_sunday
     ) {
         fastingLevel = 5;
