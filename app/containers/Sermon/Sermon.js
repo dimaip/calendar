@@ -12,8 +12,8 @@ import Zoom from 'components/Zoom/Zoom';
 
 const Sermon = () => {
     const { sermonId, date } = useParams();
-    const day = useDay();
-    const { sermons } = useExternalDay() || {};
+    const day = useDay(date);
+    const { sermons } = useExternalDay(date) || {};
     const sermon = sermons?.find(sermon => sermon.id === sermonId);
 
     const theme = getTheme(day?.colour);

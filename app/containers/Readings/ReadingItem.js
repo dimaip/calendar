@@ -1,19 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
-import getReading from 'redux/actions/getReading';
-import { useDispatch, useSelector } from 'react-redux';
 import { useTheme } from 'emotion-theming';
 import Zoom from 'components/Zoom/Zoom';
+import useReading from '../../hooks/useReading';
 
 const ReadingItem = ({ readingVerse, type }) => {
-    const readings = useSelector(state => state?.readings?.readings);
-    const dispatch = useDispatch();
-    const reading = readings[readingVerse];
-    useEffect(() => {
-        if (!reading) {
-            dispatch(getReading(readingVerse, 'default'));
-        }
-    }, []);
+    const [translation, setTranslation] = useState('default');
+    const reading = useReading(readingVerse, translation);
     const theme = useTheme();
 
     if (!reading?.fragments) {
@@ -58,7 +51,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                 }
             `}
             value={reading.translationCurrent}
-            onChange={e => dispatch(getReading(readingVerse, e.target.value))}
+            onChange={e => setTranslation(e.target.value)}
         >
             {reading.translationList.map((item, i) => {
                 return (

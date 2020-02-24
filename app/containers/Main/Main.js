@@ -26,8 +26,8 @@ import useExternalDay from 'hooks/useExternalDay';
 
 const Main = () => {
     const { date } = useParams();
-    const day = useDay();
-    const { sermons, thisDays } = useExternalDay() || {};
+    const day = useDay(date);
+    const { sermons, thisDays } = useExternalDay(date) || {};
     const [calendarShown, setCalendarShown] = useState(false);
     const [direction, setDirection] = useState('mount');
     const history = useHistory();

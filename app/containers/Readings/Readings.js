@@ -13,7 +13,7 @@ import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 const Readings = ({ brother = false }) => {
     const { service, date } = useParams();
     const history = useHistory();
-    const day = useDay();
+    const day = useDay(date);
     const readings = brother ? day?.bReadings : day?.readings;
     const readingsForService = readings?.[service];
     const services = Object.keys(readings || {});

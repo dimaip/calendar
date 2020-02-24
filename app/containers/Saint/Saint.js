@@ -13,7 +13,7 @@ import useSaint from '../../hooks/useSaint';
 const Saint = () => {
     const { saintId, date } = useParams();
     const { data: saint, isLoading } = useSaint(saintId);
-    const day = useDay();
+    const day = useDay(date);
     const theme = getTheme(day?.colour);
 
     if (isLoading || !saint) {

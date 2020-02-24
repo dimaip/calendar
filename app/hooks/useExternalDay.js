@@ -1,23 +1,16 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import getExternalDay from 'redux/actions/getExternalDay';
+import { useQuery } from 'react-query';
 
-const useExternalDay = () => {
-    const { date } = useParams();
-    const externalDays = useSelector(state => state?.externalDays);
-    const externalDay = externalDays?.[date];
-    const dispatch = useDispatch();
-    useEffect(() => {
-        if (!externalDay) {
-            dispatch(getExternalDay(date));
-        }
-    }, [date]);
+const fetchExternalDay = date => {
+    return fetch(`/api/external-day/${date}`).then(response => {
+        if (response.status > 400) throw new Error('Error on fetch external day.');
 
-    if (externalDay && !externalDay.loading) {
-        return externalDay.data;
-    }
-
-    return null;
+        return response.json();
+    });
 };
-export default useExternalDay;
+
+const useDay = date => {
+    const { data } = useQuery(`ext-day-${date}`, () => fetchExternalDay(date));
+    return data;
+};
+
+export default useDay;
