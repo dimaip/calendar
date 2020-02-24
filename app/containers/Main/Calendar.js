@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css } from 'emotion';
 import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
 import { DatePickerCalendar } from 'react-nice-dates';
@@ -8,6 +8,7 @@ import { useTheme } from 'emotion-theming';
 
 const Calendar = ({ date, handleDayClick }) => {
     const theme = useTheme();
+    const [month, setMonth] = useState(new Date(date));
     const modifiers = {
         h12: date => {
             const { feastType } = getFeastInfo(date);
@@ -102,6 +103,8 @@ const Calendar = ({ date, handleDayClick }) => {
                 date={new Date(date)}
                 onDateChange={handleDayClick}
                 locale={ru}
+                month={month}
+                onMonthChange={setMonth}
                 modifiers={modifiers}
                 modifiersClassNames={modifiersClassNames}
             />
