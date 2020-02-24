@@ -31,12 +31,17 @@ const Calendar = ({ date, handleDayClick }) => {
         },
     };
     const baseStyle = css`
-        border-radius: 50%;
-        padding-top: 5px;
-        width: calc(100% - 22px);
-        height: 100%;
-        margin: 10px;
+        border-radius: 999px;
+        position: absolute;
+        left: 0%;
+        right: 0%;
+        top: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border: 1px solid white;
+        margin: 10px;
     `;
     const modifiersClassNames = {
         selected: css`
@@ -84,6 +89,10 @@ const Calendar = ({ date, handleDayClick }) => {
         <div
             className={css`
                 border-bottom: 1px solid #ccc;
+                & .-wide .nice-dates-day_date {
+                    left: 12.5%;
+                    right: 12.5%;
+                }
             `}
         >
             <DatePickerCalendar

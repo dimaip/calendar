@@ -12,6 +12,7 @@ const Saints = ({ saints }) => {
                 line-height: 1.5;
                 color: ${theme.colours.darkGray};
                 margin-left: 22px;
+                margin-bottom: 24px;
 
                 & a {
                     color: ${theme.colours.primary};
