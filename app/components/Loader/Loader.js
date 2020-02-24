@@ -1,5 +1,5 @@
 import React from 'react';
 // TODO: design loader
-const Loader = () => <div>loading...</div>;
+const Loader = () => null;
 
 export default Loader;
