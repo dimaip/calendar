@@ -1,15 +1,14 @@
 const express = require('express');
 const webpack = require('webpack');
 const proxy = require('express-http-proxy');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require('./webpack.dev');
+
 var cors = require('cors');
 
 const app = express();
-const compiler = webpack(config);
 const isProd = process.env.NODE_ENV === 'production';
 const port = process.env.NODE_PORT || 3000;
+
+const apiHost = process.env.API_HOST || 'http://localhost:9999';
 
 app.use(cors());
 
@@ -18,7 +17,7 @@ app.use('/manifest.json', express.static('manifest.json'));
 
 app.use(
     '/api/day',
-    proxy('http://localhost:9999', {
+    proxy(apiHost, {
         proxyReqPathResolver: req => {
             return `/day.php?date=${req.url.replace(/[^0-9]/g, '')}`;
         },
@@ -26,7 +25,7 @@ app.use(
 );
 app.use(
     '/api/reading',
-    proxy('http://localhost:9999', {
+    proxy(apiHost, {
         proxyReqPathResolver: req => {
             return `/bible.php?zachalo=${req.url.substring(1)}`;
         },
@@ -43,6 +42,10 @@ app.use(
 if (isProd) {
     app.use('/', express.static('www'));
 } else {
+    const webpackDevMiddleware = require('webpack-dev-middleware');
+    const webpackHotMiddleware = require('webpack-hot-middleware');
+    const config = require('./webpack.dev');
+    const compiler = webpack(config);
     app.use(webpackDevMiddleware(compiler));
     // NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
     app.use(webpackHotMiddleware(compiler));
