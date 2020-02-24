@@ -11,6 +11,7 @@ const Saints = ({ saints }) => {
                 font-size: 18px;
                 line-height: 1.5;
                 color: ${theme.colours.darkGray};
+                margin-left: 22px;
 
                 & a {
                     color: ${theme.colours.primary};
@@ -18,6 +19,7 @@ const Saints = ({ saints }) => {
 
                 & img {
                     margin-right: 8px;
+                    margin-left: -22px;
                 }
             `}
         />
