@@ -89,6 +89,9 @@ const Calendar = ({ date, handleDayClick }) => {
         <div
             className={css`
                 border-bottom: 1px solid #ccc;
+                & .nice-dates-day:hover:after {
+                    opacity: 0 !important;
+                }
                 & .-wide .nice-dates-day_date {
                     left: 12.5%;
                     right: 12.5%;
