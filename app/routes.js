@@ -6,6 +6,7 @@ import Readings from 'containers/Readings/Readings';
 import dateFormat from 'dateformat';
 import Sermon from 'containers/Sermon/Sermon';
 import Saint from 'containers/Saint/Saint';
+import ThisDay from 'containers/ThisDay/ThisDay';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 export default (
@@ -34,6 +35,9 @@ export default (
             </Route>
             <Route exact path="/date/:date/saint/:saintId">
                 <Saint />
+            </Route>
+            <Route exact path="/date/:date/thisday/:thisDayId">
+                <ThisDay />
             </Route>
             <Route>
                 <NotFound />

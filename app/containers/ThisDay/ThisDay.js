@@ -6,20 +6,19 @@ import { css } from 'emotion';
 import Loader from 'components/Loader/Loader';
 import getTheme from 'styles/theme';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
-import useExternalDay from 'hooks/useExternalDay';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
+import useExternalDay from 'hooks/useExternalDay';
 
-const Sermon = () => {
-    const { sermonId, date } = useParams();
-    const { data: day } = useDay(date);
+const ThisDay = () => {
+    const { thisDayId, date } = useParams();
     const { data: externalDay } = useExternalDay(date);
-    const { sermons } = externalDay || {};
-    const sermon = sermons?.find(sermon => sermon.id === sermonId);
+    const { thisDays } = externalDay || {};
 
+    const thisDay = (thisDays || []).find(thisDay => thisDay.id === thisDayId);
+    const { data: day } = useDay(date);
     const theme = getTheme(day?.colour);
-
-    if (!sermon) {
+    if (!thisDays) {
         return <Loader />;
     }
 
@@ -70,14 +69,6 @@ const Sermon = () => {
                         padding: 0 16px 16px 16px;
                     `}
                 >
-                    <div
-                        className={css`
-                            font-weight: bold;
-                            margin-bottom: 12px;
-                        `}
-                    >
-                        {sermon.authorName}
-                    </div>
                     <h3
                         className={css`
                             color: ${theme.colours.primary};
@@ -85,20 +76,27 @@ const Sermon = () => {
                             font-size: 30px;
                         `}
                     >
-                        {sermon.title}
+                        {thisDay.title}
                     </h3>
-                    <p
-                        className={css`
-                            color: ${theme.colours.gray};
-                            margin-bottom: 12px;
-                            line-height: 1.5;
-                        `}
-                    >
-                        {sermon.teaser}
-                    </p>
+                    {thisDay.image && (
+                        <div
+                            className={css`
+                                margin-top: 24px;
+                                margin-bottom: 24px;
+                            `}
+                        >
+                            <img
+                                src={thisDay.image}
+                                alt={thisDay.title}
+                                className={css`
+                                    max-width: 100%;
+                                `}
+                            />
+                        </div>
+                    )}
                     <Zoom>
                         <div
-                            dangerouslySetInnerHTML={{ __html: sermon.bodytext }}
+                            dangerouslySetInnerHTML={{ __html: thisDay.bodytext }}
                             className={css`
                                 line-height: 1.5;
                                 color: ${theme.colours.darkGray};
@@ -118,4 +116,4 @@ const Sermon = () => {
         </ThemeProvider>
     );
 };
-export default Sermon;
+export default ThisDay;

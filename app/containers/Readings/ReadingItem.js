@@ -6,7 +6,7 @@ import useReading from '../../hooks/useReading';
 
 const ReadingItem = ({ readingVerse, type }) => {
     const [translation, setTranslation] = useState('default');
-    const reading = useReading(readingVerse, translation);
+    const { data: reading } = useReading(readingVerse, translation);
     const theme = useTheme();
 
     if (!reading?.fragments) {

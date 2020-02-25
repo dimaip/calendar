@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-const fetchExternalDay = date => {
+const fetchExternalDay = ({ date }) => {
     return fetch(`/api/external-day/${date}`).then(response => {
         if (response.status > 400) throw new Error('Error on fetch external day.');
 
@@ -8,9 +8,6 @@ const fetchExternalDay = date => {
     });
 };
 
-const useDay = date => {
-    const { data } = useQuery(`ext-day-${date}`, () => fetchExternalDay(date));
-    return data;
-};
+const useExternalDay = date => useQuery(['ext-day', { date }], fetchExternalDay);
 
-export default useDay;
+export default useExternalDay;

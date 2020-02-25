@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
 
-export function fetchDay(date) {
+export function fetchDay({ date }) {
     return fetch(`/api/day/${date}`)
         .then(response => {
             if (response.status > 400) throw new Error('Error on fetch day.');
@@ -43,9 +43,6 @@ export function fetchDay(date) {
         });
 }
 
-const useDay = date => {
-    const { data } = useQuery(`day-${date}`, () => fetchDay(date));
-    return data;
-};
+const useDay = date => useQuery(['day', { date }], fetchDay);
 
 export default useDay;

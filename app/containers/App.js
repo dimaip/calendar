@@ -4,12 +4,17 @@ import { HashRouter } from 'react-router-dom';
 import routes from '../routes';
 import 'styles/reset.css';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
+import { ReactQueryConfigProvider } from 'react-query';
+
+const queryConfig = { refetchAllOnWindowFocus: false };
 
 export default ({ store }) => {
     return (
-        <Provider store={store}>
-            <HashRouter>{routes}</HashRouter>
-            <ZoomControl />
-        </Provider>
+        <ReactQueryConfigProvider config={queryConfig}>
+            <Provider store={store}>
+                <HashRouter>{routes}</HashRouter>
+                <ZoomControl />
+            </Provider>
+        </ReactQueryConfigProvider>
     );
 };

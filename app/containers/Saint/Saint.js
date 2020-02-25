@@ -13,7 +13,7 @@ import useSaint from '../../hooks/useSaint';
 const Saint = () => {
     const { saintId, date } = useParams();
     const { data: saint, isLoading } = useSaint(saintId);
-    const day = useDay(date);
+    const { data: day } = useDay(date);
     const theme = getTheme(day?.colour);
 
     if (isLoading || !saint) {
@@ -83,7 +83,13 @@ const Saint = () => {
                                 margin-bottom: 24px;
                             `}
                         >
-                            <img src={saint.icon} alt={saint.title} />
+                            <img
+                                src={saint.icon}
+                                alt={saint.title}
+                                className={css`
+                                    max-width: 100%;
+                                `}
+                            />
                         </div>
                     )}
                     <Zoom>

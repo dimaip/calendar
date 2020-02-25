@@ -26,8 +26,9 @@ import useExternalDay from 'hooks/useExternalDay';
 
 const Main = () => {
     const { date } = useParams();
-    const day = useDay(date);
-    const { sermons, thisDays } = useExternalDay(date) || {};
+    const { data: day } = useDay(date);
+    const { data: externalDay } = useExternalDay(date);
+    const { sermons, thisDays } = externalDay || {};
     const [calendarShown, setCalendarShown] = useState(false);
     const [direction, setDirection] = useState('mount');
     const history = useHistory();
@@ -92,7 +93,7 @@ const Main = () => {
 
                                                 <SectionHeading>Святые дня</SectionHeading>
                                                 <Saints saints={day.saints} date={date} />
-                                                <ThisDays thisDays={thisDays} />
+                                                <ThisDays thisDays={thisDays} date={date} />
                                                 {day.prayers && day.prayers.length > 0 && (
                                                     <>
                                                         <SectionHeading>Песнопения</SectionHeading>

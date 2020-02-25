@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query';
 
-export function fetchReading(link, translation) {
+export function fetchReading({ link, translation }) {
     return fetch(`/api/reading/` + encodeURI(link) + '&translation=' + translation)
         .then(response => {
             if (response.status > 400) throw new Error('Error on fetch reading.');
@@ -27,9 +27,6 @@ export function fetchReading(link, translation) {
         });
 }
 
-const useReading = (link, translation) => {
-    const { data } = useQuery(`reading-${link}-${translation}`, () => fetchReading(link, translation));
-    return data;
-};
+const useReading = (link, translation) => useQuery(['reading', { link, translation }], fetchReading);
 
 export default useReading;
