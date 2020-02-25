@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom';
 
 const ThisDayLink = ({ to, href, children }) => {
     if (href) {
-        <a href={href} target="_blank">
-            {children}
-        </a>;
+        return (
+            <a href={href} target="_blank">
+                {children}
+            </a>
+        );
     }
     return <Link to={to}>{children}</Link>;
 };
