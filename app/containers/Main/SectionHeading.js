@@ -12,7 +12,7 @@ const SectionHeading = ({ children }) => {
                 font-weight: bold;
                 color: ${theme.colours.darkGray};
                 margin-top: 24px;
-                margin-bottom: 12px;
+                margin-bottom: 18px;
             `}
         >
             {children}

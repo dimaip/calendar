@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
@@ -7,6 +7,8 @@ import getTheme from 'styles/theme';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
+import Loader from 'components/Loader/Loader';
+// const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
 import Zlatoust from './Texts/Zlatoust';
 
 const Service = () => {
@@ -42,7 +44,7 @@ const Service = () => {
                                     }
                                 `}
                             >
-                                <LeftIcon />
+                                <LeftIcon colour={theme.colours.darkGray} />
                             </div>
                         </Link>
                     </div>
@@ -60,10 +62,9 @@ const Service = () => {
                         className={css`
                             margin-left: 12px;
                             margin-right: 12px;
-                            font-family: 'serif';
                         `}
                     >
-                        {serviceId === 'zlatoust' && <Zlatoust />}
+                        <Suspense fallback={Loader}>{serviceId === 'zlatoust' && <Zlatoust />}</Suspense>
                     </div>
                 </Zoom>
             </div>

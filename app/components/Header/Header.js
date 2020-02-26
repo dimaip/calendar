@@ -6,36 +6,62 @@ import CalendarIcon from 'components/svgs/CalendarIcon';
 import Button from 'components/Button/Button';
 import Cross from 'components/svgs/Cross';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
+import Star from '../svgs/Star';
 
 const Header = ({ handleToggleClick, calendarShown }) => {
     return (
         <header
             className={css`
-                height: 60px;
+                height: 48px;
+                position: relative;
                 display: flex;
                 align-items: center;
                 padding-left: 10px;
                 border-bottom: 1px solid #ccc;
             `}
         >
-            <Link
-                to="/"
-                title="На главную"
+            <div
                 className={css`
                     flex-grow: 1;
                 `}
-            ></Link>
-            <ZoomControlToggle />
-            {handleToggleClick && (
-                <Button
-                    onClick={handleToggleClick}
+            >
+                <Link
+                    to="/"
+                    title="На главную"
                     className={css`
-                        padding: 10px 18px;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                     `}
                 >
-                    {calendarShown ? <Cross /> : <CalendarIcon />}
-                </Button>
-            )}
+                    <Star />
+                </Link>
+            </div>
+            <div
+                className={css`
+                    z-index: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                `}
+            >
+                <ZoomControlToggle />
+                {handleToggleClick && (
+                    <Button
+                        onClick={handleToggleClick}
+                        className={css`
+                            padding: 10px 18px;
+                        `}
+                    >
+                        {calendarShown ? <Cross /> : <CalendarIcon />}
+                    </Button>
+                )}
+            </div>
         </header>
     );
 };

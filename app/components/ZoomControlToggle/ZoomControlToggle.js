@@ -11,7 +11,8 @@ const ZoomControlToggle = () => {
             onClick={() => dispatch(toggleZoomControl())}
             className={css`
                 padding: 10px 18px;
-                font-weight: bold;
+                font-size: 16px;
+                color: #000000;
             `}
         >
             Aa

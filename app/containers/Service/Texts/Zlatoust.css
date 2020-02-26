@@ -1,21 +1,16 @@
 a._idGenColorInherit {
     color: inherit;
 }
-img.Графический-фрейм {
-    border-color: #000000;
-    border-width: 1px;
-    border-style: solid;
-}
 div.Текстовый-фрейм {
     border-style: solid;
 }
 p.endIndent_7 {
-    color: #e42313;
-    font-size: 12px;
+    color: #e32636;
+    font-size: 13px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.588;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -30,12 +25,12 @@ p.endIndent_7 {
     widows: 1;
 }
 p.noteRed {
-    color: #e42313;
-    font-size: 14px;
+    color: #e32636;
+    font-size: 15px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.5;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -43,7 +38,6 @@ p.noteRed {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -51,12 +45,12 @@ p.noteRed {
     widows: 1;
 }
 p.stars {
-    color: #e42313;
-    font-size: 16px;
+    color: #e32636;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: bold;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 11px;
     margin-left: 28px;
     margin-right: 0;
@@ -71,13 +65,12 @@ p.stars {
     widows: 1;
 }
 p.baseName {
-    -epub-hyphens: none;
-    color: #e42313;
-    font-size: 16px;
+    color: #e32636;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: bold;
-    line-height: 1.286;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -92,13 +85,12 @@ p.baseName {
     widows: 1;
 }
 p._-ОСНОВНОЙ_Имя-Службы {
-    -epub-hyphens: none;
-    color: #e42313;
-    font-size: 16px;
+    color: #e32636;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: bold;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -113,12 +105,12 @@ p._-ОСНОВНОЙ_Имя-Службы {
     widows: 1;
 }
 p._-ОСНОВНОЙ_Имя-части-отст2 {
-    color: #e42313;
-    font-size: 12px;
+    color: #e32636;
+    font-size: 13px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.5;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -133,12 +125,12 @@ p._-ОСНОВНОЙ_Имя-части-отст2 {
     widows: 1;
 }
 p.baseNametIndent_5 {
-    color: #e42313;
-    font-size: 12px;
+    color: #e32636;
+    font-size: 13px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.5;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -153,12 +145,12 @@ p.baseNametIndent_5 {
     widows: 1;
 }
 p.baseRedIndent_6 {
-    color: #e42313;
-    font-size: 16px;
+    color: #e32636;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -166,7 +158,6 @@ p.baseRedIndent_6 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -174,12 +165,12 @@ p.baseRedIndent_6 {
     widows: 1;
 }
 p.baseRedtIndent_5 {
-    color: #e42313;
-    font-size: 16px;
+    color: #e32636;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -187,7 +178,6 @@ p.baseRedtIndent_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -195,12 +185,12 @@ p.baseRedtIndent_5 {
     widows: 1;
 }
 p._-ОСНОВНОЙ_КРАСН-отст5 {
-    color: #e42313;
-    font-size: 16px;
+    color: #e32636;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -208,7 +198,6 @@ p._-ОСНОВНОЙ_КРАСН-отст5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -216,13 +205,11 @@ p._-ОСНОВНОЙ_КРАСН-отст5 {
     widows: 1;
 }
 p._-ОСНОВНОЙ_МеткаНовойСтраницы {
-    -epub-hyphens: none;
-    color: #000000;
-    font-size: 16px;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -230,7 +217,6 @@ p._-ОСНОВНОЙ_МеткаНовойСтраницы {
     orphans: 1;
     page-break-after: auto;
     page-break-before: always;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -238,12 +224,11 @@ p._-ОСНОВНОЙ_МеткаНовойСтраницы {
     widows: 1;
 }
 p._-ОСНОВНОЙ_Основной-б-отст {
-    color: #000000;
-    font-size: 16px;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -251,7 +236,6 @@ p._-ОСНОВНОЙ_Основной-б-отст {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -259,12 +243,11 @@ p._-ОСНОВНОЙ_Основной-б-отст {
     widows: 1;
 }
 p.baseParaIndent_6 {
-    color: #000000;
-    font-size: 16px;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -272,7 +255,6 @@ p.baseParaIndent_6 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: 17px;
@@ -280,12 +262,11 @@ p.baseParaIndent_6 {
     widows: 1;
 }
 p.baseIndent_1_5 {
-    color: #000000;
-    font-size: 16px;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -293,7 +274,6 @@ p.baseIndent_1_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -301,12 +281,11 @@ p.baseIndent_1_5 {
     widows: 1;
 }
 p.basetIndent_5 {
-    color: #000000;
-    font-size: 16px;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -314,7 +293,6 @@ p.basetIndent_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -322,12 +300,11 @@ p.basetIndent_5 {
     widows: 1;
 }
 p.basetIndent_6 {
-    color: #000000;
-    font-size: 16px;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -342,12 +319,11 @@ p.basetIndent_6 {
     widows: 1;
 }
 p.basetIndent_5 {
-    color: #000000;
-    font-size: 16px;
+    font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.227;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -362,12 +338,11 @@ p.basetIndent_5 {
     widows: 1;
 }
 p._-ОСНОВНОЙ_Чтение-Писания {
-    color: #e42313;
-    font-size: 16px;
-    font-style: italic;
+    color: #e32636;
+    font-size: 18px;
     font-variant: normal;
     font-weight: bold;
-    line-height: 1.286;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -382,12 +357,12 @@ p._-ОСНОВНОЙ_Чтение-Писания {
     widows: 1;
 }
 p.petitRedIndent_6 {
-    color: #e42313;
-    font-size: 14px;
+    color: #e32636;
+    font-size: 15px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.421;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -395,7 +370,6 @@ p.petitRedIndent_6 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -403,12 +377,12 @@ p.petitRedIndent_6 {
     widows: 1;
 }
 p.petitRedIndent_1_5 {
-    color: #e42313;
-    font-size: 14px;
+    color: #e32636;
+    font-size: 15px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.421;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -416,7 +390,6 @@ p.petitRedIndent_1_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -424,13 +397,12 @@ p.petitRedIndent_1_5 {
     widows: 1;
 }
 p.petitNameRed {
-    -epub-hyphens: none;
-    color: #e42313;
-    font-size: 12px;
+    color: #e32636;
+    font-size: 13px;
     font-style: normal;
     font-variant: normal;
     font-weight: bold;
-    line-height: 1.5;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -445,13 +417,12 @@ p.petitNameRed {
     widows: 1;
 }
 p.petitNamePartRed {
-    -epub-hyphens: none;
-    color: #e42313;
-    font-size: 12px;
+    color: #e32636;
+    font-size: 13px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.688;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -466,13 +437,12 @@ p.petitNamePartRed {
     widows: 1;
 }
 p.petitNamePartRedIndent_5 {
-    -epub-hyphens: none;
-    color: #e42313;
-    font-size: 12px;
+    color: #e32636;
+    font-size: 13px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.688;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -487,12 +457,11 @@ p.petitNamePartRedIndent_5 {
     widows: 1;
 }
 p.petitIndent_6 {
-    color: #000000;
-    font-size: 14px;
+    font-size: 15px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.421;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -500,7 +469,6 @@ p.petitIndent_6 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -508,12 +476,11 @@ p.petitIndent_6 {
     widows: 1;
 }
 p.petitIndent_1_5 {
-    color: #000000;
-    font-size: 14px;
+    font-size: 15px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.421;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -521,7 +488,6 @@ p.petitIndent_1_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -529,12 +495,11 @@ p.petitIndent_1_5 {
     widows: 1;
 }
 p.petitIndent_5 {
-    color: #000000;
-    font-size: 14px;
+    font-size: 15px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.421;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -542,7 +507,6 @@ p.petitIndent_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -550,12 +514,11 @@ p.petitIndent_5 {
     widows: 1;
 }
 p.petitIndent_6 {
-    color: #000000;
-    font-size: 14px;
+    font-size: 15px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.421;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -570,12 +533,11 @@ p.petitIndent_6 {
     widows: 1;
 }
 p.petitIndent_1_5 {
-    color: #000000;
-    font-size: 14px;
+    font-size: 15px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.421;
+    line-height: 1.6;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -590,34 +552,32 @@ p.petitIndent_1_5 {
     widows: 1;
 }
 span._--КРАСНЫЙ {
-    color: #e42313;
+    color: #e32636;
 }
 span._-ВЫДЕЛЕНИЯ_ЖИРНЫЙ {
     font-style: normal;
     font-weight: bold;
 }
 span.markedRed {
-    color: #e42313;
+    color: #e32636;
 }
 span.markedRedBold {
-    color: #e42313;
+    color: #e32636;
     font-style: normal;
     font-weight: bold;
 }
 span.markedRedPetit {
-    color: #e42313;
-    font-size: 14px;
+    color: #e32636;
+    font-size: 15px;
 }
 span.markedRedIndex {
-    color: #e42313;
+    color: #e32636;
     vertical-align: super;
 }
 span.markedBlack {
-    color: #000000;
 }
 span._-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн {
-    color: #000000;
-    font-size: 14px;
+    font-size: 15px;
 }
 span._-СПЕЦСЛУЖЕБНЫЕ_дляДИЗ_вКРАСНОМтексте {
     color: #e6007e;
@@ -626,9 +586,8 @@ span._-СПЕЦСЛУЖЕБНЫЕ_дляРЕД_вЧЕРНОМтексте {
     color: #0000ff;
 }
 span._-РЕДКИЕ_Знак-сноски-красной {
-    color: #e42313;
-    font-family: Literaturnaya, serif;
-    font-size: 16px;
+    color: #e32636;
+    font-size: 18px;
     font-style: normal;
     font-weight: normal;
 }
@@ -664,7 +623,6 @@ p.ParaOverride-8 {
     margin-top: 9px;
 }
 p.ParaOverride-9 {
-    text-align: justify;
     text-align-last: left;
 }
 p.ParaOverride-10 {
@@ -712,10 +670,10 @@ span.CharOverride-2 {
     font-size: 58%;
 }
 span.CharOverride-3 {
-    font-size: 14px;
+    font-size: 15px;
 }
 span.CharOverride-4 {
-    font-size: 12px;
+    font-size: 13px;
 }
 span.CharOverride-5 {
     font-variant: normal;
@@ -726,20 +684,19 @@ span.CharOverride-6 {
     font-weight: normal;
 }
 span.CharOverride-7 {
-    color: #000000;
 }
 span.CharOverride-8 {
-    color: #e42313;
+    color: #e32636;
 }
 span.CharOverride-9 {
-    font-size: 12px;
+    font-size: 13px;
 }
 span.CharOverride-10 {
     font-style: normal;
     font-weight: bold;
 }
 span.CharOverride-11 {
-    font-size: 12px;
+    font-size: 13px;
     font-variant: normal;
     text-transform: uppercase;
 }
@@ -762,7 +719,7 @@ hr.HorizontalRule-1 {
     border-bottom: none;
     border-left: none;
     border-right: none;
-    border-top: solid #e42313 1px;
+    border-top: solid #e32636 1px;
 }
 div._idGenObjectLayout-1 {
     text-align: center;

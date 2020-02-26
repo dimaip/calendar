@@ -2,6 +2,8 @@ import React from 'react';
 import { css } from 'emotion';
 import { useDispatch } from 'react-redux';
 import { toggleZoomControl } from 'redux/actions/zoom';
+import getTheme from 'styles/theme';
+const theme = getTheme();
 
 const Drawer = ({ children }) => {
     const dispatch = useDispatch();
@@ -28,7 +30,7 @@ const Drawer = ({ children }) => {
             <div
                 className={css`
                     position: relative;
-                    background-color: #f8f8f8;
+                    background-color: ${theme.colours.bgGray};
                     z-index: 1;
                     box-shadow: 0 0 2px 0 #ccc;
                     padding: 48px 16px;
@@ -46,7 +48,7 @@ const Drawer = ({ children }) => {
                         width: 36px;
                         height: 4px;
                         background-color: #ccc;
-                        border-radius: 2px;
+                        border-radius: 8px;
                     `}
                 />
                 {children}

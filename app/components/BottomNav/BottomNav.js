@@ -2,19 +2,25 @@ import React from 'react';
 import { css } from 'emotion';
 import { Link, useParams } from 'react-router-dom';
 import { useTheme } from 'emotion-theming';
+import CalendarIcon from 'components/svgs/CalendarIcon';
+import Bible from 'components/svgs/Bible';
+import Prayer from 'components/svgs/Prayer';
 
 const BottomNav = ({ active }) => {
     const { date } = useParams();
     const theme = useTheme();
 
     const itemClass = css`
-        font-size: 14px;
-        padding: 12px;
-        border-bottom: 3px solid white;
+        font-size: 13px;
+        padding: 6px 12px;
         color: ${theme.colours.gray};
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     `;
     const activeClass = css`
-        border-bottom-color: ${theme.colours.primary} !important;
         color: ${theme.colours.darkGray} !important;
     `;
 
@@ -25,23 +31,30 @@ const BottomNav = ({ active }) => {
                 justify-content: space-evenly;
                 position: sticky;
                 bottom: 0;
-                background-color: white;
+                background-color: ${theme.colours.bgGray};
                 padding: 0 12px;
-                box-shadow: 0px 0px 5px #bbb;
+                border-top: 1px solid ${theme.colours.lineGray};
             `}
         >
             <Link className={itemClass + ' ' + (active === 'calendar' ? activeClass : '')} to={`/date/${date}`}>
+                <CalendarIcon colour={active === 'calendar' ? '#000000' : theme.colours.gray} />
                 Календарь
-            </Link>
-            <Link className={itemClass + ' ' + (active === 'bible' ? activeClass : '')} to="/">
-                Библия
             </Link>
             <Link
                 className={itemClass + ' ' + (active === 'services' ? activeClass : '')}
                 to={`/date/${date}/services`}
             >
+                <Prayer colour={active === 'services' ? '#000000' : theme.colours.gray} />
                 Богослужение
             </Link>
+            <a
+                className={itemClass + ' ' + (active === 'bible' ? activeClass : '')}
+                href="https://bible.psmb.ru"
+                target="_blank"
+            >
+                <Bible colour={active === 'bible' ? '#000000' : theme.colours.gray} />
+                Библия
+            </a>
         </div>
     );
 };

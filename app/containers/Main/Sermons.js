@@ -21,7 +21,8 @@ const Sermons = ({ sermons, date }) => {
                     <div
                         className={css`
                             border: 1px solid #d9dde5;
-                            border-radius: 3px;
+                            background-color: white;
+                            border-radius: 8px;
                             margin-bottom: 18px;
                             padding: 14px 12px;
                         `}

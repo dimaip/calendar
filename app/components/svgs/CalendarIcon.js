@@ -1,18 +1,25 @@
 import React from 'react';
+import { css } from 'emotion';
+import { useTheme } from 'emotion-theming';
 
-const CalendarIcon = () => (
-    <svg
-        style={{ display: 'block' }}
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="22.154"
-        viewBox="0 0 24 22.154"
-    >
-        <path
-            d="M21.692 1.846h-2.307v1.385a.463.463 0 01-.462.462H18a.463.463 0 01-.462-.462V1.846H6.462v1.385A.463.463 0 016 3.693h-.923a.463.463 0 01-.462-.462V1.846H2.308A2.314 2.314 0 000 4.154v15.692a2.314 2.314 0 002.308 2.308h19.384A2.314 2.314 0 0024 19.846V4.154a2.314 2.314 0 00-2.308-2.308zm.462 17.308A1.157 1.157 0 0121 20.308H3a1.157 1.157 0 01-1.154-1.154V8.769a.463.463 0 01.462-.462h19.384a.463.463 0 01.462.462zM6.462.462A.463.463 0 006 0h-.923a.463.463 0 00-.462.462v1.385h1.846zm12.923 0A.463.463 0 0018.923 0H18a.463.463 0 00-.462.462v1.385h1.846z"
-            fill="#3a3840"
-        />
-    </svg>
-);
+const CalendarIcon = ({ colour }) => {
+    const theme = useTheme();
+    return (
+        <svg
+            className={css`
+                display: block;
+                stroke: ${colour || '#000000'};
+            `}
+            height="17"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20.143 19.5"
+        >
+            <g fill="none" strokeMiterlimit="10" strokeWidth="1.5">
+                <path strokeLinecap="round" d="M6.359.75v3.024M14.578.75v3.024" />
+                <path d="M12.893 2.262H6.364M4.679 2.262H1.686a.936.936 0 00-.936.935v14.618a.936.936 0 00.936.935h16.771a.936.936 0 00.936-.935V3.197a.936.936 0 00-.936-.935h-3.879M.836 7.023h18.47" />
+            </g>
+        </svg>
+    );
+};
 
 export default CalendarIcon;

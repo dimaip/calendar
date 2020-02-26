@@ -26,7 +26,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                 margin: 4px 0 16px 0;
                 border: 0;
                 box-shadow: 0px 0px 2px 0px #ccc;
-                border-radius: 4px;
+                border-radius: 8px;
                 appearance: none;
                 background-color: ${theme.colours.bgGray};
                 background-position: top 10px right 8px;
@@ -116,7 +116,6 @@ const ReadingItem = ({ readingVerse, type }) => {
         <div
             className={css`
                 margin-bottom: 24px;
-                font-family: 'PTRootUI', 'Helvetica', sans-serif;
             `}
         >
             <div

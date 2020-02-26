@@ -4,7 +4,8 @@ const getTheme = primary => ({
         primaryTint: '#FAF3E1',
         gray: '#9D9D9D',
         darkGray: '#484848',
-        bgGray: '#F7F7F7',
+        bgGray: '#efeff4',
+        lineGray: '#CECED2',
     },
 });
 export default getTheme;

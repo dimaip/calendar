@@ -21,7 +21,9 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
             <div
                 className={css`
                     border: 1px solid #d9dde5;
-                    border-radius: 3px;
+                    background-color: white;
+                    border-radius: 8px;
+                    box-shadow: 0px 0px 5px 0px #e6e6e8;
                     margin-bottom: 18px;
                     padding: 14px 12px;
                 `}

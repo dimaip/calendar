@@ -41,7 +41,7 @@ const ThisDays = ({ thisDays, date }) => {
                             background-image: url("${thisDay.image}");
                             background-position: center;
                             background-size: cover;
-                            border-radius: 5px;
+                            border-radius: 8px;
                             bottom: 0;
                             top: 0;
                             left: 0;

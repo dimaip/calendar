@@ -2,12 +2,12 @@ import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
-export default () => {
+export default ({ colour }) => {
     const theme = useTheme();
     return (
         <svg
             className={css`
-                stroke: ${theme.colours.primary};
+                stroke: ${colour || theme.colours.primary};
             `}
             xmlns="http://www.w3.org/2000/svg"
             width="16.564"

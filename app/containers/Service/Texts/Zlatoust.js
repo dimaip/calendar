@@ -5,6 +5,7 @@ import { forEachObjIndexed } from 'ramda';
 import useDay from 'hooks/useDay';
 import ReadingItem from 'containers/Readings/ReadingItem';
 import isGospel from 'domain/isGospel';
+import { css } from 'emotion';
 
 const Readings = ({ readings }) => (
     <>
@@ -34,7 +35,11 @@ const Zlatoust = () => {
     const apostolReadings = readingVersesWithType.filter(reading => !isGospel(reading.readingVerse));
     const gospelReadings = readingVersesWithType.filter(reading => isGospel(reading.readingVerse));
 
-    const apostol = <Readings readings={apostolReadings} />;
+    const apostol = (
+        <div className={css``}>
+            <Readings readings={apostolReadings} />
+        </div>
+    );
     const gospel = <Readings readings={gospelReadings} />;
 
     return (

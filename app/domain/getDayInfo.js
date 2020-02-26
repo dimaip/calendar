@@ -369,7 +369,7 @@ export function getFeastInfo(_date) {
         return {
             title: 'Вход Господень в Иерусалим',
             feastType: '12',
-            colour: '#5C985C',
+            colour: '#73be73',
         };
     }
 
@@ -391,7 +391,7 @@ export function getFeastInfo(_date) {
         return {
             title: 'Пятидесятница',
             feastType: '12',
-            colour: '#5C985C',
+            colour: '#73be73',
         };
     }
 
