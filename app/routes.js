@@ -8,6 +8,7 @@ import Sermon from 'containers/Sermon/Sermon';
 import Saint from 'containers/Saint/Saint';
 import ThisDay from 'containers/ThisDay/ThisDay';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import Service from 'containers/Service/Service';
 
 export default (
     <div>
@@ -24,6 +25,9 @@ export default (
             <Route exact path="/date/:date">
                 <Main />
             </Route>
+            <Route exact path="/date/:date/services">
+                <Main services />
+            </Route>
             <Route exact path="/date/:date/readings/:service">
                 <Readings />
             </Route>
@@ -38,6 +42,9 @@ export default (
             </Route>
             <Route exact path="/date/:date/thisday/:thisDayId">
                 <ThisDay />
+            </Route>
+            <Route exact path="/date/:date/service/:serviceId">
+                <Service />
             </Route>
             <Route>
                 <NotFound />

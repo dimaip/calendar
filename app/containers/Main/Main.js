@@ -23,8 +23,9 @@ import Hymns from './Hymns';
 import Sermons from './Sermons';
 import ThisDays from './ThisDays';
 import useExternalDay from 'hooks/useExternalDay';
+import Services from './Services';
 
-const Main = () => {
+const Main = ({ services }) => {
     const { date } = useParams();
     const { data: day } = useDay(date);
     const { data: externalDay } = useExternalDay(date);
@@ -88,27 +89,34 @@ const Main = () => {
                                                     padding: 0 18px;
                                                 `}
                                             >
-                                                <SectionHeading>Богослужебные чтения</SectionHeading>
-                                                <ReadingList readings={day.readings || {}} />
+                                                {services ? (
+                                                    <Services date={date} />
+                                                ) : (
+                                                    <>
+                                                        <SectionHeading>Богослужебные чтения</SectionHeading>
+                                                        <ReadingList readings={day.readings || {}} />
 
-                                                <SectionHeading>Святые дня</SectionHeading>
-                                                <Saints saints={day.saints} date={date} />
-                                                <ThisDays thisDays={thisDays} date={date} />
-                                                {day.prayers && day.prayers.length > 0 && (
-                                                    <>
-                                                        <SectionHeading>Песнопения</SectionHeading>
-                                                        <Hymns hymns={day.prayers} />
+                                                        <SectionHeading>Святые дня</SectionHeading>
+                                                        <Saints saints={day.saints} date={date} />
+                                                        <ThisDays thisDays={thisDays} date={date} />
+                                                        {day.prayers && day.prayers.length > 0 && (
+                                                            <>
+                                                                <SectionHeading>Песнопения</SectionHeading>
+                                                                <Hymns hymns={day.prayers} />
+                                                            </>
+                                                        )}
+                                                        {day.bReadings && day.bReadings.length > 0 && (
+                                                            <>
+                                                                <SectionHeading>Душеполезные чтения</SectionHeading>
+                                                                <ReadingList brother readings={day.bReadings} />
+                                                            </>
+                                                        )}
+                                                        <Sermons date={date} sermons={sermons} />
                                                     </>
                                                 )}
-                                                {day.bReadings && day.bReadings.length > 0 && (
-                                                    <>
-                                                        <SectionHeading>Душеполезные чтения</SectionHeading>
-                                                        <ReadingList brother readings={day.bReadings} />
-                                                    </>
-                                                )}
-                                                <Sermons date={date} sermons={sermons} />
                                             </div>
                                         </Zoom>
+                                        <Links />
                                     </div>
                                 ) : (
                                     <Loader />
@@ -117,8 +125,8 @@ const Main = () => {
                         </ReactCSSTransitionGroup>
                     </div>
                 </div>
-                <Links />
-                <BottomNav active="calendar" />
+
+                <BottomNav active={services ? 'services' : 'calendar'} />
             </div>
         </ThemeProvider>
     );

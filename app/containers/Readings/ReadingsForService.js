@@ -1,9 +1,7 @@
 import React from 'react';
 import { forEachObjIndexed } from 'ramda';
 import ReadingItem from './ReadingItem';
-
-const isGospel = zachalo =>
-    zachalo.includes('Мк.') || zachalo.includes('Мф.') || zachalo.includes('Лк.') || zachalo.includes('Ин.');
+import isGospel from 'domain/isGospel';
 
 // sort gospel readings last
 const sortGospel = (a, b) => {

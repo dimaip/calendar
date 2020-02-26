@@ -116,6 +116,7 @@ const ReadingItem = ({ readingVerse, type }) => {
         <div
             className={css`
                 margin-bottom: 24px;
+                font-family: 'PTRootUI', 'Helvetica', sans-serif;
             `}
         >
             <div

@@ -36,7 +36,10 @@ const BottomNav = ({ active }) => {
             <Link className={itemClass + ' ' + (active === 'bible' ? activeClass : '')} to="/">
                 Библия
             </Link>
-            <Link className={itemClass + ' ' + (active === 'service' ? activeClass : '')} to="/">
+            <Link
+                className={itemClass + ' ' + (active === 'services' ? activeClass : '')}
+                to={`/date/${date}/services`}
+            >
                 Богослужение
             </Link>
         </div>
