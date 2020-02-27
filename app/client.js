@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from 'redux/store/configureStore';
 import App from 'containers/App';
+import * as serviceWorker from './serviceWorker';
 
 const preloadedState = localStorage.getItem('persistedState') ? JSON.parse(localStorage.getItem('persistedState')) : {};
 const store = configureStore(preloadedState);
@@ -24,3 +25,5 @@ if (module.hot) {
         render(App);
     });
 }
+
+serviceWorker.register();

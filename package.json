@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node server.js",
     "serve": "NODE_PORT=80 NODE_ENV=production node server.js",
-    "build": "NODE_ENV=production webpack --config webpack.prod.js",
+    "build": "PUBLIC_URL=https://d.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
+    "build-local": "PUBLIC_URL=http://localhost NODE_ENV=production webpack --config webpack.prod.js",
     "build-cap": "NODE_ENV=production cap sync"
   },
   "author": "PSMB.ru",
@@ -45,7 +46,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^8.0.2",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "workbox-precaching": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.3",
@@ -71,6 +73,7 @@
     "webpack-hot-middleware": "^2.25.0",
     "webpack-hot-server-middleware": "0.6.0",
     "webpack-merge": "^4.2.2",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "workbox-webpack-plugin": "^5.0.0"
   }
 }
