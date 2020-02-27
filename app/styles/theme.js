@@ -1,10 +1,10 @@
 const getTheme = primary => ({
     colours: {
         primary: primary || '#AE841A',
-        primaryTint: '#FAF3E1',
+        primaryTint: 'rgba(255,255,255,0.8)',
         gray: '#9D9D9D',
-        darkGray: '#484848',
-        bgGray: '#efeff4',
+        darkGray: '#201f24',
+        bgGray: '#fafafc',
         lineGray: '#CECED2',
     },
 });

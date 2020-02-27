@@ -11,6 +11,7 @@ const BottomNav = ({ active }) => {
     const theme = useTheme();
 
     const itemClass = css`
+        height: 44px;
         font-size: 13px;
         padding: 6px 12px;
         color: ${theme.colours.gray};
@@ -27,6 +28,7 @@ const BottomNav = ({ active }) => {
     return (
         <div
             className={css`
+                height: 44px;
                 display: flex;
                 justify-content: space-evenly;
                 position: sticky;
@@ -37,14 +39,14 @@ const BottomNav = ({ active }) => {
             `}
         >
             <Link className={itemClass + ' ' + (active === 'calendar' ? activeClass : '')} to={`/date/${date}`}>
-                <CalendarIcon colour={active === 'calendar' ? '#000000' : theme.colours.gray} />
+                <CalendarIcon colour={active === 'calendar' ? theme.colours.darkGray : theme.colours.gray} />
                 Календарь
             </Link>
             <Link
                 className={itemClass + ' ' + (active === 'services' ? activeClass : '')}
                 to={`/date/${date}/services`}
             >
-                <Prayer colour={active === 'services' ? '#000000' : theme.colours.gray} />
+                <Prayer colour={active === 'services' ? theme.colours.darkGray : theme.colours.gray} />
                 Богослужение
             </Link>
             <a
@@ -52,7 +54,7 @@ const BottomNav = ({ active }) => {
                 href="https://bible.psmb.ru"
                 target="_blank"
             >
-                <Bible colour={active === 'bible' ? '#000000' : theme.colours.gray} />
+                <Bible colour={active === 'bible' ? theme.colours.darkGray : theme.colours.gray} />
                 Библия
             </a>
         </div>

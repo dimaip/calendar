@@ -23,12 +23,12 @@ const HeadingBar = ({ title, glas, fastName, fastingLevelName, icon }) => {
                     letter-spacing: 0.5px;
                     font-weight: bold;
                     margin-bottom: 12px;
-                    font-size: 22px;
+                    font-size: 21px;
                     @media (min-width: 360px) {
-                        font-size: 26px;
+                        font-size: 25px;
                     }
                     @media (min-width: 375px) {
-                        font-size: 28px;
+                        font-size: 27px;
                     }
                 `}
             >

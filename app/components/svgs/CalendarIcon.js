@@ -8,7 +8,7 @@ const CalendarIcon = ({ colour }) => {
         <svg
             className={css`
                 display: block;
-                stroke: ${colour || '#000000'};
+                stroke: ${colour || theme.colours.darkGray};
             `}
             height="17"
             xmlns="http://www.w3.org/2000/svg"

@@ -12,11 +12,11 @@ const Header = ({ handleToggleClick, calendarShown }) => {
     return (
         <header
             className={css`
-                height: 48px;
                 position: relative;
                 display: flex;
+                height: 44px;
+                flex-shrink: 0;
                 align-items: center;
-                padding-left: 10px;
                 border-bottom: 1px solid #ccc;
             `}
         >
@@ -29,6 +29,7 @@ const Header = ({ handleToggleClick, calendarShown }) => {
                     to="/"
                     title="На главную"
                     className={css`
+                        display: block;
                         position: absolute;
                         left: 0;
                         top: 0;
@@ -50,11 +51,14 @@ const Header = ({ handleToggleClick, calendarShown }) => {
                     justify-content: center;
                 `}
             >
-                <ZoomControlToggle />
+                <div>
+                    <ZoomControlToggle />
+                </div>
                 {handleToggleClick && (
                     <Button
                         onClick={handleToggleClick}
                         className={css`
+                            display: block;
                             padding: 10px 18px;
                         `}
                     >

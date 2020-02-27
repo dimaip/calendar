@@ -42,6 +42,7 @@ export function getLentInfo(date) {
     let fastingLevel = 8;
     let fastName = 'Постный день';
     let colour = null;
+    let icon = null;
 
     const pascha = calculateEasterDate(y);
 
@@ -223,6 +224,7 @@ export function getLentInfo(date) {
 
         fastName = 'Великий пост';
         colour = '#7b68ee';
+        icon = 'greatLent.jpg';
     }
     if (current_date.valueOf() == great_lent_begin.valueOf()) {
         fastingLevel = 1;
@@ -339,6 +341,7 @@ export function getLentInfo(date) {
             fastingLevel,
             fastingLevelName: fastingLevels[fastingLevel],
             colour,
+            icon,
         };
     }
 
@@ -346,6 +349,10 @@ export function getLentInfo(date) {
 }
 
 export function getFeastInfo(_date) {
+    let title = '';
+    let feastType = null;
+    let colour = null;
+    let icon = null;
     const y = _date.getFullYear();
     const m = _date.getMonth();
     const d = _date.getDate();
@@ -354,155 +361,129 @@ export function getFeastInfo(_date) {
     const pascha = calculateEasterDate(y);
 
     if (pascha.getTime() == date.getTime()) {
-        return {
-            title: 'Пасха',
-            feastType: '12',
-            colour: '#ff4e4e',
-            icon: 'easter.jpg',
-        };
+        title = 'Пасха';
+        feastType = '12';
+        colour = '#ff4e4e';
+        icon = 'easter.jpg';
     }
 
     const palm_sunday = calculateEasterDate(y);
     palm_sunday.setDate(pascha.getDate() - 7);
 
     if (palm_sunday.getTime() == date.getTime()) {
-        return {
-            title: 'Вход Господень в Иерусалим',
-            feastType: '12',
-            colour: '#73be73',
-        };
+        title = 'Вход Господень в Иерусалим';
+        feastType = '12';
+        colour = '#73be73';
     }
 
     const holy_Ascension = calculateEasterDate(y);
     holy_Ascension.setDate(pascha.getDate() + 39);
 
     if (holy_Ascension.getTime() == date.getTime()) {
-        return {
-            title: 'Вознесение',
-            feastType: '12',
-            colour: '#A2A2A2',
-        };
+        title = 'Вознесение';
+        feastType = '12';
+        colour = '#A2A2A2';
+    }
+
+    if (date >= pascha && date < holy_Ascension) {
+        colour = '#ff4e4e';
+        icon = 'easter.jpg';
     }
 
     const pentecost = calculateEasterDate(y);
     pentecost.setDate(pascha.getDate() + 49);
 
     if (pentecost.getTime() == date.getTime()) {
-        return {
-            title: 'Пятидесятница',
-            feastType: '12',
-            colour: '#73be73',
-        };
+        title = 'Пятидесятница';
+        feastType = '12';
+        colour = '#73be73';
     }
 
     if (new Date(y, 8, 21).getTime() == date.getTime()) {
-        return {
-            title: 'Рождество Богородицы',
-            feastType: '12',
-            colour: '#4169E1',
-        };
+        title = 'Рождество Богородицы';
+        feastType = '12';
+        colour = '#4169E1';
     }
 
     if (new Date(y, 8, 27).getTime() == date.getTime()) {
-        return {
-            title: 'Воздвижение Креста Господня',
-            feastType: '12',
-            colour: '#A2A2A2',
-        };
+        title = 'Воздвижение Креста Господня';
+        feastType = '12';
+        colour = '#A2A2A2';
     }
 
     if (new Date(y, 11, 4).getTime() == date.getTime()) {
-        return {
-            title: 'Введение во храм Пресвятой Богородицы',
-            feastType: '12',
-            colour: '#4169E1',
-        };
+        title = 'Введение во храм Пресвятой Богородицы';
+        feastType = '12';
+        colour = '#4169E1';
     }
 
     if (new Date(y, 0, 7).getTime() == date.getTime()) {
-        return {
-            title: 'Рождество Христово',
-            feastType: '12',
-            colour: '#A2A2A2',
-        };
+        title = 'Рождество Христово';
+        feastType = '12';
+        colour = '#A2A2A2';
     }
 
     if (new Date(y, 0, 19).getTime() == date.getTime()) {
-        return {
-            title: 'Крещение Господне',
-            feastType: '12',
-            colour: '#A2A2A2',
-        };
+        title = 'Крещение Господне';
+        feastType = '12';
+        colour = '#A2A2A2';
     }
 
     if (new Date(y, 1, 15).getTime() == date.getTime()) {
-        return {
-            title: 'Сретение Господне',
-            feastType: '12',
-            colour: '#A2A2A2',
-        };
+        title = 'Сретение Господне';
+        feastType = '12';
+        colour = '#A2A2A2';
     }
 
     if (new Date(y, 3, 7).getTime() == date.getTime()) {
-        return {
-            title: 'Благовещение Пресвятой Богородицы',
-            feastType: '12',
-            colour: '#4169E1',
-        };
+        title = 'Благовещение Пресвятой Богородицы';
+        feastType = '12';
+        colour = '#4169E1';
     }
 
     if (new Date(y, 7, 19).getTime() == date.getTime()) {
-        return {
-            title: 'Преображение Господне',
-            feastType: '12',
-            colour: '#A2A2A2',
-        };
+        title = 'Преображение Господне';
+        feastType = '12';
+        colour = '#A2A2A2';
     }
 
     if (new Date(y, 7, 28).getTime() == date.getTime()) {
-        return {
-            title: 'Успение Богородицы',
-            feastType: '12',
-            colour: '#4169E1',
-        };
+        title = 'Успение Богородицы';
+        feastType = '12';
+        colour = '#4169E1';
     }
 
     if (new Date(y, 9, 14).getTime() == date.getTime()) {
-        return {
-            title: 'Покров Пресвятой Богородицы',
-            feastType: 'great',
-            colour: '#4169E1',
-        };
+        title = 'Покров Пресвятой Богородицы';
+        feastType = 'great';
+        colour = '#4169E1';
     }
 
     if (new Date(y, 0, 14).getTime() == date.getTime()) {
-        return {
-            title: 'Обрезание Господне',
-            feastType: 'great',
-            colour: '#A2A2A2',
-        };
+        title = 'Обрезание Господне';
+        feastType = 'great';
+        colour = '#A2A2A2';
     }
 
     if (new Date(y, 6, 7).getTime() == date.getTime()) {
-        return {
-            title: 'Рождество Иоанна Крестителя',
-            feastType: 'great',
-        };
+        title = 'Рождество Иоанна Крестителя';
+        feastType = 'great';
     }
 
     if (new Date(y, 6, 12).getTime() == date.getTime()) {
-        return {
-            title: 'День святых первоверховных апостолов Петра и Павла',
-            feastType: 'great',
-        };
+        title = 'День святых первоверховных апостолов Петра и Павла';
+        feastType = 'great';
     }
 
     if (new Date(y, 8, 11).getTime() == date.getTime()) {
-        return {
-            title: 'Усекновение главы Иоанна Предтечи',
-            feastType: 'great',
-        };
+        title = 'Усекновение главы Иоанна Предтечи';
+        feastType = 'great';
     }
 
-    return {};
+    return {
+        title,
+        feastType,
+        colour,
+        icon,
+    };
 }

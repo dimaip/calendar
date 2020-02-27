@@ -39,12 +39,12 @@ const Nav = ({ handleToggleClick, handleClickShift, date }) => {
                         color: ${theme.colours.primary};
                         line-height: 1;
                         margin-bottom: 8px;
-                        font-size: 22px;
+                        font-size: 21px;
                         @media (min-width: 360px) {
-                            font-size: 26px;
+                            font-size: 25px;
                         }
                         @media (min-width: 375px) {
-                            font-size: 28px;
+                            font-size: 27px;
                         }
                     `}
                 >
