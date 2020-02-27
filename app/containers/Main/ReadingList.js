@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { forEachObjIndexed } from 'ramda';
 import ReadingsForService from './ReadingsForService';
+import forEach from 'lodash.foreach';
 
 const ReadingList = ({ readings, brother = false }) => {
     const renderedReadings = [];
 
-    forEachObjIndexed((value, key) => {
+    forEach((value, key) => {
         renderedReadings.push(
             <ReadingsForService brother={brother} title={String(key)} readingsForService={value} key={String(key)} />
         );

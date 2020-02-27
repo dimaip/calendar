@@ -1,7 +1,7 @@
 import React from 'react';
 import './Zlatoust.css';
 import { useParams } from 'react-router-dom';
-import { forEachObjIndexed } from 'ramda';
+import forEach from 'lodash.foreach';
 import useDay from 'hooks/useDay';
 import ReadingItem from 'containers/Readings/ReadingItem';
 import isGospel from 'domain/isGospel';
@@ -23,7 +23,7 @@ const Zlatoust = () => {
     const readingsForService = readings?.['Литургия'];
 
     const readingVersesWithType = [];
-    forEachObjIndexed((readingVerses, type) => {
+    forEach((readingVerses, type) => {
         readingVerses.forEach(readingVerse => {
             readingVersesWithType.push({
                 readingVerse,

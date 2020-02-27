@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 module.exports = {
     name: 'client',
@@ -21,6 +20,7 @@ module.exports = {
     optimization: {
         namedModules: true,
         namedChunks: true,
+        usedExports: true,
     },
 
     devServer: {
@@ -30,9 +30,6 @@ module.exports = {
     },
 
     plugins: [
-        new MomentLocalesPlugin({
-            localesToKeep: ['ru'],
-        }),
         new MiniCssExtractPlugin({
             filename: '[name].bundle.css',
             chunkFilename: '[name].bundle.css',

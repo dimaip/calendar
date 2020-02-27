@@ -2,10 +2,8 @@ import React, { useState, Children } from 'react';
 import { css } from 'emotion';
 import { ThemeProvider, useTheme } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
-import moment from 'moment';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import dateFormat from 'dateformat';
-import 'moment/locale/ru';
 import ReadingList from './ReadingList';
 import Header from 'components/Header/Header';
 import Nav from 'components/Nav/Nav';
@@ -24,6 +22,7 @@ import Sermons from './Sermons';
 import ThisDays from './ThisDays';
 import useExternalDay from 'hooks/useExternalDay';
 import Services from './Services';
+import { parseISO, formatISO, subDays, addDays } from 'date-fns';
 
 const GradientSection = ({ children }) => {
     const theme = useTheme();
@@ -76,10 +75,10 @@ const Main = ({ services }) => {
     const makeHandleClickShift = direction => () => {
         switch (direction) {
             case 'left':
-                setNewDate(dateFormat(moment(date).subtract(1, 'days'), 'yyyy-mm-dd'));
+                setNewDate(formatISO(subDays(parseISO(date), 1), { representation: 'date' }));
                 break;
             case 'right':
-                setNewDate(dateFormat(moment(date).add(1, 'days'), 'yyyy-mm-dd'));
+                setNewDate(formatISO(addDays(parseISO(date), 1), { representation: 'date' }));
                 break;
         }
         setDirection(direction);

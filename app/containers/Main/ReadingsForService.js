@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
 import { Link, useParams } from 'react-router-dom';
-import { forEachObjIndexed } from 'ramda';
+import forEach from 'lodash.foreach';
 import ReadingGroup from './ReadingGroup';
 import { useTheme } from 'emotion-theming';
 import RightIcon from 'components/svgs/RightIcon';
 
 const ReadingsForService = ({ title, readingsForService, brother }) => {
     const rendredReadingGroups = [];
-    forEachObjIndexed((value, key) => {
+    forEach((value, key) => {
         rendredReadingGroups.push(<ReadingGroup title={String(key)} readingVerses={value} key={String(key)} />);
     }, readingsForService);
 

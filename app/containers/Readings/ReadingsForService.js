@@ -1,5 +1,5 @@
 import React from 'react';
-import { forEachObjIndexed } from 'ramda';
+import forEach from 'lodash.foreach';
 import ReadingItem from './ReadingItem';
 import isGospel from 'domain/isGospel';
 
@@ -19,7 +19,7 @@ const sortGospel = (a, b) => {
 const ReadingsForService = ({ readingsForService }) => {
     // flatten readings
     const readingVersesWithType = [];
-    forEachObjIndexed((readingVerses, type) => {
+    forEach((readingVerses, type) => {
         readingVerses.forEach(readingVerse => {
             readingVersesWithType.push({
                 readingVerse,

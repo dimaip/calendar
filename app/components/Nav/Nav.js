@@ -1,14 +1,16 @@
 import React from 'react';
 import { css } from 'emotion';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import LeftIcon from 'components/svgs/LeftIcon';
 import RightIcon from 'components/svgs/RightIcon';
 import Button from '../Button/Button.js';
 import { useTheme } from 'emotion-theming';
+import { subDays, format, parseISO } from 'date-fns';
+import { ru } from 'date-fns/locale';
 
 const Nav = ({ handleToggleClick, handleClickShift, date }) => {
     const theme = useTheme();
+    const dateObj = parseISO(date);
     return (
         <div
             className={css`
@@ -46,7 +48,7 @@ const Nav = ({ handleToggleClick, handleClickShift, date }) => {
                         }
                     `}
                 >
-                    {moment(date).format('D MMMM YYYY, ddd')}
+                    {format(dateObj, 'd MMMM yyyy, EEEEEE', { locale: ru })}
                 </div>
                 <div
                     className={css`
@@ -55,10 +57,7 @@ const Nav = ({ handleToggleClick, handleClickShift, date }) => {
                         line-height: 1;
                     `}
                 >
-                    {moment(date)
-                        .subtract(13, 'days')
-                        .format('D MMMM')}{' '}
-                    по старому стилю
+                    {format(subDays(dateObj, 13), 'd MMMM', { locale: ru })} по старому стилю
                 </div>
             </Button>
             <Button
