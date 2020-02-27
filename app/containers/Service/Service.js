@@ -8,8 +8,7 @@ import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import Loader from 'components/Loader/Loader';
-// const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
-import Zlatoust from './Texts/Zlatoust';
+const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
 
 const Service = () => {
     const { serviceId, date } = useParams();

@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 module.exports = {
@@ -10,7 +10,8 @@ module.exports = {
     context: path.resolve(__dirname, './app'),
 
     output: {
-        filename: '[name].js',
+        filename: '[name].bundle.js',
+        chunkFilename: '[name].bundle.js',
         path: path.resolve(__dirname, './www'),
         publicPath: '',
     },
@@ -18,7 +19,8 @@ module.exports = {
     target: 'web',
 
     optimization: {
-        usedExports: true,
+        namedModules: true,
+        namedChunks: true,
     },
 
     devServer: {
@@ -31,7 +33,10 @@ module.exports = {
         new MomentLocalesPlugin({
             localesToKeep: ['ru'],
         }),
-        new ExtractTextPlugin('styles.css'),
+        new MiniCssExtractPlugin({
+            filename: '[name].bundle.css',
+            chunkFilename: '[name].bundle.css',
+        }),
         new webpack.NoEmitOnErrorsPlugin(),
         new HtmlWebpackPlugin({
             title: 'Православный календарь',
@@ -59,19 +64,15 @@ module.exports = {
             },
             {
                 test: /\.css$/, //global - without modules
-                use: ExtractTextPlugin.extract(['css-loader']),
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
             {
                 test: /\.global\.scss$/, //global - without modules
-                use: ExtractTextPlugin.extract(['css-loader', 'postcss-loader', 'sass-loader']),
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
             },
             {
                 test: /^((?!\.global).)*scss$/,
-                use: ExtractTextPlugin.extract([
-                    'css-loader', //TODO [name]__[local]___[hash:base64:5] => error: ssr code has different hash
-                    'postcss-loader',
-                    'sass-loader',
-                ]),
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
