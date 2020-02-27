@@ -29,6 +29,7 @@ const BottomNav = ({ active }) => {
         <div
             className={css`
                 height: 44px;
+                flex-shrink: 0;
                 display: flex;
                 justify-content: space-evenly;
                 position: sticky;
