@@ -19,14 +19,14 @@ const sortGospel = (a, b) => {
 const ReadingsForService = ({ readingsForService }) => {
     // flatten readings
     const readingVersesWithType = [];
-    forEach((readingVerses, type) => {
+    forEach(readingsForService, (readingVerses, type) => {
         readingVerses.forEach(readingVerse => {
             readingVersesWithType.push({
                 readingVerse,
                 type,
             });
         });
-    }, readingsForService);
+    });
 
     return (
         <>

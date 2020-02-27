@@ -9,9 +9,9 @@ import RightIcon from 'components/svgs/RightIcon';
 
 const ReadingsForService = ({ title, readingsForService, brother }) => {
     const rendredReadingGroups = [];
-    forEach((value, key) => {
+    forEach(readingsForService, (value, key) => {
         rendredReadingGroups.push(<ReadingGroup title={String(key)} readingVerses={value} key={String(key)} />);
-    }, readingsForService);
+    });
 
     const { date } = useParams();
     const theme = useTheme();

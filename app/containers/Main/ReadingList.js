@@ -6,11 +6,14 @@ import forEach from 'lodash.foreach';
 const ReadingList = ({ readings, brother = false }) => {
     const renderedReadings = [];
 
-    forEach((value, key) => {
+    console.log(readings);
+
+    forEach(readings, (value, key) => {
+        console.log(value, key);
         renderedReadings.push(
             <ReadingsForService brother={brother} title={String(key)} readingsForService={value} key={String(key)} />
         );
-    }, readings);
+    });
 
     return <div>{renderedReadings}</div>;
 };

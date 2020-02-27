@@ -23,14 +23,14 @@ const Zlatoust = () => {
     const readingsForService = readings?.['Литургия'];
 
     const readingVersesWithType = [];
-    forEach((readingVerses, type) => {
+    forEach(readingsForService, (readingVerses, type) => {
         readingVerses.forEach(readingVerse => {
             readingVersesWithType.push({
                 readingVerse,
                 type,
             });
         });
-    }, readingsForService);
+    });
 
     const apostolReadings = readingVersesWithType.filter(reading => !isGospel(reading.readingVerse));
     const gospelReadings = readingVersesWithType.filter(reading => isGospel(reading.readingVerse));

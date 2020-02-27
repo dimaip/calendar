@@ -19,7 +19,7 @@ export default ({ colour }) => {
                 </g>
                 <path
                     d="M17.312 18.008H2.303a1.759 1.759 0 100 3.518h15.061V.502H2.303a1.781 1.781 0 00-1.8 1.759v17.506"
-                    stroke-miterlimit="10"
+                    strokeMiterlimit="10"
                 />
                 <path strokeLinecap="round" strokeMiterlimit="10" d="M3.742 19.771H15.62" />
             </g>
