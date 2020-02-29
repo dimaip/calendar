@@ -42,7 +42,7 @@ export function getLentInfo(date) {
     let fastingLevel = 8;
     let fastName = 'Постный день';
     let colour = null;
-    let icon = 'default.jpg';
+    let icon = null;
 
     const pascha = calculateEasterDate(y);
 
@@ -352,7 +352,7 @@ export function getFeastInfo(_date) {
     let title = '';
     let feastType = null;
     let colour = null;
-    let icon = 'default.jpg';
+    let icon = null;
     const y = _date.getFullYear();
     const m = _date.getMonth();
     const d = _date.getDate();

@@ -29,7 +29,7 @@ export function fetchDay({ date }) {
                     glas,
                     week,
                     colour: feastColour || lentColour,
-                    icon: feastIcon || lentIcon,
+                    icon: feastIcon || lentIcon || 'default.jpg',
                 };
             }
 
