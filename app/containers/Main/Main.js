@@ -157,7 +157,7 @@ const Main = ({ services }) => {
                                                                 <Hymns hymns={day.prayers} />
                                                             </SolidSection>
                                                         )}
-                                                        {day.bReadings && day.bReadings.length > 0 && (
+                                                        {day.bReadings && Object.keys(day.bReadings).length > 0 && (
                                                             <GradientSection>
                                                                 <SectionHeading>Душеполезные чтения</SectionHeading>
                                                                 <ReadingList brother readings={day.bReadings} />
