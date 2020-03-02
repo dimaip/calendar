@@ -15,7 +15,7 @@ const Readings = ({ readings }) => (
     </>
 );
 
-const Zlatoust = () => {
+const Zlatoust = ({ lang }) => {
     const { date } = useParams();
     const { data: day } = useDay(date);
 
@@ -384,204 +384,410 @@ const Zlatoust = () => {
                     <span className="lowercaseCapital">2</span>
                     <span className="lowercaseCapital">)</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-4">
-                    <span className="markedBlack"> </span>
-                    <span className="markedRed">Н</span>
-                    <span className="markedBlack"> </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1</span>
-                    <span className="markedBlack">
-                        {' '}
-                        Благослови Господа, душа моя!
-                        <br /> Благословен Ты, Господи.
-                    </span>
-                </p>
-                <p className="basetIndent_5 ParaOverride-4">
-                    <span className="markedBlack">
-                        {' '}
-                        Благослови Господа, душа моя,
-                        <br /> и всё, что во мне, — имя святое Его;
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">2</span>
-                    <span className="markedBlack">
-                        {' '}
-                        благослови Господа, душа моя,
-                        <br /> и не забывай всех даро́в Его.
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1</span>
-                    <span className="markedBlack">
-                        {' '}
-                        Он прощает все беззакония твои,
-                        <br /> исцеляет все неду`ги твои,
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">2</span>
-                    <span className="markedBlack">
-                        {' '}
-                        избавляет от истле́ния жизнь твою,
-                        <br /> милостью и щедротами венчает тебя,
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1</span>
-                    <span className="markedBlack">
-                        {' '}
-                        насыщает бла́гами зрелость твою;
-                        <br /> как у орла, обновится юность твоя!
-                    </span>
-                </p>
-                <p className="petitIndent_1_5 ParaOverride-4">
-                    <span className="markedBlack"> </span>
-                    <span className="markedRedBold">[</span>
-                    <span className="markedRedIndex _idGenCharOverride-1">2</span>
-                    <span className="markedBlack">
-                        {' '}
-                        Милость творит Господь,
-                        <br /> тесни`мых защищает права́;
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1</span>
-                    <span className="markedBlack">
-                        {' '}
-                        открыл Он Моисею пути Свои,
-                        <br /> сына́м Изра́илевым — деяния Свои:
-                    </span>
-                    <span className="markedRedBold">]</span>
-                </p>
-                <p className="basetIndent_6">
-                    <span className="markedBlack"> </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">2</span>
-                    <span className="markedBlack">
-                        {' '}
-                        щедр и ми`лостив Господь,
-                        <br /> долготерпелив и благ весьма,
-                    </span>
-                </p>
-                <p className="petitIndent_6">
-                    <span className="markedBlack"> </span>
-                    <span className="markedRedBold">[</span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1 </span>
-                    <span className="markedBlack">
-                        прогневается не до конца,
-                        <br /> и враждует не вове́к.
-                    </span>
-                </p>
-                <p className="petitIndent_1_5">
-                    <span className="markedBlack"> </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">2</span>
-                    <span className="markedBlack">
-                        {' '}
-                        Не по беззакониям нашим сотворил Он нам,
-                        <br /> и не по грехам нашим воздал Он нам;
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1</span>
-                    <span className="markedBlack"> но как высоки`</span>
-                    <span className="markedBlack">
-                        {' '}
-                        небеса над землёй,
-                        <br /> сильна́ милость Его к боящимся Его;
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">2</span>
-                    <span className="markedBlack">
-                        {' '}
-                        как восток от запада далёк,
-                        <br /> беззакония наши отдали`л Он от нас;
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1</span>
-                    <span className="markedBlack">
-                        {' '}
-                        как ми`лует отец детей,
-                        <br /> ми`лует Господь боящихся Его.
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">2</span>
-                    <span className="markedBlack">
-                        {' '}
-                        Ибо знает Он состав наш,
-                        <br /> па́
-                    </span>
-                    <span className="markedBlack">мятует, что мы — персть.</span>
-                </p>
-                <p className="petitIndent_1_5 ParaOverride-6">
-                    <span className="markedBlack"> </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1 </span>
-                    <span className="markedBlack">
-                        Человек — дни его подобны траве,
-                        <br /> как цвет полево́й, отцветают они;
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">2</span>
-                    <span className="markedBlack CharOverride-1"> </span>
-                    <span className="markedBlack">
-                        повеет над ним — и нет его,
-                        <br /> и не узна́ет его место его.
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1</span>
-                    <span className="markedBlack CharOverride-1"> </span>
-                    <span className="markedBlack">
-                        Но милость Господня от века и вове́к
-                        <br /> к боя´щимся Его,
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">2</span>
-                    <span className="markedBlack CharOverride-1"> </span>
-                    <span className="markedBlack">
-                        и правда Его на сына́х сынов
-                        <br /> тех, кто хранит Завет Его,
-                        <br />
-                        кто помнит заповеди Его
-                        <br /> и претворяет их в дела.
-                    </span>
-                </p>
-                <p className="petitIndent_1_5 ParaOverride-6">
-                    <span className="markedBlack"> </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1</span>
-                    <span className="markedBlack CharOverride-1"> </span>
-                    <span className="markedBlack">
-                        Господь воздвиг престол Свой на небесах,
-                        <br /> и всё объе́млет царство Его.
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">2</span>
-                    <span className="markedBlack CharOverride-1"> </span>
-                    <span className="markedBlack">
-                        Благословите Господа, все Вестники Его,
-                        <br /> сильные, творящие слово Его,
-                        <br /> вне́
-                    </span>
-                    <span className="markedBlack">
-                        мля звуку сло́ва Его.
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1</span>
-                    <span className="markedBlack CharOverride-1"> </span>
-                    <span className="markedBlack">
-                        Благословите Господа, все Воинства Его,
-                        <br /> слу`ги Его, творящие волю Его!
-                        <br />
-                    </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">2</span>
-                    <span className="markedBlack CharOverride-1"> </span>
-                    <span className="markedBlack">
-                        Благословите Господа, все дела Его,
-                        <br /> на всяком месте владычества Его!
-                    </span>
-                    <span className="markedRedBold">]</span>
-                </p>
-                <p className="basetIndent_5 ParaOverride-4">
-                    <span className="markedBlack"> </span>
-                    <span className="markedRedIndex _idGenCharOverride-1">1</span>
-                    <span className="markedBlack">
-                        {' '}
-                        Благослови Господа, душа моя,
-                        <br /> и всё, что во мне, — имя святое Его! <br />
-                        Благословен Ты, Господи!
-                    </span>
-                </p>
+                {lang === 'default' && (
+                    <>
+                        <p className="basetIndent_5 ParaOverride-4">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRed">Н</span>
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Благослови Господа, душа моя!
+                                <br /> Благословен Ты, Господи.
+                            </span>
+                        </p>
+                        <p className="basetIndent_5 ParaOverride-4">
+                            <span className="markedBlack">
+                                {' '}
+                                Благослови Господа, душа моя,
+                                <br /> и всё, что во мне, — имя святое Его;
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                благослови Господа, душа моя,
+                                <br /> и не забывай всех даро́в Его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Он прощает все беззакония твои,
+                                <br /> исцеляет все неду`ги твои,
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                избавляет от истле́ния жизнь твою,
+                                <br /> милостью и щедротами венчает тебя,
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                насыщает бла́гами зрелость твою;
+                                <br /> как у орла, обновится юность твоя!
+                            </span>
+                        </p>
+                        <p className="petitIndent_1_5 ParaOverride-4">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedBold">[</span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Милость творит Господь,
+                                <br /> тесни`мых защищает права́;
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                открыл Он Моисею пути Свои,
+                                <br /> сына́м Изра́илевым — деяния Свои:
+                            </span>
+                            <span className="markedRedBold">]</span>
+                        </p>
+                        <p className="basetIndent_6">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                щедр и ми`лостив Господь,
+                                <br /> долготерпелив и благ весьма,
+                            </span>
+                        </p>
+                        <p className="petitIndent_6">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedBold">[</span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1 </span>
+                            <span className="markedBlack">
+                                прогневается не до конца,
+                                <br /> и враждует не вове́к.
+                            </span>
+                        </p>
+                        <p className="petitIndent_1_5">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Не по беззакониям нашим сотворил Он нам,
+                                <br /> и не по грехам нашим воздал Он нам;
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack"> но как высоки`</span>
+                            <span className="markedBlack">
+                                {' '}
+                                небеса над землёй,
+                                <br /> сильна́ милость Его к боящимся Его;
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                как восток от запада далёк,
+                                <br /> беззакония наши отдали`л Он от нас;
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                как ми`лует отец детей,
+                                <br /> ми`лует Господь боящихся Его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Ибо знает Он состав наш,
+                                <br /> па́
+                            </span>
+                            <span className="markedBlack">мятует, что мы — персть.</span>
+                        </p>
+                        <p className="petitIndent_1_5 ParaOverride-6">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1 </span>
+                            <span className="markedBlack">
+                                Человек — дни его подобны траве,
+                                <br /> как цвет полево́й, отцветают они;
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                повеет над ним — и нет его,
+                                <br /> и не узна́ет его место его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                Но милость Господня от века и вове́к
+                                <br /> к боя´щимся Его,
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                и правда Его на сына́х сынов
+                                <br /> тех, кто хранит Завет Его,
+                                <br />
+                                кто помнит заповеди Его
+                                <br /> и претворяет их в дела.
+                            </span>
+                        </p>
+                        <p className="petitIndent_1_5 ParaOverride-6">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                Господь воздвиг престол Свой на небесах,
+                                <br /> и всё объе́млет царство Его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                Благословите Господа, все Вестники Его,
+                                <br /> сильные, творящие слово Его,
+                                <br /> вне́
+                            </span>
+                            <span className="markedBlack">
+                                мля звуку сло́ва Его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                Благословите Господа, все Воинства Его,
+                                <br /> слу`ги Его, творящие волю Его!
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                Благословите Господа, все дела Его,
+                                <br /> на всяком месте владычества Его!
+                            </span>
+                            <span className="markedRedBold">]</span>
+                        </p>
+                        <p className="basetIndent_5 ParaOverride-4">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Благослови Господа, душа моя,
+                                <br /> и всё, что во мне, — имя святое Его! <br />
+                                Благословен Ты, Господи!
+                            </span>
+                        </p>
+                    </>
+                )}
+
+                {lang === 'ЦСЯ' && (
+                    <>
+                        <p className="basetIndent_5 ParaOverride-4">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRed">Н</span>
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Благослови, душе моя, Господа.
+                                <br /> Благословен еси, Господи.
+                            </span>
+                        </p>
+                        <p className="basetIndent_5 ParaOverride-4">
+                            <span className="markedBlack">
+                                {' '}
+                                Благослови, душе моя, Господа,
+                                <br /> и вся внутренняя моя Имя святое Его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Благослови, душе моя, Господа,
+                                <br /> и не забывай всех воздаяний Его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Очищающаго вся беззакония твоя,
+                                <br /> исцеляющаго вся недуги твоя.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Избавляющаго от истления живот твой,
+                                <br /> венчающаго тя милостию и щедротами.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Исполняющаго во благих желание твое:
+                                <br /> обновится, яко орля, юность твоя.
+                            </span>
+                        </p>
+                        <p className="petitIndent_1_5 ParaOverride-4">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedBold">[</span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Творяй милостыни Господь,
+                                <br /> и судьбу всем обидимым.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Сказа пути Своя Моисеови,
+                                <br /> сыновом Израилевым хотения Своя.
+                            </span>
+                            <span className="markedRedBold">]</span>
+                        </p>
+                        <p className="basetIndent_6">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Щедр и милостив Господь,
+                                <br /> долготерпелив и многомилостив.
+                            </span>
+                        </p>
+                        <p className="petitIndent_6">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedBold">[</span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1 </span>
+                            <span className="markedBlack">
+                                Не до конца прогневается,
+                                <br /> ниже в век враждует.
+                            </span>
+                        </p>
+                        <p className="petitIndent_1_5">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Не по беззаконием нашим сотворил есть нам,
+                                <br /> ниже по грехом нашим воздал есть нам.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack"> Яко по высоте</span>
+                            <span className="markedBlack">
+                                {' '}
+                                небесней от земли,
+                                <br /> утвердил есть Господь милость Свою на боящихся Его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Елико отстоят востоцы от запад,
+                                <br /> удалил есть от нас беззакония наша.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Якоже щедрит отец сыны,
+                                <br /> ущедри Господь боящихся Его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Яко Той позна создание наше,
+                                <br />
+                            </span>
+                            <span className="markedBlack">помяну, яко персть есмы.</span>
+                        </p>
+                        <p className="petitIndent_1_5 ParaOverride-6">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1 </span>
+                            <span className="markedBlack">
+                                Человек, яко трава дние его,
+                                <br /> яко цвет сельный, тако оцветет.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                Яко дух пройде в нем, и не будет,
+                                <br /> и не познает ктому места своего.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                Милость же Господня от века и до века
+                                <br /> на боящихся Его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                И правда Его на сынех сынов,
+                                <br /> хранящих завет Его,
+                                <br /> и помнящих заповеди Его
+                                <br /> творити я.
+                            </span>
+                        </p>
+                        <p className="petitIndent_1_5 ParaOverride-6">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                Господь на небеси уготова Престол Свой,
+                                <br /> и Царство Его всеми обладает.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                Благословите Господа, ангели Его,
+                                <br /> сильнии крепостию, творящии слово Его,
+                            </span>
+                            <span className="markedBlack">
+                                услышати глас словес Его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                Благословите Господа, вся силы Его,
+                                <br /> слуги Его, творящии волю Его.
+                                <br />
+                            </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">2</span>
+                            <span className="markedBlack CharOverride-1"> </span>
+                            <span className="markedBlack">
+                                Благословите Господа, вся дела Его,
+                                <br /> на всяком месте владычества Его.
+                            </span>
+                            <span className="markedRedBold">]</span>
+                        </p>
+                        <p className="basetIndent_5 ParaOverride-4">
+                            <span className="markedBlack"> </span>
+                            <span className="markedRedIndex _idGenCharOverride-1">1</span>
+                            <span className="markedBlack">
+                                {' '}
+                                Благослови, душе моя, Господа,
+                                <br /> и вся внутренняя моя Имя святое Его. <br />
+                                Благословен еси, Господи.
+                            </span>
+                        </p>
+                    </>
+                )}
+
                 <p className="baseNametIndent_5">
                     <span className="markedRed">
                         <a id="_idTextAnchor002" />
