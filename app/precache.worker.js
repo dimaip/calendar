@@ -1,3 +1,6 @@
+const PRECACHE_DAYS = 10;
+const PRECACHE_INTERVAL = 3600 * 24 * 1000;
+
 const getDaysArray = (start, end) => {
     const arr = [];
     for (const dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
@@ -7,7 +10,7 @@ const getDaysArray = (start, end) => {
 };
 const precache = () => {
     const tillDate = new Date();
-    tillDate.setDate(tillDate.getDate() + 7);
+    tillDate.setDate(tillDate.getDate() + PRECACHE_DAYS);
 
     const daylist = getDaysArray(new Date(), tillDate);
 
@@ -26,7 +29,7 @@ const precache = () => {
 
     setTimeout(() => {
         precache();
-    }, 3600 * 24 * 1000);
+    }, PRECACHE_INTERVAL);
 };
 
 onmessage = () => {
