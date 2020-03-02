@@ -32,6 +32,14 @@ app.use(
     })
 );
 app.use(
+    '/api/readings',
+    proxy(apiHost, {
+        proxyReqPathResolver: req => {
+            return `/day.php?date=${req.url.replace(/[^0-9]/g, '')}&readings=1`;
+        },
+    })
+);
+app.use(
     '/api/external-day',
     proxy('https://psmb.ru', {
         proxyReqPathResolver: req => {

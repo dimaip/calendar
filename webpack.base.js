@@ -9,8 +9,8 @@ module.exports = {
     context: path.resolve(__dirname, './app'),
 
     output: {
-        filename: '[name].bundle.js',
-        chunkFilename: '[name].bundle.js',
+        filename: '[name].[contenthash].bundle.js',
+        chunkFilename: '[name].[contenthash].bundle.js',
         path: path.resolve(__dirname, './www'),
         publicPath: '',
     },
@@ -55,6 +55,10 @@ module.exports = {
     ],
     module: {
         rules: [
+            {
+                test: /\.worker\.js$/,
+                use: { loader: 'worker-loader' },
+            },
             {
                 test: /\.js$/,
                 use: 'babel-loader',

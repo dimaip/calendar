@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import useReadings from './useReadings';
 
 export function fetchReading({ link, translation }) {
     return fetch(`/api/reading/` + encodeURI(link) + '&translation=' + translation)
@@ -27,6 +28,13 @@ export function fetchReading({ link, translation }) {
         });
 }
 
-const useReading = (link, translation) => useQuery(['reading', { link, translation }], fetchReading);
+const useReading = (link, translation, date) => {
+    const { data: readings } = useReadings(date);
+    const { data: reading } = useQuery(['reading', { link, translation }], fetchReading);
+    if (readings?.[link] && translation === 'default') {
+        return readings[link];
+    }
+    return reading;
+};
 
 export default useReading;

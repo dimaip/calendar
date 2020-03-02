@@ -3,10 +3,12 @@ import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import Zoom from 'components/Zoom/Zoom';
 import useReading from '../../hooks/useReading';
+import { useParams } from 'react-router-dom';
 
 const ReadingItem = ({ readingVerse, type }) => {
     const [translation, setTranslation] = useState('default');
-    const { data: reading } = useReading(readingVerse, translation);
+    const { date } = useParams();
+    const reading = useReading(readingVerse, translation, date);
     const theme = useTheme();
 
     if (!reading?.fragments) {

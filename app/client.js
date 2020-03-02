@@ -4,6 +4,8 @@ import { AppContainer } from 'react-hot-loader';
 import configureStore from 'redux/store/configureStore';
 import App from 'containers/App';
 import * as serviceWorker from './serviceWorker';
+// @ts-ignore
+import Worker from './precache.worker.js';
 
 const preloadedState = localStorage.getItem('persistedState') ? JSON.parse(localStorage.getItem('persistedState')) : {};
 const store = configureStore(preloadedState);
@@ -27,3 +29,6 @@ if (module.hot) {
 }
 
 serviceWorker.register();
+
+const precacheWorker = new Worker();
+precacheWorker.postMessage('precache');

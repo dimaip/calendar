@@ -23,6 +23,7 @@ import ThisDays from './ThisDays';
 import useExternalDay from 'hooks/useExternalDay';
 import Services from './Services';
 import { parseISO, formatISO, subDays, addDays } from 'date-fns';
+import useReadings from 'hooks/useReadings';
 
 const GradientSection = ({ children }) => {
     const theme = useTheme();
@@ -57,6 +58,10 @@ const Main = ({ services }) => {
     const { date } = useParams();
     const { data: day } = useDay(date);
     const { data: externalDay } = useExternalDay(date);
+
+    // pre-fetch readings
+    useReadings(date);
+
     const { sermons, thisDays } = externalDay || {};
     const [calendarShown, setCalendarShown] = useState(false);
     const [direction, setDirection] = useState('mount');
