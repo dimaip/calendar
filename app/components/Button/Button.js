@@ -8,7 +8,6 @@ const Button = props => (
             ${props.className}
             cursor: pointer;
             padding: 12px;
-            -webkit-tap-highlight-color: transparent;
             user-select: none;
             &:hover {
                 opacity: 0.8;
