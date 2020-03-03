@@ -5790,15 +5790,6 @@ const Vasiliy = ({ lang }) => {
                 <p className="footnoteRed">
                     <span className="markedRed"> ** См. выше, с. 52.</span>
                 </p>
-                <p className="_-КОЛОНТИТУЛЫ-ОФОРМЛЕН_КОНЦОВКА-отст7 ParaOverride-2">
-                    <span className="markedBlack">
-                        <img
-                            className="_idGenObjectAttribute-1"
-                            src="ЛитСвВасВел_РУС_ПБ3_ДЛЯ_ОГК-web-resources/image/Изображение_1873.png"
-                            alt=""
-                        />
-                    </span>
-                </p>
                 <hr className="HorizontalRule-1" />
                 <div className="_idFootnotes">
                     <div id="footnote-026" className="_idFootnote">
@@ -5957,15 +5948,6 @@ const Vasiliy = ({ lang }) => {
                             <span className="markedBlack">инствам. Кто не причащается, да покинет собра­ние!</span>
                             <span className="markedRed"> (св. Григорий Двое­слов)</span>
                             <span className="markedBlack">.</span>
-                        </p>
-                        <p className="_-КОЛОНТИТУЛЫ-ОФОРМЛЕН_КОНЦОВКА-отст7">
-                            <span className="markedBlack">
-                                <img
-                                    className="_idGenObjectAttribute-1"
-                                    src="ЛитСвВасВел_РУС_ПБ3_ДЛЯ_ОГК-web-resources/image/Изображение_1873.png"
-                                    alt=""
-                                />
-                            </span>
                         </p>
                     </div>
                     <div id="footnote-017" className="_idFootnote">

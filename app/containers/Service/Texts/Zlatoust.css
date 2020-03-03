@@ -1,10 +1,4 @@
-a._idGenColorInherit {
-    color: inherit;
-}
-div.Текстовый-фрейм {
-    border-style: solid;
-}
-p.endIndent_7 {
+p._-КОЛОНТИТУЛЫ-ОФОРМЛЕН_КОНЦОВКА-отст7 {
     color: #e32636;
     font-size: 13px;
     font-style: normal;
@@ -24,8 +18,7 @@ p.endIndent_7 {
     text-transform: uppercase;
     widows: 1;
 }
-p.noteRed {
-    color: #e32636;
+p._-КОЛОНТИТУЛЫ-ОФОРМЛЕН_НЕВИДИМКА-на-шмуце {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -38,13 +31,35 @@ p.noteRed {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
     text-transform: none;
     widows: 1;
 }
-p.stars {
+p._-СНОСКА_Сноска-КРАСНАЯ {
+    color: #e32636;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.5;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 0;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: justify;
+    text-align-last: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+p._-ОСНОВНОЙ_Звездочки {
     color: #e32636;
     font-size: 18px;
     font-style: normal;
@@ -64,7 +79,8 @@ p.stars {
     text-transform: uppercase;
     widows: 1;
 }
-p.baseName {
+p._-ОСНОВНОЙ_Имя-РаздСл {
+    -epub-hyphens: none;
     color: #e32636;
     font-size: 18px;
     font-style: normal;
@@ -84,7 +100,8 @@ p.baseName {
     text-transform: none;
     widows: 1;
 }
-p.baseNameWorship {
+p._-ОСНОВНОЙ_Имя-Службы {
+    -epub-hyphens: none;
     color: #e32636;
     font-size: 18px;
     font-style: normal;
@@ -104,13 +121,13 @@ p.baseNameWorship {
     text-transform: uppercase;
     widows: 1;
 }
-p.baseNamePart {
+p._-ОСНОВНОЙ_Имя-части-отст2 {
     color: #e32636;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.6;
+    line-height: 1.5;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -124,13 +141,13 @@ p.baseNamePart {
     text-transform: uppercase;
     widows: 1;
 }
-p.baseNametIndent_5 {
+p._-ОСНОВНОЙ_Имя-части-отст5 {
     color: #e32636;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
-    line-height: 1.6;
+    line-height: 1.5;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -144,7 +161,7 @@ p.baseNametIndent_5 {
     text-transform: uppercase;
     widows: 1;
 }
-p.baseRedBigIndent {
+p._-ОСНОВНОЙ_КРАСН-б-отст {
     color: #e32636;
     font-size: 18px;
     font-style: normal;
@@ -158,13 +175,14 @@ p.baseRedBigIndent {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
     text-transform: none;
     widows: 1;
 }
-p.baseRedtIndent_5 {
+p._-ОСНОВНОЙ_КРАСН-отст1-5 {
     color: #e32636;
     font-size: 18px;
     font-style: normal;
@@ -178,13 +196,56 @@ p.baseRedtIndent_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
     text-transform: none;
     widows: 1;
 }
-p.baseBigIndent {
+p._-ОСНОВНОЙ_КРАСН-отст5 {
+    color: #e32636;
+    font-size: 18px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 14px;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: justify;
+    text-align-last: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+p._-ОСНОВНОЙ_МеткаНовойСтраницы {
+    -epub-hyphens: none;
+    font-size: 18px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 0;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: always;
+    text-align: justify;
+    text-align-last: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+p._-ОСНОВНОЙ_Основной-б-отст {
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -197,13 +258,14 @@ p.baseBigIndent {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
     text-transform: none;
     widows: 1;
 }
-p.baseParaBigIndent {
+p._-ОСНОВНОЙ_Основной-б-отст-абз {
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -216,13 +278,14 @@ p.baseParaBigIndent {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: 17px;
     text-transform: none;
     widows: 1;
 }
-p.baseIndent_1_5 {
+p._-ОСНОВНОЙ_Основной-отст1-5 {
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -235,13 +298,14 @@ p.baseIndent_1_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
     text-transform: none;
     widows: 1;
 }
-p.baseIndent_5 {
+p._-ОСНОВНОЙ_Основной-отст5 {
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -254,13 +318,14 @@ p.baseIndent_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
     text-transform: none;
     widows: 1;
 }
-p.baseBigIndent {
+p._-ОСНОВНОЙ_ОсновнойСТ-б-отст {
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -279,7 +344,7 @@ p.baseBigIndent {
     text-transform: none;
     widows: 1;
 }
-p.baseIndent_5 {
+p._-ОСНОВНОЙ_ОсновнойСТ-отст1-5 {
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -298,9 +363,10 @@ p.baseIndent_5 {
     text-transform: none;
     widows: 1;
 }
-p.baseReading {
+p._-ОСНОВНОЙ_Чтение-Писания {
     color: #e32636;
     font-size: 18px;
+    font-style: italic;
     font-variant: normal;
     font-weight: bold;
     line-height: 1.6;
@@ -317,7 +383,7 @@ p.baseReading {
     text-transform: none;
     widows: 1;
 }
-p.petitRedBigIndent {
+p._-ПЕТИТ_КРАСН-петит-б-отст {
     color: #e32636;
     font-size: 15px;
     font-style: normal;
@@ -331,13 +397,14 @@ p.petitRedBigIndent {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
     text-transform: none;
     widows: 1;
 }
-p.petitRedIndent_1_5 {
+p._-ПЕТИТ_КРАСН-петит-отст1-5 {
     color: #e32636;
     font-size: 15px;
     font-style: normal;
@@ -351,19 +418,21 @@ p.petitRedIndent_1_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
     text-transform: none;
     widows: 1;
 }
-p.petitNameRed {
+p._-ПЕТИТ_Петит-Имя-РаздСл {
+    -epub-hyphens: none;
     color: #e32636;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
     font-weight: bold;
-    line-height: 1.6;
+    line-height: 1.5;
     margin-bottom: 0;
     margin-left: 28px;
     margin-right: 0;
@@ -377,7 +446,8 @@ p.petitNameRed {
     text-transform: none;
     widows: 1;
 }
-p.petitNamePartRed {
+p._-ПЕТИТ_Петит-Имя-части-отст2 {
+    -epub-hyphens: none;
     color: #e32636;
     font-size: 13px;
     font-style: normal;
@@ -397,7 +467,8 @@ p.petitNamePartRed {
     text-transform: uppercase;
     widows: 1;
 }
-p.petitNamePartRedIndent_5 {
+p._-ПЕТИТ_Петит-Имя-части-отст5 {
+    -epub-hyphens: none;
     color: #e32636;
     font-size: 13px;
     font-style: normal;
@@ -417,7 +488,7 @@ p.petitNamePartRedIndent_5 {
     text-transform: uppercase;
     widows: 1;
 }
-p.petitBigIndent {
+p._-ПЕТИТ_Петит-б-отст {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -430,13 +501,14 @@ p.petitBigIndent {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
     text-transform: none;
     widows: 1;
 }
-p.petitIndent_1_5 {
+p._-ПЕТИТ_Петит-отст1-5 {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -449,13 +521,14 @@ p.petitIndent_1_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
     text-transform: none;
     widows: 1;
 }
-p.petitIndent_5 {
+p._-ПЕТИТ_Петит-отст5 {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -468,13 +541,14 @@ p.petitIndent_5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
+    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
     text-transform: none;
     widows: 1;
 }
-p.petitBigIndent {
+p._-ПЕТИТ_ПетитСТ-б-отст {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -493,7 +567,7 @@ p.petitBigIndent {
     text-transform: none;
     widows: 1;
 }
-p.petitIndent_1_5 {
+p._-ПЕТИТ_ПетитСТ-отст1-5 {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -512,47 +586,47 @@ p.petitIndent_1_5 {
     text-transform: none;
     widows: 1;
 }
-span.textRed {
+span._--КРАСНЫЙ {
     color: #e32636;
 }
-span.markedBold {
+span._-ВЫДЕЛЕНИЯ_ЖИРНЫЙ {
     font-style: normal;
     font-weight: bold;
 }
 span.markedRed {
     color: #e32636;
 }
-span.markedRedBold {
+span._-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ {
     color: #e32636;
     font-style: normal;
     font-weight: bold;
 }
-span.markedRedPetit {
+span._-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн {
     color: #e32636;
     font-size: 15px;
 }
-span.markedRedIndex {
+span._-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн {
     color: #e32636;
     vertical-align: super;
 }
 span.markedBlack {
 }
-span.markedBlackPetit {
+span._-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн {
     font-size: 15px;
 }
-span.serviceRedInText {
+span._-СПЕЦСЛУЖЕБНЫЕ_дляДИЗ_вКРАСНОМтексте {
     color: #e6007e;
 }
-span.serviceBlackInText {
+span._-СПЕЦСЛУЖЕБНЫЕ_дляРЕД_вЧЕРНОМтексте {
     color: #0000ff;
 }
-span.rareFootnoteRed {
+span._-РЕДКИЕ_Знак-сноски-красной {
     color: #e32636;
     font-size: 18px;
     font-style: normal;
     font-weight: normal;
 }
-span.lowercaseCapital {
+span._-РЕДКИЕ_СТРОЧНЫЕ-в-прописн--заг- {
     font-variant: normal;
     text-transform: none;
 }
@@ -584,6 +658,7 @@ p.ParaOverride-8 {
     margin-top: 9px;
 }
 p.ParaOverride-9 {
+    text-align: justify;
     text-align-last: left;
 }
 p.ParaOverride-10 {
@@ -650,7 +725,7 @@ span.CharOverride-8 {
     color: #e32636;
 }
 span.CharOverride-9 {
-    font-size: 13px;
+    font-size: 12px;
 }
 span.CharOverride-10 {
     font-style: normal;
