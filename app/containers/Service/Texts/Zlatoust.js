@@ -15,7 +15,7 @@ const Readings = ({ readings }) => (
     </>
 );
 
-const Zlatoust = ({ lang }) => {
+const Zlatoust = ({ lang, textRef }) => {
     const { date } = useParams();
     const { data: day } = useDay(date);
 
@@ -43,7 +43,7 @@ const Zlatoust = ({ lang }) => {
     const gospel = <Readings readings={gospelReadings} />;
 
     return (
-        <div>
+        <div ref={textRef}>
             <div id="_idContainer003" className="_idGenObjectStyleOverride-1">
                 <p className="_-ОСНОВНОЙ_Имя-Службы ParaOverride-1">
                     <span className="markedRedBold">
@@ -344,7 +344,7 @@ const Zlatoust = ({ lang }) => {
                         </span>
                     </span>
                 </p>
-                <p className="baseNametIndent_5 ParaOverride-2">
+                <p id="antifon1" className="baseNametIndent_5 ParaOverride-2">
                     <span className="markedRed">
                         Молитва перед пением <br />
                         первого антифона
@@ -836,7 +836,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack"> Тебе, Господи.</span>
                     <span className="markedRedBold">]</span>
                 </p>
-                <p className="baseNametIndent_5 ParaOverride-2">
+                <p id="antifon2" className="baseNametIndent_5 ParaOverride-2">
                     <span className="markedRed">
                         Молитва перед пением
                         <br />
@@ -992,7 +992,7 @@ const Zlatoust = ({ lang }) => {
                     <a href="pb2.html#_idTextAnchor002">34</a>
                     <span className="markedRed">.]</span>
                 </p>
-                <p className="baseNametIndent_5">
+                <p id="antifon3" className="baseNametIndent_5">
                     <span className="markedRed">
                         Молитва перед пением
                         <br />
@@ -1355,7 +1355,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="stars ParaOverride-10">
                     <span className="markedRed">***</span>
                 </p>
-                <p className="baseName ParaOverride-11">
+                <p id="malyVhod" className="baseName ParaOverride-11">
                     <span className="markedRed">(</span>
                     <span className="markedRed">3</span>
                     <span className="markedRed">)</span>
@@ -1481,7 +1481,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack"> Господу помолимся!</span>
                     <span className="markedRedPetit">]</span>
                 </p>
-                <p className="baseNametIndent_5 ParaOverride-2">
+                <p id="trisvatoe" className="baseNametIndent_5 ParaOverride-2">
                     <span className="markedRed">
                         Молитва перед пением <br />
                     </span>
@@ -1700,7 +1700,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Будем внимательны!</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-13">
+                <p id="apostol" className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-13">
                     <span className="markedRed">Чтение Апостола</span>
                 </p>
 
@@ -1898,7 +1898,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Будем внимательны! </span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Чтение-Писания">
+                <p id="gospel" className="_-ОСНОВНОЙ_Чтение-Писания">
                     <span className="markedRed">Чтение Евангелия</span>
                 </p>
 
@@ -1917,7 +1917,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_Чтение-Писания">
                     <span className="markedRed CharOverride-6">Проповедь</span>
                 </p>
-                <p className="baseNametIndent_5 ParaOverride-14">
+                <p id="sugubaja" className="baseNametIndent_5 ParaOverride-14">
                     <span className="markedRed">Сугубая ектения</span>
                 </p>
                 <p className="baseIndent_1_5">
@@ -2225,7 +2225,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="stars ParaOverride-2">
                     <span className="markedRed">***</span>
                 </p>
-                <p className="baseName ParaOverride-11">
+                <p id="oglashaemie" className="baseName ParaOverride-11">
                     <span className="markedRed">(</span>
                     <span className="markedRed">5</span>
                     <span className="markedRed">)</span>
@@ -2369,7 +2369,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseRedIndent_5">
                     <span className="markedRed"> [Все непричащающиеся с благоговением покидают цер­ковь.]</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Имя-Службы ParaOverride-15">
+                <p id="vernie" className="_-ОСНОВНОЙ_Имя-Службы ParaOverride-15">
                     <span className="markedRedBold">
                         II. <br />
                     </span>
@@ -2645,7 +2645,7 @@ const Zlatoust = ({ lang }) => {
                     </span>
                     <span className="markedRedBold">]</span>
                 </p>
-                <p className="baseName">
+                <p id="vhod" className="baseName">
                     <span className="markedRed">(</span>
                     <span className="markedRed">2</span>
                     <span className="markedRed">)</span>
@@ -3076,7 +3076,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack"> Тебе, Господи.</span>
                     <span className="markedRedBold">]</span>
                 </p>
-                <p className="baseNametIndent_5">
+                <p id="prinoshenie" className="baseNametIndent_5">
                     <span className="markedRed">Молитва приношения</span>
                 </p>
                 <p className="baseRedtIndent_5 ParaOverride-16">
@@ -3110,7 +3110,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Н</span>
                     <span className="markedBlack"> Аминь.</span>
                 </p>
-                <p className="baseName">
+                <p id="tselovanie" className="baseName">
                     <span className="markedRed">(</span>
                     <span className="markedRed">3</span>
                     <span className="markedRed">)</span>
@@ -3248,7 +3248,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="basetIndent_5">
                     <span className="markedBlack"> В Премудрости будем внимать!</span>
                 </p>
-                <p className="baseNametIndent_5">
+                <p id="simvol" className="baseNametIndent_5">
                     <span className="markedRed">Символ веры</span>
                 </p>
                 <p className="petitRedIndent_1_5 ParaOverride-16">
@@ -3349,7 +3349,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="stars ParaOverride-8">
                     <span className="markedRed">***</span>
                 </p>
-                <p className="baseName ParaOverride-11">
+                <p id="anafora" className="baseName ParaOverride-11">
                     <span className="markedRed">(</span>
                     <span className="markedRed">4</span>
                     <span className="markedRed">)</span>
@@ -3428,7 +3428,7 @@ const Zlatoust = ({ lang }) => {
                     </span>
                     <span className="markedBlack">.</span>
                 </p>
-                <p className="baseName ParaOverride-17">
+                <p id="prefacio" className="baseName ParaOverride-17">
                     <span className="markedRed">Вводная часть</span>
                 </p>
                 <p className="basetIndent_5 ParaOverride-2">
@@ -3513,7 +3513,7 @@ const Zlatoust = ({ lang }) => {
                         Твоя!
                     </span>
                 </p>
-                <p className="baseName ParaOverride-17">
+                <p id="anamnesis" className="baseName ParaOverride-17">
                     <span className="markedRed">Воспоминание</span>
                 </p>
                 <p className="basetIndent_5 ParaOverride-2">
@@ -3612,7 +3612,7 @@ const Zlatoust = ({ lang }) => {
                         </span>
                     </span>
                 </p>
-                <p className="baseName ParaOverride-18">
+                <p id="epiclisis" className="baseName ParaOverride-18">
                     <span className="markedRed">Призывание</span>
                 </p>
                 <p className="basetIndent_5">
@@ -3736,7 +3736,7 @@ const Zlatoust = ({ lang }) => {
                     </span>
                     ю<span className="markedBlack">, а не в суд или во осужде́ние!</span>
                 </p>
-                <p className="baseName ParaOverride-18">
+                <p id="hodataistvo" className="baseName ParaOverride-18">
                     <span className="markedRed">Хода́тайство</span>
                 </p>
                 <p className="basetIndent_5 ParaOverride-8">
@@ -4116,7 +4116,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack">поди.</span>
                     <span className="markedRedBold">]</span>
                 </p>
-                <p className="baseNametIndent_5 ParaOverride-2">
+                <p id="ourfather" className="baseNametIndent_5 ParaOverride-2">
                     <span className="markedRed">Молитва перед причащением</span>
                 </p>
                 <p className="baseIndent_1_5 ParaOverride-7">
@@ -4223,7 +4223,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Н</span>
                     <span className="markedBlack"> Пред Тобой, Господи.</span>
                 </p>
-                <p className="baseNametIndent_5">
+                <p id="glavopriklon" className="baseNametIndent_5">
                     <span className="markedRed">Молитва главопреклонная</span>
                 </p>
                 <p className="petitIndent_1_5 ParaOverride-16">
@@ -4439,7 +4439,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="stars">
                     <span className="markedRed">***</span>
                 </p>
-                <p className="baseName ParaOverride-11">
+                <p id="prichashenie" className="baseName ParaOverride-11">
                     <span className="markedRed">(</span>
                     <span className="markedRed">6</span>
                     <span className="markedRed">)</span>
@@ -5237,7 +5237,7 @@ const Zlatoust = ({ lang }) => {
                         </span>
                     </span>
                 </p>
-                <p className="baseNametIndent_5">
+                <p id="otpust" className="baseNametIndent_5">
                     <span className="markedRed">
                         <a id="_idTextAnchor008" />
                         <a id="_idTextAnchor009" />

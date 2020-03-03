@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
@@ -8,14 +8,79 @@ import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import Loader from 'components/Loader/Loader';
+import LanguageSwitcher from './LanguageSwitcher';
+import TOCSwitcher from './TOCSwitcher';
+import zlatoustTOC from './Texts/zlatoustTOC';
 const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
+
+const TOC = ({ serviceId, showTOC, setShowTOC }) => {
+    const data = serviceId === 'zlatoust' ? zlatoustTOC : {};
+    return (
+        showTOC && (
+            <>
+                <div
+                    className={css`
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        bottom: 0;
+                        z-index: 0;
+                    `}
+                    onClick={e => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        setShowTOC(false);
+                    }}
+                ></div>
+                <div
+                    className={css`
+                        position: fixed;
+                        top: 60px;
+                        left: 50px;
+                        right: 0;
+                        bottom: 0;
+                        background-color: white;
+                        padding: 24px;
+                        border-left: 1px solid #d9dde5;
+                        box-shadow: -1px 0px 3px #d9dde5;
+                        z-index: 1;
+                        overflow-y: auto;
+                    `}
+                >
+                    {Object.keys(data).map(anchorID => (
+                        <div
+                            key={anchorID}
+                            className={css`
+                                margin-bottom: 12px;
+                                cursor: pointer;
+                            `}
+                            role="button"
+                            onClick={() => {
+                                const domNode = document.getElementById(anchorID);
+                                setShowTOC(false);
+                                if (domNode) {
+                                    domNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                }
+                            }}
+                        >
+                            {data[anchorID]}
+                        </div>
+                    ))}
+                </div>
+            </>
+        )
+    );
+};
 
 const Service = () => {
     const { serviceId, date } = useParams();
     const { data: day } = useDay(date);
     const theme = getTheme(day?.colour);
+    const textRef = useRef();
 
     const [lang, setLang] = useState('default');
+    const [showTOC, setShowTOC] = useState(false);
 
     return (
         <ThemeProvider theme={theme}>
@@ -29,6 +94,7 @@ const Service = () => {
                         position: sticky;
                         top: 0;
                         background-color: white;
+                        z-index: 1;
                     `}
                 >
                     <div
@@ -57,40 +123,32 @@ const Service = () => {
                             align-items: center;
                         `}
                     >
-                        <div
-                            onClick={() => setLang(lang === 'ЦСЯ' ? 'default' : 'ЦСЯ')}
-                            role="button"
-                            className={css`
-                                cursor: pointer;
-                                padding: 8px 6px 3px 6px;
-                                margin-right: 6px;
-                                border-radius: 8px;
-                                color: ${lang === 'ЦСЯ' ? 'white' : 'inherit'};
-                                background-color: ${lang === 'ЦСЯ' ? 'gray' : 'white'};
-                            `}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 400 440" width="16">
-                                <path
-                                    d="M187.57.442c-16.544.166-26.08 1.862-34.412 15.099v170.734s.615 19.322-23.513 19.322H18.043S.546 207.411.546 223.098v130.32s-4.83 12.064 45.84 12.064c50.667 0 53.095-10.849 53.095-10.849v-109.23s-.15-13.832 23.962-13.832c32.134 0 29.715 9.628 29.715 12.644v182.798s-1.016 12.565 46.842 12.565 46.842-12.565 46.842-12.565V244.215c0-3.016-2.42-12.644 29.715-12.644 24.111 0 23.988 13.832 23.988 13.832v109.23s2.402 10.85 53.07 10.85 45.839-12.064 45.839-12.064v-130.32c0-15.688-17.497-17.502-17.497-17.502H270.382c-24.128 0-23.54-19.322-23.54-19.322V15.54C236.65-.651 224.64.428 200.212.44h-.423c-4.46-.002-8.524-.037-12.219 0z"
-                                    fillRule="evenodd"
-                                    fill={lang === 'ЦСЯ' ? 'white' : 'black'}
-                                    strokeWidth=".845"
-                                />
-                            </svg>
-                        </div>
+                        <LanguageSwitcher lang={lang} setLang={setLang} />
                         <ZoomControlToggle />
+                        <TOCSwitcher showTOC={showTOC} setShowTOC={setShowTOC} />
                     </div>
                 </div>
-                <Zoom>
-                    <div
-                        className={css`
-                            margin-left: 12px;
-                            margin-right: 12px;
-                        `}
-                    >
-                        <Suspense fallback={Loader}>{serviceId === 'zlatoust' && <Zlatoust lang={lang} />}</Suspense>
-                    </div>
-                </Zoom>
+                <div
+                    className={css`
+                        position: relative;
+                    `}
+                >
+                    <Zoom>
+                        <>
+                            <div
+                                className={css`
+                                    margin-left: 12px;
+                                    margin-right: 12px;
+                                `}
+                            >
+                                <Suspense fallback={Loader}>
+                                    {serviceId === 'zlatoust' && <Zlatoust lang={lang} />}
+                                </Suspense>
+                            </div>
+                            {<TOC serviceId={serviceId} showTOC={showTOC} setShowTOC={setShowTOC} />}
+                        </>
+                    </Zoom>
+                </div>
             </div>
         </ThemeProvider>
     );

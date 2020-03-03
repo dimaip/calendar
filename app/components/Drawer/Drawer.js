@@ -1,12 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
-import { useDispatch } from 'react-redux';
-import { toggleZoomControl } from 'redux/actions/zoom';
 import getTheme from 'styles/theme';
 const theme = getTheme();
 
-const Drawer = ({ children }) => {
-    const dispatch = useDispatch();
+const Drawer = ({ children, onClose }) => {
     return (
         <div
             className={css`
@@ -25,7 +22,7 @@ const Drawer = ({ children }) => {
                     flex-grow: 1;
                     cursor: pointer;
                 `}
-                onClick={() => dispatch(toggleZoomControl())}
+                onClick={onClose}
             />
             <div
                 className={css`

@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'components/Button/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { toggleZoomControl } from 'redux/actions/zoom';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
@@ -8,13 +8,17 @@ import { useTheme } from 'emotion-theming';
 const ZoomControlToggle = () => {
     const dispatch = useDispatch();
     const theme = useTheme();
+    const zoomControlShown = useSelector(state => state.ui.zoomControlShown);
     return (
         <Button
             onClick={() => dispatch(toggleZoomControl())}
             className={css`
-                padding: 10px 18px;
+                padding: 6px 6px !important;
+                margin-right: 6px;
                 font-size: 16px;
-                color: ${theme.colours.darkGray};
+                border-radius: 8px;
+                color: ${zoomControlShown ? 'white' : theme.colours.darkGray};
+                background-color: ${zoomControlShown ? 'gray' : 'white'};
             `}
         >
             Aa

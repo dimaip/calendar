@@ -4,6 +4,7 @@ import Button from 'components/Button/Button';
 import { setZoom } from 'redux/actions/zoom';
 import { css } from 'emotion';
 import Drawer from 'components/Drawer/Drawer';
+import { toggleZoomControl } from 'redux/actions/zoom';
 
 const buttonStyle = css`
     width: 70px;
@@ -22,7 +23,7 @@ const ZoomControl = () => {
     const dispatch = useDispatch();
     return (
         zoomControlShown && (
-            <Drawer>
+            <Drawer onClose={() => dispatch(toggleZoomControl())}>
                 <div
                     className={css`
                         text-align: center;
