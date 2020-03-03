@@ -15,7 +15,7 @@ const Readings = ({ readings }) => (
     </>
 );
 
-const Zlatoust = ({ lang }) => {
+const Zlatoust = ({ lang, textRef }) => {
     const { date } = useParams();
     const { data: day } = useDay(date);
 
@@ -43,9 +43,9 @@ const Zlatoust = ({ lang }) => {
     const gospel = <Readings readings={gospelReadings} />;
 
     return (
-        <div>
+        <div ref={textRef}>
             <div id="_idContainer003" className="_idGenObjectStyleOverride-1">
-                <p className="_-ОСНОВНОЙ_Имя-Службы ParaOverride-1">
+                <p className="baseNameWorship ParaOverride-1">
                     <span className="markedRedBold">
                         I. <br />
                     </span>
@@ -63,7 +63,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseRedIndent_5 ParaOverride-2">
                     <span className="markedRed"> Открыв завесу и кадя престол:</span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Д</span>
                     <span className="markedBlack">
@@ -100,7 +100,7 @@ const Zlatoust = ({ lang }) => {
                         нас, и очи­сти нас от вся­кой скверны, и спа­си, Бла­го́й, ду­ши наши.
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack">
                         {' '}
                         Слава в вышних Богу, <br /> и на земле мир избранникам Его.
@@ -108,7 +108,7 @@ const Zlatoust = ({ lang }) => {
                     </span>
                     <span className="markedRed">(Дважды.)</span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack">
                         {' '}
                         Господи! отве́рзни уста мои, <br /> и речь моя возвести`
@@ -164,7 +164,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="stars ParaOverride-3">
                     <span className="markedRed">***</span>
                 </p>
-                <p className="petitIndent_6">
+                <p className="petitBigIndent">
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">[</span>
                     <span className="markedRedPetit">Д</span>
@@ -230,23 +230,23 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseIndent_1_5">
                     <span className="markedBlack"> О </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">великом господине и отце нашем святейшем</span>
+                    <span className="markedBlackPetit">великом господине и отце нашем святейшем</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> патриархе </span>
                     <span className="markedRed">(имя)</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">и о </span>
+                    <span className="markedBlackPetit">и о </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">господине нашем пре­освя­ще́н­нейшем</span>
+                    <span className="markedBlackPetit">господине нашем пре­освя­ще́н­нейшем</span>
                     <span className="markedRedPetit">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> митрополите</span>
+                    <span className="markedBlackPetit"> митрополите</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">(или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> архи­епископе</span>
+                    <span className="markedBlackPetit"> архи­епископе</span>
                     <span className="markedRedPetit">, или:</span>
                     <span className="markedBlack"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">епи­ско­пе</span>
+                    <span className="markedBlackPetit">епи­ско­пе</span>
                     <span className="markedRedPetit">) (имя)]</span>
                     <span className="markedBlack">
                         , почтенном пре­свитер­стве, во Хри­сте дья­кон­стве, обо всём клире и на­роде{' '}
@@ -268,10 +268,10 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">(имя)</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">[или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> об этом селе </span>
+                    <span className="markedBlackPetit"> об этом селе </span>
                     <span className="markedRedPetit">(имя), или:</span>
                     <span className="markedBlack"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">об этой святой обите­ли</span>
+                    <span className="markedBlackPetit">об этой святой обите­ли</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack">
                         {' '}
@@ -335,7 +335,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">2</span>
                     <span className="markedRed">)</span>
                     <span className="markedRed"> Антифоны изобразительные </span>
-                    <span className="_-РЕДКИЕ_Знак-сноски-красной">
+                    <span className="rareFootnoteRed">
                         <span id="footnote-031-backlink">
                             <a className="_idFootnoteLink _idGenColorInherit" href="pb2.html#footnote-031">
                                 {' '}
@@ -365,7 +365,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseIndent_1_5 ParaOverride-4">
                     <span className="markedBlack"> Ибо Тебе́ подобает вся слава, честь и поклонение, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отцу и Сыну и Святому Духу,</span>
+                    <span className="markedBlackPetit">Отцу и Сыну и Святому Духу,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда и во веки веков.</span>
                 </p>
@@ -386,7 +386,7 @@ const Zlatoust = ({ lang }) => {
                 </p>
                 {lang === 'default' && (
                     <>
-                        <p className="basetIndent_5 ParaOverride-4">
+                        <p className="baseIndent_5 ParaOverride-4">
                             <span className="markedBlack"> </span>
                             <span className="markedRed">Н</span>
                             <span className="markedBlack"> </span>
@@ -397,7 +397,7 @@ const Zlatoust = ({ lang }) => {
                                 <br /> Благословен Ты, Господи.
                             </span>
                         </p>
-                        <p className="basetIndent_5 ParaOverride-4">
+                        <p className="baseIndent_5 ParaOverride-4">
                             <span className="markedBlack">
                                 {' '}
                                 Благослови Господа, душа моя,
@@ -450,7 +450,7 @@ const Zlatoust = ({ lang }) => {
                             </span>
                             <span className="markedRedBold">]</span>
                         </p>
-                        <p className="basetIndent_6">
+                        <p className="baseBigIndent">
                             <span className="markedBlack"> </span>
                             <span className="markedRedIndex _idGenCharOverride-1">2</span>
                             <span className="markedBlack">
@@ -459,7 +459,7 @@ const Zlatoust = ({ lang }) => {
                                 <br /> долготерпелив и благ весьма,
                             </span>
                         </p>
-                        <p className="petitIndent_6">
+                        <p className="petitBigIndent">
                             <span className="markedBlack"> </span>
                             <span className="markedRedBold">[</span>
                             <span className="markedRedIndex _idGenCharOverride-1">1 </span>
@@ -574,7 +574,7 @@ const Zlatoust = ({ lang }) => {
                             </span>
                             <span className="markedRedBold">]</span>
                         </p>
-                        <p className="basetIndent_5 ParaOverride-4">
+                        <p className="baseIndent_5 ParaOverride-4">
                             <span className="markedBlack"> </span>
                             <span className="markedRedIndex _idGenCharOverride-1">1</span>
                             <span className="markedBlack">
@@ -589,7 +589,7 @@ const Zlatoust = ({ lang }) => {
 
                 {lang === 'ЦСЯ' && (
                     <>
-                        <p className="basetIndent_5 ParaOverride-4">
+                        <p className="baseIndent_5 ParaOverride-4">
                             <span className="markedBlack"> </span>
                             <span className="markedRed">Н</span>
                             <span className="markedBlack"> </span>
@@ -600,7 +600,7 @@ const Zlatoust = ({ lang }) => {
                                 <br /> Благословен еси, Господи.
                             </span>
                         </p>
-                        <p className="basetIndent_5 ParaOverride-4">
+                        <p className="baseIndent_5 ParaOverride-4">
                             <span className="markedBlack">
                                 {' '}
                                 Благослови, душе моя, Господа,
@@ -653,7 +653,7 @@ const Zlatoust = ({ lang }) => {
                             </span>
                             <span className="markedRedBold">]</span>
                         </p>
-                        <p className="basetIndent_6">
+                        <p className="baseBigIndent">
                             <span className="markedBlack"> </span>
                             <span className="markedRedIndex _idGenCharOverride-1">2</span>
                             <span className="markedBlack">
@@ -662,7 +662,7 @@ const Zlatoust = ({ lang }) => {
                                 <br /> долготерпелив и многомилостив.
                             </span>
                         </p>
-                        <p className="petitIndent_6">
+                        <p className="petitBigIndent">
                             <span className="markedBlack"> </span>
                             <span className="markedRedBold">[</span>
                             <span className="markedRedIndex _idGenCharOverride-1">1 </span>
@@ -775,7 +775,7 @@ const Zlatoust = ({ lang }) => {
                             </span>
                             <span className="markedRedBold">]</span>
                         </p>
-                        <p className="basetIndent_5 ParaOverride-4">
+                        <p className="baseIndent_5 ParaOverride-4">
                             <span className="markedBlack"> </span>
                             <span className="markedRedIndex _idGenCharOverride-1">1</span>
                             <span className="markedBlack">
@@ -856,7 +856,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseIndent_1_5 ParaOverride-7">
                     <span className="markedBlack"> ибо Твоя´ власть и Твои` царствие, и сила, и слава, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отца и Сына и Святого Духа,</span>
+                    <span className="markedBlackPetit">Отца и Сына и Святого Духа,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда и во веки веков.</span>
                 </p>
@@ -875,14 +875,14 @@ const Zlatoust = ({ lang }) => {
                     <span className="lowercaseCapital">5</span>
                     <span className="lowercaseCapital">)</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-7">
+                <p className="baseIndent_5 ParaOverride-7">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Н</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedIndex CharOverride-2">1</span>
                     <span className="markedBlack"> Хвали Господа, душа моя!</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-7">
+                <p className="baseIndent_5 ParaOverride-7">
                     <span className="markedBlack">
                         {' '}
                         Восхвалю` Господа, доко́ле живу;
@@ -904,7 +904,7 @@ const Zlatoust = ({ lang }) => {
                         <br /> в тот день погибнут все замыслы его.
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> </span>
                     <span className="markedRedIndex _idGenCharOverride-1">2</span>
                     <span className="markedBlack">
@@ -949,7 +949,7 @@ const Zlatoust = ({ lang }) => {
                         <br /> но искриви`т неправедных путь.
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> </span>
                     <span className="markedRedIndex _idGenCharOverride-1">2</span>
                     <span className="markedBlack">
@@ -979,10 +979,10 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack"> и рас­пя´­тый, Хри­сте Боже, Смер­тию смерть попра́в­ший,</span>
                     <span className="markedRed">/</span>
                     <span className="markedBlack"> один из Свя­той Тро­ицы,</span>
-                    <span className="_--КРАСНЫЙ">//</span>
+                    <span className="textRed">//</span>
                     <span className="markedBlack"> прославляемый вместе с От­цом и Свя­тым Ду­хом, — спаси нас!</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-2">
+                <p className="baseIndent_5 ParaOverride-2">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Снова и снова в мире Господу помолимся!</span>
@@ -1015,7 +1015,7 @@ const Zlatoust = ({ lang }) => {
                         ибо Ты` благой и человеколюбивый Бог и мы` вос­сылаем славу Те­бе,
                     </span>
                     <span className="markedRedPetit"> [</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отцу и Сыну и Свя­тому Духу,</span>
+                    <span className="markedBlackPetit">Отцу и Сыну и Свя­тому Духу,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и все­гда и во веки веков.</span>
                 </p>
@@ -1033,7 +1033,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="lowercaseCapital">Мф 5:3-1</span>
                     <span className="lowercaseCapital">2</span>
                     <span className="lowercaseCapital">)</span>
-                    <span className="_-РЕДКИЕ_Знак-сноски-красной">
+                    <span className="rareFootnoteRed">
                         <span id="footnote-030-backlink">
                             <a className="_idFootnoteLink _idGenColorInherit" href="pb2.html#footnote-030">
                                 {' '}
@@ -1042,7 +1042,7 @@ const Zlatoust = ({ lang }) => {
                         </span>
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Н</span>
                     <span className="markedBlack"> </span>
@@ -1053,7 +1053,7 @@ const Zlatoust = ({ lang }) => {
                         <br /> когда Ты при­дёшь царствовать!
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">На </span>
                     <span className="markedRed">1</span>
@@ -1077,7 +1077,7 @@ const Zlatoust = ({ lang }) => {
                         <br /> ибо будут они уте́шены.
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">На </span>
                     <span className="markedRed">1</span>
@@ -1101,7 +1101,7 @@ const Zlatoust = ({ lang }) => {
                         <br /> ибо будут они насыщены.
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedRed"> На 8</span>
                     <span className="markedRed"> </span>
                     <span className="markedRedIndex _idGenCharOverride-1">1</span>
@@ -1118,7 +1118,7 @@ const Zlatoust = ({ lang }) => {
                         <br /> ибо увидят они Бога.{' '}
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedRed"> На 6</span>
                     <span className="markedRed"> </span>
                     <span className="markedRedIndex _idGenCharOverride-1">1</span>
@@ -1139,7 +1139,7 @@ const Zlatoust = ({ lang }) => {
                         <br /> ибо их есть Царство Небесное.
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedRed"> На 4</span>
                     <span className="markedRed"> </span>
                     <span className="markedRedIndex _idGenCharOverride-1">1</span>
@@ -1165,7 +1165,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRedIndex CharOverride-2">1</span>
                     <span className="markedRed"> Слава.</span>
                 </p>
-                <p className="petitRedIndent_6">
+                <p className="petitRedBigIndent">
                     <span className="markedRed"> </span>
                     <span className="markedRedIndex CharOverride-2">2</span>
                     <span className="markedRed"> И ныне.]</span>
@@ -1188,7 +1188,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="petitIndent_1_5">
                     <span className="markedBlack"> По хода́тайству Богородицы, о Спаситель, спаси нас!</span>
                 </p>
-                <p className="petitRedIndent_6">
+                <p className="petitRedBigIndent">
                     <span className="markedRed"> (Припев на каждый стих.)</span>
                 </p>
                 <p className="petitIndent_1_5">
@@ -1224,7 +1224,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRedIndex CharOverride-2">1 </span>
                     <span className="markedRed">Слава.</span>
                 </p>
-                <p className="petitRedIndent_6">
+                <p className="petitRedBigIndent">
                     <span className="markedRed"> </span>
                     <span className="markedRedIndex CharOverride-2">2</span>
                     <span className="markedRed"> И ныне.</span>
@@ -1246,7 +1246,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="petitIndent_1_5">
                     <span className="markedBlack"> По хода́тайству святых Твоих, о Спаситель, спаси нас!</span>
                 </p>
-                <p className="petitRedIndent_6">
+                <p className="petitRedBigIndent">
                     <span className="markedRed"> (Припев на каждый стих.)</span>
                 </p>
                 <p className="petitIndent_1_5">
@@ -1272,7 +1272,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRedIndex CharOverride-2">2</span>
                     <span className="markedBlack"> Откровения Твои несомненно верны`.</span>
                 </p>
-                <p className="petitIndent_6 ParaOverride-9">
+                <p className="petitBigIndent ParaOverride-9">
                     <span className="markedBlack"> </span>
                     <span className="markedBlack">Храм Твой, Господи, навеки укр</span>
                     <span className="markedBlack">а́</span>
@@ -1369,7 +1369,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack">!</span>
                     <span className="markedRedPetit">]</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Имя-части-отст2">
+                <p className="baseNamePart">
                     <span className="markedRed">Молитва перед входом</span>
                 </p>
                 <p className="baseIndent_1_5">
@@ -1385,7 +1385,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseIndent_1_5">
                     <span className="markedBlack"> ибо Тебе́ подобает вся слава, честь и поклонение, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отцу и Сыну и Святому Духу,</span>
+                    <span className="markedBlackPetit">Отцу и Сыну и Святому Духу,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всег­да и во веки веков.</span>
                 </p>
@@ -1416,7 +1416,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">]</span>
                     <span className="markedBlack"> святых Твоих </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">во все дни:</span>
+                    <span className="markedBlackPetit">во все дни:</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда и во веки веков.</span>
                 </p>
@@ -1431,7 +1431,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Премудрость! </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Ста­нем благоговейно!</span>
+                    <span className="markedBlackPetit">Ста­нем благоговейно!</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> </span>
                 </p>
@@ -1460,10 +1460,10 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack"> Вос­крес­ший из мёртвых </span>
                     <span className="markedRedPetit">[или в праздники:</span>
                     <span className="markedBlack"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">По хо­да́­тай­ству Бого­ро­дицы</span>
+                    <span className="markedBlackPetit">По хо­да́­тай­ству Бого­ро­дицы</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">и т. д., или по будням: </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Дивный во святых</span>
+                    <span className="markedBlackPetit">Дивный во святых</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack">,</span>
                     <span className="markedRed">/</span>
@@ -1519,7 +1519,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseIndent_1_5">
                     <span className="markedBlack"> ибо Ты`, Боже наш, свят и мы` воссылаем славу Тебе, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отцу и Сыну и Святому Духу,</span>
+                    <span className="markedBlackPetit">Отцу и Сыну и Святому Духу,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда</span>
                 </p>
@@ -1581,7 +1581,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">)</span>
                     <span className="markedRed"> Чтения и прошения верных</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-13">
+                <p className="baseIndent_5 ParaOverride-13">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Повели, владыка!</span>
@@ -1616,7 +1616,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRedPetit">)</span>
                     <span className="markedBlack">,</span>
                     <span className="markedRedPetit"> [</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">во все дни:</span>
+                    <span className="markedBlackPetit">во все дни:</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда и во веки веков!</span>
                 </p>
@@ -1673,25 +1673,25 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRedBold CharOverride-3">[</span>
                     <span className="markedRedPetit">или:</span>
                     <span className="markedBlack"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Из Соборного по­сла­ния Иакова </span>
+                    <span className="markedBlackPetit">Из Соборного по­сла­ния Иакова </span>
                     <span className="markedRedPetit">(или:</span>
                     <span className="markedBlack"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Петра</span>
+                    <span className="markedBlackPetit">Петра</span>
                     <span className="markedRedPetit">)</span>
                     <span className="markedBlack"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">чтение</span>
+                    <span className="markedBlackPetit">чтение</span>
                     <span className="markedRedPetit">; или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> Из Послания к римлянам </span>
+                    <span className="markedBlackPetit"> Из Послания к римлянам </span>
                     <span className="markedRedPetit">(или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> к коринфянам</span>
+                    <span className="markedBlackPetit"> к коринфянам</span>
                     <span className="markedRedPetit">, или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> к галатам</span>
+                    <span className="markedBlackPetit"> к галатам</span>
                     <span className="markedRedPetit">)</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">святого</span>
+                    <span className="markedBlackPetit">святого</span>
                     <span className="markedRedPetit">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> апо­сто­ла Павла чтение</span>
+                    <span className="markedBlackPetit"> апо­сто­ла Павла чтение</span>
                     <span className="markedRedBold CharOverride-3">]</span>
                     <span className="markedBlack">.</span>
                 </p>
@@ -1700,13 +1700,13 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Будем внимательны!</span>
                 </p>
-                <p id="apostol" className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-13">
+                <p id="apostol" className="baseReading ParaOverride-13">
                     <span className="markedRed">Чтение Апостола</span>
                 </p>
 
                 {apostol}
 
-                <p className="basetIndent_5 ParaOverride-2">
+                <p className="baseIndent_5 ParaOverride-2">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack"> Мир тебе, </span>
@@ -1721,8 +1721,8 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Ч</span>
                     <span className="markedBlack"> И духу твоему.</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-2">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЖИРНЫЙ CharOverride-6">Проповедь</span>
+                <p className="baseReading ParaOverride-2">
+                    <span className="markedBold CharOverride-6">Проповедь</span>
                 </p>
                 <p className="petitIndent_5">
                     <span className="markedBlack"> </span>
@@ -1751,13 +1751,13 @@ const Zlatoust = ({ lang }) => {
                         духовные очи открой для уразумения{' '}
                     </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Твоей</span>
+                    <span className="markedBlackPetit">Твоей</span>
                     <span className="markedRedPetit">] </span>
                     <span className="markedBlack">
                         евангельской проповеди! Вложи` в нас и страх пред Твоими благи`ми за́поведями, дабы, одолев{' '}
                     </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">все</span>
+                    <span className="markedBlackPetit">все</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack">
                         {' '}
@@ -1767,17 +1767,17 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseIndent_1_5">
                     <span className="markedBlack"> ведь Ты` просвещение душ и тел наших, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Хри­сте</span>
+                    <span className="markedBlackPetit">Хри­сте</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> Боже, и мы` воссылаем славу Те­бе, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">вме­сте с Твоим безначальным Отцом и все­свят</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">ы́</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">м и благ</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">и`</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">м и животвор</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">я´</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">­щим Ду­хом Твоим,</span>
+                    <span className="markedBlackPetit">вме­сте с Твоим безначальным Отцом и все­свят</span>
+                    <span className="markedBlackPetit">ы́</span>
+                    <span className="markedBlackPetit">м и благ</span>
+                    <span className="markedBlackPetit">и`</span>
+                    <span className="markedBlackPetit">м и животвор</span>
+                    <span className="markedBlackPetit">я´</span>
+                    <span className="markedBlackPetit">­щим Ду­хом Твоим,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и все­гда и во ве­ки веков.</span>
                 </p>
@@ -1898,13 +1898,13 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Будем внимательны! </span>
                 </p>
-                <p id="gospel" className="_-ОСНОВНОЙ_Чтение-Писания">
+                <p id="gospel" className="baseReading">
                     <span className="markedRed">Чтение Евангелия</span>
                 </p>
 
                 {gospel}
 
-                <p className="basetIndent_5 ParaOverride-2">
+                <p className="baseIndent_5 ParaOverride-2">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack"> Мир тебе, благовеству`ющему!</span>
@@ -1914,7 +1914,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Н</span>
                     <span className="markedBlack"> Слава Тебе, Господи, слава Тебе!</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Чтение-Писания">
+                <p className="baseReading">
                     <span className="markedRed CharOverride-6">Проповедь</span>
                 </p>
                 <p id="sugubaja" className="baseNametIndent_5 ParaOverride-14">
@@ -1966,23 +1966,23 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Ещё мы молимся о </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">великом господине и отце на­шем святейшем</span>
+                    <span className="markedBlackPetit">великом господине и отце на­шем святейшем</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> па­три­архе </span>
                     <span className="markedRed">(имя)</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">и о </span>
+                    <span className="markedBlackPetit">и о </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">господине нашем преосвяще́ннейшем</span>
+                    <span className="markedBlackPetit">господине нашем преосвяще́ннейшем</span>
                     <span className="markedRedPetit">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> митрополите </span>
+                    <span className="markedBlackPetit"> митрополите </span>
                     <span className="markedRedPetit">(или:</span>
                     <span className="markedBlack"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">ар­хи­епи­скопе</span>
+                    <span className="markedBlackPetit">ар­хи­епи­скопе</span>
                     <span className="markedRedPetit">, или:</span>
                     <span className="markedBlack"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">епископе</span>
+                    <span className="markedBlackPetit">епископе</span>
                     <span className="markedRedPetit">)</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">(имя)]</span>
@@ -2018,7 +2018,7 @@ const Zlatoust = ({ lang }) => {
                         со­зда­те­лях святого дома сего{' '}
                     </span>
                     <span className="markedRedPetit">[если в обители:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> свя­той обители сей</span>
+                    <span className="markedBlackPetit"> свя­той обители сей</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack">,</span>
                     <span className="markedRed"> </span>
@@ -2101,7 +2101,7 @@ const Zlatoust = ({ lang }) => {
                         ибо Ты` ми`лостивый и человеколюби`вый Бог и мы` воссылаем славу Тебе,{' '}
                     </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отцу и Сыну и Святому Духу,</span>
+                    <span className="markedBlackPetit">Отцу и Сыну и Святому Духу,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда и во веки веков.</span>
                 </p>
@@ -2235,7 +2235,7 @@ const Zlatoust = ({ lang }) => {
                     </span>
                     <span className="markedRed CharOverride-6">(если есть)</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-13">
+                <p className="baseIndent_5 ParaOverride-13">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Оглашаемые, помолитесь Господу!</span>
@@ -2280,7 +2280,7 @@ const Zlatoust = ({ lang }) => {
                         Спаси, помилуй, поддержи и сохрани их, Боже, Тво­ею благодатью.
                     </span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-13">
+                <p className="baseIndent_5 ParaOverride-13">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Оглашаемые, пред Господом ваши главы` пре­­кло­ни`те!</span>
@@ -2328,7 +2328,7 @@ const Zlatoust = ({ lang }) => {
                         дабы и они` с нами славили вседостойное и пре­кра­с­ное имя Твоё,{' '}
                     </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отца и Сына и Святого Духа,</span>
+                    <span className="markedBlackPetit">Отца и Сына и Святого Духа,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ны­не и всегда и во веки веков.</span>
                 </p>
@@ -2337,7 +2337,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Н</span>
                     <span className="markedBlack"> Аминь.</span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Д</span>
                     <span className="markedBlack">
@@ -2369,7 +2369,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseRedIndent_5">
                     <span className="markedRed"> [Все непричащающиеся с благоговением покидают цер­ковь.]</span>
                 </p>
-                <p id="vernie" className="_-ОСНОВНОЙ_Имя-Службы ParaOverride-15">
+                <p id="vernie" className="baseNameWorship ParaOverride-15">
                     <span className="markedRedBold">
                         II. <br />
                     </span>
@@ -2384,7 +2384,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">)</span>
                     <span className="markedRed"> Приуготовление</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-13">
+                <p className="baseIndent_5 ParaOverride-13">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Все верные, снова и снова в мире Господу помо­лим­ся!</span>
@@ -2446,10 +2446,10 @@ const Zlatoust = ({ lang }) => {
                 </p>
                 <p className="baseIndent_1_5 ParaOverride-16">
                     <span className="markedBlack"> Ибо Тебе́ подобает вся слава, честь и поклонение</span>
-                    <span className="_-СПЕЦСЛУЖЕБНЫЕ_дляРЕД_вЧЕРНОМтексте CharOverride-7">,</span>
+                    <span className="serviceBlackInText CharOverride-7">,</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отцу и Сыну и Святому Духу,</span>
+                    <span className="markedBlackPetit">Отцу и Сыну и Святому Духу,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда и во ве­ки веков.</span>
                 </p>
@@ -2553,7 +2553,7 @@ const Zlatoust = ({ lang }) => {
                         дабы мы, под Твое́й властью всегда хра­ни­мые, воссылали славу Тебе,{' '}
                     </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отцу и Сыну и Святому Духу,</span>
+                    <span className="markedBlackPetit">Отцу и Сыну и Святому Духу,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ны­не и всегда и во веки веков.</span>
                 </p>
@@ -2604,7 +2604,7 @@ const Zlatoust = ({ lang }) => {
                         один Святой и во свя­тыне пребывающий.
                     </span>
                 </p>
-                <p className="petitIndent_6">
+                <p className="petitBigIndent">
                     <span className="markedBlack">
                         {' '}
                         Итак, прошу Тебя, одного благо́го и внимающего моль­ба́м: воззри на меня, грешного и негодного
@@ -2625,7 +2625,7 @@ const Zlatoust = ({ lang }) => {
                         драгоценной кро́ви.
                     </span>
                 </p>
-                <p className="petitIndent_6">
+                <p className="petitBigIndent">
                     <span className="markedBlack">
                         {' '}
                         Преклони`в свою главу`, я к Тебе приступаю и прошу Те­бя: не отврати Твоего лица от меня и не
@@ -2671,7 +2671,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseRedtIndent_5">
                     <span className="markedRed"> В то же время:</span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack">
@@ -2681,7 +2681,7 @@ const Zlatoust = ({ lang }) => {
                         вся­кое ныне жи­тейское <br /> отло́жим попечение,
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Д</span>
                     <span className="markedBlack">
@@ -2765,20 +2765,20 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> патри­ар­ха Мо­сковского и всея Руси </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">и </span>
+                    <span className="markedBlackPetit">и </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">господина нашего преосвящен­ней­ше­го</span>
+                    <span className="markedBlackPetit">господина нашего преосвящен­ней­ше­го</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">(имя)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">,</span>
+                    <span className="markedBlackPetit">,</span>
                     <span className="markedRedPetit"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">ми­тро­по­лита </span>
+                    <span className="markedBlackPetit">ми­тро­по­лита </span>
                     <span className="markedRedPetit">(или:</span>
                     <span className="markedBlack"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">архиепископа</span>
+                    <span className="markedBlackPetit">архиепископа</span>
                     <span className="markedRedPetit">, или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> епи­скопа</span>
+                    <span className="markedBlackPetit"> епи­скопа</span>
                     <span className="markedRedPetit">)</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">(титул)]</span>
@@ -2786,7 +2786,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed"> </span>
                     <span className="markedBlack">да воспо́мнит Господь Бог во цар­ствии Своём </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">во все дни:</span>
+                    <span className="markedBlackPetit">во все дни:</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда и во ве­ки ве­ков;</span>
                 </p>
@@ -2820,7 +2820,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack"> христи­ан, да вос­по́</span>
                     <span className="markedBlack">мнит Господь Бог во царствии Своём </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">во все дни:</span>
+                    <span className="markedBlackPetit">во все дни:</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и все­гда и во ве­ки веков!</span>
                 </p>
@@ -2829,9 +2829,9 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack"> Аминь.</span>
                 </p>
                 <p className="petitIndent_1_5 ParaOverride-16">
-                    <span className="_-СПЕЦСЛУЖЕБНЫЕ_дляДИЗ_вКРАСНОМтексте CharOverride-8"> </span>
-                    <span className="_-СПЕЦСЛУЖЕБНЫЕ_дляДИЗ_вКРАСНОМтексте CharOverride-8">[</span>
-                    <span className="_-СПЕЦСЛУЖЕБНЫЕ_дляДИЗ_вКРАСНОМтексте CharOverride-8">Д и Н </span>
+                    <span className="serviceRedInText CharOverride-8"> </span>
+                    <span className="serviceRedInText CharOverride-8">[</span>
+                    <span className="serviceRedInText CharOverride-8">Д и Н </span>
                     <span className="markedBlack">Да воспо́мнит Господь Бог пресвитерство твоё во цар­ствии Своём…</span>
                 </p>
                 <p className="petitRedIndent_1_5 ParaOverride-16">
@@ -2868,7 +2868,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseRedtIndent_5 ParaOverride-16">
                     <span className="markedRed"> Тихо — ставя св. дары на пре­стол:</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-16">
+                <p className="baseIndent_5 ParaOverride-16">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack">
@@ -2878,7 +2878,7 @@ const Zlatoust = ({ lang }) => {
                         его плащани`цей чистой с ароматами обвил <br /> и, погребая, в гробнице новой положи`л.
                     </span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-16">
+                <p className="baseIndent_5 ParaOverride-16">
                     <span className="markedBlack">
                         {' '}
                         В гробнице — телом <br /> и в аду — душой как Бог, <br />в раю — с разбойником <br /> и на
@@ -2886,7 +2886,7 @@ const Zlatoust = ({ lang }) => {
                         Ты пребывал, Христе, <br /> всё наполняя, не­объя´тный.
                     </span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-16">
+                <p className="baseIndent_5 ParaOverride-16">
                     <span className="markedBlack">
                         {' '}
                         О, сколь живоно́сным и воистину прекраснее ра́я <br /> и све­т­лее любого царского чертога <br />
@@ -2904,7 +2904,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseRedtIndent_5 ParaOverride-16">
                     <span className="markedRed"> Кадя св. дары:</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-16">
+                <p className="baseIndent_5 ParaOverride-16">
                     <span className="markedRed"> П</span>
                     <span className="markedBlack">
                         {' '}
@@ -3120,7 +3120,7 @@ const Zlatoust = ({ lang }) => {
                         <br />и исповедание единой веры
                     </span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-2">
+                <p className="baseIndent_5 ParaOverride-2">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack"> Мир всем!</span>
@@ -3147,7 +3147,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">П</span>
                     <span className="markedBlack"> Господи </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Иисусе Христе,</span>
+                    <span className="markedBlackPetit">Иисусе Христе,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack CharOverride-4"> </span>
                     <span className="markedBlack">
@@ -3161,10 +3161,10 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseIndent_1_5">
                     <span className="markedBlack"> ибо Ты` Любовь наша и мы` воссылаем славу Те­бе, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">
+                    <span className="markedBlackPetit">
                         вместе с Твоим безначальным Отцом и всесвяты`м и благи`
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">м и животворя´щим Духом Твоим,</span>
+                    <span className="markedBlackPetit">м и животворя´щим Духом Твоим,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда и во веки веков.</span>
                 </p>
@@ -3193,7 +3193,7 @@ const Zlatoust = ({ lang }) => {
                         </span>
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedRed"> </span>
                     <span className="markedRed">П [и Н] </span>
                     <span className="markedBlack">
@@ -3205,7 +3205,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRedPetit">-3)</span>
                     <span className="markedBlack">.</span>
                 </p>
-                <p className="baseRedIndent_6">
+                <p className="baseRedBigIndent">
                     <span className="markedRed"> (Триж­ды.)</span>
                 </p>
                 <p className="baseRedtIndent_5">
@@ -3245,7 +3245,7 @@ const Zlatoust = ({ lang }) => {
                         </span>
                     </span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> В Премудрости будем внимать!</span>
                 </p>
                 <p id="simvol" className="baseNametIndent_5">
@@ -3364,7 +3364,7 @@ const Zlatoust = ({ lang }) => {
                         </span>
                     </span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-2">
+                <p className="baseIndent_5 ParaOverride-2">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Д</span>
                     <span className="markedBlack">
@@ -3431,7 +3431,7 @@ const Zlatoust = ({ lang }) => {
                 <p id="prefacio" className="baseName ParaOverride-17">
                     <span className="markedRed">Вводная часть</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-2">
+                <p className="baseIndent_5 ParaOverride-2">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack"> Достойно это, и праведно, </span>
@@ -3516,7 +3516,7 @@ const Zlatoust = ({ lang }) => {
                 <p id="anamnesis" className="baseName ParaOverride-17">
                     <span className="markedRed">Воспоминание</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-2">
+                <p className="baseIndent_5 ParaOverride-2">
                     <span className="markedBlack">
                         {' '}
                         Ты мир Свой та́к возлюбил, что о́тдал Своего еди­нородного Сына, дабы всякий веру­ющий в Него не
@@ -3615,7 +3615,7 @@ const Zlatoust = ({ lang }) => {
                 <p id="epiclisis" className="baseName ParaOverride-18">
                     <span className="markedRed">Призывание</span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack">
                         {' '}
                         Ещё мы приносим Тебе это духовное и бескров­ное слу­же­ние, и просим, и молим, и умоляем:
@@ -3739,7 +3739,7 @@ const Zlatoust = ({ lang }) => {
                 <p id="hodataistvo" className="baseName ParaOverride-18">
                     <span className="markedRed">Хода́тайство</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-8">
+                <p className="baseIndent_5 ParaOverride-8">
                     <span className="markedBlack">
                         {' '}
                         Ещё мы приносим Тебе это духов­ное служение за в вере почивших:{' '}
@@ -3779,7 +3779,7 @@ const Zlatoust = ({ lang }) => {
                     </span>
                     <span className="markedBlack">ч­ную, и Матерь Бога нашего. </span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-б-отст">
+                <p className="baseBigIndent">
                     <span className="markedBlack"> </span>
                     <span className="markedBlack">
                         Че́ствуемую превыше херувимов и славную не­срав­ненно более серафимов, девственно Бога-Слово
@@ -3849,13 +3849,13 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">(имя)</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">[или: </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">это село </span>
+                    <span className="markedBlackPetit">это село </span>
                     <span className="markedRedPetit">(имя)]</span>
                     <span className="markedBlack">,</span>
                     <span className="markedRed"> </span>
                     <span className="markedBlack">в кото­ром живём </span>
                     <span className="markedRedPetit">[или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> эту святую обитель, в ко­то­рой живём</span>
+                    <span className="markedBlackPetit"> эту святую обитель, в ко­то­рой живём</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack">,</span>
                     <span className="markedRed"> </span>
@@ -3864,47 +3864,47 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseIndent_1_5">
                     <span className="markedBlack"> И среди первых воспо́мни, Господи, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">великого гос­подина и отца на­шего</span>
+                    <span className="markedBlackPetit">великого гос­подина и отца на­шего</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRed">(имя)</span>
                     <span className="markedBlack">, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">святейшего</span>
+                    <span className="markedBlackPetit">святейшего</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> патриарха Москов­ско­го и всея Ру­си, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">и </span>
+                    <span className="markedBlackPetit">и </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">господина на­шего пре­ос­вя­­ще́ннейшего</span>
+                    <span className="markedBlackPetit">господина на­шего пре­ос­вя­­ще́ннейшего</span>
                     <span className="markedRedPetit">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> </span>
+                    <span className="markedBlackPetit"> </span>
                     <span className="markedRedPetit">(имя)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">, мит­ропо­ли­та</span>
+                    <span className="markedBlackPetit">, мит­ропо­ли­та</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">(или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> ар­хи­епи­скопа</span>
+                    <span className="markedBlackPetit"> ар­хи­епи­скопа</span>
                     <span className="markedRedPetit">, или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> епископа</span>
+                    <span className="markedBlackPetit"> епископа</span>
                     <span className="markedRedPetit">)</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">(титул)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">,</span>
+                    <span className="markedBlackPetit">,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> и да­ру`й ему</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">/им</span>
+                    <span className="markedBlackPetit">/им</span>
                     <span className="markedBlack"> слу­жить Твоей</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">/-им</span>
+                    <span className="markedBlackPetit">/-им</span>
                     <span className="markedBlack"> святой</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">/-ым </span>
+                    <span className="markedBlackPetit">/-ым </span>
                     <span className="markedBlack">цер­кви</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">/-а́м</span>
+                    <span className="markedBlackPetit">/-а́м</span>
                     <span className="markedBlack"> в ми­ре, в чести, невредимым</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">/-и</span>
+                    <span className="markedBlackPetit">/-и</span>
                     <span className="markedBlack">, здра­вым/-и, дол­го­де́н­ству­ю­щим</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">/-и</span>
+                    <span className="markedBlackPetit">/-и</span>
                     <span className="markedBlack">, пра­виль­но пре­подаю`щим</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">/-и</span>
+                    <span className="markedBlackPetit">/-и</span>
                     <span className="markedBlack"> сло­во Твоей Ис­тины;</span>
                 </p>
                 <p className="baseIndent_1_5">
@@ -3966,7 +3966,7 @@ const Zlatoust = ({ lang }) => {
                         имя Твоё,{' '}
                     </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отца и Сына и Святого Духа,</span>
+                    <span className="markedBlackPetit">Отца и Сына и Святого Духа,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и все­гда и во веки веков!</span>
                 </p>
@@ -4145,7 +4145,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">)</span>
                     <span className="markedBlack">: </span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-7">
+                <p className="baseIndent_5 ParaOverride-7">
                     <span className="markedRed"> П</span>
                     <span className="markedRed"> </span>
                     <span className="markedRed">и</span>
@@ -4176,7 +4176,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRedPetit">(т. е. от зла или от злого — дьявола)</span>
                     <span className="markedBlack">, — </span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-16">
+                <p className="baseIndent_5 ParaOverride-16">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack">
@@ -4184,7 +4184,7 @@ const Zlatoust = ({ lang }) => {
                         ибо Твои` царствие, и сила, и слава, <br />
                     </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отца и Сына и Святого Духа,</span>
+                    <span className="markedBlackPetit">Отца и Сына и Святого Духа,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack">
                         {' '}
@@ -4203,7 +4203,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Н</span>
                     <span className="markedBlack"> Аминь.</span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack"> Мир всем!</span>
@@ -4357,7 +4357,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack">!</span>
                     <span className="markedRedPetit">]</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-16">
+                <p className="baseIndent_5 ParaOverride-16">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack">
@@ -4407,7 +4407,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">П</span>
                     <span className="markedBlack"> Благословен жар святынь Тво­их </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">во все дни:</span>
+                    <span className="markedBlackPetit">во все дни:</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и все­гда и во веки веков, аминь.</span>
                 </p>
@@ -4469,7 +4469,7 @@ const Zlatoust = ({ lang }) => {
                         верую, что вот это есть непорочное те­ло Твоё, а вот это есть драгоценная кровь Твоя.
                     </span>
                 </p>
-                <p className="baseParaIndent_6 ParaOverride-16">
+                <p className="baseParaBigIndent ParaOverride-16">
                     <span className="markedBlack">
                         Молю же Тебя: помилуй меня и прости мне воль­ные и невольные со­греше­ния мои, соделанные словом
                         или делом, в ве́
@@ -4527,7 +4527,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">
+                    <span className="markedBlackPetit">
                         Вот, я приступаю к бессмертному Царю и Богу нашему
                     </span>
                     <span className="markedBlack">.</span>
@@ -4560,7 +4560,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">П</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">
+                    <span className="markedBlackPetit">
                         Вот, я приступаю к бессмертному Царю и Богу нашему.
                     </span>
                     <span className="markedRedPetit">]</span>
@@ -4670,7 +4670,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseRedtIndent_5">
                     <span className="markedRed"> Медленно:</span>
                 </p>
-                <p className="basetIndent_5">
+                <p className="baseIndent_5">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Н</span>
                     <span className="markedBlack">
@@ -4732,7 +4732,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseName ParaOverride-20">
                     <span className="markedRed">После причащения</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-2">
+                <p className="baseIndent_5 ParaOverride-2">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Д</span>
                     <span className="markedBlack">
@@ -4791,7 +4791,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseRedIndent_5">
                     <span className="markedRed"> Благословляя народ, в заключение: </span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-15">
+                <p className="baseIndent_5 ParaOverride-15">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack">
@@ -4802,7 +4802,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRedPetit">7:9</span>
                     <span className="markedRedPetit">.)</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-15">
+                <p className="baseIndent_5 ParaOverride-15">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Н</span>
                     <span className="markedBlack">
@@ -4827,7 +4827,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseRedtIndent_5 ParaOverride-7">
                     <span className="markedRed"> Кадя св. чашу:</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-7">
+                <p className="baseIndent_5 ParaOverride-7">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack">
@@ -4855,7 +4855,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseIndent_1_5 ParaOverride-7">
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">во все дни:</span>
+                    <span className="markedBlackPetit">во все дни:</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда и во веки веков!</span>
                 </p>
@@ -4881,8 +4881,8 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack"> Сохрани нас в Твоём освящении</span>
                     <span className="markedRed">/</span>
                     <span className="markedBlack"> раз­мыш­ля´ющими весь день о прав­де Твоей.</span>
-                    <span className="_--КРАСНЫЙ">/</span>
-                    <span className="_--КРАСНЫЙ">/</span>
+                    <span className="textRed">/</span>
+                    <span className="textRed">/</span>
                     <span className="markedBlack"> Аллилуия, аллилуия, аллилуия</span>
                     <span className="markedRed">
                         <span id="footnote-003-backlink">
@@ -4974,7 +4974,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseIndent_1_5 ParaOverride-7">
                     <span className="markedBlack"> ибо Ты` освящение наше и мы` воссы­лаем славу Тебе, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">От­цу и Сыну и Святому Духу,</span>
+                    <span className="markedBlackPetit">От­цу и Сыну и Святому Духу,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда и во веки веков.</span>
                 </p>
@@ -5033,7 +5033,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">)</span>
                     <span className="markedBlack">, и мы` вос­сы­ла­ем славу, и благодарение, и поклонение Тебе, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отцу и Сы­ну и Свя­тому Духу,</span>
+                    <span className="markedBlackPetit">Отцу и Сы­ну и Свя­тому Духу,</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ныне и всегда и во веки веков.</span>
                 </p>
@@ -5060,7 +5060,7 @@ const Zlatoust = ({ lang }) => {
                         св. даров или перед агапической трапезой)
                     </span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-15">
+                <p className="baseIndent_5 ParaOverride-15">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">П</span>
                     <span className="markedBlack"> </span>
@@ -5079,7 +5079,7 @@ const Zlatoust = ({ lang }) => {
                         исполни же радо­стью и весельем сердца наши` во все дни: ныне и всегда и во веки веков!
                     </span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-15">
+                <p className="baseIndent_5 ParaOverride-15">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">[Н </span>
                     <span className="markedBlack">Аминь.</span>
@@ -5109,7 +5109,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="baseRedtIndent_5 ParaOverride-15">
                     <span className="markedRed"> Может петься и в начале тра́пезы любви, т. е. агапы.</span>
                 </p>
-                <p className="basetIndent_5 ParaOverride-15">
+                <p className="baseIndent_5 ParaOverride-15">
                     <span className="markedBlack"> </span>
                     <span className="markedRed">Н</span>
                     <span className="markedBlack">
@@ -5193,7 +5193,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedBlack"> </span>
                     <span className="markedBlack">Благословение Го­сподне на вас, по Его милости и человеколюбию </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">во все дни:</span>
+                    <span className="markedBlackPetit">во все дни:</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> ны­не и всегда и во веки веков!</span>
                 </p>
@@ -5293,31 +5293,31 @@ const Zlatoust = ({ lang }) => {
                     <span className="markedRed">Н</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Великого го­спо­дина и отца нашего</span>
+                    <span className="markedBlackPetit">Великого го­спо­дина и отца нашего</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRed">(имя)</span>
                     <span className="markedBlack">, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">свя­тейше­го</span>
+                    <span className="markedBlackPetit">свя­тейше­го</span>
                     <span className="markedRedPetit">]</span>
                     <span className="markedBlack"> па­три­арха Мос­ковского и всея Руси, </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">и </span>
+                    <span className="markedBlackPetit">и </span>
                     <span className="markedRedPetit">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">
+                    <span className="markedBlackPetit">
                         господина на­-
                         <br />
                         шего преосвященнейшего
                     </span>
                     <span className="markedRedPetit">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> </span>
+                    <span className="markedBlackPetit"> </span>
                     <span className="markedRedPetit">(имя)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">, мит­ро­по­лита </span>
+                    <span className="markedBlackPetit">, мит­ро­по­лита </span>
                     <span className="markedRedPetit">(или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> архиепископа</span>
+                    <span className="markedBlackPetit"> архиепископа</span>
                     <span className="markedRedPetit">, или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> епископа</span>
+                    <span className="markedBlackPetit"> епископа</span>
                     <span className="markedRedPetit">)</span>
                     <span className="markedBlack"> </span>
                     <span className="markedRedPetit">(титул)]</span>
@@ -5591,12 +5591,12 @@ const Zlatoust = ({ lang }) => {
                             </span>
                             <span className="markedRed"> Далее в тексте Служебника вставки:</span>
                         </p>
-                        <p className="petitIndent_6">
+                        <p className="petitBigIndent">
                             <span className="markedBlack"> </span>
                             <span className="markedRedPetit">Д</span>
                             <span className="markedBlack"> …дабы в единомыслии ис­по­ведать:</span>
                         </p>
-                        <p className="petitIndent_6">
+                        <p className="petitBigIndent">
                             <span className="markedBlack"> </span>
                             <span className="markedRedPetit">Н</span>
                             <span className="markedBlack">
