@@ -1369,7 +1369,7 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="markedBlack">!</span>
                     <span className="markedRedPetit">]</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Имя-части-отст2">
+                <p className="baseNamePart">
                     <span className="markedRed">Молитва перед входом</span>
                 </p>
                 <p className="baseIndent_1_5">
@@ -1700,7 +1700,7 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Будем внимательны!</span>
                 </p>
-                <p id="apostol" className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-13">
+                <p id="apostol" className="baseReading ParaOverride-13">
                     <span className="markedRed">Чтение Апостола</span>
                 </p>
 
@@ -1721,7 +1721,7 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="markedRed">Ч</span>
                     <span className="markedBlack"> И духу твоему.</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-2">
+                <p className="baseReading ParaOverride-2">
                     <span className="markedBold CharOverride-6">Проповедь</span>
                 </p>
                 <p className="petitIndent_5">
@@ -1898,7 +1898,7 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="markedRed">Д</span>
                     <span className="markedBlack"> Будем внимательны! </span>
                 </p>
-                <p id="gospel" className="_-ОСНОВНОЙ_Чтение-Писания">
+                <p id="gospel" className="baseReading">
                     <span className="markedRed">Чтение Евангелия</span>
                 </p>
 
@@ -1914,7 +1914,7 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="markedRed">Н</span>
                     <span className="markedBlack"> Слава Тебе, Господи, слава Тебе!</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Чтение-Писания">
+                <p className="baseReading">
                     <span className="markedRed CharOverride-6">Проповедь</span>
                 </p>
                 <p id="sugubaja" className="baseNametIndent_5 ParaOverride-14">
