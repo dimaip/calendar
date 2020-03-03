@@ -125,17 +125,13 @@ const ReadingItem = ({ readingVerse, type }) => {
                     position: sticky;
                     top: 0;
                     background-color: white;
-                    display: flex;
                     margin: 0 -17px;
                     padding: 8px 17px;
+                    z-index: 3;
                     /* box-shadow: 0px 0px 3px #bbb; */
                 `}
             >
-                <div
-                    className={css`
-                        flex-grow: 1;
-                    `}
-                >
+                <div>
                     {type != 'unnamed' && (
                         <div
                             className={css`
@@ -157,8 +153,8 @@ const ReadingItem = ({ readingVerse, type }) => {
                         {readingVerse.replace('@', '')}
                     </div>
                 </div>
+                {reading.translationList?.length ? <div>{translationSelector}</div> : null}
             </div>
-            {reading.translationList?.length ? <div>{translationSelector}</div> : null}
             <Zoom>{readingText}</Zoom>
         </div>
     );

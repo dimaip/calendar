@@ -8,16 +8,7 @@ import RightIcon from 'components/svgs/RightIcon';
 const Services = ({ date }) => {
     const theme = useTheme();
 
-    const services = [
-        { title: 'Литургия Иоанна Златоуста', id: 'zlatoust' },
-        { title: 'Литургия Василия Великого', id: 'zlatoust' },
-        { title: 'Вечерня', id: 'zlatoust' },
-        { title: 'Утреня', id: 'zlatoust' },
-        { title: 'Первый час', id: 'zlatoust' },
-        { title: 'Третий час', id: 'zlatoust' },
-        { title: 'Шестой час', id: 'zlatoust' },
-        { title: 'Девятый час', id: 'zlatoust' },
-    ];
+    const services = [{ title: 'Литургия Иоанна Златоуста', id: 'zlatoust' }];
 
     return (
         <>

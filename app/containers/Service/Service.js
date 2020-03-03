@@ -1,5 +1,5 @@
-import React, { Suspense, useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { Suspense, useState } from 'react';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
@@ -10,77 +10,37 @@ import Zoom from 'components/Zoom/Zoom';
 import Loader from 'components/Loader/Loader';
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
-import zlatoustTOC from './Texts/zlatoustTOC';
+import TOC from './TOC';
+import { format, parseISO } from 'date-fns';
+import dateFormat from 'dateformat';
+import { ru } from 'date-fns/locale';
+import Calendar from '../Main/Calendar';
+import CalendarIcon from 'components/svgs/CalendarIcon';
+import Button from 'components/Button/Button';
+import Cross from 'components/svgs/Cross';
 const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
-
-const TOC = ({ serviceId, showTOC, setShowTOC }) => {
-    const data = serviceId === 'zlatoust' ? zlatoustTOC : {};
-    return (
-        showTOC && (
-            <>
-                <div
-                    className={css`
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        z-index: 0;
-                    `}
-                    onClick={e => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        setShowTOC(false);
-                    }}
-                ></div>
-                <div
-                    className={css`
-                        position: fixed;
-                        top: 60px;
-                        left: 50px;
-                        right: 0;
-                        bottom: 0;
-                        background-color: white;
-                        padding: 24px;
-                        border-left: 1px solid #d9dde5;
-                        box-shadow: -1px 0px 3px #d9dde5;
-                        z-index: 1;
-                        overflow-y: auto;
-                    `}
-                >
-                    {Object.keys(data).map(anchorID => (
-                        <div
-                            key={anchorID}
-                            className={css`
-                                margin-bottom: 12px;
-                                cursor: pointer;
-                            `}
-                            role="button"
-                            onClick={() => {
-                                const domNode = document.getElementById(anchorID);
-                                setShowTOC(false);
-                                if (domNode) {
-                                    domNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                }
-                            }}
-                        >
-                            {data[anchorID]}
-                        </div>
-                    ))}
-                </div>
-            </>
-        )
-    );
-};
 
 const Service = () => {
     const { serviceId, date } = useParams();
+    const dateObj = parseISO(date);
     const { data: day } = useDay(date);
     const theme = getTheme(day?.colour);
-    const textRef = useRef();
 
     const [lang, setLang] = useState('default');
     const [showTOC, setShowTOC] = useState(false);
+    const [calendarShown, setCalendarShown] = useState(false);
+
+    const history = useHistory();
+    const setNewDate = dateString => {
+        history.push(`/date/${dateString}/service/${serviceId}`);
+    };
+
+    const handleDayClick = day => {
+        const dateString = dateFormat(day, 'yyyy-mm-dd');
+
+        setNewDate(dateString);
+        setCalendarShown(false);
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -97,11 +57,7 @@ const Service = () => {
                         z-index: 1;
                     `}
                 >
-                    <div
-                        className={css`
-                            position: absolute;
-                        `}
-                    >
+                    <div>
                         <Link to={`/date/${date}/services`} title="Назад">
                             <div
                                 className={css`
@@ -115,6 +71,22 @@ const Service = () => {
                             </div>
                         </Link>
                     </div>
+                    <Button
+                        className={css`
+                            display: flex;
+                            align-items: center;
+                        `}
+                        onClick={() => setCalendarShown(!calendarShown)}
+                    >
+                        <div
+                            className={css`
+                                margin-right: 12px;
+                            `}
+                        >
+                            {format(dateObj, 'd MMMM, EEEEEE', { locale: ru })}
+                        </div>
+                        {calendarShown ? <Cross /> : <CalendarIcon />}
+                    </Button>
                     <div
                         className={css`
                             position: absolute;
@@ -128,6 +100,7 @@ const Service = () => {
                         <TOCSwitcher showTOC={showTOC} setShowTOC={setShowTOC} />
                     </div>
                 </div>
+                {calendarShown && <Calendar date={date} handleDayClick={handleDayClick} />}
                 <div
                     className={css`
                         position: relative;

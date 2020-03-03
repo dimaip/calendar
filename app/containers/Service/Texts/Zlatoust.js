@@ -15,7 +15,7 @@ const Readings = ({ readings }) => (
     </>
 );
 
-const Zlatoust = ({ lang, textRef }) => {
+const Zlatoust = ({ lang }) => {
     const { date } = useParams();
     const { data: day } = useDay(date);
 
@@ -43,7 +43,7 @@ const Zlatoust = ({ lang, textRef }) => {
     const gospel = <Readings readings={gospelReadings} />;
 
     return (
-        <div ref={textRef}>
+        <div>
             <div id="_idContainer003" className="_idGenObjectStyleOverride-1">
                 <p className="_-ОСНОВНОЙ_Имя-Службы ParaOverride-1">
                     <span className="markedRedBold">

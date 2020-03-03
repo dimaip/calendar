@@ -89,7 +89,13 @@ const Calendar = ({ date, handleDayClick }) => {
     return (
         <div
             className={css`
-                border-bottom: 1px solid #ccc;
+                z-index: 1;
+                position: fixed;
+                left: 0;
+                right: 0;
+                background: white;
+                border-bottom: 1px solid #d9dde5;
+                box-shadow: 0px 2px 3px #d9dde5;
                 & .nice-dates-day:hover:after {
                     opacity: 0 !important;
                 }
@@ -99,15 +105,17 @@ const Calendar = ({ date, handleDayClick }) => {
                 }
             `}
         >
-            <DatePickerCalendar
-                date={new Date(date)}
-                onDateChange={handleDayClick}
-                locale={ru}
-                month={month}
-                onMonthChange={setMonth}
-                modifiers={modifiers}
-                modifiersClassNames={modifiersClassNames}
-            />
+            <div>
+                <DatePickerCalendar
+                    date={new Date(date)}
+                    onDateChange={handleDayClick}
+                    locale={ru}
+                    month={month}
+                    onMonthChange={setMonth}
+                    modifiers={modifiers}
+                    modifiersClassNames={modifiersClassNames}
+                />
+            </div>
         </div>
     );
 };
