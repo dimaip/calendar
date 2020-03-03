@@ -51,7 +51,7 @@ const TOC = ({ serviceId, showTOC, setShowTOC }) => {
                                 const domNode = document.getElementById(anchorID);
                                 setShowTOC(false);
                                 if (domNode) {
-                                    domNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                    domNode.scrollIntoView({ block: 'center' });
                                 }
                             }}
                         >
