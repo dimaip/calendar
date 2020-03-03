@@ -1,9 +1,15 @@
 import React from 'react';
 import { css } from 'emotion';
 import zlatoustTOC from './Texts/zlatoustTOC';
+import vasiliyTOC from './Texts/vasiliyTOC';
+
+const TOCbyServiceId = {
+    zlatoust: zlatoustTOC,
+    vasiliy: vasiliyTOC,
+};
 
 const TOC = ({ serviceId, showTOC, setShowTOC }) => {
-    const data = serviceId === 'zlatoust' ? zlatoustTOC : {};
+    const data = TOCbyServiceId[serviceId] || {};
     return (
         showTOC && (
             <>
