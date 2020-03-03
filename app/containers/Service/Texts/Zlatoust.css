@@ -84,7 +84,7 @@ p.baseName {
     text-transform: none;
     widows: 1;
 }
-p._-ОСНОВНОЙ_Имя-Службы {
+p.baseNameWorship {
     color: #e32636;
     font-size: 18px;
     font-style: normal;
@@ -144,7 +144,7 @@ p.baseNametIndent_5 {
     text-transform: uppercase;
     widows: 1;
 }
-p.baseRedIndent_6 {
+p.baseRedBigIndent {
     color: #e32636;
     font-size: 18px;
     font-style: normal;
@@ -184,46 +184,7 @@ p.baseRedtIndent_5 {
     text-transform: none;
     widows: 1;
 }
-p._-ОСНОВНОЙ_КРАСН-отст5 {
-    color: #e32636;
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 14px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_МеткаНовойСтраницы {
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: always;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_Основной-б-отст {
+p.baseBigIndent {
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -242,7 +203,7 @@ p._-ОСНОВНОЙ_Основной-б-отст {
     text-transform: none;
     widows: 1;
 }
-p.baseParaIndent_6 {
+p.baseParaBigIndent {
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -280,7 +241,7 @@ p.baseIndent_1_5 {
     text-transform: none;
     widows: 1;
 }
-p.basetIndent_5 {
+p.baseIndent_5 {
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -299,7 +260,7 @@ p.basetIndent_5 {
     text-transform: none;
     widows: 1;
 }
-p.basetIndent_6 {
+p.baseBigIndent {
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -318,7 +279,7 @@ p.basetIndent_6 {
     text-transform: none;
     widows: 1;
 }
-p.basetIndent_5 {
+p.baseIndent_5 {
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -356,7 +317,7 @@ p._-ОСНОВНОЙ_Чтение-Писания {
     text-transform: none;
     widows: 1;
 }
-p.petitRedIndent_6 {
+p.petitRedBigIndent {
     color: #e32636;
     font-size: 15px;
     font-style: normal;
@@ -456,7 +417,7 @@ p.petitNamePartRedIndent_5 {
     text-transform: uppercase;
     widows: 1;
 }
-p.petitIndent_6 {
+p.petitBigIndent {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -513,7 +474,7 @@ p.petitIndent_5 {
     text-transform: none;
     widows: 1;
 }
-p.petitIndent_6 {
+p.petitBigIndent {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -551,10 +512,10 @@ p.petitIndent_1_5 {
     text-transform: none;
     widows: 1;
 }
-span._--КРАСНЫЙ {
+span.textRed {
     color: #e32636;
 }
-span._-ВЫДЕЛЕНИЯ_ЖИРНЫЙ {
+span.markedBold {
     font-style: normal;
     font-weight: bold;
 }
@@ -576,16 +537,16 @@ span.markedRedIndex {
 }
 span.markedBlack {
 }
-span._-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн {
+span.markedBlackPetit {
     font-size: 15px;
 }
-span._-СПЕЦСЛУЖЕБНЫЕ_дляДИЗ_вКРАСНОМтексте {
+span.serviceRedInText {
     color: #e6007e;
 }
-span._-СПЕЦСЛУЖЕБНЫЕ_дляРЕД_вЧЕРНОМтексте {
+span.serviceBlackInText {
     color: #0000ff;
 }
-span._-РЕДКИЕ_Знак-сноски-красной {
+span.rareFootnoteRed {
     color: #e32636;
     font-size: 18px;
     font-style: normal;
