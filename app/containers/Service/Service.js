@@ -19,6 +19,7 @@ import CalendarIcon from 'components/svgs/CalendarIcon';
 import Button from 'components/Button/Button';
 import Cross from 'components/svgs/Cross';
 const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
+const Vasiliy = React.lazy(() => import('./Texts/Vasiliy'));
 
 const Service = () => {
     const { serviceId, date } = useParams();
@@ -116,6 +117,7 @@ const Service = () => {
                             >
                                 <Suspense fallback={Loader}>
                                     {serviceId === 'zlatoust' && <Zlatoust lang={lang} />}
+                                    {serviceId === 'vasiliy' && <Vasiliy lang={lang} />}
                                 </Suspense>
                             </div>
                             {<TOC serviceId={serviceId} showTOC={showTOC} setShowTOC={setShowTOC} />}
