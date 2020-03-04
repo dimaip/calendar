@@ -31,7 +31,6 @@ p._-КОЛОНТИТУЛЫ-ОФОРМЛЕН_НЕВИДИМКА-на-шмуце {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -52,7 +51,6 @@ p._-СНОСКА_Сноска-КРАСНАЯ {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -175,7 +173,6 @@ p._-ОСНОВНОЙ_КРАСН-б-отст {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -196,7 +193,6 @@ p._-ОСНОВНОЙ_КРАСН-отст1-5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -217,7 +213,6 @@ p._-ОСНОВНОЙ_КРАСН-отст5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -238,7 +233,6 @@ p._-ОСНОВНОЙ_МеткаНовойСтраницы {
     orphans: 1;
     page-break-after: auto;
     page-break-before: always;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -258,7 +252,6 @@ p._-ОСНОВНОЙ_Основной-б-отст {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -278,7 +271,6 @@ p._-ОСНОВНОЙ_Основной-б-отст-абз {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: 17px;
@@ -298,7 +290,6 @@ p._-ОСНОВНОЙ_Основной-отст1-5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -318,7 +309,6 @@ p._-ОСНОВНОЙ_Основной-отст5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -397,7 +387,6 @@ p._-ПЕТИТ_КРАСН-петит-б-отст {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -418,7 +407,6 @@ p._-ПЕТИТ_КРАСН-петит-отст1-5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -501,7 +489,6 @@ p._-ПЕТИТ_Петит-б-отст {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -521,7 +508,6 @@ p._-ПЕТИТ_Петит-отст1-5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -541,7 +527,6 @@ p._-ПЕТИТ_Петит-отст5 {
     orphans: 1;
     page-break-after: auto;
     page-break-before: auto;
-    text-align: justify;
     text-align-last: left;
     text-decoration: none;
     text-indent: -28px;
@@ -658,7 +643,6 @@ p.ParaOverride-8 {
     margin-top: 9px;
 }
 p.ParaOverride-9 {
-    text-align: justify;
     text-align-last: left;
 }
 p.ParaOverride-10 {
