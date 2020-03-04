@@ -14,7 +14,14 @@ if (isProd) {
     Sentry.init({ dsn: 'https://e5296954a22242bc85d59b9a36559c44@sentry.io/3629452' });
 }
 
-const preloadedState = localStorage.getItem('persistedState') ? JSON.parse(localStorage.getItem('persistedState')) : {};
+let preloadedState = {};
+
+try {
+    preloadedState = localStorage.getItem('persistedState') ? JSON.parse(localStorage.getItem('persistedState')) : {};
+} catch (e) {
+    console.warn(e);
+}
+
 const store = configureStore(preloadedState);
 const rootElement = document.getElementById('react-root');
 
