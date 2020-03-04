@@ -593,7 +593,7 @@ span._-ВЫДЕЛЕНИЯ_ЖИРНЫЙ {
     font-style: normal;
     font-weight: bold;
 }
-span.markedRed {
+span._-ВЫДЕЛЕНИЯ_КРАСНЫЙ {
     color: #e32636;
 }
 span._-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ {
@@ -609,7 +609,7 @@ span._-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн {
     color: #e32636;
     vertical-align: super;
 }
-span.markedBlack {
+span._-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ {
 }
 span._-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн {
     font-size: 15px;
