@@ -7,7 +7,6 @@ import * as serviceWorker from './serviceWorker';
 // @ts-ignore
 import Worker from './precache.worker.js';
 import * as Sentry from '@sentry/browser';
-import ReactGA from 'react-ga';
 // ReactGA.pageview(window.location.pathname + window.location.search);
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -34,10 +33,6 @@ if (module.hot) {
     module.hot.accept('containers/App', () => {
         render(App);
     });
-}
-
-if (isProd) {
-    ReactGA.initialize('G-P4KC3YS7WG');
 }
 
 serviceWorker.register();
