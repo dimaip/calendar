@@ -171,6 +171,7 @@ const Main = ({ services }) => {
                                             </div>
                                         </Zoom>
                                         <Links />
+                                        <button onClick={methodDoesNotExist}>Сломай меня</button>;
                                     </div>
                                 ) : (
                                     <Loader />
