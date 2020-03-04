@@ -120,7 +120,7 @@ const Service = () => {
                                     {serviceId === 'vasiliy' && <Vasiliy lang={lang} />}
                                 </Suspense>
                             </div>
-                            {<TOC serviceId={serviceId} showTOC={showTOC} setShowTOC={setShowTOC} />}
+                            <TOC serviceId={serviceId} showTOC={showTOC} setShowTOC={setShowTOC} />
                         </>
                     </Zoom>
                 </div>

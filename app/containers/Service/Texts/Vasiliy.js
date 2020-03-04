@@ -4887,7 +4887,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Пред Тобой, Господи.</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-8">
+                <p id="glavopriklon" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-8">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва главопреклонная</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
