@@ -3323,9 +3323,9 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">вместе со безначальным Твоим Отцом и всесвяты</span>
                     <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
                     <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">м и благи</span>
-                    <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-петит">t</span>
+                    <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-петит">`</span>
                     <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">м и животворя</span>
-                    <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-петит">t</span>
+                    <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-петит">`</span>
                     <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">щим Твоим Духом,</span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и всегда и во веки веков.</span>
@@ -4100,7 +4100,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">в </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(т. е. перемени</span>
-                    <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-красн">t</span>
+                    <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-красн">`</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">в)</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Твоим Духом Святым.</span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">]</span>
