@@ -6,6 +6,9 @@ import App from 'containers/App';
 import * as serviceWorker from './serviceWorker';
 // @ts-ignore
 import Worker from './precache.worker.js';
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({ dsn: 'https://e5296954a22242bc85d59b9a36559c44@sentry.io/3629452' });
 
 const preloadedState = localStorage.getItem('persistedState') ? JSON.parse(localStorage.getItem('persistedState')) : {};
 const store = configureStore(preloadedState);
