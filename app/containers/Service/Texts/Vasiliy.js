@@ -376,7 +376,7 @@ const Vasiliy = ({ lang }) => {
                 </p>
                 <p id="antifon1" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        Молитfва перед пением
+                        Молитва перед пением
                         <br />
                         первого антифона
                     </span>
