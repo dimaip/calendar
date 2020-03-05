@@ -30,7 +30,7 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.EnvironmentPlugin(['NODE_ENV', 'PUBLIC_URL']),
+        new webpack.EnvironmentPlugin({ NODE_ENV: 'development', PUBLIC_URL: 'http://localhost:3000' }),
         new MiniCssExtractPlugin({
             filename: '[name].[hash].bundle.css',
             chunkFilename: '[name].[hash].bundle.css',
