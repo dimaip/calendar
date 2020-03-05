@@ -1726,10 +1726,8 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и всегда</span>
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-4"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ CharOverride-4">Тихо:</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Тихо:</span>
                 </p>
                 <p className="_-ПЕТИТ_Петит-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1946,15 +1944,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Молитва <br />
                         перед чтением Евангелия
-                        <span id="footnote-027-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-027"
-                            >
-                                {' '}
-                                *****
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).
+                                </span>
+                            </>
+                        </Tooltip>
                     </span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
@@ -2276,15 +2272,18 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> святой обители сей</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         ]
-                        <span id="footnote-026-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-026"
-                            >
-                                {' '}
-                                ******
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    {' '}
+                                    Далее могут быть ещё добавлены особые прошения, в т. ч. по специальной просьбе верных, о
+                                    болящих, по случаю различных бедствий, скорбей и нужд и т. д. Также перед Заупокойной
+                                    ектениёй могут быть добавлены и соответствующие особые молитвы после дьяконского
+                                    возгласа{' '}
+                                </span>
+                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Господу помолимся!</span>
+                            </>
+                        </Tooltip>
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
@@ -2329,20 +2328,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
                 </p>
-                <p className="_-ПЕТИТ_Петит-Имя-части-отст5 ParaOverride-2">
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ CharOverride-3">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">СУГУБАя Заупокойная ектения</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-025-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-025"
-                            >
-                                {' '}
-                                *******
-                            </a>
-                        </span>
-                    </span>
+                <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
+                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">СУГУБАЯ ЗАУПОКОЙНАЯ ЕКТЕНИЯ</span>
+                    <Tooltip>
+                        Не читается в храмовые (престольные) и двунадесятые праздники и, как правило, в
+                        воскресные дни, дни Святок и всей св. Пятидесятницы.
+                    </Tooltip>
                 </p>
                 <p className="_-ПЕТИТ_Петит-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -2404,7 +2396,7 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
                 </p>
-                <p className="_-ПЕТИТ_Петит-Имя-части-отст5">
+                <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва об усопших</span>
                 </p>
                 <p className="_-ПЕТИТ_Петит-отст1-5">
@@ -2575,33 +2567,34 @@ const Zlatoust = ({ lang, textRef }) => {
                         {' '}
                         Все оглашаемые, изыди`те! Оглашаемые, изы­ди`те! Все оглашаемые, изыди`те!
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-024-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-024"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip> 
+                        <> 
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                Если присутствуют просвещаемые, то здесь могут быть до­бавлены специальные Ектения и
+                                Молитва о просвещаемых, сохранившиеся в Литургии преждеосвящённых даров (см.: ПБ. Кн.&nbsp;3. С.&nbsp;95–96).
+                            </span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Пусть не останется никого из оглашаемых </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и просве­щае­мых</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">]</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">!</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-023-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-023"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Или: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                Пусть никто из оглашаемых, никто из тех, чья вера не­твер­да, никто из кающихся, никто
+                                из нечистых
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (т. е. обуреваемых) </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                не при­бли­жается к святым таинствам. Кто не причащается, да покинет собра­ние!
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (св. Григорий Двоеслов)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
@@ -2650,15 +2643,13 @@ const Zlatoust = ({ lang, textRef }) => {
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-13">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Молитва первая
-                        <span id="footnote-022-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-022"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    Древнее надписание: «После распростертия илитона» (возможно, с ан­ти­минсом).
+                                </span>
+                            </>
+                        </Tooltip>
                     </span>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
@@ -2815,19 +2806,15 @@ const Zlatoust = ({ lang, textRef }) => {
                     <a>96</a>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
                 </p>
-                <p className="_-ПЕТИТ_Петит-Имя-части-отст5 ParaOverride-12">
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ CharOverride-3">[</span>
+                <p className="_-ОСНОВНОЙ_Имя-части-отст5">
+                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Молитва предстоятеля о себе
-                        <span id="footnote-021-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-021"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Вставка из Литургии св. Василия Великого.</span>
+                            </>
+                        </Tooltip>
                     </span>
                 </p>
                 <p className="_-ПЕТИТ_КРАСН-петит-отст1-5">
@@ -2857,17 +2844,12 @@ const Zlatoust = ({ lang, textRef }) => {
                         служителя Тво
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">его</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">
-                        <span id="footnote-020-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-020"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">В церковнославянском тексте далее вставка: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и очисти мою душу и сердце от сове­сти нечистой.</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                         , и силой Святого Духа Твоего укрепи меня, облечённого благодатью священства, для предстояния
                         перед этим свя­тым престолом Твоим и принесения в жертву Твоего свя­того и непорочного тела и
@@ -3427,15 +3409,11 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ CharOverride-9">[</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва перед целованием мира </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-019-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-019"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Руси читалась до сер. ХVII в. Изначально могла быть обращена к Богу-Отцу.</span>
+                            </>
+                        </Tooltip>
                     </span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
@@ -3481,15 +3459,24 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">6.</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         )
-                        <span id="footnote-018-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-018"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Далее в тексте Служебника вставки:</span>
+                            <p className="_-ПЕТИТ_Петит-б-отст">
+                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Д</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> …дабы в единомыслии ис­по­ведать:</span>
+                            </p>
+                            <p className="_-ПЕТИТ_Петит-б-отст">
+                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Н</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                    {' '}
+                                    Отца и Сына и Святого Духа — Троицу единосущ­ную и нераздельную.
+                                </span>
+                            </p>
+                        </>
+                    </Tooltip>
                     </span>
                 </p>
                 <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
@@ -3518,17 +3505,23 @@ const Zlatoust = ({ lang, textRef }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-16">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Сослужащие [и Н]: </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">И есть, и будет</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-017-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-017"
-                            >
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                                 {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                                Согласно древней практике перед закрытием входных дверей все верные дают друг другу
+                                целование мира и любви со сло­вами:{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос посреди нас!</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> — и отвечая: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">И есть, и будет!</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> [или:</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Христос воскрес!</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> — </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Воистину воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">].</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст5">
@@ -3538,17 +3531,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Двери, двери!</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-016-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-016"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                            «Дьяконы пусть стоят при дверях… чтобы во время возношения никто не выходил и чтобы не
+                            отворялась дверь, хотя бы пришёл и верующий» (Апостольские постанов­ления. 8. 11).</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> В Премудрости будем внимать!</span>
@@ -3729,18 +3718,15 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        {' '}
-                        Св. возношение (ана́фора)
-                        <span id="footnote-015-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-015"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                        {' '}Св. возношение (ана́фора)</span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    Раздел (4) — Евхаристический кано́н. Он со­стоит из вступ­ления и четы­рех основных
+                                    частей: префа́цио (вводная часть), ана́мнесис (воспо­ми­нание), эпи`клесис (при­зывание) и
+                                    ин­тер­це́ссио (хода́тай­ство).</span>
+                            </>
+                        </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -3797,15 +3783,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и справедливо</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         ]
-                        <span id="footnote-014-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-014"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Далее в тексте Служебника вставка: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                покло­няться Отцу и Сыну и Святому Духу, Троице еди­носущной и нераз­дельной.</span>
+                        </>
+                    </Tooltip>
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
@@ -3970,17 +3954,22 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Твоё из Твоего Тебе́ принося всегда и везде</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-013-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-013"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> См. у М. Арранца и др. С греч., возможно ещё: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">согласно всему </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">этому</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) (</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">по всем этим причинам</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и для всего </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">этого</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) (Е. Ло­вягин и др.)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">,</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
@@ -3990,15 +3979,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         (На­род вто­рит.)
-                        <span id="footnote-012-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-012"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                В церковнославянском тексте Служебника далее следует вставка: тропарь Третьего часа, со
+                                стихами (см.:{' '}ПБ. Кн.&nbsp;1. 3-е изд. М., 2015. С. 214, а также: ПБ. Кн.&nbsp;7. M., 2010 С.&nbsp;35).</span>
+                        </>
+                    </Tooltip>
                     </span>
                 </p>
                 <p id="epiclisis" className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-18">
@@ -4174,17 +4161,29 @@ const Zlatoust = ({ lang, textRef }) => {
                         Че́ствуемую превыше херувимов и славную не­срав­ненно более серафимов, девственно Бога-Слово
                         ро­дившую, поистине Богородицу — тебя величаем
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-011-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-011"
-                            >
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                                 {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                                В двунадесятые праздники и в дни их попразднества обычно вместо «Воистину подобает»
+                                поётся «задостойник», т. е. запев на 9-й песни канона праздника (см.:{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн. 1. Изд. 3-е, испр. и доп. М. : </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">СФИ</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2015</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. С. </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">17</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">7–2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">06</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">22</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4–2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">34</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) и её ирмо́с.</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
@@ -4671,17 +4670,14 @@ const Zlatoust = ({ lang, textRef }) => {
                         наших, —
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ CharOverride-11">
-                        <span id="footnote-010-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-010"
-                            >
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                                Эта молитва, вероятно, когда-то служила отпустом для непричащающихся верных (см.: Taft
+                                R. The Precommunion Rites. Roma, 2000. P. 193).</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-16">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
@@ -4735,17 +4731,13 @@ const Zlatoust = ({ lang, textRef }) => {
                         {' '}
                         Вне́мли, Господи Иисусе Христе, Боже наш, из свя­той обители Своей
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-009-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-009"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В тексте Служебника далее вставка: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и со славного пре­стола царствия Своего</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-8">.</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">,</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
@@ -4866,15 +4858,21 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         {' '}
                         для причащения в алтаре
-                        <span id="footnote-008-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-008"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    Далее по обычаю предстоятель просит у всех прощения и тихо молится:
+                                </span>
+                                <p className="_-ПЕТИТ_Петит-б-отст">
+                                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">П</span>
+                                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                        {' '}
+                                        Отпусти, оставь, прости, Боже, наши вольные и невольные согре­ше­ния, соделанные словом
+                                        и делом, в ве́дении и неве́дении, днём и в ночи`, во уме и разумении, — всё нам прости, по Своей благости и
+                                        человеколюбию!</span>
+                                </p>
+                            </>
+                        </Tooltip>
                         .
                     </span>
                 </p>
@@ -5842,416 +5840,7 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <hr className="HorizontalRule-1" />
                 <div className="_idFootnotes">
-                    <div id="footnote-027" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-027-backlink"
-                                >
-                                    *****
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Изначально могла быть обращена к Богу-Отцу (ср.:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;3. 2-е изд. М., </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2010</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. С.&nbsp;</span>125
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-026" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-026-backlink"
-                                >
-                                    ******
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Далее могут быть ещё добавлены особые прошения, в т. ч. по специальной просьбе верных, о
-                                болящих, по случаю различных бедствий, скорбей и нужд и т. д. Также перед Заупокойной
-                                ектениёй могут быть добавлены и соответствующие особые молитвы после дьяконского
-                                возгласа{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Господу помолимся!</span>
-                        </p>
-                    </div>
-                    <div id="footnote-025" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-025-backlink"
-                                >
-                                    *******
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Не читается в храмовые (престольные) и двунадесятые праздники и, как правило, в
-                                воскресные дни, дни Святок и всей св. Пятидесятницы.
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-024" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-024-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Если присутствуют просвещаемые, то здесь могут быть до­бавлены специальные Ектения и
-                                Молитва о просвещаемых, сохранившиеся в Литургии преждеосвящённых даров (см.:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;3. С.&nbsp;9</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">5–9</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">6).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-023" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-023-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Или: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                Пусть никто из оглашаемых, никто из тех, чья вера не­твер­да, никто из кающихся, никто
-                                из нечистых
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (т. е. обуреваемых) </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                не при­бли­жается к святым таинствам. Кто не причащается, да покинет собра­ние!
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (св. Григорий Двоеслов)</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-022" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-022-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Древнее надписание: «После распростертия илитона» (возможно, с ан­ти­минсом).
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-021" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-021-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Вставка из Литургии св. Василия Великого.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-020" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-020-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В церковнославянском тексте далее вставка: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и очисти мою душу и сердце от сове­сти нечистой</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-019" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-019-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Руси читалась до сер. </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ХVII</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> в. Изначально могла быть обращена к Богу-Отцу.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-018" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-018-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Далее в тексте Служебника вставки:</span>
-                        </p>
-                        <p className="_-ПЕТИТ_Петит-б-отст">
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Д</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> …дабы в единомыслии ис­по­ведать:</span>
-                        </p>
-                        <p className="_-ПЕТИТ_Петит-б-отст">
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Н</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                {' '}
-                                Отца и Сына и Святого Духа — Троицу единосущ­ную и нераздельную.
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-017" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-017-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Согласно древней практике перед закрытием входных дверей все верные дают друг другу
-                                целование мира и любви со сло­вами:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос посреди нас!</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> — и отвечая: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">И есть, и будет!</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> [или:</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Христос воскрес!</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> — </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Воистину воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">].</span>
-                        </p>
-                    </div>
-                    <div id="footnote-016" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-016-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                «Дьяконы пусть стоят при дверях… чтобы во время возношения никто не выходил и чтобы не
-                                отворялась дверь, хотя бы пришёл и верующий» (Апостольские постанов­ления. 8.{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">11</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-015" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-015-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Раздел (4) — Евхаристический кано́н. Он со­стоит из вступ­ления и четы­рех основных
-                                частей: префа́цио (вводная часть), ана́мнесис (воспо­ми­нание), эпи`клесис (при­зывание) и
-                                ин­тер­це́
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ссио (хода́тай­ство).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-014" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-014-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Далее в тексте Служебника вставка: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                покло­няться Отцу и Сыну и Святому Духу, Троице еди­носущной и нераз­дельной
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-8">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-013" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-013-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> См. у М. Арранца и др. С греч., возможно ещё: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">согласно всему </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">этому</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) (</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">по всем этим причинам</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и для всего </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">этого</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) (Е. Ло­вягин и др.)</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-012" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-012-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                В церковнославянском тексте Служебника далее следует вставка: тропарь Третьего часа, со
-                                стихами (см.:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;1. 3-е изд. М., </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2015</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span> С. 214
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, а также: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;7. </span>С.&nbsp;35
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-011" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-011-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                В двунадесятые праздники и в дни их попразднества обычно вместо «Воистину подобает»
-                                поётся «задостойник», т. е. запев на 9-й песни канона праздника (см.:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн. 1. Изд. 3-е, испр. и доп. М. : </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">СФИ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2015</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. С. </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">17</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">7–2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">06</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">22</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4–2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">34</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) и её ирмо́с.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-010" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-010-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Эта молитва, вероятно, когда-то служила отпустом для непричащающихся верных (см.: Taft
-                                R. The Precommunion Rites. Roma,{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2000</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. P. </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">193</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">). </span>
-                        </p>
-                    </div>
-                    <div id="footnote-009" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-009-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В тексте Служебника далее вставка: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и со славного пре­стола царствия Своего</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-8">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-008" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-008-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Далее по обычаю предстоятель просит у всех прощения и тихо молится:
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                {' '}
-                                Отпусти, оставь, прости, Боже, наши вольные и невольные согре­ше­ния, соделанные словом
-                                и делом, в ве́дении и неве́
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                дении, днём и в ночи`, во уме и разумении, — всё нам прости, по Своей благости и
-                                человеколюбию!
-                            </span>
-                        </p>
-                    </div>
+
                     <div id="footnote-007" className="_idFootnote">
                         <p className="_-СНОСКА_Сноска-КРАСНАЯ">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
