@@ -4947,15 +4947,22 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         {' '}
                         Н Причастный стих
-                        <span id="footnote-007-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-007"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    {' '}
+                                    То есть прича́стен (кино́ник) дня или святого — см.:{' '}
+                                </span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;2. С.&nbsp;</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">22</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4–2</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">63</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    . Поётся во время прича­ще­ния в алтаре (а иногда и в храме).
+                                </span>
+                            </>
+                        </Tooltip>
                         .
                     </span>
                 </p>
@@ -5126,17 +5133,14 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">6, </span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">27</span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">.)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-006-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-006"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (</span>см.: ПБ. Кн.&nbsp;1. с. 224
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Причащая:</span>
@@ -5169,17 +5173,14 @@ const Zlatoust = ({ lang, textRef }) => {
                         {' '}
                         Тело Христово прими`те, от источника бессмер­тия вку­си`те!
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-005-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-005"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                            </span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-20">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">После причащения</span>
@@ -5266,17 +5267,20 @@ const Zlatoust = ({ lang, textRef }) => {
                         {' '}
                         поклоняясь неразде­ль­ной Троице, <br /> ибо Она спасла нас
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-004-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-004"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> От Пасхи до отдания поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                , от Вознесения до отдания — тропарь Вознесению, в Троицкую родительскую субботу —{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">По глубочайшей Премудрости </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(см.: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;7. С.&nbsp;</span>145
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
@@ -5339,17 +5343,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_--КРАСНЫЙ">/</span>
                     <span className="_--КРАСНЫЙ">/</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аллилуия, аллилуия, аллилуия</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-003-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-003"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
@@ -5553,17 +5553,13 @@ const Zlatoust = ({ lang, textRef }) => {
                         Да будет имя Господне благословенно — отныне и до века!{' '}
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(Трижды.)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-002-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-002"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
@@ -5682,17 +5678,20 @@ const Zlatoust = ({ lang, textRef }) => {
                         Слава Тебе, Христе Боже, Надежда наша, слава <br />
                         Те­бе!
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-001-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-001"
-                            >
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                                 {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                                На Пасху, в Светлую седмицу и на отдание Пасхи вместо этих слов поётся:{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                Христос воскрес из мёртвых, Смертию смерть поправ
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, а народ закан­чивает: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и тем, кто во гробах, Жизнь дарова́в</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Затем даётся отпуст.</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-15">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -5702,17 +5701,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Господи, помилуй </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(трижды)</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">. Бла­го­слови!</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-000-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-000"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> От Фоминой недели до отдания Пасхи поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(трижды).</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p id="otpust" className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
@@ -5838,160 +5833,6 @@ const Zlatoust = ({ lang, textRef }) => {
                     </a>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
                 </p>
-                <hr className="HorizontalRule-1" />
-                <div className="_idFootnotes">
-
-                    <div id="footnote-007" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-007-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                То есть прича́стен (кино́ник) дня или святого — см.:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;2. С.&nbsp;</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">22</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4–2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">63</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                . Поётся во время прича­ще­ния в алтаре (а иногда и в храме).
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-006" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-006-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (</span>см.: ПБ. Кн.&nbsp;1. с. 224
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-005" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-005-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                .<a id="_idTextAnchor007" />
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-004" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-004-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> От Пасхи до отдания поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                , от Вознесения до отдания — тропарь Вознесению, в Троицкую родительскую субботу —{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">По глубочайшей Премудрости </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(см.: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;7. С.&nbsp;</span>145
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-003" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-003-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-002" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-002-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-001" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-001-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                На Пасху, в Светлую седмицу и на отдание Пасхи вместо этих слов поётся:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                Христос воскрес из мёртвых, Смертию смерть поправ
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, а народ закан­чивает: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и тем, кто во гробах, Жизнь дарова́в</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Затем даётся отпуст.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-000" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-000-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> От Фоминой недели до отдания Пасхи поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(трижды).</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div className="_idGenObjectLayout-1">
-                <div id="_idContainer004" className="Текстовый-фрейм"></div>
             </div>
         </div>
     );
