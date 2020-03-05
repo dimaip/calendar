@@ -7,8 +7,9 @@ import dateFormat from 'dateformat';
 import Sermon from 'containers/Sermon/Sermon';
 import Saint from 'containers/Saint/Saint';
 import ThisDay from 'containers/ThisDay/ThisDay';
-import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import ScrollToTop from 'components/ScrollToTop/ScrollToTop';
 import Service from 'containers/Service/Service';
+import Tracker from 'components/Tracker/Tracker';
 
 export default (
     <div>
@@ -23,31 +24,49 @@ export default (
                 }}
             />
             <Route exact path="/date/:date">
-                <Main />
+                <Tracker>
+                    <Main />
+                </Tracker>
             </Route>
             <Route exact path="/date/:date/services">
-                <Main services />
+                <Tracker>
+                    <Main services />
+                </Tracker>
             </Route>
             <Route exact path="/date/:date/readings/:service">
-                <Readings />
+                <Tracker>
+                    <Readings />
+                </Tracker>
             </Route>
             <Route exact path="/date/:date/bReadings/:service">
-                <Readings brother />
+                <Tracker>
+                    <Readings brother />
+                </Tracker>
             </Route>
             <Route exact path="/date/:date/sermon/:sermonId">
-                <Sermon />
+                <Tracker>
+                    <Sermon />
+                </Tracker>
             </Route>
             <Route exact path="/date/:date/saint/:saintId">
-                <Saint />
+                <Tracker>
+                    <Saint />
+                </Tracker>
             </Route>
             <Route exact path="/date/:date/thisday/:thisDayId">
-                <ThisDay />
+                <Tracker>
+                    <ThisDay />
+                </Tracker>
             </Route>
             <Route exact path="/date/:date/service/:serviceId">
-                <Service />
+                <Tracker>
+                    <Service />
+                </Tracker>
             </Route>
             <Route>
-                <NotFound />
+                <Tracker>
+                    <NotFound />
+                </Tracker>
             </Route>
         </Switch>
     </div>

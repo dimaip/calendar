@@ -24,7 +24,11 @@ const localStorageMiddleware = ({ getState }) => {
                 const persistentStateSubset = {
                     settings: state.settings,
                 };
-                localStorage.setItem('persistedState', JSON.stringify(persistentStateSubset));
+                try {
+                    localStorage.setItem('persistedState', JSON.stringify(persistentStateSubset));
+                } catch (e) {
+                    console.warn(e);
+                }
                 timer = null;
             }, debounceLocalStorageTimeout);
         }

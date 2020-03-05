@@ -6,6 +6,7 @@ import useDay from 'hooks/useDay';
 import ReadingItem from 'containers/Readings/ReadingItem';
 import isGospel from 'domain/isGospel';
 import { css } from 'emotion';
+import Tooltip from 'components/Tooltip/Tooltip';
 
 const Readings = ({ readings }) => (
     <>
@@ -334,18 +335,11 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Антифоны изобразительные </span>
-                    <span className="_-РЕДКИЕ_Знак-сноски-красной">
-                        <span id="footnote-031-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-031"
-                            >
-                                {' '}
-                                *
-                            </a>
-                        </span>
-                    </span>
+                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Антифоны изобразительные</span>
+                    <Tooltip>
+                        То есть взятые из службы «Изобразительных» («Типика́»). Ан­тифоны ещё могут быть праздничные и
+                        вседневные (будничные); последние даны ниже.
+                    </Tooltip>
                 </p>
                 <p id="antifon1" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
@@ -1165,17 +1159,9 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-РЕДКИЕ_СТРОЧНЫЕ-в-прописн--заг-">Мф 5:3-1</span>
                     <span className="_-РЕДКИЕ_СТРОЧНЫЕ-в-прописн--заг-">2</span>
                     <span className="_-РЕДКИЕ_СТРОЧНЫЕ-в-прописн--заг-">)</span>
-                    <span className="_-РЕДКИЕ_Знак-сноски-красной">
-                        <span id="footnote-030-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-030"
-                            >
-                                {' '}
-                                **
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        «Блаженны» могут петься с тропарями из канонов Утрени по Типикону (богослужебному Уставу).
+                    </Tooltip>
                 </p>
                 {lang === 'default' && (
                     <>
@@ -1721,15 +1707,7 @@ const Zlatoust = ({ lang, textRef }) => {
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Трисвятой песни
-                        <span id="footnote-029-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-029"
-                            >
-                                {' '}
-                                ***
-                            </a>
-                        </span>
+                        <Tooltip>Если Трисвятое не поётся, то даётся только возглас.</Tooltip>
                     </span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
@@ -1792,17 +1770,23 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-12">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Трисвятое</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ CharOverride-5">
-                        <span id="footnote-028-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-028"
-                            >
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                                 {' '}
-                                ****
-                            </a>
-                        </span>
-                    </span>
+                                Вместо Трисвятого в Рождество Христово, Богоявление, Лазареву субботу, а также на
+                                Светлой (Пасхальной) седмице и на Пятидесятницу поётся:{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                Вы все, во Христа крестившиеся, во Христа облеклись. Аллилуия!
+                            </span>
+                            <br />
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Воздвижение креста: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                Кресту Твоему поклоняемся, Владыка, и святое Воскресение Твоё славим.
+                            </span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
@@ -5722,74 +5706,6 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <hr className="HorizontalRule-1" />
                 <div className="_idFootnotes">
-                    <div id="footnote-031" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-031-backlink"
-                                >
-                                    *
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                То есть взятые из службы «Изобразительных» («Типика́»). Ан­тифоны ещё могут быть
-                                праздничные и вседневные (будничные); последние даны ниже.
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-030" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <a
-                                className="_idFootnoteAnchor _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-030-backlink"
-                            >
-                                **
-                            </a>{' '}
-                            «Блаженны» могут петься с тропарями из канонов Утрени по Типикону (богослужебному Уставу).
-                        </p>
-                    </div>
-                    <div id="footnote-029" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-029-backlink"
-                                >
-                                    ***
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Если Трисвятое не поётся, то даётся только возглас.
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-028" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-028-backlink"
-                                >
-                                    ****
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Вместо Трисвятого в Рождество Христово, Богоявление, Лазареву субботу, а также на
-                                Светлой (Пасхальной) седмице и на Пятидесятницу поётся:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                Вы все, во Христа крестившиеся, во Христа облеклись. Аллилуия!
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Воздвижение креста: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                Кресту Твоему поклоняемся, Владыка, и святое Воскресение Твоё славим.
-                            </span>
-                        </p>
-                    </div>
                     <div id="footnote-027" className="_idFootnote">
                         <p className="_-СНОСКА_Сноска-КРАСНАЯ">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
