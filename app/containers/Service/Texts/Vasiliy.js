@@ -1789,7 +1789,13 @@ const Vasiliy = ({ lang }) => {
                 <p id="apostol" className="_-ОСНОВНОЙ_Чтение-Писания">
                     <span className="_-ВЫДЕЛЕНИЯ_ЖИРН-КУРСИВ">Чтение Апостола</span>
                 </p>
-                {apostol}
+                <div
+                    className={css`
+                        margin: 0 5px;
+                    `}
+                >
+                    {apostol}
+                </div>
                 <p className="_-ОСНОВНОЙ_Основной-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
@@ -1986,7 +1992,13 @@ const Vasiliy = ({ lang }) => {
                 <p id="gospel" className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-12">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Чтение Евангелия</span>
                 </p>
-                {gospel}
+                <div
+                    className={css`
+                        margin: 0 5px;
+                    `}
+                >
+                    {gospel}
+                </div>
                 <p className="_-ОСНОВНОЙ_Основной-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
