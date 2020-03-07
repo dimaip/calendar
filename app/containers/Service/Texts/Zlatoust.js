@@ -80,27 +80,52 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (см. </span>с.&nbsp;<a>96</a>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">О Царь Небесный</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> О Царь Небесный, Хода́тай </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Уте́шитель</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">,</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        Дух Истины, о Ты, везде пребывающий и всё наполняющий, Со­кро­вищ­ница благ и жизни Податель,
-                        при­ди` и вселись в
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        нас, и очи­сти нас от вся­кой скверны, и спа­си, Бла­го́й, ду­ши наши.
-                    </span>
-                </p>
+                {lang === 'default' && (
+                    <>
+                        <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">О Царь Небесный</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> О Царь Небесный, Хода́тай </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Уте́шитель</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">,</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                Дух Истины, о Ты, везде пребывающий и всё наполняющий, Со­кро­вищ­ница благ и жизни Податель,
+                                при­ди` и вселись в
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                нас, и очи­сти нас от вся­кой скверны, и спа­си, Бла­го́й, ду­ши наши.
+                            </span>
+                        </p>
+                    </>
+                )}
+                {lang === 'ЦСЯ' && (
+                    <>
+                        <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">О Царь Небесный</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> 
+                                {' '}
+                                Царю Небесный, Утешителю,
+                                <br /> 
+                                Душе истины, Иже везде сый и вся исполняяй, 
+                                <br /> 
+                                Сокровище благих и жизни Подателю, прииди и вселися в ны,
+                                <br /> 
+                                и очисти ны от всякия скверны, и спаси, Блаже, души наша.
+                            </span>
+                        </p>
+                    </>
+                )}    
                 <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                         {' '}
@@ -343,7 +368,8 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p id="antifon1" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        Молитва перед пением <br />
+                        Молитва перед пением
+                        <br />
                         первого антифона
                     </span>
                 </p>
@@ -384,46 +410,44 @@ const Zlatoust = ({ lang, textRef }) => {
 
                 {lang === 'default' && (
                     <>
-                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-4">
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Благослови Господа, душа моя!
-                                <br /> Благословен Ты, Господи.
+                                <br />{' '}Благословен Ты, Господи.
                             </span>
-                        </p>
-                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-4">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
-                                Благослови Господа, душа моя,
+                                <br /> Благослови Господа, душа моя,
                                 <br /> и всё, что во мне, — имя святое Его;
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 благослови Господа, душа моя,
                                 <br /> и не забывай всех даро́в Его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Он прощает все беззакония твои,
                                 <br /> исцеляет все неду`ги твои,
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 избавляет от истле́ния жизнь твою,
                                 <br /> милостью и щедротами венчает тебя,
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 насыщает бла́гами зрелость твою;
@@ -433,14 +457,14 @@ const Zlatoust = ({ lang, textRef }) => {
                         <p className="_-ПЕТИТ_ПетитСТ-отст1-5 ParaOverride-4">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Милость творит Господь,
                                 <br /> тесни`мых защищает права́;
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 открыл Он Моисею пути Свои,
@@ -450,7 +474,7 @@ const Zlatoust = ({ lang, textRef }) => {
                         </p>
                         <p className="_-ОСНОВНОЙ_ОсновнойСТ-б-отст">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 щедр и ми`лостив Господь,
@@ -460,7 +484,7 @@ const Zlatoust = ({ lang, textRef }) => {
                         <p className="_-ПЕТИТ_ПетитСТ-б-отст">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1 </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1 </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 прогневается не до конца,
                                 <br /> и враждует не вове́к.
@@ -468,14 +492,14 @@ const Zlatoust = ({ lang, textRef }) => {
                         </p>
                         <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Не по беззакониям нашим сотворил Он нам,
                                 <br /> и не по грехам нашим воздал Он нам;
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> но как высоки`</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
@@ -483,21 +507,21 @@ const Zlatoust = ({ lang, textRef }) => {
                                 <br /> сильна́ милость Его к боящимся Его;
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 как восток от запада далёк,
                                 <br /> беззакония наши отдали`л Он от нас;
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 как ми`лует отец детей,
                                 <br /> ми`лует Господь боящихся Его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Ибо знает Он состав наш,
@@ -507,27 +531,27 @@ const Zlatoust = ({ lang, textRef }) => {
                         </p>
                         <p className="_-ПЕТИТ_Петит-отст1-5 ParaOverride-6">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1 </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1 </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Человек — дни его подобны траве,
                                 <br /> как цвет полево́й, отцветают они;
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 повеет над ним — и нет его,
                                 <br /> и не узна́ет его место его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Но милость Господня от века и вове́к
                                 <br /> к боя´щимся Его,
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 и правда Его на сына́х сынов
@@ -539,14 +563,14 @@ const Zlatoust = ({ lang, textRef }) => {
                         </p>
                         <p className="_-ПЕТИТ_Петит-отст1-5 ParaOverride-6">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Господь воздвиг престол Свой на небесах,
                                 <br /> и всё объе́млет царство Его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Благословите Господа, все Вестники Его,
@@ -557,14 +581,14 @@ const Zlatoust = ({ lang, textRef }) => {
                                 мля звуку сло́ва Его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Благословите Господа, все Воинства Его,
                                 <br /> слу`ги Его, творящие волю Его!
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Благословите Господа, все дела Его,
@@ -574,7 +598,7 @@ const Zlatoust = ({ lang, textRef }) => {
                         </p>
                         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-4">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Благослови Господа, душа моя,
@@ -591,7 +615,7 @@ const Zlatoust = ({ lang, textRef }) => {
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Благослови, душе моя, Господа.
@@ -605,151 +629,120 @@ const Zlatoust = ({ lang, textRef }) => {
                                 <br /> и вся внутренняя моя Имя святое Его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Благослови, душе моя, Господа,
                                 <br /> и не забывай всех воздаяний Его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Очищающаго вся беззакония твоя,
                                 <br /> исцеляющаго вся недуги твоя.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Избавляющаго от истления живот твой,
                                 <br /> венчающаго тя милостию и щедротами.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Исполняющаго во благих желание твое:
                                 <br /> обновится, яко орля, юность твоя.
-                            </span>
-                        </p>
-                        <p className="_-ПЕТИТ_Петит-отст1-5 ParaOverride-4">
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                {' '}
-                                Творяй милостыни Господь,
+                                <br /> Творяй милостыни Господь,
                                 <br /> и судьбу всем обидимым.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Сказа пути Своя Моисеови,
                                 <br /> сыновом Израилевым хотения Своя.
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">]</span>
-                        </p>
-                        <p className="basetIndent_6">
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Щедр и милостив Господь,
                                 <br /> долготерпелив и многомилостив.
                             </span>
-                        </p>
-                        <p className="petitIndent_6">
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1 </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1 </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Не до конца прогневается,
                                 <br /> ниже в век враждует.
                             </span>
-                        </p>
-                        <p className="_-ПЕТИТ_Петит-отст1-5">
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Не по беззаконием нашим сотворил есть нам,
                                 <br /> ниже по грехом нашим воздал есть нам.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Яко по высоте</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> 
                                 {' '}
-                                небесней от земли,
+                                Яко по высоте небесней от земли,
                                 <br /> утвердил есть Господь милость Свою на боящихся Его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Елико отстоят востоцы от запад,
                                 <br /> удалил есть от нас беззакония наша.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Якоже щедрит отец сыны,
                                 <br /> ущедри Господь боящихся Его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Яко Той позна создание наше,
                                 <br />
+                                помяну, яко персть есмы.
+                                <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">помяну, яко персть есмы.</span>
-                        </p>
-                        <p className="_-ПЕТИТ_Петит-отст1-5 ParaOverride-6">
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1 </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1 </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Человек, яко трава дние его,
                                 <br /> яко цвет сельный, тако оцветет.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Яко дух пройде в нем, и не будет,
                                 <br /> и не познает ктому места своего.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Милость же Господня от века и до века
                                 <br /> на боящихся Его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 И правда Его на сынех сынов,
                                 <br /> хранящих завет Его,
                                 <br /> и помнящих заповеди Его
                                 <br /> творити я.
                             </span>
-                        </p>
-                        <p className="_-ПЕТИТ_Петит-отст1-5 ParaOverride-6">
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Господь на небеси уготова Престол Свой,
                                 <br /> и Царство Его всеми обладает.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Благословите Господа, ангели Его,
                                 <br /> сильнии крепостию, творящии слово Его,
@@ -758,24 +751,18 @@ const Zlatoust = ({ lang, textRef }) => {
                                 услышати глас словес Его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Благословите Господа, вся силы Его,
                                 <br /> слуги Его, творящии волю Его.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Благословите Господа, вся дела Его,
                                 <br /> на всяком месте владычества Его.
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">]</span>
-                        </p>
-                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-4">
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Благослови, душе моя, Господа,
@@ -874,14 +861,14 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 {lang === 'default' && (
                     <>
-                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-7">
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-2">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Хвали Господа, душа моя!</span>
                         </p>
-                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-7">
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-3">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Восхвалю` Господа, доко́ле живу;
@@ -889,14 +876,14 @@ const Zlatoust = ({ lang, textRef }) => {
                                 <br /> поку`да есмь.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Не надейтеся на вельмож,
                                 <br /> на Адамова сына — в нём спасения нет:
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 выйдет дух его, он вернётся в землю свою,
@@ -905,42 +892,42 @@ const Zlatoust = ({ lang, textRef }) => {
                         </p>
                         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Бла́го тому, кому в помощь Иакова Бог,
                                 <br /> чья надежда — на Господа, на Бога своего,
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 на Того, Чьё творение — небеса и земля,
                                 <br /> и море, и всё, что в них,
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Кто хранит верность вовек,
                                 <br /> для утесняемых вершит суд,
                                 <br /> а́лчущим подаёт хлеб; <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Господь выводит узников на свет,
                                 <br /> Господь отверзает очи слепцам,
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Господь выпрямляет тех, кто согбе́н,
                                 <br /> Господь праведным благоволи`т,
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Господь пришельцев хранит,
@@ -950,7 +937,7 @@ const Zlatoust = ({ lang, textRef }) => {
                         </p>
                         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Царствует Господь вовек,
@@ -1169,7 +1156,7 @@ const Zlatoust = ({ lang, textRef }) => {
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Во царствии Своём вспомни о нас, Господи,
@@ -1182,7 +1169,7 @@ const Zlatoust = ({ lang, textRef }) => {
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Блаженны нищие духом,
@@ -1193,7 +1180,7 @@ const Zlatoust = ({ lang, textRef }) => {
                                 ибо их есть Царство Небесное.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Блаженны скорбящие,
@@ -1206,7 +1193,7 @@ const Zlatoust = ({ lang, textRef }) => {
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">0</span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Блаженны кроткие,
@@ -1217,7 +1204,7 @@ const Zlatoust = ({ lang, textRef }) => {
                                 ибо они примут в удел землю.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Блаженны а́лчущие и жаждущие правды,
@@ -1227,14 +1214,14 @@ const Zlatoust = ({ lang, textRef }) => {
                         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На 8</span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Блаженны милосердные,
                                 <br /> ибо будут они помилованы.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Блаженны те, чьи сердца́ чисты`,
@@ -1244,7 +1231,7 @@ const Zlatoust = ({ lang, textRef }) => {
                         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На 6</span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Блаженны миротворцы,
@@ -1255,7 +1242,7 @@ const Zlatoust = ({ lang, textRef }) => {
                                 ибо наречены` они будут сынами Божьими.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 Блаженны гонимые за правду,
@@ -1265,7 +1252,7 @@ const Zlatoust = ({ lang, textRef }) => {
                         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На 4</span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Блаженны вы, когда станут вас
@@ -1277,7 +1264,7 @@ const Zlatoust = ({ lang, textRef }) => {
                                 худое слово — из-за Меня.
                                 <br />
                             </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
                                 Радуйтесь и веселитесь, <br /> ибо велика́ награда ваша на Небесах!
@@ -1382,12 +1369,12 @@ const Zlatoust = ({ lang, textRef }) => {
                 )}
                 <p className="_-ПЕТИТ_КРАСН-петит-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> [</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">1</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Слава.</span>
                 </p>
                 <p className="_-ПЕТИТ_КРАСН-петит-б-отст">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> И ныне.]</span>
                 </p>
                 <p className="_-ПЕТИТ_Петит-Имя-РаздСл ParaOverride-8">
@@ -1402,7 +1389,7 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_Петит-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">1</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Сладко Господа благодарить!</span>
                 </p>
                 <p className="_-ПЕТИТ_Петит-отст1-5">
@@ -1413,7 +1400,7 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                         {' '}
                         Сладко Господа благодарить,
@@ -1423,7 +1410,7 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">1</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                         {' '}
                         возвещать поутру` милость Твою,
@@ -1432,7 +1419,7 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                         {' '}
                         Прав Господь, Бог наш,
@@ -1441,12 +1428,12 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_КРАСН-петит-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">1 </span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1 </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Слава.</span>
                 </p>
                 <p className="_-ПЕТИТ_КРАСН-петит-б-отст">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> И ныне.</span>
                 </p>
                 <p className="_-ПЕТИТ_Петит-Имя-части-отст2">
@@ -1457,7 +1444,7 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_Петит-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">1</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-1"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Господь&nbsp;— Царь. Его оде</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">я´</span>
@@ -1471,7 +1458,7 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Господь&nbsp;— Царь. Его оде</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">я´</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
@@ -1481,7 +1468,7 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">1</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Сто</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и`</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">т мир&nbsp;— и</span>
@@ -1489,7 +1476,7 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5 ParaOverride-9">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-2">2</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Откровения Твои несомненно верны`.</span>
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-б-отст ParaOverride-9">
@@ -1517,7 +1504,7 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                         {' '}
                         Приди`те пред Господом ликовать,
@@ -1534,7 +1521,7 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                         {' '}
                         благодарно станем пред Ним,
@@ -1543,32 +1530,32 @@ const Zlatoust = ({ lang, textRef }) => {
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Ибо Господь — великий Бог,</span>
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> над всеми богами великий Царь;</span>
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> в руке Его — бездны земли`,</span>
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и высо́ты гор — во власти Его;</span>
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">1</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">1</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и море Он сотворил,</span>
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн _idGenCharOverride-1">2</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">2</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и сушу извая´ли руки Его.</span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">]</span>
                 </p>
@@ -1739,10 +1726,8 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и всегда</span>
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-4"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ CharOverride-4">Тихо:</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Тихо:</span>
                 </p>
                 <p className="_-ПЕТИТ_Петит-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1965,15 +1950,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Молитва <br />
                         перед чтением Евангелия
-                        <span id="footnote-027-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-027"
-                            >
-                                {' '}
-                                *****
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).
+                                </span>
+                            </>
+                        </Tooltip>
                     </span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
@@ -2301,15 +2284,18 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> святой обители сей</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         ]
-                        <span id="footnote-026-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-026"
-                            >
-                                {' '}
-                                ******
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    {' '}
+                                    Далее могут быть ещё добавлены особые прошения, в т. ч. по специальной просьбе верных, о
+                                    болящих, по случаю различных бедствий, скорбей и нужд и т. д. Также перед Заупокойной
+                                    ектениёй могут быть добавлены и соответствующие особые молитвы после дьяконского
+                                    возгласа{' '}
+                                </span>
+                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Господу помолимся!</span>
+                            </>
+                        </Tooltip>
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
@@ -2354,20 +2340,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
                 </p>
-                <p className="_-ПЕТИТ_Петит-Имя-части-отст5 ParaOverride-2">
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ CharOverride-3">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">СУГУБАя Заупокойная ектения</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-025-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-025"
-                            >
-                                {' '}
-                                *******
-                            </a>
-                        </span>
-                    </span>
+                <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
+                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
+                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">СУГУБАЯ ЗАУПОКОЙНАЯ ЕКТЕНИЯ</span>
+                    <Tooltip>
+                        Не читается в храмовые (престольные) и двунадесятые праздники и, как правило, в
+                        воскресные дни, дни Святок и всей св. Пятидесятницы.
+                    </Tooltip>
                 </p>
                 <p className="_-ПЕТИТ_Петит-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -2429,7 +2408,7 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
                 </p>
-                <p className="_-ПЕТИТ_Петит-Имя-части-отст5">
+                <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва об усопших</span>
                 </p>
                 <p className="_-ПЕТИТ_Петит-отст1-5">
@@ -2600,33 +2579,34 @@ const Zlatoust = ({ lang, textRef }) => {
                         {' '}
                         Все оглашаемые, изыди`те! Оглашаемые, изы­ди`те! Все оглашаемые, изыди`те!
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-024-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-024"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip> 
+                        <> 
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                Если присутствуют просвещаемые, то здесь могут быть до­бавлены специальные Ектения и
+                                Молитва о просвещаемых, сохранившиеся в Литургии преждеосвящённых даров (см.: ПБ. Кн.&nbsp;3. С.&nbsp;95–96).
+                            </span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Пусть не останется никого из оглашаемых </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и просве­щае­мых</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">]</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">!</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-023-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-023"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Или: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                Пусть никто из оглашаемых, никто из тех, чья вера не­твер­да, никто из кающихся, никто
+                                из нечистых
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (т. е. обуреваемых) </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                не при­бли­жается к святым таинствам. Кто не причащается, да покинет собра­ние!
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (св. Григорий Двоеслов)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
@@ -2675,15 +2655,13 @@ const Zlatoust = ({ lang, textRef }) => {
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-13">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Молитва первая
-                        <span id="footnote-022-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-022"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    Древнее надписание: «После распростертия илитона» (возможно, с ан­ти­минсом).
+                                </span>
+                            </>
+                        </Tooltip>
                     </span>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
@@ -2840,19 +2818,15 @@ const Zlatoust = ({ lang, textRef }) => {
                     <a>96</a>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
                 </p>
-                <p className="_-ПЕТИТ_Петит-Имя-части-отст5 ParaOverride-12">
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ CharOverride-3">[</span>
+                <p className="_-ОСНОВНОЙ_Имя-части-отст5">
+                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Молитва предстоятеля о себе
-                        <span id="footnote-021-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-021"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Вставка из Литургии св. Василия Великого.</span>
+                            </>
+                        </Tooltip>
                     </span>
                 </p>
                 <p className="_-ПЕТИТ_КРАСН-петит-отст1-5">
@@ -2882,17 +2856,12 @@ const Zlatoust = ({ lang, textRef }) => {
                         служителя Тво
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">его</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">
-                        <span id="footnote-020-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-020"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">В церковнославянском тексте далее вставка: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и очисти мою душу и сердце от сове­сти нечистой.</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                         , и силой Святого Духа Твоего укрепи меня, облечённого благодатью священства, для предстояния
                         перед этим свя­тым престолом Твоим и принесения в жертву Твоего свя­того и непорочного тела и
@@ -2937,36 +2906,78 @@ const Zlatoust = ({ lang, textRef }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> 1-я часть Херувимской песни:</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Херувимов в таинстве изображая…</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В то же время:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        Херувимов в таинстве изображая <br /> и живо­творя­щей Троице <br /> Трисвятую песнь воспевая,{' '}
-                        <br />
-                        вся­кое ныне жи­тейское <br /> отло́жим попечение,
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        <a id="_idTextAnchor005" />
-                        дабы приня´ть нам Царя всего сущего, <br /> стражей ангельской
-                        <br /> незримо сопровожда́емого.
-                        <br />
-                        Аллилуия, аллилуия, аллилуия.
-                    </span>
-                </p>
+                {lang === 'default' && (
+                    <>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Херувимов в таинстве изображая…</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В то же время:</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                Херувимов в таинстве изображая <br /> и живо­творя­щей Троице <br /> Трисвятую песнь воспевая,{' '}
+                                <br />
+                                вся­кое ныне жи­тейское <br /> отло
+                            </span>
+                            <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">жим попечение,</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> дабы приня</span>
+                            <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                ть нам Царя всего сущего, <br /> стражей ангельской
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-б-отст">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> незримо сопровожда</span>
+                            <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                ­емого.
+                                <br />
+                                Аллилуия, аллилуия, аллилуия.
+                            </span>
+                        </p>
+                    </>
+                )}
+
+                {lang === 'ЦСЯ' && (
+                    <>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Иже Херувимы тайно образующе…</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В то же время:</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                Иже Херувимы тайно образующе <br /> и животворящей Троице <br /> Трисвятую песнь припевающе,{' '}
+                                <br />
+                                всякое ныне житейское <br /> отложим попечение.</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Яко да Царя всех подымем, <br /> ангельскими невидимо дориносима чинми.
+                                <br />
+                                Аллилуия, аллилуия, аллилуия.
+                            </span>
+                        </p>
+                    </>
+                )}
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (Трижды.) </span>
                 </p>
@@ -3410,15 +3421,11 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ CharOverride-9">[</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва перед целованием мира </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-019-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-019"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Руси читалась до сер. ХVII в. Изначально могла быть обращена к Богу-Отцу.</span>
+                            </>
+                        </Tooltip>
                     </span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
@@ -3464,15 +3471,24 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">6.</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         )
-                        <span id="footnote-018-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-018"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Далее в тексте Служебника вставки:</span>
+                            <p className="_-ПЕТИТ_Петит-б-отст">
+                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Д</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> …дабы в единомыслии ис­по­ведать:</span>
+                            </p>
+                            <p className="_-ПЕТИТ_Петит-б-отст">
+                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Н</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                    {' '}
+                                    Отца и Сына и Святого Духа — Троицу единосущ­ную и нераздельную.
+                                </span>
+                            </p>
+                        </>
+                    </Tooltip>
                     </span>
                 </p>
                 <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
@@ -3501,17 +3517,23 @@ const Zlatoust = ({ lang, textRef }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-16">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Сослужащие [и Н]: </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">И есть, и будет</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-017-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-017"
-                            >
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                                 {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                                Согласно древней практике перед закрытием входных дверей все верные дают друг другу
+                                целование мира и любви со сло­вами:{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос посреди нас!</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> — и отвечая: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">И есть, и будет!</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> [или:</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Христос воскрес!</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> — </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Воистину воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">].</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст5">
@@ -3521,17 +3543,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Двери, двери!</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-016-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-016"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                            «Дьяконы пусть стоят при дверях… чтобы во время возношения никто не выходил и чтобы не
+                            отворялась дверь, хотя бы пришёл и верующий» (Апостольские постанов­ления. 8. 11).</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> В Премудрости будем внимать!</span>
@@ -3543,94 +3561,162 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> [</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Опахивая св. дары возду`хом:]</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        Верую в одного Бога — Отца, Вседержителя, Твор­ца неба и земли, всего видимого и невидимого.
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        И в одного Господа Иисуса Христа, Сына Божьего&nbsp;— еди­но­родного, от Отца рождённого прежде
-                        всех вре­мён{' '}
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> миро́в</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        , Свет от Света, Бога истинного от Бо­га ис­тин­но­го, рождённого,{' '}
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">но</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        не сотворённого, едино­сущ­ного От­цу, — через Которого всё стало;
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        ради нас, людей, и для нашего спасения сшед­шего с Не­бес, и воплоти`вшегося от Свя­того Духа и
-                        Де­вы Ма­рии, и ставшего Человеком;
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        и распя´того за нас при Пилате Понтийском, и стра­дав­шего, и погребённого;
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и воскресшего </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> восставшего</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> в третий день, по Пи­са­нию;</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и восшедшего </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> вознёсшегося</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> на Небеса, и воссевшего по правую руку Отца;</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        и снова гряду`щего во Славе, дабы судить живых и мёрт­вых, и Его Царству не будет конца.
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        И в Духа Святого — Господа, животворящего, от От­ца ис­ходящего, со Отцом и Сыном вместе
-                        почитаемого и прославляемого, говорившего через про­роков.
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> В одну святую, кафоли`ческую </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> вселенскую, со­бор­ную</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и апостольскую Церковь.</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Признаю` одно крещение, ради прощения грехов.</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Ожидаю воскресения мёртвых </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и Жизни будущего века </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">
-                        (т.&nbsp;е. вечной Жизни и нового состояния всего мира)
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">. </span>
-                </p>
+                {lang === 'default' && (
+                    <>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                Верую в одного Бога — Отца, Вседержителя, Твор­ца неба и земли, всего видимого и невидимого.
+                            </span>
+                        </p>
+                        
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                И в одного Господа Иисуса Христа, Сына Божьего&nbsp;— еди­но­родного, от Отца рождённого прежде
+                                всех вре­мён{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> миро́в</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                , Свет от Света, Бога истинного от Бо­га ис­тин­но­го, рождённого,{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">но</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">]</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                не сотворённого, едино­сущ­ного От­цу, — через Которого всё стало;
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                ради нас, людей, и для нашего спасения сшед­шего с Не­бес, и воплоти`вшегося от Свя­того Духа и
+                                Де­вы Ма­рии, и ставшего Человеком;
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                и распя´того за нас при Пилате Понтийском, и стра­дав­шего, и погребённого;
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и воскресшего </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> восставшего</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> в третий день, по Пи­са­нию;</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и восшедшего </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> вознёсшегося</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> на Небеса, и воссевшего по правую руку Отца;</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                и снова гряду`щего во Славе, дабы судить живых и мёрт­вых, и Его Царству не будет конца.
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                И в Духа Святого — Господа, животворящего, от От­ца ис­ходящего, со Отцом и Сыном вместе
+                                почитаемого и прославляемого, говорившего через про­роков.
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> В одну святую, кафоли`ческую </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> вселенскую, со­бор­ную</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и апостольскую Церковь.</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Признаю` одно крещение, ради прощения грехов.</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Ожидаю воскресения мёртвых </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и Жизни будущего века </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">
+                                (т.&nbsp;е. вечной Жизни и нового состояния всего мира)
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">. </span>
+                        </p>
+                    </>
+                )}
+
+                {lang === 'ЦСЯ' && (
+                    <>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Верую во единаго Бога Отца Вседержителя,</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                Творца небу и земли, видимым же всем и невидимым.
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                И во единаго Господа Иисуса Христа, Сына Божия, Единороднаго, Иже от Отца рожденнаго прежде всех век.{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                            Света от Света, Бога истинна от Бога истинна, рожденна,{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                несотворенна, единосущна Отцу, Имже вся быша.
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                Нас ради человек и нашего ради спасения сшедшаго с небес и воплотившагося от Духа Свята и Марии Девы и вочеловечшася.
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Распятаго же за ны при Понтийстем Пилате, и страдавша, и погребенна.
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> И воскресшаго в третий день по Писанием.</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> И возшедшаго на небеса, и седяща одесную Отца.</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> И паки грядущаго со славою судити живым и мертвым, Егоже Царствию не будет конца.
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                И в Духа Святаго, Господа, Животворящаго, Иже от Отца исходящаго, Иже со Отцем и Сыном спокланяема и сславима, глаголавшаго пророки.
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Во едину Святую, Соборную и Апостольскую Церковь.</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Исповедую едино крещение во оставление грехов.</span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Чаю воскресения мертвых, и жизни будущаго века. </span>
+                        </p>
+                        </>
+                )}
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[Н]</span>
@@ -3644,18 +3730,15 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        {' '}
-                        Св. возношение (ана́фора)
-                        <span id="footnote-015-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-015"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                        {' '}Св. возношение (ана́фора)</span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    Раздел (4) — Евхаристический кано́н. Он со­стоит из вступ­ления и четы­рех основных
+                                    частей: префа́цио (вводная часть), ана́мнесис (воспо­ми­нание), эпи`клесис (при­зывание) и
+                                    ин­тер­це́ссио (хода́тай­ство).</span>
+                            </>
+                        </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -3712,15 +3795,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и справедливо</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         ]
-                        <span id="footnote-014-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-014"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Далее в тексте Служебника вставка: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                покло­няться Отцу и Сыну и Святому Духу, Троице еди­носущной и нераз­дельной.</span>
+                        </>
+                    </Tooltip>
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
@@ -3885,17 +3966,22 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Твоё из Твоего Тебе́ принося всегда и везде</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-013-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-013"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> См. у М. Арранца и др. С греч., возможно ещё: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">согласно всему </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">этому</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) (</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">по всем этим причинам</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и для всего </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">этого</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) (Е. Ло­вягин и др.)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">,</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
@@ -3905,15 +3991,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         (На­род вто­рит.)
-                        <span id="footnote-012-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-012"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                В церковнославянском тексте Служебника далее следует вставка: тропарь Третьего часа, со
+                                стихами (см.:{' '}ПБ. Кн.&nbsp;1. 3-е изд. М., 2015. С. 214, а также: ПБ. Кн.&nbsp;7. M., 2010 С.&nbsp;35).</span>
+                        </>
+                    </Tooltip>
                     </span>
                 </p>
                 <p id="epiclisis" className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-18">
@@ -4089,17 +4173,29 @@ const Zlatoust = ({ lang, textRef }) => {
                         Че́ствуемую превыше херувимов и славную не­срав­ненно более серафимов, девственно Бога-Слово
                         ро­дившую, поистине Богородицу — тебя величаем
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-011-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-011"
-                            >
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                                 {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                                В двунадесятые праздники и в дни их попразднества обычно вместо «Воистину подобает»
+                                поётся «задостойник», т. е. запев на 9-й песни канона праздника (см.:{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн. 1. Изд. 3-е, испр. и доп. М. : </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">СФИ</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2015</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. С. </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">17</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">7–2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">06</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">22</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4–2</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">34</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) и её ирмо́с.</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
@@ -4452,59 +4548,98 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">: </span>
                 </p>
-                <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">и</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        Отец наш Небесный!
-                        <br />
-                        да святи`тся имя Твоё,
-                        <br />
-                        да придёт Царство Твоё,
-                        <br />
-                        да будет воля Твоя
-                        <br />и на земле, как на Небе;
-                        <br />
-                        хлеб наш насущный подай нам сегодня,
-                        <br />
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        и прости нам долги` наши,
-                        <br />
-                        как и мы простили должникам нашим,
-                        <br />и не введи нас во искушение,
-                        <br />
-                        но избавь нас от лукавого <br />
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(т. е. от зла или от злого — дьявола)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">, — </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        ибо Твои` царствие, и сила, и слава, <br />
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отца и Сына и Святого Духа,</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        <br />
-                        ныне и всегда и во веки веков{' '}
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(Мф </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">6:9</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">-</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">13</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
-                </p>
+                {lang === 'default' && (
+                    <>
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-7">
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> П и Н</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                Отец наш Небесный!
+                                <br />
+                                да святи`тся имя Твоё,
+                                <br />
+                                да придёт Царство Твоё,
+                                <br />
+                                да будет воля Твоя
+                                <br />и на земле, как на Небе;
+                                <br />
+                                хлеб наш насущный подай нам сегодня,
+                                <br />
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                и прости нам долги` наши,
+                                <br />
+                                как и мы простили должникам нашим,
+                                <br />и не введи нас во искушение,
+                                <br />
+                                но избавь нас от лукавого <br />
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(т. е. от зла или от злого — дьявола)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">, — </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-2"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ибо Твои царствие, и сила, и слава, </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-2">
+                                <br />
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отца и Сына и Святого Духа,</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                <br />
+                                ныне и всегда и во веки веков{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(Мф 6:9-13)</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
+                        </p>
+                    </>
+                )}
+
+                {lang === 'ЦСЯ' && (
+                    <>
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-7">
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> П и Н</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                Отче наш,
+                                <br />
+                                Иже еси на небесех, да святится имя Твое,
+                                <br />
+                                да приидет Царствие Твое,
+                                <br />
+                                да будет воля Твоя,
+                                <br />
+                                яко на небеси и на земли.
+                                <br />
+                                Хлеб наш насущный даждь нам днесь;
+                                <br />
+                                и остави нам долги наша,
+                                <br />
+                                как и мы простили должникам нашим,
+                                <br />
+                                и не введи нас во искушение,
+                                <br />
+                                но избавь нас от лукавого <br />
+                            </span>
+                        </p>
+                        <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-16">
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                {' '}
+                                Яко Твое есть Царство, и сила, и слава,
+                                <br />
+                                Отца, и Сына, и Святаго Духа,
+                                <br />
+                                ныне и присно, и во веки веков.{' '}
+                            </span>
+                        </p>
+                    </>
+                )}
+
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
@@ -4547,17 +4682,14 @@ const Zlatoust = ({ lang, textRef }) => {
                         наших, —
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ CharOverride-11">
-                        <span id="footnote-010-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-010"
-                            >
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                                Эта молитва, вероятно, когда-то служила отпустом для непричащающихся верных (см.: Taft
+                                R. The Precommunion Rites. Roma, 2000. P. 193).</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-16">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
@@ -4611,17 +4743,13 @@ const Zlatoust = ({ lang, textRef }) => {
                         {' '}
                         Вне́мли, Господи Иисусе Христе, Боже наш, из свя­той обители Своей
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-009-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-009"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В тексте Служебника далее вставка: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и со славного пре­стола царствия Своего</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-8">.</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">,</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
@@ -4742,15 +4870,21 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         {' '}
                         для причащения в алтаре
-                        <span id="footnote-008-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-008"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    Далее по обычаю предстоятель просит у всех прощения и тихо молится:
+                                </span>
+                                <p className="_-ПЕТИТ_Петит-б-отст">
+                                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">П</span>
+                                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                        {' '}
+                                        Отпусти, оставь, прости, Боже, наши вольные и невольные согре­ше­ния, соделанные словом
+                                        и делом, в ве́дении и неве́дении, днём и в ночи`, во уме и разумении, — всё нам прости, по Своей благости и
+                                        человеколюбию!</span>
+                                </p>
+                            </>
+                        </Tooltip>
                         .
                     </span>
                 </p>
@@ -4825,15 +4959,22 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         {' '}
                         Н Причастный стих
-                        <span id="footnote-007-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-007"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
+                        <Tooltip>
+                            <>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    {' '}
+                                    То есть прича́стен (кино́ник) дня или святого — см.:{' '}
+                                </span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;2. С.&nbsp;</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">22</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4–2</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">63</span>
+                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                    . Поётся во время прича­ще­ния в алтаре (а иногда и в храме).
+                                </span>
+                            </>
+                        </Tooltip>
                         .
                     </span>
                 </p>
@@ -5004,17 +5145,14 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">6, </span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">27</span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">.)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-006-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-006"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (</span>см.: ПБ. Кн.&nbsp;1. с. 224
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Причащая:</span>
@@ -5047,17 +5185,14 @@ const Zlatoust = ({ lang, textRef }) => {
                         {' '}
                         Тело Христово прими`те, от источника бессмер­тия вку­си`те!
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-005-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-005"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                            </span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-20">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">После причащения</span>
@@ -5144,17 +5279,20 @@ const Zlatoust = ({ lang, textRef }) => {
                         {' '}
                         поклоняясь неразде­ль­ной Троице, <br /> ибо Она спасла нас
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-004-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-004"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> От Пасхи до отдания поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                , от Вознесения до отдания — тропарь Вознесению, в Троицкую родительскую субботу —{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">По глубочайшей Премудрости </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(см.: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;7. С.&nbsp;</span>145
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
@@ -5217,17 +5355,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_--КРАСНЫЙ">/</span>
                     <span className="_--КРАСНЫЙ">/</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аллилуия, аллилуия, аллилуия</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-003-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-003"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
@@ -5431,17 +5565,13 @@ const Zlatoust = ({ lang, textRef }) => {
                         Да будет имя Господне благословенно — отныне и до века!{' '}
                     </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(Трижды.)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-002-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-002"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
@@ -5560,17 +5690,20 @@ const Zlatoust = ({ lang, textRef }) => {
                         Слава Тебе, Христе Боже, Надежда наша, слава <br />
                         Те­бе!
                     </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-001-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-001"
-                            >
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                                 {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                                На Пасху, в Светлую седмицу и на отдание Пасхи вместо этих слов поётся:{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                                Христос воскрес из мёртвых, Смертию смерть поправ
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, а народ закан­чивает: </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и тем, кто во гробах, Жизнь дарова́в</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Затем даётся отпуст.</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-15">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -5580,17 +5713,13 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Господи, помилуй </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(трижды)</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">. Бла­го­слови!</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <span id="footnote-000-backlink">
-                            <a
-                                className="_idFootnoteLink _idGenColorInherit"
-                                href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-000"
-                            >
-                                {' '}
-                                ********
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> От Фоминой недели до отдания Пасхи поётся </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(трижды).</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p id="otpust" className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
@@ -5716,569 +5845,6 @@ const Zlatoust = ({ lang, textRef }) => {
                     </a>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
                 </p>
-                <hr className="HorizontalRule-1" />
-                <div className="_idFootnotes">
-                    <div id="footnote-027" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-027-backlink"
-                                >
-                                    *****
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Изначально могла быть обращена к Богу-Отцу (ср.:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;3. 2-е изд. М., </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2010</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. С.&nbsp;</span>125
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-026" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-026-backlink"
-                                >
-                                    ******
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Далее могут быть ещё добавлены особые прошения, в т. ч. по специальной просьбе верных, о
-                                болящих, по случаю различных бедствий, скорбей и нужд и т. д. Также перед Заупокойной
-                                ектениёй могут быть добавлены и соответствующие особые молитвы после дьяконского
-                                возгласа{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Господу помолимся!</span>
-                        </p>
-                    </div>
-                    <div id="footnote-025" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-025-backlink"
-                                >
-                                    *******
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Не читается в храмовые (престольные) и двунадесятые праздники и, как правило, в
-                                воскресные дни, дни Святок и всей св. Пятидесятницы.
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-024" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-024-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Если присутствуют просвещаемые, то здесь могут быть до­бавлены специальные Ектения и
-                                Молитва о просвещаемых, сохранившиеся в Литургии преждеосвящённых даров (см.:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;3. С.&nbsp;9</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">5–9</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">6).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-023" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-023-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Или: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                Пусть никто из оглашаемых, никто из тех, чья вера не­твер­да, никто из кающихся, никто
-                                из нечистых
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (т. е. обуреваемых) </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                не при­бли­жается к святым таинствам. Кто не причащается, да покинет собра­ние!
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (св. Григорий Двоеслов)</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-022" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-022-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Древнее надписание: «После распростертия илитона» (возможно, с ан­ти­минсом).
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-021" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-021-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Вставка из Литургии св. Василия Великого.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-020" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-020-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В церковнославянском тексте далее вставка: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и очисти мою душу и сердце от сове­сти нечистой</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-019" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-019-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Руси читалась до сер. </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ХVII</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> в. Изначально могла быть обращена к Богу-Отцу.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-018" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-018-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Далее в тексте Служебника вставки:</span>
-                        </p>
-                        <p className="_-ПЕТИТ_Петит-б-отст">
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Д</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> …дабы в единомыслии ис­по­ведать:</span>
-                        </p>
-                        <p className="_-ПЕТИТ_Петит-б-отст">
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Н</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                {' '}
-                                Отца и Сына и Святого Духа — Троицу единосущ­ную и нераздельную.
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-017" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-017-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Согласно древней практике перед закрытием входных дверей все верные дают друг другу
-                                целование мира и любви со сло­вами:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос посреди нас!</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> — и отвечая: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">И есть, и будет!</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> [или:</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Христос воскрес!</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> — </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Воистину воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">].</span>
-                        </p>
-                    </div>
-                    <div id="footnote-016" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-016-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                «Дьяконы пусть стоят при дверях… чтобы во время возношения никто не выходил и чтобы не
-                                отворялась дверь, хотя бы пришёл и верующий» (Апостольские постанов­ления. 8.{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">11</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-015" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-015-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Раздел (4) — Евхаристический кано́н. Он со­стоит из вступ­ления и четы­рех основных
-                                частей: префа́цио (вводная часть), ана́мнесис (воспо­ми­нание), эпи`клесис (при­зывание) и
-                                ин­тер­це́
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ссио (хода́тай­ство).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-014" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-014-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Далее в тексте Служебника вставка: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                покло­няться Отцу и Сыну и Святому Духу, Троице еди­носущной и нераз­дельной
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-8">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-013" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-013-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> См. у М. Арранца и др. С греч., возможно ещё: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">согласно всему </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">этому</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) (</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">по всем этим причинам</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и для всего </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">этого</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) (Е. Ло­вягин и др.)</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-012" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-012-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                В церковнославянском тексте Служебника далее следует вставка: тропарь Третьего часа, со
-                                стихами (см.:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;1. 3-е изд. М., </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2015</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span> С. 214
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, а также: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;7. </span>С.&nbsp;35
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-011" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-011-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                В двунадесятые праздники и в дни их попразднества обычно вместо «Воистину подобает»
-                                поётся «задостойник», т. е. запев на 9-й песни канона праздника (см.:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн. 1. Изд. 3-е, испр. и доп. М. : </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">СФИ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2015</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. С. </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">17</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">7–2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">06</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">22</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4–2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">34</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">) и её ирмо́с.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-010" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-010-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Эта молитва, вероятно, когда-то служила отпустом для непричащающихся верных (см.: Taft
-                                R. The Precommunion Rites. Roma,{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2000</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. P. </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">193</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">). </span>
-                        </p>
-                    </div>
-                    <div id="footnote-009" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-009-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В тексте Служебника далее вставка: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и со славного пре­стола царствия Своего</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-8">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-008" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-008-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Далее по обычаю предстоятель просит у всех прощения и тихо молится:
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                {' '}
-                                Отпусти, оставь, прости, Боже, наши вольные и невольные согре­ше­ния, соделанные словом
-                                и делом, в ве́дении и неве́
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                дении, днём и в ночи`, во уме и разумении, — всё нам прости, по Своей благости и
-                                человеколюбию!
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-007" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-007-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                То есть прича́стен (кино́ник) дня или святого — см.:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;2. С.&nbsp;</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">22</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4–2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">63</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                . Поётся во время прича­ще­ния в алтаре (а иногда и в храме).
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-006" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-006-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> (</span>см.: ПБ. Кн.&nbsp;1. с. 224
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-005" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-005-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                .<a id="_idTextAnchor007" />
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-004" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-004-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> От Пасхи до отдания поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                , от Вознесения до отдания — тропарь Вознесению, в Троицкую родительскую субботу —{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">По глубочайшей Премудрости </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(см.: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;7. С.&nbsp;</span>145
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-003" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-003-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-002" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-002-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-001" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-001-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                На Пасху, в Светлую седмицу и на отдание Пасхи вместо этих слов поётся:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                Христос воскрес из мёртвых, Смертию смерть поправ
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, а народ закан­чивает: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и тем, кто во гробах, Жизнь дарова́в</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Затем даётся отпуст.</span>
-                        </p>
-                    </div>
-                    <div id="footnote-000" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="03_ЛитЗлат_РУС_ЛИЗ.html#footnote-000-backlink"
-                                >
-                                    ********
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> От Фоминой недели до отдания Пасхи поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(трижды).</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div className="_idGenObjectLayout-1">
-                <div id="_idContainer004" className="Текстовый-фрейм"></div>
             </div>
         </div>
     );
