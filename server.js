@@ -1,12 +1,15 @@
 const express = require('express');
 const webpack = require('webpack');
 const proxy = require('express-http-proxy');
+const basicAuth = require('express-basic-auth');
 
 var cors = require('cors');
 
 const app = express();
 const isProd = process.env.NODE_ENV === 'production';
 const port = process.env.NODE_PORT || 3000;
+// This password is not meant to be safe, it's just for clearing the cache
+const clearCachePassword = process.env.CLEAR_CACHE_PASSWORD || 'pass';
 
 const apiHost = process.env.API_HOST || 'http://localhost:9999';
 
@@ -55,6 +58,20 @@ app.use(
         },
     })
 );
+
+app.use(
+    '/clear-cache',
+    basicAuth({
+        users: { psmb: clearCachePassword },
+        challenge: true,
+    }),
+    proxy(apiHost, {
+        proxyReqPathResolver: req => {
+            return '/clearCache.php';
+        },
+    })
+);
+
 if (isProd) {
     app.use('/', express.static('www'));
 } else {
