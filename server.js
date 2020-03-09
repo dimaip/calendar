@@ -17,6 +17,8 @@ app.use(cors());
 
 app.use('/static', express.static('app/assets/public'));
 app.use('/manifest.json', express.static('manifest.json'));
+app.use('/android-chrome-192x192.png', express.static('app/assets/public/icons/android-chrome-192x192.png'));
+app.use('/android-chrome-512x512.png', express.static('app/assets/public/icons/android-chrome-512x512.png'));
 
 app.use(
     '/api/day',
