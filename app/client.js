@@ -13,11 +13,12 @@ const isProd = process.env.NODE_ENV === 'production';
 
 if (isProd) {
     Sentry.init({ dsn: 'https://e5296954a22242bc85d59b9a36559c44@sentry.io/3629452' });
+
+    TagManager.initialize({
+        gtmId: 'GTM-MSCF98P',
+    });
 }
 
-TagManager.initialize({
-    gtmId: 'GTM-MSCF98P',
-});
 let preloadedState = {};
 
 try {
