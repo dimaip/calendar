@@ -13,7 +13,7 @@ const buttonStyle = css`
     display: block;
     text-align: center;
     border: 1px solid #d9dde5;
-    border-radius: 3px;
+    border-radius: 8px;
     margin: 12px;
     padding: 0 !important;
 `;

@@ -34,7 +34,7 @@ const BottomNav = ({ active }) => {
                 justify-content: space-evenly;
                 position: sticky;
                 bottom: 0;
-                background-color: ${theme.colours.bgGray};
+                background-color: ${theme.colours.bgGrayLight};
                 padding: 0 12px;
                 border-top: 1px solid ${theme.colours.lineGray};
             `}

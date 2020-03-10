@@ -30,7 +30,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                 box-shadow: 0px 0px 2px 0px #ccc;
                 border-radius: 8px;
                 appearance: none;
-                background-color: ${theme.colours.bgGray};
+                background-color: ${theme.colours.bgGrayLight};
                 background-position: top 10px right 8px;
                 background-repeat: no-repeat;
                 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11.268' height='6.832' viewBox='0 0 11.268 6.832'%3E%3Cpath d='M59,233.668H70.269l-5.75-6.832Z' transform='translate(70.269 233.668) rotate(180)' fill='%23A2A2A2'/%3E%3C/svg%3E");

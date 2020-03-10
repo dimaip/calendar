@@ -17,6 +17,7 @@ import Saints from './Saints';
 import SectionHeading from './SectionHeading';
 import Links from './Links';
 import Zoom from 'components/Zoom/Zoom';
+import SolidSection from 'components/SolidSection/SolidSection';
 import Hymns from './Hymns';
 import Sermons from './Sermons';
 import ThisDays from './ThisDays';
@@ -25,26 +26,12 @@ import Services from './Services';
 import { parseISO, formatISO, subDays, addDays } from 'date-fns';
 import useReadings from 'hooks/useReadings';
 
-const GradientSection = ({ children }) => {
+const BorderedSection = ({ children }) => {
     const theme = useTheme();
     return (
         <div
             className={css`
-                background: linear-gradient(180deg, rgba(255, 255, 255, 0) calc(100% - 200px), #f2f2f6 100%);
-                margin: 0 -18px;
-                padding: 0 18px 1px 18px;
-            `}
-        >
-            {children}
-        </div>
-    );
-};
-const SolidSection = ({ children }) => {
-    const theme = useTheme();
-    return (
-        <div
-            className={css`
-                background: linear-gradient(180deg, #fafafc calc(100% - 200px), #f7f7f9 100%);
+                border-bottom: 0.5px solid ${theme.colours.lineGray};
                 margin: 0 -18px;
                 padding: 0 18px 1px 18px;
             `}
@@ -138,16 +125,25 @@ const Main = ({ services }) => {
                                                     <Services date={date} />
                                                 ) : (
                                                     <>
-                                                        <GradientSection>
+                                                        <SolidSection>
                                                             <SectionHeading>Богослужебные чтения</SectionHeading>
                                                             <ReadingList readings={day.readings || {}} />
-                                                        </GradientSection>
+                                                        </SolidSection>
 
-                                                        <SectionHeading>Святые дня</SectionHeading>
-                                                        <Saints saints={day.saints} date={date} />
+                                                        <BorderedSection>
+                                                            <SectionHeading
+                                                                className={css`
+                                                                    margin-bottom: 14px;
+                                                                `}
+                                                            >
+                                                                Святые дня
+                                                            </SectionHeading>
+                                                            <Saints saints={day.saints} date={date} />
+                                                        </BorderedSection>
+
                                                         <ThisDays thisDays={thisDays} date={date} />
                                                         {day.prayers && day.prayers.length > 0 && (
-                                                            <SolidSection>
+                                                            <BorderedSection>
                                                                 <div
                                                                     className={css`
                                                                         overflow: auto;
@@ -156,22 +152,22 @@ const Main = ({ services }) => {
                                                                     <SectionHeading>Песнопения</SectionHeading>
                                                                 </div>
                                                                 <Hymns hymns={day.prayers} />
-                                                            </SolidSection>
+                                                            </BorderedSection>
                                                         )}
                                                         {day.bReadings && Object.keys(day.bReadings).length > 0 && (
-                                                            <GradientSection>
+                                                            <SolidSection>
                                                                 <SectionHeading>Душеполезные чтения</SectionHeading>
                                                                 <ReadingList brother readings={day.bReadings} />
-                                                            </GradientSection>
+                                                            </SolidSection>
                                                         )}
-                                                        <GradientSection>
+                                                        <SolidSection>
                                                             <Sermons date={date} sermons={sermons} />
-                                                        </GradientSection>
+                                                        </SolidSection>
                                                     </>
                                                 )}
                                             </div>
                                         </Zoom>
-                                        <Links />
+                                        {!services && <Links />}
                                     </div>
                                 ) : (
                                     <Loader />

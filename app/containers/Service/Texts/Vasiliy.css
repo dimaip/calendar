@@ -1,31 +1,4 @@
-img.Графический-фрейм {
-    border-width: 1px;
-    border-style: solid;
-}
-div.Текстовый-фрейм {
-    border-style: solid;
-}
-p._-КОЛОНТИТУЛЫ-ОФОРМЛЕН_КОНЦОВКА-отст7 {
-    color: #e32636;
-    font-size: 13px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 20px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align: center;
-    text-decoration: none;
-    text-indent: 0;
-    text-transform: uppercase;
-    widows: 1;
-}
-p._-КОЛОНТИТУЛЫ-ОФОРМЛЕН_НЕВИДИМКА-на-шмуце {
+._-ПЕТИТ_Петит-б-отст {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -44,403 +17,7 @@ p._-КОЛОНТИТУЛЫ-ОФОРМЛЕН_НЕВИДИМКА-на-шмуце {
     text-transform: none;
     widows: 1;
 }
-p._-СНОСКА_Сноска-КРАСНАЯ {
-    color: #e32636;
-    font-size: 13px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-СНОСКА_Сноска-КРАСНАЯ-кунцевая {
-    color: #e32636;
-    font-size: 13px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-СНОСКА_Сноска-ЧЁРНАЯ {
-    font-size: 13px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_Звездочки {
-    color: #e32636;
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: bold;
-    line-height: 1.6;
-    margin-bottom: 11px;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 14px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align: center;
-    text-decoration: none;
-    text-indent: 0;
-    text-transform: uppercase;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_Имя-РаздСл {
-    -epub-hyphens: none;
-    color: #e32636;
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: bold;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 14px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align: center;
-    text-decoration: none;
-    text-indent: 0;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_Имя-Службы {
-    -epub-hyphens: none;
-    color: #e32636;
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: bold;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align: center;
-    text-decoration: none;
-    text-indent: 0;
-    text-transform: uppercase;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_Имя-части-отст2 {
-    color: #e32636;
-    font-size: 13px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 6px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align: center;
-    text-decoration: none;
-    text-indent: 0;
-    text-transform: uppercase;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_Имя-части-отст5 {
-    color: #e32636;
-    font-size: 13px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 14px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align: center;
-    text-decoration: none;
-    text-indent: 0;
-    text-transform: uppercase;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_КРАСН-б-отст {
-    color: #e32636;
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_КРАСН-отст1-5 {
-    color: #e32636;
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 4px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_КРАСН-отст5 {
-    color: #e32636;
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 14px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_МеткаНовойСтраницы {
-    -epub-hyphens: none;
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: always;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_Основной-б-отст {
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_Основной-б-отст-абз {
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: 17px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_Основной-отст1-5 {
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 4px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_Основной-отст5 {
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 14px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_ОсновнойСТ-б-отст {
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_ОсновнойСТ-отст1-5 {
-    font-size: 18px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 4px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ОСНОВНОЙ_Чтение-Писания {
-    color: #e32636;
-    font-size: 18px;
-    font-style: italic;
-    font-variant: normal;
-    font-weight: bold;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 14px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align: center;
-    text-decoration: none;
-    text-indent: 0;
-    text-transform: none;
-    widows: 1;
-}
-p._-ПЕТИТ_КРАСН-петит-б-отст {
-    color: #e32636;
-    font-size: 15px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ПЕТИТ_КРАСН-петит-отст1-5 {
-    color: #e32636;
+._-ПЕТИТ_Петит-отст1-5 {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -459,45 +36,7 @@ p._-ПЕТИТ_КРАСН-петит-отст1-5 {
     text-transform: none;
     widows: 1;
 }
-p._-ПЕТИТ_Петит-б-отст {
-    font-size: 15px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 0;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ПЕТИТ_Петит-отст1-5 {
-    font-size: 15px;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1.6;
-    margin-bottom: 0;
-    margin-left: 28px;
-    margin-right: 0;
-    margin-top: 4px;
-    orphans: 1;
-    page-break-after: auto;
-    page-break-before: auto;
-    text-align-last: left;
-    text-decoration: none;
-    text-indent: -28px;
-    text-transform: none;
-    widows: 1;
-}
-p._-ПЕТИТ_Петит-отст5 {
+._-ПЕТИТ_Петит-отст5 {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -516,7 +55,7 @@ p._-ПЕТИТ_Петит-отст5 {
     text-transform: none;
     widows: 1;
 }
-p._-ПЕТИТ_ПетитСТ-б-отст {
+._-ПЕТИТ_ПетитСТ-б-отст {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -535,7 +74,7 @@ p._-ПЕТИТ_ПетитСТ-б-отст {
     text-transform: none;
     widows: 1;
 }
-p._-ПЕТИТ_ПетитСТ-отст1-5 {
+._-ПЕТИТ_ПетитСТ-отст1-5 {
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -554,161 +93,120 @@ p._-ПЕТИТ_ПетитСТ-отст1-5 {
     text-transform: none;
     widows: 1;
 }
-span._-ВЫДЕЛЕНИЯ_REGULAR {
+
+._-СНОСКА_Сноска-КРАСНАЯ-кунцевая {
+    color: #e32636;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 0;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align-last: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+._-СНОСКА_Сноска-ЧЁРНАЯ {
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 0;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align-last: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+._-ВЫДЕЛЕНИЯ_REGULAR {
     font-style: normal;
     font-weight: normal;
 }
-span._-ВЫДЕЛЕНИЯ_ЖИРН-КУРСИВ {
+._-ВЫДЕЛЕНИЯ_ЖИРН-КУРСИВ {
     font-style: italic;
     font-variant: normal;
     font-weight: bold;
     text-transform: none;
 }
-span._-ВЫДЕЛЕНИЯ_КРАСНЫЙ {
+._-ВЫДЕЛЕНИЯ_КРАСНЫЙ {
     color: #e32636;
 }
-span._-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ {
+._-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ {
     color: #e32636;
     font-style: normal;
     font-weight: bold;
 }
-span._-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн {
+._-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн {
     color: #e32636;
     font-size: 15px;
 }
-span._-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн {
+._-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн {
     color: #e32636;
     vertical-align: super;
 }
-span._-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ {
+._-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ {
 }
-span._-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн {
+._-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн {
     font-size: 15px;
 }
-span._-ДР--ГАРНИТУРЫ_УДАРЕНИЕ {
+._-ДР--ГАРНИТУРЫ_УДАРЕНИЕ {
     font-style: normal;
     font-weight: normal;
 }
-span._-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-красн {
+._-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-красн {
     color: #e32636;
     font-style: normal;
     font-weight: normal;
 }
-span._-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-петит {
+._-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-петит {
     font-size: 13px;
     font-style: normal;
     font-weight: normal;
 }
-span._-РЕДКИЕ_Знак-сноски-красной {
+._-РЕДКИЕ_Знак-сноски-красной {
     color: #e32636;
     font-size: 18px;
     font-style: normal;
     font-weight: normal;
 }
-span._-РЕДКИЕ_СТРОЧНЫЕ-в-прописн--заг- {
+._-РЕДКИЕ_СТРОЧНЫЕ-в-прописн--заг- {
     font-variant: normal;
     text-transform: none;
 }
-p.ParaOverride-1 {
-    margin-top: 9px;
-}
-p.ParaOverride-2 {
-    margin-top: 11px;
-}
-p.ParaOverride-3 {
-    margin-bottom: 9px;
-    margin-top: 6px;
-}
-p.ParaOverride-4 {
-    margin-top: 3px;
-}
-p.ParaOverride-5 {
-    margin-top: 4px;
-}
-p.ParaOverride-6 {
-    margin-bottom: 0px;
-    margin-top: 9px;
-}
-p.ParaOverride-7 {
-    margin-top: 0px;
-}
-p.ParaOverride-8 {
-    margin-top: 13px;
-}
-p.ParaOverride-9 {
-    margin-top: 16px;
-}
-p.ParaOverride-10 {
-    margin-top: 10px;
-}
-p.ParaOverride-11 {
-    margin-top: 5px;
-}
-p.ParaOverride-12 {
-    margin-top: 17px;
-}
-p.ParaOverride-13 {
-    margin-top: 20px;
-}
-p.ParaOverride-14 {
-    margin-top: 7px;
-}
-p.ParaOverride-15 {
-    margin-top: 6px;
-}
-p.ParaOverride-16 {
-    text-align: left;
-}
-p.ParaOverride-17 {
-    margin-top: 11px;
-    text-align: left;
-}
-p.ParaOverride-18 {
-    margin-top: 17px;
-    text-align: left;
-}
-p.ParaOverride-19 {
-    margin-bottom: 9px;
-    margin-top: 9px;
-}
-p.ParaOverride-20 {
-    margin-bottom: 0px;
-    margin-top: 17px;
-}
-p.ParaOverride-21 {
-    margin-top: 16px;
-    text-align: left;
-}
-p.ParaOverride-22 {
-    margin-bottom: 9px;
-    margin-top: 11px;
-}
-p.ParaOverride-23 {
-    margin-bottom: 13px;
-    margin-top: 7px;
-}
-p.ParaOverride-24 {
-    margin-top: 15px;
-}
-span.CharOverride-1 {
+.CharOverride-1 {
     font-size: 58%;
 }
-span.CharOverride-2 {
+.CharOverride-2 {
     font-size: 13px;
 }
-span.CharOverride-3 {
+.CharOverride-3 {
     font-size: 58%;
     vertical-align: super;
 }
-span.CharOverride-4 {
+.CharOverride-4 {
     color: #00d6ff;
 }
-span.CharOverride-5 {
+.CharOverride-5 {
 }
-span.CharOverride-6 {
+.CharOverride-6 {
     color: #e32636;
 }
-span.CharOverride-7 {
+.CharOverride-7 {
     font-variant: normal;
     text-transform: none;
 }
@@ -718,10 +216,4 @@ img._idGenObjectAttribute-1 {
 }
 div._idGenObjectStyleOverride-1 {
     border-width: 0px;
-}
-hr.HorizontalRule-1 {
-    border-bottom: none;
-    border-left: none;
-    border-right: none;
-    border-top: solid #e32636 1px;
 }

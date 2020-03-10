@@ -6,6 +6,7 @@ import forEach from 'lodash.foreach';
 import ReadingGroup from './ReadingGroup';
 import { useTheme } from 'emotion-theming';
 import RightIcon from 'components/svgs/RightIcon';
+import ButtonBox from 'components/ButtonBox/ButtonBox';
 
 const ReadingsForService = ({ title, readingsForService, brother }) => {
     const rendredReadingGroups = [];
@@ -18,16 +19,7 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
 
     return (
         <Link to={`/date/${date}/${brother ? 'bReadings' : 'readings'}/${title}`}>
-            <div
-                className={css`
-                    border: 1px solid #d9dde5;
-                    background-color: white;
-                    border-radius: 8px;
-                    box-shadow: 0px 0px 5px 0px #e6e6e8;
-                    margin-bottom: 18px;
-                    padding: 14px 12px;
-                `}
-            >
+            <ButtonBox>
                 <h2
                     className={css`
                         text-transform: uppercase;
@@ -55,7 +47,7 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
                     </div>
                 </h2>
                 {rendredReadingGroups}
-            </div>
+            </ButtonBox>
         </Link>
     );
 };
