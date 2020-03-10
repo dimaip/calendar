@@ -9,8 +9,8 @@ module.exports = {
     context: path.resolve(__dirname, './app'),
 
     output: {
-        filename: '[name].[hash].bundle.js',
-        chunkFilename: '[name].[hash].bundle.js',
+        filename: '[name].bundle.js',
+        chunkFilename: '[name].bundle.js',
         path: path.resolve(__dirname, './www'),
         publicPath: '',
     },
@@ -32,8 +32,8 @@ module.exports = {
     plugins: [
         new webpack.EnvironmentPlugin({ NODE_ENV: 'development', PUBLIC_URL: 'http://localhost:3000' }),
         new MiniCssExtractPlugin({
-            filename: '[name].[hash].bundle.css',
-            chunkFilename: '[name].[hash].bundle.css',
+            filename: '[name].bundle.css',
+            chunkFilename: '[name].bundle.css',
         }),
         new webpack.NoEmitOnErrorsPlugin(),
         new HtmlWebpackPlugin({
