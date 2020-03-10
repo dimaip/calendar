@@ -37,7 +37,8 @@ const TOC = ({ serviceId, showTOC, setShowTOC }) => {
                         right: 0;
                         bottom: 0;
                         z-index: 4;
-                        overflow-y: auto;
+                        overflow-y: scroll;
+                        -webkit-overflow-scrolling: touch;
                         background-color: white;
                         padding: 24px;
                         border-left: 1px solid #d9dde5;

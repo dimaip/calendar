@@ -105,7 +105,8 @@ const Main = ({ services }) => {
                 <div
                     className={css`
                         flex-grow: 1;
-                        overflow-y: auto;
+                        overflow-y: scroll;
+                        -webkit-overflow-scrolling: touch;
                     `}
                 >
                     {calendarShown && <Calendar date={date} handleDayClick={handleDayClick} />}
