@@ -8,7 +8,6 @@ import * as serviceWorker from './serviceWorker';
 import Worker from './precache.worker.js';
 import * as Sentry from '@sentry/browser';
 import TagManager from 'react-gtm-module';
-// ReactGA.pageview(window.location.pathname + window.location.search);
 const isProd = process.env.NODE_ENV === 'production';
 
 if (isProd) {

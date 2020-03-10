@@ -17,6 +17,7 @@
     "@capacitor/android": "^1.0.0-beta.24",
     "@capacitor/cli": "^1.0.0-beta.22",
     "@capacitor/core": "^1.0.0-beta.22",
+    "@capacitor/ios": "^1.5.1",
     "@emotion/core": "^10.0.27",
     "@sentry/browser": "^5.13.0",
     "autoprefixer": "^7.1.6",

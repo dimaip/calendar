@@ -9,9 +9,15 @@ import Saint from 'containers/Saint/Saint';
 import ThisDay from 'containers/ThisDay/ThisDay';
 import ScrollToTop from 'components/ScrollToTop/ScrollToTop';
 import Service from 'containers/Service/Service';
+import { css } from 'emotion';
 
 export default (
-    <div>
+    <div
+        className={css`
+            max-width: 640px;
+            margin: 0 auto;
+        `}
+    >
         <ScrollToTop />
         <Switch>
             <Route

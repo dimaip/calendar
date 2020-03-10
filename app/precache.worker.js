@@ -19,9 +19,9 @@ const precache = () => {
             cache.match(`/api/day/${date}`).then(exists => {
                 // If not in cache
                 if (!exists) {
-                    fetch(`/api/day/${date}`);
-                    fetch(`/api/external-day/${date}`);
-                    fetch(`/api/readings/${date}`);
+                    fetch(`${process.env.PUBLIC_URL}/api/day/${date}`);
+                    fetch(`${process.env.PUBLIC_URL}/api/external-day/${date}`);
+                    fetch(`${process.env.PUBLIC_URL}/api/readings/${date}`);
                 }
             });
         });

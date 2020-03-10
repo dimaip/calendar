@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 const fetchSaint = ({ saintId }) =>
-    fetch(`/api/saint/${saintId}`).then(response => {
+    fetch(`${process.env.PUBLIC_URL}/api/saint/${saintId}`).then(response => {
         if (response.status > 400) throw new Error('Error on fetch day.');
 
         return response.json();

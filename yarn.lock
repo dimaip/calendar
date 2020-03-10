@@ -1030,6 +1030,11 @@
   dependencies:
     tslib "^1.9.0"
 
+"@capacitor/ios@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@capacitor/ios/-/ios-1.5.1.tgz#9a0120ae500f37c6dc38b25c6ecfbe131013f70a"
+  integrity sha512-6b8o/U87KIRWj3OLT+RrStTS56FWF7/dJkFe75XS5PBZPlWl8dKB3MUb3oKpWX5E7Y105Yo8CA/fKOSk8QQzsg==
+
 "@emotion/cache@^10.0.27":
   version "10.0.27"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.27.tgz#7895db204e2c1a991ae33d51262a3a44f6737303"
