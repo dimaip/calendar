@@ -131,13 +131,7 @@ const Main = ({ services }) => {
                                                         </SolidSection>
 
                                                         <BorderedSection>
-                                                            <SectionHeading
-                                                                className={css`
-                                                                    margin-bottom: 14px;
-                                                                `}
-                                                            >
-                                                                Святые дня
-                                                            </SectionHeading>
+                                                            <SectionHeading>Святые дня</SectionHeading>
                                                             <Saints saints={day.saints} date={date} />
                                                         </BorderedSection>
 
