@@ -7,11 +7,15 @@ import * as serviceWorker from './serviceWorker';
 // @ts-ignore
 import Worker from './precache.worker.js';
 import * as Sentry from '@sentry/browser';
-// ReactGA.pageview(window.location.pathname + window.location.search);
+import TagManager from 'react-gtm-module';
 const isProd = process.env.NODE_ENV === 'production';
 
 if (isProd) {
     Sentry.init({ dsn: 'https://e5296954a22242bc85d59b9a36559c44@sentry.io/3629452' });
+
+    TagManager.initialize({
+        gtmId: 'GTM-MSCF98P',
+    });
 }
 
 let preloadedState = {};

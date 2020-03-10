@@ -14,18 +14,20 @@ const precache = () => {
 
     const daylist = getDaysArray(new Date(), tillDate);
 
-    caches.open(`workbox-runtime-${process.env.PUBLIC_URL}/`).then(cache => {
-        daylist.forEach(date => {
-            cache.match(`/api/day/${date}`).then(exists => {
-                // If not in cache
-                if (!exists) {
-                    fetch(`/api/day/${date}`);
-                    fetch(`/api/external-day/${date}`);
-                    fetch(`/api/readings/${date}`);
-                }
+    if (caches) {
+        caches.open(`workbox-runtime-${process.env.PUBLIC_URL}/`).then(cache => {
+            daylist.forEach(date => {
+                cache.match(`/api/day/${date}`).then(exists => {
+                    // If not in cache
+                    if (!exists) {
+                        fetch(`${process.env.PUBLIC_URL}/api/day/${date}`);
+                        fetch(`${process.env.PUBLIC_URL}/api/external-day/${date}`);
+                        fetch(`${process.env.PUBLIC_URL}/api/readings/${date}`);
+                    }
+                });
             });
         });
-    });
+    }
 
     setTimeout(() => {
         precache();

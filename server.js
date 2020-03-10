@@ -1,12 +1,15 @@
 const express = require('express');
 const webpack = require('webpack');
 const proxy = require('express-http-proxy');
+const basicAuth = require('express-basic-auth');
 
 var cors = require('cors');
 
 const app = express();
 const isProd = process.env.NODE_ENV === 'production';
 const port = process.env.NODE_PORT || 3000;
+// This password is not meant to be safe, it's just for clearing the cache
+const clearCachePassword = process.env.CLEAR_CACHE_PASSWORD || 'pass';
 
 const apiHost = process.env.API_HOST || 'http://localhost:9999';
 
@@ -14,6 +17,8 @@ app.use(cors());
 
 app.use('/static', express.static('app/assets/public'));
 app.use('/manifest.json', express.static('manifest.json'));
+app.use('/android-chrome-192x192.png', express.static('app/assets/public/icons/android-chrome-192x192.png'));
+app.use('/android-chrome-512x512.png', express.static('app/assets/public/icons/android-chrome-512x512.png'));
 
 app.use(
     '/api/day',
@@ -55,6 +60,20 @@ app.use(
         },
     })
 );
+
+app.use(
+    '/clear-cache',
+    basicAuth({
+        users: { psmb: clearCachePassword },
+        challenge: true,
+    }),
+    proxy(apiHost, {
+        proxyReqPathResolver: req => {
+            return '/clearCache.php';
+        },
+    })
+);
+
 if (isProd) {
     app.use('/', express.static('www'));
 } else {

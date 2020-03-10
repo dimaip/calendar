@@ -4,6 +4,8 @@ import { css } from 'emotion';
 import SectionHeading from './SectionHeading';
 import { Link } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
+import ButtonBox from 'components/ButtonBox/ButtonBox';
+import SolidSection from 'components/SolidSection/SolidSection';
 
 const Services = ({ date }) => {
     const theme = useTheme();
@@ -14,61 +16,58 @@ const Services = ({ date }) => {
     ];
 
     return (
-        <>
+        <SolidSection>
             <SectionHeading>Богослужебные тексты</SectionHeading>
             <div
                 className={css`
-                    margin-top: 24px;
+                    margin-top: 6px;
+                    background: ${theme.colours.bgGray};
+                    margin: 6px -18px 0 -18px;
+                    padding: 0 18px 1px 18px;
                 `}
             >
-                {services.map(service => (
-                    <Link to={`/date/${date}/service/${service.id}`} key={service.id}>
-                        <div
-                            className={css`
-                                border: 1px solid #d9dde5;
-                                background-color: white;
-                                border-radius: 8px;
-                                margin-bottom: 18px;
-                                padding: 14px 12px;
-                            `}
-                        >
-                            <div
-                                className={css`
-                                    display: flex;
-                                `}
-                            >
+                <div
+                    className={css`
+                        margin: 0 -10px 18px -10px;
+                    `}
+                >
+                    {services.map(service => (
+                        <Link to={`/date/${date}/service/${service.id}`} key={service.id}>
+                            <ButtonBox>
                                 <div
                                     className={css`
-                                        flex-grow: 1;
-                                        flex-shrink: 1;
+                                        display: flex;
                                     `}
                                 >
-                                    <p
+                                    <div
                                         className={css`
-                                            text-transform: uppercase;
-                                            font-size: 14px;
-                                            font-weight: bold;
-                                            color: ${theme.colours.primary};
-                                            margin-bottom: -4px;
+                                            flex-grow: 1;
+                                            flex-shrink: 1;
                                         `}
                                     >
-                                        {service.title}
-                                    </p>
+                                        <p
+                                            className={css`
+                                                margin-bottom: -4px;
+                                            `}
+                                        >
+                                            {service.title}
+                                        </p>
+                                    </div>
+                                    <div
+                                        className={css`
+                                            flex-grow: 0;
+                                            flex-shrink: 0;
+                                        `}
+                                    >
+                                        <RightIcon />
+                                    </div>
                                 </div>
-                                <div
-                                    className={css`
-                                        flex-grow: 0;
-                                        flex-shrink: 0;
-                                    `}
-                                >
-                                    <RightIcon />
-                                </div>
-                            </div>
-                        </div>
-                    </Link>
-                ))}
+                            </ButtonBox>
+                        </Link>
+                    ))}
+                </div>
             </div>
-        </>
+        </SolidSection>
     );
 };
 export default Services;

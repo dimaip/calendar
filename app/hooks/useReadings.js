@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 export function fetchReadings({ date }) {
-    return fetch(`/api/readings/${date}`).then(response => {
+    return fetch(`${process.env.PUBLIC_URL}/api/readings/${date}`).then(response => {
         if (response.status > 400) throw new Error('Error on fetch readings.');
 
         return response.json();

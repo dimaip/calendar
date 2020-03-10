@@ -9,10 +9,15 @@ import Saint from 'containers/Saint/Saint';
 import ThisDay from 'containers/ThisDay/ThisDay';
 import ScrollToTop from 'components/ScrollToTop/ScrollToTop';
 import Service from 'containers/Service/Service';
-import Tracker from 'components/Tracker/Tracker';
+import { css } from 'emotion';
 
 export default (
-    <div>
+    <div
+        className={css`
+            max-width: 640px;
+            margin: 0 auto;
+        `}
+    >
         <ScrollToTop />
         <Switch>
             <Route
@@ -24,49 +29,31 @@ export default (
                 }}
             />
             <Route exact path="/date/:date">
-                <Tracker>
-                    <Main />
-                </Tracker>
+                <Main />
             </Route>
             <Route exact path="/date/:date/services">
-                <Tracker>
-                    <Main services />
-                </Tracker>
+                <Main services />
             </Route>
             <Route exact path="/date/:date/readings/:service">
-                <Tracker>
-                    <Readings />
-                </Tracker>
+                <Readings />
             </Route>
             <Route exact path="/date/:date/bReadings/:service">
-                <Tracker>
-                    <Readings brother />
-                </Tracker>
+                <Readings brother />
             </Route>
             <Route exact path="/date/:date/sermon/:sermonId">
-                <Tracker>
-                    <Sermon />
-                </Tracker>
+                <Sermon />
             </Route>
             <Route exact path="/date/:date/saint/:saintId">
-                <Tracker>
-                    <Saint />
-                </Tracker>
+                <Saint />
             </Route>
             <Route exact path="/date/:date/thisday/:thisDayId">
-                <Tracker>
-                    <ThisDay />
-                </Tracker>
+                <ThisDay />
             </Route>
             <Route exact path="/date/:date/service/:serviceId">
-                <Tracker>
-                    <Service />
-                </Tracker>
+                <Service />
             </Route>
             <Route>
-                <Tracker>
-                    <NotFound />
-                </Tracker>
+                <NotFound />
             </Route>
         </Switch>
     </div>

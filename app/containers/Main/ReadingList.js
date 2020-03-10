@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReadingsForService from './ReadingsForService';
 import forEach from 'lodash.foreach';
+import { css } from 'emotion';
 
 const ReadingList = ({ readings, brother = false }) => {
     const renderedReadings = [];
@@ -12,7 +13,15 @@ const ReadingList = ({ readings, brother = false }) => {
         );
     });
 
-    return <div>{renderedReadings}</div>;
+    return (
+        <div
+            className={css`
+                margin: 0 -10px 18px -10px;
+            `}
+        >
+            {renderedReadings}
+        </div>
+    );
 };
 ReadingList.propTypes = {
     readings: PropTypes.object.isRequired,

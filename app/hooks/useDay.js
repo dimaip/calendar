@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
 
 export function fetchDay({ date }) {
-    return fetch(`/api/day/${date}`)
+    return fetch(`${process.env.PUBLIC_URL}/api/day/${date}`)
         .then(response => {
             if (response.status > 400) throw new Error('Error on fetch day.');
 

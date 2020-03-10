@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 import useReadings from './useReadings';
 
 export function fetchReading({ link, translation }) {
-    return fetch(`/api/reading/` + encodeURI(link) + '&translation=' + translation)
+    return fetch(`${process.env.PUBLIC_URL}/api/reading/` + encodeURI(link) + '&translation=' + translation)
         .then(response => {
             if (response.status > 400) throw new Error('Error on fetch reading.');
 

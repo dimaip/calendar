@@ -27,7 +27,7 @@ const Drawer = ({ children, onClose }) => {
             <div
                 className={css`
                     position: relative;
-                    background-color: ${theme.colours.bgGray};
+                    background-color: ${theme.colours.bgGrayLight};
                     z-index: 1;
                     box-shadow: 0 0 2px 0 #ccc;
                     padding: 48px 16px;

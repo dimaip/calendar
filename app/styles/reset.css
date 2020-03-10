@@ -1,12 +1,12 @@
 @font-face {
     font-family: 'PTRootUI';
-    src: url('/static/fonts/PTRootUI_Regular.woff2') format('woff2');
+    src: url('https://d.psmb.ru/static/fonts/PTRootUI_Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'PTRootUI';
-    src: url('/static/fonts/PTRootUI_Bold.woff2') format('woff2');
+    src: url('https://d.psmb.ru/static/fonts/PTRootUI_Bold.woff2') format('woff2');
     font-weight: bold;
     font-style: normal;
 }
@@ -15,9 +15,8 @@ body {
     margin: 0 auto;
     font-family: 'PTRootUI', 'Helvetica', sans-serif;
     font-size: 18px;
-    max-width: 640px;
     position: relative;
-    color: #484848;
+    color: #201f24;
     /* Disable double-tap zoom on iOS */
     touch-action: manipulation;
 }
