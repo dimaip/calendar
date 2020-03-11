@@ -18,9 +18,16 @@ const Calendar = ({ date, handleDayClick }) => {
             const { feastType } = getFeastInfo(date);
             return feastType === 'great';
         },
-        p123: date => {
+        pStrict: date => {
             const { fastingLevel } = getLentInfo(date);
-            return fastingLevel === 1 || fastingLevel === 2 || fastingLevel === 3;
+            return (
+                fastingLevel === 1 ||
+                fastingLevel === 2 ||
+                fastingLevel === 3 ||
+                fastingLevel === 4 ||
+                fastingLevel === 5 ||
+                fastingLevel === 6
+            );
         },
         p7: date => {
             const { fastingLevel } = getLentInfo(date);
@@ -77,7 +84,7 @@ const Calendar = ({ date, handleDayClick }) => {
             border-color: ${theme.colours.primary};
         }
     `,
-        p123: css`
+        pStrict: css`
             & .nice-dates-day_date {
                 ${baseStyle}
                 background-color: #7b68ee;
