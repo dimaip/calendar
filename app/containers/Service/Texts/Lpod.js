@@ -855,14 +855,9 @@ const Lpod = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Снова и снова в мире Господу по­мо­лимся!</span>
-                    <span className="_-РЕДКИЕ_Знак-сноски-красной">
-                        <span id="footnote-010-backlink">
-                            <a className="_idFootnoteLink _idGenColorInherit" href="lpod.html#footnote-010">
-                                {' '}
-                                *
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        Молитвы (4)–(7) в случае необходимости могут быть опущены.
+                    </Tooltip>
                 </p>
                 <p className="_-ПЕТИТ_КРАСН-петит-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> [И далее Малая ектения, </span>
@@ -914,14 +909,17 @@ const Lpod = ({ lang }) => {
                 </p>
                 <p className="_-ПЕТИТ_Петит-Имя-части-отст5 ParaOverride-1">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва (5)</span>
-                    <span className="_-РЕДКИЕ_Знак-сноски-красной">
-                        <span id="footnote-009-backlink">
-                            <a className="_idFootnoteLink _idGenColorInherit" href="lpod.html#footnote-009">
-                                {' '}
-                                **
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                                Употреблялась до сер. XVII в., а на Украине&nbsp;– до XVIII в. (см.:&nbsp;Арранц&nbsp;М.{' '}
+                            </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КУРСИВ">Как молились Богу древ­ние византийцы. </span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">С. 4</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4–4</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">5, 48).</span>
+                        </>
+                    </Tooltip>
                 </p>
                 <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1000,14 +998,12 @@ const Lpod = ({ lang }) => {
                         <br /> и Твоей благостью посети нас,
                         <br />и дай нам
                     </span>
-                    <span className="_-РЕДКИЕ_Знак-сноски-красной">
-                        <span id="footnote-008-backlink">
-                            <a className="_idFootnoteLink _idGenColorInherit" href="lpod.html#footnote-008">
-                                {' '}
-                                ***
-                            </a>
-                        </span>
-                    </span>
+                    <Tooltip>
+                        <>
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В церковнославянском тексте далее вставка:</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> по благодати Твоей.</span>
+                        </>
+                    </Tooltip>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                         {' '}
                         в остальное время нынешнего дня <br /> избежать различных ко
@@ -3591,56 +3587,8 @@ const Lpod = ({ lang }) => {
                 </p>
                 <hr className="HorizontalRule-1" />
                 <div className="_idFootnotes">
-                    <div id="footnote-010" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="lpod.html#footnote-010-backlink"
-                                >
-                                    *
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Молитвы (4)–(7) в случае необходимости могут быть опущены.{' '}
-                            </span>
-                        </p>
-                    </div>
-                    <div id="footnote-009" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="lpod.html#footnote-009-backlink"
-                                >
-                                    **
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                Употреблялась до сер. XVII в., а на Украине&nbsp;– до XVIII в. (см.:&nbsp;Арранц&nbsp;М.{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КУРСИВ">Как молились Богу древ­ние византийцы. </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">С. 4</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4–4</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">5, 48).</span>
-                        </p>
-                    </div>
-                    <div id="footnote-008" className="_idFootnote">
-                        <p className="_-СНОСКА_Сноска-КРАСНАЯ">
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                <a
-                                    className="_idFootnoteAnchor _idGenColorInherit"
-                                    href="lpod.html#footnote-008-backlink"
-                                >
-                                    ***
-                                </a>
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В церковнославянском тексте далее вставка:</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> по благодати Твоей.</span>
-                        </p>
-                    </div>
+
+                   
                     <div id="footnote-007" className="_idFootnote">
                         <p className="_-СНОСКА_Сноска-КРАСНАЯ">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
