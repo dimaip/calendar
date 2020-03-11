@@ -43,9 +43,11 @@ const Service = () => {
 
     useEffect(() => {
         if (history.location.state?.scrollToReadings) {
-            const domNode = document.getElementById('apostol');
+            const domNode = document.getElementById('firstReading');
             if (domNode) {
-                domNode.scrollIntoView({ block: 'center' });
+                setTimeout(() => {
+                    domNode.scrollIntoView({ block: 'center' });
+                }, 800);
             }
         }
     }, []);

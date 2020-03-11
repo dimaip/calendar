@@ -1613,9 +1613,11 @@ const Lpod = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Будем внимательны!</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-3">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Чтение 1-й паремии</span>
-                </p>
+                <div id="firstReading">
+                    <p className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-3">
+                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Чтение 1-й паремии</span>
+                    </p>
+                </div>
                 {firstReading}
                 <p className="_-ПЕТИТ_КРАСН-петит-отст5 ParaOverride-6">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">

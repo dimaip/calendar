@@ -354,6 +354,7 @@ export function getFeastInfo(_date) {
     let colour = null;
     let icon = null;
     let vasiliy = false;
+    let lpod = false;
     const y = _date.getFullYear();
     const m = _date.getMonth();
     const d = _date.getDate();
@@ -361,43 +362,58 @@ export function getFeastInfo(_date) {
 
     const pascha = calculateEasterDate(y);
 
+    const isEasterOffset = offset => {
+        const easter = calculateEasterDate(y);
+        easter.setDate(easter.getDate() + offset);
+        return easter.getTime() == date.getTime();
+    };
+
     {
-        const week1 = calculateEasterDate(y);
-        week1.setDate(pascha.getDate() - 7 * 6);
-        if (week1.getTime() == date.getTime()) {
-            vasiliy = true;
+        // В какие дни служится Литургия Преждеосвященных Даров?
+        // По средам и пятницам Великого поста, в праздник Первого и Второго обретения главы Иоанна Предтечи (9 марта по новому стилю), в четверг пятой седмицы Великого поста (14 апреля в 2016 году), в день памяти 40 мучеников Севастийских, а также в первые три дня Страстной седмицы.
+        // Исключения:
+        // В праздник Благовещения Пресвятой Богородицы всегда служится литургия св. Иоанна Златоуста, вне зависимости от дня недели.
+        // Если обретение главы Иоанна Предтечи и день памяти 40 мучеников Севастийских приходятся на выходные дни — служится литургия или Иоанна Златоуста (в субботу) или Василия Великого (в воскресенье).
+        if (
+            isEasterOffset(-7 * 6 - 4) ||
+            isEasterOffset(-7 * 6 - 2) ||
+            isEasterOffset(-7 * 5 - 4) ||
+            isEasterOffset(-7 * 5 - 2) ||
+            isEasterOffset(-7 * 4 - 4) ||
+            isEasterOffset(-7 * 4 - 2) ||
+            isEasterOffset(-7 * 3 - 4) ||
+            isEasterOffset(-7 * 3 - 2) ||
+            isEasterOffset(-7 * 2 - 4) ||
+            isEasterOffset(-7 * 2 - 3) ||
+            isEasterOffset(-7 * 2 - 2) ||
+            isEasterOffset(-7 * 1 - 4) ||
+            isEasterOffset(-7 * 1 - 2) ||
+            isEasterOffset(-6) ||
+            isEasterOffset(-5) ||
+            isEasterOffset(-4) ||
+            (date.getDay() !== 0 && // not weekend
+                date.getDay() !== 6 &&
+                (new Date(y, 2, 9).getTime() == date.getTime() || new Date(y, 2, 22).getTime() == date.getTime())) // glava Ioanna // 40 sev much
+        ) {
+            lpod = true;
         }
-        const week2 = calculateEasterDate(y);
-        week2.setDate(pascha.getDate() - 7 * 5);
-        if (week2.getTime() == date.getTime()) {
-            vasiliy = true;
+        // Blagoveshenie overrides lpod
+        if (new Date(y, 3, 7).getTime() == date.getTime()) {
+            lpod = false;
         }
-        const week3 = calculateEasterDate(y);
-        week3.setDate(pascha.getDate() - 7 * 4);
-        if (week3.getTime() == date.getTime()) {
-            vasiliy = true;
-        }
-        const week4 = calculateEasterDate(y);
-        week4.setDate(pascha.getDate() - 7 * 3);
-        if (week4.getTime() == date.getTime()) {
-            vasiliy = true;
-        }
-        const week5 = calculateEasterDate(y);
-        week5.setDate(pascha.getDate() - 7 * 2);
-        if (week5.getTime() == date.getTime()) {
-            vasiliy = true;
-        }
-        const velikiyChetverg = calculateEasterDate(y);
-        velikiyChetverg.setDate(pascha.getDate() - 3);
-        if (velikiyChetverg.getTime() == date.getTime()) {
-            vasiliy = true;
-        }
-        const velikayaSubota = calculateEasterDate(y);
-        velikayaSubota.setDate(pascha.getDate() - 1);
-        if (velikayaSubota.getTime() == date.getTime()) {
-            vasiliy = true;
-        }
-        if (new Date(y, 0, 14).getTime() == date.getTime()) {
+    }
+
+    {
+        if (
+            isEasterOffset(-7 * 6) ||
+            isEasterOffset(-7 * 5) ||
+            isEasterOffset(-7 * 4) ||
+            isEasterOffset(-7 * 3) ||
+            isEasterOffset(-7 * 2) ||
+            isEasterOffset(-3) ||
+            isEasterOffset(-1) ||
+            new Date(y, 0, 14).getTime() == date.getTime()
+        ) {
             vasiliy = true;
         }
         // Blagoveshenie overrides vasiliy
@@ -534,5 +550,6 @@ export function getFeastInfo(_date) {
         colour,
         icon,
         vasiliy,
+        lpod,
     };
 }
