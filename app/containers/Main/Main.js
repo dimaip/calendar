@@ -81,19 +81,13 @@ const Main = ({ services }) => {
 
     return (
         <ThemeProvider theme={theme}>
-            <div
-                className={css`
-                    display: flex;
-                    flex-direction: column;
-                    height: 100vh;
-                `}
-            >
+            <div>
                 <Header handleToggleClick={handleToggleClick} calendarShown={calendarShown} />
                 <div
                     className={css`
                         flex-grow: 1;
-                        overflow-y: scroll;
-                        -webkit-overflow-scrolling: touch;
+                        /* overflow-y: scroll;
+                        -webkit-overflow-scrolling: touch; */
                     `}
                 >
                     {calendarShown && <Calendar date={date} handleDayClick={handleDayClick} />}
