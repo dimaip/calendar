@@ -400,6 +400,10 @@ export function getFeastInfo(_date) {
         if (new Date(y, 0, 14).getTime() == date.getTime()) {
             vasiliy = true;
         }
+        // Blagoveshenie overrides vasiliy
+        if (new Date(y, 3, 7).getTime() == date.getTime()) {
+            vasiliy = false;
+        }
     }
 
     // в навечерия Рождества Христова и Богоявления, и в день праздника святого Василия.
