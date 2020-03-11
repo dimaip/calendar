@@ -94,6 +94,8 @@ const Calendar = ({ date, handleDayClick }) => {
                 left: 0;
                 right: 0;
                 background: white;
+                max-width: 640px;
+                margin: 0 auto;
                 border-bottom: 1px solid #d9dde5;
                 box-shadow: 0px 2px 3px #d9dde5;
                 & .nice-dates-day:hover:after {
