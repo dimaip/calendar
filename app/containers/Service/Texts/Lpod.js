@@ -22,7 +22,6 @@ const Lpod = ({ lang }) => {
 
     const readings = day?.readings;
     const readingsForService = readings?.['Вечерня'];
-    console.log(readingsForService);
 
     const readingVersesWithType = [];
     forEach(readingsForService, (readingVerses, type) => {
