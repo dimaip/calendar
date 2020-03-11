@@ -46,12 +46,12 @@ const Calendar = ({ date, handleDayClick }) => {
     `;
     const modifiersClassNames = {
         selected: css`
-        & .nice-dates-day_date {
-            ${baseStyle}
-            background-color: ${theme.colours.primary};
-            color: white;
-        }
-    `,
+            & .nice-dates-day_date {
+                ${baseStyle}
+                font-weight: bold;
+                margin: 4px;
+            }
+        `,
         h12: css`
             & .nice-dates-day_date {
                 ${baseStyle}
