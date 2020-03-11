@@ -10,63 +10,72 @@ import Star from '../svgs/Star';
 
 const Header = ({ handleToggleClick, calendarShown }) => {
     return (
-        <header
+        <div
             className={css`
-                position: relative;
-                display: flex;
                 height: 44px;
-                flex-shrink: 0;
-                align-items: center;
-                border-bottom: 1px solid #ccc;
             `}
         >
-            <div
+            <header
                 className={css`
-                    flex-grow: 1;
+                    position: fixed;
+                    left: 0;
+                    right: 0;
+                    background-color: white;
+                    display: flex;
+                    height: 44px;
+                    flex-shrink: 0;
+                    align-items: center;
+                    border-bottom: 1px solid #ccc;
                 `}
             >
-                <Link
-                    to="/"
-                    title="На главную"
+                <div
                     className={css`
-                        display: block;
-                        position: absolute;
-                        left: 0;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
+                        flex-grow: 1;
+                    `}
+                >
+                    <Link
+                        to="/"
+                        title="На главную"
+                        className={css`
+                            display: block;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            right: 0;
+                            bottom: 0;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        `}
+                    >
+                        <Star />
+                    </Link>
+                </div>
+                <div
+                    className={css`
+                        z-index: 1;
                         display: flex;
                         align-items: center;
                         justify-content: center;
                     `}
                 >
-                    <Star />
-                </Link>
-            </div>
-            <div
-                className={css`
-                    z-index: 1;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                `}
-            >
-                <div>
-                    <ZoomControlToggle />
+                    <div>
+                        <ZoomControlToggle />
+                    </div>
+                    {handleToggleClick && (
+                        <Button
+                            onClick={handleToggleClick}
+                            className={css`
+                                display: block;
+                                padding: 10px 18px;
+                            `}
+                        >
+                            {calendarShown ? <Cross /> : <CalendarIcon />}
+                        </Button>
+                    )}
                 </div>
-                {handleToggleClick && (
-                    <Button
-                        onClick={handleToggleClick}
-                        className={css`
-                            display: block;
-                            padding: 10px 18px;
-                        `}
-                    >
-                        {calendarShown ? <Cross /> : <CalendarIcon />}
-                    </Button>
-                )}
-            </div>
-        </header>
+            </header>
+        </div>
     );
 };
 export default Header;

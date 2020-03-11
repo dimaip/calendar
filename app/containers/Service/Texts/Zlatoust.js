@@ -7,7 +7,6 @@ import isGospel from 'domain/isGospel';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
 import './Shared.css';
-import './Zlatoust.css';
 
 const Readings = ({ readings }) => (
     <>
@@ -1912,9 +1911,11 @@ const Zlatoust = ({ lang, textRef }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Будем внимательны!</span>
                 </p>
-                <p id="apostol" className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-13">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Чтение Апостола</span>
-                </p>
+                <div id="firstReading">
+                    <p id="apostol" className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-13">
+                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Чтение Апостола</span>
+                    </p>
+                </div>
                 <div
                     className={css`
                         margin: 0 5px;

@@ -1,4 +1,4 @@
-const vasiliyTOC = {
+const liturgyTOC = {
     antifon1: 'Первый антифон',
     antifon2: 'Второй антифон',
     antifon3: 'Третий антифон',
@@ -23,4 +23,4 @@ const vasiliyTOC = {
     prichashenie: 'Святое причащение',
     otpust: 'Отпуст',
 };
-export default vasiliyTOC;
+export default liturgyTOC;

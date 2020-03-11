@@ -13,6 +13,7 @@ const Services = ({ date }) => {
     const services = [
         { title: 'Литургия Иоанна Златоуста', id: 'zlatoust' },
         { title: 'Литургия Василия Великого', id: 'vasiliy' },
+        { title: 'Литургия преждеосвященных даров', id: 'lpod' },
     ];
 
     return (

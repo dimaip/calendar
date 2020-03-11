@@ -18,9 +18,16 @@ const Calendar = ({ date, handleDayClick }) => {
             const { feastType } = getFeastInfo(date);
             return feastType === 'great';
         },
-        p123: date => {
+        pStrict: date => {
             const { fastingLevel } = getLentInfo(date);
-            return fastingLevel === 1 || fastingLevel === 2 || fastingLevel === 3;
+            return (
+                fastingLevel === 1 ||
+                fastingLevel === 2 ||
+                fastingLevel === 3 ||
+                fastingLevel === 4 ||
+                fastingLevel === 5 ||
+                fastingLevel === 6
+            );
         },
         p7: date => {
             const { fastingLevel } = getLentInfo(date);
@@ -46,12 +53,12 @@ const Calendar = ({ date, handleDayClick }) => {
     `;
     const modifiersClassNames = {
         selected: css`
-        & .nice-dates-day_date {
-            ${baseStyle}
-            background-color: ${theme.colours.primary};
-            color: white;
-        }
-    `,
+            & .nice-dates-day_date {
+                ${baseStyle}
+                font-weight: bold;
+                margin: 4px;
+            }
+        `,
         h12: css`
             & .nice-dates-day_date {
                 ${baseStyle}
@@ -77,7 +84,7 @@ const Calendar = ({ date, handleDayClick }) => {
             border-color: ${theme.colours.primary};
         }
     `,
-        p123: css`
+        pStrict: css`
             & .nice-dates-day_date {
                 ${baseStyle}
                 background-color: #7b68ee;
@@ -94,6 +101,8 @@ const Calendar = ({ date, handleDayClick }) => {
                 left: 0;
                 right: 0;
                 background: white;
+                max-width: 640px;
+                margin: 0 auto;
                 border-bottom: 1px solid #d9dde5;
                 box-shadow: 0px 2px 3px #d9dde5;
                 & .nice-dates-day:hover:after {

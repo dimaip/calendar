@@ -1,27 +1,48 @@
 import React from 'react';
+import liturgyTOC from './Texts/liturgyTOC';
+import lpodTOC from './Texts/lpodTOC';
+import SelectBox from '../../components/SelectBox/SelectBox';
 import { css } from 'emotion';
 
-const TOCSwitcher = ({ showTOC, setShowTOC }) => (
-    <div
-        onClick={() => setShowTOC(!showTOC)}
-        role="button"
-        className={css`
-            cursor: pointer;
-            padding: 3px 6px;
+const mapServiceTOC = {
+    zlatoust: liturgyTOC,
+    vasily: liturgyTOC,
+    lpod: lpodTOC,
+};
 
-            border-radius: 8px;
-            color: ${showTOC ? 'white' : 'inherit'};
-            background-color: ${showTOC ? 'gray' : 'white'};
-        `}
-    >
-        <svg viewBox="0 0 100 80" width="26">
-            <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                fill={showTOC ? 'white' : 'black'}
-                d="M78.201,77.618H40.998c-1.667,0-3.018-1.351-3.018-3.018v-1.2  c0-1.667,1.351-3.018,3.018-3.018h37.203c1.667,0,3.018,1.351,3.018,3.018v1.2C81.219,76.267,79.868,77.618,78.201,77.618z   M78.201,53.618H40.998c-1.667,0-3.018-1.351-3.018-3.018v-1.2c0-1.667,1.351-3.018,3.018-3.018h37.203  c1.667,0,3.018,1.351,3.018,3.018v1.2C81.219,52.267,79.868,53.618,78.201,53.618z M78.201,29.618H40.998  c-1.667,0-3.018-1.351-3.018-3.018v-1.2c0-1.667,1.351-3.018,3.018-3.018h37.203c1.667,0,3.018,1.351,3.018,3.018v1.2  C81.219,28.267,79.868,29.618,78.201,29.618z M27.801,77.618h-6.003c-1.666,0-3.017-1.351-3.017-3.018v-1.2  c0-1.667,1.351-3.018,3.017-3.018h6.003c1.667,0,3.018,1.351,3.018,3.018v1.2C30.819,76.267,29.468,77.618,27.801,77.618z   M27.801,53.618h-6.003c-1.666,0-3.017-1.351-3.017-3.018v-1.2c0-1.667,1.351-3.018,3.017-3.018h6.003  c1.667,0,3.018,1.351,3.018,3.018v1.2C30.819,52.267,29.468,53.618,27.801,53.618z M27.802,29.618h-6.004  c-1.666,0-3.017-1.351-3.017-3.018v-1.2c0-1.667,1.351-3.018,3.017-3.018h6.004c1.666,0,3.017,1.351,3.017,3.018v1.2  C30.819,28.267,29.468,29.618,27.802,29.618z"
-            />
-        </svg>
-    </div>
-);
+const TOCSwitcher = ({ serviceId }) => {
+    const data = mapServiceTOC[serviceId];
+    const items = Object.keys(data).map(item => ({
+        value: item,
+        label: data[item],
+    }));
+    return (
+        <SelectBox
+            className={css`
+                flex-shrink: 1;
+                max-width: 70px;
+                @media (min-width: 340px) {
+                    max-width: 80px;
+                }
+                @media (min-width: 360px) {
+                    max-width: 100px;
+                }
+                @media (min-width: 380px) {
+                    max-width: 120px;
+                }
+                @media (min-width: 400px) {
+                    max-width: 140px;
+                }
+            `}
+            items={items}
+            value={null}
+            onChange={anchorID => {
+                const domNode = document.getElementById(anchorID);
+                if (domNode) {
+                    domNode.scrollIntoView({ block: 'center' });
+                }
+            }}
+        />
+    );
+};
 export default TOCSwitcher;

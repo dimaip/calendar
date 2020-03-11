@@ -29,35 +29,43 @@ const BottomNav = ({ active }) => {
         <div
             className={css`
                 height: 44px;
-                flex-shrink: 0;
-                display: flex;
-                justify-content: space-evenly;
-                position: sticky;
-                bottom: 0;
-                background-color: ${theme.colours.bgGrayLight};
-                padding: 0 12px;
-                border-top: 1px solid ${theme.colours.lineGray};
             `}
         >
-            <Link className={itemClass + ' ' + (active === 'calendar' ? activeClass : '')} to={`/date/${date}`}>
-                <CalendarIcon colour={active === 'calendar' ? theme.colours.darkGray : theme.colours.gray} />
-                Календарь
-            </Link>
-            <Link
-                className={itemClass + ' ' + (active === 'services' ? activeClass : '')}
-                to={`/date/${date}/services`}
+            <div
+                className={css`
+                    height: 44px;
+                    flex-shrink: 0;
+                    display: flex;
+                    justify-content: space-evenly;
+                    position: fixed;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: ${theme.colours.bgGrayLight};
+                    padding: 0 12px;
+                    border-top: 1px solid ${theme.colours.lineGray};
+                `}
             >
-                <Prayer colour={active === 'services' ? theme.colours.darkGray : theme.colours.gray} />
-                Богослужение
-            </Link>
-            <a
-                className={itemClass + ' ' + (active === 'bible' ? activeClass : '')}
-                href="https://bible.psmb.ru"
-                target="_blank"
-            >
-                <Bible colour={active === 'bible' ? theme.colours.darkGray : theme.colours.gray} />
-                Библия
-            </a>
+                <Link className={itemClass + ' ' + (active === 'calendar' ? activeClass : '')} to={`/date/${date}`}>
+                    <CalendarIcon colour={active === 'calendar' ? theme.colours.darkGray : theme.colours.gray} />
+                    Календарь
+                </Link>
+                <Link
+                    className={itemClass + ' ' + (active === 'services' ? activeClass : '')}
+                    to={`/date/${date}/services`}
+                >
+                    <Prayer colour={active === 'services' ? theme.colours.darkGray : theme.colours.gray} />
+                    Богослужение
+                </Link>
+                <a
+                    className={itemClass + ' ' + (active === 'bible' ? activeClass : '')}
+                    href="https://bible.psmb.ru"
+                    target="_blank"
+                >
+                    <Bible colour={active === 'bible' ? theme.colours.darkGray : theme.colours.gray} />
+                    Библия
+                </a>
+            </div>
         </div>
     );
 };

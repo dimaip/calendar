@@ -19,6 +19,7 @@ body {
     color: #201f24;
     /* Disable double-tap zoom on iOS */
     touch-action: manipulation;
+    overscroll-behavior-y: none;
 }
 a {
     color: inherit;

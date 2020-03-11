@@ -1,6 +1,5 @@
 import React from 'react';
 import './Shared.css';
-import './Vasiliy.css';
 import { useParams } from 'react-router-dom';
 import forEach from 'lodash.foreach';
 import useDay from 'hooks/useDay';
@@ -1784,9 +1783,11 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Будем внимательны!</span>
                 </p>
-                <p id="apostol" className="_-ОСНОВНОЙ_Чтение-Писания">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЖИРН-КУРСИВ">Чтение Апостола</span>
-                </p>
+                <div id="firstReading">
+                    <p id="apostol" className="_-ОСНОВНОЙ_Чтение-Писания">
+                        <span className="_-ВЫДЕЛЕНИЯ_ЖИРН-КУРСИВ">Чтение Апостола</span>
+                    </p>
+                </div>
                 <div
                     className={css`
                         margin: 0 5px;
