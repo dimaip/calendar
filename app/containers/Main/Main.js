@@ -126,7 +126,7 @@ const Main = ({ services }) => {
                                                 ) : (
                                                     <>
                                                         <SolidSection>
-                                                            <SectionHeading>Богослужебные чтения</SectionHeading>
+                                                            <SectionHeading>Богослужения</SectionHeading>
                                                             <ReadingList readings={day.readings || {}} />
                                                         </SolidSection>
 

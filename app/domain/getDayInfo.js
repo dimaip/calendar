@@ -353,12 +353,56 @@ export function getFeastInfo(_date) {
     let feastType = null;
     let colour = null;
     let icon = null;
+    let vasiliy = false;
     const y = _date.getFullYear();
     const m = _date.getMonth();
     const d = _date.getDate();
     const date = new Date(y, m, d);
 
     const pascha = calculateEasterDate(y);
+
+    {
+        const week1 = calculateEasterDate(y);
+        week1.setDate(pascha.getDate() - 7 * 6);
+        if (week1.getTime() == date.getTime()) {
+            vasiliy = true;
+        }
+        const week2 = calculateEasterDate(y);
+        week2.setDate(pascha.getDate() - 7 * 5);
+        if (week2.getTime() == date.getTime()) {
+            vasiliy = true;
+        }
+        const week3 = calculateEasterDate(y);
+        week3.setDate(pascha.getDate() - 7 * 4);
+        if (week3.getTime() == date.getTime()) {
+            vasiliy = true;
+        }
+        const week4 = calculateEasterDate(y);
+        week4.setDate(pascha.getDate() - 7 * 3);
+        if (week4.getTime() == date.getTime()) {
+            vasiliy = true;
+        }
+        const week5 = calculateEasterDate(y);
+        week5.setDate(pascha.getDate() - 7 * 2);
+        if (week5.getTime() == date.getTime()) {
+            vasiliy = true;
+        }
+        const velikiyChetverg = calculateEasterDate(y);
+        velikiyChetverg.setDate(pascha.getDate() - 3);
+        if (velikiyChetverg.getTime() == date.getTime()) {
+            vasiliy = true;
+        }
+        const velikayaSubota = calculateEasterDate(y);
+        velikayaSubota.setDate(pascha.getDate() - 1);
+        if (velikayaSubota.getTime() == date.getTime()) {
+            vasiliy = true;
+        }
+        if (new Date(y, 0, 14).getTime() == date.getTime()) {
+            vasiliy = true;
+        }
+    }
+
+    // в навечерия Рождества Христова и Богоявления, и в день праздника святого Василия.
 
     if (pascha.getTime() == date.getTime()) {
         title = 'Пасха';
@@ -485,5 +529,6 @@ export function getFeastInfo(_date) {
         feastType,
         colour,
         icon,
+        vasiliy,
     };
 }

@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
@@ -43,6 +43,15 @@ const Service = () => {
         setCalendarShown(false);
     };
 
+    useEffect(() => {
+        if (history.location.state?.scrollToReadings) {
+            const domNode = document.getElementById('apostol');
+            if (domNode) {
+                domNode.scrollIntoView({ block: 'center' });
+            }
+        }
+    }, []);
+
     return (
         <ThemeProvider theme={theme}>
             <div>
@@ -59,7 +68,7 @@ const Service = () => {
                     `}
                 >
                     <div>
-                        <Link to={`/date/${date}/services`} title="Назад">
+                        <Link to={`/date/${date}`} title="Назад">
                             <div
                                 className={css`
                                     padding: 18px;

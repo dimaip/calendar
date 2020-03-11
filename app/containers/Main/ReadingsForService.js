@@ -7,6 +7,7 @@ import ReadingGroup from './ReadingGroup';
 import { useTheme } from 'emotion-theming';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
+import { getFeastInfo } from 'domain/getDayInfo';
 
 const ReadingsForService = ({ title, readingsForService, brother }) => {
     const rendredReadingGroups = [];
@@ -17,8 +18,23 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
     const { date } = useParams();
     const theme = useTheme();
 
+    let to;
+    let effectiveTitle = title;
+    if (title === 'Литургия') {
+        const { vasiliy } = getFeastInfo(new Date(date));
+        to = {
+            pathname: `/date/${date}/service/${vasiliy ? 'vasiliy' : 'zlatoust'}`,
+            state: { scrollToReadings: true },
+        };
+        effectiveTitle += ` ${vasiliy ? 'Василия Великого' : 'Иоанна Златоуста'}`;
+    } else if (brother) {
+        to = `/date/${date}/bReadings/${title}`;
+    } else {
+        to = `/date/${date}/readings/${title}`;
+    }
+
     return (
-        <Link to={`/date/${date}/${brother ? 'bReadings' : 'readings'}/${title}`}>
+        <Link to={to}>
             <ButtonBox>
                 <h2
                     className={css`
@@ -35,7 +51,7 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
                             flex-grow: 1;
                         `}
                     >
-                        {title}
+                        {effectiveTitle}
                     </div>
 
                     <div
