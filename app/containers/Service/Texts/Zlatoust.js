@@ -7,7 +7,6 @@ import isGospel from 'domain/isGospel';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
 import './Shared.css';
-import './Zlatoust.css';
 
 const Readings = ({ readings }) => (
     <>

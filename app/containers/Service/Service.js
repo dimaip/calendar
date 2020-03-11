@@ -18,6 +18,7 @@ import Button from 'components/Button/Button';
 import Cross from 'components/svgs/Cross';
 const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
 const Vasiliy = React.lazy(() => import('./Texts/Vasiliy'));
+const Lpod = React.lazy(() => import('./Texts/Lpod'));
 
 const Service = () => {
     const { serviceId, date } = useParams();
@@ -132,6 +133,7 @@ const Service = () => {
                                 <Suspense fallback={Loader}>
                                     {serviceId === 'zlatoust' && <Zlatoust lang={lang} />}
                                     {serviceId === 'vasiliy' && <Vasiliy lang={lang} />}
+                                    {serviceId === 'lpod' && <Lpod lang={lang} />}
                                 </Suspense>
                             </div>
                         </>

@@ -412,3 +412,268 @@
     text-transform: none;
     widows: 1;
 }
+
+._-ПЕТИТ_Петит-Имя-РаздСл {
+    -epub-hyphens: none;
+    color: #e32636;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 14px;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    widows: 1;
+}
+._-ПЕТИТ_Петит-Имя-части-отст2 {
+    -epub-hyphens: none;
+    color: #e32636;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 18px;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: uppercase;
+    widows: 1;
+}
+._-ПЕТИТ_Петит-Имя-части-отст5 {
+    -epub-hyphens: none;
+    color: #e32636;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 14px;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: center;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: uppercase;
+    widows: 1;
+}
+._-ПЕТИТ_Петит-б-отст {
+    font-size: 15px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 0;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align-last: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+._-ПЕТИТ_Петит-отст1-5 {
+    font-size: 15px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 4px;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align-last: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+._-ПЕТИТ_Петит-отст5 {
+    font-size: 15px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 14px;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align-last: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+._-ПЕТИТ_ПетитСТ-б-отст {
+    font-size: 15px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 0;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+._-ПЕТИТ_ПетитСТ-отст1-5 {
+    font-size: 15px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 4px;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+._--КРАСНЫЙ {
+    color: #e32636;
+}
+._-ВЫДЕЛЕНИЯ_ЖИРНЫЙ {
+    font-style: normal;
+    font-weight: bold;
+}
+._-ВЫДЕЛЕНИЯ_КРАСНЫЙ {
+    color: #e32636;
+}
+._-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ {
+    color: #e32636;
+    font-style: normal;
+    font-weight: bold;
+}
+._-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн {
+    color: #e32636;
+    font-size: 15px;
+}
+._-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн {
+    color: #e32636;
+    vertical-align: super;
+}
+._-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн {
+    font-size: 15px;
+}
+._-СПЕЦСЛУЖЕБНЫЕ_дляДИЗ_вКРАСНОМтексте {
+    color: #e6007e;
+}
+._-СПЕЦСЛУЖЕБНЫЕ_дляРЕД_вЧЕРНОМтексте {
+    color: #0000ff;
+}
+._-РЕДКИЕ_Знак-сноски-красной {
+    color: #e32636;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: normal;
+}
+._-РЕДКИЕ_СТРОЧНЫЕ-в-прописн--заг- {
+    font-variant: normal;
+    text-transform: none;
+}
+
+._-СНОСКА_Сноска-КРАСНАЯ-кунцевая {
+    color: #e32636;
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 0;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align-last: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+._-СНОСКА_Сноска-ЧЁРНАЯ {
+    font-size: 13px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-right: 0;
+    margin-top: 0;
+    orphans: 1;
+    page-break-after: auto;
+    page-break-before: auto;
+    text-align-last: left;
+    text-decoration: none;
+    text-indent: -28px;
+    text-transform: none;
+    widows: 1;
+}
+._-ВЫДЕЛЕНИЯ_REGULAR {
+    font-style: normal;
+    font-weight: normal;
+}
+._-ВЫДЕЛЕНИЯ_ЖИРН-КУРСИВ {
+    font-style: italic;
+    font-variant: normal;
+    font-weight: bold;
+    text-transform: none;
+}
+._-ДР--ГАРНИТУРЫ_УДАРЕНИЕ {
+    font-style: normal;
+    font-weight: normal;
+}
+._-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-красн {
+    color: #e32636;
+    font-style: normal;
+    font-weight: normal;
+}
+._-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-петит {
+    font-size: 13px;
+    font-style: normal;
+    font-weight: normal;
+}

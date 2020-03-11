@@ -1,6 +1,5 @@
 import React from 'react';
 import './Shared.css';
-import './Vasiliy.css';
 import { useParams } from 'react-router-dom';
 import forEach from 'lodash.foreach';
 import useDay from 'hooks/useDay';
