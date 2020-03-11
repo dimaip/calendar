@@ -6,7 +6,7 @@ import { css } from 'emotion';
 
 const mapServiceTOC = {
     zlatoust: liturgyTOC,
-    vasily: liturgyTOC,
+    vasiliy: liturgyTOC,
     lpod: lpodTOC,
 };
 
@@ -35,7 +35,7 @@ const TOCSwitcher = ({ serviceId }) => {
                 }
             `}
             items={items}
-            value={null}
+            value={''}
             onChange={anchorID => {
                 const domNode = document.getElementById(anchorID);
                 if (domNode) {
