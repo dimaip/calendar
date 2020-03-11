@@ -33,7 +33,6 @@ const Lpod = ({ lang }) => {
             });
         });
     });
-    console.log(readingVersesWithType);
     const firstReading = readingVersesWithType[0] && (
         <div className={css``}>
             <Readings readings={[readingVersesWithType[0]]} />
@@ -87,7 +86,7 @@ const Lpod = ({ lang }) => {
                         ВЕЛИКОПОСТНАЯ ВЕЧЕРНЯ
                     </span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-1">
+                <p id="priugotovlenie" className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-1">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(1) Приуготовление</span>
                 </p>
                 <p className="_-ПЕТИТ_Петит-б-отст">

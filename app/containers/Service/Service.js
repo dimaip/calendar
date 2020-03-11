@@ -105,7 +105,7 @@ const Service = () => {
                             {calendarShown ? <Cross /> : null}
                         </Button>
                         <LanguageSwitcher lang={lang} setLang={setLang} />
-                        <TOCSwitcher />
+                        <TOCSwitcher serviceId={serviceId} />
                     </div>
 
                     <div

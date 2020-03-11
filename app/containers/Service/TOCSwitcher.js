@@ -1,12 +1,20 @@
 import React from 'react';
 import liturgyTOC from './Texts/liturgyTOC';
+import lpodTOC from './Texts/lpodTOC';
 import SelectBox from '../../components/SelectBox/SelectBox';
 import { css } from 'emotion';
 
-const TOCSwitcher = () => {
-    const items = Object.keys(liturgyTOC).map(item => ({
+const mapServiceTOC = {
+    zlatoust: liturgyTOC,
+    vasily: liturgyTOC,
+    lpod: lpodTOC,
+};
+
+const TOCSwitcher = ({ serviceId }) => {
+    const data = mapServiceTOC[serviceId];
+    const items = Object.keys(data).map(item => ({
         value: item,
-        label: liturgyTOC[item],
+        label: data[item],
     }));
     return (
         <SelectBox
