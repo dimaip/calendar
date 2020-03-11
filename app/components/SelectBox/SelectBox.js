@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
-const SelectBox = ({ className = '', items, value, onChange, maxLength = 0 }) => {
+const SelectBox = ({ className = '', items, value, onChange }) => {
     const theme = useTheme();
     return (
         <select
@@ -41,18 +41,11 @@ const SelectBox = ({ className = '', items, value, onChange, maxLength = 0 }) =>
             value={value}
             onChange={e => onChange(e.target.value)}
         >
-            {items.map(item => {
-                let truncatedLabel = item.label;
-                if (maxLength && truncatedLabel.length > maxLength) {
-                    truncatedLabel = truncatedLabel.substring(0, maxLength) + '…';
-                }
-                console.log(maxLength);
-                return (
-                    <option key={item.value} value={item.value}>
-                        {truncatedLabel}
-                    </option>
-                );
-            })}
+            {items.map(item => (
+                <option key={item.value} value={item.value}>
+                    {item.label}
+                </option>
+            ))}
         </select>
     );
 };

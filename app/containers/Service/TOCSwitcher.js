@@ -8,25 +8,24 @@ const TOCSwitcher = () => {
         value: item,
         label: liturgyTOC[item],
     }));
-    let maxWidth = 5;
-    if (window.screen.width >= 340) {
-        maxWidth = 8;
-    }
-    if (window.screen.width >= 360) {
-        maxWidth = 10;
-    }
-    if (window.screen.width >= 380) {
-        maxWidth = 13;
-    }
-    if (window.screen.width >= 400) {
-        maxWidth = 17;
-    }
     return (
         <SelectBox
             className={css`
                 flex-shrink: 1;
+                max-width: 70px;
+                @media (min-width: 340px) {
+                    max-width: 80px;
+                }
+                @media (min-width: 360px) {
+                    max-width: 100px;
+                }
+                @media (min-width: 380px) {
+                    max-width: 120px;
+                }
+                @media (min-width: 400px) {
+                    max-width: 140px;
+                }
             `}
-            maxLength={maxWidth}
             items={items}
             value={null}
             onChange={anchorID => {
