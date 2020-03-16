@@ -1,1 +1,10 @@
-{}
+{
+  "appId": "com.orthodox.app",
+  "appName": "Православное богослужение",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www",
+  "ios": {
+    "contentInset": "always"
+  }
+}

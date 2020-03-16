@@ -15,11 +15,6 @@ const apiHost = process.env.API_HOST || 'http://localhost:9999';
 
 app.use(cors());
 
-app.use('/static', express.static('app/assets/public'));
-app.use('/manifest.json', express.static('manifest.json'));
-app.use('/android-chrome-192x192.png', express.static('app/assets/public/icons/android-chrome-192x192.png'));
-app.use('/android-chrome-512x512.png', express.static('app/assets/public/icons/android-chrome-512x512.png'));
-
 app.use(
     '/api/day',
     proxy(apiHost, {
@@ -74,9 +69,8 @@ app.use(
     })
 );
 
-if (isProd) {
-    app.use('/', express.static('www'));
-} else {
+app.use('/', express.static('www'));
+if (!isProd) {
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');
     const config = require('./webpack.dev');

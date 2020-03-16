@@ -68,15 +68,6 @@ const Lpod = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Господу помолимся.</span>
                 </p>
-                <p className="_-КОЛОНТИТУЛЫ-ОФОРМЛЕН_КОНЦОВКА-отст7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        <img
-                            className="_idGenObjectAttribute-1"
-                            src="lpod-web-resources/image/Изображение_1610.png"
-                            alt=""
-                        />
-                    </span>
-                </p>
                 <p className="_-ОСНОВНОЙ_Имя-Службы">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         <a id="_idTextAnchor001" />
@@ -2301,15 +2292,6 @@ const Lpod = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ CharOverride-3">1-е прим. на с. 97</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
                 </p>
-                <p className="_-КОЛОНТИТУЛЫ-ОФОРМЛЕН_КОНЦОВКА-отст7 ParaOverride-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        <img
-                            className="_idGenObjectAttribute-1"
-                            src="lpod-web-resources/image/Изображение_1610.png"
-                            alt=""
-                        />
-                    </span>
-                </p>
                 <p className="_-ОСНОВНОЙ_Имя-Службы">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         <a id="_idTextAnchor004" />
@@ -3579,15 +3561,6 @@ const Lpod = ({ lang }) => {
                 <p className="_-СНОСКА_Сноска-КРАСНАЯ">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> *** См. выш</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ CharOverride-7">е, с. 34.</span>
-                </p>
-                <p className="_-КОЛОНТИТУЛЫ-ОФОРМЛЕН_КОНЦОВКА-отст7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        <img
-                            className="_idGenObjectAttribute-1"
-                            src="lpod-web-resources/image/Изображение_1619.png"
-                            alt=""
-                        />
-                    </span>
                 </p>
                 <hr className="HorizontalRule-1" />
                 <div className="_idFootnotes">

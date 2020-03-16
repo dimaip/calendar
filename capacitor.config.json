@@ -1,6 +1,6 @@
 {
   "appId": "com.orthodox.app",
-  "appName": "Православный календарь",
+  "appName": "Православное богослужение",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
   "webDir": "www",
