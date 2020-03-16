@@ -59,6 +59,7 @@ const BottomNav = ({ active }) => {
                 </Link>
                 <a
                     className={itemClass + ' ' + (active === 'bible' ? activeClass : '')}
+                    rel="noopener"
                     href="https://bible.psmb.ru"
                     target="_blank"
                 >
