@@ -1,4 +1,4 @@
-import React, { useState, Children } from 'react';
+import React, { useState, useRef } from 'react';
 import { css } from 'emotion';
 import { ThemeProvider, useTheme } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
@@ -77,7 +77,12 @@ const Main = ({ services }) => {
     };
     const handleToggleClick = () => setCalendarShown(!calendarShown);
 
-    const theme = getTheme(day?.colour);
+    const themeColour = useRef();
+    if (day?.colour) {
+        themeColour.current = day?.colour;
+    }
+
+    const theme = getTheme(themeColour.current);
 
     return (
         <ThemeProvider theme={theme}>
