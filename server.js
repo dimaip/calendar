@@ -69,15 +69,19 @@ app.use(
     })
 );
 
-app.use('/', express.static('www'));
 if (!isProd) {
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');
     const config = require('./webpack.dev');
     const compiler = webpack(config);
-    app.use(webpackDevMiddleware(compiler));
+    app.use(
+        webpackDevMiddleware(compiler, {
+            publicPath: '/built/',
+        })
+    );
     // NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
     app.use(webpackHotMiddleware(compiler));
 }
+app.use('/', express.static('www'));
 
 app.listen(port, () => console.log(`=== Go to http://localhost:${port} ===`));
