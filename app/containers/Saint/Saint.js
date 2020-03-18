@@ -9,15 +9,20 @@ import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import useSaint from '../../hooks/useSaint';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 
 const Saint = () => {
     const { saintId, date } = useParams();
-    const { data: saint, isLoading } = useSaint(saintId);
+    const { data: saint, status } = useSaint(saintId);
     const { data: day } = useDay(date);
     const theme = getTheme(day?.colour);
 
-    if (isLoading || !saint) {
+    if (status === 'loading') {
         return <Loader />;
+    }
+
+    if (status === 'error' || !saint) {
+        return <ErrorMessage />;
     }
 
     return (

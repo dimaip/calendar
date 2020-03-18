@@ -9,18 +9,23 @@ import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import useExternalDay from 'hooks/useExternalDay';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 
 const Sermon = () => {
     const { sermonId, date } = useParams();
     const { data: day } = useDay(date);
-    const { data: externalDay } = useExternalDay(date);
+    const { data: externalDay, status: externalDayStatus } = useExternalDay(date);
     const { sermons } = externalDay || {};
     const sermon = sermons?.find(sermon => sermon.id === sermonId);
 
     const theme = getTheme(day?.colour);
 
-    if (!sermon) {
+    if (externalDayStatus === 'loading') {
         return <Loader />;
+    }
+
+    if (externalDayStatus === 'error' || !sermon) {
+        return <ErrorMessage />;
     }
 
     return (

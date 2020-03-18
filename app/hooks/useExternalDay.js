@@ -1,8 +1,10 @@
 import { useQuery } from 'react-query';
 
-const fetchExternalDay = ({ date }) => {
+const fetchExternalDay = (key, { date }) => {
     return fetch(`${process.env.PUBLIC_URL}/api/external-day/${date}`).then(response => {
-        if (response.status > 400) throw new Error('Error on fetch external day.');
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
 
         return response.json();
     });

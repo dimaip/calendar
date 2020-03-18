@@ -10,11 +10,7 @@ import ButtonBox from 'components/ButtonBox/ButtonBox';
 const Sermons = ({ sermons, date }) => {
     const theme = useTheme();
 
-    if (!sermons) {
-        return <Loader />;
-    }
-
-    return sermons.length ? (
+    return sermons?.length ? (
         <>
             <SectionHeading>Проповедь</SectionHeading>
             <div

@@ -4,15 +4,33 @@ import { useTheme } from 'emotion-theming';
 import Zoom from 'components/Zoom/Zoom';
 import useReading from '../../hooks/useReading';
 import { useParams } from 'react-router-dom';
+import Loader from 'components/Loader/Loader';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 
 const ReadingItem = ({ readingVerse, type }) => {
     const [translation, setTranslation] = useState('default');
     const { date } = useParams();
-    const reading = useReading(readingVerse, translation, date);
+    const { data: reading, status } = useReading(readingVerse, translation, date);
     const theme = useTheme();
 
+    if (status === 'loading') {
+        return <Loader />;
+    }
+
+    if (status === 'error') {
+        return <ErrorMessage />;
+    }
+
     if (!reading?.fragments) {
-        return <div>Отрывок не найден</div>;
+        return (
+            <div
+                className={css`
+                    color: ${theme.colours.gray};
+                `}
+            >
+                Отрывок не найден
+            </div>
+        );
     }
 
     const translationSelector = (

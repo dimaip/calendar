@@ -1,8 +1,10 @@
 import { useQuery } from 'react-query';
 
-export function fetchReadings({ date }) {
+export function fetchReadings(key, { date }) {
     return fetch(`${process.env.PUBLIC_URL}/api/readings/${date}`).then(response => {
-        if (response.status > 400) throw new Error('Error on fetch readings.');
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
 
         return response.json();
     });

@@ -15,11 +15,7 @@ const ThisDayLink = ({ to, href, children }) => {
 };
 
 const ThisDays = ({ thisDays, date }) => {
-    if (!thisDays) {
-        return <Loader />;
-    }
-
-    return thisDays.length ? (
+    return thisDays?.length ? (
         <div>
             {thisDays.map(thisDay => {
                 return (
