@@ -46,7 +46,9 @@ if (module.hot) {
     });
 }
 
-serviceWorker.register();
+if (isProd) {
+    serviceWorker.register();
 
-const precacheWorker = new Worker();
-precacheWorker.postMessage('precache');
+    const precacheWorker = new Worker();
+    precacheWorker.postMessage('precache');
+}
