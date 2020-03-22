@@ -1,22 +1,54 @@
+@font-face {
+    font-family: 'PTRootUI';
+    src: url('/assets/fonts/PTRootUI_Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'PTRootUI';
+    src: url('/assets/fonts/PTRootUI_Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
 body {
-  margin: 0;
-  font-family: 'Open Sans', sans-serif;
+    margin: 0 auto;
+    font-family: 'PTRootUI', 'Helvetica', sans-serif;
+    font-size: 18px;
+    position: relative;
+    color: #201f24;
+    /* Disable double-tap zoom on iOS */
+    touch-action: manipulation;
+    overscroll-behavior-y: none;
 }
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
-h1, h2, h3, h4, h5, h6 {
-  font-size: inherit;
-  font-weight: inherit;
-  margin: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: 0;
 }
 button {
-  background: none;
-  border: 0;
-  color: inherit;
-  font: inherit;
+    background: none;
+    border: 0;
+    color: inherit;
+    font: inherit;
+    padding: 0;
 }
 button:focus {
-  outline: none;
+    outline: none;
+}
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }

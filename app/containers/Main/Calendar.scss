@@ -1,0 +1,11 @@
+$nice-dates-color-gray-dark: #484848;
+$nice-dates-color-gray: #8e8e93;
+$nice-dates-color-gray-light: #f2f2f2;
+$nice-dates-font-size-small: 12px;
+$nice-dates-font-size-base: 14px;
+$nice-dates-font-size-big: 16px;
+@import 'react-nice-dates/src/style.scss';
+
+.nice-dates-day_month {
+    top: -3px;
+}

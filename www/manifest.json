@@ -1,0 +1,22 @@
+{
+  "name": "Православное богослужение на русском языке",
+  "short_name": "PB",
+  "description": "Православное богослужение и православный календарь на русском языке с чтениями дня, святыми, тропарями",
+  "lang": "ru-RU",
+  "start_url": "https://d.psmb.ru",
+  "display": "standalone",
+  "theme_color": "#AE841A",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "\/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image\/png"
+    },
+    {
+      "src": "\/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image\/png"
+    }
+  ]
+}

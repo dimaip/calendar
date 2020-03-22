@@ -1,31 +1,20 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import { HashRouter, StaticRouter } from 'react-router-dom'
-import routes from 'routes'
+import React from 'react';
+import { Provider } from 'react-redux';
+import { HashRouter } from 'react-router-dom';
+import routes from '../routes';
+import 'styles/reset.css';
+import ZoomControl from 'components/ZoomControl/ZoomControl';
+import { ReactQueryConfigProvider } from 'react-query';
 
-export default ({ server, location, context, store }) => {
-  let router
+const queryConfig = { refetchAllOnWindowFocus: false };
 
-  if (server) {
-    router = (
-      <StaticRouter
-        location={location}
-        context={context}
-      >
-        {routes}
-      </StaticRouter>
-    )
-  } else {
-    router = (
-      <HashRouter>
-        {routes}
-      </HashRouter>
-    )
-  }
-
-  return (
-    <Provider store={store}>
-      {router}
-    </Provider>
-  )
-}
+export default ({ store }) => {
+    return (
+        <ReactQueryConfigProvider config={queryConfig}>
+            <Provider store={store}>
+                <HashRouter>{routes}</HashRouter>
+                <ZoomControl />
+            </Provider>
+        </ReactQueryConfigProvider>
+    );
+};

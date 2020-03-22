@@ -1,32 +1,87 @@
-const express = require('express')
-const webpack = require('webpack')
+const express = require('express');
+const webpack = require('webpack');
 const proxy = require('express-http-proxy');
-const webpackDevMiddleware = require('webpack-dev-middleware')
-const webpackHotMiddleware = require('webpack-hot-middleware')
-const config = require('./webpack.config')
-const api = require('./server/api')
-var cors = require('cors')
+const basicAuth = require('express-basic-auth');
 
+var cors = require('cors');
 
-const app = express()
-const compiler = webpack(config)
-const port = process.env.NODE_PORT || 3000
+const app = express();
+const isProd = process.env.NODE_ENV === 'production';
+const port = process.env.NODE_PORT || 3000;
+// This password is not meant to be safe, it's just for clearing the cache
+const clearCachePassword = process.env.CLEAR_CACHE_PASSWORD || 'pass';
 
-app.use(cors())
+const apiHost = process.env.API_HOST || 'http://localhost:9999';
 
-//app.use('/api/', api())
-app.use('/api/day', proxy('http://localhost:9999', {
-    proxyReqPathResolver: (req) => {
-        return `/day.php?date=${req.url.replace(/[^0-9]/g, '')}`
-    }
-}));
-app.use('/api/reading', proxy('http://localhost:9999', {
-    proxyReqPathResolver: (req) => {
-        return `/bible.php?zachalo=${req.url.substring(1)}`
-    }
-}));
-app.use(webpackDevMiddleware(compiler))
-// NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
-app.use(webpackHotMiddleware(compiler))
+app.use(cors());
 
-app.listen(port, () => console.log(`=== Go to http://localhost:${port} ===`))
+app.use(
+    '/api/day',
+    proxy(apiHost, {
+        proxyReqPathResolver: req => {
+            return `/day.php?date=${req.url.replace(/[^0-9]/g, '')}`;
+        },
+    })
+);
+app.use(
+    '/api/reading',
+    proxy(apiHost, {
+        proxyReqPathResolver: req => {
+            return `/bible.php?zachalo=${req.url.substring(1)}`;
+        },
+    })
+);
+app.use(
+    '/api/readings',
+    proxy(apiHost, {
+        proxyReqPathResolver: req => {
+            return `/day.php?date=${req.url.replace(/[^0-9]/g, '')}&readings=1`;
+        },
+    })
+);
+app.use(
+    '/api/external-day',
+    proxy('https://psmb.ru', {
+        proxyReqPathResolver: req => {
+            return `/?calendarDate=${req.url.substring(1)}`;
+        },
+    })
+);
+app.use(
+    '/api/saint',
+    proxy('https://psmb.ru', {
+        proxyReqPathResolver: req => {
+            return `https://psmb.ru/sv/${req.url.substring(1)}.html?json=1`;
+        },
+    })
+);
+
+app.use(
+    '/clear-cache',
+    basicAuth({
+        users: { psmb: clearCachePassword },
+        challenge: true,
+    }),
+    proxy(apiHost, {
+        proxyReqPathResolver: req => {
+            return '/clearCache.php';
+        },
+    })
+);
+
+if (!isProd) {
+    const webpackDevMiddleware = require('webpack-dev-middleware');
+    const webpackHotMiddleware = require('webpack-hot-middleware');
+    const config = require('./webpack.dev');
+    const compiler = webpack(config);
+    app.use(
+        webpackDevMiddleware(compiler, {
+            publicPath: '/built/',
+        })
+    );
+    // NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
+    app.use(webpackHotMiddleware(compiler));
+}
+app.use('/', express.static('www'));
+
+app.listen(port, () => console.log(`=== Go to http://localhost:${port} ===`));
