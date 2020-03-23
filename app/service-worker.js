@@ -15,6 +15,6 @@ precacheAndRoute(self.__WB_MANIFEST);
 
 // Cache (pre-caching happens in precache.worker.js) api and static requests
 registerRoute(new RegExp('/api/'), new StaleWhileRevalidate());
-registerRoute(new RegExp('/static/'), new CacheFirst());
+registerRoute(new RegExp('/assets/'), new CacheFirst());
 
 googleAnalytics.initialize();

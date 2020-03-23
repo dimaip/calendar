@@ -9,17 +9,22 @@ import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import useExternalDay from 'hooks/useExternalDay';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 
 const ThisDay = () => {
     const { thisDayId, date } = useParams();
-    const { data: externalDay } = useExternalDay(date);
+    const { data: externalDay, status: externalDayStatus } = useExternalDay(date);
     const { thisDays } = externalDay || {};
 
     const thisDay = (thisDays || []).find(thisDay => thisDay.id === thisDayId);
     const { data: day } = useDay(date);
     const theme = getTheme(day?.colour);
-    if (!thisDays) {
+    if (externalDayStatus === 'loading') {
         return <Loader />;
+    }
+
+    if (externalDayStatus === 'error' || !thisDays) {
+        return <ErrorMessage />;
     }
 
     return (

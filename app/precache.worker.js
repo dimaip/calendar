@@ -14,7 +14,7 @@ const precache = () => {
 
     const daylist = getDaysArray(new Date(), tillDate);
 
-    if (caches) {
+    if (self.caches) {
         caches.open(`workbox-runtime-${process.env.PUBLIC_URL}/`).then(cache => {
             daylist.forEach(date => {
                 cache.match(`/api/day/${date}`).then(exists => {

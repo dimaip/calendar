@@ -9,7 +9,7 @@ const HeadingBar = ({ title, glas, fastName, fastingLevelName, icon }) => {
             className={css`
                 color: white;
                 background-color: ${theme.colours.primary};
-                background-image: ${icon && `url("/static/icons/${icon}")`};
+                background-image: ${icon && `url("/assets/icons/${icon}")`};
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: center;

@@ -15,11 +15,6 @@ const apiHost = process.env.API_HOST || 'http://localhost:9999';
 
 app.use(cors());
 
-app.use('/static', express.static('app/assets/public'));
-app.use('/manifest.json', express.static('manifest.json'));
-app.use('/android-chrome-192x192.png', express.static('app/assets/public/icons/android-chrome-192x192.png'));
-app.use('/android-chrome-512x512.png', express.static('app/assets/public/icons/android-chrome-512x512.png'));
-
 app.use(
     '/api/day',
     proxy(apiHost, {
@@ -74,16 +69,19 @@ app.use(
     })
 );
 
-if (isProd) {
-    app.use('/', express.static('www'));
-} else {
+if (!isProd) {
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');
     const config = require('./webpack.dev');
     const compiler = webpack(config);
-    app.use(webpackDevMiddleware(compiler));
+    app.use(
+        webpackDevMiddleware(compiler, {
+            publicPath: '/built/',
+        })
+    );
     // NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
     app.use(webpackHotMiddleware(compiler));
 }
+app.use('/', express.static('www'));
 
 app.listen(port, () => console.log(`=== Go to http://localhost:${port} ===`));

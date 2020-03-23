@@ -1,4 +1,4 @@
-import React, { useState, Children } from 'react';
+import React, { useState, useRef } from 'react';
 import { css } from 'emotion';
 import { ThemeProvider, useTheme } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
@@ -25,6 +25,7 @@ import useExternalDay from 'hooks/useExternalDay';
 import Services from './Services';
 import { parseISO, formatISO, subDays, addDays } from 'date-fns';
 import useReadings from 'hooks/useReadings';
+import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 
 const BorderedSection = ({ children }) => {
     const theme = useTheme();
@@ -43,13 +44,14 @@ const BorderedSection = ({ children }) => {
 
 const Main = ({ services }) => {
     const { date } = useParams();
-    const { data: day } = useDay(date);
-    const { data: externalDay } = useExternalDay(date);
+    const dayQuery = useDay(date);
+    const day = dayQuery.data;
+    const externalDayQuery = useExternalDay(date);
+    const { sermons, thisDays } = externalDayQuery.data || {};
 
     // pre-fetch readings
     useReadings(date);
 
-    const { sermons, thisDays } = externalDay || {};
     const [calendarShown, setCalendarShown] = useState(false);
     const [direction, setDirection] = useState('mount');
     const history = useHistory();
@@ -77,7 +79,12 @@ const Main = ({ services }) => {
     };
     const handleToggleClick = () => setCalendarShown(!calendarShown);
 
-    const theme = getTheme(day?.colour);
+    const themeColour = useRef();
+    if (day?.colour) {
+        themeColour.current = day?.colour;
+    }
+
+    const theme = getTheme(themeColour.current);
 
     return (
         <ThemeProvider theme={theme}>
@@ -86,82 +93,71 @@ const Main = ({ services }) => {
                 <div
                     className={css`
                         flex-grow: 1;
-                        /* overflow-y: scroll;
-                        -webkit-overflow-scrolling: touch; */
                     `}
                 >
                     {calendarShown && <Calendar date={date} handleDayClick={handleDayClick} />}
                     <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
                     <div>
-                        <ReactCSSTransitionGroup
-                            className="slide-transition-group"
-                            transitionName={`slide-${direction}`}
-                            transitionEnterTimeout={400}
-                            transitionLeaveTimeout={400}
-                        >
-                            <div className="slide" key={date}>
-                                {Boolean(day) ? (
-                                    <div>
-                                        <HeadingBar
-                                            title={day.title}
-                                            glas={day.glas}
-                                            fastName={day.fastName}
-                                            fastingLevelName={day.fastingLevelName}
-                                            icon={day.icon}
-                                        />
-                                        <Zoom>
-                                            <div
-                                                className={css`
-                                                    padding: 0 18px;
-                                                `}
-                                            >
-                                                {services ? (
-                                                    <Services date={date} />
-                                                ) : (
-                                                    <>
-                                                        <SolidSection>
-                                                            <SectionHeading>Богослужения</SectionHeading>
-                                                            <ReadingList readings={day.readings || {}} />
-                                                        </SolidSection>
+                        {dayQuery.status === 'loading' && <Loader />}
+                        {dayQuery.status === 'error' && <ErrorMessage />}
+                        {dayQuery.status === 'success' && (
+                            <div>
+                                <HeadingBar
+                                    title={day.title}
+                                    glas={day.glas}
+                                    fastName={day.fastName}
+                                    fastingLevelName={day.fastingLevelName}
+                                    icon={day.icon}
+                                />
+                                <Zoom>
+                                    <div
+                                        className={css`
+                                            padding: 0 18px;
+                                        `}
+                                    >
+                                        {services ? (
+                                            <Services date={date} />
+                                        ) : (
+                                            <>
+                                                <SolidSection>
+                                                    <SectionHeading>Богослужения</SectionHeading>
+                                                    <ReadingList readings={day.readings || {}} />
+                                                </SolidSection>
 
-                                                        <BorderedSection>
-                                                            <SectionHeading>Святые дня</SectionHeading>
-                                                            <Saints saints={day.saints} date={date} />
-                                                        </BorderedSection>
+                                                <BorderedSection>
+                                                    <SectionHeading>Святые дня</SectionHeading>
+                                                    <Saints saints={day.saints} date={date} />
+                                                </BorderedSection>
 
-                                                        <ThisDays thisDays={thisDays} date={date} />
-                                                        {day.prayers && day.prayers.length > 0 && (
-                                                            <BorderedSection>
-                                                                <div
-                                                                    className={css`
-                                                                        overflow: auto;
-                                                                    `}
-                                                                >
-                                                                    <SectionHeading>Песнопения</SectionHeading>
-                                                                </div>
-                                                                <Hymns hymns={day.prayers} />
-                                                            </BorderedSection>
-                                                        )}
-                                                        {day.bReadings && Object.keys(day.bReadings).length > 0 && (
-                                                            <SolidSection>
-                                                                <SectionHeading>Душеполезные чтения</SectionHeading>
-                                                                <ReadingList brother readings={day.bReadings} />
-                                                            </SolidSection>
-                                                        )}
-                                                        <SolidSection>
-                                                            <Sermons date={date} sermons={sermons} />
-                                                        </SolidSection>
-                                                    </>
+                                                <ThisDays thisDays={thisDays} date={date} />
+                                                {day.prayers && day.prayers.length > 0 && (
+                                                    <BorderedSection>
+                                                        <div
+                                                            className={css`
+                                                                overflow: auto;
+                                                            `}
+                                                        >
+                                                            <SectionHeading>Песнопения</SectionHeading>
+                                                        </div>
+                                                        <Hymns hymns={day.prayers} />
+                                                    </BorderedSection>
                                                 )}
-                                            </div>
-                                        </Zoom>
-                                        {!services && <Links />}
+                                                {day.bReadings && Object.keys(day.bReadings).length > 0 && (
+                                                    <SolidSection>
+                                                        <SectionHeading>Душеполезные чтения</SectionHeading>
+                                                        <ReadingList brother readings={day.bReadings} />
+                                                    </SolidSection>
+                                                )}
+                                                <SolidSection>
+                                                    <Sermons date={date} sermons={sermons} />
+                                                </SolidSection>
+                                            </>
+                                        )}
                                     </div>
-                                ) : (
-                                    <Loader />
-                                )}
+                                </Zoom>
+                                {!services && <Links />}
                             </div>
-                        </ReactCSSTransitionGroup>
+                        )}
                     </div>
                 </div>
 

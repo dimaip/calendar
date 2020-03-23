@@ -11,8 +11,8 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         chunkFilename: '[name].bundle.js',
-        path: path.resolve(__dirname, './www'),
-        publicPath: '',
+        path: path.resolve(__dirname, './www/built'),
+        publicPath: '/built/',
     },
 
     target: 'web',
@@ -36,28 +36,15 @@ module.exports = {
             chunkFilename: '[name].bundle.css',
         }),
         new webpack.NoEmitOnErrorsPlugin(),
-        new HtmlWebpackPlugin({
-            title: 'Православный календарь',
-            appMountId: 'react-root',
-            window: {
-                __PRELOADED_STATE__: {},
-            },
-            template: 'assets/templates/index.ejs',
-            filename: 'index.html',
-            inject: false,
-            mobile: true,
-            alwaysWriteToDisk: true,
-            minify: {
-                collapseWhitespace: true,
-                preserveLineBreaks: true,
-            },
-        }),
     ],
     module: {
         rules: [
             {
                 test: /\.worker\.js$/,
-                use: { loader: 'worker-loader' },
+                use: {
+                    loader: 'worker-loader',
+                    options: { publicPath: '/built/' },
+                },
             },
             {
                 test: /\.js$/,

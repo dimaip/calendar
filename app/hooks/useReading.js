@@ -1,10 +1,12 @@
 import { useQuery } from 'react-query';
 import useReadings from './useReadings';
 
-export function fetchReading({ link, translation }) {
+export function fetchReading(key, { link, translation }) {
     return fetch(`${process.env.PUBLIC_URL}/api/reading/` + encodeURI(link) + '&translation=' + translation)
         .then(response => {
-            if (response.status > 400) throw new Error('Error on fetch reading.');
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
 
             return response.json();
         })
@@ -29,12 +31,15 @@ export function fetchReading({ link, translation }) {
 }
 
 const useReading = (link, translation, date) => {
-    const { data: readings } = useReadings(date);
-    const { data: reading } = useQuery(['reading', { link, translation }], fetchReading);
+    const { data: readings, status: readingsStatus } = useReadings(date);
+    const readingQuery = useQuery(['reading', { link, translation }], fetchReading);
     if (readings?.[link] && translation === 'default') {
-        return readings[link];
+        return {
+            data: readings[link],
+            status: 'success',
+        };
     }
-    return reading;
+    return readingQuery;
 };
 
 export default useReading;
