@@ -6,10 +6,10 @@
   "private": true,
   "scripts": {
     "start": "node server.js",
-    "serve": "NODE_PORT=80 NODE_ENV=production node server.js",
-    "build": "PUBLIC_URL=https://d.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
-    "build-local": "PUBLIC_URL=http://localhost NODE_ENV=production webpack --config webpack.prod.js",
-    "build-cap": "NODE_ENV=production cap sync"
+    "serve": "cross-env NODE_PORT=80 NODE_ENV=production node server.js",
+    "build": "cross-env PUBLIC_URL=https://d.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
+    "build-local": "cross-env PUBLIC_URL=http://localhost NODE_ENV=production webpack --config webpack.prod.js",
+    "build-cap": "cross-env NODE_ENV=production cap sync"
   },
   "author": "PSMB.ru",
   "license": "ISC",
@@ -65,6 +65,7 @@
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-optional-chaining": "^7.0.0-beta.3",
     "clean-webpack-plugin": "^0.1.15",
+    "cross-env": "^7.0.2",
     "css-loader": "^3.4.2",
     "file-loader": "^5.0.2",
     "html-webpack-plugin": "^3.2.0",
