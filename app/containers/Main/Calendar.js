@@ -6,7 +6,7 @@ import { ru } from 'date-fns/locale';
 import './Calendar.scss';
 import { useTheme } from 'emotion-theming';
 
-const Calendar = ({ date, handleDayClick }) => {
+const Calendar = ({ date, handleDayClick, onClose }) => {
     const theme = useTheme();
     const [month, setMonth] = useState(new Date(date));
     const modifiers = {
@@ -96,35 +96,55 @@ const Calendar = ({ date, handleDayClick }) => {
     return (
         <div
             className={css`
-                z-index: 1;
                 position: fixed;
+                top: 44px;
                 left: 0;
                 right: 0;
-                background: white;
-                max-width: 640px;
-                margin: 0 auto;
-                border-bottom: 1px solid #d9dde5;
-                box-shadow: 0px 2px 3px #d9dde5;
-                & .nice-dates-day:hover:after {
-                    opacity: 0 !important;
-                }
-                & .-wide .nice-dates-day_date {
-                    left: 12.5%;
-                    right: 12.5%;
-                }
+                bottom: 0;
+                display: flex;
+                flex-direction: column;
             `}
         >
-            <div>
-                <DatePickerCalendar
-                    date={new Date(date)}
-                    onDateChange={handleDayClick}
-                    locale={ru}
-                    month={month}
-                    onMonthChange={setMonth}
-                    modifiers={modifiers}
-                    modifiersClassNames={modifiersClassNames}
-                />
+            <div
+                className={css`
+                    z-index: 1;
+                    position: fixed;
+                    left: 0;
+                    right: 0;
+                    background: white;
+                    max-width: 640px;
+                    margin: 0 auto;
+                    border-bottom: 1px solid #d9dde5;
+                    box-shadow: 0px 2px 3px #d9dde5;
+                    & .nice-dates-day:hover:after {
+                        opacity: 0 !important;
+                    }
+                    & .-wide .nice-dates-day_date {
+                        left: 12.5%;
+                        right: 12.5%;
+                    }
+                `}
+            >
+                <div>
+                    <DatePickerCalendar
+                        date={new Date(date)}
+                        onDateChange={handleDayClick}
+                        locale={ru}
+                        month={month}
+                        onMonthChange={setMonth}
+                        modifiers={modifiers}
+                        modifiersClassNames={modifiersClassNames}
+                    />
+                </div>
             </div>
+            <div
+                role="button"
+                className={css`
+                    flex-grow: 1;
+                    cursor: pointer;
+                `}
+                onClick={onClose}
+            />
         </div>
     );
 };

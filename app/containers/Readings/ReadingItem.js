@@ -11,6 +11,7 @@ import SelectBox from 'components/SelectBox/SelectBox';
 const ReadingItem = ({ readingVerse, type }) => {
     const [translation, setTranslation] = useState('default');
     const { date } = useParams();
+    // @ts-ignore
     const { data: reading, status } = useReading(readingVerse, translation, date);
     const theme = useTheme();
 

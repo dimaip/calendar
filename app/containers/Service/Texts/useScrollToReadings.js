@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 const useScrollToReadings = () => {
     const history = useHistory();
     useEffect(() => {
+        // @ts-ignore
         if (history.location.state?.scrollToReadings) {
             const domNode = document.getElementById('firstReading');
             if (domNode) {

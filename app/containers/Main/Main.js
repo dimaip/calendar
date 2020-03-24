@@ -95,7 +95,9 @@ const Main = ({ services }) => {
                         flex-grow: 1;
                     `}
                 >
-                    {calendarShown && <Calendar date={date} handleDayClick={handleDayClick} />}
+                    {calendarShown && (
+                        <Calendar date={date} handleDayClick={handleDayClick} onClose={() => setCalendarShown(false)} />
+                    )}
                     <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
                     <div>
                         {dayQuery.status === 'loading' && <Loader />}
