@@ -7,6 +7,7 @@ import useDay from 'hooks/useDay';
 import ReadingItem from 'containers/Readings/ReadingItem';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
+import useScrollToReadings from './useScrollToReadings';
 
 const Readings = ({ readings }) => (
     <>
@@ -19,6 +20,7 @@ const Readings = ({ readings }) => (
 const Lpod = ({ lang }) => {
     const { date } = useParams();
     const { data: day } = useDay(date);
+    useScrollToReadings();
 
     const readings = day?.readings;
     const readingsForService = readings?.['Вечерня'];
@@ -846,9 +848,7 @@ const Lpod = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Снова и снова в мире Господу по­мо­лимся!</span>
-                    <Tooltip>
-                        Молитвы (4)–(7) в случае необходимости могут быть опущены.
-                    </Tooltip>
+                    <Tooltip>Молитвы (4)–(7) в случае необходимости могут быть опущены.</Tooltip>
                 </p>
                 <p className="_-ПЕТИТ_КРАСН-петит-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> [И далее Малая ектения, </span>
@@ -3560,8 +3560,6 @@ const Lpod = ({ lang }) => {
                 </p>
                 <hr className="HorizontalRule-1" />
                 <div className="_idFootnotes">
-
-                   
                     <div id="footnote-007" className="_idFootnote">
                         <p className="_-СНОСКА_Сноска-КРАСНАЯ">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">

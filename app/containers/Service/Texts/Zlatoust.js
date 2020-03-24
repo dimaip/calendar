@@ -7,6 +7,7 @@ import isGospel from 'domain/isGospel';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
 import './Shared.css';
+import useScrollToReadings from './useScrollToReadings';
 
 const Readings = ({ readings }) => (
     <>
@@ -16,9 +17,10 @@ const Readings = ({ readings }) => (
     </>
 );
 
-const Zlatoust = ({ lang, textRef }) => {
+const Zlatoust = ({ lang }) => {
     const { date } = useParams();
     const { data: day } = useDay(date);
+    useScrollToReadings();
 
     const readings = day?.readings;
     const readingsForService = readings?.['Литургия'];

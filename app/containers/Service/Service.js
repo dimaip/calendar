@@ -41,17 +41,6 @@ const Service = () => {
         setCalendarShown(false);
     };
 
-    useEffect(() => {
-        if (history.location.state?.scrollToReadings) {
-            const domNode = document.getElementById('firstReading');
-            if (domNode) {
-                setTimeout(() => {
-                    domNode.scrollIntoView({ block: 'center' });
-                }, 800);
-            }
-        }
-    }, []);
-
     return (
         <ThemeProvider theme={theme}>
             <div>
