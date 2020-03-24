@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
-import Loader from 'components/Loader/Loader';
 import SectionHeading from './SectionHeading';
 import { Link } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
