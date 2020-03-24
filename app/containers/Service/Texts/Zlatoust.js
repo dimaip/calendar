@@ -1,49 +1,11 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import forEach from 'lodash.foreach';
-import useDay from 'hooks/useDay';
-import ReadingItem from 'containers/Readings/ReadingItem';
-import isGospel from 'domain/isGospel';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
 import './Shared.css';
-import useScrollToReadings from './useScrollToReadings';
-
-const Readings = ({ readings }) => (
-    <>
-        {readings.map(({ readingVerse, type }) => (
-            <ReadingItem key={readingVerse} readingVerse={readingVerse} type={type} />
-        ))}
-    </>
-);
+import useLiturgy from './useLiturgy';
 
 const Zlatoust = ({ lang }) => {
-    const { date } = useParams();
-    const { data: day } = useDay(date);
-    useScrollToReadings();
-
-    const readings = day?.readings;
-    const readingsForService = readings?.['Литургия'];
-
-    const readingVersesWithType = [];
-    forEach(readingsForService, (readingVerses, type) => {
-        readingVerses.forEach(readingVerse => {
-            readingVersesWithType.push({
-                readingVerse,
-                type,
-            });
-        });
-    });
-
-    const apostolReadings = readingVersesWithType.filter(reading => !isGospel(reading.readingVerse));
-    const gospelReadings = readingVersesWithType.filter(reading => isGospel(reading.readingVerse));
-
-    const apostol = (
-        <div className={css``}>
-            <Readings readings={apostolReadings} />
-        </div>
-    );
-    const gospel = <Readings readings={gospelReadings} />;
+    const { hymns, apostol, gospel, sermons, saints } = useLiturgy();
 
     return (
         <div>
@@ -1683,6 +1645,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Далее следуют тропари и кондаки праздника и храма.</span>
                 </p>
+                {hymns}
                 <p className="_-ПЕТИТ_Петит-отст1-5 ParaOverride-7">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[Д</span>
@@ -2145,6 +2108,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_Чтение-Писания">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ CharOverride-6">Проповедь</span>
                 </p>
+                {sermons}
                 <p id="sugubaja" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-14">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Сугубая ектения</span>
                 </p>
@@ -5791,6 +5755,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">63</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
                 </p>
+                {saints}
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Многолетие

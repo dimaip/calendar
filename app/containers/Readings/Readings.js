@@ -118,7 +118,9 @@ const Readings = ({ brother = false }) => {
                         <ZoomControlToggle />
                     </div>
                 </div>
-                {calendarShown && <Calendar date={date} handleDayClick={handleDayClick} />}
+                {calendarShown && (
+                    <Calendar date={date} handleDayClick={handleDayClick} onClose={() => setCalendarShown(false)} />
+                )}
 
                 {Boolean(day) ? (
                     <div

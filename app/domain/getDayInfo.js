@@ -1,4 +1,5 @@
-import memoize from 'lodash.memoize';
+// import memoize from 'lodash.memoize';
+const memoize = a => a;
 
 // Originally inspired by http://www.holytrinityorthodox.com/ru/calendar/v2staff/loadCalendar_v2.js
 

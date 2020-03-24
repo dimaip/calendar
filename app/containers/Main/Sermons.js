@@ -7,12 +7,12 @@ import { Link } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 
-const Sermons = ({ sermons, date }) => {
+const Sermons = ({ sermons, date, hideTitle = false }) => {
     const theme = useTheme();
 
     return sermons?.length ? (
         <>
-            <SectionHeading>Проповедь</SectionHeading>
+            {!hideTitle && <SectionHeading>Проповедь</SectionHeading>}
             <div
                 className={css`
                     margin: 0 -10px 18px -10px;

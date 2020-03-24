@@ -107,7 +107,9 @@ const Service = () => {
                         <ZoomControlToggle />
                     </div>
                 </div>
-                {calendarShown && <Calendar date={date} handleDayClick={handleDayClick} />}
+                {calendarShown && (
+                    <Calendar date={date} handleDayClick={handleDayClick} onClose={() => setCalendarShown(false)} />
+                )}
                 <div
                     className={css`
                         position: relative;

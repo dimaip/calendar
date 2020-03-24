@@ -1,50 +1,11 @@
 import React from 'react';
 import './Shared.css';
-import { useParams } from 'react-router-dom';
-import forEach from 'lodash.foreach';
-import useDay from 'hooks/useDay';
-import ReadingItem from 'containers/Readings/ReadingItem';
-import isGospel from 'domain/isGospel';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
-import useScrollToReadings from './useScrollToReadings';
-
-const Readings = ({ readings }) => (
-    <>
-        {readings.map(({ readingVerse, type }) => (
-            <ReadingItem key={readingVerse} readingVerse={readingVerse} type={type} />
-        ))}
-    </>
-);
+import useLiturgy from './useLiturgy';
 
 const Vasiliy = ({ lang }) => {
-    const { date } = useParams();
-    const { data: day } = useDay(date);
-
-    useScrollToReadings();
-
-    const readings = day?.readings;
-    const readingsForService = readings?.['Литургия'];
-
-    const readingVersesWithType = [];
-    forEach(readingsForService, (readingVerses, type) => {
-        readingVerses.forEach(readingVerse => {
-            readingVersesWithType.push({
-                readingVerse,
-                type,
-            });
-        });
-    });
-
-    const apostolReadings = readingVersesWithType.filter(reading => !isGospel(reading.readingVerse));
-    const gospelReadings = readingVersesWithType.filter(reading => isGospel(reading.readingVerse));
-
-    const apostol = (
-        <div className={css``}>
-            <Readings readings={apostolReadings} />
-        </div>
-    );
-    const gospel = <Readings readings={gospelReadings} />;
+    const { hymns, apostol, gospel, sermons, saints } = useLiturgy();
 
     return (
         <div>
@@ -1697,6 +1658,7 @@ const Vasiliy = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст5 ParaOverride-9">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Тропари и кондаки праздника и храма.</span>
                 </p>
+                {hymns}
                 <p className="_-ПЕТИТ_Петит-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[Д</span>
@@ -2247,6 +2209,7 @@ const Vasiliy = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-12">
                     <span className="_-ВЫДЕЛЕНИЯ_REGULAR">Проповедь</span>
                 </p>
+                {sermons}
                 <p id="sugubaja" className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Сугубая ектения</span>
                 </p>
@@ -6880,6 +6843,7 @@ const Vasiliy = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-11">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Праздничные отпусты – см. в приложениях.</span>
                 </p>
+                {saints}
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-9">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Многолетие </span>
                     <span className="_-РЕДКИЕ_СТРОЧНЫЕ-в-прописн--заг-">(при закрытии завесы)</span>
