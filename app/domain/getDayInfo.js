@@ -1,3 +1,5 @@
+import memoize from 'lodash.memoize';
+
 // Originally inspired by http://www.holytrinityorthodox.com/ru/calendar/v2staff/loadCalendar_v2.js
 
 const fastingLevels = {
@@ -11,7 +13,7 @@ const fastingLevels = {
     8: '',
 };
 
-const calculateEasterDate = year => {
+const calculateEasterDate = memoize(year => {
     // Pascha Calculation
     let pascha_m;
     let pascha_d;
@@ -33,9 +35,9 @@ const calculateEasterDate = year => {
     }
 
     return new Date(year, pascha_m, pascha_d); // Set Pascha Date
-};
+});
 
-export function getLentInfo(date) {
+export const getLentInfo = memoize(date => {
     const y = date.getFullYear();
     const m = date.getMonth();
     const d = date.getDate();
@@ -346,9 +348,9 @@ export function getLentInfo(date) {
     }
 
     return null;
-}
+});
 
-export function getFeastInfo(_date) {
+export const getFeastInfo = memoize(_date => {
     let title = '';
     let feastType = null;
     let colour = null;
@@ -552,4 +554,4 @@ export function getFeastInfo(_date) {
         vasiliy,
         lpod,
     };
-}
+});
