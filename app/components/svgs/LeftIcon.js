@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
-export default ({ colour }) => {
+export default ({ colour = null }) => {
     const theme = useTheme();
     return (
         <svg
