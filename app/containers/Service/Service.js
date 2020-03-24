@@ -41,17 +41,6 @@ const Service = () => {
         setCalendarShown(false);
     };
 
-    useEffect(() => {
-        if (history.location.state?.scrollToReadings) {
-            const domNode = document.getElementById('firstReading');
-            if (domNode) {
-                setTimeout(() => {
-                    domNode.scrollIntoView({ block: 'center' });
-                }, 800);
-            }
-        }
-    }, []);
-
     return (
         <ThemeProvider theme={theme}>
             <div>
@@ -118,7 +107,9 @@ const Service = () => {
                         <ZoomControlToggle />
                     </div>
                 </div>
-                {calendarShown && <Calendar date={date} handleDayClick={handleDayClick} />}
+                {calendarShown && (
+                    <Calendar date={date} handleDayClick={handleDayClick} onClose={() => setCalendarShown(false)} />
+                )}
                 <div
                     className={css`
                         position: relative;
