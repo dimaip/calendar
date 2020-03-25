@@ -108,6 +108,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                 <div
                     className={css`
                         margin-bottom: 6px;
+                        margin-right: 6px;
                     `}
                 >
                     {type != 'unnamed' && (
@@ -133,7 +134,6 @@ const ReadingItem = ({ readingVerse, type }) => {
                 </div>
                 {reading.translationList?.length ? (
                     <div>
-                        {' '}
                         <SelectBox
                             onChange={value => setTranslation(value)}
                             value={reading.translationCurrent}

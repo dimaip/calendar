@@ -48,7 +48,7 @@ const useLiturgy = () => {
     const gospelReadings = readingVersesWithType.filter(reading => isGospel(reading.readingVerse));
 
     const hymns = day?.prayers && day.prayers.length > 0 && (
-        <SolidSection marginTop={24} marginBottom={24} paddingTop={18}>
+        <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
             <Hymns hymns={day.prayers} />
         </SolidSection>
     );
@@ -61,14 +61,14 @@ const useLiturgy = () => {
     const gospel = <Readings readings={gospelReadings} />;
 
     const sermons = (
-        <SolidSection paddingTop={8} marginTop={12}>
+        <SolidSection paddingTop={8} marginTop={12} marginHorizontal={-12}>
             <Sermons date={date} sermons={sermonsData} hideTitle />
         </SolidSection>
     );
 
     const saints = day?.saints && (
-        <SolidSection marginTop={24}>
-            <SectionHeading>Святые дня</SectionHeading>
+        <SolidSection marginTop={24} marginHorizontal={-12}>
+            <SectionHeading >Святые дня</SectionHeading>
             <Saints saints={day.saints} date={date} />
         </SolidSection>
     );
