@@ -32,7 +32,7 @@ export function fetchReading(key, { link, translation }) {
 
 const useReading = (link, translation, date) => {
     const { data: readings, status: readingsStatus } = useReadings(date);
-    const readingQuery = useQuery(['reading', { link, translation }], fetchReading);
+    const readingQuery = useQuery(['reading', { link, translation }], fetchReading, {retry: false});
     if (readings?.[link] && translation === 'default') {
         return {
             data: readings[link],
