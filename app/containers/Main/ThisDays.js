@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
-import Loader from 'components/Loader/Loader';
 import { Link } from 'react-router-dom';
+import SolidSection from 'components/SolidSection/SolidSection';
 
 const ThisDayLink = ({ to, href, children }) => {
     if (href) {
@@ -16,53 +16,63 @@ const ThisDayLink = ({ to, href, children }) => {
 
 const ThisDays = ({ thisDays, date }) => {
     return thisDays?.length ? (
-        <div>
+        <SolidSection paddingTop={24} paddingBottom={24}>
             {thisDays.map(thisDay => {
                 return (
                     <ThisDayLink to={`/date/${date}/thisday/${thisDay.id}`} href={thisDay.link} key={thisDay.id}>
                         <div
                             className={css`
-                                max-width: 480px;
+                                max-width: 640px;
+                                background-color: #201f24;
+                                display: flex;
+                                border-radius: 8px;
+                                overflow: hidden;
+                                min-height: 200px;
                             `}
                         >
                             <div
                                 className={css`
-                                    position: relative;
-                                    width: 100%;
-                                    padding-bottom: 56.5%;
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-between;
+                                    align-items: flex-start;
+                                    padding: 12px;
+                                    width: 66%;
                                 `}
                             >
                                 <div
                                     className={css`
-                            background-image: url("${thisDay.image}");
-                            background-position: center;
-                            background-size: cover;
-                            border-radius: 8px;
-                            bottom: 0;
-                            top: 0;
-                            left: 0;
-                            right: 0;
-                            position: absolute;
-                            padding: 12px;
+                                        color: white;
+                                        font-weight: bold;
+                                        font-size: 20px;
+                                        line-height: 1.2;
+                                        flex-grow: 1;
                                     `}
                                 >
-                                    <h3
-                                        className={css`
-                                            color: white;
-                                            font-weight: bold;
-                                            text-shadow: -0.3px -0.3px 0 #000, 0.3px -0.3px 0 #000, -0.3px 0.3px 0 #000,
-                                                0.3px 0.3px 0 #000;
-                                        `}
-                                    >
-                                        {thisDay.title}
-                                    </h3>
+                                    {thisDay.title}
+                                </div>
+                                <div
+                                    className={css`
+                                        color: white;
+                                        font-size: 10px;
+                                    `}
+                                >
+                                    в этот день
                                 </div>
                             </div>
+                            <div
+                                className={css`
+                                    background-image: url(${thisDay.image});
+                                    background-size: cover;
+                                    background-position: center;
+                                    width: 100%;
+                                `}
+                            />
                         </div>
                     </ThisDayLink>
                 );
             })}
-        </div>
+        </SolidSection>
     ) : null;
 };
 export default ThisDays;
