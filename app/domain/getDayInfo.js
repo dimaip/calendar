@@ -518,6 +518,7 @@ export const getFeastInfo = memoize(
             title = 'Благовещение Пресвятой Богородицы';
             feastType = '12';
             colour = '#4169E1';
+            icon = 'annunciation.jpg';
         }
 
         if (new Date(y, 7, 19).getTime() == date.getTime()) {
