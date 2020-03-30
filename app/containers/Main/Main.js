@@ -56,7 +56,7 @@ const Main = ({ services }) => {
     const [direction, setDirection] = useState('mount');
     const history = useHistory();
     const setNewDate = dateString => {
-        history.push(`/date/${dateString}`);
+        history.push(`/date/${dateString}${services ? '/services' : ''}`);
     };
     const handleDayClick = day => {
         const dateString = dateFormat(day, 'yyyy-mm-dd');
@@ -118,7 +118,7 @@ const Main = ({ services }) => {
                                         `}
                                     >
                                         {services ? (
-                                            <Services date={date} />
+                                            <Services date={date} readings={day.readings || {}} />
                                         ) : (
                                             <>
                                                 <SolidSection>
