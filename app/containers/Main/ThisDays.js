@@ -16,7 +16,14 @@ const ThisDayLink = ({ to, href, children }) => {
 
 const ThisDays = ({ thisDays, date }) => {
     return thisDays?.length ? (
-        <SolidSection paddingTop={24} paddingBottom={24}>
+        <div
+            className={css`
+                padding-top: 12px;
+                padding-bottom: 12px;
+                margin-left: -12px;
+                margin-right: -12px;
+            `}
+        >
             {thisDays.map(thisDay => {
                 return (
                     <ThisDayLink to={`/date/${date}/thisday/${thisDay.id}`} href={thisDay.link} key={thisDay.id}>
@@ -44,9 +51,13 @@ const ThisDays = ({ thisDays, date }) => {
                                     className={css`
                                         color: white;
                                         font-weight: bold;
-                                        font-size: 20px;
                                         line-height: 1.2;
                                         flex-grow: 1;
+                                        margin-bottom: 6px;
+                                        font-size: 18px;
+                                        @media (min-width: 360px) {
+                                            font-size: 20px;
+                                        }
                                     `}
                                 >
                                     {thisDay.title}
@@ -72,7 +83,7 @@ const ThisDays = ({ thisDays, date }) => {
                     </ThisDayLink>
                 );
             })}
-        </SolidSection>
+        </div>
     ) : null;
 };
 export default ThisDays;

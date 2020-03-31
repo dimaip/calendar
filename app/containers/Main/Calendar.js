@@ -56,7 +56,7 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
             & .nice-dates-day_date {
                 ${baseStyle}
                 font-weight: bold;
-                margin: 4px;
+                text-decoration: underline;
             }
         `,
         h12: css`

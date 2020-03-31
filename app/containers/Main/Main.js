@@ -126,10 +126,8 @@ const Main = ({ services }) => {
                                                     <ReadingList readings={day.readings || {}} />
                                                 </SolidSection>
 
-                                                <BorderedSection>
-                                                    <SectionHeading>Святые дня</SectionHeading>
-                                                    <Saints saints={day.saints} date={date} />
-                                                </BorderedSection>
+                                                <SectionHeading>Святые дня</SectionHeading>
+                                                <Saints saints={day.saints} date={date} />
 
                                                 <ThisDays thisDays={thisDays} date={date} />
                                                 {day.prayers && day.prayers.length > 0 && (

@@ -30,7 +30,13 @@ const Services = ({ date, readings }) => {
     ];
 
     return (
-        <SolidSection>
+        <div
+            className={css`
+                background: ${theme.colours.bgGray};
+                padding: 0 18px 0 18px;
+                margin: 0 -18px 0 -18px;
+            `}
+        >
             <SectionHeading>Богослужебные тексты</SectionHeading>
             <div
                 className={css`
@@ -100,7 +106,7 @@ const Services = ({ date, readings }) => {
                     день
                 </div>
             </div>
-        </SolidSection>
+        </div>
     );
 };
 export default Services;
