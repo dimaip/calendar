@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { css } from 'emotion';
 import { ThemeProvider, useTheme } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import dateFormat from 'dateformat';
 import ReadingList from './ReadingList';
 import Header from 'components/Header/Header';
@@ -26,6 +25,7 @@ import Services from './Services';
 import { parseISO, formatISO, subDays, addDays } from 'date-fns';
 import useReadings from 'hooks/useReadings';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import BurgerMenu from './BurgerMenu';
 
 const BorderedSection = ({ children }) => {
     const theme = useTheme();
@@ -53,6 +53,7 @@ const Main = ({ services }) => {
     useReadings(date);
 
     const [calendarShown, setCalendarShown] = useState(false);
+    const [menuShown, setMenuShown] = useState(false);
     const [direction, setDirection] = useState('mount');
     const history = useHistory();
     const setNewDate = dateString => {
@@ -89,7 +90,12 @@ const Main = ({ services }) => {
     return (
         <ThemeProvider theme={theme}>
             <div>
-                <Header handleToggleClick={handleToggleClick} calendarShown={calendarShown} />
+                <Header
+                    handleToggleClick={handleToggleClick}
+                    calendarShown={calendarShown}
+                    menuShown={menuShown}
+                    setMenuShown={setMenuShown}
+                />
                 <div
                     className={css`
                         flex-grow: 1;
@@ -161,6 +167,7 @@ const Main = ({ services }) => {
                     </div>
                 </div>
 
+                <BurgerMenu menuShown={menuShown} setMenuShown={setMenuShown} />
                 <BottomNav active={services ? 'services' : 'calendar'} />
             </div>
         </ThemeProvider>

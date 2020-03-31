@@ -5,10 +5,11 @@ import { Link } from 'react-router-dom';
 import CalendarIcon from 'components/svgs/CalendarIcon';
 import Button from 'components/Button/Button';
 import Cross from 'components/svgs/Cross';
+import Burger from 'components/svgs/Burger';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Star from '../svgs/Star';
 
-const Header = ({ handleToggleClick, calendarShown }) => {
+const Header = ({ handleToggleClick, calendarShown, menuShown, setMenuShown }) => {
     return (
         <div
             className={css`
@@ -28,6 +29,18 @@ const Header = ({ handleToggleClick, calendarShown }) => {
                     border-bottom: 1px solid #ccc;
                 `}
             >
+                {setMenuShown && (
+                    <Button
+                        onClick={() => setMenuShown(!menuShown)}
+                        className={css`
+                            display: block;
+                            padding: 10px 18px;
+                            z-index: 1;
+                        `}
+                    >
+                        <Burger />
+                    </Button>
+                )}
                 <div
                     className={css`
                         flex-grow: 1;
