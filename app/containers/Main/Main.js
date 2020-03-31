@@ -81,8 +81,8 @@ const Main = ({ services }) => {
     const handleToggleClick = () => setCalendarShown(!calendarShown);
 
     const themeColour = useRef();
-    if (day?.colour) {
-        themeColour.current = day?.colour;
+    if (day) {
+        themeColour.current = day.colour;
     }
 
     const theme = getTheme(themeColour.current);
