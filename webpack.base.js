@@ -30,6 +30,9 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.DefinePlugin({
+            VERSION: JSON.stringify(process.env.npm_package_version),
+        }),
         new webpack.EnvironmentPlugin({ NODE_ENV: 'development', PUBLIC_URL: 'http://localhost:3000' }),
         new MiniCssExtractPlugin({
             filename: '[name].bundle.css',

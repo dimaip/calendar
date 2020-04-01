@@ -37,36 +37,55 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                 >
                     <CrossCircle />
                 </Button>
-                Приложение «Православное&nbsp;богослужение» разработано{' '}
-                <a
+                <div
                     className={css`
-                        text-decoration: underline;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        height: 100%;
                     `}
-                    href="https://psmb.ru"
-                    target="_blank"
                 >
-                    Преображенским братством
-                </a>
-                <br />
-                <br />
-                © Переводы Св. Писания и Богослужебных текстов:
-                <br />
-                Архимандрит Ианнуарий (Ивлиев)
-                <br />
-                Священник Георгий Кочетков
-                <br />
-                С.С. Аверинцев
-                <br />
-                Епископ Кассиан (Безобразов)
-                <br />
-                РБО 2011
-                <br />
-                Novum Testamentum Graece Edited by Barbara Aland and others
-                <br />
-                Deutsche Bibelgesellschaft, Stuttgart
-                <br />
-                <br />
-                При любом использовании материалов сайта, ссылка на источник обязательна
+                    <div>
+                        Приложение «Православное&nbsp;богослужение» разработано{' '}
+                        <a
+                            className={css`
+                                text-decoration: underline;
+                            `}
+                            href="https://psmb.ru"
+                            target="_blank"
+                        >
+                            Преображенским братством
+                        </a>
+                        <br />
+                        <br />
+                        © Переводы Св. Писания и Богослужебных текстов:
+                        <br />
+                        Архимандрит Ианнуарий (Ивлиев)
+                        <br />
+                        Священник Георгий Кочетков
+                        <br />
+                        С.С. Аверинцев
+                        <br />
+                        Епископ Кассиан (Безобразов)
+                        <br />
+                        РБО 2011
+                        <br />
+                        Novum Testamentum Graece Edited by Barbara Aland and others
+                        <br />
+                        Deutsche Bibelgesellschaft, Stuttgart
+                        <br />
+                        <br />
+                        При любом использовании материалов сайта, ссылка на источник обязательна
+                    </div>
+                    <div>
+                        Версия:{' '}
+                        {
+                            // @ts-ignore
+                            VERSION
+                        }
+                    </div>
+                </div>
             </div>
             <div
                 role="button"
