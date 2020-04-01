@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { css } from 'emotion';
 import { ThemeProvider, useTheme } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
@@ -26,6 +26,10 @@ import { parseISO, formatISO, subDays, addDays } from 'date-fns';
 import useReadings from 'hooks/useReadings';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import BurgerMenu from './BurgerMenu';
+import SwipeableViews from 'react-swipeable-views';
+import { virtualize } from 'react-swipeable-views-utils';
+
+const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
 const BorderedSection = ({ children }) => {
     const theme = useTheme();
@@ -42,29 +46,99 @@ const BorderedSection = ({ children }) => {
     );
 };
 
-const Main = ({ services }) => {
-    const { date } = useParams();
+const Inner = ({ date, services, handleToggleClick, makeHandleClickShift }) => {
     const dayQuery = useDay(date);
     const day = dayQuery.data;
     const externalDayQuery = useExternalDay(date);
     const { sermons, thisDays } = externalDayQuery.data || {};
 
+    const themeColour = useRef();
+    if (day) {
+        themeColour.current = day.colour;
+    }
+
+    const theme = getTheme(themeColour.current);
+    return (
+        <ThemeProvider theme={theme}>
+            <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
+            <div>
+                {dayQuery.status === 'loading' && <Loader />}
+                {dayQuery.status === 'error' && <ErrorMessage />}
+                {dayQuery.status === 'success' && (
+                    <div>
+                        <HeadingBar
+                            title={day.title}
+                            glas={day.glas}
+                            fastName={day.fastName}
+                            fastingLevelName={day.fastingLevelName}
+                            icon={day.icon}
+                        />
+                        <Zoom>
+                            <div
+                                className={css`
+                                    padding: 0 18px;
+                                `}
+                            >
+                                {services ? (
+                                    <Services date={date} readings={day.readings || {}} />
+                                ) : (
+                                    <>
+                                        <SolidSection>
+                                            <SectionHeading>Богослужения</SectionHeading>
+                                            <ReadingList readings={day.readings || {}} />
+                                        </SolidSection>
+
+                                        <SectionHeading>Святые дня</SectionHeading>
+                                        <Saints saints={day.saints} date={date} />
+
+                                        <ThisDays thisDays={thisDays} date={date} />
+                                        {day.prayers && day.prayers.length > 0 && (
+                                            <BorderedSection>
+                                                <div
+                                                    className={css`
+                                                        overflow: auto;
+                                                    `}
+                                                >
+                                                    <SectionHeading>Песнопения</SectionHeading>
+                                                </div>
+                                                <Hymns hymns={day.prayers} />
+                                            </BorderedSection>
+                                        )}
+                                        {day.bReadings && Object.keys(day.bReadings).length > 0 && (
+                                            <SolidSection>
+                                                <SectionHeading>Душеполезные чтения</SectionHeading>
+                                                <ReadingList brother readings={day.bReadings} />
+                                            </SolidSection>
+                                        )}
+                                        <SolidSection>
+                                            <Sermons date={date} sermons={sermons} />
+                                        </SolidSection>
+                                    </>
+                                )}
+                            </div>
+                        </Zoom>
+                        {!services && <Links />}
+                    </div>
+                )}
+            </div>
+        </ThemeProvider>
+    );
+};
+
+const Main = ({ services }) => {
+    const { date } = useParams();
     // pre-fetch readings
     useReadings(date);
-
     const [calendarShown, setCalendarShown] = useState(false);
     const [menuShown, setMenuShown] = useState(false);
-    const [direction, setDirection] = useState('mount');
+
     const history = useHistory();
     const setNewDate = dateString => {
         history.push(`/date/${dateString}${services ? '/services' : ''}`);
     };
     const handleDayClick = day => {
         const dateString = dateFormat(day, 'yyyy-mm-dd');
-        const direction = dateString > date ? 'right' : 'left';
-
         setNewDate(dateString);
-        setDirection(direction);
         setCalendarShown(false);
     };
     const makeHandleClickShift = direction => () => {
@@ -76,17 +150,29 @@ const Main = ({ services }) => {
                 setNewDate(formatISO(addDays(parseISO(date), 1), { representation: 'date' }));
                 break;
         }
-        setDirection(direction);
     };
     const handleToggleClick = () => setCalendarShown(!calendarShown);
 
-    const themeColour = useRef();
-    if (day) {
-        themeColour.current = day.colour;
-    }
+    const theme = getTheme();
 
-    const theme = getTheme(themeColour.current);
+    const goLeft = makeHandleClickShift('left');
+    const goRight = makeHandleClickShift('right');
 
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const slideRenderer = ({ key, index }) => {
+        const indexOffset = index - activeIndex;
+        const effectiveDate = formatISO(addDays(parseISO(date), indexOffset), { representation: 'date' });
+        return (
+            <Inner
+                key={key}
+                date={effectiveDate}
+                services={services}
+                handleToggleClick={handleToggleClick}
+                makeHandleClickShift={makeHandleClickShift}
+            />
+        );
+    };
     return (
         <ThemeProvider theme={theme}>
             <div>
@@ -104,67 +190,22 @@ const Main = ({ services }) => {
                     {calendarShown && (
                         <Calendar date={date} handleDayClick={handleDayClick} onClose={() => setCalendarShown(false)} />
                     )}
-                    <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
-                    <div>
-                        {dayQuery.status === 'loading' && <Loader />}
-                        {dayQuery.status === 'error' && <ErrorMessage />}
-                        {dayQuery.status === 'success' && (
-                            <div>
-                                <HeadingBar
-                                    title={day.title}
-                                    glas={day.glas}
-                                    fastName={day.fastName}
-                                    fastingLevelName={day.fastingLevelName}
-                                    icon={day.icon}
-                                />
-                                <Zoom>
-                                    <div
-                                        className={css`
-                                            padding: 0 18px;
-                                        `}
-                                    >
-                                        {services ? (
-                                            <Services date={date} readings={day.readings || {}} />
-                                        ) : (
-                                            <>
-                                                <SolidSection>
-                                                    <SectionHeading>Богослужения</SectionHeading>
-                                                    <ReadingList readings={day.readings || {}} />
-                                                </SolidSection>
 
-                                                <SectionHeading>Святые дня</SectionHeading>
-                                                <Saints saints={day.saints} date={date} />
-
-                                                <ThisDays thisDays={thisDays} date={date} />
-                                                {day.prayers && day.prayers.length > 0 && (
-                                                    <BorderedSection>
-                                                        <div
-                                                            className={css`
-                                                                overflow: auto;
-                                                            `}
-                                                        >
-                                                            <SectionHeading>Песнопения</SectionHeading>
-                                                        </div>
-                                                        <Hymns hymns={day.prayers} />
-                                                    </BorderedSection>
-                                                )}
-                                                {day.bReadings && Object.keys(day.bReadings).length > 0 && (
-                                                    <SolidSection>
-                                                        <SectionHeading>Душеполезные чтения</SectionHeading>
-                                                        <ReadingList brother readings={day.bReadings} />
-                                                    </SolidSection>
-                                                )}
-                                                <SolidSection>
-                                                    <Sermons date={date} sermons={sermons} />
-                                                </SolidSection>
-                                            </>
-                                        )}
-                                    </div>
-                                </Zoom>
-                                {!services && <Links />}
-                            </div>
-                        )}
-                    </div>
+                    <VirtualizeSwipeableViews
+                        index={activeIndex}
+                        slideRenderer={slideRenderer}
+                        overscanSlideAfter={1}
+                        overscanSlideBefore={1}
+                        onChangeIndex={(index, indexLatest) => {
+                            if (index < indexLatest) {
+                                setActiveIndex(index);
+                                goLeft();
+                            } else {
+                                setActiveIndex(index);
+                                goRight();
+                            }
+                        }}
+                    />
                 </div>
 
                 <BurgerMenu menuShown={menuShown} setMenuShown={setMenuShown} />
@@ -173,4 +214,5 @@ const Main = ({ services }) => {
         </ThemeProvider>
     );
 };
+
 export default Main;
