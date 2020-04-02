@@ -22,7 +22,7 @@ export function register() {
                         installingWorker.onstatechange = () => {
                             if (installingWorker.state === 'installed') {
                                 if (navigator.serviceWorker.controller) {
-                                    console.log('sw reload');
+                                    console.log('New SW, reloading');
                                     location.reload();
                                 } else {
                                     // At this point, everything has been precached.

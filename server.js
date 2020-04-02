@@ -69,6 +69,10 @@ app.use(
     })
 );
 
+app.get('/version', function(_req, res) {
+    res.send(process.env.npm_package_version);
+});
+
 if (!isProd) {
     const webpackDevMiddleware = require('webpack-dev-middleware');
     const webpackHotMiddleware = require('webpack-hot-middleware');
