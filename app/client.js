@@ -54,3 +54,16 @@ if (isProd) {
     const precacheWorker = new Worker();
     precacheWorker.postMessage('precache');
 }
+
+window.addEventListener('beforeinstallprompt', e => {
+    // @ts-ignore
+    e.userChoice.then(choiceResult => {
+        // @ts-ignore
+        window.dataLayer = window.dataLayer || [];
+        // @ts-ignore
+        window.dataLayer.push({
+            event: 'A2H',
+            outcome: choiceResult.outcome,
+        });
+    });
+});

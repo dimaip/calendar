@@ -39,6 +39,6 @@ export function fetchDay(key, { date }) {
         });
 }
 
-const useDay = date => useQuery(['day', { date }], fetchDay, {retry: false});
+const useDay = date => useQuery(['day', { date }], fetchDay, { retry: false });
 
 export default useDay;
