@@ -19,6 +19,7 @@ const Header = ({ handleToggleClick, calendarShown, menuShown, setMenuShown }) =
             <header
                 className={css`
                     position: fixed;
+                    z-index: 1;
                     left: 0;
                     right: 0;
                     background-color: white;

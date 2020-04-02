@@ -125,7 +125,7 @@ const Inner = ({ date, services, handleToggleClick, makeHandleClickShift }) => {
     );
 };
 
-const Main = ({ services }) => {
+const Main = ({ services = false }) => {
     const { date } = useParams();
     // pre-fetch readings
     useReadings(date);
