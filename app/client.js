@@ -42,7 +42,9 @@ const render = Component => {
 
 render(App);
 
+// @ts-ignore
 if (module.hot) {
+    // @ts-ignore
     module.hot.accept('containers/App', () => {
         render(App);
     });

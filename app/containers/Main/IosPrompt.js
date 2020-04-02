@@ -11,6 +11,7 @@ const isIphone = () => {
 };
 
 // Detects if device is in standalone mode
+// @ts-ignore
 const isInStandaloneMode = () => 'standalone' in window.navigator && window.navigator.standalone;
 
 const IosPrompt = () => {
@@ -25,6 +26,7 @@ const IosPrompt = () => {
         }, 3000);
     }, []);
 
+    // @ts-ignore
     const iosPromptDismissed = useSelector(state => state.settings.iosPromptDismissed);
     const now = new Date();
     // Bother users again in 60d
