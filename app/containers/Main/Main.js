@@ -28,6 +28,7 @@ import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
 import BurgerMenu from './BurgerMenu';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
+import IosPrompt from './IosPrompt';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -210,6 +211,7 @@ const Main = ({ services = false }) => {
 
                 <BurgerMenu menuShown={menuShown} setMenuShown={setMenuShown} />
                 <BottomNav active={services ? 'services' : 'calendar'} />
+                <IosPrompt />
             </div>
         </ThemeProvider>
     );
