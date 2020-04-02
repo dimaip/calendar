@@ -75,6 +75,8 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                         <br />
                         Deutsche Bibelgesellschaft, Stuttgart
                         <br />
+                        Некоторые жития святых взяты с сайта holytrinityorthodox.com
+                        <br />
                         <br />
                         При любом использовании материалов сайта, ссылка на источник обязательна
                     </div>
