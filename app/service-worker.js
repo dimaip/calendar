@@ -1,5 +1,5 @@
 import { precacheAndRoute } from 'workbox-precaching';
-import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies';
+import { StaleWhileRevalidate, CacheFirst, NetworkFirst } from 'workbox-strategies';
 import { registerRoute } from 'workbox-routing';
 import * as googleAnalytics from 'workbox-google-analytics';
 
@@ -10,11 +10,17 @@ self.addEventListener('activate', function(event) {
     event.waitUntil(self.clients.claim());
 });
 
+googleAnalytics.initialize();
+
 // Pre-cache main JS assets
+precacheAndRoute([
+    { revision: '1', url: '/' },
+    { revision: '1', url: '/index.html' },
+]);
 precacheAndRoute(self.__WB_MANIFEST);
 
 // Cache (pre-caching happens in precache.worker.js) api and static requests
+registerRoute(new RegExp('/version'), new NetworkFirst());
 registerRoute(new RegExp('/api/'), new StaleWhileRevalidate());
 registerRoute(new RegExp('/assets/'), new CacheFirst());
-
-googleAnalytics.initialize();
+registerRoute(new RegExp('.*'), new CacheFirst());

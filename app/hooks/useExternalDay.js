@@ -10,6 +10,6 @@ const fetchExternalDay = (key, { date }) => {
     });
 };
 
-const useExternalDay = date => useQuery(['ext-day', { date }], fetchExternalDay);
+const useExternalDay = date => useQuery(['ext-day', { date }], fetchExternalDay, {retry: false});
 
 export default useExternalDay;

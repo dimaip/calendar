@@ -9,6 +9,7 @@ module.exports = merge(common, {
     plugins: [
         new InjectManifest({
             swSrc: 'service-worker.js',
+            swDest: '../service-worker.js',
         }),
     ],
 });

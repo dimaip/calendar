@@ -21,7 +21,10 @@ body {
     color: #201f24;
     /* Disable double-tap zoom on iOS */
     touch-action: manipulation;
-    overscroll-behavior-y: none;
+    overscroll-behavior: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
 }
 a {
     color: inherit;
@@ -50,5 +53,4 @@ button:focus {
 }
 * {
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }

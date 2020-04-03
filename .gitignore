@@ -8,3 +8,4 @@ convertBibleQuote/bible
 /electron/app
 /android/app
 /www/built
+/www/service-worker.*

@@ -9,6 +9,6 @@ const fetchSaint = (key, { saintId }) =>
         return response.json();
     });
 
-const useSaint = saintId => useQuery(['saint', { saintId }], fetchSaint);
+const useSaint = saintId => useQuery(['saint', { saintId }], fetchSaint, {retry: false});
 
 export default useSaint;

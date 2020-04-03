@@ -10,6 +10,6 @@ export function fetchReadings(key, { date }) {
     });
 }
 
-const useReadings = date => useQuery(['readings', { date }], fetchReadings);
+const useReadings = date => useQuery(['readings', { date }], fetchReadings, {retry: false});
 
 export default useReadings;

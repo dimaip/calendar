@@ -1,3 +1,5 @@
+import 'core-js';
+import 'regenerator-runtime/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
@@ -40,7 +42,9 @@ const render = Component => {
 
 render(App);
 
+// @ts-ignore
 if (module.hot) {
+    // @ts-ignore
     module.hot.accept('containers/App', () => {
         render(App);
     });
@@ -52,3 +56,16 @@ if (isProd) {
     const precacheWorker = new Worker();
     precacheWorker.postMessage('precache');
 }
+
+window.addEventListener('beforeinstallprompt', e => {
+    // @ts-ignore
+    e.userChoice.then(choiceResult => {
+        // @ts-ignore
+        window.dataLayer = window.dataLayer || [];
+        // @ts-ignore
+        window.dataLayer.push({
+            event: 'A2H',
+            outcome: choiceResult.outcome,
+        });
+    });
+});

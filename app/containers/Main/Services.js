@@ -6,18 +6,37 @@ import { Link } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import SolidSection from 'components/SolidSection/SolidSection';
+import { getFeastInfo } from 'domain/getDayInfo';
 
-const Services = ({ date }) => {
+const OptionalLink = ({ enabled, ...rest }) =>
+    enabled ? (
+        // @ts-ignore
+        <Link {...rest} />
+    ) : (
+        <span title="Данная служба в этот день не совершается" className={rest.className}>
+            {rest.children}
+        </span>
+    );
+
+const Services = ({ date, readings }) => {
     const theme = useTheme();
 
+    const { vasiliy, lpod } = getFeastInfo(new Date(date));
+
     const services = [
-        { title: 'Литургия Иоанна Златоуста', id: 'zlatoust' },
-        { title: 'Литургия Василия Великого', id: 'vasiliy' },
-        { title: 'Литургия преждеосвященных даров', id: 'lpod' },
+        { title: 'Литургия Иоанна Златоуста', id: 'zlatoust', enabled: readings['Литургия'] && !vasiliy },
+        { title: 'Литургия Василия Великого', id: 'vasiliy', enabled: readings['Литургия'] && vasiliy },
+        { title: 'Литургия преждеосвященных даров', id: 'lpod', enabled: readings['Вечерня'] && lpod },
     ];
 
     return (
-        <SolidSection>
+        <div
+            className={css`
+                background: ${theme.colours.bgGray};
+                padding: 0 18px 0 18px;
+                margin: 0 -18px 0 -18px;
+            `}
+        >
             <SectionHeading>Богослужебные тексты</SectionHeading>
             <div
                 className={css`
@@ -33,11 +52,19 @@ const Services = ({ date }) => {
                     `}
                 >
                     {services.map(service => (
-                        <Link to={`/date/${date}/service/${service.id}`} key={service.id}>
+                        <OptionalLink
+                            enabled={service.enabled}
+                            className={css`
+                                cursor: ${service.enabled ? 'pointer' : 'arrow'};
+                            `}
+                            to={`/date/${date}/service/${service.id}`}
+                            key={service.id}
+                        >
                             <ButtonBox>
                                 <div
                                     className={css`
                                         display: flex;
+                                        opacity: ${service.enabled ? 1 : 0.2};
                                     `}
                                 >
                                     <div
@@ -64,11 +91,22 @@ const Services = ({ date }) => {
                                     </div>
                                 </div>
                             </ButtonBox>
-                        </Link>
+                        </OptionalLink>
                     ))}
                 </div>
+                <div
+                    className={css`
+                        font-size: 14px;
+                        color: ${theme.colours.gray};
+                        margin-top: 12px;
+                        margin-bottom: 24px;
+                    `}
+                >
+                    Текст службы адаптируется под выбранную дату. Активны только те службы, которые служаться в этот
+                    день
+                </div>
             </div>
-        </SolidSection>
+        </div>
     );
 };
 export default Services;
