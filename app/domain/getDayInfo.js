@@ -218,6 +218,7 @@ export const getLentInfo = memoize(
         palm_sunday.setDate(pascha.getDate() - 7);
         const theotocos = new Date(y, 3, 7);
         const great_lent_end = calculateEasterDate(y);
+        great_lent_end.setDate(pascha.getDate() - 1);
 
         if (current_date >= great_lent_begin && current_date <= great_lent_end) {
             if (current_day_of_week == 0 || current_day_of_week == 6) {
