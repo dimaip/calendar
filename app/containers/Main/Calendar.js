@@ -97,7 +97,7 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
         <div
             className={css`
                 position: fixed;
-                z-index: 1;
+                z-index: 4;
                 top: 44px;
                 left: 0;
                 right: 0;
