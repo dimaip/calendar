@@ -12,7 +12,9 @@ import Hymns from 'containers/Main/Hymns';
 import ReadingItem from 'containers/Readings/ReadingItem';
 import Saints from 'containers/Main/Saints';
 import SectionHeading from 'containers/Main/SectionHeading';
-import { useTheme } from 'emotion-theming';
+import Prokimen from './Prokimen';
+import Aliluja from './Aliluja';
+import Prichasten from './Prichasten';
 
 const Readings = ({ readings }) => (
     <>
@@ -68,11 +70,17 @@ const useLiturgy = () => {
 
     const saints = day?.saints && (
         <SolidSection marginTop={24} marginHorizontal={-12}>
-            <SectionHeading >Святые дня</SectionHeading>
+            <SectionHeading>Святые дня</SectionHeading>
             <Saints saints={day.saints} date={date} />
         </SolidSection>
     );
 
-    return { hymns, apostol, gospel, sermons, saints };
+    const prokimen = <Prokimen day={day} date={date} />;
+
+    const aliluja = <Aliluja day={day} date={date} />;
+
+    const prichasten = <Prichasten day={day} date={date} />;
+
+    return { hymns, apostol, gospel, sermons, saints, prokimen, aliluja, prichasten };
 };
 export default useLiturgy;
