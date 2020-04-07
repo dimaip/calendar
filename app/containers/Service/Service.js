@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect } from 'react';
-import { useParams, Link, useHistory } from 'react-router-dom';
+import { useParams, Link, useHistory, Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
@@ -16,12 +16,13 @@ import { ru } from 'date-fns/locale';
 import Calendar from '../Main/Calendar';
 import Button from 'components/Button/Button';
 import Cross from 'components/svgs/Cross';
+import { getFeastInfo } from 'domain/getDayInfo';
 const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
 const Vasiliy = React.lazy(() => import('./Texts/Vasiliy'));
 const Lpod = React.lazy(() => import('./Texts/Lpod'));
 
 const Service = () => {
-    const { serviceId, date } = useParams();
+    const { serviceId: originalServiceId, date } = useParams();
     const dateObj = parseISO(date);
     const { data: day } = useDay(date);
     const theme = getTheme(day?.colour);
@@ -30,8 +31,32 @@ const Service = () => {
     const [calendarShown, setCalendarShown] = useState(false);
 
     const history = useHistory();
+
+    const { vasiliy, lpod } = getFeastInfo(new Date(date));
+    // Expand serviceId
+    let serviceId;
+    if (day?.readings?.[originalServiceId]) {
+        if (originalServiceId === 'Литургия') {
+            serviceId = vasiliy ? 'vasiliy' : 'zlatoust';
+        } else if (originalServiceId === 'Вечерня' && lpod) {
+            serviceId = 'lpod';
+        }
+    }
+    // If service not found, redirect
+    if (!serviceId) {
+        if (day?.readings) {
+            if (day?.readings?.['Литургия']) {
+                return <Redirect to={`/date/${date}/service/Литургия`} />;
+            }
+            if (day?.readings?.['Вечерня'] && lpod) {
+                return <Redirect to={`/date/${date}/service/Вечерня`} />;
+            }
+            return <Redirect to={`/date/${date}`} />;
+        }
+    }
+
     const setNewDate = dateString => {
-        history.push(`/date/${dateString}/service/${serviceId}`);
+        history.push(`/date/${dateString}/service/${originalServiceId}`);
     };
 
     const handleDayClick = day => {
