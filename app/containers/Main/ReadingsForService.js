@@ -23,13 +23,13 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
     if (title === 'Литургия') {
         to = {
-            pathname: `/date/${date}/service/${vasiliy ? 'vasiliy' : 'zlatoust'}`,
+            pathname: `/date/${date}/service/Литургия`,
             state: { scrollToReadings: true },
         };
         effectiveTitle += ` ${vasiliy ? 'Василия Великого' : 'Иоанна Златоуста'}`;
     } else if (title === 'Вечерня' && lpod) {
         to = {
-            pathname: `/date/${date}/service/lpod`,
+            pathname: `/date/${date}/service/Вечерня`,
             state: { scrollToReadings: true },
         };
         effectiveTitle = 'Литургия преждеосвященных даров';

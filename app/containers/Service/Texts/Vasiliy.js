@@ -5,7 +5,7 @@ import Tooltip from 'components/Tooltip/Tooltip';
 import useLiturgy from './useLiturgy';
 
 const Vasiliy = ({ lang }) => {
-    const { hymns, apostol, gospel, sermons, saints } = useLiturgy();
+    const { hymns, apostol, gospel, sermons, saints, prokimen, aliluja, prichasten } = useLiturgy();
 
     return (
         <div>
@@ -1910,14 +1910,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Премудрость!</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Прокимен, глас… </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Прокимны см. в приложе­ниях.</span>
-                </p>
+                {prokimen}
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
@@ -2119,22 +2112,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Премудрость!</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-2"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аллилуия, аллилуия, аллилуия,</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-2"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">глас…</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Народ припевает </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Аллилуия </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">трижды – здесь и после каждого стиха.</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-11">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Стихи см. в прило­жениях.</span>
-                </p>
+                {aliluja}
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-11">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         {' '}
@@ -6171,22 +6149,7 @@ const Vasiliy = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-21">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Причащение в алтаре</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Н Причастный стих</span>
-                    <Tooltip>
-                        <>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> То есть прича</span>
-                            <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">стен (кино</span>
-                            <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                ник) дня или святого – см. в приложениях. Поётся во время прича­ще­ния в алтаре (а
-                                иногда и в храме).
-                            </span>
-                        </>
-                    </Tooltip>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
-                </p>
+                {prichasten}
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>

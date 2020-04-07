@@ -1,7 +1,12 @@
 import React from 'react';
 
 const Cross = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.29 19.89" width="14" style={{ marginTop: 5 }}>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 18.29 19.89"
+        width="10"
+        style={{ marginTop: 3, marginLeft: 5 }}
+    >
         <path
             d="M17.29 1L1 18.89M1 1l16.29 17.89"
             fill="none"

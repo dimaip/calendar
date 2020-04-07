@@ -5,7 +5,7 @@ import './Shared.css';
 import useLiturgy from './useLiturgy';
 
 const Zlatoust = ({ lang }) => {
-    const { hymns, apostol, gospel, sermons, saints } = useLiturgy();
+    const { hymns, apostol, gospel, sermons, saints, prokimen, aliluja, prichasten } = useLiturgy();
 
     return (
         <div>
@@ -1820,23 +1820,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Премудрость!</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Проки`мен, глас… </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        {' '}
-                        Текст прокимнов воскресных по гласам, а также буд­ничных и праздничных — см.:{' '}
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн. 2. С. </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">22</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">1–2</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">63</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
-                </p>
+                {prokimen}
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
@@ -2016,28 +2000,7 @@ const Zlatoust = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Премудрость!</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аллилуия, аллилуия, аллилуия, глас…</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Народ припевает </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Аллилуия</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> трижды — здесь и после каждого стиха. </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        {' '}
-                        Воскресные стихи по гласам, а также будничные и праздничные — см.:{' '}
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн. 2. С. </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">23</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">9–2</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">63</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">.</span>
-                </p>
+                {aliluja}
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         {' '}
@@ -4947,29 +4910,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-18">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Причащение в алтаре</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        {' '}
-                        Н Причастный стих
-                        <Tooltip>
-                            <>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                    {' '}
-                                    То есть прича́стен (кино́ник) дня или святого — см.:{' '}
-                                </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;2. С.&nbsp;</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">22</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4–2</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">63</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                    . Поётся во время прича­ще­ния в алтаре (а иногда и в храме).
-                                </span>
-                            </>
-                        </Tooltip>
-                        .
-                    </span>
-                </p>
+                {prichasten}
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>

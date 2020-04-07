@@ -26,61 +26,68 @@ const ThisDays = ({ thisDays, date }) => {
         >
             {thisDays.map(thisDay => {
                 return (
-                    <ThisDayLink to={`/date/${date}/thisday/${thisDay.id}`} href={thisDay.link} key={thisDay.id}>
-                        <div
-                            className={css`
-                                max-width: 640px;
-                                background-color: #201f24;
-                                display: flex;
-                                border-radius: 8px;
-                                overflow: hidden;
-                                min-height: 200px;
-                            `}
-                        >
+                    <div
+                        key={thisDay.id}
+                        className={css`
+                            margin-bottom: 8px;
+                        `}
+                    >
+                        <ThisDayLink to={`/date/${date}/thisday/${thisDay.id}`} href={thisDay.link}>
                             <div
                                 className={css`
+                                    max-width: 640px;
+                                    background-color: #201f24;
                                     display: flex;
-                                    flex-direction: column;
-                                    justify-content: space-between;
-                                    align-items: flex-start;
-                                    padding: 12px;
-                                    width: 66%;
+                                    border-radius: 8px;
+                                    overflow: hidden;
+                                    min-height: 200px;
                                 `}
                             >
                                 <div
                                     className={css`
-                                        color: white;
-                                        font-weight: bold;
-                                        line-height: 1.2;
-                                        flex-grow: 1;
-                                        margin-bottom: 6px;
-                                        font-size: 18px;
-                                        @media (min-width: 360px) {
-                                            font-size: 20px;
-                                        }
+                                        display: flex;
+                                        flex-direction: column;
+                                        justify-content: space-between;
+                                        align-items: flex-start;
+                                        padding: 12px;
+                                        width: 66%;
                                     `}
                                 >
-                                    {thisDay.title}
+                                    <div
+                                        className={css`
+                                            color: white;
+                                            font-weight: bold;
+                                            line-height: 1.2;
+                                            flex-grow: 1;
+                                            margin-bottom: 6px;
+                                            font-size: 18px;
+                                            @media (min-width: 360px) {
+                                                font-size: 20px;
+                                            }
+                                        `}
+                                    >
+                                        {thisDay.title}
+                                    </div>
+                                    <div
+                                        className={css`
+                                            color: white;
+                                            font-size: 10px;
+                                        `}
+                                    >
+                                        в этот день
+                                    </div>
                                 </div>
                                 <div
                                     className={css`
-                                        color: white;
-                                        font-size: 10px;
+                                        background-image: url(${thisDay.image});
+                                        background-size: cover;
+                                        background-position: center;
+                                        width: 100%;
                                     `}
-                                >
-                                    в этот день
-                                </div>
+                                />
                             </div>
-                            <div
-                                className={css`
-                                    background-image: url(${thisDay.image});
-                                    background-size: cover;
-                                    background-position: center;
-                                    width: 100%;
-                                `}
-                            />
-                        </div>
-                    </ThisDayLink>
+                        </ThisDayLink>
+                    </div>
                 );
             })}
         </div>

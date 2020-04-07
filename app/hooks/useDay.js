@@ -13,7 +13,20 @@ export function fetchDay(key, { date }) {
         .then(res => {
             let day = {};
             if (res) {
-                const { comment, prayers, readings, bReadings, saints, seromns, title, glas, week } = res;
+                const {
+                    comment,
+                    prayers,
+                    prokimen,
+                    aliluja,
+                    prichasten,
+                    readings,
+                    bReadings,
+                    saints,
+                    seromns,
+                    title,
+                    glas,
+                    week,
+                } = res;
 
                 const { colour: feastColour, icon: feastIcon } = getFeastInfo(new Date(date));
                 const { fastName, fastingLevelName, colour: lentColour, icon: lentIcon } = getLentInfo(new Date(date));
@@ -23,6 +36,9 @@ export function fetchDay(key, { date }) {
                     fastName,
                     fastingLevelName,
                     prayers,
+                    prokimen,
+                    aliluja,
+                    prichasten,
                     readings,
                     bReadings,
                     saints,
