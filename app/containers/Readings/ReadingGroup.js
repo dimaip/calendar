@@ -6,6 +6,8 @@ const ReadingGroup = ({type, readingVerses}) => {
   var items = [];
 
   readingVerses.map((readingVerse, i) => {
+    if(!readingVerse) return;
+
     //get ";" indexes for multi-book verse - for example: Мф., 107 зач., XXVI, 2-20; Ин., XIII, 3-17; Мф., X…1-39; Лк., XXII, 43-45; Мф., XXVI, 40 - XXVII, 2.
     const
       verses = [],
