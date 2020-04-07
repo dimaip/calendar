@@ -27,11 +27,12 @@ const ThisDays = ({ thisDays, date }) => {
             {thisDays.map(thisDay => {
                 return (
                     <div
+                        key={thisDay.id}
                         className={css`
                             margin-bottom: 8px;
                         `}
                     >
-                        <ThisDayLink to={`/date/${date}/thisday/${thisDay.id}`} href={thisDay.link} key={thisDay.id}>
+                        <ThisDayLink to={`/date/${date}/thisday/${thisDay.id}`} href={thisDay.link}>
                             <div
                                 className={css`
                                     max-width: 640px;
