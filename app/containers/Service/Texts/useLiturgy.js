@@ -33,8 +33,8 @@ const VariableSection = ({ children, date }) => {
             className={css`
                 position: relative;
                 background: ${theme.colours.bgGray};
-                margin: 24px -18px 24px -18px;
-                padding: 8px 18px 8px 18px;
+                margin: 24px -12px 24px -12px;
+                padding: 8px 12px 8px 12px;
             `}
         >
             <div
