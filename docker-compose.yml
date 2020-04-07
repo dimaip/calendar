@@ -16,6 +16,8 @@ services:
         environment:
             API_HOST: 'http://calendar-backend'
         deploy:
+            update_config:
+                order: start-first
             labels:
                 - 'traefik.enable=true'
                 - 'traefik.port=80'
