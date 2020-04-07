@@ -141,7 +141,13 @@ const Prokimens = ({ day, date }) => {
               },
           ];
 
-    return prokimens.map(prokimen => <Prokimen key={prokimen.title} {...prokimen} />);
+    return (
+        <>
+            {prokimens.map(prokimen => (
+                <Prokimen key={prokimen.title} {...prokimen} />
+            ))}
+        </>
+    );
 };
 
 export default Prokimens;

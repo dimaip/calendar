@@ -148,7 +148,13 @@ const Alilujas = ({ day, date }) => {
               },
           ];
 
-    return alilujas.map(aliluja => <Aliluja key={aliluja.title} {...aliluja} />);
+    return (
+        <>
+            {alilujas.map(aliluja => (
+                <Aliluja key={aliluja.title} {...aliluja} />
+            ))}
+        </>
+    );
 };
 
 export default Alilujas;

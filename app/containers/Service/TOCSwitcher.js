@@ -12,6 +12,9 @@ const mapServiceTOC = {
 
 const TOCSwitcher = ({ serviceId }) => {
     const data = mapServiceTOC[serviceId];
+    if (!data) {
+        return null;
+    }
     const items = Object.keys(data).map(item => ({
         value: item,
         label: data[item],

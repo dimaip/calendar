@@ -15,6 +15,8 @@ import SectionHeading from 'containers/Main/SectionHeading';
 import Prokimen from './Prokimen';
 import Aliluja from './Aliluja';
 import Prichasten from './Prichasten';
+import Tooltip from 'components/Tooltip/Tooltip';
+import { useTheme } from 'emotion-theming';
 
 const Readings = ({ readings }) => (
     <>
@@ -23,6 +25,43 @@ const Readings = ({ readings }) => (
         ))}
     </>
 );
+
+const VariableSection = ({ children, date }) => {
+    const theme = useTheme();
+    return (
+        <div
+            className={css`
+                position: relative;
+                background: ${theme.colours.bgGray};
+                margin: 24px -18px 24px -18px;
+                padding: 8px 18px 8px 18px;
+            `}
+        >
+            <div
+                className={css`
+                    position: absolute;
+                    top: 4px;
+                    right: 10px;
+                `}
+            >
+                <Tooltip>
+                    Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда ошибается. Если хотите
+                    быть уверены, смотрите{' '}
+                    <a
+                        className={css`
+                            text-decoration: underline;
+                        `}
+                        href={`http://www.patriarchia.ru/bu/${date}`}
+                        target="_blank"
+                    >
+                        богослужебные указания
+                    </a>
+                </Tooltip>
+            </div>
+            {children}
+        </div>
+    );
+};
 
 const useLiturgy = () => {
     const { date } = useParams();
@@ -75,11 +114,23 @@ const useLiturgy = () => {
         </SolidSection>
     );
 
-    const prokimen = <Prokimen day={day} date={date} />;
+    const prokimen = (
+        <VariableSection date={date}>
+            <Prokimen day={day} date={date} />
+        </VariableSection>
+    );
 
-    const aliluja = <Aliluja day={day} date={date} />;
+    const aliluja = (
+        <VariableSection date={date}>
+            <Aliluja day={day} date={date} />
+        </VariableSection>
+    );
 
-    const prichasten = <Prichasten day={day} date={date} />;
+    const prichasten = (
+        <VariableSection date={date}>
+            <Prichasten day={day} date={date} />
+        </VariableSection>
+    );
 
     return { hymns, apostol, gospel, sermons, saints, prokimen, aliluja, prichasten };
 };
