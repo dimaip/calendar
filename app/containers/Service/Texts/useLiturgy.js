@@ -9,40 +9,15 @@ import useExternalDay from 'hooks/useExternalDay';
 import SolidSection from 'components/SolidSection/SolidSection';
 import Sermons from 'containers/Main/Sermons';
 import Hymns from 'containers/Main/Hymns';
-import ReadingItem from 'containers/Readings/ReadingItem';
+import ReadingGroup from 'containers/Readings/ReadingGroup';
 import Saints from 'containers/Main/Saints';
 import SectionHeading from 'containers/Main/SectionHeading';
-import { useTheme } from 'emotion-theming';
 
 const Readings = ({ readings }) => (
     <>
-        {readings.map(({ readingVerse, type }) => {
-          //get ";" indexes for multi-book verse - for example: Мф., 107 зач., XXVI, 2-20; Ин., XIII, 3-17; Мф., X…1-39; Лк., XXII, 43-45; Мф., XXVI, 40 - XXVII, 2.
-          const
-            verses = [],
-            complexVerseIndexes = Array.from(readingVerse.matchAll(/(;)\s+(?:(?:[^0-9XIV .]+\.(?:\s[^0-9XIV ]+\.)?|[0-9]\s+[^0-9XIV ]+?\.)).+?/g)).map(item => {
-              return item.index;
-            });
-
-          if (complexVerseIndexes.length > 0) {
-            // slice verses by ";" position
-            complexVerseIndexes.map((idx, i) => {
-              if (i === 0) {
-                verses.push(readingVerse.slice(0, idx))
-              }
-              verses.push(
-                i < complexVerseIndexes.length - 1
-                  ? readingVerse.slice(idx, complexVerseIndexes[i + 1]).replace(/^;\s*/, '')
-                  : readingVerse.slice(idx).replace(/^;\s*/, '')
-              )
-            });
-          } else {
-            verses.push(readingVerse);
-          }
-
-          return verses.map(readingVerseSplitted => <ReadingItem key={readingVerseSplitted}
-                                                                 readingVerse={readingVerseSplitted} type={type}/>)
-        })}
+      {readings.map(({ readingVerse, type }, i) => (
+        <ReadingGroup key={`${readingVerse}_${i}`} readingVerses={[readingVerse]} type={type} />
+      ))}
     </>
 );
 
