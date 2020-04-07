@@ -88,7 +88,7 @@ const Prichastens = ({ day, date }) => {
               },
           ];
 
-    return prichastens.map(prichasten => <Prichasten {...prichasten} />);
+    return prichastens.map(prichasten => <Prichasten key={prichasten.title} {...prichasten} />);
 };
 
 export default Prichastens;
