@@ -1,6 +1,6 @@
 import React from 'react';
 
-const getAllilujaData = (day, date) => {
+const getAlilujaData = (day, date) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     if (dayOfWeek === 0) {
@@ -107,37 +107,48 @@ const getAllilujaData = (day, date) => {
             verse2: 'Блаженны, кого избрал Ты и при́нял, Господи, и память о них из рода в род.',
         };
     }
-    return {
-        title: 'Аллилуия, аллилуия, аллилуия, глас…',
-    };
+    return null;
 };
 
-const Alliluja = ({ day, date }) => {
-    const { title, verse1, stih, title2, verse2 } = getAllilujaData(day, date);
+const Aliluja = ({ title, verse1, stih, title2, verse2 }) => (
+    <>
+        <p className="_-ОСНОВНОЙ_Основной-отст1-5">
+            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
+            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> {title}</span>
+        </p>
+        <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Народ припевает </span>
+            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Аллилуия</span>
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> трижды — здесь и после каждого стиха. </span>
+        </p>
 
-    return (
-        <>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> {title}</span>
+        {verse1 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{verse1}</p>}
+        {stih && (
+            <p className="_-ОСНОВНОЙ_Основной-б-отст">
+                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Стих</span> {stih}
             </p>
-            <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Народ припевает </span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Аллилуия</span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> трижды — здесь и после каждого стиха. </span>
-            </p>
+        )}
+        {title2 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{title2}</p>}
+        {verse2 && <p className="_-ОСНОВНОЙ_Основной-б-отст">{verse2}</p>}
+    </>
+);
 
-            {verse1 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{verse1}</p>}
-            {stih && (
-                <p className="_-ОСНОВНОЙ_Основной-б-отст">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Стих</span> {stih}
-                </p>
-            )}
-            {title2 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{title2}</p>}
-            {verse2 && <p className="_-ОСНОВНОЙ_Основной-б-отст">{verse2}</p>}
-        </>
-    );
+const Alilujas = ({ day, date }) => {
+    const commonAlilujah = getAlilujaData(day, date);
+    let alilujas = day?.aliluja ? [commonAlilujah, ...day.aliluja] : [commonAlilujah];
+    alilujas = alilujas.filter(Boolean);
+    const exclusiveAlilujahs = alilujas.filter(aliluja => aliluja.replace);
+    alilujas = exclusiveAlilujahs.length ? exclusiveAlilujahs : alilujas;
+    alilujas = alilujas.length
+        ? alilujas
+        : [
+              {
+                  title: 'Аллилуия, аллилуия, аллилуия, глас…',
+              },
+          ];
+
+    return alilujas.map(aliluja => <Aliluja {...aliluja} />);
 };
 
-export default Alliluja;
+export default Alilujas;

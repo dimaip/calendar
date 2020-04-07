@@ -105,32 +105,43 @@ const getProkimenData = (day, date) => {
             verse2: 'Ду́ши их/ пребудут во бла́ге.',
         };
     }
-    return {
-        title: 'Прокимен, глас…',
-    };
+    return null;
 };
 
-const Prokimen = ({ day, date }) => {
-    const { title, verse1, stih, title2, verse2 } = getProkimenData(day, date);
-
-    return (
-        <>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> {title}</span>
-                {verse1 && <br />}
-                {verse1}
+const Prokimen = ({ title, verse1, stih, title2, verse2 }) => (
+    <>
+        <p className="_-ОСНОВНОЙ_Основной-отст1-5">
+            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
+            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> {title}</span>
+            {verse1 && <br />}
+            {verse1}
+        </p>
+        {stih && (
+            <p className="_-ОСНОВНОЙ_Основной-б-отст">
+                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Стих</span> {stih}
             </p>
-            {stih && (
-                <p className="_-ОСНОВНОЙ_Основной-б-отст">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Стих</span> {stih}
-                </p>
-            )}
-            {title2 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{title2}</p>}
-            {verse2 && <p className="_-ОСНОВНОЙ_Основной-б-отст">{verse2}</p>}
-        </>
-    );
+        )}
+        {title2 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{title2}</p>}
+        {verse2 && <p className="_-ОСНОВНОЙ_Основной-б-отст">{verse2}</p>}
+    </>
+);
+
+const Prokimens = ({ day, date }) => {
+    const commonProkimen = getProkimenData(day, date);
+    let prokimens = day?.prokimen ? [commonProkimen, ...day.prokimen] : [commonProkimen];
+    prokimens = prokimens.filter(Boolean);
+    const exclusiveProkimens = prokimens.filter(prokimen => prokimen.replace);
+    prokimens = exclusiveProkimens.length ? exclusiveProkimens : prokimens;
+    prokimens = prokimens.length
+        ? prokimens
+        : [
+              {
+                  title: 'Прокимен, глас…',
+              },
+          ];
+
+    return prokimens.map(prokimen => <Prokimen {...prokimen} />);
 };
 
-export default Prokimen;
+export default Prokimens;

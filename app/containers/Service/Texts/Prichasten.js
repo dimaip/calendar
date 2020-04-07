@@ -48,36 +48,47 @@ const getPrichastenData = (day, date) => {
             verse2: 'Блаженны, кого избрал Ты и при́нял, Господи, и память о них из рода в род.',
         };
     }
-    return {
-        title: 'Причастный стих',
-    };
+    return null;
 };
 
-const Prichasten = ({ day, date }) => {
-    const { title, verse1, title2, verse2 } = getPrichastenData(day, date);
+const Prichasten = ({ title, verse1, title2, verse2 }) => (
+    <>
+        <p className="_-ОСНОВНОЙ_Основной-отст1-5">
+            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
+            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                {' '}
+                {title}{' '}
+                <Tooltip>
+                    <>
+                        То есть прича́стен (кино́ник) дня или святого. Поётся во время прича­ще­ния в алтаре (а иногда и в
+                        храме).
+                    </>
+                </Tooltip>
+            </span>
+        </p>
 
-    return (
-        <>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                    {' '}
-                    {title}{' '}
-                    <Tooltip>
-                        <>
-                            То есть прича́стен (кино́ник) дня или святого. Поётся во время прича­ще­ния в алтаре (а иногда
-                            и в храме).
-                        </>
-                    </Tooltip>
-                </span>
-            </p>
+        {verse1 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{verse1}</p>}
+        {title2 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{title2}</p>}
+        {verse2 && <p className="_-ОСНОВНОЙ_Основной-б-отст">{verse2}</p>}
+    </>
+);
 
-            {verse1 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{verse1}</p>}
-            {title2 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{title2}</p>}
-            {verse2 && <p className="_-ОСНОВНОЙ_Основной-б-отст">{verse2}</p>}
-        </>
-    );
+const Prichastens = ({ day, date }) => {
+    const commonPrichasten = getPrichastenData(day, date);
+    let prichastens = day?.prichasten ? [commonPrichasten, ...day.prichasten] : [commonPrichasten];
+    prichastens = prichastens.filter(Boolean);
+    const exclusivePrichastens = prichastens.filter(prichasten => prichasten.replace);
+    prichastens = exclusivePrichastens.length ? exclusivePrichastens : prichastens;
+    prichastens = prichastens.length
+        ? prichastens
+        : [
+              {
+                  title: 'Причастный стих',
+              },
+          ];
+
+    return prichastens.map(prichasten => <Prichasten {...prichasten} />);
 };
 
-export default Prichasten;
+export default Prichastens;
