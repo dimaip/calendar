@@ -9,7 +9,7 @@ import useExternalDay from 'hooks/useExternalDay';
 import SolidSection from 'components/SolidSection/SolidSection';
 import Sermons from 'containers/Main/Sermons';
 import Hymns from 'containers/Main/Hymns';
-import ReadingGroup from 'containers/Readings/ReadingGroup';
+import ReadingItem from 'containers/Readings/ReadingItem';
 import Saints from 'containers/Main/Saints';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Prokimen from './Prokimen';
@@ -20,9 +20,11 @@ import { useTheme } from 'emotion-theming';
 
 const Readings = ({ readings }) => (
     <>
-      {readings.map(({ readingVerse, type }, i) => (
-        <ReadingGroup key={`${readingVerse}_${i}`} readingVerses={[readingVerse]} type={type} />
-      ))}
+        {readings
+            .map(({ readingVerse, type }) =>
+                readingVerse ? <ReadingItem key={readingVerse} readingVerse={readingVerse} type={type} /> : null
+            )
+            .filter(Boolean)}
     </>
 );
 

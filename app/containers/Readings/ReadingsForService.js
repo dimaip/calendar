@@ -1,6 +1,6 @@
 import React from 'react';
 import forEach from 'lodash.foreach';
-import ReadingGroup from './ReadingGroup';
+import ReadingItem from './ReadingItem';
 import isGospel from 'domain/isGospel';
 
 // sort gospel readings last
@@ -30,8 +30,8 @@ const ReadingsForService = ({ readingsForService }) => {
 
     return (
         <>
-            {readingVersesWithType.sort(sortGospel).map(({ readingVerse, type }, i) => (
-                <ReadingGroup key={`${readingVerse}_${i}`} readingVerses={[readingVerse]} type={type} />
+            {readingVersesWithType.sort(sortGospel).map(({ readingVerse, type }) => (
+                <ReadingItem key={readingVerse} readingVerse={readingVerse} type={type} />
             ))}
         </>
     );

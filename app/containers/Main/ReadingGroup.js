@@ -5,9 +5,11 @@ import ReadingItem from './ReadingItem';
 import { useTheme } from 'emotion-theming';
 
 const ReadingGroup = ({ title, readingVerses }) => {
-    var items = readingVerses.map((el, i) => {
-        return <ReadingItem reading={el} key={i} />;
-    });
+    var items = readingVerses
+        .map(reading => {
+            return reading && <ReadingItem reading={reading} key={reading} />;
+        })
+        .filter(Boolean);
 
     const theme = useTheme();
 

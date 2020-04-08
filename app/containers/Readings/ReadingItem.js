@@ -146,4 +146,9 @@ const ReadingItem = ({ readingVerse, type }) => {
         </div>
     );
 };
-export default ReadingItem;
+const ComplexReadingItem = ({ readingVerse: complexReadingVerse, type }) => {
+    return complexReadingVerse
+        .split('~')
+        .map(readingVerse => <ReadingItem readingVerse={readingVerse} key={readingVerse} type={type} />);
+};
+export default ComplexReadingItem;
