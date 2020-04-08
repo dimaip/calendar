@@ -1863,6 +1863,10 @@ const Zlatoust = ({ lang }) => {
                 <div id="firstReading">
                     <p id="apostol" className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-13">
                         <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Чтение Апостола</span>
+                        <Tooltip>
+                            Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения
+                            зачала
+                        </Tooltip>
                     </p>
                 </div>
                 <div
@@ -2050,6 +2054,10 @@ const Zlatoust = ({ lang }) => {
                 </p>
                 <p className="_-ОСНОВНОЙ_Чтение-Писания">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Чтение Евангелия</span>
+                    <Tooltip>
+                        Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения
+                        зачала
+                    </Tooltip>
                 </p>
                 <div
                     className={css`

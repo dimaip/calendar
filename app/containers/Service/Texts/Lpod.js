@@ -1603,6 +1603,10 @@ const Lpod = ({ lang }) => {
                 <div id="firstReading">
                     <p className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-3">
                         <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Чтение 1-й паремии</span>
+                        <Tooltip>
+                            Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения
+                            зачала
+                        </Tooltip>
                     </p>
                 </div>
                 {firstReading}
@@ -1672,6 +1676,10 @@ const Lpod = ({ lang }) => {
                 </p>
                 <p className="_-ОСНОВНОЙ_Чтение-Писания">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Чтение 2-й паремии</span>
+                    <Tooltip>
+                        Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения
+                        зачала
+                    </Tooltip>
                     <span className="_-РЕДКИЕ_Знак-сноски-красной">
                         <span id="footnote-006-backlink">
                             <a className="_idFootnoteLink _idGenColorInherit" href="lpod.html#footnote-006">
