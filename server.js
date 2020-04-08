@@ -16,26 +16,26 @@ const apiHost = process.env.API_HOST || 'http://localhost:9999';
 app.use(cors());
 
 app.use(
-    '/api/day',
+    '/api/day/',
     proxy(apiHost, {
         proxyReqPathResolver: req => {
-            return `/day.php?date=${req.url.replace(/[^0-9]/g, '')}`;
+            return `/day/${req.url.substring(1)}`;
         },
     })
 );
 app.use(
-    '/api/reading',
+    '/api/reading/',
     proxy(apiHost, {
         proxyReqPathResolver: req => {
-            return `/bible.php?zachalo=${req.url.substring(1)}`;
+            return `/reading/${req.url.substring(1)}`;
         },
     })
 );
 app.use(
-    '/api/readings',
+    '/api/readings/',
     proxy(apiHost, {
         proxyReqPathResolver: req => {
-            return `/day.php?date=${req.url.replace(/[^0-9]/g, '')}&readings=1`;
+            return `/readings/${req.url.substring(1)}`;
         },
     })
 );
