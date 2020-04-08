@@ -13,7 +13,7 @@ const ReadingItem = ({ reading }) => {
                 line-height: 1.5;
             `}
         >
-            {reading.replace('@', '')}
+            {reading.replace('@', '').replace(/~/g, '; ')}
         </div>
     );
 };

@@ -20,9 +20,11 @@ import { useTheme } from 'emotion-theming';
 
 const Readings = ({ readings }) => (
     <>
-        {readings.map(({ readingVerse, type }) => (
-            <ReadingItem key={readingVerse} readingVerse={readingVerse} type={type} />
-        ))}
+        {readings
+            .map(({ readingVerse, type }) =>
+                readingVerse ? <ReadingItem key={readingVerse} readingVerse={readingVerse} type={type} /> : null
+            )
+            .filter(Boolean)}
     </>
 );
 
