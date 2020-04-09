@@ -136,7 +136,9 @@ const Aliluja = ({ title, verse1, stih, title2, verse2 }) => (
 
 const Alilujas = ({ day, date }) => {
     const commonAlilujah = getAlilujaData(day, date);
-    let alilujas = day?.aliluja ? [commonAlilujah, ...day.aliluja] : [commonAlilujah];
+    let alilujas = day?.liturgyParts?.['Аллилуарий']
+        ? [commonAlilujah, ...day.liturgyParts['Аллилуарий']]
+        : [commonAlilujah];
     alilujas = alilujas.filter(Boolean);
     const exclusiveAlilujahs = alilujas.filter(aliluja => aliluja.replace);
     alilujas = exclusiveAlilujahs.length ? exclusiveAlilujahs : alilujas;

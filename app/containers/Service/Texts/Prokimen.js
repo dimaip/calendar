@@ -129,7 +129,9 @@ const Prokimen = ({ title, verse1, stih, title2, verse2 }) => (
 
 const Prokimens = ({ day, date }) => {
     const commonProkimen = getProkimenData(day, date);
-    let prokimens = day?.prokimen ? [commonProkimen, ...day.prokimen] : [commonProkimen];
+    let prokimens = day?.liturgyParts?.['Прокимен']
+        ? [commonProkimen, ...day.liturgyParts['Прокимен']]
+        : [commonProkimen];
     prokimens = prokimens.filter(Boolean);
     const exclusiveProkimens = prokimens.filter(prokimen => prokimen.replace);
     prokimens = exclusiveProkimens.length ? exclusiveProkimens : prokimens;
