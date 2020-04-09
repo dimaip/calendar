@@ -93,7 +93,7 @@ const Inner = ({ date, services, handleToggleClick, makeHandleClickShift }) => {
                                         <Saints saints={day.saints} date={date} />
 
                                         <ThisDays thisDays={thisDays} date={date} />
-                                        {day.prayers && day.prayers.length > 0 && (
+                                        {(day.prayers || day.prayersOther) && (
                                             <BorderedSection>
                                                 <div
                                                     className={css`
@@ -102,7 +102,7 @@ const Inner = ({ date, services, handleToggleClick, makeHandleClickShift }) => {
                                                 >
                                                     <SectionHeading>Песнопения</SectionHeading>
                                                 </div>
-                                                <Hymns hymns={day.prayers} />
+                                                <Hymns hymns={(day.prayers || '') + (day.prayersOther || '')} />
                                             </BorderedSection>
                                         )}
                                         {day.bReadings && Object.keys(day.bReadings).length > 0 && (
