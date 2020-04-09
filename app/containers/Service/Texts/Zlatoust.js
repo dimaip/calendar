@@ -5119,21 +5119,7 @@ const Zlatoust = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> При этом медленно поётся причастный стих:</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        Тело Христово прими`те, от источника бессмер­тия вку­си`те!
-                    </span>
-                    <Tooltip>
-                        <>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> На Светлой седмице поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"></span>
-                        </>
-                    </Tooltip>
-                </p>
+                {prichasten}
                 <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-20">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">После причащения</span>
                 </p>

@@ -6339,15 +6339,7 @@ const Vasiliy = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> При этом медленно поётся причастный стих:</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Тело Христово прими</span>
-                    <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">те, от источника бессмер­тия вку­си­</span>
-                    <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">те!</span>
-                </p>
+                {prichasten}
                 <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-16">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">После причащения</span>
                 </p>
