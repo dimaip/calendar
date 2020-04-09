@@ -15,8 +15,12 @@ import SectionHeading from 'containers/Main/SectionHeading';
 import Prokimen from './Prokimen';
 import Aliluja from './Aliluja';
 import Prichasten from './Prichasten';
+import VhodnoiStih from './VhodnoiStih';
 import Tooltip from 'components/Tooltip/Tooltip';
 import { useTheme } from 'emotion-theming';
+import Trisvatoe from './Trisvatoe';
+import Zadastoinik from './Zadastoinik';
+import Otpust from './Otpust';
 
 const Readings = ({ readings }) => (
     <>
@@ -28,7 +32,7 @@ const Readings = ({ readings }) => (
     </>
 );
 
-const VariableSection = ({ children, date }) => {
+export const VariableSection = ({ children, date }) => {
     const theme = useTheme();
     return (
         <div
@@ -65,12 +69,12 @@ const VariableSection = ({ children, date }) => {
     );
 };
 
-const useLiturgy = () => {
+const useLiturgy = (lang, serviceType) => {
     const { date } = useParams();
     const { data: day } = useDay(date);
 
     const externalDayQuery = useExternalDay(date);
-    const { sermons: sermonsData, thisDays } = externalDayQuery.data || {};
+    const { sermons: sermonsData } = externalDayQuery.data || {};
 
     useScrollToReadings();
 
@@ -134,6 +138,34 @@ const useLiturgy = () => {
         </VariableSection>
     );
 
-    return { hymns, apostol, gospel, sermons, saints, prokimen, aliluja, prichasten };
+    const vhodnoiStih = (
+        <VariableSection date={date}>
+            <VhodnoiStih day={day} />
+        </VariableSection>
+    );
+    const otpust = (
+        <VariableSection date={date}>
+            <Otpust day={day} date={date} serviceType={serviceType} />
+        </VariableSection>
+    );
+
+    const trisvatoe = <Trisvatoe day={day} lang={lang} />;
+
+    const zadastoinik = <Zadastoinik day={day} />;
+
+    return {
+        hymns,
+        apostol,
+        gospel,
+        sermons,
+        saints,
+        prokimen,
+        aliluja,
+        prichasten,
+        vhodnoiStih,
+        trisvatoe,
+        zadastoinik,
+        otpust,
+    };
 };
 export default useLiturgy;
