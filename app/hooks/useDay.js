@@ -45,7 +45,7 @@ export function fetchDay(key, { date }) {
                     glas,
                     week,
                     colour: feastColour || lentColour,
-                    icon: feastIcon || lentIcon || 'default.jpg',
+                    icon: feastIcon || lentIcon || 'default.svg',
                 };
             }
 

@@ -443,8 +443,6 @@ export const getFeastInfo = memoize(
         if (pascha.getTime() == date.getTime()) {
             title = 'Пасха';
             feastType = '12';
-            colour = '#ff4e4e';
-            icon = 'easter.jpg';
         }
 
         const palm_sunday = calculateEasterDate(y);
@@ -454,10 +452,14 @@ export const getFeastInfo = memoize(
             title = 'Вход Господень в Иерусалим';
             feastType = '12';
             colour = '#73be73';
+            icon = 'vhod.jpg';
         }
 
         const holy_Ascension = calculateEasterDate(y);
         holy_Ascension.setDate(pascha.getDate() + 39);
+
+        const mondayAfterFomina = calculateEasterDate(y);
+        mondayAfterFomina.setDate(pascha.getDate() + 8);
 
         if (holy_Ascension.getTime() == date.getTime()) {
             title = 'Вознесение';
@@ -465,9 +467,13 @@ export const getFeastInfo = memoize(
             colour = '#A2A2A2';
         }
 
-        if (date >= pascha && date < holy_Ascension) {
+        if (date >= pascha && date < mondayAfterFomina) {
             colour = '#ff4e4e';
-            icon = 'easter.jpg';
+            icon = 'easter.svg';
+        }
+        if (date >= mondayAfterFomina && date < holy_Ascension) {
+            colour = '#ff4e4e';
+            icon = 'easter2.svg';
         }
 
         const pentecost = calculateEasterDate(y);
