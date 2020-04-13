@@ -1,33 +1,52 @@
 import React from 'react';
-const VhodnoiStih = ({ day }) => {
+const VhodnoiStih = ({ day, lang }) => {
     const vhodnoiStih = day?.liturgyParts?.['Входной стих'];
     if (vhodnoiStih) {
         return (
             <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
                 <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span> {vhodnoiStih}
+                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span> {vhodnoiStih}
             </p>
         );
     }
 
     return (
-        <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Благословен вход </span>
-            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или: </span>
-            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Благословенны входящие</span>
-            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[</span>
-            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">во святое</span>
-            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">]</span>
-            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> святых Твоих </span>
-            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-            <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">во все дни:</span>
-            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и всегда и во веки веков.</span>
-        </p>
+        <>
+            {lang === 'default' && (
+                <>
+                    <p className="_-ОСНОВНОЙ_Основной-отст1-5">
+                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
+                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Приди</span>
+                        <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
+                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">те, покло</span>
+                        <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
+                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">нимся и припадём ко Христу!</span>
+                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span>
+                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Вос­крес­ший из мёртвых </span>
+                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(или в соответствии с празд­ником)</span>
+                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">,</span>
+                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span>
+                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Сын Божий, спа­си нас, поющих Те­бе:</span>
+                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span>
+                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> аллилуия!</span>
+                    </p>
+                </>
+            )}
+            {lang === 'ЦСЯ' && (
+                <>
+                    <p className="_-ОСНОВНОЙ_Основной-отст1-5">
+                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
+                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
+                            {' '}
+                            Приидите, поклонимся и припадем ко Христу. / Спаси ны, Сыне Божий, / Воскресый из мертвых,
+                            поющия Ти, / аллилуиа.
+                        </span>
+                    </p>
+                </>
+            )}
+        </>
     );
 };
 

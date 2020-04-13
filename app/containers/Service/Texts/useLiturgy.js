@@ -21,6 +21,9 @@ import { useTheme } from 'emotion-theming';
 import Trisvatoe from './Trisvatoe';
 import Zadastoinik from './Zadastoinik';
 import Otpust from './Otpust';
+import Antifon1 from './Antifon1';
+import Antifon2 from './Antifon2';
+import Antifon3 from './Antifon3';
 
 const Readings = ({ readings }) => (
     <>
@@ -140,7 +143,7 @@ const useLiturgy = (lang, serviceType) => {
 
     const vhodnoiStih = (
         <VariableSection date={date}>
-            <VhodnoiStih day={day} />
+            <VhodnoiStih day={day} lang={lang} />
         </VariableSection>
     );
     const otpust = (
@@ -152,6 +155,10 @@ const useLiturgy = (lang, serviceType) => {
     const trisvatoe = <Trisvatoe day={day} lang={lang} />;
 
     const zadastoinik = <Zadastoinik day={day} />;
+
+    const antifon1 = <Antifon1 lang={lang} date={date} />;
+    const antifon2 = <Antifon2 lang={lang} date={date} />;
+    const antifon3 = <Antifon3 lang={lang} date={date} />;
 
     return {
         hymns,
@@ -166,6 +173,9 @@ const useLiturgy = (lang, serviceType) => {
         trisvatoe,
         zadastoinik,
         otpust,
+        antifon1,
+        antifon2,
+        antifon3,
     };
 };
 export default useLiturgy;

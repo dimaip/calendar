@@ -36,10 +36,17 @@ const calculateEasterDateMemoized = memoize(year => {
     return { d: pascha_d, m: pascha_m, y: year };
 });
 
-const calculateEasterDate = year => {
+export const calculateEasterDate = year => {
     const { y, m, d } = calculateEasterDateMemoized(year);
     // Clone the date when accessing
     return new Date(y, m, d);
+};
+
+export const makeIsEasterOffset = date => offset => {
+    const y = date.getFullYear();
+    const easter = calculateEasterDate(y);
+    easter.setDate(easter.getDate() + offset);
+    return easter.getTime() == date.getTime();
 };
 
 export const getLentInfo = memoize(
@@ -378,11 +385,7 @@ export const getFeastInfo = memoize(
 
         const pascha = calculateEasterDate(y);
 
-        const isEasterOffset = offset => {
-            const easter = calculateEasterDate(y);
-            easter.setDate(easter.getDate() + offset);
-            return easter.getTime() == date.getTime();
-        };
+        const isEasterOffset = makeIsEasterOffset(date);
 
         {
             // В какие дни служится Литургия Преждеосвященных Даров?
@@ -465,6 +468,13 @@ export const getFeastInfo = memoize(
             title = 'Вознесение';
             feastType = '12';
             colour = '#A2A2A2';
+        }
+
+        const strastnayaBegin = calculateEasterDate(y);
+        strastnayaBegin.setDate(pascha.getDate() - 6);
+
+        if (date >= strastnayaBegin && date < pascha) {
+            icon = 'passion.svg';
         }
 
         if (date >= pascha && date < mondayAfterFomina) {

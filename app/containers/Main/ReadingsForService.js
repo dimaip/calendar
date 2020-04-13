@@ -24,19 +24,24 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
     if (title === 'Литургия') {
         to = {
             pathname: `/date/${date}/service/Литургия`,
-            state: { scrollToReadings: true },
+            state: { from: 'main', scrollToReadings: true },
         };
         effectiveTitle += ` ${vasiliy ? 'Василия Великого' : 'Иоанна Златоуста'}`;
     } else if (title === 'Вечерня' && lpod) {
         to = {
             pathname: `/date/${date}/service/Вечерня`,
-            state: { scrollToReadings: true },
+            state: { from: 'main', scrollToReadings: true },
         };
         effectiveTitle = 'Литургия преждеосвященных даров';
     } else if (brother) {
         to = `/date/${date}/bReadings/${title}`;
     } else {
-        to = `/date/${date}/readings/${title}`;
+        to = {
+            pathname: `/date/${date}/readings/${title}`,
+            state: {
+                from: 'main',
+            },
+        };
     }
 
     return (

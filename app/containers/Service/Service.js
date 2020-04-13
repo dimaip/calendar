@@ -17,9 +17,45 @@ import Calendar from '../Main/Calendar';
 import Button from 'components/Button/Button';
 import Cross from 'components/svgs/Cross';
 import { getFeastInfo } from 'domain/getDayInfo';
+import EasterHours from './Texts/EasterHours';
 const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
 const Vasiliy = React.lazy(() => import('./Texts/Vasiliy'));
 const Lpod = React.lazy(() => import('./Texts/Lpod'));
+const Blagodarstvennie = React.lazy(() => import('./Texts/Blagodarstvennie'));
+const Pokajanni = React.lazy(() => import('./Texts/Pokajanni'));
+
+const servicesFeatures = {
+    zlatoust: {
+        calendar: true,
+        lang: true,
+        skipRedirect: false,
+    },
+    vasiliy: {
+        calendar: true,
+        lang: true,
+        skipRedirect: false,
+    },
+    lpod: {
+        calendar: true,
+        lang: true,
+        skipRedirect: false,
+    },
+    blagodarstvennie: {
+        calendar: false,
+        lang: false,
+        skipRedirect: true,
+    },
+    pokajanni: {
+        calendar: false,
+        lang: false,
+        skipRedirect: true,
+    },
+    easterHours: {
+        calendar: false,
+        lang: false,
+        skipRedirect: true,
+    },
+};
 
 const Service = () => {
     const { serviceId: originalServiceId, date } = useParams();
@@ -33,8 +69,14 @@ const Service = () => {
     const history = useHistory();
 
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
+
+    if (!day) {
+        return <Loader />;
+    }
+
     // Expand serviceId
     let serviceId;
+
     if (day?.readings?.[originalServiceId]) {
         if (originalServiceId === 'Литургия') {
             serviceId = vasiliy ? 'vasiliy' : 'zlatoust';
@@ -42,6 +84,12 @@ const Service = () => {
             serviceId = 'lpod';
         }
     }
+
+    if (servicesFeatures?.[originalServiceId]?.skipRedirect) {
+        serviceId = originalServiceId;
+    }
+    const serviceFeatures = servicesFeatures?.[serviceId];
+
     // If service not found, redirect
     if (!serviceId) {
         if (day?.readings) {
@@ -82,7 +130,10 @@ const Service = () => {
                     `}
                 >
                     <div>
-                        <Link to={`/date/${date}`} title="Назад">
+                        <Link
+                            to={history.location.state?.from === 'main' ? `/date/${date}` : `/date/${date}/services`}
+                            title="Назад"
+                        >
                             <div
                                 className={css`
                                     padding: 18px;
@@ -102,25 +153,27 @@ const Service = () => {
                             align-items: center;
                         `}
                     >
-                        <Button
-                            className={css`
-                                flex-shrink: 0;
-                                display: flex;
-                                align-items: center;
-                                border-radius: 5px;
-                                padding: 8px !important;
-                                line-height: 1.2;
-                                text-align: center;
-                                background: ${theme.colours.bgGrayDark};
-                                font-size: 14px;
-                                margin-right: 8px;
-                            `}
-                            onClick={() => setCalendarShown(!calendarShown)}
-                        >
-                            {format(dateObj, 'd MMMM, EEEEEE', { locale: ru })}
-                            {calendarShown ? <Cross /> : null}
-                        </Button>
-                        <LanguageSwitcher lang={lang} setLang={setLang} />
+                        {serviceFeatures['calendar'] && (
+                            <Button
+                                className={css`
+                                    flex-shrink: 0;
+                                    display: flex;
+                                    align-items: center;
+                                    border-radius: 5px;
+                                    padding: 8px !important;
+                                    line-height: 1.2;
+                                    text-align: center;
+                                    background: ${theme.colours.bgGrayDark};
+                                    font-size: 14px;
+                                    margin-right: 8px;
+                                `}
+                                onClick={() => setCalendarShown(!calendarShown)}
+                            >
+                                {format(dateObj, 'd MMMM, EEEEEE', { locale: ru })}
+                                {calendarShown ? <Cross /> : null}
+                            </Button>
+                        )}
+                        {serviceFeatures['lang'] && <LanguageSwitcher lang={lang} setLang={setLang} />}
                         <TOCSwitcher serviceId={serviceId} />
                     </div>
 
@@ -152,6 +205,9 @@ const Service = () => {
                                     {serviceId === 'zlatoust' && <Zlatoust lang={lang} />}
                                     {serviceId === 'vasiliy' && <Vasiliy lang={lang} />}
                                     {serviceId === 'lpod' && <Lpod lang={lang} />}
+                                    {serviceId === 'easterHours' && <EasterHours />}
+                                    {serviceId === 'blagodarstvennie' && <Blagodarstvennie />}
+                                    {serviceId === 'pokajanni' && <Pokajanni />}
                                 </Suspense>
                             </div>
                         </>
