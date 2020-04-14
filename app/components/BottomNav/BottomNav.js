@@ -44,6 +44,7 @@ const BottomNav = ({ active }) => {
                     background-color: ${theme.colours.bgGrayLight};
                     padding: 0 12px;
                     border-top: 1px solid ${theme.colours.lineGray};
+                    user-select: none;
                 `}
             >
                 <Link className={itemClass + ' ' + (active === 'calendar' ? activeClass : '')} to={`/date/${date}`}>

@@ -22,7 +22,6 @@ body {
     /* Disable double-tap zoom on iOS */
     touch-action: manipulation;
     overscroll-behavior: none;
-    user-select: none;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
 }

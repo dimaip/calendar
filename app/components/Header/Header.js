@@ -14,6 +14,7 @@ const Header = ({ handleToggleClick, calendarShown, menuShown, setMenuShown }) =
         <div
             className={css`
                 height: 44px;
+                user-select: none;
             `}
         >
             <header

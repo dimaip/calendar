@@ -69,6 +69,7 @@ const Services = ({ date, readings }) => {
                             enabled={service.enabled}
                             className={css`
                                 cursor: ${service.enabled ? 'pointer' : 'arrow'};
+                                user-select: none;
                             `}
                             to={`/date/${date}/service/${service.id}`}
                             key={service.id}
