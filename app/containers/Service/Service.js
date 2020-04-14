@@ -155,6 +155,7 @@ const Service = () => {
                     >
                         {serviceFeatures['calendar'] && (
                             <Button
+                                title={calendarShown ? 'Спрятать календарь' : 'Показать календарь'}
                                 className={css`
                                     flex-shrink: 0;
                                     display: flex;

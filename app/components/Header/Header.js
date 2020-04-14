@@ -33,6 +33,7 @@ const Header = ({ handleToggleClick, calendarShown, menuShown, setMenuShown }) =
             >
                 {setMenuShown && (
                     <Button
+                        title="Меню"
                         onClick={() => setMenuShown(!menuShown)}
                         className={css`
                             display: block;
@@ -79,6 +80,7 @@ const Header = ({ handleToggleClick, calendarShown, menuShown, setMenuShown }) =
                     </div>
                     {handleToggleClick && (
                         <Button
+                            title={calendarShown ? 'Спрятать календарь' : 'Показать календарь'}
                             onClick={handleToggleClick}
                             className={css`
                                 display: block;

@@ -11,6 +11,7 @@ const ZoomControlToggle = () => {
     const zoomControlShown = useSelector(state => state.ui.zoomControlShown);
     return (
         <Button
+            title="Изменить шрифт"
             onClick={() => dispatch(toggleZoomControl())}
             className={css`
                 padding: 6px 6px !important;

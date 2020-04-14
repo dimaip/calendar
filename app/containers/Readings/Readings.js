@@ -84,6 +84,7 @@ const Readings = ({ brother = false }) => {
                         `}
                     >
                         <Button
+                            title={calendarShown ? 'Спрятать календарь' : 'Показать календарь'}
                             className={css`
                                 flex-shrink: 0;
                                 display: flex;

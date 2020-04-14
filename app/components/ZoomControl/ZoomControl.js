@@ -40,6 +40,7 @@ const ZoomControl = () => {
                     `}
                 >
                     <Button
+                        title="Уменшить шрифт"
                         className={css`
                             ${buttonStyle}
                             font-size: 14px;
@@ -49,6 +50,7 @@ const ZoomControl = () => {
                         A-
                     </Button>
                     <Button
+                        title="Увеличить шрифт"
                         className={css`
                             ${buttonStyle}
                             font-size: 18px;

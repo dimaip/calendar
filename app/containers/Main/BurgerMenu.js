@@ -26,6 +26,7 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                 `}
             >
                 <Button
+                    title="Закрыть меню"
                     onClick={() => setMenuShown(false)}
                     className={css`
                         display: block;
@@ -52,6 +53,7 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                             className={css`
                                 text-decoration: underline;
                             `}
+                            rel="noopener"
                             href="https://psmb.ru"
                             target="_blank"
                         >

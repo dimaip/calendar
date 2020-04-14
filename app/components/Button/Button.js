@@ -4,6 +4,7 @@ import { css } from 'emotion';
 const Button = props => (
     <button
         {...props}
+        ariaLabel={props.title || undefined}
         className={css`
             ${props.className}
             cursor: pointer;

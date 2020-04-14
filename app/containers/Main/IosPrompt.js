@@ -75,6 +75,7 @@ const IosPrompt = () => {
                 `}
             >
                 <Button
+                    title="Закрыть"
                     onClick={() => {
                         const now = new Date();
                         dispatch(dismissIosPrompt(now.getTime()));
