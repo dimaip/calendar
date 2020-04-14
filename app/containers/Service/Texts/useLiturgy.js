@@ -43,7 +43,7 @@ export const VariableSection = ({ children, date }) => {
                 position: relative;
                 background: ${theme.colours.bgGray};
                 margin: 24px -12px 24px -12px;
-                padding: 8px 12px 8px 12px;
+                padding: 12px 12px 12px 12px;
             `}
         >
             <div
@@ -54,8 +54,8 @@ export const VariableSection = ({ children, date }) => {
                 `}
             >
                 <Tooltip>
-                    Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда ошибается. Если хотите
-                    быть уверены, смотрите{' '}
+                    Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда ошибается. За наиболее
+                    точной информацией обращайтесь к{' '}
                     <a
                         className={css`
                             text-decoration: underline;
@@ -63,7 +63,7 @@ export const VariableSection = ({ children, date }) => {
                         href={`http://www.patriarchia.ru/bu/${date}`}
                         target="_blank"
                     >
-                        богослужебные указания
+                        богослужебным указаниям
                     </a>
                 </Tooltip>
             </div>

@@ -11,6 +11,7 @@ const Hymns = ({ hymns }) => {
                 font-size: 18px;
                 line-height: 1.5;
                 color: ${theme.colours.darkGray};
+                margin-top: -24px;
                 margin-bottom: 24px;
 
                 & p {
@@ -19,6 +20,8 @@ const Hymns = ({ hymns }) => {
 
                 & h5 {
                     font-weight: bold;
+                    margin-top: 24px;
+                    margin-bottom: 12px;
                 }
 
                 & a {
@@ -27,6 +30,9 @@ const Hymns = ({ hymns }) => {
 
                 & img {
                     margin-right: 8px;
+                }
+                & audio {
+                    display: block;
                 }
             `}
         />

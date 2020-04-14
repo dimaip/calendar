@@ -1,5 +1,5 @@
 import React from 'react';
-import { calculateEasterDate } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 
 const Antifon1Easter = () => (
     <>
@@ -7,26 +7,31 @@ const Antifon1Easter = () => (
             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Первый антифон, глас 2</span>
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 1: Славьте Бога, все жители земли.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">1</span> Славьте Бога, все жители земли.
             <br />
-            Припев: По ходатайству Богородицы, Спаситель, / спаси нас.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Припев</span> По ходатайству Богородицы, Спаситель, / спаси нас.
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 2: Славьте Бога, все жители земли, славьте имя Его, славьте Его хвалой!
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2</span> Славьте Бога, все жители земли, славьте имя Его, славьте Его
+            хвалой!
             <br />
-            Припев: По ходатайству Богородицы, Спаситель, / спаси нас.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Припев</span> По ходатайству Богородицы, Спаситель, / спаси нас.
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 3: Скажите Богу: «Как грозны Твои дела! Ты могуч, враги заискивают пред Тобой.
-            <br /> Припев: По ходатайству Богородицы, Спаситель, / спаси нас.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">3</span> Скажите Богу: «Как грозны Твои дела! Ты могуч, враги
+            заискивают пред Тобой.
+            <br /> <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Припев</span> По ходатайству Богородицы, Спаситель, / спаси
+            нас.
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 4: Да склонятся пред Тобою все жители земли, да воспоют Тебя, да воспоют Твоё имя.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4</span> Да склонятся пред Тобою все жители земли, да воспоют Тебя, да
+            воспоют Твоё имя.
             <br />
-            Припев: По ходатайству Богородицы, Спаситель, / спаси нас.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Припев</span> По ходатайству Богородицы, Спаситель, / спаси нас.
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Слава, и ныне: По ходатайству Богородицы, Спаситель, / спаси нас.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Слава, и ныне</span> По ходатайству Богородицы, Спаситель, / спаси
+            нас.
         </p>
     </>
 );
@@ -412,17 +417,8 @@ const Antifon1Sunday = ({ lang }) => (
 );
 
 const Antifon1 = ({ lang, date: dateString }) => {
-    const _date = new Date(dateString);
-    const y = _date.getFullYear();
-    const m = _date.getMonth();
-    const d = _date.getDate();
-    const date = new Date(y, m, d);
-
-    const easter = calculateEasterDate(y);
-    const easterAnd1Week = calculateEasterDate(y);
-    easterAnd1Week.setDate(easterAnd1Week.getDate() + 7);
-
-    if (easter <= date && date <= easterAnd1Week) {
+    const isEasterOffsetRange = makeIsEasterOffsetRange(dateString);
+    if (isEasterOffsetRange(0, 6)) {
         return <Antifon1Easter />;
     }
 

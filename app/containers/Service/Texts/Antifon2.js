@@ -1,5 +1,5 @@
 import React from 'react';
-import { calculateEasterDate } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 
 const Antifon2Easter = () => (
     <>
@@ -7,23 +7,29 @@ const Antifon2Easter = () => (
             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Второй антифон, глас 2</span>
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 1: Бог да помилует нас, да благословит.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">1</span> Бог да помилует нас, да благословит.
             <br />
-            Припев: Спаси нас, Сын Божий, воскресший из мёртвых, / поющих Тебе: Аллилуйя.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Припев</span> Спаси нас, Сын Божий, воскресший из мёртвых, / поющих
+            Тебе: Аллилуйя.
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 2: Бог да помилует нас, да благословит, да обратит на нас светлый Свой взор!
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2</span> Бог да помилует нас, да благословит, да обратит на нас
+            светлый Свой взор!
             <br />
-            Припев: Спаси нас, Сын Божий, воскресший из мёртвых, / поющих Тебе: Аллилуйя.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Припев</span> Спаси нас, Сын Божий, воскресший из мёртвых, / поющих
+            Тебе: Аллилуйя.
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 3: Тогда путь Твой ведом будет на земле, и все страны увидят спасение Твоё.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">3</span> Тогда путь Твой ведом будет на земле, и все страны увидят
+            спасение Твоё.
             <br /> Припев: Спаси нас, Сын Божий, воскресший из мёртвых, / поющих Тебе: Аллилуйя.
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 4: Да восхвалят народы, Тебя, Боже! Все народы да восхвалят Тебя!
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4</span> Да восхвалят народы, Тебя, Боже! Все народы да восхвалят
+            Тебя!
             <br />
-            Припев: Спаси нас, Сын Божий, воскресший из мёртвых, / поющих Тебе: Аллилуйя.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Припев</span> Спаси нас, Сын Божий, воскресший из мёртвых, / поющих
+            Тебе: Аллилуйя.
         </p>
     </>
 );
@@ -275,17 +281,8 @@ const Antifon2Sunday = ({ lang }) => (
 );
 
 const Antifon2 = ({ lang, date: dateString }) => {
-    const _date = new Date(dateString);
-    const y = _date.getFullYear();
-    const m = _date.getMonth();
-    const d = _date.getDate();
-    const date = new Date(y, m, d);
-
-    const easter = calculateEasterDate(y);
-    const easterAnd1Week = calculateEasterDate(y);
-    easterAnd1Week.setDate(easterAnd1Week.getDate() + 7);
-
-    if (easter <= date && date <= easterAnd1Week) {
+    const isEasterOffsetRange = makeIsEasterOffsetRange(dateString);
+    if (isEasterOffsetRange(0, 6)) {
         return <Antifon2Easter />;
     }
 

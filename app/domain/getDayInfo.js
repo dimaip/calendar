@@ -43,10 +43,27 @@ export const calculateEasterDate = year => {
 };
 
 export const makeIsEasterOffset = date => offset => {
+    if (typeof date === 'string') {
+        const splitDateString = date.split('-');
+        date = new Date(splitDateString[0], splitDateString[1] - 1, splitDateString[2]);
+    }
     const y = date.getFullYear();
     const easter = calculateEasterDate(y);
     easter.setDate(easter.getDate() + offset);
-    return easter.getTime() == date.getTime();
+    return easter.getTime() === date.getTime();
+};
+
+export const makeIsEasterOffsetRange = date => (offsetBegin, offsetEnd) => {
+    if (typeof date === 'string') {
+        const splitDateString = date.split('-');
+        date = new Date(splitDateString[0], splitDateString[1] - 1, splitDateString[2]);
+    }
+    const y = date.getFullYear();
+    const begin = calculateEasterDate(y);
+    begin.setDate(begin.getDate() + offsetBegin);
+    const end = calculateEasterDate(y);
+    end.setDate(end.getDate() + offsetEnd);
+    return begin.getTime() <= date.getTime() && date.getTime() <= end.getTime();
 };
 
 export const getLentInfo = memoize(

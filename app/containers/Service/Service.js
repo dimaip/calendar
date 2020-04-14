@@ -201,8 +201,40 @@ const Service = () => {
                                     margin-right: 12px;
                                 `}
                             >
+                                <div
+                                    className={css`
+                                        position: relative;
+                                        background: ${theme.colours.bgGray};
+                                        margin: 0 -12px 24px -12px;
+                                        padding: 12px 12px 12px 12px;
+                                        font-size: 13px;
+                                        color: ${theme.colours.darkGray};
+                                    `}
+                                >
+                                    Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда
+                                    ошибается. За наиболее точной информацией обращайтесь к{' '}
+                                    <a
+                                        className={css`
+                                            text-decoration: underline;
+                                        `}
+                                        href={`http://www.patriarchia.ru/bu/${date}`}
+                                        target="_blank"
+                                    >
+                                        богослужебным указаниям.
+                                    </a>
+                                    Если вы обнаружили ошибку, пожалуйста,{' '}
+                                    <a
+                                        className={css`
+                                            text-decoration: underline;
+                                        `}
+                                        href="mailto:pb@psmb.ru"
+                                        target="_blank"
+                                    >
+                                        напишите нам
+                                    </a>
+                                </div>
                                 <Suspense fallback={Loader}>
-                                    {serviceId === 'zlatoust' && <Zlatoust lang={lang} />}
+                                    {serviceId === 'zlatoust' && <Zlatoust date={date} lang={lang} />}
                                     {serviceId === 'vasiliy' && <Vasiliy lang={lang} />}
                                     {serviceId === 'lpod' && <Lpod lang={lang} />}
                                     {serviceId === 'easterHours' && <EasterHours />}

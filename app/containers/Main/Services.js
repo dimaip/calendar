@@ -5,8 +5,7 @@ import SectionHeading from './SectionHeading';
 import { Link } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
-import SolidSection from 'components/SolidSection/SolidSection';
-import { getFeastInfo, calculateEasterDate } from 'domain/getDayInfo';
+import { getFeastInfo, makeIsEasterOffsetRange } from 'domain/getDayInfo';
 
 const OptionalLink = ({ enabled, ...rest }) =>
     enabled ? (
@@ -23,21 +22,13 @@ const Services = ({ date, readings }) => {
 
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
 
-    const _dateObj = new Date(date);
-    const y = _dateObj.getFullYear();
-    const m = _dateObj.getMonth();
-    const d = _dateObj.getDate();
-    const dateObj = new Date(y, m, d);
-
-    const easter = calculateEasterDate(y);
-    const easterAnd1Week = calculateEasterDate(y);
-    easterAnd1Week.setDate(easterAnd1Week.getDate() + 7);
+    const isEasterOffsetRange = makeIsEasterOffsetRange(date);
 
     const services = [
         { title: 'Литургия Иоанна Златоуста', id: 'zlatoust', enabled: readings['Литургия'] && !vasiliy },
         { title: 'Литургия Василия Великого', id: 'vasiliy', enabled: readings['Литургия'] && vasiliy },
         { title: 'Литургия преждеосвященных даров', id: 'lpod', enabled: readings['Вечерня'] && lpod },
-        { title: 'Пасхальные часы', id: 'easterHours', enabled: easter <= dateObj && dateObj <= easterAnd1Week },
+        { title: 'Пасхальные часы', id: 'easterHours', enabled: isEasterOffsetRange(0, 6) },
         { title: 'Благодарственные молитвы', id: 'blagodarstvennie', enabled: true },
         { title: 'Покаянный канон', id: 'pokajanni', enabled: true },
     ];

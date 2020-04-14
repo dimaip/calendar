@@ -1,6 +1,6 @@
 import React from 'react';
 import Tooltip from 'components/Tooltip/Tooltip';
-import { calculateEasterDate } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 
 const Antifon3Easter = () => (
     <>
@@ -8,24 +8,30 @@ const Antifon3Easter = () => (
             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Третий антифон, глас 5</span>
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 1: Да восстанет Бог / и расточатся враги Его.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">1</span> Да восстанет Бог / и расточатся враги Его.
             <br />
-            Тропарь, глас 5: Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто в гробах, Жизнь даровав.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Тропарь, глас 5</span> Христос воскрес из мёртвых, Смертию смерть
+            поправ и тем, кто в гробах, Жизнь даровав.
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 2: Да восстанет Бог и расточатся враги Его, / и да бегут от лица Его ненавидящие Его.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2</span> Да восстанет Бог и расточатся враги Его, / и да бегут от лица
+            Его ненавидящие Его.
             <br />
-            Тропарь, глас 5: Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто в гробах, Жизнь даровав.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Тропарь, глас 5</span> Христос воскрес из мёртвых, Смертию смерть
+            поправ и тем, кто в гробах, Жизнь даровав.
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 3: Как исчезает дым, да исчезнут они, как тает воск от лица огня.
-            <br /> Тропарь, глас 5: Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто в гробах, Жизнь
-            даровав.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">3</span> Как исчезает дым, да исчезнут они, как тает воск от лица
+            огня.
+            <br /> <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Тропарь, глас 5</span> Христос воскрес из мёртвых, Смертию
+            смерть поправ и тем, кто в гробах, Жизнь даровав.
         </p>
         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-            Стих 4: Да сгинут злые пред Божьим лицом, – а праведные да возвеселятся.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4</span> Да сгинут злые пред Божьим лицом, – а праведные да
+            возвеселятся.
             <br />
-            Тропарь, глас 5: Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто в гробах, Жизнь даровав.
+            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Тропарь, глас 5</span> Христос воскрес из мёртвых, Смертию смерть
+            поправ и тем, кто в гробах, Жизнь даровав.
         </p>
     </>
 );
@@ -278,17 +284,8 @@ const Antifon3Sunday = ({ lang }) => (
 );
 
 const Antifon3 = ({ lang, date: dateString }) => {
-    const _date = new Date(dateString);
-    const y = _date.getFullYear();
-    const m = _date.getMonth();
-    const d = _date.getDate();
-    const date = new Date(y, m, d);
-
-    const easter = calculateEasterDate(y);
-    const easterAnd1Week = calculateEasterDate(y);
-    easterAnd1Week.setDate(easterAnd1Week.getDate() + 7);
-
-    if (easter <= date && date <= easterAnd1Week) {
+    const isEasterOffsetRange = makeIsEasterOffsetRange(dateString);
+    if (isEasterOffsetRange(0, 6)) {
         return <Antifon3Easter />;
     }
 
