@@ -80,7 +80,16 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                         Некоторые жития святых взяты с сайта holytrinityorthodox.com
                         <br />
                         <br />
-                        При любом использовании материалов сайта, ссылка на источник обязательна
+                        Нашли ошибку или есть хорошая идея?{' '}
+                        <a
+                            className={css`
+                                text-decoration: underline;
+                            `}
+                            href="mailto:pb@psmb.ru"
+                            target="_blank"
+                        >
+                            Напишите нам!
+                        </a>
                     </div>
                     <div>
                         Версия:{' '}
