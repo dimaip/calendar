@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "serve": "cross-env NODE_PORT=80 NODE_ENV=production node server.js",
-    "build": "cross-env PUBLIC_URL=https://d.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
+    "build": "cross-env PUBLIC_URL=https://c.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
     "build-local": "cross-env PUBLIC_URL=http://localhost NODE_ENV=production webpack --config webpack.prod.js",
     "build-cap": "cross-env NODE_ENV=production cap sync"
   },
