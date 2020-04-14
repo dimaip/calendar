@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
-const CalendarIcon = ({ colour }) => {
+const CalendarIcon = ({ colour = null }) => {
     const theme = useTheme();
     return (
         <svg
