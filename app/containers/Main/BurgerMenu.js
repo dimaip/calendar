@@ -61,21 +61,23 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                         </a>
                         <br />
                         <br />
-                        © Переводы Св. Писания и Богослужебных текстов:
+                        © Перевод Православного Богослужения на русский язык: Священник Георгий Кочетков
                         <br />
-                        Архимандрит Ианнуарий (Ивлиев)
                         <br />
-                        Священник Георгий Кочетков
+                        Цитирование Свящ. Писания по:
                         <br />
-                        С.С. Аверинцев
+                        • Архимандрит Ианнуарий (Ивлиев)
                         <br />
-                        Епископ Кассиан (Безобразов)
+                        • С.С. Аверинцев
                         <br />
-                        РБО 2011
+                        • Епископ Кассиан (Безобразов)
                         <br />
-                        Novum Testamentum Graece Edited by Barbara Aland and others
+                        • РБО 2011
                         <br />
-                        Deutsche Bibelgesellschaft, Stuttgart
+                        • Novum Testamentum Graece, Nestle-Aland #28
+                        <br />
+                        • Deutsche Bibelgesellschaft, Stuttgart
+                        <br />
                         <br />
                         Некоторые жития святых взяты с сайта holytrinityorthodox.com
                         <br />
