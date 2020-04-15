@@ -4,7 +4,7 @@ import { css } from 'emotion';
 const Button = props => (
     <button
         {...props}
-        ariaLabel={props.title || undefined}
+        aria-label={props.title || undefined}
         className={css`
             ${props.className}
             cursor: pointer;
@@ -12,7 +12,9 @@ const Button = props => (
             user-select: none;
             &:hover {
                 opacity: 0.8;
-                cursor: pointer;
+            }
+            &:active {
+                opacity: 0.5;
             }
         `}
     >

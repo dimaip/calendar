@@ -9,6 +9,13 @@ const ButtonBox = props => (
             box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
             margin-bottom: 8px;
             padding: 14px 12px;
+            &:active,
+            &:focus {
+                box-shadow: none;
+                position: relative;
+                top: 1px;
+                background-color: #fafafa;
+            }
         `}
     >
         {props.children}

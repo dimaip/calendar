@@ -20,7 +20,7 @@ body {
     position: relative;
     color: #201f24;
     /* Disable double-tap zoom on iOS */
-    touch-action: manipulation;
+    touch-action: none;
     overscroll-behavior: none;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
