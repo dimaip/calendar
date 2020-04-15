@@ -18,7 +18,7 @@ app.use(cors());
 app.use((req, res, next) => {
     const host = req.get('Host');
     if (host === 'd.psmb.ru') {
-        return res.redirect(301, 'https://c.psmb.ru/' + req.originalUrl);
+        return res.redirect(301, 'https://c.psmb.ru' + req.originalUrl);
     }
     return next();
 });
@@ -72,7 +72,7 @@ app.use(
     }),
     proxy(apiHost, {
         proxyReqPathResolver: req => {
-            return '/clearCache.php';
+            return '/clear-cache';
         },
     })
 );
