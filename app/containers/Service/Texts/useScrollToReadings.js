@@ -8,7 +8,12 @@ const useScrollToReadings = () => {
         if (history.location.state?.scrollToReadings) {
             const domNode = document.getElementById('firstReading');
             if (domNode) {
-                domNode.scrollIntoView({ block: 'center' });
+                try {
+                    domNode.scrollIntoView({ block: 'center' });
+                } catch (error) {
+                    // fallback to prevent browser crashing
+                    domNode.scrollIntoView();
+                }
             }
         }
     }, []);

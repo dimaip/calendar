@@ -42,7 +42,12 @@ const TOCSwitcher = ({ serviceId }) => {
             onChange={anchorID => {
                 const domNode = document.getElementById(anchorID);
                 if (domNode) {
-                    domNode.scrollIntoView({ block: 'center' });
+                    try {
+                        domNode.scrollIntoView({ block: 'center' });
+                    } catch (error) {
+                        // fallback to prevent browser crashing
+                        domNode.scrollIntoView();
+                    }
                 }
             }}
         />
