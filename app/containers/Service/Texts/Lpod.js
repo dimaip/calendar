@@ -43,6 +43,8 @@ const Lpod = ({ lang }) => {
     );
     const secondReading = readingVersesWithType[1] && <Readings readings={[readingVersesWithType[1]]} />;
 
+    const gospelReading = readingVersesWithType[2] && <Readings readings={[readingVersesWithType[2]]} />;
+
     return (
         <div>
             <div id="_idContainer004" className="_idGenObjectStyleOverride-1">
@@ -1791,6 +1793,7 @@ const Lpod = ({ lang }) => {
                         </span>
                     </span>
                 </p>
+                {gospelReading}
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Сугубая ектения</span>
                 </p>
