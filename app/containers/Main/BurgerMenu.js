@@ -72,6 +72,12 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                         <br />
                         • Епископ Кассиан (Безобразов)
                         <br />
+                        • Протоиерей Сергий Овсянников
+                        <br />
+                        • Алексеев А.А.
+                        <br />
+                        • Левинская И.А.
+                        <br />
                         • РБО 2011
                         <br />
                         • Novum Testamentum Graece, Nestle-Aland #28
