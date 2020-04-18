@@ -3193,7 +3193,7 @@ const Zlatoust = ({ lang, date }) => {
                         </Link>
                     </span>
                 </p>
-            </div>    
+            </div>
         </div>
     );
 };
