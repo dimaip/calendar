@@ -478,8 +478,8 @@ export const getFeastInfo = memoize(
         const holy_Ascension = calculateEasterDate(y);
         holy_Ascension.setDate(pascha.getDate() + 39);
 
-        const mondayAfterFomina = calculateEasterDate(y);
-        mondayAfterFomina.setDate(pascha.getDate() + 8);
+        const fomina = calculateEasterDate(y);
+        fomina.setDate(pascha.getDate() + 7);
 
         if (holy_Ascension.getTime() == date.getTime()) {
             title = 'Вознесение';
@@ -494,11 +494,11 @@ export const getFeastInfo = memoize(
             icon = 'passion.svg';
         }
 
-        if (date >= pascha && date < mondayAfterFomina) {
+        if (date >= pascha && date < fomina) {
             colour = '#ff4e4e';
             icon = 'easter.svg';
         }
-        if (date >= mondayAfterFomina && date < holy_Ascension) {
+        if (date >= fomina && date < holy_Ascension) {
             colour = '#ff4e4e';
             icon = 'easter2.svg';
         }
