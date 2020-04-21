@@ -3,7 +3,7 @@
   "short_name": "ПБ",
   "description": "Православное богослужение и православный календарь на русском языке с чтениями дня, святыми дня, тропарями",
   "lang": "ru-RU",
-  "start_url": "https://c.psmb.ru/?utm_source=homescreen",
+  "start_url": "https://c.psmb.ru/?utm_source=homescreen&from_home",
   "display": "standalone",
   "theme_color": "#AE841A",
   "background_color": "#ffffff",

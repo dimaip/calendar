@@ -11,6 +11,7 @@ import * as serviceWorker from './serviceWorker';
 import Worker from './precache.worker.js';
 import * as Sentry from '@sentry/browser';
 import TagManager from 'react-gtm-module';
+import './redirectToHome';
 const isProd = process.env.NODE_ENV === 'production';
 
 if (isProd) {
