@@ -403,6 +403,7 @@ export const getFeastInfo = memoize(
         const pascha = calculateEasterDate(y);
 
         const isEasterOffset = makeIsEasterOffset(date);
+        const isEasterOffsetRange = makeIsEasterOffsetRange(date);
 
         {
             // В какие дни служится Литургия Преждеосвященных Даров?
@@ -473,6 +474,10 @@ export const getFeastInfo = memoize(
             feastType = '12';
             colour = '#73be73';
             icon = 'vhod.jpg';
+        }
+
+        if (isEasterOffsetRange(39, 48)) {
+            icon = 'ascension.svg';
         }
 
         const holy_Ascension = calculateEasterDate(y);
