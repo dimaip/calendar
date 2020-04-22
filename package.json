@@ -1,11 +1,12 @@
 {
   "name": "c.psmb.ru",
-  "version": "2.0.31",
+  "version": "2.0.32",
   "description": "Orthodox calendar",
   "main": "index.js",
   "private": true,
   "scripts": {
     "start": "node server.js",
+    "serve": "cross-env NODE_PORT=80 NODE_ENV=production node server.js",
     "build": "cross-env PUBLIC_URL=https://c.psmb.ru API_HOST=https://api.c.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
     "build-local": "cross-env PUBLIC_URL=http://localhost NODE_ENV=production webpack --config webpack.prod.js"
   },
