@@ -12,7 +12,6 @@ import Worker from './precache.worker.js';
 import * as Sentry from '@sentry/browser';
 import TagManager from 'react-gtm-module';
 import './redirectToHome';
-import checkVersion from 'checkVersion';
 const isProd = process.env.NODE_ENV === 'production';
 
 if (isProd) {
@@ -21,8 +20,6 @@ if (isProd) {
     TagManager.initialize({
         gtmId: 'GTM-MSCF98P',
     });
-
-    checkVersion();
 }
 
 let preloadedState = {};
