@@ -15,5 +15,3 @@ yarn start
 ```
 
 or `yarn build` for production build.
-
-For Android app run `yarn build` and then `yarn cap open android` and then build from Android Studio.

@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 const fetchExternalDay = (key, { date }) => {
-    return fetch(`${process.env.PUBLIC_URL}/api/external-day/${date}`).then(response => {
+    return fetch(`https://psmb.ru/?calendarDate=${date}.html?json=1`).then(response => {
         if (!response.ok) {
             throw new Error(response.statusText);
         }
@@ -10,6 +10,6 @@ const fetchExternalDay = (key, { date }) => {
     });
 };
 
-const useExternalDay = date => useQuery(['ext-day', { date }], fetchExternalDay, {retry: false});
+const useExternalDay = date => useQuery(['ext-day', { date }], fetchExternalDay, { retry: false });
 
 export default useExternalDay;

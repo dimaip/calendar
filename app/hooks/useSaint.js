@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
 const fetchSaint = (key, { saintId }) =>
-    fetch(`${process.env.PUBLIC_URL}/api/saint/${saintId}`).then(response => {
+    fetch(`https://psmb.ru/sv/${saintId}.html?json=1`).then(response => {
         if (!response.ok) {
             throw new Error(response.statusText);
         }
@@ -9,6 +9,6 @@ const fetchSaint = (key, { saintId }) =>
         return response.json();
     });
 
-const useSaint = saintId => useQuery(['saint', { saintId }], fetchSaint, {retry: false});
+const useSaint = saintId => useQuery(['saint', { saintId }], fetchSaint, { retry: false });
 
 export default useSaint;

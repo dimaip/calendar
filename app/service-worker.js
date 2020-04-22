@@ -20,8 +20,8 @@ precacheAndRoute([
 precacheAndRoute(self.__WB_MANIFEST);
 
 // Cache (pre-caching happens in precache.worker.js) api and static requests
-registerRoute(new RegExp('/clear-cache'), new NetworkOnly());
-registerRoute(new RegExp('/version'), new NetworkFirst());
-registerRoute(new RegExp('/api/'), new StaleWhileRevalidate());
+registerRoute(new RegExp('https://api\\.c\\.psmb\\.ru/clear-cache'), new NetworkOnly());
+registerRoute(new RegExp('/built/version'), new NetworkFirst());
+registerRoute(new RegExp('https://api\\.c\\.psmb\\.ru/'), new StaleWhileRevalidate());
 registerRoute(new RegExp('/assets/'), new CacheFirst());
 registerRoute(new RegExp('.*'), new CacheFirst());

@@ -10,20 +10,11 @@ import ThisDay from 'containers/ThisDay/ThisDay';
 import ScrollToTop from 'components/ScrollToTop/ScrollToTop';
 import Service from 'containers/Service/Service';
 import { css } from 'emotion';
-import getVersion from './getVersion';
+import checkVersion from './checkVersion';
 
 export default () => {
     const history = useHistory();
-    history.listen(async () => {
-        const version = await getVersion();
-
-        // VERSION is a global constant injected by webpack
-        // @ts-ignore
-        if (version && version !== VERSION) {
-            console.log('New version, reloading');
-            location.reload();
-        }
-    });
+    history.listen(checkVersion);
     return (
         <div
             className={css`

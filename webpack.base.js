@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CreateFileWebpack = require('create-file-webpack');
 
 module.exports = {
     name: 'client',
@@ -33,12 +33,21 @@ module.exports = {
         new webpack.DefinePlugin({
             VERSION: JSON.stringify(process.env.npm_package_version),
         }),
-        new webpack.EnvironmentPlugin({ NODE_ENV: 'development', PUBLIC_URL: 'http://localhost:3000' }),
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: 'development',
+            PUBLIC_URL: 'http://localhost:3000',
+            API_HOST: 'http://localhost:9999',
+        }),
         new MiniCssExtractPlugin({
             filename: '[name].bundle.css',
             chunkFilename: '[name].bundle.css',
         }),
         new webpack.NoEmitOnErrorsPlugin(),
+        new CreateFileWebpack({
+            path: './www/built',
+            fileName: 'version',
+            content: `"${process.env.npm_package_version}"`,
+        }),
     ],
     module: {
         rules: [
