@@ -24,6 +24,7 @@ import Otpust from './Otpust';
 import Antifon1 from './Antifon1';
 import Antifon2 from './Antifon2';
 import Antifon3 from './Antifon3';
+import Katekhumen from './Katekhumen';
 
 const Readings = ({ readings }) => (
     <>
@@ -159,6 +160,7 @@ const useLiturgy = (lang, serviceType) => {
     const antifon1 = <Antifon1 lang={lang} date={date} />;
     const antifon2 = <Antifon2 lang={lang} date={date} />;
     const antifon3 = <Antifon3 lang={lang} date={date} />;
+    const katekhumen = <Katekhumen lang={lang} date={date} />;
 
     return {
         hymns,
@@ -176,6 +178,7 @@ const useLiturgy = (lang, serviceType) => {
         antifon1,
         antifon2,
         antifon3,
+        katekhumen,
     };
 };
 export default useLiturgy;
