@@ -4,21 +4,13 @@ import Tooltip from 'components/Tooltip/Tooltip';
 import './Shared.css';
 
 import useLiturgy from './useLiturgy';
-import { makeIsEasterOffsetRange, makeIsEasterOffset } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import { Link } from 'react-router-dom';
 
 const Zlatoust = ({ lang, date }) => {
-    const {
-        katekhumen,
-        otpust,
-        prichasten,
-        saints,
-        zadastoinik,
-    } = useLiturgy(lang, 'Zlatoust');
+    const { katekhumen, otpust, prichasten, saints, zadastoinik } = useLiturgy(lang, 'Zlatoust');
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
-    const isEasterOffset = makeIsEasterOffset(date);
-    const isEaster = isEasterOffset(0);
     const isBrightWeek = isEasterOffsetRange(0, 6);
     return (
         <div
@@ -30,16 +22,6 @@ const Zlatoust = ({ lang, date }) => {
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Божественная литургия Иоанна Златоуста</span>
             </p>
             <div id="_idContainer003" className="_idGenObjectStyleOverride-1">
-                <p id="katekhumen" className="_-ОСНОВНОЙ_Имя-Службы ParaOverride-1">
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">
-                        I. <br />
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        <a id="_idTextAnchor001" />
-                        Литургия оглашаемых
-                    </span>
-                </p>
-    
                 {katekhumen}
 
                 <p id="vernie" className="_-ОСНОВНОЙ_Имя-Службы ParaOverride-15">

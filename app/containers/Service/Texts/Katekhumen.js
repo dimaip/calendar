@@ -103,6 +103,15 @@ const Katekhumen = ({ lang, date, day }) => {
     const isBrightWeek = isEasterOffsetRange(0, 6);
     return (
         <>
+            <p id="katekhumen" className="_-ОСНОВНОЙ_Имя-Службы ParaOverride-1">
+                <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">
+                    I. <br />
+                </span>
+                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
+                    <a id="_idTextAnchor001" />
+                    Литургия оглашаемых
+                </span>
+            </p>
             {!isBrightWeek && (
                 <>
                     <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-2">
