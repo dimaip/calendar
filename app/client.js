@@ -1,5 +1,6 @@
 import 'core-js';
 import 'unfetch/polyfill';
+import 'element-closest-polyfill';
 import 'regenerator-runtime/runtime';
 import React from 'react';
 import ReactDOM from 'react-dom';
