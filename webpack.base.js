@@ -48,6 +48,11 @@ module.exports = {
             fileName: 'version',
             content: `"${process.env.npm_package_version}"`,
         }),
+        new CreateFileWebpack({
+            path: './www',
+            fileName: 'version',
+            content: `${process.env.npm_package_version}`,
+        }),
     ],
     module: {
         rules: [
