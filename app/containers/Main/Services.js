@@ -31,6 +31,7 @@ const Services = ({ date, readings }) => {
         { title: 'Пасхальные часы', id: 'easterHours', enabled: isEasterOffsetRange(0, 6) },
         { title: 'Благодарственные молитвы', id: 'blagodarstvennie', enabled: true },
         { title: 'Покаянный канон', id: 'pokajanni', enabled: true },
+        { title: 'Чин приготовления', id: 'chinPrigotovlenija', enabled: true },
     ];
 
     return (

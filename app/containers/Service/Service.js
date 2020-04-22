@@ -22,6 +22,7 @@ const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
 const Vasiliy = React.lazy(() => import('./Texts/Vasiliy'));
 const Lpod = React.lazy(() => import('./Texts/Lpod'));
 const Blagodarstvennie = React.lazy(() => import('./Texts/Blagodarstvennie'));
+const ChinPrigotovlenija = React.lazy(() => import('./Texts/ChinPrigotovlenija'));
 const Pokajanni = React.lazy(() => import('./Texts/Pokajanni'));
 
 const servicesFeatures = {
@@ -46,6 +47,11 @@ const servicesFeatures = {
         skipRedirect: true,
     },
     pokajanni: {
+        calendar: false,
+        lang: false,
+        skipRedirect: true,
+    },
+    chinPrigotovlenija: {
         calendar: false,
         lang: false,
         skipRedirect: true,
@@ -240,6 +246,7 @@ const Service = () => {
                                     {serviceId === 'lpod' && <Lpod lang={lang} />}
                                     {serviceId === 'easterHours' && <EasterHours />}
                                     {serviceId === 'blagodarstvennie' && <Blagodarstvennie />}
+                                    {serviceId === 'chinPrigotovlenija' && <ChinPrigotovlenija />}
                                     {serviceId === 'pokajanni' && <Pokajanni />}
                                 </Suspense>
                             </div>

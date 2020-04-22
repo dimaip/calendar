@@ -1,6 +1,5 @@
 import React from 'react';
 import './Shared.css';
-import './Blagodarstvennie.css';
 
 const Blagodarstvennie = ({}) => {
     return (
