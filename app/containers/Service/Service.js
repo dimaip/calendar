@@ -17,7 +17,6 @@ import Calendar from '../Main/Calendar';
 import Button from 'components/Button/Button';
 import Cross from 'components/svgs/Cross';
 import { getFeastInfo } from 'domain/getDayInfo';
-import EasterHours from './Texts/EasterHours';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLanguage } from 'redux/actions/language';
 const reloadOnFailedImport = e => {
@@ -30,6 +29,7 @@ const Lpod = React.lazy(() => import('./Texts/Lpod').catch(reloadOnFailedImport)
 const Blagodarstvennie = React.lazy(() => import('./Texts/Blagodarstvennie').catch(reloadOnFailedImport));
 const ChinPrigotovlenija = React.lazy(() => import('./Texts/ChinPrigotovlenija').catch(reloadOnFailedImport));
 const Pokajanni = React.lazy(() => import('./Texts/Pokajanni').catch(reloadOnFailedImport));
+const EasterHours = React.lazy(() => import('./Texts/EasterHours').catch(reloadOnFailedImport));
 
 const servicesFeatures = {
     zlatoust: {
