@@ -4,12 +4,13 @@ import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
 import Loader from 'components/Loader/Loader';
-import getTheme from 'styles/theme';
+import getTheme, { rteStyles } from 'styles/theme';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import useExternalDay from 'hooks/useExternalDay';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import RteText from 'components/RteText/RteText';
 
 const ThisDay = () => {
     const { thisDayId, date } = useParams();
@@ -100,21 +101,7 @@ const ThisDay = () => {
                         </div>
                     )}
                     <Zoom>
-                        <div
-                            dangerouslySetInnerHTML={{ __html: thisDay.bodytext }}
-                            className={css`
-                                line-height: 1.5;
-                                color: ${theme.colours.darkGray};
-
-                                & p {
-                                    margin-bottom: 12px;
-                                }
-
-                                & a {
-                                    color: ${theme.colours.primary};
-                                }
-                            `}
-                        />
+                        <RteText html={thisDay.bodytext} />
                     </Zoom>
                 </div>
             </div>

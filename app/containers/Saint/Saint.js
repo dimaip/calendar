@@ -4,12 +4,13 @@ import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
 import Loader from 'components/Loader/Loader';
-import getTheme from 'styles/theme';
+import getTheme, { rteStyles } from 'styles/theme';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import useSaint from '../../hooks/useSaint';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import RteText from 'components/RteText/RteText';
 
 const Saint = () => {
     const { saintId, date } = useParams();
@@ -98,21 +99,7 @@ const Saint = () => {
                         </div>
                     )}
                     <Zoom>
-                        <div
-                            dangerouslySetInnerHTML={{ __html: saint.bodytext }}
-                            className={css`
-                                line-height: 1.5;
-                                color: ${theme.colours.darkGray};
-
-                                & p {
-                                    margin-bottom: 12px;
-                                }
-
-                                & a {
-                                    color: ${theme.colours.primary};
-                                }
-                            `}
-                        />
+                        <RteText html={saint.bodytext} />
                     </Zoom>
                 </div>
             </div>

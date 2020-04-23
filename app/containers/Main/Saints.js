@@ -1,10 +1,9 @@
 import React, { useRef, useEffect } from 'react';
-import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
 import { useHistory } from 'react-router-dom';
+import RteText from 'components/RteText/RteText';
 
 const Saints = ({ saints, date }) => {
-    const theme = useTheme();
     const ref = useRef(null);
     const history = useHistory();
     useEffect(() => {
@@ -21,21 +20,12 @@ const Saints = ({ saints, date }) => {
         }
     }, []);
     return (
-        <div
-            dangerouslySetInnerHTML={{ __html: saints }}
+        <RteText
+            html={saints}
             ref={ref}
             className={css`
-                font-size: 18px;
-                line-height: 1.5;
-                color: ${theme.colours.darkGray};
                 margin-left: 22px;
                 margin-bottom: 24px;
-
-                & a {
-                    color: ${theme.colours.primary};
-                    cursor: pointer;
-                }
-
                 & img {
                     margin-right: 8px;
                     margin-left: -22px;

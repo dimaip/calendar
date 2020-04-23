@@ -8,6 +8,8 @@ const getTheme = primary => ({
         bgGray: '#f2f2f6',
         bgGrayDark: '#EFEFF4',
         lineGray: '#CECED2',
+        red: '#e32636',
     },
 });
+
 export default getTheme;

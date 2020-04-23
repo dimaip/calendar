@@ -4,12 +4,13 @@ import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
 import Loader from 'components/Loader/Loader';
-import getTheme from 'styles/theme';
+import getTheme, { rteStyles } from 'styles/theme';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import useExternalDay from 'hooks/useExternalDay';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import RteText from 'components/RteText/RteText';
 
 const Sermon = () => {
     const { sermonId, date } = useParams();
@@ -102,21 +103,7 @@ const Sermon = () => {
                         {sermon.teaser}
                     </p>
                     <Zoom>
-                        <div
-                            dangerouslySetInnerHTML={{ __html: sermon.bodytext }}
-                            className={css`
-                                line-height: 1.5;
-                                color: ${theme.colours.darkGray};
-
-                                & p {
-                                    margin-bottom: 12px;
-                                }
-
-                                & a {
-                                    color: ${theme.colours.primary};
-                                }
-                            `}
-                        />
+                        <RteText html={sermon.bodytext} />
                     </Zoom>
                 </div>
             </div>
