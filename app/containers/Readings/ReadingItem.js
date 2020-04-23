@@ -72,11 +72,11 @@ const ReadingItem = ({ readingVerse, type }) => {
                                             >
                                                 {verse.verse}
                                             </span>{' '}
-                                            {verse.text.split('\n').map(text => (
-                                                <>
+                                            {verse.text.split('\n').map((text, index) => (
+                                                <span key={index}>
                                                     {text}
                                                     <br />
-                                                </>
+                                                </span>
                                             ))}
                                         </div>
                                     )}

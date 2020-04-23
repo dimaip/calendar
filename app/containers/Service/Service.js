@@ -18,6 +18,8 @@ import Button from 'components/Button/Button';
 import Cross from 'components/svgs/Cross';
 import { getFeastInfo } from 'domain/getDayInfo';
 import EasterHours from './Texts/EasterHours';
+import { useSelector, useDispatch } from 'react-redux';
+import { setLanguage } from 'redux/actions/language';
 const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
 const Vasiliy = React.lazy(() => import('./Texts/Vasiliy'));
 const Lpod = React.lazy(() => import('./Texts/Lpod'));
@@ -69,7 +71,10 @@ const Service = () => {
     const { data: day } = useDay(date);
     const theme = getTheme(day?.colour);
 
-    const [lang, setLang] = useState('default');
+    const lang = useSelector(state => state.settings.language);
+    const dispatch = useDispatch();
+    const setLang = language => dispatch(setLanguage(language));
+
     const [calendarShown, setCalendarShown] = useState(false);
 
     const history = useHistory();
