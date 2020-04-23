@@ -11,8 +11,8 @@ module.exports = {
     context: path.resolve(__dirname, './app'),
 
     output: {
-        filename: '[name].bundle.js',
-        chunkFilename: '[name].bundle.js',
+        filename: '[name].[contenthash].js',
+        chunkFilename: '[name].[contenthash].js',
         path: path.resolve(__dirname, './www/built'),
         publicPath: '/built/',
     },
@@ -23,6 +23,16 @@ module.exports = {
         namedModules: true,
         namedChunks: true,
         usedExports: true,
+        runtimeChunk: 'single',
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all',
+                },
+            },
+        },
     },
 
     devServer: {
@@ -41,8 +51,8 @@ module.exports = {
             API_HOST: 'http://localhost:9999',
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].bundle.css',
-            chunkFilename: '[name].bundle.css',
+            filename: '[name].[contenthash].css',
+            chunkFilename: '[name].[contenthash].css',
         }),
         new webpack.NoEmitOnErrorsPlugin(),
         new CreateFileWebpack({
