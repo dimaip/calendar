@@ -16,9 +16,13 @@ googleAnalytics.initialize();
 const routes = [{ revision: '1', url: '/' }, { revision: '1', url: '/index.html' }, ...self.__WB_MANIFEST];
 precacheAndRoute(routes);
 
+const apiHostRegexp = process.env.API_HOST;
+const publicUrlRegexp = process.env.PUBLIC_URL;
+
 // Cache (pre-caching happens in precache.worker.js) api and static requests
-registerRoute(new RegExp('https://api\\.c\\.psmb\\.ru/clear-cache'), new NetworkOnly());
+registerRoute(new RegExp(`^${apiHostRegexp}/clear-cache`), new NetworkOnly());
 registerRoute(new RegExp('/built/version'), new NetworkFirst());
-registerRoute(new RegExp('https://api\\.c\\.psmb\\.ru/.*'), new StaleWhileRevalidate());
+registerRoute(new RegExp(`^${apiHostRegexp}`), new StaleWhileRevalidate());
+registerRoute(new RegExp('^https://psmb.ru'), new StaleWhileRevalidate());
 registerRoute(new RegExp('/assets/'), new CacheFirst());
-registerRoute(new RegExp('.*'), new CacheFirst());
+registerRoute(new RegExp(`^${publicUrlRegexp}/.*`), new CacheFirst());
