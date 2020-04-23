@@ -13,8 +13,7 @@ self.addEventListener('activate', function(event) {
 googleAnalytics.initialize();
 
 // Pre-cache main JS assets
-const routes = [{ revision: '1', url: '/' }, { revision: '1', url: '/index.html' }, ...self.__WB_MANIFEST];
-precacheAndRoute(routes);
+precacheAndRoute(self.__WB_MANIFEST);
 
 const apiHostRegexp = process.env.API_HOST;
 const publicUrlRegexp = process.env.PUBLIC_URL;
