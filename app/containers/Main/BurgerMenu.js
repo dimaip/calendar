@@ -19,9 +19,9 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                     background: ${theme.colours.darkGray};
                     color: white;
                     width: 280px;
-                    padding: 80px 30px 30px 30px;
+                    padding: 30px 30px 30px 30px;
                     z-index: 2;
-                    font-size: 13px;
+                    font-size: 12px;
                     line-height: 1.5;
                 `}
             >
@@ -32,8 +32,8 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                         display: block;
                         padding: 10px 18px;
                         position: absolute;
-                        top: 12px;
-                        right: 4px;
+                        top: 0;
+                        right: 0;
                     `}
                 >
                     <CrossCircle />
