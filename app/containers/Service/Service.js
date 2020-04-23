@@ -20,12 +20,16 @@ import { getFeastInfo } from 'domain/getDayInfo';
 import EasterHours from './Texts/EasterHours';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLanguage } from 'redux/actions/language';
-const Zlatoust = React.lazy(() => import('./Texts/Zlatoust'));
-const Vasiliy = React.lazy(() => import('./Texts/Vasiliy'));
-const Lpod = React.lazy(() => import('./Texts/Lpod'));
-const Blagodarstvennie = React.lazy(() => import('./Texts/Blagodarstvennie'));
-const ChinPrigotovlenija = React.lazy(() => import('./Texts/ChinPrigotovlenija'));
-const Pokajanni = React.lazy(() => import('./Texts/Pokajanni'));
+const reloadOnFailedImport = e => {
+    console.warn('Imported asset not available, probably time to re-deploy', e);
+    location.reload();
+};
+const Zlatoust = React.lazy(() => import('./Texts/Zlatoust').catch(reloadOnFailedImport));
+const Vasiliy = React.lazy(() => import('./Texts/Vasiliy').catch(reloadOnFailedImport));
+const Lpod = React.lazy(() => import('./Texts/Lpod').catch(reloadOnFailedImport));
+const Blagodarstvennie = React.lazy(() => import('./Texts/Blagodarstvennie').catch(reloadOnFailedImport));
+const ChinPrigotovlenija = React.lazy(() => import('./Texts/ChinPrigotovlenija').catch(reloadOnFailedImport));
+const Pokajanni = React.lazy(() => import('./Texts/Pokajanni').catch(reloadOnFailedImport));
 
 const servicesFeatures = {
     zlatoust: {
