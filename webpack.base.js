@@ -3,6 +3,8 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CreateFileWebpack = require('create-file-webpack');
 
+const version = process.env.NOW_GITHUB_COMMIT_SHA.substr(0, 4);
+
 module.exports = {
     name: 'client',
 
@@ -31,7 +33,7 @@ module.exports = {
 
     plugins: [
         new webpack.DefinePlugin({
-            VERSION: JSON.stringify(process.env.npm_package_version),
+            VERSION: JSON.stringify(version),
         }),
         new webpack.EnvironmentPlugin({
             NODE_ENV: 'development',
@@ -46,12 +48,12 @@ module.exports = {
         new CreateFileWebpack({
             path: './www/built',
             fileName: 'version',
-            content: `"${process.env.npm_package_version}"`,
+            content: `"${version}"`,
         }),
         new CreateFileWebpack({
             path: './www',
             fileName: 'version',
-            content: `${process.env.npm_package_version}`,
+            content: `${version}`,
         }),
     ],
     module: {
