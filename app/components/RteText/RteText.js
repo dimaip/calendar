@@ -4,10 +4,13 @@ import { useTheme } from 'emotion-theming';
 
 const RteText = React.forwardRef(({ html, className = '' }, ref) => {
     const theme = useTheme();
+    const htmlWithStrongSlashes = html
+        .replace(/([\s])\/\/([\s])/g, '$1<strong>//</strong>$2')
+        .replace(/([\s])\/([\s])/g, '$1<strong>/</strong>$2');
     return (
         <div
             ref={ref}
-            dangerouslySetInnerHTML={{ __html: html }}
+            dangerouslySetInnerHTML={{ __html: htmlWithStrongSlashes }}
             className={
                 css`
                     font-size: 18px;
