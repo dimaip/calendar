@@ -14,4 +14,4 @@ yarn
 yarn start
 ```
 
-or `yarn build` for production build.
+Or `yarn build` for production build.
