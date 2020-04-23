@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CreateFileWebpack = require('create-file-webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const version = process.env.NOW_GITHUB_COMMIT_SHA ? process.env.NOW_GITHUB_COMMIT_SHA.substr(0, 4) : 'dev';
 
@@ -55,6 +57,11 @@ module.exports = {
             chunkFilename: '[name].[contenthash].css',
         }),
         new webpack.NoEmitOnErrorsPlugin(),
+        new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: 'index.html',
+            filename: '../index.html',
+        }),
         new CreateFileWebpack({
             path: './www/built',
             fileName: 'version',

@@ -10,3 +10,4 @@ convertBibleQuote/bible
 /www/built
 /www/service-worker.*
 /www/version
+/www/index.html
