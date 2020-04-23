@@ -3,7 +3,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CreateFileWebpack = require('create-file-webpack');
 
-const version = process.env.NOW_GITHUB_COMMIT_SHA.substr(0, 4);
+const version = process.env.NOW_GITHUB_COMMIT_SHA ? process.env.NOW_GITHUB_COMMIT_SHA.substr(0, 4) : 'dev';
 
 module.exports = {
     name: 'client',

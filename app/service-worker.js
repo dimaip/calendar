@@ -13,11 +13,8 @@ self.addEventListener('activate', function(event) {
 googleAnalytics.initialize();
 
 // Pre-cache main JS assets
-precacheAndRoute([
-    { revision: '1', url: '/' },
-    { revision: '1', url: '/index.html' },
-]);
-precacheAndRoute(self.__WB_MANIFEST);
+const routes = [{ revision: '1', url: '/' }, { revision: '1', url: '/index.html' }, ...self.__WB_MANIFEST];
+precacheAndRoute(routes);
 
 // Cache (pre-caching happens in precache.worker.js) api and static requests
 registerRoute(new RegExp('https://api\\.c\\.psmb\\.ru/clear-cache'), new NetworkOnly());
