@@ -2,10 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CreateFileWebpack = require('create-file-webpack');
-const GitRevisionPlugin = require('git-revision-webpack-plugin');
-
-const gitRevisionPlugin = new GitRevisionPlugin();
-const version = gitRevisionPlugin.version();
 
 module.exports = {
     name: 'client',
@@ -35,7 +31,7 @@ module.exports = {
 
     plugins: [
         new webpack.DefinePlugin({
-            VERSION: JSON.stringify(version),
+            VERSION: JSON.stringify(process.env.npm_package_version),
         }),
         new webpack.EnvironmentPlugin({
             NODE_ENV: 'development',
@@ -50,12 +46,12 @@ module.exports = {
         new CreateFileWebpack({
             path: './www/built',
             fileName: 'version',
-            content: `"${version}"`,
+            content: `"${process.env.npm_package_version}"`,
         }),
         new CreateFileWebpack({
             path: './www',
             fileName: 'version',
-            content: `${version}`,
+            content: `${process.env.npm_package_version}`,
         }),
     ],
     module: {
