@@ -3,6 +3,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CreateFileWebpack = require('create-file-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const version = process.env.NOW_GITHUB_COMMIT_SHA ? process.env.NOW_GITHUB_COMMIT_SHA.substr(0, 4) : 'dev';
@@ -13,29 +14,11 @@ module.exports = {
     context: path.resolve(__dirname, './app'),
 
     output: {
-        filename: '[name].[contenthash].js',
-        chunkFilename: '[name].[contenthash].js',
         path: path.resolve(__dirname, './www/built'),
         publicPath: '/built/',
     },
 
     target: 'web',
-
-    optimization: {
-        namedModules: true,
-        namedChunks: true,
-        usedExports: true,
-        runtimeChunk: 'single',
-        splitChunks: {
-            cacheGroups: {
-                vendor: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendor',
-                    chunks: 'all',
-                },
-            },
-        },
-    },
 
     devServer: {
         historyApiFallback: {
@@ -61,7 +44,9 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'index.html',
             filename: '../index.html',
+            alwaysWriteToDisk: true,
         }),
+        new HtmlWebpackHarddiskPlugin(),
         new CreateFileWebpack({
             path: './www/built',
             fileName: 'version',
