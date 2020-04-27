@@ -257,7 +257,6 @@ export const getLentInfo = memoize(
 
             fastName = 'Великий пост';
             colour = '#7b68ee';
-            icon = 'greatLent.jpg';
         }
         if (current_date.valueOf() == great_lent_begin.valueOf()) {
             fastingLevel = 1;
@@ -370,6 +369,10 @@ export const getLentInfo = memoize(
 
         if (current_date > svetlaia_begin && current_date <= svetlaia_end) {
             fastingLevel = 8;
+        }
+
+        if (fastingLevel && fastingLevel < 8 && !icon) {
+            icon = 'fast.svg';
         }
 
         if (fastingLevel) {
@@ -510,6 +513,10 @@ export const getFeastInfo = memoize(
 
         const pentecost = calculateEasterDate(y);
         pentecost.setDate(pascha.getDate() + 49);
+
+        if (isEasterOffsetRange(49, 55)) {
+            icon = 'pentecost.svg';
+        }
 
         if (pentecost.getTime() == date.getTime()) {
             title = 'Пятидесятница';
