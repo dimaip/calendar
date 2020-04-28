@@ -4,14 +4,17 @@ import Tooltip from 'components/Tooltip/Tooltip';
 import './Shared.css';
 
 import useLiturgy from './useLiturgy';
-import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, makeIsEasterOffset } from 'domain/getDayInfo';
 import { Link } from 'react-router-dom';
 
 const Zlatoust = ({ lang, date }) => {
     const { katekhumen, otpust, prichasten, saints, zadastoinik } = useLiturgy(lang, 'Zlatoust');
 
+    const isEasterOffset = makeIsEasterOffset(date);
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
-    const isBrightWeek = isEasterOffsetRange(0, 6);
+    const brightWeek = isEasterOffsetRange(0, 6);
+    const easterSeason = isEasterOffsetRange(0, 38);
+    const easterOtdanie = isEasterOffset(38);
     return (
         <div
             className={css`
@@ -2492,13 +2495,13 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
 
-                    {isBrightWeek && (
+                    {brightWeek && (
                         <span>
                             {' '}
                             Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в
                         </span>
                     )}
-                    {!isBrightWeek && (
+                    {!brightWeek && (
                         <>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
@@ -2614,13 +2617,13 @@ const Zlatoust = ({ lang, date }) => {
                 <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-15">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    {isBrightWeek && (
+                    {easterSeason && (
                         <span>
                             {' '}
                             Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в
                         </span>
                     )}
-                    {!isBrightWeek && (
+                    {!easterSeason && (
                         <>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
@@ -2690,13 +2693,13 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
                 </p>
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    {isBrightWeek && (
+                    {brightWeek && (
                         <span>
                             {' '}
                             Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в
                         </span>
                     )}
-                    {!isBrightWeek && (
+                    {!brightWeek && (
                         <>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Да наполнятся уста наши</span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span>
@@ -2916,13 +2919,13 @@ const Zlatoust = ({ lang, date }) => {
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-15">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    {isBrightWeek && (
+                    {brightWeek && (
                         <span>
                             {' '}
                             Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в
                         </span>
                     )}
-                    {!isBrightWeek && (
+                    {!brightWeek && (
                         <>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
@@ -3041,6 +3044,7 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Аминь.</span>
                 </p>
+                {/* @TODO: убрать сноску и вместо нее сделать алгоритм */}
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-15">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>

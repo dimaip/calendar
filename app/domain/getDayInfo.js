@@ -81,6 +81,12 @@ export const getLentInfo = memoize(
         const current_date = new Date(y, m, d);
         const current_day_of_week = current_date.getDay();
 
+        // console.log('Days since Easter', Math.floor((current_date.getTime() - pascha.getTime()) / (3600 * 24 * 1000)));
+        // console.log(
+        //     'Weeks since Easter',
+        //     Math.floor((current_date.getTime() - pascha.getTime()) / (3600 * 24 * 7 * 1000))
+        // );
+
         // Cristmass Lent
         const cristmass_lent_begin = new Date(y, 10, 28);
         const cristmass_lent_nicolos = new Date(y, 11, 19);
