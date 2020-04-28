@@ -79,12 +79,14 @@
             crossorigin="anonymous"
         ></script>
         <script>
-            Sentry.init({ dsn: 'https://e5296954a22242bc85d59b9a36559c44@o360342.ingest.sentry.io/3629452' });
+            if (window.location.host === 'c.psmb.ru') {
+                Sentry.init({ dsn: 'https://e5296954a22242bc85d59b9a36559c44@o360342.ingest.sentry.io/3629452' });
+            }
         </script>
         <script>
             window.addEventListener('DOMContentLoaded', function() {
                 if (!window.APP_LOADED) {
-                    console.warn('Outdated index.html, reloading1');
+                    console.warn('Outdated index.html, reloading');
                     window.location.reload();
                 }
             });
