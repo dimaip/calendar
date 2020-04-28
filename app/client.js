@@ -10,14 +10,15 @@ import App from 'containers/App';
 import * as serviceWorker from './serviceWorker';
 // @ts-ignore
 import Worker from './precache.worker.js';
-import * as Sentry from '@sentry/browser';
 import TagManager from 'react-gtm-module';
 import './redirectToHome';
 const isProd = process.env.NODE_ENV === 'production';
 
-if (isProd) {
-    Sentry.init({ dsn: 'https://e5296954a22242bc85d59b9a36559c44@sentry.io/3629452' });
+// Signals to script in index.html that the app assets have been loaded
+// @ts-ignore
+window.APP_LOADED = true;
 
+if (isProd) {
     TagManager.initialize({
         gtmId: 'GTM-MSCF98P',
     });

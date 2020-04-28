@@ -14,7 +14,6 @@
   "license": "ISC",
   "dependencies": {
     "@emotion/core": "^10.0.27",
-    "@sentry/browser": "^5.13.0",
     "autoprefixer": "^7.1.6",
     "cors": "^2.8.5",
     "create-file-webpack": "^1.0.2",

@@ -73,6 +73,22 @@
         />
 
         <link rel="manifest" href="/manifest.json" />
+        <script
+            src="https://browser.sentry-cdn.com/5.15.5/bundle.min.js"
+            integrity="sha384-wF7Jc4ZlWVxe/L8Ji3hOIBeTgo/HwFuaeEfjGmS3EXAG7Y+7Kjjr91gJpJtr+PAT"
+            crossorigin="anonymous"
+        ></script>
+        <script>
+            Sentry.init({ dsn: 'https://e5296954a22242bc85d59b9a36559c44@o360342.ingest.sentry.io/3629452' });
+        </script>
+        <script>
+            window.addEventListener('DOMContentLoaded', function() {
+                if (!window.APP_LOADED) {
+                    console.warn('Outdated index.html, reloading1');
+                    window.location.reload();
+                }
+            });
+        </script>
     </head>
     <body>
         <svg id="loader" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 375 667" style="width: 100%; height: 100%">
