@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 
 const Zlatoust = ({ lang, date }) => {
     const { katekhumen, otpust, prichasten, saints, zadastoinik } = useLiturgy(lang, 'Zlatoust');
+    const dateObj = new Date(date);
+    const dayOfWeek = dateObj.getDay();
 
     const isEasterOffset = makeIsEasterOffset(date);
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
@@ -2623,7 +2625,7 @@ const Zlatoust = ({ lang, date }) => {
                             Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в
                         </span>
                     )}
-                    {!easterSeason && (
+                    {!easterSeason && !(isEasterOffsetRange(39, 47) && dayOfWeek !== 0) && (
                         <>
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
                                 {' '}
@@ -2636,21 +2638,18 @@ const Zlatoust = ({ lang, date }) => {
                             </span>
                         </>
                     )}
-                    <Tooltip>
+                    {isEasterOffsetRange(39, 47) && dayOfWeek !== 0 && (
                         <>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> От Пасхи до отдания поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                , от Вознесения до отдания — тропарь Вознесению, в Троицкую родительскую субботу —{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">По глубочайшей Премудрости </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(см.: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">ПБ</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Кн.&nbsp;7. С.&nbsp;</span>145
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">).</span>
+                            {' '}
+                            Тропарь Вознесения Господня, глас 4
+                            <br />
+                            Вознёсся во славе Ты, Христе Боже наш, <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span> и
+                            радость подарил ученикам, <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span> обещав им Святого
+                            Духа, <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span> когда они через Твоё благословение
+                            уверились, <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">//</span> что Ты - Сын Божий, Искупитель
+                            мира.
                         </>
-                    </Tooltip>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
+                    )}
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Кадя св. чашу:</span>
