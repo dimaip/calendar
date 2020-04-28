@@ -166,7 +166,9 @@
         <script>
             window.addEventListener('DOMContentLoaded', function() {
                 if (!window.APP_LOADED) {
-                    console.warn('Outdated index.html, reloading');
+                    alert(
+                        'Почему-то мы не смогли автоматически обновить приложение. Если это сообщение будет появляться снова, напишите нам на pb@psmb.ru'
+                    );
                     window.location.reload();
                 }
             });
