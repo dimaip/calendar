@@ -1,3 +1,7 @@
+// Signals to script in index.html that the app assets have been loaded
+// @ts-ignore
+window.APP_LOADED = true;
+
 import 'core-js';
 import 'unfetch/polyfill';
 import 'element-closest-polyfill';
@@ -13,10 +17,6 @@ import Worker from './precache.worker.js';
 import TagManager from 'react-gtm-module';
 import './redirectToHome';
 const isProd = process.env.NODE_ENV === 'production';
-
-// Signals to script in index.html that the app assets have been loaded
-// @ts-ignore
-window.APP_LOADED = true;
 
 if (isProd) {
     TagManager.initialize({
