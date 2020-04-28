@@ -605,6 +605,7 @@ export const getFeastInfo = memoize(
         if (new Date(y, 6, 12).getTime() == date.getTime()) {
             title = 'День святых первоверховных апостолов Петра и Павла';
             feastType = 'great';
+            icon = 'peterAndPaul.svg';
         }
 
         if (new Date(y, 8, 11).getTime() == date.getTime()) {
