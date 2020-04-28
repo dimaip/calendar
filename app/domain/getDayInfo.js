@@ -608,6 +608,10 @@ export const getFeastInfo = memoize(
             icon = 'peterAndPaul.svg';
         }
 
+        if (new Date(y, 6, 13).getTime() == date.getTime()) {
+            icon = 'peterAndPaul.svg';
+        }
+
         if (new Date(y, 8, 11).getTime() == date.getTime()) {
             title = 'Усекновение главы Иоанна Предтечи';
             feastType = 'great';
