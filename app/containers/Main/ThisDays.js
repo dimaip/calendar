@@ -61,9 +61,6 @@ const ThisDays = ({ thisDays, date }) => {
                                             flex-grow: 1;
                                             margin-bottom: 6px;
                                             font-size: 18px;
-                                            @media (min-width: 360px) {
-                                                font-size: 20px;
-                                            }
                                         `}
                                     >
                                         {thisDay.title}
