@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <title>Ремонт приложения</title>
+    </head>
+    <body>
+        <script>
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for (let registration of registrations) {
+                    registration.unregister();
+                }
+            });
+            caches
+                .keys()
+                .then(function(cacheNames) {
+                    return Promise.all(
+                        cacheNames
+                            .filter(function(cacheName) {
+                                return true;
+                            })
+                            .map(function(cacheName) {
+                                return caches.delete(cacheName);
+                            })
+                    );
+                })
+                .then(() => {
+                    alert('Кажется у нас получилось все исправить, возвращаем вас в приложение');
+                    window.location.replace('/');
+                });
+        </script>
+    </body>
+</html>
