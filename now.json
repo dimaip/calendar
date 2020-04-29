@@ -1,0 +1,11 @@
+{
+  "routes": [
+    {
+      "src": "/index.html(.*)",
+      "headers": {
+        "Clear-Site-Data": "\"cache\", \"storage\""
+      },
+      "dest": "/index.html$1"
+    }
+  ]
+}

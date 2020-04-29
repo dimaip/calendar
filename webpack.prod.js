@@ -2,6 +2,15 @@ const merge = require('webpack-merge');
 const common = require('./webpack.base.js');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
+const hash = Array(1)
+    .fill(null)
+    .map(() =>
+        Math.random()
+            .toString(36)
+            .substr(2)
+    )
+    .join('');
+
 module.exports = merge(common, {
     entry: ['client.js'],
     mode: 'production',
@@ -14,6 +23,20 @@ module.exports = merge(common, {
         new InjectManifest({
             swSrc: 'service-worker.js',
             swDest: '../service-worker.js',
+            additionalManifestEntries: [
+                {
+                    url: '/',
+                    revision: hash,
+                },
+                {
+                    url: '/?utm_source=homescreen',
+                    revision: hash,
+                },
+                {
+                    url: '/?utm_source=homescreen&from_home',
+                    revision: hash,
+                },
+            ],
         }),
     ],
     optimization: {
