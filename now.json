@@ -8,7 +8,7 @@
       "dest": "/index.html$1"
     },
     {
-      "src": "/\\?(.+)",
+      "src": "/?(.+)",
       "headers": {
         "Clear-Site-Data": "\"cache\", \"storage\""
       },
