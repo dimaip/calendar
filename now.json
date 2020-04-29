@@ -12,7 +12,7 @@
       "headers": {
         "Clear-Site-Data": "\"cache\", \"storage\""
       },
-      "dest": "^/?$1"
+      "dest": "/?$1"
     },
     {
       "src": "^/$",
