@@ -172,6 +172,8 @@
                     if (response) {
                         Sentry.captureMessage('Reloading app from index.html');
                         window.location.reload();
+                    } else {
+                        Sentry.captureMessage('User refused to reload app from index.html');
                     }
                 }
             });
