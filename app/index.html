@@ -166,10 +166,13 @@
         <script>
             window.addEventListener('DOMContentLoaded', function() {
                 if (!window.APP_LOADED) {
-                    // alert(
-                    //     'Почему-то мы не смогли автоматически обновить приложение. Если это сообщение будет появляться снова, напишите нам на pb@psmb.ru'
-                    // );
-                    // window.location.reload();
+                    const response = confirm(
+                        'Почему-то мы не смогли автоматически обновить приложение. Нажмите OK чтобы попробовать еще раз. Если это сообщение будет появляться снова, напишите нам на pb@psmb.ru'
+                    );
+                    if (response) {
+                        Sentry.captureMessage('Reloading app from index.html');
+                        window.location.reload();
+                    }
                 }
             });
         </script>

@@ -21,6 +21,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setLanguage } from 'redux/actions/language';
 const reloadOnFailedImport = e => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
+    Sentry.captureException(e);
     location.reload();
 };
 const Zlatoust = React.lazy(() => import('./Texts/Zlatoust').catch(reloadOnFailedImport));
