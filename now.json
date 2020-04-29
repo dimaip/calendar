@@ -1,11 +1,31 @@
 {
-  "routes": [
+  "headers": [
     {
-      "src": "/index.html(.*)",
-      "headers": {
-        "Clear-Site-Data": "\"cache\", \"storage\""
-      },
-      "dest": "/index.html$1"
+      "source": "/",
+      "headers": [
+        {
+          "key": "Clear-Site-Data",
+          "value": "\"cache\", \"storage\""
+        }
+      ]
+    },
+    {
+      "source": "/?utm_source=homescreen",
+      "headers": [
+        {
+          "key": "Clear-Site-Data",
+          "value": "\"cache\", \"storage\""
+        }
+      ]
+    },
+    {
+      "source": "/?utm_source=homescreen&from_home",
+      "headers": [
+        {
+          "key": "Clear-Site-Data",
+          "value": "\"cache\", \"storage\""
+        }
+      ]
     }
   ]
 }
