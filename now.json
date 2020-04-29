@@ -1,21 +1,21 @@
 {
   "routes": [
     {
-      "src": "/index.html(.*)",
+      "src": "^/index.html(.*)",
       "headers": {
         "Clear-Site-Data": "\"cache\", \"storage\""
       },
       "dest": "/index.html$1"
     },
     {
-      "src": "/?(.+)",
+      "src": "^/?(.+)",
       "headers": {
         "Clear-Site-Data": "\"cache\", \"storage\""
       },
-      "dest": "/?$1"
+      "dest": "^/?$1"
     },
     {
-      "src": "/",
+      "src": "^/$",
       "headers": {
         "Clear-Site-Data": "\"cache\", \"storage\""
       },
