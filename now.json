@@ -10,6 +10,15 @@
       ]
     },
     {
+      "source": "/index.html",
+      "headers": [
+        {
+          "key": "Clear-Site-Data",
+          "value": "\"cache\", \"storage\""
+        }
+      ]
+    },
+    {
       "source": "/?utm_source=homescreen",
       "headers": [
         {
