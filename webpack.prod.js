@@ -36,6 +36,10 @@ module.exports = merge(common, {
                     url: '/?utm_source=homescreen&from_home',
                     revision: hash,
                 },
+                {
+                    url: '/manifest.json',
+                    revision: '1',
+                },
             ],
         }),
     ],
