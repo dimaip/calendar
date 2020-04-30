@@ -1,6 +1,6 @@
 import React from 'react';
-import liturgyTOC from './Texts/liturgyTOC';
-import lpodTOC from './Texts/lpodTOC';
+import liturgyTOC from './Texts/Liturgies/Vernie/liturgyTOC';
+import lpodTOC from './Texts/Lpod/lpodTOC';
 import SelectBox from '../../components/SelectBox/SelectBox';
 import { css } from 'emotion';
 

@@ -1,7 +1,7 @@
 import React from 'react';
-import './Shared.css';
+import '../Shared.css';
 import Tooltip from 'components/Tooltip/Tooltip';
-import useLiturgy from './useLiturgy';
+import useLiturgy from './Vernie/useLiturgy';
 
 const Vasiliy = ({ lang }) => {
     const { katekhumen, saints, prichasten, otpust } = useLiturgy(lang, 'vasiliy');

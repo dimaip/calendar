@@ -1,5 +1,5 @@
 import React from 'react';
-import './Shared.css';
+import '../Shared.css';
 import './Lpod.css';
 import { useParams } from 'react-router-dom';
 import forEach from 'lodash.foreach';
@@ -7,7 +7,7 @@ import useDay from 'hooks/useDay';
 import ReadingItem from 'containers/Readings/ReadingItem';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
-import useScrollToReadings from './useScrollToReadings';
+import useScrollToReadings from '../useScrollToReadings';
 
 const Readings = ({ readings }) => (
     <>

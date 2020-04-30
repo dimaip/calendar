@@ -7,8 +7,8 @@ import SectionHeading from 'containers/Main/SectionHeading';
 import Prichasten from './Prichasten';
 import Zadastoinik from './Zadastoinik';
 import Otpust from './Otpust';
-import Katekhumen from './Katekhumen';
-import VariableSection from './VariableSection';
+import Katekhumen from '../Katekhumen/Katekhumen';
+import VariableSection from '../../VariableSection';
 
 const useLiturgy = (lang, serviceType) => {
     const { date } = useParams();

@@ -25,13 +25,17 @@ const reloadOnFailedImport = e => {
     Sentry.captureException(e);
     location.reload();
 };
-const Zlatoust = React.lazy(() => import('./Texts/Zlatoust').catch(reloadOnFailedImport));
-const Vasiliy = React.lazy(() => import('./Texts/Vasiliy').catch(reloadOnFailedImport));
-const Lpod = React.lazy(() => import('./Texts/Lpod').catch(reloadOnFailedImport));
-const Blagodarstvennie = React.lazy(() => import('./Texts/Blagodarstvennie').catch(reloadOnFailedImport));
-const ChinPrigotovlenija = React.lazy(() => import('./Texts/ChinPrigotovlenija').catch(reloadOnFailedImport));
-const Pokajanni = React.lazy(() => import('./Texts/Pokajanni').catch(reloadOnFailedImport));
-const EasterHours = React.lazy(() => import('./Texts/EasterHours').catch(reloadOnFailedImport));
+const Zlatoust = React.lazy(() => import('./Texts/Liturgies/Zlatoust').catch(reloadOnFailedImport));
+const Vasiliy = React.lazy(() => import('./Texts/Liturgies/Vasiliy').catch(reloadOnFailedImport));
+const Lpod = React.lazy(() => import('./Texts/Lpod/Lpod').catch(reloadOnFailedImport));
+const Blagodarstvennie = React.lazy(() =>
+    import('./Texts/Blagodarstvennie/Blagodarstvennie').catch(reloadOnFailedImport)
+);
+const ChinPrigotovlenija = React.lazy(() =>
+    import('./Texts/ChinPrigotovlenija/ChinPrigotovlenija').catch(reloadOnFailedImport)
+);
+const Pokajanni = React.lazy(() => import('./Texts/Pokajanni/Pokajanni').catch(reloadOnFailedImport));
+const EasterHours = React.lazy(() => import('./Texts/EasterHours/EasterHours').catch(reloadOnFailedImport));
 
 const servicesFeatures = {
     zlatoust: {

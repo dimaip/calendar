@@ -1,9 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
-import './Shared.css';
+import '../Shared.css';
 
-import useLiturgy from './useLiturgy';
+import useLiturgy from './Vernie/useLiturgy';
 import { makeIsEasterOffsetRange, makeIsEasterOffset } from 'domain/getDayInfo';
 import { Link } from 'react-router-dom';
 

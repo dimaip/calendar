@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
-import './Shared.css';
+import '../../Shared.css';
 import isGospel from 'domain/isGospel';
 import { makeIsEasterOffsetRange, makeIsEasterOffset } from 'domain/getDayInfo';
 import Antifon1 from './Antifon1';
@@ -9,14 +9,14 @@ import Antifon2 from './Antifon2';
 import Antifon3 from './Antifon3';
 import SolidSection from 'components/SolidSection/SolidSection';
 import Hymns from 'containers/Main/Hymns';
-import useScrollToReadings from './useScrollToReadings';
+import useScrollToReadings from '../../useScrollToReadings';
 import forEach from 'lodash.foreach';
 import useExternalDay from 'hooks/useExternalDay';
 import Sermons from 'containers/Main/Sermons';
 import ReadingItem from 'containers/Readings/ReadingItem';
 import Alilujas from './Aliluja';
 import Prokimens from './Prokimen';
-import VariableSection from './VariableSection';
+import VariableSection from '../../VariableSection';
 import Trisvatoe from './Trisvatoe';
 import VhodnoiStih from './VhodnoiStih';
 
