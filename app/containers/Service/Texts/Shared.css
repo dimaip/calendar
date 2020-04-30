@@ -495,8 +495,12 @@
     text-transform: none;
     widows: 1;
 }
+._-ПЕТИТ_Петит-отст1-5 ._-ОСНОВНОЙ_Основной-отст1-5 {
+    font-size: 15px !important;
+    margin-left: 0 !important;
+}
 ._-ПЕТИТ_Петит-отст1-5 {
-    font-size: 15px;
+    font-size: 15px !important;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;

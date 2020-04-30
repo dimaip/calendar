@@ -9,6 +9,8 @@ const mapping = {
         return <p className="_-ОСНОВНОЙ_Основной-отст1-5">{children}</p>;
     },
     strong: ({ children }) => <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">{children}</span>,
+    blockquote: ({ children }) => <p className="_-ПЕТИТ_Петит-отст1-5">{children}</p>,
+    inlineCode: ({ children }) => <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">{children}</span>,
 };
 
 const MDXProvider = ({ children }) => <OriginalMDXProvider components={mapping}>{children}</OriginalMDXProvider>;
