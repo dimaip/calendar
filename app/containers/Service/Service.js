@@ -2,6 +2,7 @@ import React, { Suspense, useState } from 'react';
 import { useParams, Link, useHistory, Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
+import MDXProvider from './MDXProvider';
 import { css } from 'emotion';
 import getTheme from 'styles/theme';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
@@ -250,15 +251,18 @@ const Service = () => {
                                         напишите нам
                                     </a>
                                 </div>
-                                <Suspense fallback={Loader}>
-                                    {serviceId === 'zlatoust' && <Zlatoust date={date} lang={lang} />}
-                                    {serviceId === 'vasiliy' && <Vasiliy lang={lang} />}
-                                    {serviceId === 'lpod' && <Lpod lang={lang} />}
-                                    {serviceId === 'easterHours' && <EasterHours />}
-                                    {serviceId === 'blagodarstvennie' && <Blagodarstvennie />}
-                                    {serviceId === 'chinPrigotovlenija' && <ChinPrigotovlenija />}
-                                    {serviceId === 'pokajanni' && <Pokajanni />}
-                                </Suspense>
+
+                                <MDXProvider>
+                                    <Suspense fallback={Loader}>
+                                        {serviceId === 'zlatoust' && <Zlatoust date={date} lang={lang} />}
+                                        {serviceId === 'vasiliy' && <Vasiliy lang={lang} />}
+                                        {serviceId === 'lpod' && <Lpod lang={lang} />}
+                                        {serviceId === 'easterHours' && <EasterHours />}
+                                        {serviceId === 'blagodarstvennie' && <Blagodarstvennie />}
+                                        {serviceId === 'chinPrigotovlenija' && <ChinPrigotovlenija />}
+                                        {serviceId === 'pokajanni' && <Pokajanni />}
+                                    </Suspense>
+                                </MDXProvider>
                             </div>
                         </>
                     </Zoom>

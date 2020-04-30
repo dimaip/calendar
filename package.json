@@ -14,6 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@emotion/core": "^10.0.27",
+    "@mdx-js/react": "^1.6.0",
     "autoprefixer": "^7.1.6",
     "cors": "^2.8.5",
     "create-file-webpack": "^1.0.2",
@@ -61,6 +62,7 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
+    "@mdx-js/loader": "^1.6.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-optional-chaining": "^7.0.0-beta.3",
     "clean-webpack-plugin": "^3.0.0",
@@ -70,6 +72,7 @@
     "html-webpack-harddisk-plugin": "^1.0.1",
     "isomorphic-style-loader": "^5.1.0",
     "mini-css-extract-plugin": "^0.9.0",
+    "pattern-replace-loader": "^1.0.4",
     "prettier": "^1.19.1",
     "react-hot-loader": "^4.12.19",
     "redux-devtools-extension": "^2.13.8",

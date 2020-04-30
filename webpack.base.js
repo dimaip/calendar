@@ -88,6 +88,23 @@ module.exports = {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
                 use: 'file-loader',
             },
+
+            {
+                test: /\.mdx?$/,
+                use: [
+                    'babel-loader',
+                    '@mdx-js/loader',
+                    {
+                        loader: 'pattern-replace-loader',
+                        options: {
+                            multiple: [
+                                { search: '(\\s)\\/\\/(\\s)', replace: '$1**//**$2', flags: 'gi' },
+                                { search: '(\\s)\\/(\\s)', replace: '$1**/**$2', flags: 'gi' },
+                            ],
+                        },
+                    },
+                ],
+            },
         ],
     },
     resolve: {
