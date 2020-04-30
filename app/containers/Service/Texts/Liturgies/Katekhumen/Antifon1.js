@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
-import Antifon1Easter from './Antifon1Easter.mdx';
+import Antifon1Easter from './Antifon1Easter/Antifon1Easter';
 
 const Antifon1Sunday = ({ lang }) => (
     <>
@@ -385,7 +385,7 @@ const Antifon1Sunday = ({ lang }) => (
 const Antifon1 = ({ lang, date: dateString }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(dateString);
     if (isEasterOffsetRange(0, 6)) {
-        return <Antifon1Easter />;
+        return <Antifon1Easter lang={lang} />;
     }
 
     return <Antifon1Sunday lang={lang} />;
