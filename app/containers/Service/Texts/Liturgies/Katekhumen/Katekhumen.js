@@ -5,7 +5,7 @@ import '../../Shared.css';
 import isGospel from 'domain/isGospel';
 import { makeIsEasterOffsetRange, makeIsEasterOffset } from 'domain/getDayInfo';
 import Antifon1 from './Antifon1/Antifon1';
-import Antifon2 from './Antifon2';
+import Antifon2 from './Antifon2/Antifon2';
 import Antifon3 from './Antifon3';
 import SolidSection from 'components/SolidSection/SolidSection';
 import Hymns from 'containers/Main/Hymns';
