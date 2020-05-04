@@ -4,6 +4,7 @@ import Tooltip from 'components/Tooltip/Tooltip';
 import isGospel from 'domain/isGospel';
 import VelikajaEktenia from './VelikajaEktenia/VelikajaEktenia';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import MalajaEktenia from './MalajaEktenia/MalajaEktenia';
 import Antifon1 from './Antifon1/Antifon1';
 import Antifon2 from './Antifon2/Antifon2';
 import Antifon3 from './Antifon3/Antifon3';
@@ -61,6 +62,7 @@ const Katekhumen = ({ lang, date, day }) => {
     const externalDayQuery = useExternalDay(date);
     const { apostol, gospel } = getKatekhumenReadings(day);
 
+    const malajaEktenia = <MalajaEktenia lang={lang} />;
     const velikajaEktenia = <VelikajaEktenia lang={lang} />;
     const antifon1 = <Antifon1 lang={lang} date={date} />;
     const antifon2 = <Antifon2 lang={lang} date={date} />;
@@ -385,54 +387,8 @@ const Katekhumen = ({ lang, date, day }) => {
 
             {antifon1}
 
-            <p className="_-ОСНОВНОЙ_Имя-части-отст5">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                    <a id="_idTextAnchor002" />
-                    малая ектения
-                </span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Снова и снова в мире Господу помолимся!</span>
-            </p>
-            <p className="_-ПЕТИТ_Петит-отст1-5 ParaOverride-7">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Н</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Господи, помилуй </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(на каждое прошение)</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
-            </p>
-            <p className="_-ПЕТИТ_Петит-отст1-5 ParaOverride-7">
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн"> Д</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                    {' '}
-                    Поддержи, спаси, помилуй и сохрани нас, Боже, Тво­ею благодатью.
-                </span>
-            </p>
-            <p className="_-ПЕТИТ_Петит-отст1-5 ParaOverride-7">
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн"> Д</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                    {' '}
-                    Всесвяту́ю, непоро́чную, преблагослове́нную, слав­ную нашу Вла­ды­чицу Богородицу и Вечноде́ву Ма­рию
-                    со все­ми свя­тыми помяну́
-                </span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">в, са­ми`х се­бя, и друг друга, и всю нашу жизнь Христу </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(или:</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> чрез Христа</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">)</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Богу пре­да­ди`м </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(или: </span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">по­святи`м</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">)</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
-            </p>
-            <p className="_-ПЕТИТ_Петит-отст1-5 ParaOverride-7">
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн"> Н</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Тебе, Господи.</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">]</span>
-            </p>
+            {malajaEktenia}
+
             <p id="antifon2" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                     Молитва перед пением
