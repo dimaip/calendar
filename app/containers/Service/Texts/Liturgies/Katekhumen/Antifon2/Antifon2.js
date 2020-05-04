@@ -17,7 +17,7 @@ const Antifon2Sunday = ({ lang = 'default' }) => {
 const Antifon2 = ({ lang, date: dateString }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(dateString);
     if (isEasterOffsetRange(0, 6)) {
-        return <Antifon2Easter />;
+        return <Antifon2Easter lang={lang} />;
     }
 
     return <Antifon2Sunday lang={lang} />;
