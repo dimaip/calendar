@@ -8,6 +8,7 @@ import MalajaEktenia from './MalajaEktenia/MalajaEktenia';
 import Antifon1 from './Antifon1/Antifon1';
 import Antifon2 from './Antifon2/Antifon2';
 import Antifon3 from './Antifon3/Antifon3';
+import Priugotovl from './Priugotovl/Priugotovl';
 import SolidSection from 'components/SolidSection/SolidSection';
 import Hymns from 'containers/Main/Hymns';
 import useScrollToReadings from '../../useScrollToReadings';
@@ -67,6 +68,7 @@ const Katekhumen = ({ lang, date, day }) => {
     const antifon1 = <Antifon1 lang={lang} date={date} />;
     const antifon2 = <Antifon2 lang={lang} date={date} />;
     const antifon3 = <Antifon3 lang={lang} date={date} />;
+    const priugotovl = <Priugotovl lang={lang} />;   
 
     const hymns = day?.prayers && day.prayers.length > 0 && (
         <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
@@ -120,29 +122,7 @@ const Katekhumen = ({ lang, date, day }) => {
             </p>
             {!easterSeason && (
                 <>
-                    <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-2">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">1</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Приуготовление</span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_КРАСН-отст5 ParaOverride-2">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Открыв завесу и кадя престол:</span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            В гробнице — телом <br /> и в аду — душой как Бог, <br />в раю — с раз­бой­ником <br /> и на
-                            престоле — со Отцом и Духом <br />
-                            Ты пребывал, Христе, <br /> всё напол­няя, необъя´тный.
-                        </span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Полное каждение с чтением Пс </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">50</span>
-                    </p>
+                    {priugotovl}
                     {lang === 'default' && (
                         <>
                             <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
