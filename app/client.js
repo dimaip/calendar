@@ -19,6 +19,12 @@ import './redirectToHome';
 const isProd = process.env.NODE_ENV === 'production';
 
 if (isProd) {
+    // @ts-ignore
+    Sentry.init({
+        dsn: 'https://e5296954a22242bc85d59b9a36559c44@o360342.ingest.sentry.io/3629452',
+        // @ts-ignore
+        release: 'c.psmb.ru@' + VERSION,
+    });
     TagManager.initialize({
         gtmId: 'GTM-MSCF98P',
     });

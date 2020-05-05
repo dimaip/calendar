@@ -159,14 +159,6 @@
             crossorigin="anonymous"
         ></script>
         <script>
-            if (window.location.host === 'c.psmb.ru') {
-                Sentry.init({
-                    dsn: 'https://e5296954a22242bc85d59b9a36559c44@o360342.ingest.sentry.io/3629452',
-                    release: 'c.psmb.ru@' + VERSION,
-                });
-            }
-        </script>
-        <script>
             window.addEventListener('DOMContentLoaded', function() {
                 if (!window.APP_LOADED) {
                     const response = confirm(
