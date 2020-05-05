@@ -15,6 +15,8 @@ import Cross from 'components/svgs/Cross';
 import { format, parseISO } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import Calendar from 'containers/Main/Calendar';
+import { getFeastInfo } from 'domain/getDayInfo';
+import Prayer from 'components/svgs/Prayer';
 
 const Readings = ({ brother = false }) => {
     const { service, date } = useParams();
@@ -45,6 +47,25 @@ const Readings = ({ brother = false }) => {
         setNewDate(dateString);
         setCalendarShown(false);
     };
+
+    const { vasiliy, lpod } = getFeastInfo(new Date(date));
+
+    let serviceTitle = service;
+    let to = null;
+
+    if (service === 'Литургия') {
+        to = {
+            pathname: `/date/${date}/service/Литургия`,
+            state: { from: 'readings', scrollToReadings: true },
+        };
+        serviceTitle += ` ${vasiliy ? 'Василия Великого' : 'Иоанна Златоуста'}`;
+    } else if (service === 'Вечерня' && lpod) {
+        to = {
+            pathname: `/date/${date}/service/Вечерня`,
+            state: { from: 'readings', scrollToReadings: true },
+        };
+        serviceTitle = 'Литургия преждеосвященных даров';
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -109,6 +130,18 @@ const Readings = ({ brother = false }) => {
                                     history.push(`/date/${date}/${brother ? 'bReadings' : 'readings'}/${value}`),
                             }}
                         />
+                        {to && (
+                            <Link
+                                to={to}
+                                title="На службу"
+                                className={css`
+                                    margin-left: 10px;
+                                    margin-top: 5px;
+                                `}
+                            >
+                                <Prayer colour={theme.colours.darkGray} />
+                            </Link>
+                        )}
                     </div>
 
                     <div

@@ -135,6 +135,13 @@ const Service = () => {
         setCalendarShown(false);
     };
 
+    const backLink =
+        history.location.state?.from === 'main'
+            ? `/date/${date}`
+            : history.location.state?.from === 'readings'
+            ? `/date/${date}/readings/${originalServiceId}`
+            : `/date/${date}/services`;
+
     return (
         <ThemeProvider theme={theme}>
             <div>
@@ -151,10 +158,7 @@ const Service = () => {
                     `}
                 >
                     <div>
-                        <Link
-                            to={history.location.state?.from === 'main' ? `/date/${date}` : `/date/${date}/services`}
-                            title="Назад"
-                        >
+                        <Link to={backLink} title="Назад">
                             <div
                                 className={css`
                                     padding: 18px;

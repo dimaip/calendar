@@ -160,7 +160,10 @@
         ></script>
         <script>
             if (window.location.host === 'c.psmb.ru') {
-                Sentry.init({ dsn: 'https://e5296954a22242bc85d59b9a36559c44@o360342.ingest.sentry.io/3629452' });
+                Sentry.init({
+                    dsn: 'https://e5296954a22242bc85d59b9a36559c44@o360342.ingest.sentry.io/3629452',
+                    release: 'c.psmb.ru@' + VERSION,
+                });
             }
         </script>
         <script>
@@ -171,7 +174,22 @@
                     );
                     if (response) {
                         Sentry.captureMessage('Reloading app from index.html');
-                        window.location.reload();
+                        caches
+                            .keys()
+                            .then(function(cacheNames) {
+                                return Promise.all(
+                                    cacheNames
+                                        .filter(function(cacheName) {
+                                            return true;
+                                        })
+                                        .map(function(cacheName) {
+                                            return caches.delete(cacheName);
+                                        })
+                                );
+                            })
+                            .then(() => {
+                                window.location.reload();
+                            });
                     } else {
                         Sentry.captureMessage('User refused to reload app from index.html');
                     }
