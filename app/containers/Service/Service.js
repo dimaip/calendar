@@ -60,7 +60,7 @@ const Service = () => {
     const services = makeServices(date, day?.readings);
     const service = services.find(service => service.id === originalServiceId);
 
-    if (service.skipRedirect) {
+    if (service?.skipRedirect) {
         serviceId = originalServiceId;
     }
 
@@ -146,7 +146,7 @@ const Service = () => {
                             align-items: center;
                         `}
                     >
-                        {service.calendar && (
+                        {service?.calendar && (
                             <Button
                                 title={calendarShown ? 'Спрятать календарь' : 'Показать календарь'}
                                 className={css`
@@ -167,7 +167,7 @@ const Service = () => {
                                 {calendarShown ? <Cross /> : null}
                             </Button>
                         )}
-                        {service.lang && <LanguageSwitcher lang={lang} setLang={setLang} />}
+                        {service?.lang && <LanguageSwitcher lang={lang} setLang={setLang} />}
                         <TOCSwitcher serviceId={serviceId} />
                     </div>
 
