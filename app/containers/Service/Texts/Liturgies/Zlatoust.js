@@ -1,10 +1,9 @@
 import React from 'react';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
-import '../Shared.css';
 
 import useLiturgy from './Vernie/useLiturgy';
-import { makeIsEasterOffsetRange, makeIsEasterOffset } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import { Link } from 'react-router-dom';
 
 const Zlatoust = ({ lang, date }) => {
@@ -12,11 +11,10 @@ const Zlatoust = ({ lang, date }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
 
-    const isEasterOffset = makeIsEasterOffset(date);
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const brightWeek = isEasterOffsetRange(0, 6);
     const easterSeason = isEasterOffsetRange(0, 38);
-    const easterOtdanie = isEasterOffset(38);
+    const easterOtdanie = isEasterOffsetRange(38);
     return (
         <div
             className={css`
@@ -3056,10 +3054,8 @@ const Zlatoust = ({ lang, date }) => {
                             </>
                         )}
                         {(brightWeek || easterOtdanie) && (
-                            <>
-                                Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в
-                            </>
-                        )}    
+                            <>Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в</>
+                        )}
                     </span>
                     <Tooltip>
                         <>

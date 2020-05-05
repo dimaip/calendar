@@ -1,7 +1,6 @@
 import React from 'react';
-import '../Shared.css';
 
-const Pokajanni = ({}) => {
+const Pokajanni = () => {
     return (
         <>
             <p className="_-ОСНОВНОЙ_Имя-Службы">

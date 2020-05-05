@@ -5,7 +5,7 @@ import SectionHeading from './SectionHeading';
 import { Link } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
-import { getFeastInfo, makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import makeServices from 'containers/Service/Texts/Texts';
 
 const OptionalLink = ({ enabled, ...rest }) =>
     enabled ? (
@@ -20,19 +20,7 @@ const OptionalLink = ({ enabled, ...rest }) =>
 const Services = ({ date, readings }) => {
     const theme = useTheme();
 
-    const { vasiliy, lpod } = getFeastInfo(new Date(date));
-
-    const isEasterOffsetRange = makeIsEasterOffsetRange(date);
-
-    const services = [
-        { title: 'Литургия Иоанна Златоуста', id: 'zlatoust', enabled: readings['Литургия'] && !vasiliy },
-        { title: 'Литургия Василия Великого', id: 'vasiliy', enabled: readings['Литургия'] && vasiliy },
-        { title: 'Литургия преждеосвященных даров', id: 'lpod', enabled: readings['Вечерня'] && lpod },
-        { title: 'Пасхальные часы', id: 'easterHours', enabled: isEasterOffsetRange(0, 6) },
-        { title: 'Благодарственные молитвы', id: 'blagodarstvennie', enabled: true },
-        { title: 'Покаянный канон', id: 'pokajanni', enabled: true },
-        { title: 'Чин приготовления', id: 'chinPrigotovlenija', enabled: true },
-    ];
+    const services = makeServices(date, readings);
 
     return (
         <div

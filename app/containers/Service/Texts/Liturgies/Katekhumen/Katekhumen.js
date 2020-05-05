@@ -1,9 +1,8 @@
 import React from 'react';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
-import '../../Shared.css';
 import isGospel from 'domain/isGospel';
-import { makeIsEasterOffsetRange, makeIsEasterOffset } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import Antifon1 from './Antifon1/Antifon1';
 import Antifon2 from './Antifon2/Antifon2';
 import Antifon3 from './Antifon3/Antifon3';
@@ -99,11 +98,10 @@ const Katekhumen = ({ lang, date, day }) => {
         </SolidSection>
     );
 
-    const isEasterOffset = makeIsEasterOffset(date);
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const brightWeek = isEasterOffsetRange(0, 6);
     const easterSeason = isEasterOffsetRange(0, 38);
-    const easterOtdanie = isEasterOffset(38);
+    const easterOtdanie = isEasterOffsetRange(38);
     const brightOrOtdanie = brightWeek || easterOtdanie;
     return (
         <>

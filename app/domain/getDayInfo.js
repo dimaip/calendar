@@ -42,17 +42,6 @@ export const calculateEasterDate = year => {
     return new Date(y, m, d);
 };
 
-export const makeIsEasterOffset = date => offset => {
-    if (typeof date === 'string') {
-        const splitDateString = date.split('-');
-        date = new Date(splitDateString[0], splitDateString[1] - 1, splitDateString[2]);
-    }
-    const y = date.getFullYear();
-    const easter = calculateEasterDate(y);
-    easter.setDate(easter.getDate() + offset);
-    return easter.getTime() === date.getTime();
-};
-
 export const makeIsEasterOffsetRange = date => (offsetBegin, offsetEnd) => {
     if (typeof date === 'string') {
         const splitDateString = date.split('-');
@@ -61,6 +50,9 @@ export const makeIsEasterOffsetRange = date => (offsetBegin, offsetEnd) => {
     const y = date.getFullYear();
     const begin = calculateEasterDate(y);
     begin.setDate(begin.getDate() + offsetBegin);
+    if (!offsetEnd) {
+        return begin.getTime() === date.getTime();
+    }
     const end = calculateEasterDate(y);
     end.setDate(end.getDate() + offsetEnd);
     return begin.getTime() <= date.getTime() && date.getTime() <= end.getTime();
@@ -411,7 +403,6 @@ export const getFeastInfo = memoize(
 
         const pascha = calculateEasterDate(y);
 
-        const isEasterOffset = makeIsEasterOffset(date);
         const isEasterOffsetRange = makeIsEasterOffsetRange(date);
 
         {
@@ -421,22 +412,22 @@ export const getFeastInfo = memoize(
             // В праздник Благовещения Пресвятой Богородицы всегда служится литургия св. Иоанна Златоуста, вне зависимости от дня недели.
             // Если обретение главы Иоанна Предтечи и день памяти 40 мучеников Севастийских приходятся на выходные дни — служится литургия или Иоанна Златоуста (в субботу) или Василия Великого (в воскресенье).
             if (
-                isEasterOffset(-7 * 6 - 4) ||
-                isEasterOffset(-7 * 6 - 2) ||
-                isEasterOffset(-7 * 5 - 4) ||
-                isEasterOffset(-7 * 5 - 2) ||
-                isEasterOffset(-7 * 4 - 4) ||
-                isEasterOffset(-7 * 4 - 2) ||
-                isEasterOffset(-7 * 3 - 4) ||
-                isEasterOffset(-7 * 3 - 2) ||
-                isEasterOffset(-7 * 2 - 4) ||
-                isEasterOffset(-7 * 2 - 3) ||
-                isEasterOffset(-7 * 2 - 2) ||
-                isEasterOffset(-7 * 1 - 4) ||
-                isEasterOffset(-7 * 1 - 2) ||
-                isEasterOffset(-6) ||
-                isEasterOffset(-5) ||
-                isEasterOffset(-4) ||
+                isEasterOffsetRange(-7 * 6 - 4) ||
+                isEasterOffsetRange(-7 * 6 - 2) ||
+                isEasterOffsetRange(-7 * 5 - 4) ||
+                isEasterOffsetRange(-7 * 5 - 2) ||
+                isEasterOffsetRange(-7 * 4 - 4) ||
+                isEasterOffsetRange(-7 * 4 - 2) ||
+                isEasterOffsetRange(-7 * 3 - 4) ||
+                isEasterOffsetRange(-7 * 3 - 2) ||
+                isEasterOffsetRange(-7 * 2 - 4) ||
+                isEasterOffsetRange(-7 * 2 - 3) ||
+                isEasterOffsetRange(-7 * 2 - 2) ||
+                isEasterOffsetRange(-7 * 1 - 4) ||
+                isEasterOffsetRange(-7 * 1 - 2) ||
+                isEasterOffsetRange(-6) ||
+                isEasterOffsetRange(-5) ||
+                isEasterOffsetRange(-4) ||
                 (date.getDay() !== 0 && // not weekend
                     date.getDay() !== 6 &&
                     (new Date(y, 2, 9).getTime() == date.getTime() || new Date(y, 2, 22).getTime() == date.getTime())) // glava Ioanna // 40 sev much
@@ -451,13 +442,13 @@ export const getFeastInfo = memoize(
 
         {
             if (
-                isEasterOffset(-7 * 6) ||
-                isEasterOffset(-7 * 5) ||
-                isEasterOffset(-7 * 4) ||
-                isEasterOffset(-7 * 3) ||
-                isEasterOffset(-7 * 2) ||
-                isEasterOffset(-3) ||
-                isEasterOffset(-1) ||
+                isEasterOffsetRange(-7 * 6) ||
+                isEasterOffsetRange(-7 * 5) ||
+                isEasterOffsetRange(-7 * 4) ||
+                isEasterOffsetRange(-7 * 3) ||
+                isEasterOffsetRange(-7 * 2) ||
+                isEasterOffsetRange(-3) ||
+                isEasterOffsetRange(-1) ||
                 new Date(y, 0, 14).getTime() == date.getTime()
             ) {
                 vasiliy = true;

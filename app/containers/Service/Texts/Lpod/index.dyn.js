@@ -1,5 +1,4 @@
 import React from 'react';
-import '../Shared.css';
 import './Lpod.css';
 import { useParams } from 'react-router-dom';
 import forEach from 'lodash.foreach';

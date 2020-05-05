@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useState, useEffect } from 'react';
 import { useParams, Link, useHistory, Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
@@ -20,60 +20,15 @@ import Cross from 'components/svgs/Cross';
 import { getFeastInfo } from 'domain/getDayInfo';
 import { useSelector, useDispatch } from 'react-redux';
 import { setLanguage } from 'redux/actions/language';
+import makeServices from './Texts/Texts';
+import './Texts/Shared.css';
 const reloadOnFailedImport = e => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
     Sentry.captureException(e);
     location.reload();
 };
-const Zlatoust = React.lazy(() => import('./Texts/Liturgies/Zlatoust').catch(reloadOnFailedImport));
-const Vasiliy = React.lazy(() => import('./Texts/Liturgies/Vasiliy').catch(reloadOnFailedImport));
-const Lpod = React.lazy(() => import('./Texts/Lpod/Lpod').catch(reloadOnFailedImport));
-const Blagodarstvennie = React.lazy(() =>
-    import('./Texts/Blagodarstvennie/Blagodarstvennie').catch(reloadOnFailedImport)
-);
-const ChinPrigotovlenija = React.lazy(() =>
-    import('./Texts/ChinPrigotovlenija/ChinPrigotovlenija').catch(reloadOnFailedImport)
-);
-const Pokajanni = React.lazy(() => import('./Texts/Pokajanni/Pokajanni').catch(reloadOnFailedImport));
-const EasterHours = React.lazy(() => import('./Texts/EasterHours/EasterHours').catch(reloadOnFailedImport));
 
-const servicesFeatures = {
-    zlatoust: {
-        calendar: true,
-        lang: true,
-        skipRedirect: false,
-    },
-    vasiliy: {
-        calendar: true,
-        lang: true,
-        skipRedirect: false,
-    },
-    lpod: {
-        calendar: true,
-        lang: true,
-        skipRedirect: false,
-    },
-    blagodarstvennie: {
-        calendar: false,
-        lang: false,
-        skipRedirect: true,
-    },
-    pokajanni: {
-        calendar: false,
-        lang: false,
-        skipRedirect: true,
-    },
-    chinPrigotovlenija: {
-        calendar: false,
-        lang: false,
-        skipRedirect: true,
-    },
-    easterHours: {
-        calendar: false,
-        lang: false,
-        skipRedirect: true,
-    },
-};
+const toUpperCase = name => name.charAt(0).toUpperCase() + name.slice(1);
 
 const Service = () => {
     const { serviceId: originalServiceId, date } = useParams();
@@ -91,10 +46,6 @@ const Service = () => {
 
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
 
-    if (!day) {
-        return <Loader />;
-    }
-
     // Expand serviceId
     let serviceId;
 
@@ -106,10 +57,27 @@ const Service = () => {
         }
     }
 
-    if (servicesFeatures?.[originalServiceId]?.skipRedirect) {
+    const services = makeServices(date, day?.readings);
+    const service = services.find(service => service.id === originalServiceId);
+
+    if (service.skipRedirect) {
         serviceId = originalServiceId;
     }
-    const serviceFeatures = servicesFeatures?.[serviceId];
+
+    const [TextComponent, setTextComponent] = useState();
+    useEffect(() => {
+        if (serviceId) {
+            const serviceIdUpper = toUpperCase(serviceId);
+            const Component = React.lazy(() =>
+                import(`./Texts/${serviceIdUpper}/index.dyn.js`).catch(reloadOnFailedImport)
+            );
+            setTextComponent(Component);
+        }
+    }, [serviceId]);
+
+    if (!day) {
+        return <Loader />;
+    }
 
     // If service not found, redirect
     if (!serviceId) {
@@ -178,7 +146,7 @@ const Service = () => {
                             align-items: center;
                         `}
                     >
-                        {serviceFeatures['calendar'] && (
+                        {service.calendar && (
                             <Button
                                 title={calendarShown ? 'Спрятать календарь' : 'Показать календарь'}
                                 className={css`
@@ -199,7 +167,7 @@ const Service = () => {
                                 {calendarShown ? <Cross /> : null}
                             </Button>
                         )}
-                        {serviceFeatures['lang'] && <LanguageSwitcher lang={lang} setLang={setLang} />}
+                        {service.lang && <LanguageSwitcher lang={lang} setLang={setLang} />}
                         <TOCSwitcher serviceId={serviceId} />
                     </div>
 
@@ -262,13 +230,7 @@ const Service = () => {
 
                                 <MDXProvider>
                                     <Suspense fallback={Loader}>
-                                        {serviceId === 'zlatoust' && <Zlatoust date={date} lang={lang} />}
-                                        {serviceId === 'vasiliy' && <Vasiliy lang={lang} />}
-                                        {serviceId === 'lpod' && <Lpod lang={lang} />}
-                                        {serviceId === 'easterHours' && <EasterHours />}
-                                        {serviceId === 'blagodarstvennie' && <Blagodarstvennie />}
-                                        {serviceId === 'chinPrigotovlenija' && <ChinPrigotovlenija />}
-                                        {serviceId === 'pokajanni' && <Pokajanni />}
+                                        {TextComponent && <TextComponent date={date} lang={lang} />}
                                     </Suspense>
                                 </MDXProvider>
                             </div>

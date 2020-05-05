@@ -1,5 +1,4 @@
 import React from 'react';
-import '../Shared.css';
 import Tooltip from 'components/Tooltip/Tooltip';
 
 const ChinPrigotovlenija = ({}) => {
