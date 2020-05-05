@@ -85,7 +85,7 @@ const Inner = ({ date, services, handleToggleClick, makeHandleClickShift }) => {
                                 ) : (
                                     <>
                                         <SolidSection>
-                                            <SectionHeading>Богослужения</SectionHeading>
+                                            <SectionHeading>Богослужебные чтения</SectionHeading>
                                             <ReadingList readings={day.readings || {}} />
                                         </SolidSection>
 

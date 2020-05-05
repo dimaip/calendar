@@ -3,20 +3,24 @@ import { css } from 'emotion';
 
 const ButtonBox = props => (
     <div
-        className={css`
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
-            margin-bottom: 8px;
-            padding: 14px 12px;
-            &:active,
-            &:focus {
-                box-shadow: none;
-                position: relative;
-                top: 1px;
-                background-color: #fafafa;
-            }
-        `}
+        className={
+            css`
+                background-color: white;
+                border-radius: 8px;
+                box-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+                margin-bottom: 8px;
+                padding: 14px 12px;
+                &:active,
+                &:focus {
+                    box-shadow: none;
+                    position: relative;
+                    top: 1px;
+                    background-color: #fafafa;
+                }
+            ` +
+            ' ' +
+            props.className
+        }
     >
         {props.children}
     </div>
