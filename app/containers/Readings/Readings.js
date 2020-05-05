@@ -133,6 +133,7 @@ const Readings = ({ brother = false }) => {
                         {to && (
                             <Link
                                 to={to}
+                                title="На службу"
                                 className={css`
                                     margin-left: 10px;
                                     margin-top: 5px;
