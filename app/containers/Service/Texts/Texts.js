@@ -78,6 +78,14 @@ const makeServices = (date, readings = {}) => {
             lang: false,
             skipRedirect: true,
         },
+        {
+            title: 'Краткая утреня',
+            id: 'matins',
+            enabled: true,
+            calendar: true,
+            lang: false,
+            skipRedirect: true,
+        },
     ];
 };
 export default makeServices;
