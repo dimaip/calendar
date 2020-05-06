@@ -7,7 +7,7 @@ const langMap = {
     ЦСЯ: PriugotovlCsj,
 };
 
-const Priugotovl = ({ lang = 'default', date: dateString }) => {
+const Priugotovl = ({ lang = 'default' }) => {
     const Component = langMap[lang];
     return <Component lang={lang} />;
 };
