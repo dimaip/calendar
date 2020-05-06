@@ -1,26 +1,14 @@
 import React from 'react';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
-import Antifon1Ru from './Antifon1.ru.mdx';
-import Antifon1Csj from './Antifon1.csj.mdx';
-import Antifon1Easter from '../Antifon1Easter/Antifon1Easter';
-
-const langMap = {
-    default: Antifon1Ru,
-    ЦСЯ: Antifon1Csj,
-};
-
-const Antifon1Sunday = ({ lang = 'default' }) => {
-    const Component = langMap[lang];
-    return <Component />;
-};
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 const Antifon1 = ({ lang, date: dateString }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(dateString);
     if (isEasterOffsetRange(0, 6)) {
-        return <Antifon1Easter lang={lang} />;
+        return <MdxLoader path="Liturgies/Katekhumen/Antifon1Easer/Antifon1Easer" lang={lang} />;
     }
 
-    return <Antifon1Sunday lang={lang} />;
+    return <MdxLoader path="Liturgies/Katekhumen/Antifon1/Antifon1" lang={lang} />;
 };
 
 export default Antifon1;
