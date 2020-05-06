@@ -17,7 +17,6 @@ import useExternalDay from 'hooks/useExternalDay';
 import Sermons from 'containers/Main/Sermons';
 import ReadingItem from 'containers/Readings/ReadingItem';
 import Alilujas from './Aliluja';
-import Prokimens from './Reading/Prokimen';
 import VariableSection from '../../VariableSection';
 import Trisvatoe from './Trisvatoe';
 import VhodnoiStih from './VhodnoiStih';
@@ -72,7 +71,7 @@ const Katekhumen = ({ lang, date, day }) => {
     const antifon2 = <Antifon2 lang={lang} date={date} />;
     const antifon3 = <Antifon3 lang={lang} date={date} />;
     const reading = <Reading lang={lang} day={day} date={date} />;
-    const priugotovl = <Priugotovl lang={lang} />;   
+    const priugotovl = <Priugotovl lang={lang} />;
 
     const hymns = day?.prayers && day.prayers.length > 0 && (
         <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
@@ -83,12 +82,6 @@ const Katekhumen = ({ lang, date, day }) => {
     const aliluja = (
         <VariableSection date={date}>
             <Alilujas day={day} date={date} />
-        </VariableSection>
-    );
-
-    const prokimen = (
-        <VariableSection date={date}>
-            <Prokimens day={day} date={date} />
         </VariableSection>
     );
 
@@ -804,9 +797,9 @@ const Katekhumen = ({ lang, date, day }) => {
                 <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
             </p>
             {trisvatoe}
-            
+
             {reading}
- 
+
             <div
                 className={css`
                     margin: 0 5px;
