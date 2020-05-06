@@ -7,11 +7,11 @@ const reloadOnFailedImport = e => {
 };
 
 const MdxLoader = props => {
-    let { lang, path } = props;
+    let { lang, src } = props;
     lang = lang === 'default' ? 'ru' : lang;
     lang = lang === 'ЦСЯ' ? 'csj' : lang;
     const Component = React.lazy(() =>
-        import(`containers/Service/Texts/${path}.${lang}.mdx`).catch(reloadOnFailedImport)
+        import(`containers/Service/Texts/${src}.${lang}.mdx`).catch(reloadOnFailedImport)
     );
     return <Component {...props} />;
 };
