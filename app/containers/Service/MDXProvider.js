@@ -9,7 +9,7 @@ const mapping = {
         return <p className="_-ОСНОВНОЙ_Основной-отст1-5">{children}</p>;
     },
     strong: ({ children }) => <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">{children}</span>,
-    blockquote: ({ children }) => <p className="_-ПЕТИТ_Петит-отст1-5">{children}</p>,
+    blockquote: ({ children }) => <div className="_-ПЕТИТ_Петит-отст1-5">{children}</div>,
     inlineCode: ({ children }) => <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">{children}</span>,
     del: ({ children }) => <span className="_-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн CharOverride-1">{children}</span>,
 };

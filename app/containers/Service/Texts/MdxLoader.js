@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
+import Loader from 'components/Loader/Loader';
 
 const reloadOnFailedImport = e => {
     console.warn('Loading mdx file failed', e);
     Sentry.captureException(e);
-    location.reload();
 };
 
 const MdxLoader = props => {
@@ -13,7 +13,11 @@ const MdxLoader = props => {
     const Component = React.lazy(() =>
         import(`containers/Service/Texts/${src}.${lang}.mdx`).catch(reloadOnFailedImport)
     );
-    return <Component {...props} />;
+    return (
+        <Suspense fallback={Loader}>
+            <Component {...props} />
+        </Suspense>
+    );
 };
 
 export default MdxLoader;
