@@ -58,7 +58,7 @@ const Service = () => {
     }
 
     const services = makeServices(date, day?.readings);
-    const service = services.find(service => service.id === serviceId);
+    const service = services.find(service => service.id === (serviceId || originalServiceId));
 
     if (service?.skipRedirect) {
         serviceId = originalServiceId;
