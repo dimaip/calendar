@@ -17,10 +17,12 @@ import useExternalDay from 'hooks/useExternalDay';
 import Sermons from 'containers/Main/Sermons';
 import ReadingItem from 'containers/Readings/ReadingItem';
 import Alilujas from './Aliluja';
-import Prokimens from './Prokimen';
+import Prokimens from './Reading/Prokimen';
 import VariableSection from '../../VariableSection';
 import Trisvatoe from './Trisvatoe';
 import VhodnoiStih from './VhodnoiStih';
+import SnovaSnova from './SnovaSnova/SnovaSnova';
+import Reading from './Reading/Reading';
 
 const Readings = ({ readings }) => (
     <>
@@ -65,9 +67,11 @@ const Katekhumen = ({ lang, date, day }) => {
 
     const malajaEktenia = <MalajaEktenia lang={lang} />;
     const velikajaEktenia = <VelikajaEktenia lang={lang} />;
+    const snovaSnova = <SnovaSnova lang={lang} />;
     const antifon1 = <Antifon1 lang={lang} date={date} />;
     const antifon2 = <Antifon2 lang={lang} date={date} />;
     const antifon3 = <Antifon3 lang={lang} date={date} />;
+    const reading = <Reading lang={lang} day={day} date={date} />;
     const priugotovl = <Priugotovl lang={lang} />;   
 
     const hymns = day?.prayers && day.prayers.length > 0 && (
@@ -429,14 +433,8 @@ const Katekhumen = ({ lang, date, day }) => {
 
             {antifon2}
 
-            <p className="_-ОСНОВНОЙ_Основной-отст5 ParaOverride-2">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Снова и снова в мире Господу помолимся!</span>
-            </p>
-            <p className="_-ПЕТИТ_КРАСН-петит-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> [И далее Малая ектения.]</span>
-            </p>
+            {snovaSnova}
+
             <p id="antifon3" className="_-ОСНОВНОЙ_Имя-части-отст5">
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                     Молитва перед пением
@@ -806,124 +804,10 @@ const Katekhumen = ({ lang, date, day }) => {
                 <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
             </p>
             {trisvatoe}
-            <p className="_-ОСНОВНОЙ_Имя-РаздСл">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4</span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Чтения и прошения верных</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст5 ParaOverride-13">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Повели, владыка!</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> [Благословляя чтеца:]</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Благословен, кто во имя Господне грядёт!</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д </span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Благослови, владыка, горний престол!</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Благословляя горнее место:</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                    {' '}
-                    Благословен Ты на славном престоле царствия Тво­его, Ты, восседающий на херувимах{' '}
-                </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(Дан </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">3:5</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">4-</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">55</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">)</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">,</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн"> [</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">во все дни:</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и всегда и во веки веков!</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Вне́млем!</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Мир всем!</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[и</span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н]</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> И духу твоему.</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Премудрость!</span>
-            </p>
-            {prokimen}
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Премудрость!</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Из книги Деяний святых апостолов чтение </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ CharOverride-3">[</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">или:</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Из Соборного по­сла­ния Иакова </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(или:</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Петра</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">)</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">чтение</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">; или:</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> Из Послания к римлянам </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(или:</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> к коринфянам</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">, или:</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> к галатам</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">)</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">святого</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн"> апо­сто­ла Павла чтение</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ CharOverride-3">]</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Будем внимательны!</span>
-            </p>
-            <div id="firstReading">
-                <p id="apostol" className="_-ОСНОВНОЙ_Чтение-Писания ParaOverride-13">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Чтение Апостола</span>
-                    <Tooltip>
-                        Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения
-                        зачала
-                    </Tooltip>
-                </p>
-            </div>
+            
+            <p id="apostol"></p>
+            {reading}
+ 
             <div
                 className={css`
                     margin: 0 5px;
