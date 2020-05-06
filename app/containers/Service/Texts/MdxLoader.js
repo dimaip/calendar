@@ -1,7 +1,7 @@
 import React from 'react';
 
 const reloadOnFailedImport = e => {
-    console.warn('Imported asset not available, probably time to re-deploy', e);
+    console.warn('Loading mdx file failed', e);
     Sentry.captureException(e);
     location.reload();
 };
