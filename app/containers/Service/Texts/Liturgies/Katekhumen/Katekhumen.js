@@ -805,7 +805,6 @@ const Katekhumen = ({ lang, date, day }) => {
             </p>
             {trisvatoe}
             
-            <p id="apostol"></p>
             {reading}
  
             <div
