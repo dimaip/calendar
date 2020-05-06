@@ -3,8 +3,11 @@ import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
 import isGospel from 'domain/isGospel';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import Molitva1 from './Molitva1/Molitva1';
 import Antifon1 from './Antifon1/Antifon1';
+import Molitva2 from './Molitva2/Molitva2';
 import Antifon2 from './Antifon2/Antifon2';
+import Molitva3 from './Molitva3/Molitva3';
 import Antifon3 from './Antifon3/Antifon3';
 import SolidSection from 'components/SolidSection/SolidSection';
 import Hymns from 'containers/Main/Hymns';
@@ -287,197 +290,17 @@ const Katekhumen = ({ lang, date, day }) => {
                 </>
             )}
             <MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia/VelikajaEktenia" lang={lang} />
-            <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-2">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2</span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Антифоны изобразительные</span>
-                <Tooltip>
-                    То есть взятые из службы «Изобразительных» («Типика́»). Ан­тифоны ещё могут быть праздничные и
-                    вседневные (будничные); последние даны ниже.
-                </Tooltip>
-            </p>
-            <p id="antifon1" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                    Молитва перед пением
-                    <br />
-                    первого антифона
-                </span>
-            </p>
-            {lang === 'default' && (
-                <>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Господи Боже наш, Ты, Чья власть несравне́нна и слава непостижи`ма, Чья милость безмерна и
-                            чело
-                        </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            веколюбие несказа́нно, — Ты, Владыка, по Своему благосердию воз­зри на нас и на этот святой
-                            дом и яви` Твою неистощимую милость и сострадание Твоё нам и моля´щимся с нами. —
-                        </span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-4">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Ибо Тебе́ подобает вся слава, честь и поклонение, </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отцу и Сыну и Святому Духу,</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и всегда и во веки веков.</span>
-                    </p>
-                </>
-            )}
-            {lang === 'ЦСЯ' && (
-                <>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-4">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Господи Боже наш, Егоже держава несказанна и слава непостижима, Егоже милость безмерна и
-                            человеколюбие неизреченно. Сам, Владыко, по благоутробию Твоему, призри на ны и на святый
-                            храм сей, и сотвори с нами и молящимися с нами, богатыя милости Твоя и щедроты Твоя.
-                        </span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Яко подобает Тебе всякая слава, честь и поклонение, Отцу, и Сыну, и Святому Духу, ныне и
-                            присно, и во веки веков.
-                        </span>
-                    </p>
-                </>
-            )}
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
-            </p>
-
+            <MdxLoader src="Liturgies/Katekhumen/Molitva1/Molitva1" lang={lang} />
             {antifon1}
 
             <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia/MalajaEktenia" lang={lang} />
 
-            <p id="antifon2" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                    Молитва перед пением
-                    <br />
-                    второго антифона
-                </span>
-            </p>
-            {lang === 'default' && (
-                <>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Господи Боже наш, спаси народ Твой и благо­слови на­следие Твоё, Церковь Твою в полноте
-                            сохрани, освяти лю­бя­щих красоту́ дома Твоего! Ты в ответ прославь их Твоей бо­же­ственною
-                            си­лой и нас, на­дею­щих­ся на Тебя, не оставь, —
-                        </span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            ибо Твоя´ власть и Твои` царствие, и сила, и слава,{' '}
-                        </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отца и Сына и Святого Духа,</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и всегда и во веки веков.</span>
-                    </p>
-                </>
-            )}
-            {lang === 'ЦСЯ' && (
-                <>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ CharOverride-2"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Господи Боже наш, спаси люди Твоя и благослови достояние Твое, исполнение Церкве Твоея
-                            сохрани, освяти любящия благолепие дому Твоего. Ты тех воспрослави Божественною Твоею силою
-                            и не остави нас, уповающих на Тя.
-                        </span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Яко Твоя держава и Твое есть Царство и сила, и слава, Отца, и Сына, и Святаго Духа, ныне и
-                            присно, и во веки веков.
-                        </span>
-                    </p>
-                </>
-            )}
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
-            </p>
-
+            <MdxLoader src="Liturgies/Katekhumen/Molitva2/Molitva2" lang={lang} />
             {antifon2}
 
             <MdxLoader src="Liturgies/Katekhumen/SnovaSnova/SnovaSnova" lang={lang} />
 
-            <p id="antifon3" className="_-ОСНОВНОЙ_Имя-части-отст5">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                    Молитва перед пением
-                    <br />
-                    третьего антифона
-                </span>
-            </p>
-            {lang === 'default' && (
-                <>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Ты эти общие и согласные молитвы нам даро­ва́л, Ты и двоим или троим, согласно собравшимся во
-                            имя Твоё, просимое подавать обещал, — Ты же и ныне исполни на пользу прошения слуг Твоих:
-                            подай нам в нынешнем веке познание Твоей Истины, а в будущем Жизнь вечную дару́й, —
-                        </span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            ибо Ты` благой и человеколюбивый Бог и мы` вос­сылаем славу Те­бе,
-                        </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн"> [</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отцу и Сыну и Свя­тому Духу,</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и все­гда и во веки веков.</span>
-                    </p>
-                </>
-            )}
-            {lang === 'ЦСЯ' && (
-                <>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Иже общия сия и согласныя даровавый нам молитвы, иже и двема или трем согласующимся о имени
-                            Твоем прошения подати обещавый, Сам и ныне раб Твоих прошения к полезному исполни, подая нам
-                            и в настоящем веце познание Твоея истины, и в будущем живот вечный даруя.
-                        </span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            Яко благ и человеколюбец Бог еси, и Тебе славу возсылаем, Отцу, и Сыну, и Святому Духу, ныне
-                            и присно, и во веки веков.
-                        </span>
-                    </p>
-                </>
-            )}
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
-            </p>
-
+            <MdxLoader src="Liturgies/Katekhumen/Molitva3/Molitva3" lang={lang} />
             {antifon3}
 
             {/* @TODO hide during Sundays and feasts */}
