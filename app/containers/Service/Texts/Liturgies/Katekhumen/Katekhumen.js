@@ -112,7 +112,7 @@ const Katekhumen = ({ lang, date, day }) => {
             </p>
             {!easterSeason && (
                 <>
-                    <MdxLoader src="Liturgies/Katekhumen/Priugotovl/Priugotovl" lang={lang} />
+                    <MdxLoader src="Liturgies/Katekhumen/Priugotovl" lang={lang} />
                     {lang === 'default' && (
                         <>
                             <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
@@ -286,7 +286,7 @@ const Katekhumen = ({ lang, date, day }) => {
                     </p>
                 </>
             )}
-            <MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia/VelikajaEktenia" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia" lang={lang} />
             <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-2">
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2</span>
@@ -357,7 +357,7 @@ const Katekhumen = ({ lang, date, day }) => {
 
             {antifon1}
 
-            <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia/MalajaEktenia" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" lang={lang} />
 
             <p id="antifon2" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
@@ -419,7 +419,7 @@ const Katekhumen = ({ lang, date, day }) => {
 
             {antifon2}
 
-            <MdxLoader src="Liturgies/Katekhumen/SnovaSnova/SnovaSnova" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/SnovaSnova" lang={lang} />
 
             <p id="antifon3" className="_-ОСНОВНОЙ_Имя-части-отст5">
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
