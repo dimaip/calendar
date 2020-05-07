@@ -24,12 +24,15 @@ const Readings = ({ readingsForService, day }) =>
     );
 const Vespers = ({ date }) => {
     const dateObj = new Date(date);
+    const tomorrowDateObj = new Date(date);
+    tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
+    const { data: tomorrowDay } = useDay(tomorrowDateObj);
 
-    const hymns = day?.prayers && day.prayers.length > 0 && (
+    const hymns = tomorrowDay?.prayers && tomorrowDay.prayers.length > 0 && (
         <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-            <Hymns hymns={day.prayers} />
+            <Hymns hymns={tomorrowDay.prayers} />
         </SolidSection>
     );
 
