@@ -11,10 +11,10 @@ const MdxLoader = props => {
     lang = lang === 'default' ? 'ru' : lang;
     lang = lang === 'ЦСЯ' ? 'csj' : lang;
     const Component = React.lazy(() =>
-        import(`containers/Service/Texts/${src}.${lang || 'ru'}.mdx`).catch(reloadOnFailedImport)
+        import(`containers/Service/Texts/${src}/${lang || 'ru'}.mdx`).catch(reloadOnFailedImport)
     );
     return (
-        <Suspense fallback={Loader}>
+        <Suspense fallback={<Loader />}>
             <Component {...props} />
         </Suspense>
     );

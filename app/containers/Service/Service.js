@@ -229,7 +229,7 @@ const Service = () => {
                                 </div>
 
                                 <MDXProvider>
-                                    <Suspense fallback={Loader}>
+                                    <Suspense fallback={<Loader />}>
                                         {TextComponent && <TextComponent date={date} lang={lang} />}
                                     </Suspense>
                                 </MDXProvider>
