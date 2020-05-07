@@ -115,7 +115,7 @@ const Katekhumen = ({ lang, date, day }) => {
             </p>
             {!easterSeason && (
                 <>
-                    <MdxLoader src="Liturgies/Katekhumen/Priugotovl/Priugotovl" lang={lang} />
+                    <MdxLoader src="Liturgies/Katekhumen/Priugotovl" lang={lang} />
                     {lang === 'default' && (
                         <>
                             <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
@@ -293,12 +293,12 @@ const Katekhumen = ({ lang, date, day }) => {
             <MdxLoader src="Liturgies/Katekhumen/Molitva1/Molitva1" lang={lang} />
             {antifon1}
 
-            <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia/MalajaEktenia" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" lang={lang} />
 
             <MdxLoader src="Liturgies/Katekhumen/Molitva2/Molitva2" lang={lang} />
             {antifon2}
 
-            <MdxLoader src="Liturgies/Katekhumen/SnovaSnova/SnovaSnova" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/SnovaSnova" lang={lang} />
 
             <MdxLoader src="Liturgies/Katekhumen/Molitva3/Molitva3" lang={lang} />
             {antifon3}
