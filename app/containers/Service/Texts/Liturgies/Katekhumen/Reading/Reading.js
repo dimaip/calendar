@@ -10,7 +10,7 @@ const Reading = ({ lang, day, date }) => {
         </VariableSection>
     );
 
-    return <MdxLoader src="Liturgies/Katekhumen/Reading/Reading" lang={lang} prokimen={prokimen} />;
+    return <MdxLoader src="Liturgies/Katekhumen/Reading" lang={lang} prokimen={prokimen} />;
 };
 
 export default Reading;
