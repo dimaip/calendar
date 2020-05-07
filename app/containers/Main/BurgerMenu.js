@@ -105,6 +105,15 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                             // @ts-ignore
                             VERSION
                         }
+                        .{' '}
+                        <a
+                            href="https://c.psmb.ru/fix.html"
+                            className={css`
+                                text-decoration: underline;
+                            `}
+                        >
+                            Починить
+                        </a>
                     </div>
                 </div>
             </div>
