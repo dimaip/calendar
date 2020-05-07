@@ -1,17 +1,6 @@
-import Prayer1 from './Prayer1.ru.mdx';
-import Prayer2 from './Prayer2.ru.mdx';
-import Prayer3 from './Prayer3.ru.mdx';
-import Prayer4 from './Prayer4.ru.mdx';
-import Prayer7 from './Prayer7.ru.mdx';
-import Prayer8 from './Prayer8.ru.mdx';
-import Prayer11 from './Prayer11.ru.mdx';
-import Prayer12 from './Prayer12.ru.mdx';
-import PrayerGlavopriklonnaja from './PrayerGlavopriklonnaja.ru.mdx';
-import PrayerKatekhumens from './PrayerKatekhumens.ru.mdx';
-import Slavoslovie from './Slavoslovie.ru.mdx';
-import Sugubaja from './Sugubaja.ru.mdx';
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
-# Утреня праздничная от Фоминой Недели до Вознесения
+# Утреня (от Фоминой Недели до Отдания Пасхи)
 
 **П** Слава святой, и единосущной, и животворящей, и нераздельной Троице: ныне и всегда и во веки веков!
 
@@ -19,14 +8,14 @@ import Sugubaja from './Sugubaja.ru.mdx';
 
 **П и Н** Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь даровав. **(Трижды.)**
 
-<>{props.dayOfWeek === 1 && <Prayer1 />}</>
-<>{props.dayOfWeek === 2 && <Prayer2 />}</>
-<>{props.dayOfWeek === 3 && <Prayer3 />}</>
-<>{props.dayOfWeek === 4 && <Prayer4 />}</>
-<>{props.dayOfWeek === 5 && <Prayer7 />}</>
-<>{props.dayOfWeek === 6 && <Prayer8 />}</>
+<>{props.dayOfWeek === 1 && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
+<>{props.dayOfWeek === 2 && <MdxLoader src="Matins/Prayer2" lang={props.lang} />}</>
+<>{props.dayOfWeek === 3 && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
+<>{props.dayOfWeek === 4 && <MdxLoader src="Matins/Prayer4" lang={props.lang} />}</>
+<>{props.dayOfWeek === 5 && <MdxLoader src="Matins/Prayer7" lang={props.lang} />}</>
+<>{props.dayOfWeek === 6 && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
 
-<Prayer11 />
+<MdxLoader src="Matins/Prayer11" lang={props.lang} />
 
 ### Утренние «хвалитные» псалмы (Пс 148–150)
 
@@ -40,7 +29,7 @@ import Sugubaja from './Sugubaja.ru.mdx';
 хвалите Его, все Воинства Его!  
 **[**Тебе подобает песнь — Богу.**]**
 
-<Slavoslovie />
+<MdxLoader src="Matins/Slavoslovie" lang={props.lang} />
 
 <>{props.hymns}</>
 
@@ -52,13 +41,17 @@ import Sugubaja from './Sugubaja.ru.mdx';
 
 <>{props.readings}</>
 
-<PrayerKatekhumens />
-<Sugubaja />
+### Воскресная песнь, глас 6
+
+**Н** Увидев Воскресение Христа, / поклонимся святому Господу Иисусу, / одному безгрешному! / Кресту Твоему поклоняемся, Христе, / и святое Воскресение Твоё поём и славим; / Ты — Бог наш, / кроме Тебя иного не знаем / и имя Твоё призываем. / Придите, все верные, / поклонимся святому Христову Воскресению, / ибо пришла через Крест радость всему миру! / Всегда благословляя Господа, / воспеваем Воскресение Его: / Он, ради нас распятие претерпев, / Смертию смерть победил!
+
+<MdxLoader src="Matins/PrayerKatekhumens" lang={props.lang} />
+<MdxLoader src="Shared/Sugubaja" lang={props.lang} />
 
 **П** Завершим нашу утреннюю молитву Господу!
 
-<Prayer12 />
-<PrayerGlavopriklonnaja />
+<MdxLoader src="Matins/Prayer12" lang={props.lang} />
+<MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
 
 **П** Премудрость!
 
@@ -68,18 +61,18 @@ import Sugubaja from './Sugubaja.ru.mdx';
 
 **Н** Аминь.
 
-**П** Христос воскрес из мёртвых, Смертию смерть поправ
+**П** Христос воскрес из мёртвых, Смертию смерть поправ…
 
-**Н** и тем, кто во гробах, Жизнь даровав. **(1 раз)**
+**Н** …и тем, кто во гробах, Жизнь даровав. **(1 раз)**
 
 ## Отпуст
 
-**П** Воскресший из мертвых Христос, истинный Бог наш, по ходатайству Своей всенепорочной Матери, святых славных и всехвальных апостолов, святых (имена святых дня), святых праведных праотцов Иоакима и Анны, и всех святых, да помилует и спасёт нас, по Своей благости и человеколюбию.
+**П** Воскресший из мертвых Христос, истинный Бог наш, по ходатайству Своей всенепорочной Матери, святых славных и всехвальных апостолов, святых **(имена святых дня)**, святых праведных праотцов Иоакима и Анны, и всех святых, да помилует и спасёт нас, по Своей благости и человеколюбию.
 
 <>{props.saints}</>
 
 **П** Христос Воскрес!
 
-**Н** Воистину воскрес! (трижды)
+**Н** Воистину воскрес! **(трижды)**
 
 **П и Н** Христос воскрес из мёртвых, смертию Смерть поправ и тем, кто во гробах, Жизнь даровав **(трижды, быстро)**. И нам даровал жизнь вечную, поклоняемся Его тридневному Воскресению!
