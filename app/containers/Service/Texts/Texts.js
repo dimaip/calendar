@@ -15,6 +15,7 @@ const makeServices = (date, readings = {}) => {
             calendar: true,
             lang: true,
             skipRedirect: false,
+            group: 'Богослужебные тексты',
         },
         {
             title: 'Литургия Василия Великого',
@@ -23,6 +24,7 @@ const makeServices = (date, readings = {}) => {
             calendar: true,
             lang: true,
             skipRedirect: false,
+            group: 'Богослужебные тексты',
         },
         {
             title: 'Литургия преждеосвященных даров',
@@ -31,6 +33,7 @@ const makeServices = (date, readings = {}) => {
             calendar: true,
             lang: true,
             skipRedirect: false,
+            group: 'Богослужебные тексты',
         },
         {
             title: 'Канон Пасхи',
@@ -45,6 +48,7 @@ const makeServices = (date, readings = {}) => {
             calendar: false,
             lang: false,
             skipRedirect: true,
+            group: 'Богослужебные тексты',
         },
         {
             title: 'Пасхальные часы',
@@ -53,6 +57,7 @@ const makeServices = (date, readings = {}) => {
             calendar: false,
             lang: false,
             skipRedirect: true,
+            group: 'Богослужебные тексты',
         },
         {
             title: 'Благодарственные молитвы',
@@ -61,6 +66,7 @@ const makeServices = (date, readings = {}) => {
             calendar: false,
             lang: false,
             skipRedirect: true,
+            group: 'Богослужебные тексты',
         },
         {
             title: 'Покаянный канон',
@@ -69,6 +75,7 @@ const makeServices = (date, readings = {}) => {
             calendar: false,
             lang: false,
             skipRedirect: true,
+            group: 'Богослужебные тексты',
         },
         {
             title: 'Чин приготовления',
@@ -77,6 +84,25 @@ const makeServices = (date, readings = {}) => {
             calendar: false,
             lang: false,
             skipRedirect: true,
+            group: 'Богослужебные тексты',
+        },
+        {
+            title: 'Краткая утреня',
+            id: 'matins',
+            enabled: true,
+            calendar: true,
+            lang: false,
+            skipRedirect: true,
+            group: 'Домашнее молитвенное правило',
+        },
+        {
+            title: 'Краткая вечерня',
+            id: 'vespers',
+            enabled: true,
+            calendar: true,
+            lang: false,
+            skipRedirect: true,
+            group: 'Домашнее молитвенное правило',
         },
     ];
 };
