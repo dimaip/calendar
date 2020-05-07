@@ -3,11 +3,8 @@ import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
 import isGospel from 'domain/isGospel';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
-import Molitva1 from './Molitva1/Molitva1';
 import Antifon1 from './Antifon1/Antifon1';
-import Molitva2 from './Molitva2/Molitva2';
 import Antifon2 from './Antifon2/Antifon2';
-import Molitva3 from './Molitva3/Molitva3';
 import Antifon3 from './Antifon3/Antifon3';
 import SolidSection from 'components/SolidSection/SolidSection';
 import Hymns from 'containers/Main/Hymns';
@@ -289,23 +286,23 @@ const Katekhumen = ({ lang, date, day }) => {
                     </p>
                 </>
             )}
-            <MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia/VelikajaEktenia" lang={lang} />
-            <MdxLoader src="Liturgies/Katekhumen/Molitva1/Molitva1" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/Molitva1" lang={lang} />
             {antifon1}
 
             <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" lang={lang} />
 
-            <MdxLoader src="Liturgies/Katekhumen/Molitva2/Molitva2" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/Molitva2" lang={lang} />
             {antifon2}
 
             <MdxLoader src="Liturgies/Katekhumen/SnovaSnova" lang={lang} />
 
-            <MdxLoader src="Liturgies/Katekhumen/Molitva3/Molitva3" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/Molitva3" lang={lang} />
             {antifon3}
 
             {/* @TODO hide during Sundays and feasts */}
-            {!brightOrOtdanie && <MdxLoader src="Liturgies/Katekhumen/AntifonVsednev/AntifonVsednev" lang={lang} />}
-            <MdxLoader src="Liturgies/Katekhumen/MalijVhod/MalijVhod" lang={lang} />
+            {!brightOrOtdanie && <MdxLoader src="Liturgies/Katekhumen/AntifonVsednev" lang={lang} />}
+            <MdxLoader src="Liturgies/Katekhumen/MalijVhod" lang={lang} />
 
             {vhodnoiStih}
 
@@ -567,7 +564,7 @@ const Katekhumen = ({ lang, date, day }) => {
 
             {sermons}
 
-            <MdxLoader src="Liturgies/Katekhumen/SugubajaEktenia/SugubajaEktenia" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/SugubajaEktenia" lang={lang} />
 
             <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
