@@ -48,23 +48,26 @@ const Readings = ({ brother = false }) => {
         setCalendarShown(false);
     };
 
-    const { vasiliy, lpod } = getFeastInfo(new Date(date));
+    const { lpod } = getFeastInfo(new Date(date));
 
-    let serviceTitle = service;
     let to = null;
 
-    if (service === 'Литургия') {
+    if (brother && service === 'Утром') {
+        to = {
+            pathname: `/date/${date}/service/matins`,
+        };
+    } else if (brother && service === 'Вечером') {
+        to = {
+            pathname: `/date/${date}/service/vespers`,
+        };
+    } else if (service === 'Литургия') {
         to = {
             pathname: `/date/${date}/service/Литургия`,
-            state: { from: 'readings', scrollToReadings: true },
         };
-        serviceTitle += ` ${vasiliy ? 'Василия Великого' : 'Иоанна Златоуста'}`;
     } else if (service === 'Вечерня' && lpod) {
         to = {
             pathname: `/date/${date}/service/Вечерня`,
-            state: { from: 'readings', scrollToReadings: true },
         };
-        serviceTitle = 'Литургия преждеосвященных даров';
     }
 
     return (
