@@ -7,7 +7,7 @@ const Vasiliy = ({ lang }) => {
 
     return (
         <div>
-            <p className="_-ОСНОВНОЙ_Имя-Службы">
+            <p className="_-ОСНОВНОЙ_Имя-Службы" id="nachalo">
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Божественная литургия Василия Великого</span>
             </p>
             <div id="_idContainer003" className="_idGenObjectStyleOverride-1">

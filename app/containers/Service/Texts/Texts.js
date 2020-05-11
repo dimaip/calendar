@@ -1,7 +1,8 @@
 import { getFeastInfo, makeIsEasterOffsetRange } from 'domain/getDayInfo';
-import liturgyTOC from './Liturgies/liturgyTOC';
-import lpodTOC from './Lpod/lpodTOC';
-import vespersTOC from './Vespers/vespersTOC';
+import liturgyTOC from './Liturgies/TOC';
+import lpodTOC from './Lpod/TOC';
+import matinsTOC from './Matins/TOC';
+import vespersTOC from './Vespers/TOC';
 
 // New texts must be put into `Texts/ServiceIdUppercase/index.dyn.js` and then added here
 
@@ -100,6 +101,7 @@ const makeServices = (date, readings = {}) => {
             lang: false,
             skipRedirect: true,
             group: 'Домашнее молитвенное правило',
+            TOC: matinsTOC
         },
         {
             title: 'Краткая вечерня',
