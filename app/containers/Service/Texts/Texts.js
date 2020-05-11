@@ -1,4 +1,7 @@
 import { getFeastInfo, makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import liturgyTOC from './Liturgies/liturgyTOC';
+import lpodTOC from './Lpod/lpodTOC';
+import vespersTOC from './Vespers/vespersTOC';
 
 // New texts must be put into `Texts/ServiceIdUppercase/index.dyn.js` and then added here
 
@@ -16,6 +19,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: false,
             group: 'Богослужебные тексты',
+            TOC: liturgyTOC
         },
         {
             title: 'Литургия Василия Великого',
@@ -25,6 +29,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: false,
             group: 'Богослужебные тексты',
+            TOC: liturgyTOC
         },
         {
             title: 'Литургия преждеосвященных даров',
@@ -34,6 +39,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: false,
             group: 'Богослужебные тексты',
+            TOC: lpodTOC
         },
         {
             title: 'Канон Пасхи',
@@ -103,6 +109,7 @@ const makeServices = (date, readings = {}) => {
             lang: false,
             skipRedirect: true,
             group: 'Домашнее молитвенное правило',
+            TOC: vespersTOC
         },
     ];
 };

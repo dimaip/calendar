@@ -1,17 +1,9 @@
 import React from 'react';
-import liturgyTOC from './Texts/Liturgies/Vernie/liturgyTOC';
-import lpodTOC from './Texts/Lpod/lpodTOC';
 import SelectBox from '../../components/SelectBox/SelectBox';
 import { css } from 'emotion';
 
-const mapServiceTOC = {
-    zlatoust: liturgyTOC,
-    vasiliy: liturgyTOC,
-    lpod: lpodTOC,
-};
-
-const TOCSwitcher = ({ serviceId }) => {
-    const data = mapServiceTOC[serviceId];
+const TOCSwitcher = ({ service }) => {
+    const data = service?.TOC;
     if (!data) {
         return null;
     }
