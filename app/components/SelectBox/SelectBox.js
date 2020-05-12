@@ -11,7 +11,7 @@ const SelectBox = ({ className = '', items, value, onChange }) => {
                     border-radius: 5px;
                     padding: 8px 6px;
                     text-align: center;
-                    background: ${theme.colours.bgGrayDark};
+                    background: ${theme.colours.bgGray};
                     font-size: 13px;
                     line-height: 1.2;
                     color: ${theme.colours.darkGray};

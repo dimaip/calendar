@@ -21,9 +21,15 @@ const IosPrompt = () => {
     const [showIosPrompt, setShowIosPrompt] = useState(false);
 
     useEffect(() => {
+        let mounted = true;
         setTimeout(() => {
-            setShowIosPrompt(true);
+            if (mounted) {
+                setShowIosPrompt(true);
+            }
         }, 3000);
+        return () => {
+            mounted = false;
+        };
     }, []);
 
     // @ts-ignore

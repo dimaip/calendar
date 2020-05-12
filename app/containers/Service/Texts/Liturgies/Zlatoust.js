@@ -21,7 +21,7 @@ const Zlatoust = ({ lang, date }) => {
                 margin-bottom: 24px;
             `}
         >
-            <p className="_-ОСНОВНОЙ_Имя-Службы">
+            <p className="_-ОСНОВНОЙ_Имя-Службы" id="nachalo">
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Божественная литургия Иоанна Златоуста</span>
             </p>
             <div id="_idContainer003" className="_idGenObjectStyleOverride-1">
