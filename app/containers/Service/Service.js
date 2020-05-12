@@ -168,7 +168,7 @@ const Service = () => {
                             </Button>
                         )}
                         {service?.lang && <LanguageSwitcher lang={lang} setLang={setLang} />}
-                        <TOCSwitcher service={service} />
+                        <TOCSwitcher service={service} lang={lang} />
                     </div>
 
                     <div

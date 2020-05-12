@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SelectBox from '../../components/SelectBox/SelectBox';
 import { css } from 'emotion';
 
-const TOCSwitcher = ({ service }) => {
+const TOCSwitcher = ({ service, lang }) => {
     const data = service?.TOC;
     const items = Object.keys(data).map(item => ({
         value: item,
@@ -56,7 +56,7 @@ const TOCSwitcher = ({ service }) => {
                     observer = null;
                 }
             };
-        }, []);
+        }, [lang]);
     }
     if (!data) {
         return null;
