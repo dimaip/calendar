@@ -116,7 +116,7 @@ const Readings = ({ brother = false }) => {
                                 border-radius: 5px;
                                 padding: 8px !important;
                                 line-height: 1.2;
-                                background: ${theme.colours.bgGrayDark};
+                                background: ${theme.colours.bgGray};
                                 font-size: 14px;
                                 margin-right: 8px;
                             `}

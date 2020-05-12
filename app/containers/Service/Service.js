@@ -157,7 +157,7 @@ const Service = () => {
                                     padding: 8px !important;
                                     line-height: 1.2;
                                     text-align: center;
-                                    background: ${theme.colours.bgGrayDark};
+                                    background: ${theme.colours.bgGray};
                                     font-size: 14px;
                                     margin-right: 8px;
                                 `}
