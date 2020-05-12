@@ -1,4 +1,5 @@
 const liturgyTOC = {
+    nachalo: 'Начало',
     antifon1: 'Первый антифон',
     antifon2: 'Второй антифон',
     antifon3: 'Третий антифон',

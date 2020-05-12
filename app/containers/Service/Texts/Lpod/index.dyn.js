@@ -46,7 +46,7 @@ const Lpod = ({ lang }) => {
 
     return (
         <div>
-            <div id="_idContainer004" className="_idGenObjectStyleOverride-1">
+            <div id="nachalo" className="_idGenObjectStyleOverride-1">
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         {' '}

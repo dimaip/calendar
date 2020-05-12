@@ -568,6 +568,7 @@ export const getFeastInfo = memoize(
             title = 'Преображение Господне';
             feastType = '12';
             colour = '#A2A2A2';
+            icon = 'transfiguration.png';
         }
 
         if (new Date(y, 7, 28).getTime() == date.getTime()) {
@@ -591,6 +592,7 @@ export const getFeastInfo = memoize(
         if (new Date(y, 6, 7).getTime() == date.getTime()) {
             title = 'Рождество Иоанна Крестителя';
             feastType = 'great';
+            icon = 'baptist.png';
         }
 
         if (new Date(y, 6, 12).getTime() == date.getTime()) {
@@ -606,6 +608,7 @@ export const getFeastInfo = memoize(
         if (new Date(y, 8, 11).getTime() == date.getTime()) {
             title = 'Усекновение главы Иоанна Предтечи';
             feastType = 'great';
+            icon = 'baptist.png';
         }
 
         return {
