@@ -104,6 +104,7 @@ const Katekhumen = ({ lang, date, day }) => {
     const brightOrOtdanie = brightWeek || easterOtdanie;
     return (
         <>
+            <MdxLoader src="Liturgies/Katekhumen/Start" lang={lang} />
             {!easterSeason && <MdxLoader src="Liturgies/Katekhumen/Priugotovl" lang={lang} paraklit={paraklit} />}
             <MdxLoader src="Shared/EpifLiturgies" lang={lang} />
             {easterSeason && <MdxLoader src="Shared/TroparEaster" lang={lang} />}
