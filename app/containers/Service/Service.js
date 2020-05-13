@@ -76,7 +76,11 @@ const Service = () => {
     }, [serviceId]);
 
     if (!day) {
-        return <Loader />;
+        return (
+            <ThemeProvider theme={theme}>
+                <Loader />
+            </ThemeProvider>
+        );
     }
 
     // If service not found, redirect

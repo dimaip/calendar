@@ -19,11 +19,19 @@ const Saint = () => {
     const theme = getTheme(day?.colour);
 
     if (status === 'loading') {
-        return <Loader />;
+        return (
+            <ThemeProvider theme={theme}>
+                <Loader />
+            </ThemeProvider>
+        );
     }
 
     if (status === 'error' || !saint) {
-        return <ErrorMessage />;
+        return (
+            <ThemeProvider theme={theme}>
+                <ErrorMessage />
+            </ThemeProvider>
+        );
     }
 
     return (

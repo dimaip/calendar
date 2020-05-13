@@ -21,11 +21,19 @@ const ThisDay = () => {
     const { data: day } = useDay(date);
     const theme = getTheme(day?.colour);
     if (externalDayStatus === 'loading') {
-        return <Loader />;
+        return (
+            <ThemeProvider theme={theme}>
+                <Loader />
+            </ThemeProvider>
+        );
     }
 
     if (externalDayStatus === 'error' || !thisDays) {
-        return <ErrorMessage />;
+        return (
+            <ThemeProvider theme={theme}>
+                <ErrorMessage />
+            </ThemeProvider>
+        );
     }
 
     return (

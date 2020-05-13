@@ -22,11 +22,19 @@ const Sermon = () => {
     const theme = getTheme(day?.colour);
 
     if (externalDayStatus === 'loading') {
-        return <Loader />;
+        return (
+            <ThemeProvider theme={theme}>
+                <Loader />
+            </ThemeProvider>
+        );
     }
 
     if (externalDayStatus === 'error' || !sermon) {
-        return <ErrorMessage />;
+        return (
+            <ThemeProvider theme={theme}>
+                <ErrorMessage />
+            </ThemeProvider>
+        );
     }
 
     return (
