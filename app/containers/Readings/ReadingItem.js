@@ -5,7 +5,7 @@ import Zoom from 'components/Zoom/Zoom';
 import useReading from '../../hooks/useReading';
 import { useParams } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
-import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import SelectBox from 'components/SelectBox/SelectBox';
 
 const ReadingItem = ({ readingVerse, type }) => {
@@ -20,7 +20,7 @@ const ReadingItem = ({ readingVerse, type }) => {
     }
 
     if (status === 'error') {
-        return <ErrorMessage />;
+        return <ErrorMessage500 />;
     }
 
     if (!reading?.fragments) {

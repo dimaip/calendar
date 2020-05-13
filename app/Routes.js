@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory, useParams } from 'react-router-dom';
 import Main from 'containers/Main/Main.js';
 import NotFound from 'components/NotFound/NotFound.js';
 import Readings from 'containers/Readings/Readings';
@@ -11,27 +11,17 @@ import ScrollToTop from 'components/ScrollToTop/ScrollToTop';
 import Service from 'containers/Service/Service';
 import { css } from 'emotion';
 import checkVersion from './checkVersion';
+import useDay from 'hooks/useDay';
+import getTheme from 'styles/theme';
+import { ThemeProvider } from 'emotion-theming';
 
-export default () => {
-    const history = useHistory();
-    history.listen(checkVersion);
+const DateRoutes = () => {
+    const { date } = useParams();
+    const { data: day } = useDay(date);
+    const theme = getTheme(day?.colour);
     return (
-        <div
-            className={css`
-                max-width: 640px;
-                margin: 0 auto;
-            `}
-        >
-            <ScrollToTop />
+        <ThemeProvider theme={theme}>
             <Switch>
-                <Route
-                    exact
-                    path="/"
-                    render={() => {
-                        const date = dateFormat(new Date(), 'yyyy-mm-dd');
-                        return <Redirect to={`/date/${date}`} />;
-                    }}
-                />
                 <Route exact path="/date/:date">
                     <Main />
                 </Route>
@@ -58,6 +48,34 @@ export default () => {
                 </Route>
                 <Route>
                     <NotFound />
+                </Route>
+            </Switch>
+        </ThemeProvider>
+    );
+};
+
+export default () => {
+    const history = useHistory();
+    history.listen(checkVersion);
+    return (
+        <div
+            className={css`
+                max-width: 640px;
+                margin: 0 auto;
+            `}
+        >
+            <ScrollToTop />
+            <Switch>
+                <Route
+                    exact
+                    path="/"
+                    render={() => {
+                        const date = dateFormat(new Date(), 'yyyy-mm-dd');
+                        return <Redirect to={`/date/${date}`} />;
+                    }}
+                />
+                <Route path="/date/:date">
+                    <DateRoutes />
                 </Route>
             </Switch>
         </div>

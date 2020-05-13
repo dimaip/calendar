@@ -24,7 +24,7 @@ import useExternalDay from 'hooks/useExternalDay';
 import Services from './Services';
 import { parseISO, formatISO, subDays, addDays } from 'date-fns';
 import useReadings from 'hooks/useReadings';
-import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import BurgerMenu from './BurgerMenu';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
@@ -64,7 +64,7 @@ const Inner = ({ date, services, handleToggleClick, makeHandleClickShift }) => {
             <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
             <div>
                 {dayQuery.status === 'loading' && <Loader />}
-                {dayQuery.status === 'error' && <ErrorMessage />}
+                {dayQuery.status === 'error' && <ErrorMessage500 />}
                 {dayQuery.status === 'success' && (
                     <div>
                         <HeadingBar

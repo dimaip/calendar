@@ -1,10 +1,8 @@
 import React, { Suspense, useState, useEffect } from 'react';
 import { useParams, Link, useHistory, Redirect } from 'react-router-dom';
-import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
 import MDXProvider from './MDXProvider';
 import { css } from 'emotion';
-import getTheme from 'styles/theme';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
@@ -22,6 +20,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setLanguage } from 'redux/actions/language';
 import makeServices from './Texts/Texts';
 import './Texts/Shared.css';
+import { useTheme } from 'emotion-theming';
 const reloadOnFailedImport = e => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
     Sentry.captureException(e);
@@ -34,7 +33,7 @@ const Service = () => {
     const { serviceId: originalServiceId, date } = useParams();
     const dateObj = parseISO(date);
     const { data: day } = useDay(date);
-    const theme = getTheme(day?.colour);
+    const theme = useTheme();
 
     const lang = useSelector(state => state.settings.language);
     const dispatch = useDispatch();
@@ -76,11 +75,7 @@ const Service = () => {
     }, [serviceId]);
 
     if (!day) {
-        return (
-            <ThemeProvider theme={theme}>
-                <Loader />
-            </ThemeProvider>
-        );
+        return <Loader />;
     }
 
     // If service not found, redirect
@@ -115,134 +110,132 @@ const Service = () => {
             : `/date/${date}/services`;
 
     return (
-        <ThemeProvider theme={theme}>
-            <div>
+        <div>
+            <div
+                className={css`
+                    display: flex;
+                    align-items: center;
+                    height: 60px;
+                    border-bottom: 1px solid #ccc;
+                    position: sticky;
+                    top: 0;
+                    background-color: white;
+                    z-index: 1;
+                `}
+            >
+                <div>
+                    <Link to={backLink} title="Назад">
+                        <div
+                            className={css`
+                                padding: 18px;
+                                &:hover {
+                                    opacity: 0.8;
+                                }
+                            `}
+                        >
+                            <LeftIcon colour={theme.colours.darkGray} />
+                        </div>
+                    </Link>
+                </div>
                 <div
                     className={css`
+                        flex-grow: 1;
                         display: flex;
                         align-items: center;
-                        height: 60px;
-                        border-bottom: 1px solid #ccc;
-                        position: sticky;
-                        top: 0;
-                        background-color: white;
-                        z-index: 1;
                     `}
                 >
-                    <div>
-                        <Link to={backLink} title="Назад">
-                            <div
-                                className={css`
-                                    padding: 18px;
-                                    &:hover {
-                                        opacity: 0.8;
-                                    }
-                                `}
-                            >
-                                <LeftIcon colour={theme.colours.darkGray} />
-                            </div>
-                        </Link>
-                    </div>
-                    <div
-                        className={css`
-                            flex-grow: 1;
-                            display: flex;
-                            align-items: center;
-                        `}
-                    >
-                        {service?.calendar && (
-                            <Button
-                                title={calendarShown ? 'Спрятать календарь' : 'Показать календарь'}
-                                className={css`
-                                    flex-shrink: 0;
-                                    display: flex;
-                                    align-items: center;
-                                    border-radius: 5px;
-                                    padding: 8px !important;
-                                    line-height: 1.2;
-                                    text-align: center;
-                                    background: ${theme.colours.bgGray};
-                                    font-size: 14px;
-                                    margin-right: 8px;
-                                `}
-                                onClick={() => setCalendarShown(!calendarShown)}
-                            >
-                                {format(dateObj, 'd MMMM, EEEEEE', { locale: ru })}
-                                {calendarShown ? <Cross /> : null}
-                            </Button>
-                        )}
-                        {service?.lang && <LanguageSwitcher lang={lang} setLang={setLang} />}
-                        <TOCSwitcher service={service} lang={lang} />
-                    </div>
-
-                    <div
-                        className={css`
-                            flex-grow: 0;
-                        `}
-                    >
-                        <ZoomControlToggle />
-                    </div>
+                    {service?.calendar && (
+                        <Button
+                            title={calendarShown ? 'Спрятать календарь' : 'Показать календарь'}
+                            className={css`
+                                flex-shrink: 0;
+                                display: flex;
+                                align-items: center;
+                                border-radius: 5px;
+                                padding: 8px !important;
+                                line-height: 1.2;
+                                text-align: center;
+                                background: ${theme.colours.bgGray};
+                                font-size: 14px;
+                                margin-right: 8px;
+                            `}
+                            onClick={() => setCalendarShown(!calendarShown)}
+                        >
+                            {format(dateObj, 'd MMMM, EEEEEE', { locale: ru })}
+                            {calendarShown ? <Cross /> : null}
+                        </Button>
+                    )}
+                    {service?.lang && <LanguageSwitcher lang={lang} setLang={setLang} />}
+                    <TOCSwitcher service={service} lang={lang} />
                 </div>
-                {calendarShown && (
-                    <Calendar date={date} handleDayClick={handleDayClick} onClose={() => setCalendarShown(false)} />
-                )}
+
                 <div
                     className={css`
-                        position: relative;
+                        flex-grow: 0;
                     `}
                 >
-                    <Zoom>
-                        <>
-                            <div
-                                className={css`
-                                    margin-left: 12px;
-                                    margin-right: 12px;
-                                `}
-                            >
-                                <div
-                                    className={css`
-                                        position: relative;
-                                        background: ${theme.colours.bgGray};
-                                        margin: 0 -12px 24px -12px;
-                                        padding: 12px 12px 12px 12px;
-                                        font-size: 13px;
-                                        color: ${theme.colours.darkGray};
-                                    `}
-                                >
-                                    Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда
-                                    ошибается. За наиболее точной информацией обращайтесь к{' '}
-                                    <a
-                                        className={css`
-                                            text-decoration: underline;
-                                        `}
-                                        href={`http://www.patriarchia.ru/bu/${date}`}
-                                        target="_blank"
-                                    >
-                                        богослужебным указаниям.
-                                    </a>{' '}
-                                    Если вы обнаружили ошибку, пожалуйста,{' '}
-                                    <a
-                                        className={css`
-                                            text-decoration: underline;
-                                        `}
-                                        href="mailto:pb@psmb.ru"
-                                        target="_blank"
-                                    >
-                                        напишите нам
-                                    </a>
-                                </div>
-
-                                <MDXProvider>
-                                    <Suspense fallback={<Loader />}>
-                                        {TextComponent && <TextComponent date={date} lang={lang} />}
-                                    </Suspense>
-                                </MDXProvider>
-                            </div>
-                        </>
-                    </Zoom>
+                    <ZoomControlToggle />
                 </div>
             </div>
-        </ThemeProvider>
+            {calendarShown && (
+                <Calendar date={date} handleDayClick={handleDayClick} onClose={() => setCalendarShown(false)} />
+            )}
+            <div
+                className={css`
+                    position: relative;
+                `}
+            >
+                <Zoom>
+                    <>
+                        <div
+                            className={css`
+                                margin-left: 12px;
+                                margin-right: 12px;
+                            `}
+                        >
+                            <div
+                                className={css`
+                                    position: relative;
+                                    background: ${theme.colours.bgGray};
+                                    margin: 0 -12px 24px -12px;
+                                    padding: 12px 12px 12px 12px;
+                                    font-size: 13px;
+                                    color: ${theme.colours.darkGray};
+                                `}
+                            >
+                                Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда ошибается.
+                                За наиболее точной информацией обращайтесь к{' '}
+                                <a
+                                    className={css`
+                                        text-decoration: underline;
+                                    `}
+                                    href={`http://www.patriarchia.ru/bu/${date}`}
+                                    target="_blank"
+                                >
+                                    богослужебным указаниям.
+                                </a>{' '}
+                                Если вы обнаружили ошибку, пожалуйста,{' '}
+                                <a
+                                    className={css`
+                                        text-decoration: underline;
+                                    `}
+                                    href="mailto:pb@psmb.ru"
+                                    target="_blank"
+                                >
+                                    напишите нам
+                                </a>
+                            </div>
+
+                            <MDXProvider>
+                                <Suspense fallback={<Loader />}>
+                                    {TextComponent && <TextComponent date={date} lang={lang} />}
+                                </Suspense>
+                            </MDXProvider>
+                        </div>
+                    </>
+                </Zoom>
+            </div>
+        </div>
     );
 };
 export default Service;

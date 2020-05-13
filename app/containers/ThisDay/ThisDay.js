@@ -1,16 +1,60 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ThemeProvider } from 'emotion-theming';
 import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
 import Loader from 'components/Loader/Loader';
-import getTheme, { rteStyles } from 'styles/theme';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
-import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import useExternalDay from 'hooks/useExternalDay';
-import ErrorMessage from 'components/ErrorMessage/ErrorMessage';
+import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
+import ErrorMessage404 from 'components/ErrorMessage404/ErrorMessage404';
 import RteText from 'components/RteText/RteText';
+import { useTheme } from 'emotion-theming';
+
+const InnerContent = ({ theme, thisDay, externalDayStatus }) => {
+    if (externalDayStatus === 'loading') {
+        return <Loader />;
+    }
+
+    if (externalDayStatus === 'error') {
+        return <ErrorMessage500 />;
+    }
+    if (!thisDay) {
+        return <ErrorMessage404 />;
+    }
+    return (
+        <>
+            <h3
+                className={css`
+                    color: ${theme.colours.primary};
+                    margin-bottom: 12px;
+                    font-size: 30px;
+                `}
+            >
+                {thisDay.title}
+            </h3>
+            {thisDay.image && (
+                <div
+                    className={css`
+                        margin-top: 24px;
+                        margin-bottom: 24px;
+                    `}
+                >
+                    <img
+                        src={thisDay.image}
+                        alt={thisDay.title}
+                        className={css`
+                            max-width: 100%;
+                        `}
+                    />
+                </div>
+            )}
+            <Zoom>
+                <RteText html={thisDay.bodytext} />
+            </Zoom>
+        </>
+    );
+};
 
 const ThisDay = () => {
     const { thisDayId, date } = useParams();
@@ -18,102 +62,57 @@ const ThisDay = () => {
     const { thisDays } = externalDay || {};
 
     const thisDay = (thisDays || []).find(thisDay => thisDay.id === thisDayId);
-    const { data: day } = useDay(date);
-    const theme = getTheme(day?.colour);
-    if (externalDayStatus === 'loading') {
-        return (
-            <ThemeProvider theme={theme}>
-                <Loader />
-            </ThemeProvider>
-        );
-    }
-
-    if (externalDayStatus === 'error' || !thisDays) {
-        return (
-            <ThemeProvider theme={theme}>
-                <ErrorMessage />
-            </ThemeProvider>
-        );
-    }
+    const theme = useTheme();
 
     return (
-        <ThemeProvider theme={theme}>
-            <div>
+        <div>
+            <div
+                className={css`
+                    display: flex;
+                    align-items: center;
+                    height: 60px;
+                    border-bottom: 1px solid #ccc;
+                    position: sticky;
+                    top: 0;
+                    background-color: white;
+                `}
+            >
                 <div
                     className={css`
-                        display: flex;
-                        align-items: center;
-                        height: 60px;
-                        border-bottom: 1px solid #ccc;
-                        position: sticky;
-                        top: 0;
-                        background-color: white;
+                        position: absolute;
                     `}
                 >
-                    <div
-                        className={css`
-                            position: absolute;
-                        `}
-                    >
-                        <Link to={`/date/${date}`} title="Назад">
-                            <div
-                                className={css`
-                                    padding: 18px;
-                                    &:hover {
-                                        opacity: 0.8;
-                                    }
-                                `}
-                            >
-                                <LeftIcon />
-                            </div>
-                        </Link>
-                    </div>
-                    <div
-                        className={css`
-                            position: absolute;
-                            right: 12px;
-                        `}
-                    >
-                        <ZoomControlToggle />
-                    </div>
-                </div>
-                <div
-                    className={css`
-                        margin-top: 24px;
-                        padding: 0 16px 16px 16px;
-                    `}
-                >
-                    <h3
-                        className={css`
-                            color: ${theme.colours.primary};
-                            margin-bottom: 12px;
-                            font-size: 30px;
-                        `}
-                    >
-                        {thisDay.title}
-                    </h3>
-                    {thisDay.image && (
+                    <Link to={`/date/${date}`} title="Назад">
                         <div
                             className={css`
-                                margin-top: 24px;
-                                margin-bottom: 24px;
+                                padding: 18px;
+                                &:hover {
+                                    opacity: 0.8;
+                                }
                             `}
                         >
-                            <img
-                                src={thisDay.image}
-                                alt={thisDay.title}
-                                className={css`
-                                    max-width: 100%;
-                                `}
-                            />
+                            <LeftIcon />
                         </div>
-                    )}
-                    <Zoom>
-                        <RteText html={thisDay.bodytext} />
-                    </Zoom>
+                    </Link>
+                </div>
+                <div
+                    className={css`
+                        position: absolute;
+                        right: 12px;
+                    `}
+                >
+                    <ZoomControlToggle />
                 </div>
             </div>
-        </ThemeProvider>
+            <div
+                className={css`
+                    margin-top: 24px;
+                    padding: 0 16px 16px 16px;
+                `}
+            >
+                <InnerContent thisDay={thisDay} theme={theme} externalDayStatus={externalDayStatus} />
+            </div>
+        </div>
     );
 };
 export default ThisDay;
