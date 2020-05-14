@@ -27,7 +27,6 @@ import BurgerMenu from './BurgerMenu';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 import IosPrompt from './IosPrompt';
-import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -46,11 +45,9 @@ const BorderedSection = ({ children }) => {
     );
 };
 
-const Inner = ({ date, services, handleToggleClick, makeHandleClickShift }) => {
+const SwipeableHeader = ({ date, handleToggleClick, makeHandleClickShift }) => {
     const dayQuery = useDay(date);
     const day = dayQuery.data;
-    const externalDayQuery = useExternalDay(date);
-    const { sermons, thisDays } = externalDayQuery.data || {};
 
     const themeColour = useRef();
     if (day) {
@@ -73,57 +70,75 @@ const Inner = ({ date, services, handleToggleClick, makeHandleClickShift }) => {
                             fastingLevelName={day.fastingLevelName}
                             icon={day.icon}
                         />
-                        <Zoom>
-                            <div
-                                className={css`
-                                    padding: 0 18px;
-                                `}
-                            >
-                                {services ? (
-                                    <Services date={date} readings={day.readings || {}} />
-                                ) : (
-                                    <>
-                                        <SolidSection>
-                                            <SectionHeading>Богослужебные чтения</SectionHeading>
-                                            <ReadingList readings={day.readings || {}} />
-                                        </SolidSection>
-
-                                        <BorderedSection>
-                                            <SectionHeading>Святые дня</SectionHeading>
-                                            <Saints saints={day.saints} date={date} />
-                                        </BorderedSection>
-
-                                        <ThisDays thisDays={thisDays} date={date} />
-                                        {(day.prayers || day.prayersOther) && (
-                                            <BorderedSection>
-                                                <div
-                                                    className={css`
-                                                        overflow: auto;
-                                                    `}
-                                                >
-                                                    <SectionHeading>Песнопения</SectionHeading>
-                                                </div>
-                                                <Hymns hymns={(day.prayers || '') + (day.prayersOther || '')} />
-                                            </BorderedSection>
-                                        )}
-                                        {day.bReadings && Object.keys(day.bReadings).length > 0 && (
-                                            <SolidSection>
-                                                <SectionHeading>Душеполезные чтения</SectionHeading>
-                                                <ReadingList brother readings={day.bReadings} />
-                                            </SolidSection>
-                                        )}
-                                        <SolidSection>
-                                            <Sermons date={date} sermons={sermons} />
-                                        </SolidSection>
-                                    </>
-                                )}
-                            </div>
-                        </Zoom>
-                        {!services && <Links />}
                     </div>
                 )}
             </div>
         </ThemeProvider>
+    );
+};
+
+const InnerContent = ({ date, services }) => {
+    const dayQuery = useDay(date);
+    const day = dayQuery.data;
+    const externalDayQuery = useExternalDay(date);
+    const { sermons, thisDays } = externalDayQuery.data || {};
+
+    return (
+        <div>
+            {dayQuery.status === 'loading' && <Loader />}
+            {dayQuery.status === 'error' && <ErrorMessage500 />}
+            {dayQuery.status === 'success' && (
+                <div>
+                    <Zoom>
+                        <div
+                            className={css`
+                                padding: 0 18px;
+                            `}
+                        >
+                            {services ? (
+                                <Services date={date} readings={day.readings || {}} />
+                            ) : (
+                                <>
+                                    <SolidSection>
+                                        <SectionHeading>Богослужебные чтения</SectionHeading>
+                                        <ReadingList readings={day.readings || {}} />
+                                    </SolidSection>
+
+                                    <BorderedSection>
+                                        <SectionHeading>Святые дня</SectionHeading>
+                                        <Saints saints={day.saints} date={date} />
+                                    </BorderedSection>
+
+                                    <ThisDays thisDays={thisDays} date={date} />
+                                    {(day.prayers || day.prayersOther) && (
+                                        <BorderedSection>
+                                            <div
+                                                className={css`
+                                                    overflow: auto;
+                                                `}
+                                            >
+                                                <SectionHeading>Песнопения</SectionHeading>
+                                            </div>
+                                            <Hymns hymns={(day.prayers || '') + (day.prayersOther || '')} />
+                                        </BorderedSection>
+                                    )}
+                                    {day.bReadings && Object.keys(day.bReadings).length > 0 && (
+                                        <SolidSection>
+                                            <SectionHeading>Душеполезные чтения</SectionHeading>
+                                            <ReadingList brother readings={day.bReadings} />
+                                        </SolidSection>
+                                    )}
+                                    <SolidSection>
+                                        <Sermons date={date} sermons={sermons} />
+                                    </SolidSection>
+                                </>
+                            )}
+                        </div>
+                    </Zoom>
+                    {!services && <Links />}
+                </div>
+            )}
+        </div>
     );
 };
 
@@ -153,8 +168,6 @@ const Main = ({ services = false }) => {
         calendarRef?.current?.toggleCalendarShown(true);
     };
 
-    const theme = getTheme();
-
     const goLeft = makeHandleClickShift('left');
     const goRight = makeHandleClickShift('right');
 
@@ -164,52 +177,51 @@ const Main = ({ services = false }) => {
         const indexOffset = index - activeIndex;
         const effectiveDate = formatISO(addDays(parseISO(date), indexOffset), { representation: 'date' });
         return (
-            <Inner
+            <SwipeableHeader
                 key={key}
                 date={effectiveDate}
-                services={services}
                 handleToggleClick={handleToggleClick}
                 makeHandleClickShift={makeHandleClickShift}
             />
         );
     };
     return (
-        <ThemeProvider theme={theme}>
-            <div>
-                <HeaderMain
-                    calendarRef={calendarRef}
-                    menuShown={menuShown}
-                    setMenuShown={setMenuShown}
-                    setNewDate={setNewDate}
-                    date={date}
+        <div>
+            <HeaderMain
+                calendarRef={calendarRef}
+                menuShown={menuShown}
+                setMenuShown={setMenuShown}
+                setNewDate={setNewDate}
+                date={date}
+            />
+            <div
+                className={css`
+                    flex-grow: 1;
+                `}
+            >
+                <VirtualizeSwipeableViews
+                    index={activeIndex}
+                    slideRenderer={slideRenderer}
+                    overscanSlideAfter={1}
+                    overscanSlideBefore={1}
+                    onChangeIndex={(index, indexLatest) => {
+                        if (index < indexLatest) {
+                            setActiveIndex(index);
+                            goLeft();
+                        } else {
+                            setActiveIndex(index);
+                            goRight();
+                        }
+                    }}
                 />
-                <div
-                    className={css`
-                        flex-grow: 1;
-                    `}
-                >
-                    <VirtualizeSwipeableViews
-                        index={activeIndex}
-                        slideRenderer={slideRenderer}
-                        overscanSlideAfter={1}
-                        overscanSlideBefore={1}
-                        onChangeIndex={(index, indexLatest) => {
-                            if (index < indexLatest) {
-                                setActiveIndex(index);
-                                goLeft();
-                            } else {
-                                setActiveIndex(index);
-                                goRight();
-                            }
-                        }}
-                    />
-                </div>
-
-                <BurgerMenu menuShown={menuShown} setMenuShown={setMenuShown} />
-                <BottomNav active={services ? 'services' : 'calendar'} />
-                <IosPrompt />
             </div>
-        </ThemeProvider>
+
+            <InnerContent date={date} services={services} />
+
+            <BurgerMenu menuShown={menuShown} setMenuShown={setMenuShown} />
+            <BottomNav active={services ? 'services' : 'calendar'} />
+            <IosPrompt />
+        </div>
     );
 };
 
