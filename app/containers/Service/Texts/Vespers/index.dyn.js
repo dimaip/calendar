@@ -43,10 +43,10 @@ const Vespers = ({ date }) => {
         </>
     ) : null;
 
-    const saints = day?.saints && (
+    const saints = tomorrowDay?.saints && (
         <SolidSection marginTop={24} marginHorizontal={-12}>
             <SectionHeading>Святые дня</SectionHeading>
-            <Saints saints={day.saints} date={date} />
+            <Saints saints={tomorrowDay.saints} date={date} />
         </SolidSection>
     );
 
