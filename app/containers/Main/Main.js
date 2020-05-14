@@ -88,8 +88,10 @@ const Inner = ({ date, services, handleToggleClick, makeHandleClickShift }) => {
                                             <ReadingList readings={day.readings || {}} />
                                         </SolidSection>
 
-                                        <SectionHeading>Святые дня</SectionHeading>
-                                        <Saints saints={day.saints} date={date} />
+                                        <BorderedSection>
+                                            <SectionHeading>Святые дня</SectionHeading>
+                                            <Saints saints={day.saints} date={date} />
+                                        </BorderedSection>
 
                                         <ThisDays thisDays={thisDays} date={date} />
                                         {(day.prayers || day.prayersOther) && (
