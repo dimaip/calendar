@@ -115,6 +115,7 @@ export const getLentInfo = memoize(
             (current_date >= cristmass_lent_nicolos && current_date <= end_of_current_year) ||
             (current_date >= begin_of_current_year && current_date < cristmass_preprazd)
         ) {
+            fastName = 'Рождественский пост';
             if (current_day_of_week == 0 || current_day_of_week == 6) {
                 fastingLevel = 5;
             }
@@ -130,6 +131,7 @@ export const getLentInfo = memoize(
         }
 
         if (current_date >= cristmass_preprazd && current_date <= cristmass_lent_end) {
+            fastName = 'Рождественский пост';
             if (current_day_of_week == 0 || current_day_of_week == 6) {
                 fastingLevel = 4;
             }
@@ -139,10 +141,6 @@ export const getLentInfo = memoize(
             if (current_day_of_week == 2 || current_day_of_week == 4) {
                 fastingLevel = 3;
             }
-        }
-
-        if (current_date >= cristmass_lent_begin && current_date <= cristmass_lent_end) {
-            fastName = 'Рождественский пост';
         }
 
         // After Cristmass Lent
