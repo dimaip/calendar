@@ -34,6 +34,16 @@ const ErrorMessage = () => {
                     Что-то пошло не так...
                 </h3>
                 <p>Наши специалисты уже в курсе и пытаются разобраться в чем дело</p>
+                <p>
+                    <a
+                        className={css`
+                            text-decoration: underline;
+                        `}
+                        href="/"
+                    >
+                        Вернуться на главную
+                    </a>
+                </p>
             </div>
         </div>
     );

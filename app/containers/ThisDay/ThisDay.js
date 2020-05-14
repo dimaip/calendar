@@ -1,15 +1,14 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import LeftIcon from 'components/svgs/LeftIcon';
+import { useParams } from 'react-router-dom';
 import { css } from 'emotion';
 import Loader from 'components/Loader/Loader';
-import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Zoom from 'components/Zoom/Zoom';
 import useExternalDay from 'hooks/useExternalDay';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import ErrorMessage404 from 'components/ErrorMessage404/ErrorMessage404';
 import RteText from 'components/RteText/RteText';
 import { useTheme } from 'emotion-theming';
+import LayoutInner from 'components/LayoutInner/LayoutInner';
 
 const InnerContent = ({ theme, thisDay, externalDayStatus }) => {
     if (externalDayStatus === 'loading') {
@@ -65,54 +64,9 @@ const ThisDay = () => {
     const theme = useTheme();
 
     return (
-        <div>
-            <div
-                className={css`
-                    display: flex;
-                    align-items: center;
-                    height: 60px;
-                    border-bottom: 1px solid #ccc;
-                    position: sticky;
-                    top: 0;
-                    background-color: white;
-                `}
-            >
-                <div
-                    className={css`
-                        position: absolute;
-                    `}
-                >
-                    <Link to={`/date/${date}`} title="Назад">
-                        <div
-                            className={css`
-                                padding: 18px;
-                                &:hover {
-                                    opacity: 0.8;
-                                }
-                            `}
-                        >
-                            <LeftIcon />
-                        </div>
-                    </Link>
-                </div>
-                <div
-                    className={css`
-                        position: absolute;
-                        right: 12px;
-                    `}
-                >
-                    <ZoomControlToggle />
-                </div>
-            </div>
-            <div
-                className={css`
-                    margin-top: 24px;
-                    padding: 0 16px 16px 16px;
-                `}
-            >
-                <InnerContent thisDay={thisDay} theme={theme} externalDayStatus={externalDayStatus} />
-            </div>
-        </div>
+        <LayoutInner>
+            <InnerContent thisDay={thisDay} theme={theme} externalDayStatus={externalDayStatus} />
+        </LayoutInner>
     );
 };
 export default ThisDay;

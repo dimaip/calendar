@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import Loader from 'components/Loader/Loader';
 
-const reloadOnFailedImport = e => {
+const catchFailedImport = e => {
     console.warn('Loading mdx file failed', e);
     Sentry.captureException(e);
 };
@@ -11,10 +11,10 @@ const MdxLoader = props => {
     lang = lang === 'default' ? 'ru' : lang;
     lang = lang === 'ЦСЯ' ? 'csj' : lang;
     const Component = React.lazy(() =>
-        import(`containers/Service/Texts/${src}/${lang || 'ru'}.mdx`).catch(reloadOnFailedImport)
+        import(`containers/Service/Texts/${src}/${lang || 'ru'}.mdx`).catch(catchFailedImport)
     );
     return (
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<Loader width={32} />}>
             <Component {...props} />
         </Suspense>
     );

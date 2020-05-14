@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import { css } from 'emotion';
 import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
 import { DatePickerCalendar } from 'react-nice-dates';
@@ -93,12 +94,12 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
         `,
     };
 
-    return (
+    const calendar = (
         <div
             className={css`
                 position: fixed;
                 z-index: 4;
-                top: 44px;
+                top: 60px;
                 left: 0;
                 right: 0;
                 bottom: 0;
@@ -147,5 +148,7 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
             />
         </div>
     );
+
+    return ReactDOM.createPortal(calendar, document.getElementById('react-portal'));
 };
 export default Calendar;

@@ -1,15 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { css } from 'emotion';
 import { ThemeProvider, useTheme } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
-import dateFormat from 'dateformat';
 import ReadingList from './ReadingList';
-import Header from 'components/Header/Header';
+import HeaderMain from 'containers/Main/HeaderMain';
 import Nav from 'components/Nav/Nav';
 import HeadingBar from './HeadingBar';
 import Loader from 'components/Loader/Loader';
 import getTheme from 'styles/theme';
-import Calendar from './Calendar';
 import useDay from 'hooks/useDay';
 import BottomNav from 'components/BottomNav/BottomNav';
 import Saints from './Saints';
@@ -29,6 +27,7 @@ import BurgerMenu from './BurgerMenu';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 import IosPrompt from './IosPrompt';
+import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -130,17 +129,13 @@ const Main = ({ services = false }) => {
     const { date } = useParams();
     // pre-fetch readings
     useReadings(date);
-    const [calendarShown, setCalendarShown] = useState(false);
     const [menuShown, setMenuShown] = useState(false);
+
+    const calendarRef = useRef();
 
     const history = useHistory();
     const setNewDate = dateString => {
         history.push(`/date/${dateString}${services ? '/services' : ''}`);
-    };
-    const handleDayClick = day => {
-        const dateString = dateFormat(day, 'yyyy-mm-dd');
-        setNewDate(dateString);
-        setCalendarShown(false);
     };
     const makeHandleClickShift = direction => () => {
         switch (direction) {
@@ -152,7 +147,9 @@ const Main = ({ services = false }) => {
                 break;
         }
     };
-    const handleToggleClick = () => setCalendarShown(!calendarShown);
+    const handleToggleClick = () => {
+        calendarRef?.current?.toggleCalendarShown(true);
+    };
 
     const theme = getTheme();
 
@@ -177,21 +174,18 @@ const Main = ({ services = false }) => {
     return (
         <ThemeProvider theme={theme}>
             <div>
-                <Header
-                    handleToggleClick={handleToggleClick}
-                    calendarShown={calendarShown}
+                <HeaderMain
+                    calendarRef={calendarRef}
                     menuShown={menuShown}
                     setMenuShown={setMenuShown}
+                    setNewDate={setNewDate}
+                    date={date}
                 />
                 <div
                     className={css`
                         flex-grow: 1;
                     `}
                 >
-                    {calendarShown && (
-                        <Calendar date={date} handleDayClick={handleDayClick} onClose={() => setCalendarShown(false)} />
-                    )}
-
                     <VirtualizeSwipeableViews
                         index={activeIndex}
                         slideRenderer={slideRenderer}

@@ -1,9 +1,9 @@
 import React from 'react';
-const Loader = () => (
+const Loader = ({ width = 80 }) => (
     <svg
         style={{ margin: 'auto', background: 'white', display: 'block', shapeRendering: 'auto' }}
-        width={80}
-        height={80}
+        width={width}
+        height={width}
         viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid"
     >

@@ -4,6 +4,9 @@ import { css } from 'emotion';
 
 const TOCSwitcher = ({ service, lang }) => {
     const data = service?.TOC;
+    if (!data) {
+        return null;
+    }
     const items = Object.keys(data).map(item => ({
         value: item,
         label: data[item],
@@ -57,9 +60,6 @@ const TOCSwitcher = ({ service, lang }) => {
                 }
             };
         }, [lang]);
-    }
-    if (!data) {
-        return null;
     }
     return (
         <SelectBox

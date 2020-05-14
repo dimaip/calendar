@@ -102,7 +102,7 @@ const ReadingItem = ({ readingVerse, type }) => {
                     background-color: white;
                     margin: 0 -17px;
                     padding: 8px 17px;
-                    z-index: 3;
+                    /* z-index: 3; */
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
