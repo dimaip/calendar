@@ -57,6 +57,7 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
     const modifiersClassNames = {
         today: css`
             color: #ae841a !important;
+            text-decoration: underline;
         `,
         selected: css`
             & .nice-dates-day_date {

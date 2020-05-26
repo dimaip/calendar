@@ -102,7 +102,7 @@ const Service = () => {
     );
 
     return (
-        <LayoutInner backLink={backLink} left={left}>
+        <LayoutInner backLink={backLink} left={left} paddedContent={false}>
             <Zoom>
                 <>
                     <div

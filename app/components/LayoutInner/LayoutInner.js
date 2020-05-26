@@ -5,7 +5,7 @@ import { css } from 'emotion';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Header from 'components/Header/Header';
 
-const LayoutInner = ({ children, left = null, right = null, backLink = null }) => {
+const LayoutInner = ({ children, left = null, right = null, backLink = null, paddedContent = true }) => {
     const { date } = useParams();
     return (
         <div
@@ -47,10 +47,14 @@ const LayoutInner = ({ children, left = null, right = null, backLink = null }) =
                 </div>
             </Header>
             <div
-                className={css`
-                    margin-top: 24px;
-                    padding: 0 16px 16px 16px;
-                `}
+                className={
+                    paddedContent
+                        ? css`
+                              margin-top: 24px;
+                              padding: 0 16px 16px 16px;
+                          `
+                        : ''
+                }
             >
                 {children}
             </div>
