@@ -11,13 +11,23 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
     const theme = useTheme();
     const [month, setMonth] = useState(new Date(date));
     const modifiers = {
-        h12: date => {
-            const { feastType } = getFeastInfo(date);
-            return feastType === '12';
+        red: date => {
+            const { calendarColour } = getFeastInfo(date);
+            return calendarColour === 'red';
         },
-        hGreat: date => {
-            const { feastType } = getFeastInfo(date);
-            return feastType === 'great';
+        blue: date => {
+            const { calendarColour } = getFeastInfo(date);
+            return calendarColour === 'blue';
+        },
+        gold: date => {
+            const { calendarColour } = getFeastInfo(date);
+            const { calendarColour: calendarColourFeast } = getLentInfo(date);
+            return calendarColour === 'gold' || calendarColourFeast === 'gold';
+        },
+        green: date => {
+            const { calendarColour } = getFeastInfo(date);
+            const { calendarColour: calendarColourFeast } = getLentInfo(date);
+            return calendarColour === 'green' || calendarColourFeast === 'green';
         },
         pStrict: date => {
             const { fastingLevel } = getLentInfo(date);
@@ -29,14 +39,6 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
                 fastingLevel === 5 ||
                 fastingLevel === 6
             );
-        },
-        p7: date => {
-            const { fastingLevel } = getLentInfo(date);
-            return fastingLevel === 7;
-        },
-        p: date => {
-            const { fastingLevel } = getLentInfo(date);
-            return fastingLevel && fastingLevel !== 8;
         },
     };
     const baseStyle = css`
@@ -53,43 +55,50 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
         margin: 10px;
     `;
     const modifiersClassNames = {
+        today: css`
+            color: #ae841a !important;
+        `,
         selected: css`
             & .nice-dates-day_date {
                 ${baseStyle}
                 font-weight: bold;
-                text-decoration: underline;
+                color: #ae841a !important;
+                border: 2px solid #ae841a;
             }
         `,
-        h12: css`
+        red: css`
             & .nice-dates-day_date {
                 ${baseStyle}
-                background-color: #dc143c;
-                color: white;
+                background-color: #dc143c !important;
+                color: white !important;
             }
         `,
-        hGreat: css`
+        blue: css`
             & .nice-dates-day_date {
                 ${baseStyle}
-                border-color: #dc143c;
+                background-color: #4169E1 !important;
+                color: white !important;
             }
         `,
-        p: css`
+        gold: css`
             & .nice-dates-day_date {
                 ${baseStyle}
-                border-color: #7b68ee;
+                background-color: #AE841A !important;
+                color: white !important;
             }
         `,
-        p7: css`
-        & .nice-dates-day_date {
-            ${baseStyle}
-            border-color: ${theme.colours.primary};
-        }
-    `,
+        green: css`
+            & .nice-dates-day_date {
+                ${baseStyle}
+                background-color: #73be73 !important;
+                color: white !important;
+            }
+        `,
         pStrict: css`
             & .nice-dates-day_date {
                 ${baseStyle}
                 background-color: #7b68ee;
-                color: white;
+                color: white !important;
             }
         `,
     };
@@ -99,7 +108,7 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
             className={css`
                 position: fixed;
                 z-index: 4;
-                top: 60px;
+                top: 44px;
                 left: 0;
                 right: 0;
                 bottom: 0;

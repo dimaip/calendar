@@ -66,6 +66,7 @@ export const getLentInfo = memoize(
         let fastingLevel = 8;
         let fastName = 'Постный день';
         let colour = null;
+        let calendarColour = null;
         let icon = null;
 
         const pascha = calculateEasterDate(y);
@@ -259,6 +260,7 @@ export const getLentInfo = memoize(
         }
         if (current_date.valueOf() == palm_saturday.valueOf()) {
             fastingLevel = 6;
+            calendarColour = 'gold';
         }
         if (current_date.valueOf() == palm_sunday.valueOf()) {
             fastingLevel = 5;
@@ -377,6 +379,7 @@ export const getLentInfo = memoize(
                 fastingLevel,
                 fastingLevelName: fastingLevels[fastingLevel],
                 colour,
+                calendarColour,
                 icon,
             };
         }
@@ -391,6 +394,7 @@ export const getFeastInfo = memoize(
         let title = '';
         let feastType = null;
         let colour = null;
+        let calendarColour = null;
         let icon = null;
         let vasiliy = false;
         let lpod = false;
@@ -462,6 +466,7 @@ export const getFeastInfo = memoize(
         if (pascha.getTime() == date.getTime()) {
             title = 'Пасха';
             feastType = '12';
+            calendarColour = 'red';
         }
 
         const palm_sunday = calculateEasterDate(y);
@@ -471,6 +476,7 @@ export const getFeastInfo = memoize(
             title = 'Вход Господень в Иерусалим';
             feastType = '12';
             colour = '#73be73';
+            calendarColour = 'green';
             icon = 'vhod.jpg';
         }
 
@@ -517,12 +523,14 @@ export const getFeastInfo = memoize(
             title = 'Пятидесятница';
             feastType = '12';
             colour = '#73be73';
+            calendarColour = 'green';
         }
 
         if (new Date(y, 8, 21).getTime() == date.getTime()) {
             title = 'Рождество Богородицы';
             feastType = '12';
             colour = '#4169E1';
+            calendarColour = 'blue';
         }
 
         if (new Date(y, 8, 27).getTime() == date.getTime()) {
@@ -535,30 +543,35 @@ export const getFeastInfo = memoize(
             title = 'Введение во храм Пресвятой Богородицы';
             feastType = '12';
             colour = '#4169E1';
+            calendarColour = 'blue';
         }
 
         if (new Date(y, 0, 7).getTime() == date.getTime()) {
             title = 'Рождество Христово';
             feastType = '12';
             colour = '#A2A2A2';
+            calendarColour = 'red';
         }
 
         if (new Date(y, 0, 19).getTime() == date.getTime()) {
             title = 'Крещение Господне';
             feastType = '12';
             colour = '#A2A2A2';
+            calendarColour = 'red';
         }
 
         if (new Date(y, 1, 15).getTime() == date.getTime()) {
             title = 'Сретение Господне';
             feastType = '12';
             colour = '#A2A2A2';
+            calendarColour = 'blue';
         }
 
         if (new Date(y, 3, 7).getTime() == date.getTime()) {
             title = 'Благовещение Пресвятой Богородицы';
             feastType = '12';
             colour = '#4169E1';
+            calendarColour = 'blue';
             icon = 'annunciation.jpg';
         }
 
@@ -566,6 +579,7 @@ export const getFeastInfo = memoize(
             title = 'Преображение Господне';
             feastType = '12';
             colour = '#A2A2A2';
+            calendarColour = 'red';
             icon = 'transfiguration.png';
         }
 
@@ -573,12 +587,14 @@ export const getFeastInfo = memoize(
             title = 'Успение Богородицы';
             feastType = '12';
             colour = '#4169E1';
+            calendarColour = 'blue';
         }
 
         if (new Date(y, 9, 14).getTime() == date.getTime()) {
             title = 'Покров Пресвятой Богородицы';
             feastType = 'great';
             colour = '#4169E1';
+            calendarColour = 'blue';
         }
 
         if (new Date(y, 0, 14).getTime() == date.getTime()) {
@@ -591,12 +607,14 @@ export const getFeastInfo = memoize(
             title = 'Рождество Иоанна Крестителя';
             feastType = 'great';
             icon = 'baptist.png';
+            calendarColour = 'red';
         }
 
         if (new Date(y, 6, 12).getTime() == date.getTime()) {
             title = 'День святых первоверховных апостолов Петра и Павла';
             feastType = 'great';
             icon = 'peterAndPaul.svg';
+            calendarColour = 'gold';
         }
 
         if (new Date(y, 6, 13).getTime() == date.getTime()) {
@@ -613,6 +631,7 @@ export const getFeastInfo = memoize(
             title,
             feastType,
             colour,
+            calendarColour,
             icon,
             vasiliy,
             lpod,
