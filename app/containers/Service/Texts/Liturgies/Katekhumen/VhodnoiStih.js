@@ -1,13 +1,9 @@
 import React from 'react';
+import Html from 'components/Html/Html';
 const VhodnoiStih = ({ day, lang }) => {
-    const vhodnoiStih = day?.liturgyParts?.['Входной стих'];
+    const vhodnoiStih = day?.parts?.liturgy?.['Входной стих'];
     if (vhodnoiStih) {
-        return (
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span> {vhodnoiStih}
-            </p>
-        );
+        return <Html html={vhodnoiStih} />;
     }
 
     return (

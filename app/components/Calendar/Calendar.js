@@ -64,7 +64,7 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
                 ${baseStyle}
                 font-weight: bold;
                 color: #ae841a !important;
-                border: 2px solid #ae841a;
+                border: 2px solid #ae841a !important;
             }
         `,
         red: css`

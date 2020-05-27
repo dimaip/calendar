@@ -150,8 +150,8 @@ const Prokimen = ({ title, verse1, stih, title2, verse2, audio }) => (
 
 const Prokimens = ({ day, date }) => {
     const commonProkimen = getProkimenData(day, date);
-    let prokimens = day?.liturgyParts?.['Прокимен']
-        ? [commonProkimen, ...day.liturgyParts['Прокимен']]
+    let prokimens = day?.parts?.liturgy?.['Прокимен']
+        ? [commonProkimen, ...day.parts.liturgy['Прокимен']]
         : [commonProkimen];
     prokimens = prokimens.filter(Boolean);
     const exclusiveProkimens = prokimens.filter(prokimen => prokimen.replace);

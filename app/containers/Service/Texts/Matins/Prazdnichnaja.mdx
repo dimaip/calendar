@@ -1,0 +1,65 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Html from 'components/Html/Html';
+
+<span id="nachalo" />
+
+# Утреня
+
+<br />
+
+**П** Слава святой, и единосущной, и животворящей, и нераздельной Троице ныне и всегда и во веки веков!
+
+**Н** Аминь.
+
+<>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
+
+<>{props.dayOfWeek === 1 && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
+<>{props.dayOfWeek === 2 && <MdxLoader src="Matins/Prayer2" lang={props.lang} />}</>
+<>{props.dayOfWeek === 3 && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
+<>{props.dayOfWeek === 4 && <MdxLoader src="Matins/Prayer4" lang={props.lang} />}</>
+<>{props.dayOfWeek === 5 && <MdxLoader src="Matins/Prayer7" lang={props.lang} />}</>
+<>{props.dayOfWeek === 6 && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
+
+<MdxLoader src="Matins/Prayer11" lang={props.lang} />
+<MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
+<Html html={props.day?.parts?.matins?.['Cтихиры на хвалите']} />
+<MdxLoader src="Matins/Slavoslovie" lang={props.lang} />
+
+<>{props.hymns}</>
+
+<span id="reading" />
+
+## Чтения
+
+**П** Премудрость! Станем благоговейно! Услышим святое евангелие!
+
+**П** От (имя) святого благовестия чтение.
+
+**Н** Слава Тебе, Господи, слава Тебе!
+
+**П** Будем внимательны!
+
+<br />
+
+<>{props.readings}</>
+
+**Н** Слава Тебе, Господи, слава Тебе!
+
+### Проповедь
+
+### Воскресная песнь, глас 6
+
+**Н** Увидев Воскресение Христа, / покло́нимся святому Господу Иисусу, / одному безгрешному! / Кресту Твоему поклоняемся, Христе, / и святое Воскресение Твоё поём и славим; / Ты — Бог наш, / кроме Тебя иного не знаем / и имя Твоё призываем. / Приди́те, все верные, / покло́нимся святому Христову Воскресению, / ибо пришла через Крест радость всему миру! / Всегда благословляя Господа, / воспеваем Воскресение Его: / Он, ради нас распятие претерпев, / Смертию Смерть победил!
+
+<MdxLoader src="Matins/PrayerKatekhumens" lang={props.lang} />
+<MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+
+## Заключение
+
+**П** Завершим нашу утреннюю молитву Господу!
+
+<MdxLoader src="Matins/Prayer12" lang={props.lang} />
+<br />
+<MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
+
+<>{props.otpust}</>

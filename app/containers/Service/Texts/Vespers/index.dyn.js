@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
-import FominaToAscension from './FominaToAscension.mdx';
+import Prazdnichnaja from './Prazdnichnaja.mdx';
 import useDay from 'hooks/useDay';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 import Loader from 'components/Loader/Loader';
@@ -9,6 +9,7 @@ import SolidSection from 'components/SolidSection/SolidSection';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';
 import Hymns from 'containers/Main/Hymns';
+import Ending from '../Shared/Ending/Ending';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -22,7 +23,7 @@ const Readings = ({ readingsForService, day }) =>
     ) : (
         <Loader />
     );
-const Vespers = ({ date }) => {
+const Vespers = ({ date, lang }) => {
     const dateObj = new Date(date);
     const tomorrowDateObj = new Date(date);
     tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
@@ -49,13 +50,27 @@ const Vespers = ({ date }) => {
             <Saints saints={tomorrowDay.saints} date={date} />
         </SolidSection>
     );
+    const otpust = <Ending date={tomorrowDateObj} lang={lang} day={tomorrowDay} />;
 
-    const isEasterOffsetRange = makeIsEasterOffsetRange(date);
-    const fominaToAscension = isEasterOffsetRange(7, 39);
-    if (fominaToAscension) {
-        return <FominaToAscension dayOfWeek={dayOfWeek} hymns={hymns} readings={readings} saints={saints} />;
+    const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDateObj);
+    const isAscension = isEasterOffsetRange(39);
+    const easterSeason = isEasterOffsetRange(0, 40);
+    const fominaToPetrov = isEasterOffsetRange(7, 57);
+    if (fominaToPetrov) {
+        return (
+            <Prazdnichnaja
+                dayOfWeek={dayOfWeek}
+                hymns={hymns}
+                readings={readings}
+                saints={saints}
+                easterSeason={easterSeason}
+                isAscension={isAscension}
+                otpust={otpust}
+                day={tomorrowDay}
+            />
+        );
     }
-    return null;
+    return <>На этот день мы еще не успели составить чин службы</>;
 };
 
 export default Vespers;

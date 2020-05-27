@@ -43,11 +43,16 @@ export const calculateEasterDate = year => {
 };
 
 export const makeIsEasterOffsetRange = date => (offsetBegin, offsetEnd) => {
+    let d, m, y;
     if (typeof date === 'string') {
         const splitDateString = date.split('-');
-        date = new Date(splitDateString[0], splitDateString[1] - 1, splitDateString[2]);
+        [y, m, d] = [splitDateString[0], splitDateString[1] - 1, splitDateString[2]];
+    } else {
+        y = date.getFullYear();
+        m = date.getMonth();
+        d = date.getDate();
     }
-    const y = date.getFullYear();
+    date = new Date(y, m, d);
     const begin = calculateEasterDate(y);
     begin.setDate(begin.getDate() + offsetBegin);
     if (!offsetEnd) {
@@ -494,6 +499,7 @@ export const getFeastInfo = memoize(
             title = 'Вознесение';
             feastType = '12';
             colour = '#A2A2A2';
+            calendarColour = 'red';
         }
 
         const strastnayaBegin = calculateEasterDate(y);

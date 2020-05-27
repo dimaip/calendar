@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
-import FominaToAscension from './FominaToAscension.mdx';
+import Prazdnichnaja from './Prazdnichnaja.mdx';
 import useDay from 'hooks/useDay';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 import Loader from 'components/Loader/Loader';
@@ -9,6 +9,7 @@ import SolidSection from 'components/SolidSection/SolidSection';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';
 import Hymns from 'containers/Main/Hymns';
+import Ending from '../Shared/Ending/Ending';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -22,7 +23,7 @@ const Readings = ({ readingsForService, day }) =>
     ) : (
         <Loader />
     );
-const Matins = ({ date }) => {
+const Matins = ({ date, lang }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
@@ -47,12 +48,25 @@ const Matins = ({ date }) => {
         </SolidSection>
     );
 
+    const otpust = <Ending date={dateObj} lang={lang} day={day} />;
+
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
-    const fominaToAscension = isEasterOffsetRange(7, 39);
-    if (fominaToAscension) {
-        return <FominaToAscension dayOfWeek={dayOfWeek} hymns={hymns} readings={readings} saints={saints} />;
+    const easterSeason = isEasterOffsetRange(0, 40);
+    const fominaToPetrov = isEasterOffsetRange(7, 57);
+    if (fominaToPetrov) {
+        return (
+            <Prazdnichnaja
+                dayOfWeek={dayOfWeek}
+                hymns={hymns}
+                readings={readings}
+                saints={saints}
+                easterSeason={easterSeason}
+                otpust={otpust}
+                day={day}
+            />
+        );
     }
-    return null;
+    return <>На этот день мы еще не успели составить чин службы</>;
 };
 
 export default Matins;

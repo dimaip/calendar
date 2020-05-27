@@ -1,8 +1,9 @@
 import React from 'react';
 import Tooltip from 'components/Tooltip/Tooltip';
+import Html from 'components/Html/Html';
 
 const Trisvatoe = ({ day, lang }) => {
-    const vmestoTrisvatogo = day?.liturgyParts?.['Вместо Трисвятого'];
+    const vmestoTrisvatogo = day?.parts?.liturgy?.['Вместо Трисвятого'];
     return (
         <>
             <p id="trisvatoe" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
@@ -191,7 +192,7 @@ const Trisvatoe = ({ day, lang }) => {
                     <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-12">
                         <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Вместо Трисвятого</span>
                     </p>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5">{vmestoTrisvatogo}</p>
+                    <Html html={vmestoTrisvatogo} />
                 </>
             )}
         </>

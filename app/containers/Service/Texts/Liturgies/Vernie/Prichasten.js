@@ -76,8 +76,8 @@ const Prichasten = ({ title, verse1, title2, verse2 }) => (
 
 const Prichastens = ({ day, date }) => {
     const commonPrichasten = getPrichastenData(day, date);
-    let prichastens = day?.liturgyParts?.['Причастен']
-        ? [commonPrichasten, ...day.liturgyParts['Причастен']]
+    let prichastens = day?.parts?.liturgy?.['Причастен']
+        ? [commonPrichasten, ...day.parts?.liturgy['Причастен']]
         : [commonPrichasten];
     prichastens = prichastens.filter(Boolean);
     const exclusivePrichastens = prichastens.filter(prichasten => prichasten.replace);

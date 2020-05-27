@@ -1,16 +1,10 @@
 import React from 'react';
+import Html from 'components/Html/Html';
 
 const Zadastoinik = ({ day }) => {
-    const zadastoinik = day?.liturgyParts?.['Задостойник'];
+    const zadastoinik = day?.parts?.liturgy?.['Задостойник'];
     if (zadastoinik) {
-        return (
-            <>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> {zadastoinik}</span>
-                </p>
-            </>
-        );
+        return <Html html={zadastoinik} />;
     }
     return (
         <>

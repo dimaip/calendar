@@ -1,15 +1,10 @@
 import React from 'react';
+import Html from 'components/Html/Html';
 
 const Otpust = ({ day, date, serviceType }) => {
-    const otpust = day?.liturgyParts?.['Отпуст'];
+    const otpust = day?.parts?.liturgy?.['Отпуст'];
     if (otpust) {
-        return (
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> {otpust}</span>
-            </p>
-        );
+        return <Html html={otpust} />;
     }
     const dateObject = new Date(date);
     const isSunday = dateObject.getDay() === 0;
