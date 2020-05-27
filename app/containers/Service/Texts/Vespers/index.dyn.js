@@ -53,8 +53,8 @@ const Vespers = ({ date, lang }) => {
     const otpust = <Ending date={tomorrowDateObj} lang={lang} day={tomorrowDay} />;
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDateObj);
+    const easterSeason = isEasterOffsetRange(0, 38);
     const isAscension = isEasterOffsetRange(39);
-    const easterSeason = isEasterOffsetRange(0, 40);
     const fominaToPetrov = isEasterOffsetRange(7, 57);
     if (fominaToPetrov) {
         return (
