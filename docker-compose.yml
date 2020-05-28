@@ -23,7 +23,7 @@ services:
                 - 'traefik.port=80'
                 - 'traefik.default.protocol=http'
                 - 'traefik.docker.network=main'
-                - 'traefik.frontend.rule=Host:c.psmb.ru,d.psmb.ru'
+                - 'traefik.frontend.rule=Host:c.psmb.ru,d.psmb.ru,molitva.app'
 networks:
     main:
         external:
