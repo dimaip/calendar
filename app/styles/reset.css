@@ -25,6 +25,9 @@ body {
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
 }
+select {
+    font-family: 'PTRootUI', 'Helvetica', sans-serif;
+}
 a {
     color: inherit;
     text-decoration: none;
