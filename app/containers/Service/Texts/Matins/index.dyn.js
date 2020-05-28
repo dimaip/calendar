@@ -51,7 +51,7 @@ const Matins = ({ date, lang }) => {
     const otpust = <Ending date={dateObj} lang={lang} day={day} />;
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
-    const easterSeason = isEasterOffsetRange(0, 40);
+    const easterSeason = isEasterOffsetRange(0, 38);
     const fominaToPetrov = isEasterOffsetRange(7, 57);
     if (fominaToPetrov) {
         return (
