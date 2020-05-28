@@ -63,6 +63,7 @@ const Matins = ({ date, lang }) => {
                 easterSeason={easterSeason}
                 otpust={otpust}
                 day={day}
+                isEasterOffsetRange={isEasterOffsetRange}
             />
         );
     }
