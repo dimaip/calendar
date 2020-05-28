@@ -3,7 +3,7 @@ import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import MdxLoader from '../../MdxLoader';
 import Html from 'components/Html/Html';
 
-const Ending = ({ day, date, lang }) => {
+const Ending = ({ day, date, lang, saints }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);
     const dateObject = new Date(date);
@@ -20,8 +20,8 @@ const Ending = ({ day, date, lang }) => {
     }
 
     if (easterSeason) {
-        return <MdxLoader src="Shared/Ending/EasterEnding" lang={lang} otpust={otpust} />;
+        return <MdxLoader src="Shared/Ending/EasterEnding" lang={lang} otpust={otpust} saints={saints} />;
     }
-    return <MdxLoader src="Shared/Ending/Ending" lang={lang} otpust={otpust} />;
+    return <MdxLoader src="Shared/Ending/Ending" lang={lang} otpust={otpust} saints={saints} />;
 };
 export default Ending;

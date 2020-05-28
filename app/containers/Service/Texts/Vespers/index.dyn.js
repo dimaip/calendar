@@ -50,7 +50,7 @@ const Vespers = ({ date, lang }) => {
             <Saints saints={tomorrowDay.saints} date={date} />
         </SolidSection>
     );
-    const otpust = <Ending date={tomorrowDateObj} lang={lang} day={tomorrowDay} />;
+    const otpust = <Ending date={tomorrowDateObj} lang={lang} day={tomorrowDay} saints={saints} />;
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDateObj);
     const easterSeason = isEasterOffsetRange(0, 38);
