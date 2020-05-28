@@ -613,6 +613,7 @@ export const getFeastInfo = memoize(
             title = 'Обрезание Господне';
             feastType = 'great';
             colour = '#ff4e4e';
+            calendarColour = 'blue';
         }
 
         if (new Date(y, 6, 7).getTime() == date.getTime()) {
