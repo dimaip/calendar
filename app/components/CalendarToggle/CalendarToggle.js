@@ -9,7 +9,7 @@ import Calendar from 'components/Calendar/Calendar';
 import dateFormat from 'dateformat';
 import CalendarIcon from 'components/svgs/CalendarIcon';
 
-const CalendarToggle = ({ date, setNewDate, iconOnly = false, calendarRef = null }) => {
+const CalendarToggle = ({ date, setNewDate, iconOnly = false, calendarRef = null, className = '' }) => {
     const dateObj = new Date(date);
     const [calendarShown, setCalendarShown] = useState(false);
     const theme = useTheme();
@@ -59,17 +59,20 @@ const CalendarToggle = ({ date, setNewDate, iconOnly = false, calendarRef = null
         <>
             <Button
                 title={calendarShown ? 'Спрятать календарь' : 'Показать календарь'}
-                className={css`
-                    flex-shrink: 0;
-                    display: flex;
-                    align-items: center;
-                    border-radius: 5px;
-                    padding: 8px !important;
-                    line-height: 1.1;
-                    background: ${iconOnly ? 'white' : theme.colours.bgGray};
-                    font-size: 14px;
-                    margin-right: 8px;
-                `}
+                className={
+                    css`
+                        flex-shrink: 0;
+                        display: flex;
+                        align-items: center;
+                        border-radius: 5px;
+                        padding: 8px !important;
+                        line-height: 1.1;
+                        background: ${iconOnly ? 'white' : theme.colours.bgGray};
+                        font-size: 14px;
+                    ` +
+                    ' ' +
+                    className
+                }
                 onClick={() => setCalendarShown(!calendarShown)}
             >
                 {toggle}

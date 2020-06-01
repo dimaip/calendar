@@ -1,10 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { css } from 'emotion';
 import getTheme from 'styles/theme';
 const theme = getTheme();
 
 const Drawer = ({ children, onClose }) => {
-    return (
+    return ReactDOM.createPortal(
         <div
             className={css`
                 position: fixed;
@@ -14,6 +15,7 @@ const Drawer = ({ children, onClose }) => {
                 bottom: 0;
                 display: flex;
                 flex-direction: column;
+                z-index: 1;
             `}
         >
             <div
@@ -21,6 +23,7 @@ const Drawer = ({ children, onClose }) => {
                 className={css`
                     flex-grow: 1;
                     cursor: pointer;
+                    background-color: rgba(0, 0, 0, 0.3);
                 `}
                 onClick={onClose}
             />
@@ -50,7 +53,8 @@ const Drawer = ({ children, onClose }) => {
                 />
                 {children}
             </div>
-        </div>
+        </div>,
+        document.getElementById('react-portal')
     );
 };
 export default Drawer;

@@ -50,7 +50,6 @@ const Services = ({ date, readings }) => {
                         key={groupTitle}
                         className={css`
                             padding: 0 18px 0 18px;
-                            border-bottom: 0.5px solid ${theme.colours.lineGray};
                         `}
                     >
                         <SectionHeading>{groupTitle}</SectionHeading>

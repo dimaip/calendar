@@ -75,7 +75,13 @@ const Readings = ({ brother = false }) => {
 
     const left = (
         <>
-            <CalendarToggle date={date} setNewDate={setNewDate} />
+            <CalendarToggle
+                date={date}
+                setNewDate={setNewDate}
+                className={css`
+                    margin-right: 8px;
+                `}
+            />
             <ServiceSelector
                 {...{
                     service,

@@ -1,28 +1,48 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'components/Button/Button';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { toggleZoomControl } from 'redux/actions/zoom';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
+import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 
 const ZoomControlToggle = () => {
     const dispatch = useDispatch();
     const theme = useTheme();
-    const zoomControlShown = useSelector(state => state.ui.zoomControlShown);
+    const { toggleOpen } = useContext(DotsMenuContext);
     return (
         <Button
             title="Изменить шрифт"
-            onClick={() => dispatch(toggleZoomControl())}
+            onClick={() => {
+                dispatch(toggleZoomControl());
+                toggleOpen();
+            }}
             className={css`
-                padding: 6px 6px !important;
+                padding: 12px !important;
                 margin-right: 6px;
                 font-size: 16px;
-                border-radius: 8px;
-                color: ${zoomControlShown ? 'white' : theme.colours.darkGray};
-                background-color: ${zoomControlShown ? 'gray' : 'white'};
+                padding: 6px 6px !important;
+                width: 100%;
+                text-align: left;
+                border-bottom: 1px solid #ccc;
             `}
         >
-            Aa
+            <span
+                className={css`
+                    color: ${theme.colours.gray};
+                    display: inline-block;
+                    width: 20px;
+                `}
+            >
+                Aa
+            </span>{' '}
+            <span
+                className={css`
+                    font-size: 13px;
+                `}
+            >
+                Изменить шрифт
+            </span>
         </Button>
     );
 };

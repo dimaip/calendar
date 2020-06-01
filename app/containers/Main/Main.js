@@ -36,8 +36,9 @@ const BorderedSection = ({ children }) => {
         <div
             className={css`
                 border-bottom: 0.5px solid ${theme.colours.lineGray};
-                margin: 0 -18px;
+                margin: 0 -18px 18px -18px;
                 padding: 0 18px 1px 18px;
+                background-color: white;
             `}
         >
             {children}
@@ -95,44 +96,48 @@ const InnerContent = ({ date, services }) => {
                                 padding: 0 18px;
                             `}
                         >
-                            {services ? (
-                                <Services date={date} readings={day.readings || {}} />
-                            ) : (
-                                <>
-                                    <SolidSection>
+                            <SolidSection>
+                                {services ? (
+                                    <Services date={date} readings={day.readings || {}} />
+                                ) : (
+                                    <>
                                         <SectionHeading>Богослужебные чтения</SectionHeading>
                                         <ReadingList readings={day.readings || {}} />
-                                    </SolidSection>
 
-                                    <BorderedSection>
-                                        <SectionHeading>Святые дня</SectionHeading>
-                                        <Saints saints={day.saints} date={date} />
-                                    </BorderedSection>
-
-                                    <ThisDays thisDays={thisDays} date={date} />
-                                    {(day.prayers || day.prayersOther) && (
                                         <BorderedSection>
-                                            <div
-                                                className={css`
-                                                    overflow: auto;
-                                                `}
-                                            >
-                                                <SectionHeading>Песнопения</SectionHeading>
-                                            </div>
-                                            <Hymns hymns={(day.prayers || '') + (day.prayersOther || '')} />
+                                            <SectionHeading>Святые дня</SectionHeading>
+                                            <Saints saints={day.saints} date={date} />
                                         </BorderedSection>
-                                    )}
-                                    {day.bReadings && Object.keys(day.bReadings).length > 0 && (
-                                        <SolidSection>
-                                            <SectionHeading>Душеполезные чтения</SectionHeading>
-                                            <ReadingList brother readings={day.bReadings} />
-                                        </SolidSection>
-                                    )}
-                                    <SolidSection>
+
+                                        <ThisDays thisDays={thisDays} date={date} />
+                                        {(day.prayers || day.prayersOther) && (
+                                            <BorderedSection>
+                                                <div
+                                                    className={css`
+                                                        overflow: auto;
+                                                    `}
+                                                >
+                                                    <SectionHeading>Песнопения</SectionHeading>
+                                                </div>
+                                                <Hymns hymns={(day.prayers || '') + (day.prayersOther || '')} />
+                                            </BorderedSection>
+                                        )}
+                                        {day.bReadings && Object.keys(day.bReadings).length > 0 && (
+                                            <>
+                                                <SectionHeading
+                                                    className={css`
+                                                        padding-top: 0 !important;
+                                                    `}
+                                                >
+                                                    Душеполезные чтения
+                                                </SectionHeading>
+                                                <ReadingList brother readings={day.bReadings} />
+                                            </>
+                                        )}
                                         <Sermons date={date} sermons={sermons} />
-                                    </SolidSection>
-                                </>
-                            )}
+                                    </>
+                                )}
+                            </SolidSection>
                         </div>
                     </Zoom>
                     {!services && <Links />}

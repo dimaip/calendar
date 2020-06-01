@@ -51,6 +51,7 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^8.0.2",
+    "share-api-polyfill": "^1.0.13",
     "typescript": "^3.7.5",
     "unfetch": "^4.1.0",
     "workbox-google-analytics": "^5.1.3",

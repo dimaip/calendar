@@ -14,7 +14,8 @@ const HeadingBar = ({ title, glas, fastName, fastingLevelName, icon }) => {
                 background-size: cover;
                 background-position: center;
                 padding: 18px;
-                min-height: 200px;
+                height: 200px;
+                overflow: hidden;
             `}
         >
             <h2

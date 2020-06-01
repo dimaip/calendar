@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { Link } from 'react-router-dom';
-import SolidSection from 'components/SolidSection/SolidSection';
+import SectionHeading from './SectionHeading';
 
 const ThisDayLink = ({ to, href, children }) => {
     if (href) {
@@ -18,12 +18,21 @@ const ThisDays = ({ thisDays, date }) => {
     return thisDays?.length ? (
         <div
             className={css`
-                padding-top: 12px;
+                padding-top: 0;
                 padding-bottom: 12px;
                 margin-left: -12px;
                 margin-right: -12px;
             `}
         >
+            <SectionHeading
+                className={css`
+                    padding-top: 0 !important;
+                    padding-bottom: 12px;
+                    padding-left: 12px;
+                `}
+            >
+                В этот день
+            </SectionHeading>
             {thisDays.map(thisDay => {
                 return (
                     <div
@@ -64,14 +73,6 @@ const ThisDays = ({ thisDays, date }) => {
                                         `}
                                     >
                                         {thisDay.title}
-                                    </div>
-                                    <div
-                                        className={css`
-                                            color: white;
-                                            font-size: 10px;
-                                        `}
-                                    >
-                                        в этот день
                                     </div>
                                 </div>
                                 <div

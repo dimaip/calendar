@@ -13,7 +13,7 @@ const SectionHeading = ({ children, className = '' }) => {
                     font-weight: bold;
                     color: ${theme.colours.darkGray};
                     padding-top: 24px;
-                    padding-bottom: 24px;
+                    padding-bottom: 18px;
                 ` +
                 ' ' +
                 className

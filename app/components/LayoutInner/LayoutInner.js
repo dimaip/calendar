@@ -4,6 +4,7 @@ import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Header from 'components/Header/Header';
+import DotsMenu from 'components/DotsMenu/DotsMenu';
 
 const LayoutInner = ({ children, left = null, right = null, backLink = null, paddedContent = true }) => {
     const { date } = useParams();
@@ -39,11 +40,10 @@ const LayoutInner = ({ children, left = null, right = null, backLink = null, pad
                     className={css`
                         flex-grow: 0;
                         display: flex;
-                        margin-right: 12px;
                     `}
                 >
                     {right}
-                    <ZoomControlToggle />
+                    <DotsMenu />
                 </div>
             </Header>
             <div

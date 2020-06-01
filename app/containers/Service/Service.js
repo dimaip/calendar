@@ -95,7 +95,13 @@ const Service = () => {
 
     const left = (
         <>
-            <CalendarToggle date={date} setNewDate={setNewDate} />
+            <CalendarToggle
+                date={date}
+                setNewDate={setNewDate}
+                className={css`
+                    margin-right: 8px;
+                `}
+            />
             {service?.lang && <LanguageSwitcher lang={lang} setLang={setLang} />}
             <TOCSwitcher service={service} lang={lang} />
         </>

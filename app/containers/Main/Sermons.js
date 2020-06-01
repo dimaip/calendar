@@ -11,7 +11,15 @@ const Sermons = ({ sermons, date, hideTitle = false }) => {
 
     return sermons?.length ? (
         <>
-            {!hideTitle && <SectionHeading>Проповедь</SectionHeading>}
+            {!hideTitle && (
+                <SectionHeading
+                    className={css`
+                        padding-top: 0 !important;
+                    `}
+                >
+                    Проповедь
+                </SectionHeading>
+            )}
             <div
                 className={css`
                     margin: 0 -10px 18px -10px;
