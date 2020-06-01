@@ -22,6 +22,14 @@ const Ending = ({ day, date, lang, saints }) => {
     if (easterSeason) {
         return <MdxLoader src="Shared/Ending/EasterEnding" lang={lang} otpust={otpust} saints={saints} />;
     }
-    return <MdxLoader src="Shared/Ending/Ending" lang={lang} otpust={otpust} saints={saints} />;
+    return (
+        <MdxLoader
+            src="Shared/Ending/Ending"
+            lang={lang}
+            otpust={otpust}
+            saints={saints}
+            isEasterOffsetRange={isEasterOffsetRange}
+        />
+    );
 };
 export default Ending;

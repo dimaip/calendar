@@ -1,3 +1,5 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+
 <span id="otpust" />
 <br />
 
@@ -24,6 +26,6 @@
 
 <br />
 
-**Н** Господи, твердыня на Тебя надеющихся, утверди Церковь, которую Ты приобрел драгоценной Кровью Своей!
+<>{!props.isEasterOffsetRange(0, 49) && <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} />}</>
 
 **Н** Кондак и/или величание **(если есть)**
