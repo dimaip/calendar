@@ -28,7 +28,7 @@ const Today = ({ date, setNewDate }) => {
                 margin-right: 10px;
             `}
         >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.646 6.582" width={8.646} height={6.582}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8.646 6.582" width={8} height={6.09}>
                 <path
                     d="M2.365 4.668a.352.352 0 10.492-.5L1.404 2.786H6.39a1.544 1.544 0 010 3.087.356.356 0 000 .712 2.256 2.256 0 000-4.512H1.377L2.861.603a.356.356 0 00-.5-.506l-2.1 2.068-.259.256z"
                     fill={theme.colours.primary}
