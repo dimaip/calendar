@@ -1,5 +1,5 @@
 ._-КОЛОНТИТУЛЫ-ОФОРМЛЕН_КОНЦОВКА-отст7 {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
@@ -38,7 +38,7 @@
     widows: 1;
 }
 ._-СНОСКА_Сноска-КРАСНАЯ {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
@@ -58,7 +58,7 @@
     widows: 1;
 }
 ._-ОСНОВНОЙ_Звездочки {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -79,14 +79,14 @@
 }
 ._-ОСНОВНОЙ_Имя-РаздСл {
     -epub-hyphens: none;
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: bold;
     line-height: 1.6;
     margin-bottom: 0;
-    margin-left: 28px;
+    margin-left: 0;
     margin-right: 0;
     margin-top: 28px;
     orphans: 1;
@@ -100,14 +100,13 @@
 }
 ._-ОСНОВНОЙ_Имя-Службы {
     -epub-hyphens: none;
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
     font-weight: bold;
     line-height: 1.6;
     margin-bottom: 0;
-    margin-left: 28px;
     margin-right: 0;
     margin-top: 28px;
     orphans: 1;
@@ -120,7 +119,7 @@
     widows: 1;
 }
 ._-ОСНОВНОЙ_Имя-части-отст2 {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
@@ -140,14 +139,14 @@
     widows: 1;
 }
 ._-ОСНОВНОЙ_Имя-части-отст5 {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
     line-height: 1.6;
     margin-bottom: 0;
-    margin-left: 28px;
+    margin-left: 0;
     margin-right: 0;
     margin-top: 28px;
     orphans: 1;
@@ -160,7 +159,7 @@
     widows: 1;
 }
 ._-ОСНОВНОЙ_КРАСН-б-отст {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -180,7 +179,7 @@
     widows: 1;
 }
 ._-ОСНОВНОЙ_КРАСН-отст1-5 {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -200,7 +199,7 @@
     widows: 1;
 }
 ._-ОСНОВНОЙ_КРАСН-отст5 {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 18px;
     font-style: normal;
     font-variant: normal;
@@ -354,7 +353,7 @@
     widows: 1;
 }
 ._-ОСНОВНОЙ_Чтение-Писания {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 18px;
     font-variant: normal;
     font-weight: bold;
@@ -373,7 +372,7 @@
     widows: 1;
 }
 ._-ПЕТИТ_КРАСН-петит-б-отст {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -393,7 +392,7 @@
     widows: 1;
 }
 ._-ПЕТИТ_КРАСН-петит-отст1-5 {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 15px;
     font-style: normal;
     font-variant: normal;
@@ -415,7 +414,7 @@
 
 ._-ПЕТИТ_Петит-Имя-РаздСл {
     -epub-hyphens: none;
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
@@ -436,7 +435,7 @@
 }
 ._-ПЕТИТ_Петит-Имя-части-отст2 {
     -epub-hyphens: none;
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
@@ -457,7 +456,7 @@
 }
 ._-ПЕТИТ_Петит-Имя-части-отст5 {
     -epub-hyphens: none;
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
@@ -576,26 +575,26 @@
     widows: 1;
 }
 ._--КРАСНЫЙ {
-    color: #e32636;
+    color: #ff4e4e;
 }
 ._-ВЫДЕЛЕНИЯ_ЖИРНЫЙ {
     font-style: normal;
     font-weight: bold;
 }
 ._-ВЫДЕЛЕНИЯ_КРАСНЫЙ {
-    color: #e32636;
+    color: #ff4e4e;
 }
 ._-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ {
-    color: #e32636;
+    color: #ff4e4e;
     font-style: normal;
     font-weight: bold;
 }
 ._-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 15px;
 }
 ._-ВЫДЕЛЕНИЯ_НАДИНДЕКС-красн {
-    color: #e32636;
+    color: #ff4e4e;
     vertical-align: super;
     font-size: 12px;
 }
@@ -606,7 +605,7 @@
     color: #e6007e;
 }
 ._-РЕДКИЕ_Знак-сноски-красной {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 18px;
     font-style: normal;
     font-weight: normal;
@@ -617,7 +616,7 @@
 }
 
 ._-СНОСКА_Сноска-КРАСНАЯ-кунцевая {
-    color: #e32636;
+    color: #ff4e4e;
     font-size: 13px;
     font-style: normal;
     font-variant: normal;
@@ -670,7 +669,7 @@
     font-weight: normal;
 }
 ._-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-красн {
-    color: #e32636;
+    color: #ff4e4e;
     font-style: normal;
     font-weight: normal;
 }

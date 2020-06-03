@@ -115,6 +115,7 @@ const Service = () => {
                         className={css`
                             margin-left: 12px;
                             margin-right: 12px;
+                            margin-bottom: 24px;
                         `}
                     >
                         <div

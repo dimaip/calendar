@@ -91,7 +91,7 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
         green: css`
             & .nice-dates-day_date {
                 ${baseStyle}
-                background-color: #73be73 !important;
+                background-color: #529c54 !important;
                 color: white !important;
             }
         `,

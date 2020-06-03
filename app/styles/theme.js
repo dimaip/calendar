@@ -7,7 +7,7 @@ const getTheme = primary => ({
         bgGrayLight: '#fafafc',
         bgGray: '#EFEFF4',
         lineGray: '#CECED2',
-        red: '#e32636',
+        red: '#ff4e4e',
     },
 });
 

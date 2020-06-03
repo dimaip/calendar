@@ -67,7 +67,7 @@ const CalendarToggle = ({ date, setNewDate, iconOnly = false, calendarRef = null
                         border-radius: 5px;
                         padding: 8px !important;
                         line-height: 1.1;
-                        background: ${iconOnly ? 'white' : theme.colours.bgGray};
+                        background-color: ${iconOnly ? 'white' : theme.colours.bgGray} !important;
                         font-size: 14px;
                     ` +
                     ' ' +

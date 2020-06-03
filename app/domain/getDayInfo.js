@@ -480,7 +480,7 @@ export const getFeastInfo = memoize(
         if (palm_sunday.getTime() == date.getTime()) {
             title = 'Вход Господень в Иерусалим';
             feastType = '12';
-            colour = '#73be73';
+            colour = '#529c54';
             calendarColour = 'green';
             icon = 'vhod.jpg';
         }
@@ -523,7 +523,7 @@ export const getFeastInfo = memoize(
 
         if (isEasterOffsetRange(49, 55)) {
             icon = 'pentecost.svg';
-            colour = '#73be73';
+            colour = '#529c54';
         }
 
         if (pentecost.getTime() == date.getTime()) {
