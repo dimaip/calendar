@@ -113,7 +113,7 @@ const Katekhumen = ({ lang, date, day }) => {
             {!easterSeason && (
                 <>
                     <MdxLoader src="Liturgies/Katekhumen/Priugotovl" lang={lang} />
-                    {lang === 'default' && (
+                    {!isEasterOffsetRange(0, 49) && lang === 'default' && (
                         <>
                             <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">О Царь Небесный</span>
@@ -138,7 +138,7 @@ const Katekhumen = ({ lang, date, day }) => {
                             </p>
                         </>
                     )}
-                    {lang === 'ЦСЯ' && (
+                    {!isEasterOffsetRange(0, 49) && lang === 'ЦСЯ' && (
                         <>
                             <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">О Царь Небесный</span>
