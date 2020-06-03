@@ -64,7 +64,7 @@
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
-    "@mdx-js/loader": "^1.6.0",
+    "@mdx-js/loader": "^2.0.0-next",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-optional-chaining": "^7.0.0-beta.3",
     "clean-webpack-plugin": "^3.0.0",

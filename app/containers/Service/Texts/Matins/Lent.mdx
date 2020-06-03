@@ -1,0 +1,73 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Html from 'components/Html/Html';
+
+<span id="nachalo" />
+
+# Утреня
+
+<br />
+
+**П** Слава святой, и единосущной, и животворящей, и нераздельной Троице ныне и всегда и во веки веков!
+
+**Н** Аминь.
+
+<>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
+
+<>{props.dayOfWeek === 1 && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
+<>{props.dayOfWeek === 2 && <MdxLoader src="Matins/Prayer2" lang={props.lang} />}</>
+<>{props.dayOfWeek === 3 && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
+<>{props.dayOfWeek === 4 && <MdxLoader src="Matins/Prayer4" lang={props.lang} />}</>
+<>{props.dayOfWeek === 5 && <MdxLoader src="Matins/Prayer7" lang={props.lang} />}</>
+<>{props.dayOfWeek === 6 && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
+
+<MdxLoader src="Matins/Prayer10" lang={props.lang} />
+<MdxLoader src="Shared/Psalm50" lang={props.lang} />
+<MdxLoader src="Matins/Prayer11" lang={props.lang} />
+<MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} lent />
+
+### Стихиры на «Хвалите»
+
+<Html html={props.day?.parts?.matins?.['Cтихиры на хвалите']} />
+<MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} />
+
+<span id="reading" />
+
+## Чтения
+
+**П** Премудрость! Станем благоговейно! Услышим святое евангелие!
+
+**П** От (имя) святого благовестия чтение.
+
+**Н** Слава Тебе, Господи, слава Тебе!
+
+**П** Будем внимательны!
+
+<br />
+
+<>{props.readings}</>
+
+**Н** Слава Тебе, Господи, слава Тебе!
+
+### Проповедь
+
+<>{(props.isEasterOffsetRange(0, 39) || props.dayOfWeek === 0) && <MdxLoader src="Matins/VoskresnajaPesn" lang={props.lang} />}</>
+
+<MdxLoader src="Matins/PrayerKatekhumens" lang={props.lang} />
+
+## Заключение
+
+**П** Завершим нашу утреннюю молитву Господу!
+
+<MdxLoader src="Matins/Prayer12" lang={props.lang} />
+<br />
+<MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
+
+**Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́
+
+<MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
+
+<>{props.hymns}</>
+
+<MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+
+<>{props.otpust}</>

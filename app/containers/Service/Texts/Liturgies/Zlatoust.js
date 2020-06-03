@@ -7,7 +7,7 @@ import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import { Link } from 'react-router-dom';
 
 const Zlatoust = ({ lang, date }) => {
-    const { katekhumen, otpust, prichasten, saints, zadastoinik } = useLiturgy(lang, 'Zlatoust');
+    const { katekhumen, otpust, prichasten, saints, zadastoinik } = useLiturgy(lang, 'zlatoust');
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
 

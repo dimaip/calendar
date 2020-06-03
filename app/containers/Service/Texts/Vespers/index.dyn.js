@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import Prazdnichnaja from './Prazdnichnaja.mdx';
+import Lent from './Lent.mdx';
 import useDay from 'hooks/useDay';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 import Loader from 'components/Loader/Loader';
@@ -56,9 +57,24 @@ const Vespers = ({ date, lang }) => {
     const easterSeason = isEasterOffsetRange(0, 38);
     const isAscension = isEasterOffsetRange(39);
     const fominaToPetrov = isEasterOffsetRange(7, 57);
+    const petrov = day.fastName === 'Петров пост';
     if (fominaToPetrov) {
         return (
             <Prazdnichnaja
+                dayOfWeek={dayOfWeek}
+                hymns={hymns}
+                readings={readings}
+                saints={saints}
+                easterSeason={easterSeason}
+                isAscension={isAscension}
+                otpust={otpust}
+                day={tomorrowDay}
+            />
+        );
+    }
+    if (petrov) {
+        return (
+            <Lent
                 dayOfWeek={dayOfWeek}
                 hymns={hymns}
                 readings={readings}

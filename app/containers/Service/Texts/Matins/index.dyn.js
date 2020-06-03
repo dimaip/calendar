@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import Prazdnichnaja from './Prazdnichnaja.mdx';
+import Lent from './Lent.mdx';
 import useDay from 'hooks/useDay';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 import Loader from 'components/Loader/Loader';
@@ -53,6 +54,7 @@ const Matins = ({ date, lang }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);
     const fominaToPetrov = isEasterOffsetRange(7, 57);
+    const petrov = day.fastName === 'Петров пост';
     if (fominaToPetrov) {
         return (
             <Prazdnichnaja
@@ -67,6 +69,22 @@ const Matins = ({ date, lang }) => {
             />
         );
     }
+
+    if (petrov) {
+        return (
+            <Lent
+                dayOfWeek={dayOfWeek}
+                hymns={hymns}
+                readings={readings}
+                saints={saints}
+                easterSeason={easterSeason}
+                otpust={otpust}
+                day={day}
+                isEasterOffsetRange={isEasterOffsetRange}
+            />
+        );
+    }
+
     return <>На этот день мы еще не успели составить чин службы</>;
 };
 
