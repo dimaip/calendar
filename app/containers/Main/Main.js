@@ -27,6 +27,7 @@ import BurgerMenu from './BurgerMenu';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 import IosPrompt from './IosPrompt';
+import PropTypes from 'prop-types';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -46,7 +47,22 @@ const BorderedSection = ({ children }) => {
     );
 };
 
-const SwipeableHeader = ({ date, handleToggleClick, makeHandleClickShift }) => {
+// In order to work with old legacy context API, it can't use hooks
+class HeighetUpdater extends React.Component {
+    componentDidUpdate() {
+        this.context.swipeableViews.slideUpdateHeight();
+    }
+    render() {
+        return null;
+    }
+}
+HeighetUpdater.contextTypes = {
+    swipeableViews: PropTypes.shape({
+        slideUpdateHeight: PropTypes.func,
+    }),
+};
+
+const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClickShift, services }) => {
     const dayQuery = useDay(date);
     const day = dayQuery.data;
 
@@ -58,25 +74,29 @@ const SwipeableHeader = ({ date, handleToggleClick, makeHandleClickShift }) => {
     const theme = getTheme(themeColour.current);
     return (
         <ThemeProvider theme={theme}>
-            <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
             <div>
-                {dayQuery.status === 'loading' && <Loader />}
-                {dayQuery.status === 'error' && <ErrorMessage500 />}
-                {dayQuery.status === 'success' && (
-                    <div>
-                        <HeadingBar
-                            title={day.title}
-                            glas={day.glas}
-                            fastName={day.fastName}
-                            fastingLevelName={day.fastingLevelName}
-                            icon={day.icon}
-                        />
-                    </div>
-                )}
+                <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
+                <div>
+                    {dayQuery.status === 'loading' && <Loader />}
+                    {dayQuery.status === 'error' && <ErrorMessage500 />}
+                    {dayQuery.status === 'success' && (
+                        <div>
+                            <HeadingBar
+                                title={day.title}
+                                glas={day.glas}
+                                fastName={day.fastName}
+                                fastingLevelName={day.fastingLevelName}
+                                icon={day.icon}
+                            />
+                            <InnerContent date={date} services={services} />
+                        </div>
+                    )}
+                </div>
+                <HeighetUpdater />
             </div>
         </ThemeProvider>
     );
-};
+});
 
 const InnerContent = ({ date, services }) => {
     const dayQuery = useDay(date);
@@ -182,9 +202,10 @@ const Main = ({ services = false }) => {
         const indexOffset = index - activeIndex;
         const effectiveDate = formatISO(addDays(parseISO(date), indexOffset), { representation: 'date' });
         return (
-            <SwipeableHeader
+            <SwipeableContainer
                 key={key}
                 date={effectiveDate}
+                services={services}
                 handleToggleClick={handleToggleClick}
                 makeHandleClickShift={makeHandleClickShift}
             />
@@ -209,6 +230,7 @@ const Main = ({ services = false }) => {
                     slideRenderer={slideRenderer}
                     overscanSlideAfter={1}
                     overscanSlideBefore={1}
+                    animateHeight
                     onChangeIndex={(index, indexLatest) => {
                         if (index < indexLatest) {
                             setActiveIndex(index);
@@ -220,8 +242,6 @@ const Main = ({ services = false }) => {
                     }}
                 />
             </div>
-
-            <InnerContent date={date} services={services} />
 
             <BurgerMenu menuShown={menuShown} setMenuShown={setMenuShown} />
             <BottomNav active={services ? 'services' : 'calendar'} />

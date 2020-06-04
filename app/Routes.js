@@ -29,21 +29,27 @@ const DateRoutes = () => {
                     <Main services />
                 </Route>
                 <Route exact path="/date/:date/readings/:service">
+                    <ScrollToTop />
                     <Readings />
                 </Route>
                 <Route exact path="/date/:date/bReadings/:service">
+                    <ScrollToTop />
                     <Readings brother />
                 </Route>
                 <Route exact path="/date/:date/sermon/:sermonId">
+                    <ScrollToTop />
                     <Sermon />
                 </Route>
                 <Route exact path="/date/:date/saint/:saintId">
+                    <ScrollToTop />
                     <Saint />
                 </Route>
                 <Route exact path="/date/:date/thisday/:thisDayId">
+                    <ScrollToTop />
                     <ThisDay />
                 </Route>
                 <Route exact path="/date/:date/service/:serviceId">
+                    <ScrollToTop />
                     <Service />
                 </Route>
                 <Route>
@@ -64,7 +70,6 @@ export default () => {
                 margin: 0 auto;
             `}
         >
-            <ScrollToTop />
             <Switch>
                 <Route
                     exact
