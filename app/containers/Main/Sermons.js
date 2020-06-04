@@ -5,6 +5,7 @@ import SectionHeading from './SectionHeading';
 import { Link } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
+import SwipeableViews from 'react-swipeable-views';
 
 const Sermons = ({ sermons, date, hideTitle = false }) => {
     const theme = useTheme();
@@ -22,60 +23,70 @@ const Sermons = ({ sermons, date, hideTitle = false }) => {
             )}
             <div
                 className={css`
-                    margin: 0 -10px 18px -10px;
+                    margin: 0 -18px 18px -18px;
                 `}
             >
-                {sermons.map(sermon => (
-                    <Link to={`/date/${date}/sermon/${sermon.id}`} key={sermon.id}>
-                        <ButtonBox>
-                            <div
-                                className={css`
-                                    display: flex;
-                                `}
-                            >
+                <SwipeableViews
+                    enableMouseEvents
+                    className={css`
+                        padding: 0 96px 0 4px !important;
+                    `}
+                    slideClassName={css`
+                        padding: 0 6px !important;
+                    `}
+                >
+                    {sermons.map(sermon => (
+                        <Link to={`/date/${date}/sermon/${sermon.id}`} key={sermon.id}>
+                            <ButtonBox>
                                 <div
                                     className={css`
-                                        flex-grow: 1;
-                                        flex-shrink: 1;
+                                        display: flex;
                                     `}
                                 >
-                                    <p
+                                    <div
                                         className={css`
-                                            font-weight: bold;
-                                            margin-bottom: 8px;
+                                            flex-grow: 1;
+                                            flex-shrink: 1;
                                         `}
                                     >
-                                        {sermon.authorName}
-                                    </p>
-                                    <h3
+                                        <p
+                                            className={css`
+                                                font-weight: bold;
+                                                margin-bottom: 8px;
+                                            `}
+                                        >
+                                            {sermon.authorName}
+                                        </p>
+                                        <h3
+                                            className={css`
+                                                color: ${theme.colours.primary};
+                                                margin-bottom: 8px;
+                                            `}
+                                        >
+                                            {sermon.title}
+                                        </h3>
+                                        <p
+                                            className={css`
+                                                font-size: 16px;
+                                                color: ${theme.colours.gray};
+                                            `}
+                                        >
+                                            {sermon.teaser}
+                                        </p>
+                                    </div>
+                                    <div
                                         className={css`
-                                            color: ${theme.colours.primary};
-                                            margin-bottom: 8px;
+                                            flex-grow: 0;
+                                            flex-shrink: 0;
                                         `}
                                     >
-                                        {sermon.title}
-                                    </h3>
-                                    <p
-                                        className={css`
-                                            font-size: 16px;
-                                            color: ${theme.colours.gray};
-                                        `}
-                                    >
-                                        {sermon.teaser}
-                                    </p>
+                                        <RightIcon />
+                                    </div>
                                 </div>
-                                <div
-                                    className={css`
-                                        flex-grow: 0;
-                                        flex-shrink: 0;
-                                    `}
-                                >
-                                    <RightIcon />
-                                </div>
-                            </div>
-                        </ButtonBox>
-                    </Link>
-                ))}
+                            </ButtonBox>
+                        </Link>
+                    ))}
+                </SwipeableViews>
             </div>
         </>
     ) : null;
