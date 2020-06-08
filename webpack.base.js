@@ -6,7 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-const version = process.env.VERCEL_GITHUB_COMMIT_SHA ? process.env.VERCEL_GITHUB_COMMIT_SHA.substr(0, 4) : 'dev';
+const sha = process.env.VERCEL_GITHUB_COMMIT_SHA || process.env.AWS_COMMIT_ID;
+
+const version = sha ? sha.substr(0, 4) : 'dev';
 
 module.exports = {
     name: 'client',
