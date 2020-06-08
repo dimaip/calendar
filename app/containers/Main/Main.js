@@ -49,6 +49,9 @@ const BorderedSection = ({ children }) => {
 
 // In order to work with old legacy context API, it can't use hooks
 class HeighetUpdater extends React.Component {
+    componentDidMount() {
+        this.context.swipeableViews.slideUpdateHeight();
+    }
     componentDidUpdate() {
         this.context.swipeableViews.slideUpdateHeight();
     }
