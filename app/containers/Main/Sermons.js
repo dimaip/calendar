@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
 import SectionHeading from './SectionHeading';
-import { Link } from 'react-router-dom';
+import SwipeableLink from 'components/SwipeableLink/SwipeableLink';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import SwipeableViews from 'react-swipeable-views';
@@ -36,7 +36,7 @@ const Sermons = ({ sermons, date, hideTitle = false }) => {
                     `}
                 >
                     {sermons.map(sermon => (
-                        <Link to={`/date/${date}/sermon/${sermon.id}`} key={sermon.id}>
+                        <SwipeableLink to={`/date/${date}/sermon/${sermon.id}`} key={sermon.id}>
                             <ButtonBox>
                                 <div
                                     className={css`
@@ -84,7 +84,7 @@ const Sermons = ({ sermons, date, hideTitle = false }) => {
                                     </div>
                                 </div>
                             </ButtonBox>
-                        </Link>
+                        </SwipeableLink>
                     ))}
                 </SwipeableViews>
             </div>
