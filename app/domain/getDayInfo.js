@@ -600,6 +600,7 @@ export const getFeastInfo = memoize(
             feastType = '12';
             colour = '#4169E1';
             calendarColour = 'blue';
+            icon = 'uspenie.svg';
         }
 
         if (new Date(y, 9, 14).getTime() == date.getTime()) {
