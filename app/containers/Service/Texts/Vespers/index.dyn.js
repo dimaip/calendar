@@ -58,7 +58,7 @@ const Vespers = ({ date }) => {
     const easterSeason = isEasterOffsetRange(0, 38);
     const isAscension = isEasterOffsetRange(39);
     const fominaToPetrov = isEasterOffsetRange(7, 56);
-    const petrov = tomorrowDay.fastName === 'Петров пост';
+    const petrov = tomorrowDay?.fastName === 'Петров пост';
     if (fominaToPetrov) {
         return (
             <Prazdnichnaja
