@@ -54,7 +54,7 @@ const Matins = ({ date }) => {
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);
-    const fominaToPetrov = isEasterOffsetRange(7, 57);
+    const fominaToPetrov = isEasterOffsetRange(7, 56);
     const petrov = day.fastName === 'Петров пост';
     if (fominaToPetrov) {
         return (
