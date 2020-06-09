@@ -56,7 +56,7 @@ class HeighetUpdater extends React.Component {
         this.context.swipeableViews.slideUpdateHeight();
     }
     render() {
-        return null;
+        return this.props.children;
     }
 }
 HeighetUpdater.contextTypes = {
@@ -95,7 +95,6 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                         </div>
                     )}
                 </div>
-                <HeighetUpdater />
             </div>
         </ThemeProvider>
     );
@@ -108,65 +107,67 @@ const InnerContent = ({ date, services }) => {
     const { sermons, thisDays } = externalDayQuery.data || {};
 
     return (
-        <div>
-            {dayQuery.status === 'loading' && <Loader />}
-            {dayQuery.status === 'error' && <ErrorMessage500 />}
-            {dayQuery.status === 'success' && (
-                <div>
-                    <Zoom>
-                        <div
-                            className={css`
-                                padding: 0 18px;
-                            `}
-                        >
-                            <SolidSection>
-                                {services ? (
-                                    <Services date={date} readings={day.readings || {}} />
-                                ) : (
-                                    <>
-                                        <SectionHeading>Богослужебные чтения</SectionHeading>
-                                        <ReadingList readings={day.readings || {}} />
+        <HeighetUpdater>
+            <div>
+                {dayQuery.status === 'loading' && <Loader />}
+                {dayQuery.status === 'error' && <ErrorMessage500 />}
+                {dayQuery.status === 'success' && (
+                    <div>
+                        <Zoom>
+                            <div
+                                className={css`
+                                    padding: 0 18px;
+                                `}
+                            >
+                                <SolidSection>
+                                    {services ? (
+                                        <Services date={date} readings={day.readings || {}} />
+                                    ) : (
+                                        <>
+                                            <SectionHeading>Богослужебные чтения</SectionHeading>
+                                            <ReadingList readings={day.readings || {}} />
 
-                                        <BorderedSection>
-                                            <SectionHeading>Святые дня</SectionHeading>
-                                            <Saints saints={day.saints} date={date} />
-                                        </BorderedSection>
-
-                                        <ThisDays thisDays={thisDays} date={date} />
-                                        {(day.prayers || day.prayersOther) && (
                                             <BorderedSection>
-                                                <div
-                                                    className={css`
-                                                        overflow: auto;
-                                                    `}
-                                                >
-                                                    <SectionHeading>Песнопения</SectionHeading>
-                                                </div>
-                                                <Hymns hymns={(day.prayers || '') + (day.prayersOther || '')} />
+                                                <SectionHeading>Святые дня</SectionHeading>
+                                                <Saints saints={day.saints} date={date} />
                                             </BorderedSection>
-                                        )}
-                                        {day.bReadings && Object.keys(day.bReadings).length > 0 && (
-                                            <>
-                                                <SectionHeading
-                                                    className={css`
-                                                        padding-top: 0 !important;
-                                                    `}
-                                                >
-                                                    Душеполезные чтения
-                                                </SectionHeading>
-                                                <ReadingList brother readings={day.bReadings} />
-                                            </>
-                                        )}
-                                        <Sermons date={date} sermons={sermons} />
-                                    </>
-                                )}
-                            </SolidSection>
-                        </div>
-                    </Zoom>
-                    {!services && <Links />}
-                </div>
-            )}
-        </div>
+
+                                            <ThisDays thisDays={thisDays} date={date} />
+                                            {(day.prayers || day.prayersOther) && (
+                                                <BorderedSection>
+                                                    <div
+                                                        className={css`
+                                                            overflow: auto;
+                                                        `}
+                                                    >
+                                                        <SectionHeading>Песнопения</SectionHeading>
+                                                    </div>
+                                                    <Hymns hymns={(day.prayers || '') + (day.prayersOther || '')} />
+                                                </BorderedSection>
+                                            )}
+                                            {day.bReadings && Object.keys(day.bReadings).length > 0 && (
+                                                <>
+                                                    <SectionHeading
+                                                        className={css`
+                                                            padding-top: 0 !important;
+                                                        `}
+                                                    >
+                                                        Душеполезные чтения
+                                                    </SectionHeading>
+                                                    <ReadingList brother readings={day.bReadings} />
+                                                </>
+                                            )}
+                                            <Sermons date={date} sermons={sermons} />
+                                        </>
+                                    )}
+                                </SolidSection>
+                            </div>
+                        </Zoom>
+                        {!services && <Links />}
+                    </div>
+                )}
+            </div>
+        </HeighetUpdater>
     );
 };
 

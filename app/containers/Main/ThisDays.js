@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css } from 'emotion';
 import { Link } from 'react-router-dom';
+import SwipeableViews from 'react-swipeable-views';
 import SectionHeading from './SectionHeading';
 
 const ThisDayLink = ({ to, href, children }) => {
@@ -33,61 +34,73 @@ const ThisDays = ({ thisDays, date }) => {
             >
                 В этот день
             </SectionHeading>
-            {thisDays.map(thisDay => {
-                return (
-                    <div
-                        key={thisDay.id}
-                        className={css`
-                            margin-bottom: 8px;
-                        `}
-                    >
-                        <ThisDayLink to={`/date/${date}/thisday/${thisDay.id}`} href={thisDay.link}>
+            <div
+                className={css`
+                    margin: 0 -6px;
+                `}
+            >
+                <SwipeableViews
+                    enableMouseEvents
+                    className={css`
+                        padding: 0 12px !important;
+                    `}
+                    slideClassName={css`
+                        padding: 0 4px !important;
+                    `}
+                >
+                    {thisDays.map(thisDay => {
+                        return (
                             <div
+                                key={thisDay.id}
                                 className={css`
-                                    max-width: 640px;
-                                    background-color: #201f24;
-                                    display: flex;
-                                    border-radius: 8px;
-                                    overflow: hidden;
-                                    min-height: 200px;
+                                    margin-bottom: 8px;
+                                    padding: 0px;
                                 `}
                             >
-                                <div
-                                    className={css`
-                                        display: flex;
-                                        flex-direction: column;
-                                        justify-content: space-between;
-                                        align-items: flex-start;
-                                        padding: 12px;
-                                        width: 66%;
-                                    `}
-                                >
+                                <ThisDayLink to={`/date/${date}/thisday/${thisDay.id}`} href={thisDay.link}>
                                     <div
                                         className={css`
-                                            color: white;
-                                            font-weight: bold;
-                                            line-height: 1.2;
-                                            flex-grow: 1;
-                                            margin-bottom: 6px;
-                                            font-size: 18px;
+                                            max-width: 640px;
+                                            overflow: hidden;
                                         `}
                                     >
-                                        {thisDay.title}
+                                        <div
+                                            className={css`
+                                                position: relative;
+                                                padding-bottom: 56.718%;
+                                                height: 0;
+                                                overflow: hidden;
+                                                border-radius: 8px;
+                                            `}
+                                        >
+                                            <img
+                                                src={thisDay.image}
+                                                alt={thisDay.title}
+                                                className={css`
+                                                    position: absolute;
+                                                    top: 0;
+                                                    left: 0;
+                                                    width: 100%;
+                                                    height: 100%;
+                                                `}
+                                            />
+                                        </div>
+                                        <h3
+                                            className={css`
+                                                margin-left: 8px;
+                                                margin-right: 8px;
+                                                margin-top: 8px;
+                                            `}
+                                        >
+                                            {thisDay.title}
+                                        </h3>
                                     </div>
-                                </div>
-                                <div
-                                    className={css`
-                                        background-image: url(${thisDay.image});
-                                        background-size: cover;
-                                        background-position: center;
-                                        width: 100%;
-                                    `}
-                                />
+                                </ThisDayLink>
                             </div>
-                        </ThisDayLink>
-                    </div>
-                );
-            })}
+                        );
+                    })}
+                </SwipeableViews>
+            </div>
         </div>
     ) : null;
 };

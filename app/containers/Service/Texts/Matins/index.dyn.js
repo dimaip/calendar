@@ -24,7 +24,8 @@ const Readings = ({ readingsForService, day }) =>
     ) : (
         <Loader />
     );
-const Matins = ({ date, lang }) => {
+const Matins = ({ date }) => {
+    const lang = 'ru';
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);

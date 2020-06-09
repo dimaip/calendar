@@ -21,8 +21,8 @@ const Nav = ({ handleToggleClick, handleClickShift, date }) => {
                 title="Предыдущий день"
                 onClick={handleClickShift('left')}
                 className={css`
-                    padding-left: 24px;
-                    padding-right: 24px;
+                    padding-left: 18px;
+                    padding-right: 12px;
                 `}
             >
                 <LeftIcon />
@@ -34,6 +34,7 @@ const Nav = ({ handleToggleClick, handleClickShift, date }) => {
                     flex-grow: 1;
                     margin: 18px 0;
                     text-align: center;
+                    padding: 12px 0 !important;
                 `}
             >
                 <div
@@ -66,8 +67,8 @@ const Nav = ({ handleToggleClick, handleClickShift, date }) => {
                 title="Следующий день"
                 onClick={handleClickShift('right')}
                 className={css`
-                    padding-left: 24px;
-                    padding-right: 24px;
+                    padding-left: 12px;
+                    padding-right: 18px;
                 `}
             >
                 <RightIcon />

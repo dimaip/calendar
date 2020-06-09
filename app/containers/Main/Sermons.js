@@ -37,7 +37,12 @@ const Sermons = ({ sermons, date, hideTitle = false }) => {
                 >
                     {sermons.map(sermon => (
                         <SwipeableLink to={`/date/${date}/sermon/${sermon.id}`} key={sermon.id}>
-                            <ButtonBox>
+                            <ButtonBox
+                                className={css`
+                                    height: 100%;
+                                    margin: 0 !important;
+                                `}
+                            >
                                 <div
                                     className={css`
                                         display: flex;

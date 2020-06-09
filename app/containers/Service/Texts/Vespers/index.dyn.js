@@ -24,7 +24,8 @@ const Readings = ({ readingsForService, day }) =>
     ) : (
         <Loader />
     );
-const Vespers = ({ date, lang }) => {
+const Vespers = ({ date }) => {
+    const lang = 'ru';
     const dateObj = new Date(date);
     const tomorrowDateObj = new Date(date);
     tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
