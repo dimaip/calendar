@@ -10,6 +10,9 @@ const Antifon1 = ({ lang, date: dateString }) => {
     if (isEasterOffsetRange(39)) {
         return <MdxLoader src="Liturgies/Katekhumen/Antifon1Ascension" lang={lang} />;
     }
+    if (isEasterOffsetRange(49)) {
+        return <MdxLoader src="Liturgies/Katekhumen/Antifon1Pentecost" lang={lang} />;
+    }
 
     return <MdxLoader src="Liturgies/Katekhumen/Antifon1" lang={lang} />;
 };
