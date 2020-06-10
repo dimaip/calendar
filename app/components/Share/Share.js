@@ -13,11 +13,15 @@ const Share = ({ date }) => {
         <Button
             onClick={() => {
                 toggleOpen();
-                navigator.share({
-                    title: 'Православное богослужение',
-                    text: day?.title,
-                    url: window.location.href,
-                });
+                if (navigator.share) {
+                    navigator
+                        .share({
+                            title: 'Православное богослужение',
+                            text: day?.title,
+                            url: window.location.href,
+                        })
+                        .catch(error => console.log('Error sharing', error));
+                }
             }}
             className={css`
                 padding: 6px 6px !important;
