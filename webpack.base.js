@@ -55,6 +55,11 @@ module.exports = {
             content: `"${version}"`,
         }),
         new CreateFileWebpack({
+            path: './www/built',
+            fileName: 'version.json',
+            content: `"${version}"`,
+        }),
+        new CreateFileWebpack({
             path: './www',
             fileName: 'version',
             content: `${version}`,
