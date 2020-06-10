@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
+import useAudio from 'hooks/useAudio';
 
 const RteText = React.forwardRef(({ html, className = '' }, ref) => {
+    const localRef = useRef();
+    const effectiveRef = ref || localRef;
     const theme = useTheme();
     const htmlWithStrongSlashes = html
         .replace(/([\s])\/\/([\s])/g, '$1<strong>//</strong>$2')
         .replace(/([\s])\/([\s])/g, '$1<strong>/</strong>$2');
+
+    useAudio(effectiveRef);
     return (
         <div
-            ref={ref}
+            ref={effectiveRef}
             dangerouslySetInnerHTML={{ __html: htmlWithStrongSlashes }}
             className={
                 css`

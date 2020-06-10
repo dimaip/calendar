@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import useAudio from 'hooks/useAudio';
 
 const getProkimenData = (day, date) => {
     const dateObj = new Date(date);
@@ -124,29 +125,35 @@ const getProkimenData = (day, date) => {
     return null;
 };
 
-const Prokimen = ({ title, verse1, stih, title2, verse2, audio }) => (
-    <>
-        <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
-            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> {title}</span>
-            {verse1 && <br />}
-            {verse1}
-        </p>
-        {stih && (
-            <p className="_-ОСНОВНОЙ_Основной-б-отст">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Стих</span> {stih}
+const Prokimen = ({ title, verse1, stih, title2, verse2, audio }) => {
+    const ref = useRef();
+    useAudio(ref);
+    return (
+        <>
+            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
+                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
+                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ч</span>
+                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> {title}</span>
+                {verse1 && <br />}
+                {verse1}
             </p>
-        )}
-        {title2 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{title2}</p>}
-        {verse2 && <p className="_-ОСНОВНОЙ_Основной-б-отст">{verse2}</p>}
-        {audio && (
-            <audio controls>
-                <source src={audio} type="audio/mpeg" />
-            </audio>
-        )}
-    </>
-);
+            {stih && (
+                <p className="_-ОСНОВНОЙ_Основной-б-отст">
+                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Стих</span> {stih}
+                </p>
+            )}
+            {title2 && <p className="_-ОСНОВНОЙ_Основной-отст1-5">{title2}</p>}
+            {verse2 && <p className="_-ОСНОВНОЙ_Основной-б-отст">{verse2}</p>}
+            {audio && (
+                <div ref={ref}>
+                    <audio controls>
+                        <source src={audio} type="audio/mpeg" />
+                    </audio>
+                </div>
+            )}
+        </>
+    );
+};
 
 const Prokimens = ({ day, date }) => {
     const commonProkimen = getProkimenData(day, date);
