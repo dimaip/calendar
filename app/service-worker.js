@@ -21,7 +21,7 @@ const publicUrlRegexp = process.env.PUBLIC_URL;
 
 // Cache (pre-caching happens in precache.worker.js) api and static requests
 registerRoute(new RegExp(`^${apiHostRegexp}/clear-cache`), new NetworkOnly());
-registerRoute(new RegExp('/built/version'), new NetworkOnly());
+registerRoute(new RegExp('/built/version.json'), new NetworkOnly());
 registerRoute(new RegExp(`^${apiHostRegexp}`), new StaleWhileRevalidate());
 registerRoute(new RegExp('^https://psmb.ru'), new StaleWhileRevalidate());
 registerRoute(new RegExp('/assets/'), new CacheFirst());
