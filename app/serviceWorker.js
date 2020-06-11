@@ -2,9 +2,6 @@ export function register() {
     if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
         const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
         if (publicUrl.origin !== window.location.origin) {
-            // Our service worker won't work if PUBLIC_URL is on a different origin
-            // from what our page is served on. This might happen if a CDN is used to
-            // serve assets; see https://github.com/facebook/create-react-app/issues/2374
             return;
         }
 
@@ -19,16 +16,22 @@ export function register() {
                         if (installingWorker == null) {
                             return;
                         }
+                        // Prevents Chrome's "Update on reload" from going into infinite loop
+                        let lockRefresh = false;
                         installingWorker.onstatechange = () => {
-                            if (installingWorker.state === 'installed') {
+                            if (installingWorker.state == 'activated') {
+                                if (lockRefresh) {
+                                    return;
+                                }
+                                lockRefresh = true;
+                                // serviceWorker.controller points to the current SW. If it exists, it means it's an update.
                                 if (navigator.serviceWorker.controller) {
-                                    console.log('New SW, reloading');
-                                    location.reload();
+                                    console.log('SW update activated, reloading', VERSION);
+                                    // Now that we now it's not a first app install, it's time to reload to get the fresh app assets
+                                    window.location.reload();
                                 } else {
-                                    // At this point, everything has been precached.
-                                    // It's the perfect time to display a
-                                    // "Content is cached for offline use." message.
-                                    console.log('Content is cached for offline use.');
+                                    // @TODO: display a "Content is cached for offline use." message.
+                                    console.log('Fresh SW activated.', VERSION);
                                 }
                             }
                         };
