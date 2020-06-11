@@ -21,9 +21,8 @@ const checkVersion = async () => {
     const version = await getVersionThrottled();
 
     // VERSION is a global constant injected by webpack
-    // @ts-ignore
     if (version && version !== VERSION) {
-        console.log('New version, reloading');
+        console.log('New version, reloading: ', VERSION, version);
         location.reload();
     }
 };
