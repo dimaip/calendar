@@ -98,8 +98,6 @@ const augmentAudio = (audioElement, theme) => {
         '<svg width="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M152.443 136.417L359.557 255.99 152.443 375.583z"/></svg>'
     );
     const currentTime = document.createElement('span');
-    const separator = document.createElement('span');
-    separator.innerText = ' / ';
     const totalTime = document.createElement('span');
     const timer = el(
         'div',
@@ -109,23 +107,33 @@ const augmentAudio = (audioElement, theme) => {
                 font-size: 12px;
                 margin-top: -8px;
                 text-align: right;
+                visibility: hidden;
             `,
         },
         [currentTime, el('span', {}, ' / '), totalTime]
     );
-    const ui = el('div', {}, [
-        el(
-            'div',
-            {
-                class: css`
-                    display: flex;
-                    align-items: center;
-                `,
-            },
-            [play, timelineWrapper]
-        ),
-        timer,
-    ]);
+    const ui = el(
+        'div',
+        {
+            class: css`
+                margin-top: 12px;
+                margin-bottom: 24px;
+            `,
+        },
+        [
+            el(
+                'div',
+                {
+                    class: css`
+                        display: flex;
+                        align-items: center;
+                    `,
+                },
+                [play, timelineWrapper]
+            ),
+            timer,
+        ]
+    );
     audioElement.parentNode.insertBefore(ui, audioElement);
 
     const handlePlay = () => {
@@ -140,13 +148,14 @@ const augmentAudio = (audioElement, theme) => {
         requestAnimationFrame(() => {
             const effectiveTime = Math.max(
                 0,
-                Math.min(audioElement.duration, typeof time === 'number' ? time : audioElement.currentTime)
+                Math.min(audioElement.duration, typeof time === 'number' ? time : audioElement.currentTime || 0)
             );
             currentTime.innerText = formatTime(effectiveTime);
             totalTime.innerText = formatTime(audioElement.duration);
             const percentPlayed = (effectiveTime / audioElement.duration) * 100;
             played.style.width = `${percentPlayed}%`;
             playhead.style.left = `calc(${percentPlayed}% - 4px)`;
+            timer.style.visibility = 'visible';
         });
     };
 
@@ -203,6 +212,7 @@ const augmentAudio = (audioElement, theme) => {
     };
     timelineWrapper.addEventListener('touchmove', touchMove);
     timelineWrapper.addEventListener('mousemove', touchMove);
+    updateUI();
 };
 
 const useAudio = ref => {
