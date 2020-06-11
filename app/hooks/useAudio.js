@@ -2,7 +2,7 @@ import { useTheme } from 'emotion-theming';
 import { useEffect } from 'react';
 import { css } from 'emotion';
 
-const formatTime = seconds => new Date(1000 * parseInt(seconds)).toISOString().substr(14, 5);
+const formatTime = seconds => new Date(1000 * parseInt(seconds || 0)).toISOString().substr(14, 5);
 
 // Just a tiny little helper from back in the days
 const el = (tagName, attributes, children) => {
