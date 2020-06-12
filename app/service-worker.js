@@ -3,14 +3,16 @@ import { StaleWhileRevalidate, CacheFirst, NetworkOnly } from 'workbox-strategie
 import { registerRoute } from 'workbox-routing';
 import * as googleAnalytics from 'workbox-google-analytics';
 
+googleAnalytics.initialize();
+
 self.addEventListener('install', function(event) {
+    // Activate without waiting for all tabs to close
     event.waitUntil(self.skipWaiting());
 });
 self.addEventListener('activate', function(event) {
+    // Take over other tabs
     event.waitUntil(self.clients.claim());
 });
-
-googleAnalytics.initialize();
 
 console.log('Precaching routes:', self.__WB_MANIFEST);
 // Pre-cache main JS assets
