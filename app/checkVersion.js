@@ -18,12 +18,23 @@ const getVersionThrottled = async () => {
 };
 
 const checkVersion = async () => {
-    const version = await getVersionThrottled();
+    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+        const version = await getVersionThrottled();
 
-    // VERSION is a global constant injected by webpack
-    if (version && version !== VERSION) {
-        console.log('New version, reloading: ', VERSION, version);
-        location.reload();
+        // VERSION is a global constant injected by webpack
+        if (version && version !== VERSION) {
+            console.log('New version, reloading: ', VERSION, version);
+            try {
+                const registation = await navigator.serviceWorker.getRegistration();
+                if (registation) {
+                    await registation.update();
+                    console.log('Registration update successul');
+                }
+            } catch (e) {
+                console.log('Failed updating SW, reloading', e);
+                location.reload();
+            }
+        }
     }
 };
 
