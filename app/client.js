@@ -6,7 +6,7 @@ import 'core-js';
 import 'unfetch/polyfill';
 import 'element-closest-polyfill';
 import 'regenerator-runtime/runtime';
-import 'share-api-polyfill';
+import './sharePolyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';

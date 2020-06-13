@@ -7256,11 +7256,6 @@ shallowequal@^1.1.0:
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
-share-api-polyfill@^1.0.13:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/share-api-polyfill/-/share-api-polyfill-1.0.13.tgz#9ebaf3881e38d216e88e47f6b27dea8aed5a79e0"
-  integrity sha512-hU4a5B2AIXqcv12wewB4HrApxp3eiptZKp30BQ3rYQzEGLZbXbN0f5aWTM7eO4O5rKKz48l3VSsXO9GN00SWIw==
-
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
