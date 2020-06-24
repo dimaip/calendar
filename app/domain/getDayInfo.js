@@ -485,7 +485,7 @@ export const getFeastInfo = memoize(
             icon = 'vhod.jpg';
         }
 
-        if (isEasterOffsetRange(39, 48)) {
+        if (isEasterOffsetRange(39, 47)) {
             icon = 'ascension.svg';
         }
 
