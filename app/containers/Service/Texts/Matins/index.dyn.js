@@ -30,9 +30,14 @@ const Matins = ({ date }) => {
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
 
-    const hymns = day?.prayers && day.prayers.length > 0 && (
+    const troparions = day?.troparions && day.troparions.length > 0 && (
         <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-            <Hymns hymns={day.prayers} />
+            <Hymns hymns={day.troparions} />
+        </SolidSection>
+    );
+    const endHymns = (day?.kondacs || day?.velichanija) && (
+        <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
+            <Hymns hymns={(day.kondacs || '') + (day.velichanija || '')} />
         </SolidSection>
     );
 
@@ -60,7 +65,8 @@ const Matins = ({ date }) => {
         return (
             <Prazdnichnaja
                 dayOfWeek={dayOfWeek}
-                hymns={hymns}
+                troparions={troparions}
+                endHymns={endHymns}
                 readings={readings}
                 saints={saints}
                 easterSeason={easterSeason}
@@ -75,7 +81,8 @@ const Matins = ({ date }) => {
         return (
             <Lent
                 dayOfWeek={dayOfWeek}
-                hymns={hymns}
+                troparions={troparions}
+                endHymns={endHymns}
                 readings={readings}
                 saints={saints}
                 easterSeason={easterSeason}

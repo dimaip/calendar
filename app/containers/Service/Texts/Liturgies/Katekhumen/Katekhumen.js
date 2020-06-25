@@ -66,9 +66,9 @@ const Katekhumen = ({ lang, date, day }) => {
     const antifon3 = <Antifon3 lang={lang} date={date} />;
     const reading = <Reading lang={lang} day={day} date={date} />;
 
-    const hymns = day?.prayers && day.prayers.length > 0 && (
+    const hymns = (day?.troparions || day?.kondacs) && (
         <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-            <Hymns hymns={day.prayers} />
+            <Hymns hymns={(day?.troparions || '') + (day?.kondacs || '')} />
         </SolidSection>
     );
 

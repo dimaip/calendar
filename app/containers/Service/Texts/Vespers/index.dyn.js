@@ -38,6 +38,16 @@ const Vespers = ({ date }) => {
             <Hymns hymns={tomorrowDay.prayers} />
         </SolidSection>
     );
+    const troparions = tomorrowDay?.troparions && tomorrowDay.troparions.length > 0 && (
+        <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
+            <Hymns hymns={tomorrowDay.troparions} />
+        </SolidSection>
+    );
+    const endHymns = (tomorrowDay?.kondacs || tomorrowDay?.velichanija) && (
+        <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
+            <Hymns hymns={(tomorrowDay.kondacs || '') + (tomorrowDay.velichanija || '')} />
+        </SolidSection>
+    );
 
     const readingsForService = day?.bReadings?.['Вечером'] || day?.readings?.['Вечерня'];
     const readings = readingsForService ? (
@@ -63,7 +73,8 @@ const Vespers = ({ date }) => {
         return (
             <Prazdnichnaja
                 dayOfWeek={dayOfWeek}
-                hymns={hymns}
+                troparions={troparions}
+                endHymns={endHymns}
                 readings={readings}
                 saints={saints}
                 easterSeason={easterSeason}
@@ -77,7 +88,8 @@ const Vespers = ({ date }) => {
         return (
             <Lent
                 dayOfWeek={dayOfWeek}
-                hymns={hymns}
+                troparions={troparions}
+                endHymns={endHymns}
                 readings={readings}
                 saints={saints}
                 easterSeason={easterSeason}

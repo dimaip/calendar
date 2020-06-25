@@ -133,7 +133,7 @@ const InnerContent = ({ date, services }) => {
                                             </BorderedSection>
 
                                             <ThisDays thisDays={thisDays} date={date} />
-                                            {(day.prayers || day.prayersOther) && (
+                                            {(day.troparions || day.kondacs || day.velichanija) && (
                                                 <BorderedSection>
                                                     <div
                                                         className={css`
@@ -142,7 +142,13 @@ const InnerContent = ({ date, services }) => {
                                                     >
                                                         <SectionHeading>Песнопения</SectionHeading>
                                                     </div>
-                                                    <Hymns hymns={(day.prayers || '') + (day.prayersOther || '')} />
+                                                    <Hymns
+                                                        hymns={
+                                                            (day.troparions || '') +
+                                                            (day.kondacs || '') +
+                                                            (day.velichanija || '')
+                                                        }
+                                                    />
                                                 </BorderedSection>
                                             )}
                                             {day.bReadings && Object.keys(day.bReadings).length > 0 && (
