@@ -2,19 +2,19 @@ import React from 'react';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
-const Antifon2 = ({ lang, date: dateString }) => {
+const Antifon2 = ({ date: dateString }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(dateString);
     if (isEasterOffsetRange(0, 6)) {
-        return <MdxLoader src="Liturgies/Katekhumen/Antifon2Easter" lang={lang} />;
+        return <MdxLoader src="Liturgies/Katekhumen/Antifon2Easter" />;
     }
     if (isEasterOffsetRange(39)) {
-        return <MdxLoader src="Liturgies/Katekhumen/Antifon2Ascension" lang={lang} />;
+        return <MdxLoader src="Liturgies/Katekhumen/Antifon2Ascension" />;
     }
     if (isEasterOffsetRange(49)) {
-        return <MdxLoader src="Liturgies/Katekhumen/Antifon2Pentecost" lang={lang} />;
+        return <MdxLoader src="Liturgies/Katekhumen/Antifon2Pentecost" />;
     }
 
-    return <MdxLoader src="Liturgies/Katekhumen/Antifon2" lang={lang} />;
+    return <MdxLoader src="Liturgies/Katekhumen/Antifon2" />;
 };
 
 export default Antifon2;

@@ -55,7 +55,7 @@ const Matins = ({ date }) => {
         </SolidSection>
     );
 
-    const otpust = <Ending date={dateObj} lang={lang} day={day} saints={saints} />;
+    const otpust = <Ending date={dateObj} day={day} saints={saints} />;
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);

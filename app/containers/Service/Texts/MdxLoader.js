@@ -14,6 +14,8 @@ const MdxLoader = props => {
     if (lang === 'parallel') {
         const ComponentA = React.lazy(() => import(`containers/Service/Texts/${src}/${langA}.mdx`).catch(() => {}));
         const ComponentB = React.lazy(() => import(`containers/Service/Texts/${src}/${langB}.mdx`).catch(() => {}));
+        const langStateA = { lang: langA, langA, langB };
+        const langStateB = { lang: langB, langA, langB };
         return (
             <div
                 className={css`
@@ -29,7 +31,9 @@ const MdxLoader = props => {
                     `}
                 >
                     <Suspense fallback={<Loader width={32} />}>
-                        <ComponentA {...props} />
+                        <LangContext.Provider value={langStateA}>
+                            <ComponentA {...props} />
+                        </LangContext.Provider>
                     </Suspense>
                 </div>
                 <div
@@ -39,7 +43,9 @@ const MdxLoader = props => {
                     `}
                 >
                     <Suspense fallback={<Loader width={32} />}>
-                        <ComponentB {...props} />
+                        <LangContext.Provider value={langStateB}>
+                            <ComponentB {...props} />
+                        </LangContext.Provider>
                     </Suspense>
                 </div>
             </div>

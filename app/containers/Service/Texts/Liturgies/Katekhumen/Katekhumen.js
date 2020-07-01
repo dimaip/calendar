@@ -61,10 +61,10 @@ const Katekhumen = ({ lang, date, day }) => {
     const externalDayQuery = useExternalDay(date);
     const { apostol, gospel } = getKatekhumenReadings(day);
 
-    const antifon1 = <Antifon1 lang={lang} date={date} />;
-    const antifon2 = <Antifon2 lang={lang} date={date} />;
-    const antifon3 = <Antifon3 lang={lang} date={date} />;
-    const reading = <Reading lang={lang} day={day} date={date} />;
+    const antifon1 = <Antifon1 date={date} />;
+    const antifon2 = <Antifon2 date={date} />;
+    const antifon3 = <Antifon3 date={date} />;
+    const reading = <Reading day={day} date={date} />;
 
     const hymns = (day?.troparions || day?.kondacs) && (
         <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
@@ -78,11 +78,11 @@ const Katekhumen = ({ lang, date, day }) => {
         </VariableSection>
     );
 
-    const trisvatoe = <Trisvatoe day={day} lang={lang} />;
+    const trisvatoe = <Trisvatoe lang={lang} day={day} />;
 
     const vhodnoiStih = (
         <VariableSection date={date}>
-            <VhodnoiStih day={day} lang={lang} />
+            <VhodnoiStih lang={lang} day={day} />
         </VariableSection>
     );
 
@@ -111,198 +111,30 @@ const Katekhumen = ({ lang, date, day }) => {
                 </span>
             </p>
             {!easterSeason && (
-                <>
-                    <MdxLoader src="Liturgies/Katekhumen/Priugotovl" lang={lang} />
-                    {!isEasterOffsetRange(0, 48) && lang === 'ru' && (
-                        <>
-                            <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">О Царь Небесный</span>
-                            </p>
-                            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> О Царь Небесный, Хода́тай </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Уте́шитель</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">,</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                    {' '}
-                                    Дух Истины, о Ты, везде пребывающий и всё наполняющий, Со­кро­вищ­ница благ и жизни
-                                    Податель, при­ди` и вселись в
-                                </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                    нас, и очи­сти нас от вся­кой скверны, и спа­си, Бла­го́й, ду­ши наши.
-                                </span>
-                            </p>
-                        </>
-                    )}
-                    {!isEasterOffsetRange(0, 48) && lang === 'csj' && (
-                        <>
-                            <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">О Царь Небесный</span>
-                            </p>
-                            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                    {' '}
-                                    Царю́ Небе́сный, Уте́шителю,
-                                    <br />
-                                    Ду́ше и́стины, И́же везде́ сый и вся исполня́яй,
-                                    <br />
-                                    Сокро́вище благи́х и жи́зни Пода́телю, прииди́ и всели́ся в ны,
-                                    <br />и очи́сти ны от вся́кия скве́рны, и спаси́, Бла́же, ду́ши на́ша.
-                                </span>
-                            </p>
-                        </>
-                    )}
-                    <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Слава в вышних Богу, <br /> и на земле мир избранникам Его.
-                            <br />
-                        </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(Дважды.)</span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Господи! отве́рзни уста мои, <br /> и речь моя возвести`
-                        </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">т хва­лу Тебе.</span>
-                    </p>
-                    <p className="_-ПЕТИТ_Петит-отст5 ParaOverride-2">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Д</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Время Господу действовать. Владыка, благослови!</span>
-                    </p>
-                    <p className="_-ПЕТИТ_Петит-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">П</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Благословен Бог наш </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">во все дни:</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">]</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и всегда и во веки веков.</span>
-                    </p>
-                    <p className="_-ПЕТИТ_Петит-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Д</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Помолись обо мне, владыка святой!</span>
-                    </p>
-                    <p className="_-ПЕТИТ_Петит-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">П</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Да направит Господь стопы` твои.</span>
-                    </p>
-                    <p className="_-ПЕТИТ_Петит-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Д</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Воспо́мни меня, владыка святой!</span>
-                    </p>
-                    <p className="_-ПЕТИТ_Петит-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">П</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Да воспо́</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">мнит тебя Господь Бог во царствии Своём </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">во все дни:</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">]</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ны­не и всегда и во веки веков.</span>
-                    </p>
-                    <p className="_-ПЕТИТ_Петит-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Д</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">]</span>
-                    </p>
-                </>
+                <MdxLoader src="Liturgies/Katekhumen/Priugotovl" isEasterOffsetRange={isEasterOffsetRange} />
             )}
-            <p className="_-ОСНОВНОЙ_Звездочки ParaOverride-3">
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">***</span>
-            </p>
-            <p className="_-ПЕТИТ_Петит-б-отст">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">Д</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Благослови, владыка</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">!</span>
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                    {' '}
-                    Благословенно Царство Отца и Сына и Святого Ду­ха ныне и всегда и во веки веков!
-                </span>
-            </p>
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
-            </p>
-            {easterSeason && (
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span> Тропарь Пасхи: Христос воскрес из мёртвых, / Смертию
-                    смерть поправ // и тем, кто во гробах, Жизнь даровав (трижды)
-                </p>
-            )}
-            {brightOrOtdanie && (
-                <>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span> Тропарь Пасхи: Христос воскрес из мёртвых, /
-                        Смертию смерть поправ // и тем, кто во гробах, Жизнь даровав (трижды)
-                    </p>
-                    <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span> Тропарь Пасхи: Христос воскрес из мёртвых, /
-                        Смертию смерть поправ // и тем, кто во гробах, Жизнь даровав. (трижды – здесь и по одному разу
-                        после каждого стиха)
-                    </p>
-                    <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">1</span> Да воccтанет Бог, и pаc­точа́тcя вpаги Его, и да
-                        бегут от лица Его ненавидящие Его;
-                    </p>
-                    <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">2</span> как иcчезает дым, да иcчезнут они, как тает воcк
-                        от лица огня,
-                    </p>
-                    <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">3</span> да сгинут злые пред Божьим лицом, – а
-                        пpа­вед­ники да возвеcелятcя!
-                    </p>
-                    <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">4</span> Вот день, что cотвоpил Гоcподь: возликуем,
-                        возвеcелимcя о нём!
-                    </p>
-                    <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Cлава.</span> Христос воскрес…
-                    </p>
-                    <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">И ныне.</span> Христос воскрес…
-                    </p>
-                </>
-            )}
-            <MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia" lang={lang} />
-            <MdxLoader src="Liturgies/Katekhumen/Molitva1" lang={lang} />
+
+            <MdxLoader src="Liturgies/Katekhumen/Vozglas" />
+            {easterSeason && <MdxLoader src="Shared/EasterTroparion3x" />}
+            {brightOrOtdanie && <MdxLoader src="Liturgies/Katekhumen/DaVosstanetBog" />}
+
+            <MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia" />
+            <MdxLoader src="Liturgies/Katekhumen/Molitva1" />
             {antifon1}
 
-            <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
 
-            <MdxLoader src="Liturgies/Katekhumen/Molitva2" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/Molitva2" />
             {antifon2}
 
-            <MdxLoader src="Liturgies/Katekhumen/SnovaSnova" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/SnovaSnova" />
 
-            <MdxLoader src="Liturgies/Katekhumen/Molitva3" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/Molitva3" />
             {antifon3}
 
             {/* @TODO hide during Sundays and feasts */}
-            {!brightOrOtdanie && <MdxLoader src="Liturgies/Katekhumen/AntifonVsednev" lang={lang} />}
-            <MdxLoader src="Liturgies/Katekhumen/MalijVhod" lang={lang} />
+            {!brightOrOtdanie && <MdxLoader src="Liturgies/Katekhumen/AntifonVsednev" />}
+            <MdxLoader src="Liturgies/Katekhumen/MalijVhod" />
 
             {vhodnoiStih}
 
@@ -357,90 +189,12 @@ const Katekhumen = ({ lang, date, day }) => {
                     Молитва <br />
                     перед чтением Евангелия
                     <Tooltip>
-                        <>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010.
-                                С.&nbsp;125).
-                            </span>
-                        </>
+                        Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).
                     </Tooltip>
                 </span>
             </p>
-            {lang === 'ru' && (
-                <>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Возжги` в наших сердцах, человеколюби`вый Владыка, Твоего богопознания чистый свет и наши
-                            духовные очи открой для уразумения{' '}
-                        </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Твоей</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">] </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            евангельской проповеди! Вложи` в нас и страх пред Твоими благи`ми за́поведями, дабы, одолев{' '}
-                        </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">все</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            устремления плотски`е, мы проводили жизнь духовную, всегда мысля и совершая благоуго́дное
-                            Тебе, —
-                        </span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ведь Ты` просвещение душ и тел наших, </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Хри­сте</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Боже, и мы` воссылаем славу Те­бе, </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">
-                            вме­сте с Твоим безначальным Отцом и все­свят
-                        </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">ы́</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">м и благ</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">и`</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">м и животвор</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">я´</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">­щим Ду­хом Твоим,</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и все­гда и во ве­ки веков.</span>
-                    </p>
-                </>
-            )}
-            {lang === 'csj' && (
-                <>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Возсияй в сердцах наших человеколюбче Владыко, Твоего Богоразумия нетленный свет, и
-                            мысленныя наши отверзи очи, во евангельских Твоих проповеданий разумение: вложи в нас и
-                            страх блаженных Твоих заповедей, да плотския похоти вся поправше, духовное жительство
-                            пройдем, вся, яже ко благоугождению Твоему, и мудрствующе и деюще.{' '}
-                        </span>
-                    </p>
-                    <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
-                        <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                            {' '}
-                            Ты бо еси просвещение душ и телес наших, Христе Боже, и Тебе славу возсылаем, со
-                            безначальным Твоим Отцем, и пресвятым и благим и животворящим Твоим Духом, ныне и присно, и
-                            во веки веков.
-                        </span>
-                    </p>
-                </>
-            )}
+            <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
 
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
-            </p>
             <p className="_-ПЕТИТ_Петит-отст5">
                 <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                 <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">[</span>
@@ -564,7 +318,7 @@ const Katekhumen = ({ lang, date, day }) => {
 
             {sermons}
 
-            <MdxLoader src="Liturgies/Katekhumen/SugubajaEktenia" lang={lang} />
+            <MdxLoader src="Liturgies/Katekhumen/SugubajaEktenia" />
 
             <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
@@ -823,70 +577,8 @@ const Katekhumen = ({ lang, date, day }) => {
                     <p className="_-ОСНОВНОЙ_Имя-части-отст5">
                         <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва об оглашаемых</span>
                     </p>
-                    {lang === 'ru' && (
-                        <>
-                            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                    {' '}
-                                    Господи Боже наш, в вышних обитающий и на до́ль­нее взирающий, ради спасения рода
-                                    че­ловеческого пославший Твоего единородного Сына и Бога, Гос­пода нашего Иисуса
-                                    Христа, — воззри на рабов Тво­их огла­ша­емых, склони`
-                                </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">в­ших пред То­бою свои гла­вы` </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[имена]</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                    , и удостой их во время благоприя´тное ку­пели воз­рож­дения, про­щения грехов и
-                                    одежды нетления, соедини их с Твоей святой, ка­фо­ли­ческой{' '}
-                                </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> вселенской</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ CharOverride-7">,</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> со­борной</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                    {' '}
-                                    и апос­толь­ской Цер­ковью и со­при­чи`сли их к Твоему и`
-                                </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                    збранному ста­ду,&nbsp;—
-                                </span>
-                            </p>
-                            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                    {' '}
-                                    дабы и они` с нами славили вседостойное и пре­кра­с­ное имя Твоё,{' '}
-                                </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">Отца и Сына и Святого Духа,</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ны­не и всегда и во веки веков.</span>
-                            </p>
-                        </>
-                    )}
-                    {lang === 'csj' && (
-                        <>
-                            <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                    {' '}
-                                    Господи Боже наш, иже на небесех живый и призираяй на вся дела Твоя, призри на рабы
-                                    Твоя оглашенныя, приклоньшыя своя выя пред Тобою и даждь им легкий ярем, сотвори их
-                                    уды честны святыя Твоея Церкве и сподоби их бани пакибытия, оставления грехов и
-                                    одежди нетления, в познание Тебе, истиннаго Бога нашего.
-                                </span>
-                            </p>
-                            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                    {' '}
-                                    Да и тии с нами славят пречестное и великолепое имя Твое, Отца, и Сына, и Святаго
-                                    Духа, ныне и присно, и во веки веков.
-                                </span>
-                            </p>
-                        </>
-                    )}
+
+                    <MdxLoader src="Liturgies/Katekhumen/Oglashaemie" />
 
                     <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                         <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
