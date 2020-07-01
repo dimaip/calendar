@@ -113,7 +113,7 @@ const Katekhumen = ({ lang, date, day }) => {
             {!easterSeason && (
                 <>
                     <MdxLoader src="Liturgies/Katekhumen/Priugotovl" lang={lang} />
-                    {!isEasterOffsetRange(0, 48) && lang === 'default' && (
+                    {!isEasterOffsetRange(0, 48) && lang === 'ru' && (
                         <>
                             <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">О Царь Небесный</span>
@@ -138,7 +138,7 @@ const Katekhumen = ({ lang, date, day }) => {
                             </p>
                         </>
                     )}
-                    {!isEasterOffsetRange(0, 48) && lang === 'ЦСЯ' && (
+                    {!isEasterOffsetRange(0, 48) && lang === 'csj' && (
                         <>
                             <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">О Царь Небесный</span>
@@ -366,7 +366,7 @@ const Katekhumen = ({ lang, date, day }) => {
                     </Tooltip>
                 </span>
             </p>
-            {lang === 'default' && (
+            {lang === 'ru' && (
                 <>
                     <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                         <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -412,7 +412,7 @@ const Katekhumen = ({ lang, date, day }) => {
                     </p>
                 </>
             )}
-            {lang === 'ЦСЯ' && (
+            {lang === 'csj' && (
                 <>
                     <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
                         <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -575,7 +575,7 @@ const Katekhumen = ({ lang, date, day }) => {
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> молении</span>
             </p>
-            {lang === 'default' && (
+            {lang === 'ru' && (
                 <>
                     <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                         <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -600,7 +600,7 @@ const Katekhumen = ({ lang, date, day }) => {
                 </>
             )}
 
-            {lang === 'ЦСЯ' && (
+            {lang === 'csj' && (
                 <>
                     <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
                         <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
@@ -823,7 +823,7 @@ const Katekhumen = ({ lang, date, day }) => {
                     <p className="_-ОСНОВНОЙ_Имя-части-отст5">
                         <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва об оглашаемых</span>
                     </p>
-                    {lang === 'default' && (
+                    {lang === 'ru' && (
                         <>
                             <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                                 <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -866,7 +866,7 @@ const Katekhumen = ({ lang, date, day }) => {
                             </p>
                         </>
                     )}
-                    {lang === 'ЦСЯ' && (
+                    {lang === 'csj' && (
                         <>
                             <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
                                 <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>

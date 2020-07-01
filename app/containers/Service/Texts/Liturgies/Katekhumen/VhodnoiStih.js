@@ -8,7 +8,7 @@ const VhodnoiStih = ({ day, lang }) => {
 
     return (
         <>
-            {lang === 'default' && (
+            {lang === 'ru' && (
                 <>
                     <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                         <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -29,7 +29,7 @@ const VhodnoiStih = ({ day, lang }) => {
                     </p>
                 </>
             )}
-            {lang === 'ЦСЯ' && (
+            {lang === 'csj' && (
                 <>
                     <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                         <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>

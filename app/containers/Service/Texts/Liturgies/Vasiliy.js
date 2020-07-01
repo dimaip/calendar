@@ -53,7 +53,7 @@ const Vasiliy = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Тихо:</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -90,7 +90,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -189,7 +189,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Тихо:</span>
                 </p>
 
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
@@ -227,7 +227,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
@@ -272,7 +272,7 @@ const Vasiliy = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Тихо:</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
@@ -372,7 +372,7 @@ const Vasiliy = ({ lang }) => {
                         </p>
                     </>
                 )}
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
@@ -428,7 +428,7 @@ const Vasiliy = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-11">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> 1-я часть Херувимской песни:</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -471,7 +471,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1024,7 +1024,7 @@ const Vasiliy = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> По поставлении св. даров на престол:</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
@@ -1101,7 +1101,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
@@ -1192,7 +1192,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
                     <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">]</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Д</span>
@@ -1241,7 +1241,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Д</span>
@@ -1314,7 +1314,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ-красн">`</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">хом: </span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1424,7 +1424,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1528,7 +1528,7 @@ const Vasiliy = ({ lang }) => {
                         </>
                     </Tooltip>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1604,7 +1604,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1672,7 +1672,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">цио)</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1766,7 +1766,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1819,7 +1819,7 @@ const Vasiliy = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-11">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д [или П] Соделывает звездицей образ Креста.</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1860,7 +1860,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1898,7 +1898,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ДР--ГАРНИТУРЫ_УДАРЕНИЕ">`</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">мнесис)</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Ты созда</span>
@@ -2082,7 +2082,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
@@ -2150,7 +2150,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -2175,7 +2175,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -2199,7 +2199,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -2227,7 +2227,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -2250,7 +2250,7 @@ const Vasiliy = ({ lang }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д [или П] Возносит хлеб и вино.</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -2271,7 +2271,7 @@ const Vasiliy = ({ lang }) => {
                         </p>
                     </>
                 )}
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -2281,7 +2281,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
@@ -2303,7 +2303,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
@@ -3139,7 +3139,7 @@ const Vasiliy = ({ lang }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">: </span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-11">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> П и Н</span>
@@ -3195,7 +3195,7 @@ const Vasiliy = ({ lang }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-11">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> П и Н</span>

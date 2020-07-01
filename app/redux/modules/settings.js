@@ -1,9 +1,8 @@
-import { SET_ZOOM, DISMISS_IOS_PROMPT, SET_LANGUAGE } from 'constants/actionTypes';
+import { SET_ZOOM, DISMISS_IOS_PROMPT } from 'constants/actionTypes';
 
 const initialState = {
     zoom: 1,
     iosPromptDismissed: false,
-    language: 'default',
 };
 
 export default function reducer(state = initialState, action) {
@@ -12,11 +11,6 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 zoom: action.payload.zoom,
-            };
-        case SET_LANGUAGE:
-            return {
-                ...state,
-                language: action.payload.language,
             };
         case DISMISS_IOS_PROMPT:
             return {

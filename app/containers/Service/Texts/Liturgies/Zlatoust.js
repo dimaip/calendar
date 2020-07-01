@@ -316,7 +316,7 @@ const Zlatoust = ({ lang, date }) => {
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> 1-я часть Херувимской песни:</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -359,7 +359,7 @@ const Zlatoust = ({ lang, date }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -965,7 +965,7 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> [</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Опахивая св. дары возду`хом:]</span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1060,7 +1060,7 @@ const Zlatoust = ({ lang, date }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                             <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -1927,7 +1927,7 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">: </span>
                 </p>
-                {lang === 'default' && (
+                {lang === 'ru' && (
                     <>
                         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-7">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> П и Н</span>
@@ -1977,7 +1977,7 @@ const Zlatoust = ({ lang, date }) => {
                     </>
                 )}
 
-                {lang === 'ЦСЯ' && (
+                {lang === 'csj' && (
                     <>
                         <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-7">
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> П и Н</span>

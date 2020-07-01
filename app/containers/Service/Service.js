@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { Suspense, useState, useEffect, useReducer, createContext } from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
 import MDXProvider from './MDXProvider';
 import { css } from 'emotion';
@@ -8,13 +8,13 @@ import Loader from 'components/Loader/Loader';
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
 import { getFeastInfo } from 'domain/getDayInfo';
-import { useSelector, useDispatch } from 'react-redux';
-import { setLanguage } from 'redux/actions/language';
 import makeServices from './Texts/Texts';
 import './Texts/Shared.css';
 import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
+import ParallelLanguageBar from './ParallelLanguageBar';
+import { LangContext, LangDispatchContext, useLangReducer } from './useLangReducer';
 const reloadOnFailedImport = e => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
     Sentry.captureException(e);
@@ -28,11 +28,9 @@ const Service = () => {
     const { data: day } = useDay(date);
     const theme = useTheme();
 
-    const lang = useSelector(state => state.settings.language);
-    const dispatch = useDispatch();
-    const setLang = language => dispatch(setLanguage(language));
-
     const history = useHistory();
+
+    const [langState, langDispatch] = useLangReducer();
 
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
 
@@ -102,64 +100,69 @@ const Service = () => {
                     margin-right: 8px;
                 `}
             />
-            {service?.lang && <LanguageSwitcher lang={lang} setLang={setLang} />}
-            <TOCSwitcher service={service} lang={lang} />
+            {service?.lang && <LanguageSwitcher />}
+            <TOCSwitcher service={service} lang={langState.lang} />
         </>
     );
 
     return (
-        <LayoutInner backLink={backLink} left={left} paddedContent={false}>
-            <Zoom>
-                <>
-                    <div
-                        className={css`
-                            margin-left: 12px;
-                            margin-right: 12px;
-                            margin-bottom: 24px;
-                        `}
-                    >
-                        <div
-                            className={css`
-                                position: relative;
-                                background: ${theme.colours.bgGray};
-                                margin: 0 -12px 24px -12px;
-                                padding: 12px 12px 12px 12px;
-                                font-size: 13px;
-                                color: ${theme.colours.darkGray};
-                            `}
-                        >
-                            Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда ошибается. За
-                            наиболее точной информацией обращайтесь к{' '}
-                            <a
+        <LangContext.Provider value={langState}>
+            <LangDispatchContext.Provider value={langDispatch}>
+                <LayoutInner backLink={backLink} left={left} paddedContent={false}>
+                    <ParallelLanguageBar />
+                    <Zoom>
+                        <>
+                            <div
                                 className={css`
-                                    text-decoration: underline;
+                                    margin-left: 12px;
+                                    margin-right: 12px;
+                                    margin-bottom: 24px;
                                 `}
-                                href={`http://www.patriarchia.ru/bu/${date}`}
-                                target="_blank"
                             >
-                                богослужебным указаниям.
-                            </a>{' '}
-                            Если вы обнаружили ошибку, пожалуйста,{' '}
-                            <a
-                                className={css`
-                                    text-decoration: underline;
-                                `}
-                                href="mailto:pb@psmb.ru"
-                                target="_blank"
-                            >
-                                напишите нам
-                            </a>
-                        </div>
+                                <div
+                                    className={css`
+                                        position: relative;
+                                        background: ${theme.colours.bgGray};
+                                        margin: 0 -12px 24px -12px;
+                                        padding: 12px 12px 12px 12px;
+                                        font-size: 13px;
+                                        color: ${theme.colours.darkGray};
+                                    `}
+                                >
+                                    Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда
+                                    ошибается. За наиболее точной информацией обращайтесь к{' '}
+                                    <a
+                                        className={css`
+                                            text-decoration: underline;
+                                        `}
+                                        href={`http://www.patriarchia.ru/bu/${date}`}
+                                        target="_blank"
+                                    >
+                                        богослужебным указаниям.
+                                    </a>{' '}
+                                    Если вы обнаружили ошибку, пожалуйста,{' '}
+                                    <a
+                                        className={css`
+                                            text-decoration: underline;
+                                        `}
+                                        href="mailto:pb@psmb.ru"
+                                        target="_blank"
+                                    >
+                                        напишите нам
+                                    </a>
+                                </div>
 
-                        <MDXProvider>
-                            <Suspense fallback={<Loader />}>
-                                {TextComponent && <TextComponent date={date} lang={lang} />}
-                            </Suspense>
-                        </MDXProvider>
-                    </div>
-                </>
-            </Zoom>
-        </LayoutInner>
+                                <MDXProvider>
+                                    <Suspense fallback={<Loader />}>
+                                        {TextComponent && <TextComponent date={date} lang={langState.lang} />}
+                                    </Suspense>
+                                </MDXProvider>
+                            </div>
+                        </>
+                    </Zoom>
+                </LayoutInner>
+            </LangDispatchContext.Provider>
+        </LangContext.Provider>
     );
 };
 export default Service;

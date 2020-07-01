@@ -1,4 +1,4 @@
-import { SET_ZOOM, SET_LANGUAGE, DISMISS_IOS_PROMPT } from 'constants/actionTypes';
+import { SET_ZOOM, DISMISS_IOS_PROMPT } from 'constants/actionTypes';
 //
 // Local storage middleware.
 //
@@ -8,7 +8,7 @@ import { SET_ZOOM, SET_LANGUAGE, DISMISS_IOS_PROMPT } from 'constants/actionType
 const localStorageMiddleware = ({ getState }) => {
     let timer = null;
     const debounceLocalStorageTimeout = 100;
-    const persistentActionsPatterns = [SET_ZOOM, SET_LANGUAGE, DISMISS_IOS_PROMPT];
+    const persistentActionsPatterns = [SET_ZOOM, DISMISS_IOS_PROMPT];
 
     return next => action => {
         const returnValue = next(action);

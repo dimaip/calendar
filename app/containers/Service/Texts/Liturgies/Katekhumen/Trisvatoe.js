@@ -15,7 +15,7 @@ const Trisvatoe = ({ day, lang }) => {
                     <Tooltip>Если Трисвятое не поётся, то даётся только возглас.</Tooltip>
                 </span>
             </p>
-            {lang === 'default' && (
+            {lang === 'ru' && (
                 <>
                     <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                         <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -76,7 +76,7 @@ const Trisvatoe = ({ day, lang }) => {
                     </p>
                 </>
             )}
-            {lang === 'ЦСЯ' && (
+            {lang === 'csj' && (
                 <>
                     <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-5">
                         <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
@@ -139,7 +139,7 @@ const Trisvatoe = ({ day, lang }) => {
             </p>
             {!vmestoTrisvatogo && (
                 <>
-                    {lang === 'default' && (
+                    {lang === 'ru' && (
                         <>
                             <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                                 <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Свято</span>
@@ -166,7 +166,7 @@ const Trisvatoe = ({ day, lang }) => {
                             </p>
                         </>
                     )}
-                    {lang === 'ЦСЯ' && (
+                    {lang === 'csj' && (
                         <>
                             <p className="_-ОСНОВНОЙ_Основной-отст1-5">
                                 <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
