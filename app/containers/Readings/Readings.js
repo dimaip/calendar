@@ -6,11 +6,7 @@ import ReadingsForService from './ReadingsForService';
 import ServiceSelector from './ServiceSelector';
 import useDay from 'hooks/useDay';
 import dateFormat from 'dateformat';
-import Button from 'components/Button/Button';
-import Cross from 'components/svgs/Cross';
-import { format, parseISO } from 'date-fns';
-import { ru } from 'date-fns/locale';
-import Calendar from 'components/Calendar/Calendar';
+import { parseISO } from 'date-fns';
 import { getFeastInfo } from 'domain/getDayInfo';
 import Prayer from 'components/svgs/Prayer';
 import { useTheme } from 'emotion-theming';
@@ -19,15 +15,12 @@ import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 
 const Readings = ({ brother = false }) => {
     const { service, date } = useParams();
-    const dateObj = parseISO(date);
     const history = useHistory();
     const { data: day } = useDay(date);
     const readings = brother ? day?.bReadings : day?.readings;
     const readingsForService = readings?.[service];
     const services = Object.keys(readings || {});
     const theme = useTheme();
-
-    const [calendarShown, setCalendarShown] = useState(false);
 
     useEffect(() => {
         // Redirect to first available service, if current one doesn't exist
@@ -38,13 +31,6 @@ const Readings = ({ brother = false }) => {
 
     const setNewDate = dateString => {
         history.push(`/date/${dateString}/readings/${service}`);
-    };
-
-    const handleDayClick = day => {
-        const dateString = dateFormat(day, 'yyyy-mm-dd');
-
-        setNewDate(dateString);
-        setCalendarShown(false);
     };
 
     const { lpod } = getFeastInfo(new Date(date));

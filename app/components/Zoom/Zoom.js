@@ -2,19 +2,7 @@ import React, { useLayoutEffect, useState, useContext } from 'react';
 import { css } from 'emotion';
 import { useSelector } from 'react-redux';
 import { LangContext } from 'containers/Service/useLangReducer';
-
-function useWindowSize() {
-    const [size, setSize] = useState([0, 0]);
-    useLayoutEffect(() => {
-        const updateSize = () => {
-            setSize([window.innerWidth, window.innerHeight]);
-        };
-        window.addEventListener('resize', updateSize);
-        updateSize();
-        return () => window.removeEventListener('resize', updateSize);
-    }, []);
-    return size;
-}
+import useWindowSize from 'hooks/useWindowSize';
 
 const Zoom = ({ children }) => {
     const [width] = useWindowSize();
