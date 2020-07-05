@@ -330,11 +330,6 @@ const Katekhumen = ({ lang, date, day }) => {
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> молении</span>
             </p>
             <MdxLoader src="Liturgies/Katekhumen/Userdnaya" />
-            <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
-            </p>
             {/* @TODO: hide on Sundays and feasts */}
             {!brightOrOtdanie && (
                 <>
