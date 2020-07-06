@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 import useLiturgy from './Vernie/useLiturgy';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
@@ -312,8 +313,8 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">входная песнь Литургии верных</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                <MdxLoader src="Liturgies/Vernie/Heruvimskaya" />
                 </p>
+                <MdxLoader src="Liturgies/Vernie/Heruvimskaya" />
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> К народу:</span>
                 </p>
