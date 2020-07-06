@@ -312,7 +312,7 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">входная песнь Литургии верных</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                <MdxLoader src="Liturgies/Katekhumen/Heruvimskaya" />
+                <MdxLoader src="Liturgies/Vernie/Heruvimskaya" />
                 </p>
                 <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> К народу:</span>
