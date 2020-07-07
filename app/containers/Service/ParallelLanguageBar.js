@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { css } from 'emotion';
 import { LangContext, LangDispatchContext } from './useLangReducer';
 import Button from 'components/Button/Button';
+import Cross from 'components/svgs/Cross';
 
 const ParallelLanguageBar = () => {
     {
@@ -122,12 +123,12 @@ const ParallelLanguageBar = () => {
                                     font-size: 24px;
                                     padding: 0 !important;
                                     line-height: 0;
-                                    margin-top: -9px;
+                                    margin-top: -6px;
                                 `}
                                 // @ts-ignore
                                 onClick={() => langDispatch({ type: 'setLang', lang: 'ru' })}
                             >
-                                ⨯
+                                <Cross white />
                             </Button>
                         </div>
                     </div>

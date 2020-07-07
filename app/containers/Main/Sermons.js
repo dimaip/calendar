@@ -39,7 +39,7 @@ const Sermons = ({ sermons, date, hideTitle = false }) => {
                         <SwipeableLink to={`/date/${date}/sermon/${sermon.id}`} key={sermon.id}>
                             <ButtonBox
                                 className={css`
-                                    height: 100%;
+                                    height: calc(100% - 1px);
                                     margin: 0 !important;
                                 `}
                             >

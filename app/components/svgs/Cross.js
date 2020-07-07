@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Cross = () => (
+const Cross = ({ white = false }) => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 18.29 19.89"
@@ -10,7 +10,7 @@ const Cross = () => (
         <path
             d="M17.29 1L1 18.89M1 1l16.29 17.89"
             fill="none"
-            stroke="#201f24"
+            stroke={white ? '#ffffff' : '#201f24'}
             strokeLinecap="round"
             strokeMiterlimit="10"
             strokeWidth="2"

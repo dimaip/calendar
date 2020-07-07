@@ -25,7 +25,7 @@ const ReadingItem = ({ type, readingVerse }) => {
                     padding: 20px 17px 0 17px;
                     background-color: white;
                     z-index: 3;
-                    min-width: ${isParallel || langState?.lang === 'parallel' ? '478px' : '296px'};
+                    min-width: ${isParallel || langState?.lang === 'parallel' ? '454px' : '296px'};
                     /* box-shadow: 0px 0px 3px #bbb; */
                 `}
             >
