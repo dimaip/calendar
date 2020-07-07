@@ -38,7 +38,7 @@ export const useLangReducer = () => {
         clearTimeout(timer);
         timer = setTimeout(() => {
             try {
-                localStorage.setItem('langState', JSON.stringify(state));
+                localStorage.setItem('langState', JSON.stringify(newState));
             } catch (e) {
                 console.warn(e);
             }
