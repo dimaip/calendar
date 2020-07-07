@@ -1,20 +1,26 @@
-import React, { useLayoutEffect, useState, useContext } from 'react';
+import React, { useContext, createContext } from 'react';
 import { css } from 'emotion';
 import { useSelector } from 'react-redux';
 import { LangContext } from 'containers/Service/useLangReducer';
 import useWindowSize from 'hooks/useWindowSize';
 
-const Zoom = ({ children }) => {
+export const ZoomContext = createContext(null);
+
+const Zoom = ({ children, isBibleParallel }) => {
     const [width] = useWindowSize();
     const { lang } = useContext(LangContext) || {};
-    const zoom = (lang === 'parallel' && width < 480 ? 0.8 : 1) * useSelector(state => state.settings.zoom);
+    const isNestedZoom = useContext(ZoomContext);
+    const zoom = isNestedZoom
+        ? 1
+        : ((lang === 'parallel' || isBibleParallel) && width < 480 ? 0.8 : 1) *
+          useSelector(state => state.settings.zoom);
     return (
         <div
             className={css`
                 zoom: ${zoom};
             `}
         >
-            {children}
+            <ZoomContext.Provider value={zoom}>{children}</ZoomContext.Provider>
         </div>
     );
 };

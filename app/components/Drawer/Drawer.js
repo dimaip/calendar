@@ -15,7 +15,7 @@ const Drawer = ({ children, onClose }) => {
                 bottom: 0;
                 display: flex;
                 flex-direction: column;
-                z-index: 1;
+                z-index: 10;
             `}
         >
             <div

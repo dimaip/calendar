@@ -12,7 +12,7 @@ const Header = ({ children }) => {
             <header
                 className={css`
                     position: fixed;
-                    z-index: 1;
+                    z-index: 4;
                     left: 0;
                     right: 0;
                     background-color: white;
