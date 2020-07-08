@@ -15,10 +15,9 @@ import Sermons from 'containers/Main/Sermons';
 import ReadingItem from 'containers/Readings/ReadingItem';
 import Alilujas from './Aliluja';
 import VariableSection from '../../VariableSection';
-import Trisvatoe from './Trisvatoe';
-import VhodnoiStih from './VhodnoiStih';
+import Trisvatoe from './Trisvatoe/Trisvatoe';
+import VhodnoiStih from './VhodnoiStih/VhodnoiStih';
 import Reading from './Reading/Reading';
-import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import KatekhumenMdx from './Katekhumen.mdx';
 
 const Readings = ({ readings }) => (
@@ -121,24 +120,6 @@ const Katekhumen = ({ lang, date, day }) => {
     }
     return (
         <KatekhumenMdx {...katekhumenProps} />
-    );
-    return (
-        <>
-            <p id="katekhumen" className="_-ОСНОВНОЙ_Имя-Службы ParaOverride-1">
-                <span className="_-ВЫДЕЛЕНИЯ_Красн-ЖИРНЫЙ">
-                    I. <br />
-                </span>
-                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                    <a id="_idTextAnchor001" />
-                    Литургия оглашаемых
-                </span>
-            </p>
-            {!easterSeason && (
-                <MdxLoader src="Liturgies/Katekhumen/Priugotovl" isEasterOffsetRange={isEasterOffsetRange} />
-            )}
-
-            
-        </>
     );
 };
 
