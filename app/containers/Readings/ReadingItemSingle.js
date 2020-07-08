@@ -14,6 +14,7 @@ import Cross from 'components/svgs/Cross';
 const ReadingItemSingle = ({
     readingVerse,
     defaultTranslation = 'default',
+    type,
     isParallel = false,
     toggleParallel = null,
 }) => {
@@ -107,7 +108,7 @@ const ReadingItemSingle = ({
             <div
                 className={css`
                     position: sticky;
-                    top: ${61 + 44 / (zoom || 1)}px;
+                    top: ${61 + (24 + (type === 'unnamed' ? 0 : 20)) / (zoom || 1)}px;
                     background-color: white;
                     margin: 0 -17px -12px -17px;
                     padding: 8px 0 8px 17px;

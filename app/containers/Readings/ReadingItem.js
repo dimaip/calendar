@@ -66,6 +66,7 @@ const ReadingItem = ({ type, readingVerse }) => {
                     >
                         <ReadingItemSingle
                             key={readingVerse}
+                            type={type}
                             readingVerse={readingVerse}
                             defaultTranslation={langState?.langA === 'csj' ? '91Slavic' : 'default'}
                             isParallel={isEffectivelyParallel}
@@ -79,6 +80,7 @@ const ReadingItem = ({ type, readingVerse }) => {
                     >
                         <ReadingItemSingle
                             key={readingVerse}
+                            type={type}
                             readingVerse={readingVerse}
                             defaultTranslation={langState?.langB === 'csj' ? '91Slavic' : 'default'}
                             isParallel={isEffectivelyParallel}
