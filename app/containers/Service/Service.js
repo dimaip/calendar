@@ -17,7 +17,7 @@ import ParallelLanguageBar from './ParallelLanguageBar';
 import { LangContext, LangDispatchContext, useLangReducer } from './useLangReducer';
 const reloadOnFailedImport = e => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
-    Sentry.captureException(e);
+    Sentry.captureException?.(e);
     location.reload();
 };
 

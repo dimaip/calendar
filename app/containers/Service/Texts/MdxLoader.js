@@ -5,7 +5,7 @@ import { LangContext } from '../useLangReducer';
 
 const catchFailedImport = e => {
     console.warn('Loading mdx file failed', e);
-    Sentry.captureException(e);
+    Sentry.captureException?.(e);
 };
 
 const MdxLoader = props => {
