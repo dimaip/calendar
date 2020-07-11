@@ -105,8 +105,11 @@ const Service = () => {
         </>
     );
 
+    // If service has no lang support, force it to 'ru'
+    const effectiveLangState = service?.lang ? langState : { ...langState, lang: 'ru' };
+
     return (
-        <LangContext.Provider value={langState}>
+        <LangContext.Provider value={effectiveLangState}>
             <LangDispatchContext.Provider value={langDispatch}>
                 <LayoutInner backLink={backLink} left={left} paddedContent={false}>
                     <ParallelLanguageBar />

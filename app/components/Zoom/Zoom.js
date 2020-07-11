@@ -6,7 +6,7 @@ import useWindowSize from 'hooks/useWindowSize';
 
 export const ZoomContext = createContext(null);
 
-const Zoom = ({ children, isBibleParallel }) => {
+const Zoom = ({ children, isBibleParallel = false }) => {
     const [width] = useWindowSize();
     const { lang } = useContext(LangContext) || {};
     const isNestedZoom = useContext(ZoomContext);
