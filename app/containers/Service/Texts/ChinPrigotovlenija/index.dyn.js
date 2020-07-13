@@ -1090,28 +1090,6 @@ const ChinPrigotovlenija = ({}) => {
                 <span className="_-СПЕЦСЛУЖЕБНЫЕ_дляРЕД_вЧЕРНОМтексте CharOverride-2">Духом Твоим</span>
                 <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">, ныне и всегда и во веки веков. </span>
             </p>
-            <div className="_idGenObjectLayout-1">
-                <div id="_idContainer002" className="Текстовый-фрейм">
-                    <p className="основной-абзац">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                            <span className="_-СПЕЦСЛУЖЕБНЫЕ_дляРЕД_вЧЕРНОМтексте">
-                                <a id="_idTextAnchor002" />
-                                для о
-                            </span>
-                        </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                            <span className="_-СПЕЦСЛУЖЕБНЫЕ_дляРЕД_вЧЕРНОМтексте">ГК</span>
-                        </span>
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                            <span className="_-СПЕЦСЛУЖЕБНЫЕ_дляРЕД_вЧЕРНОМтексте">: «мне</span>
-                        </span>
-                        <span className="_-СПЕЦСЛУЖЕБНЫЕ_дляРЕД_вЧЕРНОМтексте">
-                            {' '}
-                            на облаках» — вызывает двойственные ассоциации… )
-                        </span>
-                    </p>
-                </div>
-            </div>
             <p className="_-ОСНОВНОЙ_Основной-б-отст">
                 <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
             </p>
