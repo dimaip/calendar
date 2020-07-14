@@ -59,23 +59,7 @@ const Matins = ({ date }) => {
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);
-    const fominaToPetrov = isEasterOffsetRange(7, 56);
     const petrov = day?.fastName === 'Петров пост';
-    if (fominaToPetrov) {
-        return (
-            <Prazdnichnaja
-                dayOfWeek={dayOfWeek}
-                troparions={troparions}
-                endHymns={endHymns}
-                readings={readings}
-                saints={saints}
-                easterSeason={easterSeason}
-                otpust={otpust}
-                day={day}
-                isEasterOffsetRange={isEasterOffsetRange}
-            />
-        );
-    }
 
     if (petrov) {
         return (
@@ -93,7 +77,19 @@ const Matins = ({ date }) => {
         );
     }
 
-    return <>На этот день мы еще не успели составить чин службы</>;
+    return (
+        <Prazdnichnaja
+            dayOfWeek={dayOfWeek}
+            troparions={troparions}
+            endHymns={endHymns}
+            readings={readings}
+            saints={saints}
+            easterSeason={easterSeason}
+            otpust={otpust}
+            day={day}
+            isEasterOffsetRange={isEasterOffsetRange}
+        />
+    );
 };
 
 export default Matins;

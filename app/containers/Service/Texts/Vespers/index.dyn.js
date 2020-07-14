@@ -67,23 +67,7 @@ const Vespers = ({ date }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDateObj);
     const easterSeason = isEasterOffsetRange(0, 38);
     const isAscension = isEasterOffsetRange(39);
-    const fominaToPetrov = isEasterOffsetRange(7, 56);
     const petrov = tomorrowDay?.fastName === 'Петров пост';
-    if (fominaToPetrov) {
-        return (
-            <Prazdnichnaja
-                dayOfWeek={dayOfWeek}
-                troparions={troparions}
-                endHymns={endHymns}
-                readings={readings}
-                saints={saints}
-                easterSeason={easterSeason}
-                isAscension={isAscension}
-                otpust={otpust}
-                day={tomorrowDay}
-            />
-        );
-    }
     if (petrov) {
         return (
             <Lent
@@ -99,7 +83,19 @@ const Vespers = ({ date }) => {
             />
         );
     }
-    return <>На этот день мы еще не успели составить чин службы</>;
+    return (
+        <Prazdnichnaja
+            dayOfWeek={dayOfWeek}
+            troparions={troparions}
+            endHymns={endHymns}
+            readings={readings}
+            saints={saints}
+            easterSeason={easterSeason}
+            isAscension={isAscension}
+            otpust={otpust}
+            day={tomorrowDay}
+        />
+    );
 };
 
 export default Vespers;
