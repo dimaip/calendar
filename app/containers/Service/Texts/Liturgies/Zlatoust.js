@@ -124,7 +124,7 @@ const Zlatoust = ({ lang, date }) => {
                     </span>
                     <span className="_-РЕДКИЕ_СТРОЧНЫЕ-в-прописн--заг-">(сокращённая)</span>
                 </p>
-               <MdxLoader src="Liturgies/Vernie/SokrEktenia" />
+                <MdxLoader src="Liturgies/Vernie/SokrEktenia" />
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва вторая</span>
                 </p>
