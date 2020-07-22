@@ -43,29 +43,7 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Приуготовление</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст5 ParaOverride-13">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Все верные, снова и снова в мире Господу помо­лим­ся!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Господи, помилуй </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(на каждое прошение)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        Поддержи, спаси, помилуй и сохрани нас, Боже, Твоею благодатью.
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Премудрость!</span>
-                </p>
+                <MdxLoader src="Liturgies/Vernie/Priugotovlenie" />
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-13">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Молитва первая
