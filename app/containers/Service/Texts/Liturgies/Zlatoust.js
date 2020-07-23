@@ -433,7 +433,7 @@ const Zlatoust = ({ lang, date }) => {
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Просительная ектения</span>
                 </p>
-                </p><MdxLoader src="Liturgies/Vernie/Prositelnaya" />
+                <MdxLoader src="Liturgies/Vernie/Prositelnaya" />
                 <p id="prinoshenie" className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва приношения</span>
                 </p>
