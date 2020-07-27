@@ -103,50 +103,7 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
                 </p>
                 <MdxLoader src="Liturgies/Vernie/Heruvimskaya" />
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> К народу:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Простите меня, братья и сёстры, греш­ного!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Прости и ты нас, досточти`мый отче!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> У жертвенника — после омовения рук тихо:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Боже, будь милостив ко мне, грешному!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Тихо — после проскомидии и покрытия св.&nbsp;даров:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Подыми, владыка!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Дьякону, принимающему св.&nbsp;дары:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Возденьте руки ваши ко свя­тыне </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-11">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> и бла­гословите Го­с­пода! </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(Пс </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">13</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">3:2</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">.)</span>
-                </p>
+                <MdxLoader src="Liturgies/Vernie/Dialog" />
                 <p className="_-ОСНОВНОЙ_КРАСН-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         {' '}
