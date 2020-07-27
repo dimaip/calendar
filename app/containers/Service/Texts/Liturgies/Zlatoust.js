@@ -824,72 +824,7 @@ const Zlatoust = ({ lang, date }) => {
                         </>
                     </Tooltip>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст5 ParaOverride-2">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        Станем строго, станем благоговейно! Будем со вниманием святое возношение в мире при­но­сить!
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Милость! Мир! Жертва хвалы!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> К народу (отложив возду`х):</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        Благодать нашего Господа Иисуса Хри­ста, и любовь Бога и Отца, и общение Святого Ду­ха да будет
-                        со всеми вами!
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> И со духом твоим.</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Воздев руки:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Вознесём сердца!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Возно́сим ко Господу.</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Возблагодари`м Господа!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Достойно это, и праведно, </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и справедливо</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                        ]
-                        <Tooltip>
-                            <>
-                                <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Далее в тексте Служебника вставка: </span>
-                                <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                    покло­няться Отцу и Сыну и Святому Духу, Троице еди­носущной и нераз­дельной.
-                                </span>
-                            </>
-                        </Tooltip>
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">.</span>
-                </p>
+                <MdxLoader src="Liturgies/Vernie/AnaforaVstup" />
                 <p id="prefacio" className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-17">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Вводная часть</span>
                 </p>
