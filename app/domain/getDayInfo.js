@@ -95,6 +95,7 @@ export const getLentInfo = memoize(
         const cristmass_lent_end = new Date(y, 0, 6);
 
         if (current_date >= cristmass_lent_begin && current_date < cristmass_lent_nicolos) {
+            fastName = 'Рождественский пост';
             if (
                 current_day_of_week == 0 ||
                 current_day_of_week == 2 ||
