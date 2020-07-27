@@ -67,8 +67,11 @@ const Vespers = ({ date }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDateObj);
     const easterSeason = isEasterOffsetRange(0, 38);
     const isAscension = isEasterOffsetRange(39);
-    const petrov = tomorrowDay?.fastName === 'Петров пост';
-    if (petrov) {
+    const isFast =
+        tomorrowDay?.fastName === 'Петров пост' ||
+        tomorrowDay?.fastName === 'Успенский пост' ||
+        tomorrowDay?.fastName === 'Рождественский пост';
+    if (isFast) {
         return (
             <Lent
                 dayOfWeek={dayOfWeek}

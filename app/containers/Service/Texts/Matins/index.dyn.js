@@ -59,9 +59,12 @@ const Matins = ({ date }) => {
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);
-    const petrov = day?.fastName === 'Петров пост';
+    const isFast =
+        day?.fastName === 'Петров пост' ||
+        day?.fastName === 'Успенский пост' ||
+        day?.fastName === 'Рождественский пост';
 
-    if (petrov) {
+    if (isFast) {
         return (
             <Lent
                 dayOfWeek={dayOfWeek}
