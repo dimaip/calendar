@@ -212,7 +212,7 @@ const Zlatoust = ({ lang, date }) => {
                     </span>
                     <span className="_-РЕДКИЕ_СТРОЧНЫЕ-в-прописн--заг-">(перед Молитвой Господней)</span>
                 </p>
-                <MdxLoader src="Liturgies/Vernie/Prositelnaya" />
+                <MdxLoader src="Liturgies/Vernie/Prositelnaya2" />
                 <p id="ourfather" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва перед причащением</span>
                 </p>
