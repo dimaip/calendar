@@ -189,22 +189,7 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Приготовление ко причащению</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст5 ParaOverride-8">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Народу:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        И да будут милости великого Бога и нашего Спаси­теля Иисуса Христа со всеми вами!
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> И со духом твоим.</span>
-                </p>
+                <MdxLoader src="Liturgies/Vernie/DaBudut" />                                                                
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Просительная Ектения
