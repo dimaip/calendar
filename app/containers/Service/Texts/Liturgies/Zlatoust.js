@@ -356,26 +356,7 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Мир всем!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> И духу твоему.</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Пред Господом ваши главы` преклони`те!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Пред Тобой, Господи.</span>
-                </p>
+                <MdxLoader src="Liturgies/Vernie/MirVsem2" />
                 <p id="glavopriklon" className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва главопреклонная</span>
                 </p>
