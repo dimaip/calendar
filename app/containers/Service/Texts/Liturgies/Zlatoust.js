@@ -801,73 +801,7 @@ const Zlatoust = ({ lang, date }) => {
                 <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-20">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Причащение народа в храме</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст5 ParaOverride-2">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> В царских вратах народу:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Со страхом Божьим, и верою, </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и любовью</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        при­сту­­пи`те!
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Медленно:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-
-                    {brightWeek && (
-                        <span>
-                            {' '}
-                            Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в
-                        </span>
-                    )}
-                    {!brightWeek && (
-                        <>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                {' '}
-                                Благословен Грядущий во имя Господне; <br /> Бог — Го­сподь, и воссиял Он нам! <br />{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(Пс&nbsp;</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">11</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">7:2</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">6, </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">27</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">.)</span>
-                        </>
-                    )}
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Причащая:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Чаду </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> рабу</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Божьему </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(имя)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        преподаётся дра­гоцен­ное и свя­то­е тело и кровь нашего Господа и Бо­га и Спа­сителя Иисуса
-                        Христа для про­щения грехов его и Жизни вечной.{' '}
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Аминь.</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">]</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> При этом медленно поётся причастный стих:</span>
-                </p>
+                <MdxLoader src="Liturgies/Vernie/PrichPeople" />
                 {prichasten}
                 <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-20">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">После причащения</span>
