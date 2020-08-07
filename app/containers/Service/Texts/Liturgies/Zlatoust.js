@@ -1214,31 +1214,7 @@ const Zlatoust = ({ lang, date }) => {
                         св. даров или перед агапической трапезой)
                     </span>
                 </p>
-                <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-15">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        Как полнота Закона и Пророков, Христе Боже наш, <br />
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        Ты исполнил весь замысел{' '}
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(или:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> про́мысел</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        Отчий, — <br />
-                        исполни же радо­стью и весельем сердца наши` во все дни: ныне и всегда и во веки веков!
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-15">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">[Н </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Аминь.</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">]</span>
-                </p>
+                <MdxLoader src="Liturgies/Vernie/Sosudohran" />
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-15">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
