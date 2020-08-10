@@ -528,24 +528,7 @@ const Zlatoust = ({ lang, date }) => {
                         Бла­го­словляя народ на уход, возможно, после об­щей трапезы:
                     </span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-15">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        Благословение Го­сподне на вас, по Его милости и человеколюбию{' '}
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">во все дни:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ны­не и всегда и во веки веков!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-15">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Аминь.</span>
-                </p>
+                <MdxLoader src="Liturgies/Vernie/OkBlag" />
                 {/* @TODO: убрать сноску и вместо нее сделать алгоритм */}
                 <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-15">
                     <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
