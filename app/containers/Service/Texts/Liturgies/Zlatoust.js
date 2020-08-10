@@ -394,59 +394,7 @@ const Zlatoust = ({ lang, date }) => {
                     </span>
                     <span className="_-РЕДКИЕ_СТРОЧНЫЕ-в-прописн--заг-">(после причащения всех)</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        Благодарим Тебя, человеколюбивый Владыка, Благодетель душ наших, ибо и в нынешний день Ты
-                        удо­сто­ил нас Твоих небесных и бессмертных таинств! Соделай же пря­мым путь наш, укрепи нас
-                        всех во страхе Тво­ём, охра­ни на­шу жизнь, утверди наши стопы`, по мо­литвам и молениям славной
-                        Богородицы и Вечноде́вы Марии, и всех Твоих свя­тых, —
-                    </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Совершая Евангелием образ Креста над анти­мин­сом:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ибо Ты` освящение наше и мы` воссы­лаем славу Тебе, </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">От­цу и Сыну и Святому Духу,</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и всегда и во веки веков.</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст5 ParaOverride-2">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Древний отпуст:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Пойдём в мире!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> С именем Господним.</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> При выходе из храма:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Д</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Господу помолимся!</span>
-                </p>
-                <p className="_-ПЕТИТ_Петит-отст5 ParaOverride-2">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Господи, помилуй.</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                </p>
+                <MdxLoader src="Liturgies/Vernie/MolitvaBlag" />
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва заамвонная</span>
                 </p>
