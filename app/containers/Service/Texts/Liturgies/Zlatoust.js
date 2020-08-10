@@ -56,7 +56,7 @@ const Zlatoust = ({ lang, date }) => {
                         </Tooltip>
                     </span>
                 </p>
-           <MdxLoader src="Liturgies/Vernie/Molitva1" />
+                <MdxLoader src="Liturgies/Vernie/Molitva1" />
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Великая ектения <br />
@@ -179,7 +179,7 @@ const Zlatoust = ({ lang, date }) => {
                 <p id="hodataistvo" className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-18">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Хода́тайство</span>
                 </p>
-                <MdxLoader src="Liturgies/Vernie/AnaforaIntercess" />                                                                
+                <MdxLoader src="Liturgies/Vernie/AnaforaIntercess" />
                 <p className="_-ОСНОВНОЙ_Звездочки ParaOverride-19">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">***</span>
                 </p>
@@ -189,7 +189,7 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Приготовление ко причащению</span>
                 </p>
-                <MdxLoader src="Liturgies/Vernie/DaBudut" />                                                                
+                <MdxLoader src="Liturgies/Vernie/DaBudut" />
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         Просительная Ектения
