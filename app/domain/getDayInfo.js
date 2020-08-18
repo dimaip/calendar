@@ -42,11 +42,25 @@ export const calculateEasterDate = year => {
     return new Date(y, m, d);
 };
 
+export const makeIsDate = date => (month, day) => {
+    let d, m, y;
+    if (typeof date === 'string') {
+        const splitDateString = date.split('-');
+        [y, m, d] = [splitDateString[0], Number(splitDateString[1]) - 1, splitDateString[2]];
+    } else {
+        y = date.getFullYear();
+        m = date.getMonth();
+        d = date.getDate();
+    }
+    date = new Date(y, m, d);
+    return new Date(y, month - 1, day).getTime() == date.getTime();
+};
+
 export const makeIsEasterOffsetRange = date => (offsetBegin, offsetEnd) => {
     let d, m, y;
     if (typeof date === 'string') {
         const splitDateString = date.split('-');
-        [y, m, d] = [splitDateString[0], splitDateString[1] - 1, splitDateString[2]];
+        [y, m, d] = [splitDateString[0], Number(splitDateString[1]) - 1, splitDateString[2]];
     } else {
         y = date.getFullYear();
         m = date.getMonth();
