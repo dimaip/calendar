@@ -203,11 +203,6 @@ const Zlatoust = ({ lang, date }) => {
                 </p>
                 <MdxLoader src="Liturgies/Vernie/MolitvaAfterPrich" />
                 <MdxLoader src="Liturgies/Vernie/Otche" />
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-16">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
-                </p>
                 <MdxLoader src="Liturgies/Vernie/MirVsem2" />
                 <p id="glavopriklon" className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Молитва главопреклонная</span>
