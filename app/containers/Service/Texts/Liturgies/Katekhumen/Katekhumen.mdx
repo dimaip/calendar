@@ -11,25 +11,34 @@ import If from 'components/If/If';
 </If>
 
 <MdxLoader src="Liturgies/Katekhumen/Vozglas" />
+
 {props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" />}
+
 {props.brightOrOtdanie && <MdxLoader src="Liturgies/Katekhumen/DaVosstanetBog" />}
 
 ### Великая ектения
+
 <MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia" />
 
 <span id="antifon1" />
 ## (2) Антифоны изобразительные<Tooltip>То есть взятые из службы «Изобразительных» («Типика́»). Ан­тифоны ещё могут быть праздничные и вседневные (будничные); последние даны ниже.</Tooltip>
 
 ### Молитва перед пением первого антифона
+
 <MdxLoader src="Liturgies/Katekhumen/Molitva1" />
+
 {props.antifon1}
 
 ### Малая ектения
+
 <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
 
 <span id="antifon2" />
+
 ### Молитва перед пением второго антифона
+
 <MdxLoader src="Liturgies/Katekhumen/Molitva2" />
+
 {props.antifon2}
 
 ### Малая ектения
@@ -37,24 +46,36 @@ import If from 'components/If/If';
 <MdxLoader src="Liturgies/Katekhumen/SnovaSnova" />
 
 <span id="antifon3" />
+
 ### Молитва перед пением третьего антифона
+
 <MdxLoader src="Liturgies/Katekhumen/Molitva3" />
+
 {props.antifon3}
 
 {/* @TODO hide during Sundays and feasts */}
+
 ### <b>`[Антифоны вседневные`</b>
+
 {!props.brightOrOtdanie && <MdxLoader src="Liturgies/Katekhumen/AntifonVsednev" />}
 
 <span id="malyVhod" />
+
 ## <>\*\*\*</>
 ## (3) Малый вход с Евангелием
+
 <MdxLoader src="Liturgies/Katekhumen/PredMalijVhod" />
+
 ### Молитва перед входом
+
 <MdxLoader src="Liturgies/Katekhumen/MalijVhod" />
+
 ### Входная песнь литургии оглашаемых
+
 {props.vhodnoiStih}
 
 **Далее следуют тропари и кондаки праздника и храма.**
+
 {props.hymns}
 
 > **[Д** Господу помолимся!**]**
@@ -64,6 +85,7 @@ import If from 'components/If/If';
 ## (4) Чтения и прошения верных
 
 {props.reading}
+
 ## Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 <div
     className={props.css`
@@ -80,6 +102,7 @@ import If from 'components/If/If';
 > **[Д** Господу помолимся!**]**
 
 <span id="gospel"/>
+
 ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
 
 <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
@@ -103,6 +126,7 @@ import If from 'components/If/If';
 <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
 
 ## Проповедь
+
 {props.sermons}
 
 <MdxLoader src="Liturgies/Katekhumen/SugubajaEktenia" />
@@ -112,6 +136,7 @@ import If from 'components/If/If';
 <MdxLoader src="Liturgies/Katekhumen/Userdnaya" />
 
 {/* @TODO: hide on Sundays and feasts */}
+
 <If condition={!props.brightOrOtdanie}>
   <>
     ### <b>[</b>Cугубая заупокойная ектения <Tooltip>Не читается в храмовые (престольные) и двунадесятые праздники и, как правило, в воскресные дни, дни Святок и всей св. Пятидесятницы.</Tooltip>
