@@ -21,6 +21,7 @@ const precache = () => {
                     // If not in cache
                     if (!exists) {
                         fetch(`${process.env.API_HOST}/day/${date}`);
+                        fetch(`${process.env.API_HOST}/parts/${date}/ru`);
                         fetch(`https://psmb.ru/?calendarDate=${date}`);
                         fetch(`${process.env.API_HOST}/readings/${date}`);
                     }
