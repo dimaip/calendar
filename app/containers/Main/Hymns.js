@@ -1,5 +1,4 @@
 import React from 'react';
-import RteText from 'components/RteText/RteText';
 import { css } from 'emotion';
 import BorderedSection from './BorderedSection';
 import SectionHeading from './SectionHeading';

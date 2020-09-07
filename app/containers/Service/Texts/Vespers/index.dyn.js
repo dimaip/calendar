@@ -1,4 +1,5 @@
 import React from 'react';
+import dateFormat from 'dateformat';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import Prazdnichnaja from './Prazdnichnaja.mdx';
 import Lent from './Lent.mdx';
@@ -9,9 +10,8 @@ import { css } from 'emotion';
 import SolidSection from 'components/SolidSection/SolidSection';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';
-import Hymns from 'containers/Main/Hymns';
 import Ending from '../Shared/Ending/Ending';
-import useParts from 'hooks/useParts';
+import Parts from 'components/Parts/Parts';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -25,25 +25,26 @@ const Readings = ({ readingsForService, day }) =>
     ) : (
         <Loader />
     );
+
+const SectionLayout = ({ children }) => (
+    <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
+        {children}
+    </SolidSection>
+);
+
 const Vespers = ({ date }) => {
-    const lang = 'ru';
     const dateObj = new Date(date);
     const tomorrowDateObj = new Date(date);
     tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
+    const tomorrowDate = dateFormat(tomorrowDateObj, 'yyyy-mm-dd');
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
-    const { data: tomorrowDay } = useDay(tomorrowDateObj);
-    const { data: tomorrowParts } = useParts(tomorrowDateObj, lang);
+    const { data: tomorrowDay } = useDay(tomorrowDate);
 
-    const troparions = tomorrowParts?.shared?.['Тропари']?.length && (
-        <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-            <Hymns hymns={tomorrowParts.shared['Тропари']} />
-        </SolidSection>
-    );
-    const endHymns = (tomorrowParts?.shared?.['Кондаки']?.length || tomorrowParts?.shared?.['Величания']?.length) && (
-        <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-            <Hymns hymns={(tomorrowParts?.shared?.['Кондаки'] || []) + (tomorrowParts?.shared?.['Величания'] || [])} />
-        </SolidSection>
+    const troparions = <Parts date={tomorrowDate} partNames={['shared.Тропари']} Layout={SectionLayout} />;
+
+    const endHymns = (
+        <Parts date={tomorrowDate} partNames={['shared.Кондаки', 'shared.Величания']} Layout={SectionLayout} />
     );
 
     const readingsForService = day?.bReadings?.['Вечером'] || day?.readings?.['Вечерня'];
@@ -59,9 +60,9 @@ const Vespers = ({ date }) => {
             <Saints saints={tomorrowDay.saints} date={date} />
         </SolidSection>
     );
-    const otpust = <Ending date={tomorrowDateObj} saints={saints} />;
+    const otpust = <Ending date={tomorrowDate} saints={saints} />;
 
-    const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDateObj);
+    const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDate);
     const easterSeason = isEasterOffsetRange(0, 38);
     const isAscension = isEasterOffsetRange(39);
     const isFast =
@@ -80,7 +81,7 @@ const Vespers = ({ date }) => {
                 isAscension={isAscension}
                 otpust={otpust}
                 day={tomorrowDay}
-                date={tomorrowDateObj}
+                date={tomorrowDate}
             />
         );
     }
@@ -95,7 +96,7 @@ const Vespers = ({ date }) => {
             isAscension={isAscension}
             otpust={otpust}
             day={tomorrowDay}
-            date={tomorrowDateObj}
+            date={tomorrowDate}
         />
     );
 };
