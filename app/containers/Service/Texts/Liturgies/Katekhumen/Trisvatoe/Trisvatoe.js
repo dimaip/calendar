@@ -3,9 +3,12 @@ import Tooltip from 'components/Tooltip/Tooltip';
 import Html from 'components/Html/Html';
 import If from 'components/If/If';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Parts from 'components/Parts/Parts';
+import useParts from 'hooks/useParts';
 
-const Trisvatoe = ({ day, lang }) => {
-    const vmestoTrisvatogo = day?.parts?.liturgy?.['Вместо Трисвятого'];
+const Trisvatoe = ({ date }) => {
+    const { data: parts } = useParts(date, 'ru');
+    const vmestoTrisvatogoExists = Boolean(parts?.liturgy?.['Вместо Трисвятого']);
     return (
         <>
             <p id="trisvatoe" className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
@@ -17,11 +20,11 @@ const Trisvatoe = ({ day, lang }) => {
                     <Tooltip>Если Трисвятое не поётся, то даётся только возглас.</Tooltip>
                 </span>
             </p>
-            <If condition={!vmestoTrisvatogo}>
+            <If condition={!vmestoTrisvatogoExists}>
                 <MdxLoader src="Liturgies/Katekhumen/Trisvatoe/MolitvaPered" />
             </If>
 
-            {!vmestoTrisvatogo && (
+            {!vmestoTrisvatogoExists && (
                 <>
                     <p className="_-ПЕТИТ_ПетитСТ-отст1-5">
                         <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
@@ -53,17 +56,22 @@ const Trisvatoe = ({ day, lang }) => {
                 <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
                 <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
             </p>
-            <If condition={!vmestoTrisvatogo}>
+
+            <If condition={!vmestoTrisvatogoExists}>
                 <MdxLoader src="Liturgies/Katekhumen/Trisvatoe/Trisvatoe" />
             </If>
-            {vmestoTrisvatogo && (
-                <>
-                    <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-12">
-                        <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Вместо Трисвятого</span>
-                    </p>
-                    <Html html={vmestoTrisvatogo} />
-                </>
-            )}
+            <Parts
+                date={date}
+                partNames={['liturgy.Вместо Трисвятого']}
+                Layout={({ children }) => (
+                    <>
+                        <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-12">
+                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Вместо Трисвятого</span>
+                        </p>
+                        {children}
+                    </>
+                )}
+            />
         </>
     );
 };

@@ -1,11 +1,7 @@
 import React from 'react';
-import Html from 'components/Html/Html';
+import Parts from 'components/Parts/Parts';
 
-const Otpust = ({ day, date, serviceType }) => {
-    const otpust = day?.parts?.liturgy?.['Отпуст'];
-    if (otpust) {
-        return <Html html={otpust} />;
-    }
+const Fallback = ({ serviceType, date }) => {
     const dateObject = new Date(date);
     const isSunday = dateObject.getDay() === 0;
     const greeting =
@@ -29,6 +25,16 @@ const Otpust = ({ day, date, serviceType }) => {
                 и всех свя­тых, да помилует и спасёт нас, по Сво­ей бла­гости и человеколюбию!
             </span>
         </p>
+    );
+};
+
+const Otpust = ({ date, serviceType }) => {
+    return (
+        <Parts
+            partNames={['liturgy.Входной стих']}
+            date={date}
+            fallback={<Fallback date={date} serviceType={serviceType} />}
+        />
     );
 };
 export default Otpust;

@@ -9,8 +9,8 @@ import { css } from 'emotion';
 import SolidSection from 'components/SolidSection/SolidSection';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';
-import Hymns from 'containers/Main/Hymns';
 import Ending from '../Shared/Ending/Ending';
+import Parts from 'components/Parts/Parts';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -24,22 +24,21 @@ const Readings = ({ readingsForService, day }) =>
     ) : (
         <Loader />
     );
+
+const SectionLayout = ({ children }) => (
+    <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
+        {children}
+    </SolidSection>
+);
+
 const Matins = ({ date }) => {
-    const lang = 'ru';
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
 
-    const troparions = day?.troparions && day.troparions.length > 0 && (
-        <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-            <Hymns hymns={day.troparions} />
-        </SolidSection>
-    );
-    const endHymns = (day?.kondacs || day?.velichanija) && (
-        <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-            <Hymns hymns={(day.kondacs || '') + (day.velichanija || '')} />
-        </SolidSection>
-    );
+    const troparions = <Parts date={date} partNames={['shared.Тропари']} Layout={SectionLayout} />;
+
+    const endHymns = <Parts date={date} partNames={['shared.Кондаки', 'shared.Величания']} Layout={SectionLayout} />;
 
     const readingsForService = day?.bReadings?.['Утром'] || day?.readings?.['Утреня'];
     const readings = (
@@ -55,7 +54,7 @@ const Matins = ({ date }) => {
         </SolidSection>
     );
 
-    const otpust = <Ending date={dateObj} day={day} saints={saints} />;
+    const otpust = <Ending date={date} saints={saints} />;
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);
@@ -75,6 +74,7 @@ const Matins = ({ date }) => {
                 easterSeason={easterSeason}
                 otpust={otpust}
                 day={day}
+                date={date}
                 isEasterOffsetRange={isEasterOffsetRange}
             />
         );
@@ -90,6 +90,7 @@ const Matins = ({ date }) => {
             easterSeason={easterSeason}
             otpust={otpust}
             day={day}
+            date={date}
             isEasterOffsetRange={isEasterOffsetRange}
         />
     );

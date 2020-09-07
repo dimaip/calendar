@@ -1,5 +1,5 @@
 import React from 'react';
-import Prokimens from './Prokimen';
+import Prokimens from '../Prokimen/Prokimen';
 import VariableSection from 'containers/Service/Texts/VariableSection';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 

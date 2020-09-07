@@ -13,12 +13,13 @@ import forEach from 'lodash.foreach';
 import useExternalDay from 'hooks/useExternalDay';
 import Sermons from 'containers/Main/Sermons';
 import ReadingItem from 'containers/Readings/ReadingItem';
-import Alilujas from './Aliluja';
+import Aliluja from './Aliluja/Aliluja';
 import VariableSection from '../../VariableSection';
 import Trisvatoe from './Trisvatoe/Trisvatoe';
 import VhodnoiStih from './VhodnoiStih/VhodnoiStih';
 import Reading from './Reading/Reading';
 import KatekhumenMdx from './Katekhumen.mdx';
+import Parts from 'components/Parts/Parts';
 
 const Readings = ({ readings }) => (
     <>
@@ -56,7 +57,13 @@ const getKatekhumenReadings = day => {
     return { apostol, gospel };
 };
 
-const Katekhumen = ({ lang, date, day }) => {
+const SectionLayout = ({ children }) => (
+    <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
+        {children}
+    </SolidSection>
+);
+
+const Katekhumen = ({  date, day }) => {
     useScrollToReadings();
     const externalDayQuery = useExternalDay(date);
     const { apostol, gospel } = getKatekhumenReadings(day);
@@ -66,23 +73,19 @@ const Katekhumen = ({ lang, date, day }) => {
     const antifon3 = <Antifon3 date={date} />;
     const reading = <Reading day={day} date={date} />;
 
-    const hymns = (day?.troparions || day?.kondacs) && (
-        <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-            <Hymns hymns={(day?.troparions || '') + (day?.kondacs || '')} />
-        </SolidSection>
-    );
+    const hymns = <Parts date={date} partNames={['shared.Тропари', 'shared.Кондаки']} Layout={SectionLayout} />
 
     const aliluja = (
         <VariableSection date={date}>
-            <Alilujas day={day} date={date} />
+            <Aliluja day={day} date={date} />
         </VariableSection>
     );
 
-    const trisvatoe = <Trisvatoe lang={lang} day={day} />;
+    const trisvatoe = <Trisvatoe />;
 
     const vhodnoiStih = (
         <VariableSection date={date}>
-            <VhodnoiStih lang={lang} day={day} />
+            <VhodnoiStih date={date} />
         </VariableSection>
     );
 
@@ -116,11 +119,9 @@ const Katekhumen = ({ lang, date, day }) => {
         trisvatoe,
         vhodnoiStih,
         sermons,
-        css
-    }
-    return (
-        <KatekhumenMdx {...katekhumenProps} />
-    );
+        css,
+    };
+    return <KatekhumenMdx {...katekhumenProps} />;
 };
 
 export default Katekhumen;

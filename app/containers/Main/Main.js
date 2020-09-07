@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { css } from 'emotion';
 import { ThemeProvider, useTheme } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
@@ -28,24 +28,12 @@ import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 import IosPrompt from './IosPrompt';
 import PropTypes from 'prop-types';
+import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
+import { LangContext } from 'containers/Service/useLangReducer';
+import Parts from 'components/Parts/Parts';
+import BorderedSection from './BorderedSection';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
-
-const BorderedSection = ({ children }) => {
-    const theme = useTheme();
-    return (
-        <div
-            className={css`
-                border-bottom: 0.5px solid ${theme.colours.lineGray};
-                margin: 0 -18px 18px -18px;
-                padding: 0 18px 1px 18px;
-                background-color: white;
-            `}
-        >
-            {children}
-        </div>
-    );
-};
 
 // In order to work with old legacy context API, it can't use hooks
 class HeighetUpdater extends React.Component {
@@ -133,24 +121,27 @@ const InnerContent = ({ date, services }) => {
                                             </BorderedSection>
 
                                             <ThisDays thisDays={thisDays} date={date} />
-                                            {(day.troparions || day.kondacs || day.velichanija) && (
-                                                <BorderedSection>
-                                                    <div
-                                                        className={css`
-                                                            overflow: auto;
-                                                        `}
-                                                    >
-                                                        <SectionHeading>Песнопения</SectionHeading>
+
+                                            <BorderedSection>
+                                                <div
+                                                    className={css`
+                                                        overflow: auto;
+                                                        display: flex;
+                                                        justify-content: space-between;
+                                                        align-items: center;
+                                                    `}
+                                                >
+                                                    <SectionHeading>Песнопения</SectionHeading>
+                                                    <div>
+                                                        <LanguageSwitcher />
                                                     </div>
-                                                    <Hymns
-                                                        hymns={
-                                                            (day.troparions || '') +
-                                                            (day.kondacs || '') +
-                                                            (day.velichanija || '')
-                                                        }
-                                                    />
-                                                </BorderedSection>
-                                            )}
+                                                </div>
+                                                <Parts
+                                                    date={date}
+                                                    partNames={['shared.Тропари', 'shared.Кондаки', 'shared.Величания']}
+                                                />
+                                            </BorderedSection>
+
                                             {day.bReadings && Object.keys(day.bReadings).length > 0 && (
                                                 <>
                                                     <SectionHeading

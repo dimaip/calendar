@@ -1,4 +1,4 @@
-import React, { Suspense, useState, useEffect, useReducer, createContext } from 'react';
+import React, { Suspense, useState, useEffect, useReducer, createContext, useContext } from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
 import MDXProvider from './MDXProvider';
 import { css } from 'emotion';
@@ -30,7 +30,7 @@ const Service = () => {
 
     const history = useHistory();
 
-    const [langState, langDispatch] = useLangReducer();
+    const langState = useContext(LangContext);
 
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
 
@@ -110,61 +110,59 @@ const Service = () => {
 
     return (
         <LangContext.Provider value={effectiveLangState}>
-            <LangDispatchContext.Provider value={langDispatch}>
-                <LayoutInner backLink={backLink} left={left} paddedContent={false}>
-                    <ParallelLanguageBar />
-                    <Zoom>
-                        <>
+            <LayoutInner backLink={backLink} left={left} paddedContent={false}>
+                <ParallelLanguageBar />
+                <Zoom>
+                    <>
+                        <div
+                            className={css`
+                                margin-left: 12px;
+                                margin-right: 12px;
+                                margin-bottom: 24px;
+                            `}
+                        >
                             <div
                                 className={css`
-                                    margin-left: 12px;
-                                    margin-right: 12px;
-                                    margin-bottom: 24px;
+                                    position: relative;
+                                    background: ${theme.colours.bgGray};
+                                    margin: 0 -12px 24px -12px;
+                                    padding: 12px 12px 12px 12px;
+                                    font-size: 13px;
+                                    color: ${theme.colours.darkGray};
                                 `}
                             >
-                                <div
+                                Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда ошибается.
+                                За наиболее точной информацией обращайтесь к{' '}
+                                <a
                                     className={css`
-                                        position: relative;
-                                        background: ${theme.colours.bgGray};
-                                        margin: 0 -12px 24px -12px;
-                                        padding: 12px 12px 12px 12px;
-                                        font-size: 13px;
-                                        color: ${theme.colours.darkGray};
+                                        text-decoration: underline;
                                     `}
+                                    href={`http://www.patriarchia.ru/bu/${date}`}
+                                    target="_blank"
                                 >
-                                    Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда
-                                    ошибается. За наиболее точной информацией обращайтесь к{' '}
-                                    <a
-                                        className={css`
-                                            text-decoration: underline;
-                                        `}
-                                        href={`http://www.patriarchia.ru/bu/${date}`}
-                                        target="_blank"
-                                    >
-                                        богослужебным указаниям.
-                                    </a>{' '}
-                                    Если вы обнаружили ошибку, пожалуйста,{' '}
-                                    <a
-                                        className={css`
-                                            text-decoration: underline;
-                                        `}
-                                        href="mailto:pb@psmb.ru"
-                                        target="_blank"
-                                    >
-                                        напишите нам
-                                    </a>
-                                </div>
-
-                                <MDXProvider>
-                                    <Suspense fallback={<Loader />}>
-                                        {TextComponent && <TextComponent date={date} lang={langState.lang} />}
-                                    </Suspense>
-                                </MDXProvider>
+                                    богослужебным указаниям.
+                                </a>{' '}
+                                Если вы обнаружили ошибку, пожалуйста,{' '}
+                                <a
+                                    className={css`
+                                        text-decoration: underline;
+                                    `}
+                                    href="mailto:pb@psmb.ru"
+                                    target="_blank"
+                                >
+                                    напишите нам
+                                </a>
                             </div>
-                        </>
-                    </Zoom>
-                </LayoutInner>
-            </LangDispatchContext.Provider>
+
+                            <MDXProvider>
+                                <Suspense fallback={<Loader />}>
+                                    {TextComponent && <TextComponent date={date} lang={langState.lang} />}
+                                </Suspense>
+                            </MDXProvider>
+                        </div>
+                    </>
+                </Zoom>
+            </LayoutInner>
         </LangContext.Provider>
     );
 };

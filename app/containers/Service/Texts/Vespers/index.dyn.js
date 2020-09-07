@@ -11,6 +11,7 @@ import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';
 import Hymns from 'containers/Main/Hymns';
 import Ending from '../Shared/Ending/Ending';
+import useParts from 'hooks/useParts';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -32,20 +33,16 @@ const Vespers = ({ date }) => {
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
     const { data: tomorrowDay } = useDay(tomorrowDateObj);
+    const { data: tomorrowParts } = useParts(tomorrowDateObj, lang);
 
-    const hymns = tomorrowDay?.prayers && tomorrowDay.prayers.length > 0 && (
+    const troparions = tomorrowParts?.shared?.['Тропари']?.length && (
         <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-            <Hymns hymns={tomorrowDay.prayers} />
+            <Hymns hymns={tomorrowParts.shared['Тропари']} />
         </SolidSection>
     );
-    const troparions = tomorrowDay?.troparions && tomorrowDay.troparions.length > 0 && (
+    const endHymns = (tomorrowParts?.shared?.['Кондаки']?.length || tomorrowParts?.shared?.['Величания']?.length) && (
         <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-            <Hymns hymns={tomorrowDay.troparions} />
-        </SolidSection>
-    );
-    const endHymns = (tomorrowDay?.kondacs || tomorrowDay?.velichanija) && (
-        <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-            <Hymns hymns={(tomorrowDay.kondacs || '') + (tomorrowDay.velichanija || '')} />
+            <Hymns hymns={(tomorrowParts?.shared?.['Кондаки'] || []) + (tomorrowParts?.shared?.['Величания'] || [])} />
         </SolidSection>
     );
 
@@ -62,7 +59,7 @@ const Vespers = ({ date }) => {
             <Saints saints={tomorrowDay.saints} date={date} />
         </SolidSection>
     );
-    const otpust = <Ending date={tomorrowDateObj} day={tomorrowDay} saints={saints} />;
+    const otpust = <Ending date={tomorrowDateObj} saints={saints} />;
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDateObj);
     const easterSeason = isEasterOffsetRange(0, 38);
@@ -83,6 +80,7 @@ const Vespers = ({ date }) => {
                 isAscension={isAscension}
                 otpust={otpust}
                 day={tomorrowDay}
+                date={tomorrowDateObj}
             />
         );
     }
@@ -97,6 +95,7 @@ const Vespers = ({ date }) => {
             isAscension={isAscension}
             otpust={otpust}
             day={tomorrowDay}
+            date={tomorrowDateObj}
         />
     );
 };

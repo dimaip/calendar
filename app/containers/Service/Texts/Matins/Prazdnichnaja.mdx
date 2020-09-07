@@ -1,5 +1,5 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
-import Html from 'components/Html/Html';
+import Parts from 'components/Parts/Parts';
 
 <span id="nachalo" />
 
@@ -25,7 +25,7 @@ import Html from 'components/Html/Html';
 
 ### Стихиры на «Хвалите»
 
-<Html html={props.day?.parts?.matins?.['Cтихиры на хвалите']} />
+<Parts date={props.date} partNames={['matins.Cтихиры на хвалите']} />
 <MdxLoader src="Matins/Slavoslovie" lang={props.lang} />
 
 ### Тропари

@@ -117,7 +117,7 @@ const augmentAudio = (audioElement, theme) => {
         {
             class: css`
                 margin-top: 12px;
-                margin-bottom: 24px;
+                margin-bottom: 12px;
             `,
         },
         [
@@ -223,6 +223,6 @@ const useAudio = ref => {
                 augmentAudio(audioElement, theme);
             });
         }
-    }, []);
+    });
 };
 export default useAudio;

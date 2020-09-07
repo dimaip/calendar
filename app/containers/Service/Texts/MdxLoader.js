@@ -30,11 +30,11 @@ const MdxLoader = props => {
                         padding: 12px;
                     `}
                 >
-                    <Suspense fallback={<Loader width={32} />}>
-                        <LangContext.Provider value={langStateA}>
+                    <LangContext.Provider value={langStateA}>
+                        <Suspense fallback={<Loader width={32} />}>
                             <ComponentA {...props} />
-                        </LangContext.Provider>
-                    </Suspense>
+                        </Suspense>
+                    </LangContext.Provider>
                 </div>
                 <div
                     className={css`
@@ -42,11 +42,11 @@ const MdxLoader = props => {
                         padding: 12px;
                     `}
                 >
-                    <Suspense fallback={<Loader width={32} />}>
-                        <LangContext.Provider value={langStateB}>
+                    <LangContext.Provider value={langStateB}>
+                        <Suspense fallback={<Loader width={32} />}>
                             <ComponentB {...props} />
-                        </LangContext.Provider>
-                    </Suspense>
+                        </Suspense>
+                    </LangContext.Provider>
                 </div>
             </div>
         );

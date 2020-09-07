@@ -4,8 +4,8 @@ import useDay from 'hooks/useDay';
 import SolidSection from 'components/SolidSection/SolidSection';
 import Saints from 'containers/Main/Saints';
 import SectionHeading from 'containers/Main/SectionHeading';
-import Prichasten from './Prichasten';
-import Zadastoinik from './Zadastoinik';
+import Prichasten from './Prichasten/Prichasten';
+import Zadastoinik from './Zadastoinik/Zadastoinik';
 import Otpust from './Otpust';
 import Katekhumen from '../Katekhumen/Katekhumen';
 import VariableSection from '../../VariableSection';
@@ -29,13 +29,13 @@ const useLiturgy = (lang, serviceType) => {
 
     const otpust = (
         <VariableSection date={date}>
-            <Otpust day={day} date={date} serviceType={serviceType} />
+            <Otpust date={date} serviceType={serviceType} />
         </VariableSection>
     );
 
-    const zadastoinik = <Zadastoinik day={day} />;
+    const zadastoinik = <Zadastoinik date={date} />;
 
-    const katekhumen = <Katekhumen day={day} lang={lang} date={date} />;
+    const katekhumen = <Katekhumen day={day} date={date} />;
 
     return {
         saints,
