@@ -1,0 +1,14 @@
+[
+      {
+            "relation": [
+                  "delegate_permission/common.handle_all_urls"
+            ],
+            "target": {
+                  "namespace": "android_app",
+                  "package_name": "app.molitva.twa",
+                  "sha256_cert_fingerprints": [
+                        "E1:D5:05:97:66:74:B2:DD:F6:A0:2B:82:3F:69:FC:46:C3:90:55:8C:8F:0B:91:9C:5F:19:E9:52:4D:D4:4D:CC"
+                  ]
+            }
+      }
+]
