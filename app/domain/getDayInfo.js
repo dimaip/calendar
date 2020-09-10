@@ -553,6 +553,9 @@ export const getFeastInfo = memoize(
             colour = '#4169E1';
             calendarColour = 'blue';
         }
+        if (new Date(y, 8, 21).getTime() <= date.getTime() && date.getTime() <= new Date(y, 8, 25).getTime()) {
+            icon = 'birthOfOurLady.svg';
+        }
 
         if (new Date(y, 8, 27).getTime() == date.getTime()) {
             title = 'Воздвижение Креста Господня';
