@@ -562,6 +562,9 @@ export const getFeastInfo = memoize(
             feastType = '12';
             colour = '#7b68ee';
         }
+        if (new Date(y, 8, 27).getTime() <= date.getTime() && date.getTime() <= new Date(y, 9, 4).getTime()) {
+            icon = 'krestovozdvizhenie.svg';
+        }
 
         if (new Date(y, 11, 4).getTime() == date.getTime()) {
             title = 'Введение во храм Пресвятой Богородицы';
