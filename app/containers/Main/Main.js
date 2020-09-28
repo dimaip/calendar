@@ -95,74 +95,76 @@ const InnerContent = ({ date, services }) => {
     const { sermons, thisDays } = externalDayQuery.data || {};
 
     return (
-        <div>
-            {dayQuery.status === 'loading' && <Loader />}
-            {dayQuery.status === 'error' && <ErrorMessage500 />}
-            {dayQuery.status === 'success' && (
-                <div>
-                    <Zoom>
-                        <div
-                            className={css`
-                                padding: 0 18px;
-                            `}
-                        >
-                            <SolidSection>
-                                {services ? (
-                                    <Services date={date} readings={day.readings || {}} />
-                                ) : (
-                                    <>
-                                        <SectionHeading>Богослужебные чтения</SectionHeading>
-                                        <ReadingList readings={day.readings || {}} />
+        <HeighetUpdater>
+            <div>
+                {dayQuery.status === 'loading' && <Loader />}
+                {dayQuery.status === 'error' && <ErrorMessage500 />}
+                {dayQuery.status === 'success' && (
+                    <div>
+                        <Zoom>
+                            <div
+                                className={css`
+                                    padding: 0 18px;
+                                `}
+                            >
+                                <SolidSection>
+                                    {services ? (
+                                        <Services date={date} readings={day.readings || {}} />
+                                    ) : (
+                                        <>
+                                            <SectionHeading>Богослужебные чтения</SectionHeading>
+                                            <ReadingList readings={day.readings || {}} />
 
-                                        <BorderedSection>
-                                            <SectionHeading>Святые дня</SectionHeading>
-                                            <Saints saints={day.saints} date={date} />
-                                        </BorderedSection>
+                                            <BorderedSection>
+                                                <SectionHeading>Святые дня</SectionHeading>
+                                                <Saints saints={day.saints} date={date} />
+                                            </BorderedSection>
 
-                                        <ThisDays thisDays={thisDays} date={date} />
+                                            <ThisDays thisDays={thisDays} date={date} />
 
-                                        <BorderedSection>
-                                            <div
-                                                className={css`
-                                                    overflow: auto;
-                                                    display: flex;
-                                                    justify-content: space-between;
-                                                    align-items: center;
-                                                `}
-                                            >
-                                                <SectionHeading>Песнопения</SectionHeading>
-                                                <div>
-                                                    <LanguageSwitcher />
-                                                </div>
-                                            </div>
-                                            <Parts
-                                                date={date}
-                                                partNames={['shared.Тропари', 'shared.Кондаки', 'shared.Величания']}
-                                            />
-                                        </BorderedSection>
-
-                                        {day.bReadings && Object.keys(day.bReadings).length > 0 && (
-                                            <>
-                                                <SectionHeading
+                                            <BorderedSection>
+                                                <div
                                                     className={css`
-                                                        padding-top: 0 !important;
+                                                        overflow: auto;
+                                                        display: flex;
+                                                        justify-content: space-between;
+                                                        align-items: center;
                                                     `}
                                                 >
-                                                    Душеполезные чтения
-                                                </SectionHeading>
-                                                <ReadingList brother readings={day.bReadings} />
-                                            </>
-                                        )}
-                                        <Sermons date={date} sermons={sermons} />
-                                    </>
-                                )}
-                            </SolidSection>
-                        </div>
-                    </Zoom>
-                    {!services && <Links />}
-                </div>
-            )}
-        </div>
+                                                    <SectionHeading>Песнопения</SectionHeading>
+                                                    <div>
+                                                        <LanguageSwitcher />
+                                                    </div>
+                                                </div>
+                                                <Parts
+                                                    date={date}
+                                                    partNames={['shared.Тропари', 'shared.Кондаки', 'shared.Величания']}
+                                                />
+                                            </BorderedSection>
+
+                                            {day.bReadings && Object.keys(day.bReadings).length > 0 && (
+                                                <>
+                                                    <SectionHeading
+                                                        className={css`
+                                                            padding-top: 0 !important;
+                                                        `}
+                                                    >
+                                                        Душеполезные чтения
+                                                    </SectionHeading>
+                                                    <ReadingList brother readings={day.bReadings} />
+                                                </>
+                                            )}
+                                            <Sermons date={date} sermons={sermons} />
+                                        </>
+                                    )}
+                                </SolidSection>
+                            </div>
+                        </Zoom>
+                        {!services && <Links />}
+                    </div>
+                )}
+            </div>
+        </HeighetUpdater>
     );
 };
 
