@@ -1,6 +1,6 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef } from 'react';
 import { css } from 'emotion';
-import { ThemeProvider, useTheme } from 'emotion-theming';
+import { ThemeProvider } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
 import ReadingList from './ReadingList';
 import HeaderMain from 'containers/Main/HeaderMain';
@@ -15,7 +15,6 @@ import SectionHeading from './SectionHeading';
 import Links from './Links';
 import Zoom from 'components/Zoom/Zoom';
 import SolidSection from 'components/SolidSection/SolidSection';
-import Hymns from './Hymns';
 import Sermons from './Sermons';
 import ThisDays from './ThisDays';
 import useExternalDay from 'hooks/useExternalDay';
@@ -29,7 +28,6 @@ import { virtualize } from 'react-swipeable-views-utils';
 import IosPrompt from './IosPrompt';
 import PropTypes from 'prop-types';
 import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
-import { LangContext } from 'containers/Service/useLangReducer';
 import Parts from 'components/Parts/Parts';
 import BorderedSection from './BorderedSection';
 
@@ -64,27 +62,29 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
 
     const theme = getTheme(themeColour.current);
     return (
-        <ThemeProvider theme={theme}>
-            <div>
-                <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
+        <HeighetUpdater>
+            <ThemeProvider theme={theme}>
                 <div>
-                    {dayQuery.status === 'loading' && <Loader />}
-                    {dayQuery.status === 'error' && <ErrorMessage500 />}
-                    {dayQuery.status === 'success' && (
-                        <div>
-                            <HeadingBar
-                                title={day.title}
-                                glas={day.glas}
-                                fastName={day.fastName}
-                                fastingLevelName={day.fastingLevelName}
-                                icon={day.icon}
-                            />
-                            <InnerContent date={date} services={services} />
-                        </div>
-                    )}
+                    <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
+                    <div>
+                        {dayQuery.status === 'loading' && <Loader />}
+                        {dayQuery.status === 'error' && <ErrorMessage500 />}
+                        {dayQuery.status === 'success' && (
+                            <div>
+                                <HeadingBar
+                                    title={day.title}
+                                    glas={day.glas}
+                                    fastName={day.fastName}
+                                    fastingLevelName={day.fastingLevelName}
+                                    icon={day.icon}
+                                />
+                                <InnerContent date={date} services={services} />
+                            </div>
+                        )}
+                    </div>
                 </div>
-            </div>
-        </ThemeProvider>
+            </ThemeProvider>
+        </HeighetUpdater>
     );
 });
 
@@ -95,76 +95,74 @@ const InnerContent = ({ date, services }) => {
     const { sermons, thisDays } = externalDayQuery.data || {};
 
     return (
-        <HeighetUpdater>
-            <div>
-                {dayQuery.status === 'loading' && <Loader />}
-                {dayQuery.status === 'error' && <ErrorMessage500 />}
-                {dayQuery.status === 'success' && (
-                    <div>
-                        <Zoom>
-                            <div
-                                className={css`
-                                    padding: 0 18px;
-                                `}
-                            >
-                                <SolidSection>
-                                    {services ? (
-                                        <Services date={date} readings={day.readings || {}} />
-                                    ) : (
-                                        <>
-                                            <SectionHeading>Богослужебные чтения</SectionHeading>
-                                            <ReadingList readings={day.readings || {}} />
+        <div>
+            {dayQuery.status === 'loading' && <Loader />}
+            {dayQuery.status === 'error' && <ErrorMessage500 />}
+            {dayQuery.status === 'success' && (
+                <div>
+                    <Zoom>
+                        <div
+                            className={css`
+                                padding: 0 18px;
+                            `}
+                        >
+                            <SolidSection>
+                                {services ? (
+                                    <Services date={date} readings={day.readings || {}} />
+                                ) : (
+                                    <>
+                                        <SectionHeading>Богослужебные чтения</SectionHeading>
+                                        <ReadingList readings={day.readings || {}} />
 
-                                            <BorderedSection>
-                                                <SectionHeading>Святые дня</SectionHeading>
-                                                <Saints saints={day.saints} date={date} />
-                                            </BorderedSection>
+                                        <BorderedSection>
+                                            <SectionHeading>Святые дня</SectionHeading>
+                                            <Saints saints={day.saints} date={date} />
+                                        </BorderedSection>
 
-                                            <ThisDays thisDays={thisDays} date={date} />
+                                        <ThisDays thisDays={thisDays} date={date} />
 
-                                            <BorderedSection>
-                                                <div
+                                        <BorderedSection>
+                                            <div
+                                                className={css`
+                                                    overflow: auto;
+                                                    display: flex;
+                                                    justify-content: space-between;
+                                                    align-items: center;
+                                                `}
+                                            >
+                                                <SectionHeading>Песнопения</SectionHeading>
+                                                <div>
+                                                    <LanguageSwitcher />
+                                                </div>
+                                            </div>
+                                            <Parts
+                                                date={date}
+                                                partNames={['shared.Тропари', 'shared.Кондаки', 'shared.Величания']}
+                                            />
+                                        </BorderedSection>
+
+                                        {day.bReadings && Object.keys(day.bReadings).length > 0 && (
+                                            <>
+                                                <SectionHeading
                                                     className={css`
-                                                        overflow: auto;
-                                                        display: flex;
-                                                        justify-content: space-between;
-                                                        align-items: center;
+                                                        padding-top: 0 !important;
                                                     `}
                                                 >
-                                                    <SectionHeading>Песнопения</SectionHeading>
-                                                    <div>
-                                                        <LanguageSwitcher />
-                                                    </div>
-                                                </div>
-                                                <Parts
-                                                    date={date}
-                                                    partNames={['shared.Тропари', 'shared.Кондаки', 'shared.Величания']}
-                                                />
-                                            </BorderedSection>
-
-                                            {day.bReadings && Object.keys(day.bReadings).length > 0 && (
-                                                <>
-                                                    <SectionHeading
-                                                        className={css`
-                                                            padding-top: 0 !important;
-                                                        `}
-                                                    >
-                                                        Душеполезные чтения
-                                                    </SectionHeading>
-                                                    <ReadingList brother readings={day.bReadings} />
-                                                </>
-                                            )}
-                                            <Sermons date={date} sermons={sermons} />
-                                        </>
-                                    )}
-                                </SolidSection>
-                            </div>
-                        </Zoom>
-                        {!services && <Links />}
-                    </div>
-                )}
-            </div>
-        </HeighetUpdater>
+                                                    Душеполезные чтения
+                                                </SectionHeading>
+                                                <ReadingList brother readings={day.bReadings} />
+                                            </>
+                                        )}
+                                        <Sermons date={date} sermons={sermons} />
+                                    </>
+                                )}
+                            </SolidSection>
+                        </div>
+                    </Zoom>
+                    {!services && <Links />}
+                </div>
+            )}
+        </div>
     );
 };
 
