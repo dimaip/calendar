@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { css } from 'emotion';
 import { ThemeProvider } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
@@ -26,34 +26,18 @@ import BurgerMenu from './BurgerMenu';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
 import IosPrompt from './IosPrompt';
-import PropTypes from 'prop-types';
 import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
 import Parts from 'components/Parts/Parts';
 import BorderedSection from './BorderedSection';
+import { HeighetUpdater } from 'components/HeightUpdate/HeightUpdater';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
-
-// In order to work with old legacy context API, it can't use hooks
-class HeighetUpdater extends React.Component {
-    componentDidMount() {
-        this.context.swipeableViews.slideUpdateHeight();
-    }
-    componentDidUpdate() {
-        this.context.swipeableViews.slideUpdateHeight();
-    }
-    render() {
-        return this.props.children;
-    }
-}
-HeighetUpdater.contextTypes = {
-    swipeableViews: PropTypes.shape({
-        slideUpdateHeight: PropTypes.func,
-    }),
-};
 
 const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClickShift, services }) => {
     const dayQuery = useDay(date);
     const day = dayQuery.data;
+    const externalDayQuery = useExternalDay(date);
+    const { sermons, thisDays } = externalDayQuery.data || {};
 
     const themeColour = useRef();
     if (day) {
@@ -78,7 +62,72 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                     fastingLevelName={day.fastingLevelName}
                                     icon={day.icon}
                                 />
-                                <InnerContent date={date} services={services} />
+                                <div>
+                                    <Zoom>
+                                        <div
+                                            className={css`
+                                                padding: 0 18px;
+                                            `}
+                                        >
+                                            <SolidSection>
+                                                {services ? (
+                                                    <Services date={date} readings={day.readings || {}} />
+                                                ) : (
+                                                    <>
+                                                        <SectionHeading>Богослужебные чтения</SectionHeading>
+                                                        <ReadingList readings={day.readings || {}} />
+
+                                                        <BorderedSection>
+                                                            <SectionHeading>Святые дня</SectionHeading>
+                                                            <Saints saints={day.saints} date={date} />
+                                                        </BorderedSection>
+
+                                                        <ThisDays thisDays={thisDays} date={date} />
+
+                                                        <BorderedSection>
+                                                            <div
+                                                                className={css`
+                                                                    overflow: auto;
+                                                                    display: flex;
+                                                                    justify-content: space-between;
+                                                                    align-items: center;
+                                                                `}
+                                                            >
+                                                                <SectionHeading>Песнопения</SectionHeading>
+                                                                <div>
+                                                                    <LanguageSwitcher />
+                                                                </div>
+                                                            </div>
+                                                            <Parts
+                                                                date={date}
+                                                                partNames={[
+                                                                    'shared.Тропари',
+                                                                    'shared.Кондаки',
+                                                                    'shared.Величания',
+                                                                ]}
+                                                            />
+                                                        </BorderedSection>
+
+                                                        {day.bReadings && Object.keys(day.bReadings).length > 0 && (
+                                                            <>
+                                                                <SectionHeading
+                                                                    className={css`
+                                                                        padding-top: 0 !important;
+                                                                    `}
+                                                                >
+                                                                    Душеполезные чтения
+                                                                </SectionHeading>
+                                                                <ReadingList brother readings={day.bReadings} />
+                                                            </>
+                                                        )}
+                                                        <Sermons date={date} sermons={sermons} />
+                                                    </>
+                                                )}
+                                            </SolidSection>
+                                        </div>
+                                    </Zoom>
+                                    {!services && <Links />}
+                                </div>
                             </div>
                         )}
                     </div>
@@ -88,87 +137,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
     );
 });
 
-const InnerContent = ({ date, services }) => {
-    const dayQuery = useDay(date);
-    const day = dayQuery.data;
-    const externalDayQuery = useExternalDay(date);
-    const { sermons, thisDays } = externalDayQuery.data || {};
-
-    return (
-        <HeighetUpdater>
-            <div>
-                {dayQuery.status === 'loading' && <Loader />}
-                {dayQuery.status === 'error' && <ErrorMessage500 />}
-                {dayQuery.status === 'success' && (
-                    <div>
-                        <Zoom>
-                            <div
-                                className={css`
-                                    padding: 0 18px;
-                                `}
-                            >
-                                <SolidSection>
-                                    {services ? (
-                                        <Services date={date} readings={day.readings || {}} />
-                                    ) : (
-                                        <>
-                                            <SectionHeading>Богослужебные чтения</SectionHeading>
-                                            <ReadingList readings={day.readings || {}} />
-
-                                            <BorderedSection>
-                                                <SectionHeading>Святые дня</SectionHeading>
-                                                <Saints saints={day.saints} date={date} />
-                                            </BorderedSection>
-
-                                            <ThisDays thisDays={thisDays} date={date} />
-
-                                            <BorderedSection>
-                                                <div
-                                                    className={css`
-                                                        overflow: auto;
-                                                        display: flex;
-                                                        justify-content: space-between;
-                                                        align-items: center;
-                                                    `}
-                                                >
-                                                    <SectionHeading>Песнопения</SectionHeading>
-                                                    <div>
-                                                        <LanguageSwitcher />
-                                                    </div>
-                                                </div>
-                                                <Parts
-                                                    date={date}
-                                                    partNames={['shared.Тропари', 'shared.Кондаки', 'shared.Величания']}
-                                                />
-                                            </BorderedSection>
-
-                                            {day.bReadings && Object.keys(day.bReadings).length > 0 && (
-                                                <>
-                                                    <SectionHeading
-                                                        className={css`
-                                                            padding-top: 0 !important;
-                                                        `}
-                                                    >
-                                                        Душеполезные чтения
-                                                    </SectionHeading>
-                                                    <ReadingList brother readings={day.bReadings} />
-                                                </>
-                                            )}
-                                            <Sermons date={date} sermons={sermons} />
-                                        </>
-                                    )}
-                                </SolidSection>
-                            </div>
-                        </Zoom>
-                        {!services && <Links />}
-                    </div>
-                )}
-            </div>
-        </HeighetUpdater>
-    );
-};
-
-const Main = ({ services = false }) => {
+const Main = React.memo(({ services = false }) => {
     const { date } = useParams();
     // pre-fetch readings
     useReadings(date);
@@ -180,38 +149,53 @@ const Main = ({ services = false }) => {
     const setNewDate = dateString => {
         history.push(`/date/${dateString}${services ? '/services' : ''}`);
     };
-    const makeHandleClickShift = direction => () => {
-        switch (direction) {
-            case 'left':
-                setNewDate(formatISO(subDays(parseISO(date), 1), { representation: 'date' }));
-                break;
-            case 'right':
-                setNewDate(formatISO(addDays(parseISO(date), 1), { representation: 'date' }));
-                break;
-        }
-    };
-    const handleToggleClick = () => {
+    const makeHandleClickShift = useCallback(
+        direction => () => {
+            switch (direction) {
+                case 'left':
+                    setNewDate(formatISO(subDays(parseISO(date), 1), { representation: 'date' }));
+                    break;
+                case 'right':
+                    setNewDate(formatISO(addDays(parseISO(date), 1), { representation: 'date' }));
+                    break;
+            }
+        },
+        [date]
+    );
+    const handleToggleClick = useCallback(() => {
         calendarRef?.current?.toggleCalendarShown(true);
-    };
+    }, []);
 
     const goLeft = makeHandleClickShift('left');
     const goRight = makeHandleClickShift('right');
 
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const slideRenderer = ({ key, index }) => {
-        const indexOffset = index - activeIndex;
-        const effectiveDate = formatISO(addDays(parseISO(date), indexOffset), { representation: 'date' });
-        return (
-            <SwipeableContainer
-                key={key}
-                date={effectiveDate}
-                services={services}
-                handleToggleClick={handleToggleClick}
-                makeHandleClickShift={makeHandleClickShift}
-            />
-        );
-    };
+    const slideRenderer = useCallback(
+        ({ key, index }) => {
+            const indexOffset = index - activeIndex;
+            const effectiveDate = formatISO(addDays(parseISO(date), indexOffset), { representation: 'date' });
+            return (
+                <SwipeableContainer
+                    key={key}
+                    date={effectiveDate}
+                    services={services}
+                    handleToggleClick={handleToggleClick}
+                    makeHandleClickShift={makeHandleClickShift}
+                />
+            );
+        },
+        [date, services]
+    );
+    const onChangeIndex = useCallback((index, indexLatest) => {
+        if (index < indexLatest) {
+            setActiveIndex(index);
+            goLeft();
+        } else {
+            setActiveIndex(index);
+            goRight();
+        }
+    }, []);
     return (
         <div>
             <HeaderMain
@@ -232,15 +216,7 @@ const Main = ({ services = false }) => {
                     overscanSlideAfter={1}
                     overscanSlideBefore={1}
                     animateHeight
-                    onChangeIndex={(index, indexLatest) => {
-                        if (index < indexLatest) {
-                            setActiveIndex(index);
-                            goLeft();
-                        } else {
-                            setActiveIndex(index);
-                            goRight();
-                        }
-                    }}
+                    onChangeIndex={onChangeIndex}
                 />
             </div>
 
@@ -249,6 +225,6 @@ const Main = ({ services = false }) => {
             <IosPrompt />
         </div>
     );
-};
+});
 
 export default Main;
