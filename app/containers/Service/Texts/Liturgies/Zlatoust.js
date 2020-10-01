@@ -244,7 +244,7 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Причащение народа в храме</span>
                 </p>
                 <MdxLoader src="Liturgies/Vernie/PrichPeople" />
-                {prichasten}
+                <MdxLoader src="Liturgies/Vernie/PrichStihPeople" />
                 <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-20">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">После причащения</span>
                 </p>
