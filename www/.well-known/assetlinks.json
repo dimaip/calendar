@@ -5,9 +5,9 @@
             ],
             "target": {
                   "namespace": "android_app",
-                  "package_name": "app.molitva.twa",
+                  "package_name": "com.pb.twa",
                   "sha256_cert_fingerprints": [
-                        "3A:B8:7C:A0:0C:2C:9A:6C:47:F6:EE:6D:5C:22:A0:00:73:9A:88:22:97:63:3D:B4:DC:79:D6:E2:49:F6:C0:BE"
+                        "E1:D5:05:97:66:74:B2:DD:F6:A0:2B:82:3F:69:FC:46:C3:90:55:8C:8F:0B:91:9C:5F:19:E9:52:4D:D4:4D:CC"
                   ]
             }
       },
@@ -17,9 +17,9 @@
             ],
             "target": {
                   "namespace": "android_app",
-                  "package_name": "app.molitva.twa",
+                  "package_name": "com.pb.twa",
                   "sha256_cert_fingerprints": [
-                        "E1:D5:05:97:66:74:B2:DD:F6:A0:2B:82:3F:69:FC:46:C3:90:55:8C:8F:0B:91:9C:5F:19:E9:52:4D:D4:4D:CC"
+                        "6C:F9:DB:A2:81:34:27:C0:64:01:1A:47:62:9E:59:05:35:E0:33:CD:CB:19:E0:22:EA:DE:A9:45:04:9C:2D:16"
                   ]
             }
       }
