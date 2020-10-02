@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // In order to work with old legacy context API, it can't use hooks
-export class HeighetUpdater extends React.Component {
+export class HeightUpdater extends React.Component {
     componentDidMount() {
         this.context?.swipeableViews?.slideUpdateHeight();
     }
@@ -13,7 +13,7 @@ export class HeighetUpdater extends React.Component {
         return this.props.children;
     }
 }
-HeighetUpdater.contextTypes = {
+HeightUpdater.contextTypes = {
     swipeableViews: PropTypes.shape({
         slideUpdateHeight: PropTypes.func,
     }),

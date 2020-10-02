@@ -29,7 +29,7 @@ import IosPrompt from './IosPrompt';
 import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
 import Parts from 'components/Parts/Parts';
 import BorderedSection from './BorderedSection';
-import { HeighetUpdater } from 'components/HeightUpdate/HeightUpdater';
+import { HeightUpdater } from 'components/HeightUpdate/HeightUpdater';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -46,7 +46,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
 
     const theme = getTheme(themeColour.current);
     return (
-        <HeighetUpdater>
+        <HeightUpdater>
             <ThemeProvider theme={theme}>
                 <div>
                     <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
@@ -133,7 +133,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                     </div>
                 </div>
             </ThemeProvider>
-        </HeighetUpdater>
+        </HeightUpdater>
     );
 });
 

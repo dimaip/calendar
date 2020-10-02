@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import useParts from 'hooks/useParts';
 import RteText from 'components/RteText/RteText';
 import { LangContext } from 'containers/Service/useLangReducer';
-import { HeighetUpdater } from 'components/HeightUpdate/HeightUpdater';
+import { HeightUpdater } from 'components/HeightUpdate/HeightUpdater';
 
 const objAccess = (object, path) => path.split('.').reduce((acc, curr) => acc?.[curr], object);
 
@@ -18,25 +18,27 @@ const PartRenderer = ({ date, lang, partNames, fallback, alwaysShowFallback, Lay
     texts = exclusiveTexts.length ? exclusiveTexts : texts;
 
     return (
-        <Layout>
-            <div>
-                {alwaysShowFallback && !exclusiveTexts.length && fallback}
-                {texts?.map?.((text, index) => (
-                    <RteText
-                        key={index}
-                        html={text}
-                        className={css`
-                            margin-bottom: 12px;
+        <HeightUpdater>
+            <Layout>
+                <div>
+                    {alwaysShowFallback && !exclusiveTexts.length && fallback}
+                    {texts?.map?.((text, index) => (
+                        <RteText
+                            key={index}
+                            html={text}
+                            className={css`
+                                margin-bottom: 12px;
 
-                            & ._-ОСНОВНОЙ_Основной-отст1-5 {
-                                text-indent: 0;
-                                margin-left: 0;
-                            }
-                        `}
-                    />
-                ))}
-            </div>
-        </Layout>
+                                & ._-ОСНОВНОЙ_Основной-отст1-5 {
+                                    text-indent: 0;
+                                    margin-left: 0;
+                                }
+                            `}
+                        />
+                    ))}
+                </div>
+            </Layout>
+        </HeightUpdater>
     );
 };
 
@@ -52,50 +54,48 @@ const Parts = ({
         const langStateA = { lang: langA, langA, langB };
         const langStateB = { lang: langB, langA, langB };
         return (
-            <HeighetUpdater>
+            <div
+                className={css`
+                    display: flex;
+                    margin: 0 -12px;
+                    min-width: ${lang === 'parallel' ? '444px' : '296px'};
+                `}
+            >
                 <div
                     className={css`
-                        display: flex;
-                        margin: 0 -12px;
-                        min-width: ${lang === 'parallel' ? '444px' : '296px'};
+                        width: 50%;
+                        padding: 12px;
                     `}
                 >
-                    <div
-                        className={css`
-                            width: 50%;
-                            padding: 12px;
-                        `}
-                    >
-                        <LangContext.Provider value={langStateA}>
-                            <PartRenderer
-                                fallback={fallback}
-                                alwaysShowFallback={alwaysShowFallback}
-                                date={date}
-                                partNames={partNames}
-                                Layout={Layout}
-                                lang={langA}
-                            />
-                        </LangContext.Provider>
-                    </div>
-                    <div
-                        className={css`
-                            width: 50%;
-                            padding: 12px;
-                        `}
-                    >
-                        <LangContext.Provider value={langStateB}>
-                            <PartRenderer
-                                fallback={fallback}
-                                alwaysShowFallback={alwaysShowFallback}
-                                date={date}
-                                partNames={partNames}
-                                Layout={Layout}
-                                lang={langB}
-                            />
-                        </LangContext.Provider>
-                    </div>
+                    <LangContext.Provider value={langStateA}>
+                        <PartRenderer
+                            fallback={fallback}
+                            alwaysShowFallback={alwaysShowFallback}
+                            date={date}
+                            partNames={partNames}
+                            Layout={Layout}
+                            lang={langA}
+                        />
+                    </LangContext.Provider>
                 </div>
-            </HeighetUpdater>
+                <div
+                    className={css`
+                        width: 50%;
+                        padding: 12px;
+                    `}
+                >
+                    <LangContext.Provider value={langStateB}>
+                        <PartRenderer
+                            fallback={fallback}
+                            alwaysShowFallback={alwaysShowFallback}
+                            date={date}
+                            partNames={partNames}
+                            Layout={Layout}
+                            lang={langB}
+                        />
+                    </LangContext.Provider>
+                </div>
+            </div>
         );
     }
 
