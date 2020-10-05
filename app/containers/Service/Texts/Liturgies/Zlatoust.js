@@ -179,7 +179,7 @@ const Zlatoust = ({ lang, date }) => {
                 <p id="hodataistvo" className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-18">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Хода́тайство</span>
                 </p>
-                <MdxLoader src="Liturgies/Vernie/AnaforaIntercess" />
+                <MdxLoader src="Liturgies/Vernie/AnaforaIntercess" zadastoinik={zadastoinik} />
                 <p className="_-ОСНОВНОЙ_Звездочки ParaOverride-19">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">***</span>
                 </p>
