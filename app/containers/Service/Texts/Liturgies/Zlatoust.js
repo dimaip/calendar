@@ -290,25 +290,12 @@ const Zlatoust = ({ lang, date }) => {
                     </span>
                 </p>
                 <MdxLoader src="Liturgies/Vernie/Sosudohran" />
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-15">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    {brightWeek && (
-                        <span>
-                            {' '}
-                            Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в.
-                        </span>
+                {brightWeek && (
+                    <MdxLoader src="Shared/EasterTroparion" />
                     )}
-                    {!brightWeek && (
-                        <>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                {' '}
-                                Да будет имя Господне благословенно — отныне и до века!{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(Трижды.)</span>
-                        </>
-                    )}
-                </p>
+                {!brightWeek && (
+                    <MdxLoader src="Liturgies/Vernie/DaBudetImja" />
+                )}
                 <MdxLoader src="Liturgies/Vernie/Psalom33" />
                 <p className="_-ОСНОВНОЙ_КРАСН-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
