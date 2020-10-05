@@ -2,6 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
 import useLiturgy from './Vernie/useLiturgy';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
@@ -253,132 +254,7 @@ const Zlatoust = ({ lang, date }) => {
                 <p className="_-ОСНОВНОЙ_Звездочки ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">***</span>
                 </p>
-                <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-11">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">7</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Благодарение после причащения</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст5">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Благословляя народ, в заключение: </span>
-                </p>
-                <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-15">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        Спаси, Бо­же, народ Твой <br /> и благослови наследие Твоё!{' '}
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(Пс 2</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">7:9</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">.)</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-15">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    {easterSeason && (
-                        <span>
-                            {' '}
-                            Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в
-                        </span>
-                    )}
-                    {!easterSeason && !(isEasterOffsetRange(39, 47) && dayOfWeek !== 0) && (
-                        <>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                {' '}
-                                Мы узре́ли Свет истинный, <br /> при`няли Духа Небесно­го, <br />
-                                обрели мы веру истинную, <br />
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                {' '}
-                                поклоняясь неразде­ль­ной Троице, <br /> ибо Она спасла нас
-                            </span>
-                        </>
-                    )}
-                    {isEasterOffsetRange(39, 47) && dayOfWeek !== 0 && (
-                        <>
-                            {' '}
-                            Тропарь Вознесения Господня, глас 4
-                            <br />
-                            Вознёсся во славе Ты, Христе Боже наш, <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span> и
-                            радость подарил ученикам, <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span> обещав им Святого
-                            Духа, <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span> когда они через Твоё благословение
-                            уверились, <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">//</span> что Ты - Сын Божий, Искупитель
-                            мира.
-                        </>
-                    )}
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Кадя св. чашу:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_ОсновнойСТ-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                        {' '}
-                        Превыше небес, Боже, восстань, <br /> распростри`
-                    </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> над зе­м­лёй Славу Твою </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">(Пс 5</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">6:6</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> —</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> Относя св. чашу на жертвенник:</span>
-                </p>
-                <p className="_-ПЕТИТ_Петит-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Благословен Бог наш —</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_КРАСН-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> К народу:</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">[</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Чёрн-ПЕТИТ-в-осн">во все дни:</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_Красн-ПЕТИТ-в-осн">]</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ныне и всегда и во веки веков!</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аминь.</span>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-7">
-                    {brightWeek && (
-                        <span>
-                            {' '}
-                            Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в.
-                        </span>
-                    )}
-                    {!brightWeek && (
-                        <>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Да наполнятся уста наши</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> хвалою Тебе, Госпо­ди,</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> дабы нам воспевать Славу Твою,</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> ибо Ты удостоил нас сопричастия</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                {' '}
-                                Твоим святым, бо­же­ст­венным, бес­смер­т­ным и животворящим та­инст­вам.
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Сохрани нас в Твоём освящении</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">/</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> раз­мыш­ля´ющими весь день о прав­де Твоей.</span>
-                            <span className="_--КРАСНЫЙ">/</span>
-                            <span className="_--КРАСНЫЙ">/</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Аллилуия, аллилуия, аллилуия.</span>
-                        </>
-                    )}
-                </p>
+                <Blagodarenie easterSeason={easterSeason} isEasterOffsetRange={isEasterOffsetRange} dayOfWeek={dayOfWeek} brightWeek={brightWeek}/>
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ектения</span>
                 </p>
