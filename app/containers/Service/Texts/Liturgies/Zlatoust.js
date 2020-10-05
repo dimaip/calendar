@@ -244,7 +244,8 @@ const Zlatoust = ({ lang, date }) => {
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Причащение народа в храме</span>
                 </p>
                 <MdxLoader src="Liturgies/Vernie/PrichPeople" />
-                {prichasten}
+                {brightWeek && <MdxLoader src="Shared/EasterTroparion" />}
+                {!brightWeek && <MdxLoader src="Liturgies/Vernie/PrichStihPeople" />}
                 <p className="_-ОСНОВНОЙ_Имя-РаздСл ParaOverride-20">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">После причащения</span>
                 </p>
@@ -351,7 +352,7 @@ const Zlatoust = ({ lang, date }) => {
                     {brightWeek && (
                         <span>
                             {' '}
-                            Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в
+                            Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в.
                         </span>
                     )}
                     {!brightWeek && (
@@ -419,7 +420,7 @@ const Zlatoust = ({ lang, date }) => {
                     {brightWeek && (
                         <span>
                             {' '}
-                            Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в
+                            Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в.
                         </span>
                     )}
                     {!brightWeek && (
@@ -453,7 +454,7 @@ const Zlatoust = ({ lang, date }) => {
                             </>
                         )}
                         {(brightWeek || easterOtdanie) && (
-                            <>Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в</>
+                            <>Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в.</>
                         )}
                     </span>
                     <Tooltip>
@@ -466,7 +467,7 @@ const Zlatoust = ({ lang, date }) => {
                                 Христос воскрес из мёртвых, Смертию смерть поправ
                             </span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, а народ закан­чивает: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и тем, кто во гробах, Жизнь дарова́в</span>
+                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и тем, кто во гробах, Жизнь дарова́в.</span>
                             <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Затем даётся отпуст.</span>
                         </>
                     </Tooltip>
