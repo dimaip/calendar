@@ -31,7 +31,7 @@ const Fallback = ({ serviceType, date }) => {
 const Otpust = ({ date, serviceType }) => {
     return (
         <Parts
-            partNames={['liturgy.Входной стих']}
+            partNames={['liturgy.Отпуст']}
             date={date}
             fallback={<Fallback date={date} serviceType={serviceType} />}
         />
