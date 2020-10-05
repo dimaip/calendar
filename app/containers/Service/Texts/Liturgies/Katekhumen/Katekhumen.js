@@ -63,7 +63,7 @@ const SectionLayout = ({ children }) => (
     </SolidSection>
 );
 
-const Katekhumen = ({  date, day }) => {
+const Katekhumen = ({ date, day }) => {
     useScrollToReadings();
     const externalDayQuery = useExternalDay(date);
     const { apostol, gospel } = getKatekhumenReadings(day);
@@ -73,7 +73,7 @@ const Katekhumen = ({  date, day }) => {
     const antifon3 = <Antifon3 date={date} />;
     const reading = <Reading day={day} date={date} />;
 
-    const hymns = <Parts date={date} partNames={['shared.Тропари', 'shared.Кондаки']} Layout={SectionLayout} />
+    const hymns = <Parts date={date} partNames={['shared.Тропари', 'shared.Кондаки']} Layout={SectionLayout} />;
 
     const aliluja = (
         <VariableSection date={date}>
@@ -81,7 +81,7 @@ const Katekhumen = ({  date, day }) => {
         </VariableSection>
     );
 
-    const trisvatoe = <Trisvatoe />;
+    const trisvatoe = <Trisvatoe date={date} />;
 
     const vhodnoiStih = (
         <VariableSection date={date}>
