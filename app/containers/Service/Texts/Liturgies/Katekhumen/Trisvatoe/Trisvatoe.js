@@ -58,7 +58,10 @@ const Trisvatoe = ({ date }) => {
             </p>
 
             <If condition={!vmestoTrisvatogoExists}>
-                <MdxLoader src="Liturgies/Katekhumen/Trisvatoe/Trisvatoe" />
+                <>
+                    <p className="_-ОСНОВНОЙ_Имя-части-отст5">Трисвятое</p>
+                    <MdxLoader src="Liturgies/Katekhumen/Trisvatoe/Trisvatoe" />
+                </>
             </If>
             <Parts
                 date={date}
