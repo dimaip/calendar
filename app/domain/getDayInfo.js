@@ -631,6 +631,7 @@ export const getFeastInfo = memoize(
             feastType = 'great';
             colour = '#4169E1';
             calendarColour = 'blue';
+            icon = 'pokrov.svg';
         }
 
         if (new Date(y, 0, 14).getTime() == date.getTime()) {
