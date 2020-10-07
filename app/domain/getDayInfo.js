@@ -634,6 +634,10 @@ export const getFeastInfo = memoize(
             icon = 'pokrov.svg';
         }
 
+        if (new Date(y, 9, 8).getTime() == date.getTime()) {
+            icon = 'serge.svg';
+        }
+
         if (new Date(y, 0, 14).getTime() == date.getTime()) {
             title = 'Обрезание Господне';
             feastType = 'great';
