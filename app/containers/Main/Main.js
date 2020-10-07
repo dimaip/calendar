@@ -185,17 +185,20 @@ const Main = React.memo(({ services = false }) => {
                 />
             );
         },
-        [date, services]
+        [date, services, handleToggleClick, activeIndex]
     );
-    const onChangeIndex = useCallback((index, indexLatest) => {
-        if (index < indexLatest) {
-            setActiveIndex(index);
-            goLeft();
-        } else {
-            setActiveIndex(index);
-            goRight();
-        }
-    }, []);
+    const onChangeIndex = useCallback(
+        (index, indexLatest) => {
+            if (index < indexLatest) {
+                setActiveIndex(index);
+                goLeft();
+            } else {
+                setActiveIndex(index);
+                goRight();
+            }
+        },
+        [goLeft, goRight]
+    );
     return (
         <div>
             <HeaderMain
