@@ -17,6 +17,9 @@ const Antifon2 = ({ date: dateString }) => {
     if (isDate(8, 19)) {
         return <MdxLoader src="Liturgies/Katekhumen/Antifon2Transfiguration" />;
     }
+    if (isDate(9, 27)) {
+        return <MdxLoader src="Liturgies/Katekhumen/Antifon2Vozdvijenie" />;
+    }
 
     return <MdxLoader src="Liturgies/Katekhumen/Antifon2" />;
 };
