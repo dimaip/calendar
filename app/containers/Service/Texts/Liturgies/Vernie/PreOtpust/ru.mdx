@@ -1,0 +1,23 @@
+import Tooltip from 'components/Tooltip/Tooltip';
+import If from 'components/If/If';
+
+<If condition={(props.brightWeek || props.easterOtdanie)}>
+  **П** Христос воскрес из мёртвых, Смертию смерть поправ
+
+  **Н** и тем, кто во гробах, Жизнь дарова́в.
+</If>
+
+<If condition={props.isEasterOffsetRange(7, 37)}>
+  **П** Слава Тебе, Христе Боже, Надежда наша, слава  
+  Те­бе!
+
+  **Н** Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в. **(Трижды).**
+</If>
+
+
+<If condition={!(props.brightWeek || props.easterOtdanie || props.isEasterOffsetRange(7, 38))}>
+  **П** Слава Тебе, Христе Боже, Надежда наша, слава  
+  Те­бе!
+
+  **Н** **Слава, и ныне.** Господи, помилуй **(трижды)**. Бла­го­слови!
+</If>

@@ -254,7 +254,12 @@ const Zlatoust = ({ lang, date }) => {
                 <p className="_-ОСНОВНОЙ_Звездочки ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">***</span>
                 </p>
-                <Blagodarenie easterSeason={easterSeason} isEasterOffsetRange={isEasterOffsetRange} dayOfWeek={dayOfWeek} brightWeek={brightWeek}/>
+                <Blagodarenie
+                    easterSeason={easterSeason}
+                    isEasterOffsetRange={isEasterOffsetRange}
+                    dayOfWeek={dayOfWeek}
+                    brightWeek={brightWeek}
+                />
                 <p className="_-ОСНОВНОЙ_Имя-части-отст5 ParaOverride-2">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Ектения</span>
                 </p>
@@ -290,12 +295,8 @@ const Zlatoust = ({ lang, date }) => {
                     </span>
                 </p>
                 <MdxLoader src="Liturgies/Vernie/Sosudohran" />
-                {brightWeek && (
-                    <MdxLoader src="Shared/EasterTroparion" />
-                    )}
-                {!brightWeek && (
-                    <MdxLoader src="Liturgies/Vernie/DaBudetImja" />
-                )}
+                {brightWeek && <MdxLoader src="Shared/EasterTroparion" />}
+                {!brightWeek && <MdxLoader src="Liturgies/Vernie/DaBudetImja" />}
                 <MdxLoader src="Liturgies/Vernie/Psalom33" />
                 <p className="_-ОСНОВНОЙ_КРАСН-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
@@ -304,53 +305,13 @@ const Zlatoust = ({ lang, date }) => {
                     </span>
                 </p>
                 <MdxLoader src="Liturgies/Vernie/OkBlag" />
-                {/* @TODO: убрать сноску и вместо нее сделать алгоритм */}
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-15">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">П</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span>
-                        {!(brightWeek || easterOtdanie) && (
-                            <>
-                                Слава Тебе, Христе Боже, Надежда наша, слава <br />
-                                Те­бе!
-                            </>
-                        )}
-                        {(brightWeek || easterOtdanie) && (
-                            <>Христос воскрес из мёртвых, Смертию смерть поправ и тем, кто во гробах, Жизнь дарова́в.</>
-                        )}
-                    </span>
-                    <Tooltip>
-                        <>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
-                                {' '}
-                                На Пасху, в Светлую седмицу и на отдание Пасхи вместо этих слов поётся:{' '}
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">
-                                Христос воскрес из мёртвых, Смертию смерть поправ
-                            </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">, а народ закан­чивает: </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">и тем, кто во гробах, Жизнь дарова́в.</span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">. Затем даётся отпуст.</span>
-                        </>
-                    </Tooltip>
-                </p>
-                <p className="_-ОСНОВНОЙ_Основной-отст1-5 ParaOverride-15">
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Н</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">Слава, и ныне.</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ"> Господи, помилуй </span>
-                    <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(трижды)</span>
-                    <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">. Бла­го­слови!</span>
-                    <Tooltip>
-                        <>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ"> От Фоминой недели до отдания Пасхи поётся </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_ЧЁРНЫЙ">Христос воскрес </span>
-                            <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">(трижды).</span>
-                        </>
-                    </Tooltip>
-                </p>
+                <MdxLoader
+                    src="Liturgies/Vernie/PreOtpust"
+                    brightWeek={brightWeek}
+                    easterOtdanie={easterOtdanie}
+                    isEasterOffsetRange={isEasterOffsetRange}
+                />
+
                 <p id="otpust" className="_-ОСНОВНОЙ_Имя-части-отст5">
                     <span className="_-ВЫДЕЛЕНИЯ_КРАСНЫЙ">
                         <a id="_idTextAnchor008" />
