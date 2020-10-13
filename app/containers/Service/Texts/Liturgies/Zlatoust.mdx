@@ -1,0 +1,216 @@
+import { Link } from 'react-router-dom';
+import { css } from 'emotion';
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Tooltip from 'components/Tooltip/Tooltip';
+import If from 'components/If/If';
+import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
+
+<div className={css`margin-bottom: 24px;`} id="nachalo" />
+
+# Божественная литургия Иоанна Златоуста
+
+{props.katekhumen}
+
+<div id="vernie" />
+
+# II. <br /> Литургия верных
+
+## (1) Приуготовление
+
+<MdxLoader src="Liturgies/Vernie/Priugotovlenie" />
+
+### Молитва первая <Tooltip><>Древнее надписание: «После распростертия илитона» (возможно, с ан­ти­минсом).</></Tooltip>
+
+<MdxLoader src="Liturgies/Vernie/Molitva1" />
+
+### Великая ектения <br /> (сокращённая)
+
+<MdxLoader src="Liturgies/Vernie/SokrEktenia" />
+
+### Молитва вторая
+
+<MdxLoader src="Liturgies/Vernie/Molitva2" />
+
+**Дьякон (или предстоятель) совершает малое каждение с чте­нием Пс 50**
+
+### **[** Молитва предстоятеля о себе <Tooltip><>Вставка из Литургии св. Василия Великого.</></Tooltip>
+
+<MdxLoader src="Liturgies/Vernie/MolitvaOSebe" />
+
+<div id="vhod"/>
+
+## (2) Вход
+
+### Херувимская песнь <br /> (входная песнь Литургии верных)
+
+<MdxLoader src="Liturgies/Vernie/Heruvimskaya" />
+
+<MdxLoader src="Liturgies/Vernie/Dialog" />
+
+**Далее совершается Великий вход с приготов­лен­ными к прино­ше­нию хле­бом и вином.**
+
+### **[** Проскомидийные поминовения
+
+<MdxLoader src="Liturgies/Vernie/ProskPomin" />
+
+**2-я часть Херувим­ской песни:**
+
+<MdxLoader src="Liturgies/Vernie/Heruvimskaya2" />
+
+### Просительная ектения
+
+<MdxLoader src="Liturgies/Vernie/Prositelnaya" />
+
+<div id="prinoshenie"/>
+
+### Молитва приношения
+
+**По поставлении св. даров на престол:**
+
+<MdxLoader src="Liturgies/Vernie/MolitvaPrinosh" />
+
+<div id="tselovanie"/>
+
+## (3) Целование мира <br />и исповедание единой веры
+
+<MdxLoader src="Liturgies/Vernie/TselovanieMira" />
+
+<div id="simvol"/>
+
+## Символ веры
+
+<MdxLoader src="Liturgies/Vernie/SimvolVery" />
+
+<div id="anafora"/>
+
+## (4) Св. возношение (ана́фора) <Tooltip><>Раздел (4) — Евхаристический кано́н. Он со­стоит из вступ­ления и четы­рех основных частей: префа́цио (вводная часть), ана́мнесис (воспо­ми­нание), эпиклесис (при­зывание) и ин­тер­це́ссио (хода́тай­ство).</></Tooltip>
+
+<MdxLoader src="Liturgies/Vernie/AnaforaVstup" />
+
+<div id="prefacio"/>
+
+## Вводная часть
+
+<MdxLoader src="Liturgies/Vernie/AnaforaPrefac" />
+
+<div id="anamnesis"/>
+
+## Воспоминание
+
+<MdxLoader src="Liturgies/Vernie/AnaforaAnamnes" />
+
+<div id="epiclisis"/>
+
+## Призывание
+
+<MdxLoader src="Liturgies/Vernie/AnaforaEpikles" />
+
+<div id="hodataistvo"/>
+
+## Хода́тайство
+
+<MdxLoader src="Liturgies/Vernie/AnaforaIntercess" zadastoinik={props.zadastoinik} />
+
+## (5) Приготовление ко причащению
+
+<MdxLoader src="Liturgies/Vernie/DaBudut" />
+
+### Просительная Ектения <br /> (перед Молитвой Господней)
+
+<MdxLoader src="Liturgies/Vernie/Prositelnaya2" />
+
+<div id="ourfather"/>
+
+### Молитва перед причащением
+
+<MdxLoader src="Liturgies/Vernie/MolitvaAfterPrich" />
+<MdxLoader src="Liturgies/Vernie/Otche" />
+<MdxLoader src="Liturgies/Vernie/MirVsem2" />
+
+<div id="glavopriklon"/>
+
+### Молитва главопреклонная
+
+<MdxLoader src="Liturgies/Vernie/MolitvaGlav" />
+
+### Молитва <br />(перед возношением св. хлеба)
+
+<MdxLoader src="Liturgies/Vernie/MolitvaBeforeVosn" />
+
+<div id="prichashenie"/>
+
+## (6) Св. причащение
+
+### Молитва перед св. дарами
+
+<MdxLoader src="Liturgies/Vernie/MolitvaBeforeDary" />
+
+## Причащение в алтаре
+
+{props.prichasten}
+
+<MdxLoader src="Liturgies/Vernie/PrichAltar" />
+
+## Причащение народа в храме
+
+<MdxLoader src="Liturgies/Vernie/PrichPeople" />
+
+{props.brightWeek && <MdxLoader src="Shared/EasterTroparion" />}
+{!props.brightWeek && <MdxLoader src="Liturgies/Vernie/PrichStihPeople" />}
+
+## После причащения
+
+<MdxLoader src="Liturgies/Vernie/AfterPrich" />
+
+<Blagodarenie
+    easterSeason={props.easterSeason}
+    isEasterOffsetRange={props.isEasterOffsetRange}
+    dayOfWeek={props.dayOfWeek}
+    brightWeek={props.brightWeek}
+/>
+
+### Ектения
+
+<MdxLoader src="Liturgies/Vernie/EkteniaAftPric" />
+
+### Молитва благодарственная <br /> (после причащения всех)
+
+<MdxLoader src="Liturgies/Vernie/MolitvaBlag" />
+
+### Молитва заамвонная
+
+<MdxLoader src="Liturgies/Vernie/Zaamvon" />
+
+## (8) Заключительные молитвы
+
+### Молитва «в сосудохранилище» <br />(перед снятием священных одежд и на потребление <br />св. даров или перед агапической трапезой)
+
+<MdxLoader src="Liturgies/Vernie/Sosudohran" />
+{props.brightWeek && <MdxLoader src="Shared/EasterTroparion" />}
+{!props.brightWeek && <MdxLoader src="Liturgies/Vernie/DaBudetImja" />}
+<MdxLoader src="Liturgies/Vernie/Psalom33" />
+
+### Бла­го­словляя народ на уход, возможно, после об­щей трапезы:
+
+<MdxLoader src="Liturgies/Vernie/OkBlag" />
+<MdxLoader
+    src="Liturgies/Vernie/PreOtpust"
+    brightWeek={props.brightWeek}
+    easterOtdanie={props.easterOtdanie}
+    isEasterOffsetRange={props.isEasterOffsetRange}
+/>
+
+<div id="otpust"/>
+
+### Отпуст
+
+**По обычаю — с крестом в руках:**
+
+{props.otpust}
+{props.saints}
+
+### Многолетие<br />(при закрытии завесы)
+
+<MdxLoader src="Liturgies/Vernie/Mnogoletie" />
+
+**Священник в алтаре читает <Link className={css`text-decoration: underline;`} to={`/date/${props.date}/service/blagodarstvennie`}>Благодарственные молитвы</Link>**
