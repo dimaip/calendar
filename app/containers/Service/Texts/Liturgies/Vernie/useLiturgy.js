@@ -6,7 +6,7 @@ import Saints from 'containers/Main/Saints';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Prichasten from './Prichasten/Prichasten';
 import Zadastoinik from './Zadastoinik/Zadastoinik';
-import Otpust from './Otpust';
+import Otpust from './Otpust/Otpust';
 import Katekhumen from '../Katekhumen/Katekhumen';
 import VariableSection from '../../VariableSection';
 
