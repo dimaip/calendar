@@ -9,7 +9,6 @@ import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
 import { getFeastInfo } from 'domain/getDayInfo';
 import makeServices from './Texts/Texts';
-import './Texts/Shared.css';
 import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';

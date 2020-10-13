@@ -1,4 +1,5 @@
 import React from 'react';
+import 'containers/Service/Texts/Shared.css';
 
 const EasterHours = ({}) => {
     return (

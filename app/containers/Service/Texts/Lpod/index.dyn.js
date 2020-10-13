@@ -7,6 +7,7 @@ import ReadingItem from 'containers/Readings/ReadingItem';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
 import useScrollToReadings from '../useScrollToReadings';
+import 'containers/Service/Texts/Shared.css';
 
 const Readings = ({ readings }) => (
     <>
