@@ -10,11 +10,11 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
   <MdxLoader src="Shared/EasterTroparion" />
 )}
 
-{!props.easterSeason && !(props.isEasterOffsetRange(39, 47) && props.dayOfWeek !== 0) && !props.isEasterOffsetRange(48) && (
+{!props.easterSeason && !props.isEasterOffsetRange(39, 47) && !props.isEasterOffsetRange(48) && (
   <MdxLoader src="Liturgies/Vernie/Blagodarenie/MiUzreli" />
 )}
 
-{props.isEasterOffsetRange(39, 47) && props.dayOfWeek !== 0 && (
+{props.isEasterOffsetRange(39, 47) && (
   <MdxLoader src="Shared/AscensionTroparion" />
 )}
 
