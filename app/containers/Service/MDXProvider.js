@@ -87,6 +87,10 @@ const mapping = {
                 margin-top: 4px;
                 text-align-last: left;
                 text-indent: -28px;
+                & p {
+                    font-size: 15px !important;
+                    margin-left: 0 !important;
+                }
             `}
         >
             {children}
