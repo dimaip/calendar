@@ -1,0 +1,70 @@
+.H1 {
+    color: #ff4e4e;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-right: 0;
+    margin-top: 28px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.H2 {
+    color: #ff4e4e;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 28px;
+    text-align: center;
+}
+
+.H3 {
+    color: #ff4e4e;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-top: 28px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.P {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-top: 4px;
+    text-indent: -28px;
+}
+
+.Red {
+    color: #ff4e4e;
+}
+
+.Petit {
+    font-size: 15px !important;
+    line-height: 1.6;
+    margin-bottom: 0;
+    margin-left: 28px;
+    margin-top: 4px;
+    text-align-last: left;
+    text-indent: -28px;
+}
+.Petit .P {
+    font-size: 15px !important;
+    margin-left: 0 !important;
+}
+
+.PetitInline {
+    font-size: 15px;
+}
+
+.Super {
+    color: #ff4e4e;
+    vertical-align: super;
+    font-size: 12px;
+}
