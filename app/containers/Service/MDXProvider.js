@@ -1,5 +1,6 @@
 import React from 'react';
 import { MDXProvider as OriginalMDXProvider } from '@mdx-js/react';
+import './mdx.css';
 const mapping = {
     h1: ({ children }) => <h1 className="H1">{children}</h1>,
     h2: ({ children }) => <h2 className="H2">{children}</h2>,

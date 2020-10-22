@@ -3,7 +3,6 @@ import { Provider } from 'react-redux';
 import { HashRouter } from 'react-router-dom';
 import Routes from '../Routes';
 import 'styles/reset.css';
-import 'styles/mdx.css';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
 import { ReactQueryConfigProvider } from 'react-query';
 import { LangContext, LangDispatchContext, useLangReducer } from './Service/useLangReducer';
