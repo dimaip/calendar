@@ -572,6 +572,9 @@ export const getFeastInfo = memoize(
             colour = '#4169E1';
             calendarColour = 'blue';
         }
+        if (new Date(y, 11, 4).getTime() <= date.getTime() && date.getTime() <= new Date(y, 11, 8).getTime()) {
+            icon = 'vvedenie.svg';
+        }
 
         if (new Date(y, 0, 7).getTime() == date.getTime()) {
             title = 'Рождество Христово';
@@ -669,6 +672,14 @@ export const getFeastInfo = memoize(
             feastType = 'great';
             icon = 'baptist.png';
             colour = '#7b68ee';
+        }
+
+        if (
+            new Date(y, 9, 9).getTime() == date.getTime() ||
+            new Date(y, 4, 21).getTime() == date.getTime() ||
+            isEasterOffsetRange(-3)
+        ) {
+            icon = 'john.svg';
         }
 
         return {
