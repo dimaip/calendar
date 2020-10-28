@@ -13,12 +13,12 @@ import Parts from 'components/Parts/Parts';
 
 <>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
 
-<>{props.dayOfWeek === 1 && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
-<>{props.dayOfWeek === 2 && <MdxLoader src="Matins/Prayer2" lang={props.lang} />}</>
-<>{props.dayOfWeek === 3 && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
-<>{props.dayOfWeek === 4 && <MdxLoader src="Matins/Prayer4" lang={props.lang} />}</>
-<>{props.dayOfWeek === 5 && <MdxLoader src="Matins/Prayer7" lang={props.lang} />}</>
-<>{props.dayOfWeek === 6 && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
+<>{(props.dayOfWeek === 0 || props.dayOfWeek === 1) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
+<>{(props.dayOfWeek === 0 || props.dayOfWeek === 2) && <MdxLoader src="Matins/Prayer2" lang={props.lang} />}</>
+<>{(props.dayOfWeek === 0 || props.dayOfWeek === 3) && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
+<>{(props.dayOfWeek === 0 || props.dayOfWeek === 4) && <MdxLoader src="Matins/Prayer4" lang={props.lang} />}</>
+<>{(props.dayOfWeek === 0 || props.dayOfWeek === 5) && <MdxLoader src="Matins/Prayer7" lang={props.lang} />}</>
+<>{(props.dayOfWeek === 0 || props.dayOfWeek === 6) && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
 
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 <MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
