@@ -18,6 +18,8 @@ import Parts from 'components/Parts/Parts';
 
 <>{props.dayOfWeek === 6 && <MdxLoader src="Vespers/Psalm103" lang={props.lang} />}</>
 
+<>{props.dayOfWeek === 6 && <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />}</>
+
 <>{!props.isAscension && props.dayOfWeek === 0 && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}</>
 <>{!props.isAscension && props.dayOfWeek === 1 && <MdxLoader src="Vespers/Prayer1" lang={props.lang} />}</>
 <>{!props.isAscension && props.dayOfWeek === 2 && <MdxLoader src="Vespers/Prayer2" lang={props.lang} />}</>
