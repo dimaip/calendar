@@ -36,7 +36,7 @@ import Parts from 'components/Parts/Parts';
 
 **П** Премудрость! Станем благоговейно! Услышим святое евангелие!
 
-**П** От (имя) святого благовестия чтение.
+**П** От **(имя)** святого благовестия чтение.
 
 **Н** Слава Тебе, Господи, слава Тебе!
 
@@ -52,7 +52,10 @@ import Parts from 'components/Parts/Parts';
 
 <>{(props.isEasterOffsetRange(0, 39) || props.dayOfWeek === 0) && <MdxLoader src="Matins/VoskresnajaPesn" lang={props.lang} />}</>
 
+<MdxLoader src="Shared/EkteniaOglash" lang={props.lang} />
 <MdxLoader src="Matins/PrayerKatekhumens" lang={props.lang} />
+
+**П** Оглашаемые, отступи́те!
 
 ## Заключение
 
@@ -73,4 +76,5 @@ import Parts from 'components/Parts/Parts';
 <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
 
 <>{props.otpust}</>
+
 <>{props.endHymns}</>

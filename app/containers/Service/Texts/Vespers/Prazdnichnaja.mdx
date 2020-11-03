@@ -14,7 +14,14 @@ import Parts from 'components/Parts/Parts';
 
 <>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
 
+<>{props.dayOfWeek === 6 && <MdxLoader src="Vespers/Priidite" lang={props.lang} />}</>
+
+<>{props.dayOfWeek === 6 && <MdxLoader src="Vespers/Psalm103" lang={props.lang} />}</>
+
+<>{props.dayOfWeek === 6 && <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />}</>
+
 <>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 1) && <MdxLoader src="Vespers/Prayer1" lang={props.lang} />}</>
+<>{props.dayOfWeek === 6 && <MdxLoader src="Vespers/Kafisma" lang={props.lang} />}</>
 <>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 2) && <MdxLoader src="Vespers/Prayer2" lang={props.lang} />}</>
 <>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 3) && <MdxLoader src="Vespers/Prayer3" lang={props.lang} />}</>
 <>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 4) && <MdxLoader src="Vespers/Prayer4" lang={props.lang} />}</>
@@ -63,7 +70,11 @@ import Parts from 'components/Parts/Parts';
 
 ### Проповедь
 
+<MdxLoader src="Shared/EkteniaOglash" lang={props.lang} />
 <MdxLoader src="Vespers/PrayerKatekhumens" lang={props.lang} />
+
+**П** Оглашаемые, отступи́те!
+
 <MdxLoader src="Shared/SugubajaPolnaja" lang={props.lang} />
 <MdxLoader src="Vespers/Udostoi" lang={props.lang} />
 
