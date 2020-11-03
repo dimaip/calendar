@@ -30,6 +30,7 @@ import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
 import Parts from 'components/Parts/Parts';
 import BorderedSection from './BorderedSection';
 import { HeightUpdater } from 'components/HeightUpdate/HeightUpdater';
+import Banner from './Banner';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -123,9 +124,11 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                         <Sermons date={date} sermons={sermons} />
                                                     </>
                                                 )}
+                                                <Banner />
                                             </SolidSection>
                                         </div>
                                     </Zoom>
+
                                     {!services && <Links />}
                                 </div>
                             </div>
