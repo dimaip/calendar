@@ -20,6 +20,10 @@ import Parts from 'components/Parts/Parts';
 <>{(props.dayOfWeek === 0 || props.dayOfWeek === 5) && <MdxLoader src="Matins/Prayer7" lang={props.lang} />}</>
 <>{(props.dayOfWeek === 0 || props.dayOfWeek === 6) && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
 
+<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/Prayer10" lang={props.lang} />}</>
+<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/Psalm50" lang={props.lang} />}</>
+<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/PesnBogoroditsy" lang={props.lang} />}</>
+
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 <MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
 
