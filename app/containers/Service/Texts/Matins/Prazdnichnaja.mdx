@@ -18,6 +18,9 @@ import Parts from 'components/Parts/Parts';
 <>{(props.dayOfWeek === 0 || props.dayOfWeek === 3) && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
 <>{(props.dayOfWeek === 0 || props.dayOfWeek === 4) && <MdxLoader src="Matins/Prayer4" lang={props.lang} />}</>
 <>{(props.dayOfWeek === 0 || props.dayOfWeek === 5) && <MdxLoader src="Matins/Prayer7" lang={props.lang} />}</>
+
+<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/Polijeley" lang={props.lang} />}</>
+
 <>{(props.dayOfWeek === 0 || props.dayOfWeek === 6) && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
 
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
