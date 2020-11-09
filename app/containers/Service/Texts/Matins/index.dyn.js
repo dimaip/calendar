@@ -26,7 +26,7 @@ const Readings = ({ readingsForService, day }) =>
     );
 
 const SectionLayout = ({ children }) => (
-    <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
+    <SolidSection marginTop={24} marginBottom={24} paddingTop={12} marginHorizontal={-12}>
         {children}
     </SolidSection>
 );
@@ -92,6 +92,7 @@ const Matins = ({ date }) => {
             day={day}
             date={date}
             isEasterOffsetRange={isEasterOffsetRange}
+            SectionLayout={SectionLayout}
         />
     );
 };
