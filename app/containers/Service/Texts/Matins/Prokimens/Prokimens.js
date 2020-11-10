@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import useAudio from 'hooks/useAudio';
+import React from 'react';
 import Parts from 'components/Parts/Parts';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
@@ -7,23 +6,21 @@ const DefatulProkimen = ({ day, date }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const glas = day?.glas;
-    const ref = useRef();
-    useAudio(ref);
     if (dayOfWeek === 0) {
         if (!glas) {
             return null;
         }
-        return <MdxLoader ref1={ref} src={`Liturgies/Katekhumen/Prokimen/Sunday/Glas${glas}`} />;
+        return <MdxLoader src={`Matins/Prokimens/Glas${glas}`} />;
     }
-    return <MdxLoader ref1={ref} src={`Liturgies/Katekhumen/Prokimen/WeekDays/${dayOfWeek}`} />;
+    return null;
 };
 
-const Prokimen = ({ day, date }) => {
+const Prokimens = ({ day, date }) => {
     return (
         <>
             <Parts
                 date={date}
-                partNames={['liturgy.Прокимен']}
+                partNames={['matins.Прокимен утрени']}
                 alwaysShowFallback
                 fallback={<DefatulProkimen day={day} date={date} />}
             />
@@ -31,4 +28,4 @@ const Prokimen = ({ day, date }) => {
     );
 };
 
-export default Prokimen;
+export default Prokimens;

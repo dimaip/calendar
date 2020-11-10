@@ -1,4 +1,5 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Prokimens from 'containers/Service/Texts/Matins/Prokimens/Prokimens';
 import Parts from 'components/Parts/Parts';
 import If from 'components/If/If';
 
@@ -63,6 +64,8 @@ import If from 'components/If/If';
 ## Чтения
 
 <>{props.dayOfWeek === 0 && <MdxLoader src="Matins/Stepenny" lang={props.lang} />}</>
+
+<Prokimens day={props.day} date={props.date} />
 
 **П** Премудрость! Станем благоговейно! Услышим святое евангелие!
 
