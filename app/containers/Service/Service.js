@@ -70,25 +70,21 @@ const Service = () => {
     if (!serviceId) {
         if (day?.readings) {
             if (day?.readings?.['Литургия']) {
-                return <Redirect to={`/date/${date}/service/Литургия`} />;
+                return <Redirect to={{ pathname: `/date/${date}/service/Литургия`, state: history.location.state }} />;
             }
             if (day?.readings?.['Вечерня'] && lpod) {
-                return <Redirect to={`/date/${date}/service/Вечерня`} />;
+                return <Redirect to={{ pathname: `/date/${date}/service/Вечерня`, state: history.location.state }} />;
             }
             return <Redirect to={`/date/${date}`} />;
         }
     }
 
     const setNewDate = dateString => {
-        history.push(`/date/${dateString}/service/${originalServiceId}`);
+        history.push({
+            pathname: `/date/${dateString}/service/${originalServiceId}`,
+            state: { backLink: history.location.state?.backLink },
+        });
     };
-
-    const backLink =
-        history.location.state?.from === 'main'
-            ? `/date/${date}`
-            : history.location.state?.from === 'readings'
-            ? `/date/${date}/readings/${originalServiceId}`
-            : `/date/${date}/services`;
 
     const left = (
         <>
@@ -109,7 +105,7 @@ const Service = () => {
 
     return (
         <LangContext.Provider value={effectiveLangState}>
-            <LayoutInner backLink={backLink} left={left} paddedContent={false}>
+            <LayoutInner left={left} paddedContent={false}>
                 <ParallelLanguageBar />
                 <Zoom>
                     <>

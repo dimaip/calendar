@@ -1,13 +1,14 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
-import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 
-const LayoutInner = ({ children, left = null, right = null, backLink = null, paddedContent = true }) => {
+const LayoutInner = ({ children, left = null, right = null, paddedContent = true }) => {
     const { date } = useParams();
+    const history = useHistory();
+    const backLink = history.location.state?.backLink;
     return (
         <div
             className={css`

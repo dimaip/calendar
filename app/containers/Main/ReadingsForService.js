@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useLocation } from 'react-router-dom';
 import forEach from 'lodash.foreach';
 import ReadingGroup from './ReadingGroup';
 import { useTheme } from 'emotion-theming';
@@ -21,16 +21,17 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
     let to;
     let effectiveTitle = title;
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
+    const location = useLocation();
     if (title === 'Литургия') {
         to = {
             pathname: `/date/${date}/readings/Литургия`,
-            state: { from: 'main', scrollToReadings: true },
+            state: { backLink: location.pathname, scrollToReadings: true },
         };
         effectiveTitle += ` ${vasiliy ? 'Василия Великого' : 'Иоанна Златоуста'}`;
     } else if (title === 'Вечерня' && lpod) {
         to = {
             pathname: `/date/${date}/readings/Вечерня`,
-            state: { from: 'main', scrollToReadings: true },
+            state: { backLink: location.pathname, scrollToReadings: true },
         };
         effectiveTitle = 'Литургия преждеосвященных даров';
     } else if (brother) {
@@ -39,7 +40,7 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
         to = {
             pathname: `/date/${date}/readings/${title}`,
             state: {
-                from: 'main',
+                backLink: location.pathname,
             },
         };
     }
