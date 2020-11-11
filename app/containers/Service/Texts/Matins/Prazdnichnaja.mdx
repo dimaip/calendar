@@ -44,6 +44,7 @@ import If from 'components/If/If';
 
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 
+<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/Sviat" lang={props.lang} />}</>
 <>{props.dayOfWeek === 0 && <Exapostilari date={props.date}/>}</>
 
 <MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
