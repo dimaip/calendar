@@ -20,7 +20,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: false,
             group: 'Богослужебные тексты',
-            TOC: liturgyTOC
+            TOC: liturgyTOC,
         },
         {
             title: 'Литургия Василия Великого',
@@ -30,7 +30,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: false,
             group: 'Богослужебные тексты',
-            TOC: liturgyTOC
+            TOC: liturgyTOC,
         },
         {
             title: 'Литургия преждеосвященных даров',
@@ -40,7 +40,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: false,
             group: 'Богослужебные тексты',
-            TOC: lpodTOC
+            TOC: lpodTOC,
         },
         {
             title: 'Канон Пасхи',
@@ -101,7 +101,7 @@ const makeServices = (date, readings = {}) => {
             lang: false,
             skipRedirect: true,
             group: 'Домашнее молитвенное правило',
-            TOC: matinsTOC
+            TOC: matinsTOC,
         },
         {
             title: 'Краткая вечерня',
@@ -111,7 +111,7 @@ const makeServices = (date, readings = {}) => {
             lang: false,
             skipRedirect: true,
             group: 'Домашнее молитвенное правило',
-            TOC: vespersTOC
+            TOC: vespersTOC,
         },
     ];
 };

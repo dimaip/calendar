@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 import SectionHeading from './SectionHeading';
 
@@ -16,6 +16,7 @@ const ThisDayLink = ({ to, href, children }) => {
 };
 
 const ThisDays = ({ thisDays, date }) => {
+    const location = useLocation();
     return thisDays?.length ? (
         <div
             className={css`
@@ -57,7 +58,13 @@ const ThisDays = ({ thisDays, date }) => {
                                     padding: 0px;
                                 `}
                             >
-                                <ThisDayLink to={`/date/${date}/thisday/${thisDay.id}`} href={thisDay.link}>
+                                <ThisDayLink
+                                    to={{
+                                        pathname: `/date/${date}/thisday/${thisDay.id}`,
+                                        state: { backLink: location.pathname },
+                                    }}
+                                    href={thisDay.link}
+                                >
                                     <div
                                         className={css`
                                             max-width: 640px;

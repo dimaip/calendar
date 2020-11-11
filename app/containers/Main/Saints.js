@@ -15,7 +15,10 @@ const Saints = ({ saints, date }) => {
                 }
                 ev.preventDefault();
                 const saintId = a.dataset.saint;
-                history.push(`/date/${date}/saint/${saintId}`);
+                history.push({
+                    pathname: `/date/${date}/saint/${saintId}`,
+                    state: { backLink: history.location.pathname },
+                });
             });
         }
     }, []);

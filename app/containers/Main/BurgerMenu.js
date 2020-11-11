@@ -20,7 +20,7 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                     color: white;
                     width: 280px;
                     padding: 30px 30px 30px 30px;
-                    z-index: 2;
+                    z-index: 11;
                     font-size: 12px;
                     line-height: 1.5;
                 `}

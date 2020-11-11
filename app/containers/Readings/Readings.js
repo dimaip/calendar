@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link, useHistory } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams, Link, useHistory, useLocation } from 'react-router-dom';
 import { css } from 'emotion';
 import Loader from 'components/Loader/Loader';
 import ReadingsForService from './ReadingsForService';
 import ServiceSelector from './ServiceSelector';
 import useDay from 'hooks/useDay';
-import dateFormat from 'dateformat';
-import { parseISO } from 'date-fns';
 import { getFeastInfo } from 'domain/getDayInfo';
 import Prayer from 'components/svgs/Prayer';
 import { useTheme } from 'emotion-theming';
@@ -25,12 +23,17 @@ const Readings = ({ brother = false }) => {
     useEffect(() => {
         // Redirect to first available service, if current one doesn't exist
         if (readings && !readingsForService) {
-            history.replace(`/date/${date}/readings/${services[0]}`);
+            history.replace({ pathname: `/date/${date}/readings/${services[0]}`, state: history.location.state });
         }
     });
 
     const setNewDate = dateString => {
-        history.push(`/date/${dateString}/readings/${service}`);
+        history.push({
+            pathname: `/date/${dateString}/readings/${service}`,
+            state: {
+                backLink: history.location.state?.backLink,
+            },
+        });
     };
 
     const { lpod } = getFeastInfo(new Date(date));
@@ -40,22 +43,22 @@ const Readings = ({ brother = false }) => {
     if (brother && service === 'Утром') {
         to = {
             pathname: `/date/${date}/service/matins`,
-            state: { from: 'readings' },
+            state: { backLink: history.location.pathname },
         };
     } else if (brother && service === 'Вечером') {
         to = {
             pathname: `/date/${date}/service/vespers`,
-            state: { from: 'readings' },
+            state: { backLink: history.location.pathname },
         };
     } else if (service === 'Литургия') {
         to = {
             pathname: `/date/${date}/service/Литургия`,
-            state: { from: 'readings' },
+            state: { backLink: history.location.pathname },
         };
     } else if (service === 'Вечерня' && lpod) {
         to = {
             pathname: `/date/${date}/service/Вечерня`,
-            state: { from: 'readings' },
+            state: { backLink: history.location.pathname },
         };
     }
 
@@ -72,7 +75,13 @@ const Readings = ({ brother = false }) => {
                 {...{
                     service,
                     services,
-                    onChange: value => history.push(`/date/${date}/${brother ? 'bReadings' : 'readings'}/${value}`),
+                    onChange: value =>
+                        history.push({
+                            pathname: `/date/${date}/${brother ? 'bReadings' : 'readings'}/${value}`,
+                            state: {
+                                backLink: history.location.state?.backLink,
+                            },
+                        }),
                 }}
             />
             {to && (

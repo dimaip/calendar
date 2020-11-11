@@ -4,10 +4,16 @@ import { HashRouter } from 'react-router-dom';
 import Routes from '../Routes';
 import 'styles/reset.css';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
-import { ReactQueryConfigProvider } from 'react-query';
+import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 import { LangContext, LangDispatchContext, useLangReducer } from './Service/useLangReducer';
 
-const queryConfig = { refetchAllOnWindowFocus: false };
+const queryCache = new QueryCache({
+    defaultConfig: {
+        queries: {
+            refetchOnWindowFocus: false,
+        },
+    },
+});
 
 export default ({ store }) => {
     const [langState, langDispatch] = useLangReducer();
@@ -20,7 +26,7 @@ export default ({ store }) => {
         }
     }, []);
     return (
-        <ReactQueryConfigProvider config={queryConfig}>
+        <ReactQueryCacheProvider queryCache={queryCache}>
             <Provider store={store}>
                 <LangContext.Provider value={langState}>
                     <LangDispatchContext.Provider value={langDispatch}>
@@ -31,6 +37,6 @@ export default ({ store }) => {
                     </LangDispatchContext.Provider>
                 </LangContext.Provider>
             </Provider>
-        </ReactQueryConfigProvider>
+        </ReactQueryCacheProvider>
     );
 };

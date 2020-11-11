@@ -6,9 +6,11 @@ import SwipeableLink from 'components/SwipeableLink/SwipeableLink';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import SwipeableViews from 'react-swipeable-views';
+import { useLocation } from 'react-router-dom';
 
 const Sermons = ({ sermons, date, hideTitle = false }) => {
     const theme = useTheme();
+    const location = useLocation();
 
     return sermons?.length ? (
         <>
@@ -36,7 +38,13 @@ const Sermons = ({ sermons, date, hideTitle = false }) => {
                     `}
                 >
                     {sermons.map(sermon => (
-                        <SwipeableLink to={`/date/${date}/sermon/${sermon.id}`} key={sermon.id}>
+                        <SwipeableLink
+                            to={{
+                                pathname: `/date/${date}/sermon/${sermon.id}`,
+                                state: { backLink: location.pathname },
+                            }}
+                            key={sermon.id}
+                        >
                             <ButtonBox
                                 className={css`
                                     height: calc(100% - 1px);

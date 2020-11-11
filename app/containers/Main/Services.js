@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
 import SectionHeading from './SectionHeading';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import makeServices from 'containers/Service/Texts/Texts';
@@ -20,6 +20,8 @@ const OptionalLink = ({ enabled, ...rest }) =>
 
 const Services = ({ date, readings }) => {
     const theme = useTheme();
+
+    const location = useLocation();
 
     const services = makeServices(date, readings);
 
@@ -73,7 +75,12 @@ const Services = ({ date, readings }) => {
                                             cursor: ${service.enabled ? 'pointer' : 'arrow'};
                                             user-select: none;
                                         `}
-                                        to={`/date/${date}/service/${service.id}`}
+                                        to={{
+                                            pathname: `/date/${date}/service/${service.id}`,
+                                            state: {
+                                                backLink: location.pathname,
+                                            },
+                                        }}
                                         key={service.id}
                                     >
                                         <ButtonBox>
