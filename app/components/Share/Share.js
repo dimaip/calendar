@@ -16,7 +16,7 @@ const Share = ({ date }) => {
                 if (navigator.share) {
                     navigator
                         .share({
-                            title: 'Православное богослужение',
+                            title: 'Православное богослужение на русском языке',
                             text: day?.title,
                             url: window.location.href,
                         })
