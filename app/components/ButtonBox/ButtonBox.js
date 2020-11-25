@@ -18,7 +18,7 @@ const ButtonBox = props => {
                         box-shadow: none;
                         position: relative;
                         top: 1px;
-                        background-color: #fafafa;
+                        background-color: ${theme.colours.bgGrayLight};
                     }
                 ` +
                 ' ' +
