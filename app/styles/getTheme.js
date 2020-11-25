@@ -10,7 +10,7 @@ const getTheme = primary => {
     const darkQuery = window.matchMedia?.('(prefers-color-scheme: dark)');
     const dark = darkQuery?.matches;
 
-    darkQuery.addEventListener('change', e => {
+    darkQuery?.addEventListener?.('change', e => {
         window.location.reload();
     });
 
