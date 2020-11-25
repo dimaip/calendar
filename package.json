@@ -11,7 +11,8 @@
     "build-aws": "cross-env PUBLIC_URL=https://molitva.app API_HOST=https://api.c.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
     "build-local": "cross-env PUBLIC_URL=http://localhost NODE_ENV=production webpack --config webpack.prod.js",
     "twa-build": "cd TWA && bubblewrap build",
-    "cap-build": "yarn build && yarn cap sync"
+    "cap-build": "yarn build && yarn cap sync",
+    "cap-open": "yarn cap open ios"
   },
   "author": "PSMB.ru",
   "license": "ISC",
