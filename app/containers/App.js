@@ -6,6 +6,7 @@ import 'styles/reset.css';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
 import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 import { LangContext, LangDispatchContext, useLangReducer } from './Service/useLangReducer';
+import { Plugins } from '@capacitor/core';
 
 const queryCache = new QueryCache({
     defaultConfig: {
@@ -24,6 +25,7 @@ export default ({ store }) => {
             loader.style.display = 'none';
             reactRoot.style.display = 'block';
         }
+        Plugins.SplashScreen.hide();
     }, []);
     return (
         <ReactQueryCacheProvider queryCache={queryCache}>
