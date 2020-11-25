@@ -8,11 +8,12 @@ import Sermon from 'containers/Sermon/Sermon';
 import Saint from 'containers/Saint/Saint';
 import ThisDay from 'containers/ThisDay/ThisDay';
 import Service from 'containers/Service/Service';
-import { Global, css } from '@emotion/react';
+import { Global, css as rcss } from '@emotion/react';
 import checkVersion from './checkVersion';
 import useDay from 'hooks/useDay';
 import getTheme from 'styles/getTheme';
 import { ThemeProvider } from 'emotion-theming';
+import { css } from 'emotion';
 
 const DateRoutes = () => {
     const { date } = useParams();
@@ -21,7 +22,7 @@ const DateRoutes = () => {
     return (
         <ThemeProvider theme={theme}>
             <Global
-                styles={css`
+                styles={rcss`
                     body {
                         color: ${theme.colours.darkGray};
                         background-color: ${theme.colours.white};
