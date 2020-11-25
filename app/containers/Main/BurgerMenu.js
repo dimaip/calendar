@@ -17,10 +17,10 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                     top: 0;
                     bottom: 0;
                     background: ${theme.colours.darkGray};
-                    color: white;
+                    color: ${theme.colours.white};
                     width: 280px;
                     padding: 30px 30px 30px 30px;
-                    padding-top: env(safe-area-inset-top);
+                    padding-top: calc(env(safe-area-inset-top) + 30px);
                     z-index: 11;
                     font-size: 12px;
                     line-height: 1.5;
