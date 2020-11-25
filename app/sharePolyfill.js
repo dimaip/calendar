@@ -214,6 +214,7 @@ navigator.share =
   width: 100%;
   height: 100%;
   will-change: opacity;
+  color: #201f24;
 }
 #shareAPIPolyfill-backdrop {
   transition: opacity linear 250ms;
