@@ -18,7 +18,6 @@ body {
     font-family: 'PTRootUI', 'Helvetica', sans-serif;
     font-size: 18px;
     position: relative;
-    color: #201f24;
     /* Disable double-tap zoom on iOS */
     touch-action: manipulation;
     /* Disable overscoll effect */

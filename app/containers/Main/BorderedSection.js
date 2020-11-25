@@ -10,7 +10,7 @@ const BorderedSection = ({ children }) => {
                 border-bottom: 0.5px solid ${theme.colours.lineGray};
                 margin: 0 -18px 18px -18px;
                 padding: 0 18px 1px 18px;
-                background-color: white;
+                background-color: ${theme.colours.white};
             `}
         >
             {children}

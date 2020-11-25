@@ -24,7 +24,7 @@ const ParallelLanguageBar = () => {
                             font-size: 13px;
                             position: fixed;
                             z-index: 1;
-                            top: 44px;
+                            top: 50px;
                             left: 0;
                             right: 0;
                         `}

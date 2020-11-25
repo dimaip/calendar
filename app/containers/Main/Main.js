@@ -7,7 +7,7 @@ import HeaderMain from 'containers/Main/HeaderMain';
 import Nav from 'components/Nav/Nav';
 import HeadingBar from './HeadingBar';
 import Loader from 'components/Loader/Loader';
-import getTheme from 'styles/theme';
+import getTheme from 'styles/getTheme';
 import useDay from 'hooks/useDay';
 import BottomNav from 'components/BottomNav/BottomNav';
 import Saints from './Saints';

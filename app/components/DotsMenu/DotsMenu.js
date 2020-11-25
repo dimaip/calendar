@@ -6,11 +6,13 @@ import { css } from 'emotion';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Share from 'components/Share/Share';
 import { useParams } from 'react-router-dom';
+import { useTheme } from 'emotion-theming';
 
 export const DotsMenuContext = React.createContext({ toggleOpen: () => {}, isOpen: false, setIsOpen: () => {} });
 
-const DropDown = ({ toggleOpen, children }) =>
-    ReactDOM.createPortal(
+const DropDown = ({ toggleOpen, children }) => {
+    const theme = useTheme();
+    return ReactDOM.createPortal(
         <>
             <div
                 onClick={e => {
@@ -30,10 +32,10 @@ const DropDown = ({ toggleOpen, children }) =>
             <div
                 className={css`
                     position: fixed;
-                    background-color: white;
+                    background-color: ${theme.colours.white};
                     top: 36px;
                     right: 0;
-                    border: 1px solid #ccc;
+                    border: 1px solid ${theme.colours.lineGray};
                     z-index: 10;
                     border-radius: 8px;
                     padding: 4px 8px;
@@ -44,6 +46,7 @@ const DropDown = ({ toggleOpen, children }) =>
         </>,
         document.getElementById('react-portal')
     );
+};
 
 const DotsMenu = () => {
     const [isOpen, setIsOpen] = useState(false);

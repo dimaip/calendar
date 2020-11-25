@@ -108,10 +108,10 @@ const ReadingItemSingle = ({
             <div
                 className={css`
                     position: sticky;
-                    top: ${61 + (24 + (!type || type === 'unnamed' ? 0 : 20)) / (zoom || 1)}px;
-                    background-color: white;
-                    margin: 0 -17px -12px -17px;
-                    padding: 8px 0 8px 17px;
+                    top: ${71 + (24 + (!type || type === 'unnamed' ? 0 : 20)) / (zoom || 1)}px;
+                    background-color: ${theme.colours.white};
+                    margin: 0 0 -12px 0;
+                    padding: 8px 0;
                     z-index: 3;
                     display: flex;
                     justify-content: space-between;

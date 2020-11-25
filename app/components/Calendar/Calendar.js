@@ -109,7 +109,7 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
             className={css`
                 position: fixed;
                 z-index: 4;
-                top: 44px;
+                top: 50px;
                 left: 0;
                 right: 0;
                 bottom: 0;
@@ -122,7 +122,7 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
                     position: fixed;
                     left: 0;
                     right: 0;
-                    background: white;
+                    background: ${theme.colours.white};
                     max-width: 640px;
                     margin: 0 auto;
                     border-bottom: 1px solid #d9dde5;

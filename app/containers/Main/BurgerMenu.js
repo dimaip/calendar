@@ -20,6 +20,7 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                     color: white;
                     width: 280px;
                     padding: 30px 30px 30px 30px;
+                    padding-top: env(safe-area-inset-top);
                     z-index: 11;
                     font-size: 12px;
                     line-height: 1.5;
@@ -33,6 +34,7 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                         padding: 10px 18px;
                         position: absolute;
                         top: 0;
+                        top: env(safe-area-inset-top) !important;
                         right: 0;
                     `}
                 >

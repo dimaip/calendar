@@ -18,12 +18,11 @@ const ReadingItem = ({ type, readingVerse }) => {
             <div
                 className={css`
                     position: sticky;
-                    top: ${43 / (zoom || 1)}px;
+                    top: ${49 / (zoom || 1)}px;
                     left: 0;
                     right: 0;
-                    margin: 0 -17px;
-                    padding: 20px 17px 0 17px;
-                    background-color: white;
+                    padding: 20px 0 0 0;
+                    background-color: ${theme.colours.white};
                     z-index: 3;
                     min-width: ${isParallel || langState?.lang === 'parallel' ? '454px' : '296px'};
                     /* box-shadow: 0px 0px 3px #bbb; */
@@ -91,6 +90,7 @@ const ReadingItem = ({ type, readingVerse }) => {
             ) : (
                 <ReadingItemSingle
                     key={readingVerse}
+                    type={type}
                     readingVerse={readingVerse}
                     defaultTranslation={langState?.lang === 'csj' ? '91Slavic' : 'default'}
                     toggleParallel={toggleParallel}

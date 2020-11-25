@@ -5,6 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { dismissIosPrompt } from 'redux/actions/iosPrompt';
 import Button from 'components/Button/Button';
 
+const isCapacitor = () => {
+    return window.origin.includes('capacitor://');
+};
+
 const isIphone = () => {
     const userAgent = window.navigator.userAgent.toLowerCase();
     return /iphone|ipod/.test(userAgent);
@@ -37,7 +41,7 @@ const IosPrompt = () => {
     const now = new Date();
     // Bother users again in 60d
     const showAgain = !iosPromptDismissed || now.getTime() - iosPromptDismissed > 1000 * 3600 * 24 * 60;
-    const shouldShowIosPrompt = isIphone() && !isInStandaloneMode() && showAgain && showIosPrompt;
+    const shouldShowIosPrompt = !isCapacitor() && isIphone() && !isInStandaloneMode() && showAgain && showIosPrompt;
 
     return (
         shouldShowIosPrompt && (

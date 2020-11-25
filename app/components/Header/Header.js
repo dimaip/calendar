@@ -1,26 +1,32 @@
 import React from 'react';
 import { css } from 'emotion';
+import { useTheme } from 'emotion-theming';
 
 const Header = ({ children }) => {
+    const theme = useTheme();
     return (
         <div
             className={css`
-                height: 44px;
+                height: calc(50px + env(safe-area-inset-top));
                 user-select: none;
             `}
         >
             <header
                 className={css`
+                    padding-left: env(safe-area-inset-left);
+                    padding-right: env(safe-area-inset-right);
+                    padding-top: env(safe-area-inset-top);
+                    height: calc(50px + env(safe-area-inset-top));
+
                     position: fixed;
                     z-index: 4;
                     left: 0;
                     right: 0;
-                    background-color: white;
+                    background-color: ${theme.colours.white};
                     display: flex;
-                    height: 44px;
                     flex-shrink: 0;
                     align-items: center;
-                    border-bottom: 1px solid #ccc;
+                    border-bottom: 1px solid ${theme.colours.lineGray};
                 `}
             >
                 {children}

@@ -1,5 +1,6 @@
 import React, { Suspense, useState, useEffect, useReducer, createContext, useContext } from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
+import ScrollRestoration from 'react-scroll-restoration';
 import MDXProvider from './MDXProvider';
 import { css } from 'emotion';
 import useDay from 'hooks/useDay';
@@ -13,7 +14,7 @@ import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import ParallelLanguageBar from './ParallelLanguageBar';
-import { LangContext, LangDispatchContext, useLangReducer } from './useLangReducer';
+import { LangContext } from './useLangReducer';
 const reloadOnFailedImport = e => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
     Sentry.captureException?.(e);
@@ -151,6 +152,7 @@ const Service = () => {
 
                             <MDXProvider>
                                 <Suspense fallback={<Loader />}>
+                                    <ScrollRestoration />
                                     {TextComponent && <TextComponent date={date} lang={langState.lang} />}
                                 </Suspense>
                             </MDXProvider>

@@ -1,5 +1,4 @@
-import React, { Suspense, useContext } from 'react';
-import Loader from 'components/Loader/Loader';
+import React, { useContext } from 'react';
 import { css } from 'emotion';
 import { LangContext } from '../useLangReducer';
 
@@ -31,9 +30,7 @@ const MdxLoader = props => {
                     `}
                 >
                     <LangContext.Provider value={langStateA}>
-                        <Suspense fallback={<Loader width={32} />}>
-                            <ComponentA {...props} />
-                        </Suspense>
+                        <ComponentA {...props} />
                     </LangContext.Provider>
                 </div>
                 <div
@@ -43,9 +40,7 @@ const MdxLoader = props => {
                     `}
                 >
                     <LangContext.Provider value={langStateB}>
-                        <Suspense fallback={<Loader width={32} />}>
-                            <ComponentB {...props} />
-                        </Suspense>
+                        <ComponentB {...props} />
                     </LangContext.Provider>
                 </div>
             </div>
@@ -55,11 +50,7 @@ const MdxLoader = props => {
     const Component = React.lazy(() =>
         import(`containers/Service/Texts/${src}/${lang || 'ru'}.mdx`).catch(catchFailedImport)
     );
-    return (
-        <Suspense fallback={<Loader width={32} />}>
-            <Component {...props} />
-        </Suspense>
-    );
+    return <Component {...props} />;
 };
 
 export default MdxLoader;

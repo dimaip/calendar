@@ -11,10 +11,10 @@ const BottomNav = ({ active }) => {
     const theme = useTheme();
 
     const itemClass = css`
-        height: 44px;
+        height: 50px;
         font-size: 13px;
-        padding: 6px 12px;
-        color: ${theme.colours.gray};
+        padding: 9px 12px;
+        color: ${theme.colours.lightGray};
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -28,12 +28,12 @@ const BottomNav = ({ active }) => {
     return (
         <div
             className={css`
-                height: 44px;
+                height: calc(50px + env(safe-area-inset-bottom));
             `}
         >
             <div
                 className={css`
-                    height: 44px;
+                    height: calc(50px + env(safe-area-inset-bottom));
                     flex-shrink: 0;
                     display: flex;
                     justify-content: space-evenly;
@@ -43,19 +43,20 @@ const BottomNav = ({ active }) => {
                     bottom: 0;
                     background-color: ${theme.colours.bgGrayLight};
                     padding: 0 12px;
-                    border-top: 1px solid ${theme.colours.lineGray};
+                    padding-bottom: env(safe-area-inset-bottom);
+                    border-top: 1px solid ${theme.colours.lightGray};
                     user-select: none;
                 `}
             >
                 <Link className={itemClass + ' ' + (active === 'calendar' ? activeClass : '')} to={`/date/${date}`}>
-                    <CalendarIcon colour={active === 'calendar' ? theme.colours.darkGray : theme.colours.gray} />
+                    <CalendarIcon colour={active === 'calendar' ? theme.colours.darkGray : theme.colours.lightGray} />
                     Календарь
                 </Link>
                 <Link
                     className={itemClass + ' ' + (active === 'services' ? activeClass : '')}
                     to={`/date/${date}/services`}
                 >
-                    <Prayer colour={active === 'services' ? theme.colours.darkGray : theme.colours.gray} />
+                    <Prayer colour={active === 'services' ? theme.colours.darkGray : theme.colours.lightGray} />
                     Богослужение
                 </Link>
                 <a
@@ -64,7 +65,7 @@ const BottomNav = ({ active }) => {
                     href="https://bible.psmb.ru"
                     target="_blank"
                 >
-                    <Bible colour={active === 'bible' ? theme.colours.darkGray : theme.colours.gray} />
+                    <Bible colour={active === 'bible' ? theme.colours.darkGray : theme.colours.lightGray} />
                     Библия
                 </a>
             </div>

@@ -24,7 +24,7 @@ const ZoomControlToggle = () => {
                 padding: 6px 6px !important;
                 width: 100%;
                 text-align: left;
-                border-bottom: 1px solid #ccc;
+                border-bottom: 1px solid ${theme.colours.lineGray};
             `}
         >
             <span

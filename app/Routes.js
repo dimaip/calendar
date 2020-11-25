@@ -7,12 +7,11 @@ import dateFormat from 'dateformat';
 import Sermon from 'containers/Sermon/Sermon';
 import Saint from 'containers/Saint/Saint';
 import ThisDay from 'containers/ThisDay/ThisDay';
-import ScrollToTop from 'components/ScrollToTop/ScrollToTop';
 import Service from 'containers/Service/Service';
-import { css } from 'emotion';
+import { Global, css } from '@emotion/react';
 import checkVersion from './checkVersion';
 import useDay from 'hooks/useDay';
-import getTheme from 'styles/theme';
+import getTheme from 'styles/getTheme';
 import { ThemeProvider } from 'emotion-theming';
 
 const DateRoutes = () => {
@@ -21,6 +20,14 @@ const DateRoutes = () => {
     const theme = getTheme(day?.colour);
     return (
         <ThemeProvider theme={theme}>
+            <Global
+                styles={css`
+                    body {
+                        color: ${theme.colours.darkGray};
+                        background-color: ${theme.colours.white};
+                    }
+                `}
+            />
             <Switch>
                 <Route exact path="/date/:date">
                     <Main />
@@ -29,27 +36,21 @@ const DateRoutes = () => {
                     <Main services />
                 </Route>
                 <Route exact path="/date/:date/readings/:service">
-                    <ScrollToTop />
                     <Readings />
                 </Route>
                 <Route exact path="/date/:date/bReadings/:service">
-                    <ScrollToTop />
                     <Readings brother />
                 </Route>
                 <Route exact path="/date/:date/sermon/:sermonId">
-                    <ScrollToTop />
                     <Sermon />
                 </Route>
                 <Route exact path="/date/:date/saint/:saintId">
-                    <ScrollToTop />
                     <Saint />
                 </Route>
                 <Route exact path="/date/:date/thisday/:thisDayId">
-                    <ScrollToTop />
                     <ThisDay />
                 </Route>
                 <Route exact path="/date/:date/service/:serviceId">
-                    <ScrollToTop />
                     <Service />
                 </Route>
                 <Route>

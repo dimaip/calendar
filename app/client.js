@@ -2,6 +2,8 @@
 // @ts-ignore
 window.APP_LOADED = true;
 
+import './wdyr';
+
 import 'core-js';
 import 'unfetch/polyfill';
 import 'element-closest-polyfill';
