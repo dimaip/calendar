@@ -58,10 +58,12 @@ const Matins = ({ date }) => {
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);
+    const isHoliday = dayOfWeek === 0;
     const isFast =
-        day?.fastName === 'Петров пост' ||
-        day?.fastName === 'Успенский пост' ||
-        day?.fastName === 'Рождественский пост';
+        !isHoliday &&
+        (day?.fastName === 'Петров пост' ||
+            day?.fastName === 'Успенский пост' ||
+            day?.fastName === 'Рождественский пост');
 
     if (isFast) {
         return (

@@ -65,10 +65,12 @@ const Vespers = ({ date }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDate);
     const easterSeason = isEasterOffsetRange(0, 38);
     const isAscension = isEasterOffsetRange(39);
+    const isHoliday = dayOfWeek === 6;
     const isFast =
-        tomorrowDay?.fastName === 'Петров пост' ||
-        tomorrowDay?.fastName === 'Успенский пост' ||
-        tomorrowDay?.fastName === 'Рождественский пост';
+        !isHoliday &&
+        (tomorrowDay?.fastName === 'Петров пост' ||
+            tomorrowDay?.fastName === 'Успенский пост' ||
+            tomorrowDay?.fastName === 'Рождественский пост');
     if (isFast) {
         return (
             <Lent
