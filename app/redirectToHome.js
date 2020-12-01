@@ -1,7 +1,7 @@
 import throttle from 'lodash.throttle';
 
 // Only activate for installed apps
-if (window.location.search.includes('utm_source=homescreen')) {
+if (window.location.search.includes('utm_source=homescreen') || window.origin.includes('capacitor://')) {
     // Keep track of last accessed time
     let lastAccessed = new Date();
     const updateLastAccessed = () => {
@@ -15,12 +15,10 @@ if (window.location.search.includes('utm_source=homescreen')) {
         const sixHAgo = new Date();
         sixHAgo.setHours(-6);
         // If inactive for 6h and accessed from homescreen, redirect to home
-        if (
-            document.visibilityState === 'visible' &&
-            window.location.search.includes('from_home') &&
-            lastAccessed < sixHAgo
-        ) {
-            window.location.href = '/?utm_source=homescreen';
+        if (document.visibilityState === 'visible' && lastAccessed < sixHAgo) {
+            window.location.href = window.location.search.includes('utm_source=homescreen')
+                ? '/?utm_source=homescreen'
+                : '/';
         }
     });
 }
