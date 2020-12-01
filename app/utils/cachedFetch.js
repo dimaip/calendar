@@ -25,7 +25,8 @@ const cachedFetch = async (url, prefetch = false) => {
                             .then(text => {
                                 wrapper.setItem(url, text, () => {});
                                 resolve(text);
-                            });
+                            })
+                            .catch(e => reject(e));
                     }
                 });
             }
