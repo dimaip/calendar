@@ -1,16 +1,10 @@
 import { useQuery } from 'react-query';
 import useReadings from './useReadings';
+import cachedFetch from 'utils/cachedFetch';
 
 export function fetchReading(key, { link, translation }) {
-    return fetch(`${process.env.API_HOST}/reading/` + encodeURI(link) + '&translation=' + translation)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(response.statusText);
-            }
-
-            return response.json();
-        })
-        .then(res => {
+    return cachedFetch(`${process.env.API_HOST}/reading/` + encodeURI(link) + '&translation=' + translation).then(
+        res => {
             let reading = {};
             if (res) {
                 const { bookKey, bookName, chapCount, fragments, translationCurrent, translationList, verseKey } = res;
@@ -27,7 +21,8 @@ export function fetchReading(key, { link, translation }) {
             }
 
             return reading;
-        });
+        }
+    );
 }
 
 const useReading = (link, translation, date) => {

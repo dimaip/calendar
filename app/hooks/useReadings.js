@@ -1,13 +1,8 @@
 import { useQuery } from 'react-query';
+import cachedFetch from 'utils/cachedFetch';
 
 export function fetchReadings(key, { date }) {
-    return fetch(`${process.env.API_HOST}/readings/${date}`).then(response => {
-        if (!response.ok) {
-            throw new Error(response.statusText);
-        }
-
-        return response.json();
-    });
+    return cachedFetch(`${process.env.API_HOST}/readings/${date}`);
 }
 
 const useReadings = date => useQuery(['readings', { date }], fetchReadings, { retry: false });

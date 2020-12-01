@@ -1,3 +1,6 @@
+import 'regenerator-runtime/runtime';
+import cachedFetch from 'utils/cachedFetch';
+
 const PRECACHE_DAYS = 10;
 const PRECACHE_INTERVAL = 3600 * 24 * 1000;
 
@@ -8,27 +11,18 @@ const getDaysArray = (start, end) => {
     }
     return arr;
 };
-const precache = () => {
+const precache = async () => {
     const tillDate = new Date();
     tillDate.setDate(tillDate.getDate() + PRECACHE_DAYS);
 
     const daylist = getDaysArray(new Date(), tillDate);
 
-    if (self.caches) {
-        caches.open(`workbox-runtime-${process.env.API_HOST}/`).then(cache => {
-            daylist.forEach(date => {
-                cache.match(`/day/${date}`).then(exists => {
-                    // If not in cache
-                    if (!exists) {
-                        fetch(`${process.env.API_HOST}/day/${date}`);
-                        fetch(`${process.env.API_HOST}/parts/${date}/ru`);
-                        fetch(`https://psmb.ru/?calendarDate=${date}`);
-                        fetch(`${process.env.API_HOST}/readings/${date}`);
-                    }
-                });
-            });
-        });
-    }
+    daylist.forEach(date => {
+        cachedFetch(`${process.env.API_HOST}/day/${date}`, true);
+        cachedFetch(`${process.env.API_HOST}/parts/${date}/ru`, true);
+        cachedFetch(`https://psmb.ru/?calendarDate=${date}`, true);
+        cachedFetch(`${process.env.API_HOST}/readings/${date}`, true);
+    });
 
     setTimeout(() => {
         precache();

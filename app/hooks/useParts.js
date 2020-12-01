@@ -1,13 +1,8 @@
 import { useQuery } from 'react-query';
+import cachedFetch from 'utils/cachedFetch';
 
 export function fetchParts(key, { date, lang }) {
-    return fetch(`${process.env.API_HOST}/parts/${date}/${lang}`).then(response => {
-        if (!response.ok) {
-            throw new Error(response.statusText);
-        }
-
-        return response.json();
-    });
+    return cachedFetch(`${process.env.API_HOST}/parts/${date}/${lang}`);
 }
 
 const useParts = (date, lang) => useQuery(['day', { date, lang }], fetchParts, { retry: false });

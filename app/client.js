@@ -68,10 +68,10 @@ if (module.hot) {
 
 if (isProd) {
     serviceWorker.register();
-
-    const precacheWorker = new Worker();
-    precacheWorker.postMessage('precache');
 }
+
+const precacheWorker = new Worker();
+precacheWorker.postMessage('precache');
 
 window.addEventListener('beforeinstallprompt', e => {
     // @ts-ignore

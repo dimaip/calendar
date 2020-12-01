@@ -1,13 +1,7 @@
 import { useQuery } from 'react-query';
+import cachedFetch from 'utils/cachedFetch';
 
-const fetchSaint = (key, { saintId }) =>
-    fetch(`https://psmb.ru/sv/${saintId}.html?json=1`).then(response => {
-        if (!response.ok) {
-            throw new Error(response.statusText);
-        }
-
-        return response.json();
-    });
+const fetchSaint = (key, { saintId }) => cachedFetch(`https://psmb.ru/sv/${saintId}.html?json=1`);
 
 const useSaint = saintId => useQuery(['saint', { saintId }], fetchSaint, { retry: false });
 
