@@ -54,8 +54,8 @@ const IosPrompt = () => {
                     width: 300px;
                     margin: 0 auto;
                     padding: 14px 30px 14px 18px;
-                    background: #fff;
-                    border: 1px solid #ceced2;
+                    background: ${theme.colours.white};
+                    border: 1px solid ${theme.colours.lineGray};
                     font-size: 16px;
                     line-height: 1.5;
                     color: ${theme.colours.darkGray};
@@ -72,13 +72,13 @@ const IosPrompt = () => {
                     }
                     &:after {
                         border-color: rgba(255, 255, 255, 0);
-                        border-top-color: #fff;
+                        border-top-color: ${theme.colours.white};
                         border-width: 15px;
                         margin-left: -15px;
                     }
                     &:before {
                         border-color: rgba(206, 206, 210, 0);
-                        border-top-color: #ceced2;
+                        border-top-color: ${theme.colours.lineGray};
                         border-width: 16px;
                         margin-left: -16px;
                     }
@@ -147,7 +147,7 @@ const IosPrompt = () => {
                             strokeWidth="2.9"
                         />
                         <path
-                            stroke="#ffffff"
+                            stroke={theme.colours.white}
                             d="M230.317 507.323l.2 25.318M243.076 519.883l-25.318.199"
                             strokeWidth="2.9"
                         />
