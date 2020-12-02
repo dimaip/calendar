@@ -100,6 +100,7 @@ const Vespers = ({ date }) => {
             otpust={otpust}
             day={tomorrowDay}
             date={tomorrowDate}
+            isHoliday={isHoliday}
         />
     );
 };

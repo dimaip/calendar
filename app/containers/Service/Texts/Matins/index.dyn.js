@@ -96,6 +96,7 @@ const Matins = ({ date }) => {
             date={date}
             isEasterOffsetRange={isEasterOffsetRange}
             SectionLayout={SectionLayout}
+            isHoliday={isHoliday}
         />
     );
 };

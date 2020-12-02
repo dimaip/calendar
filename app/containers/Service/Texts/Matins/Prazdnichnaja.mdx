@@ -17,35 +17,35 @@ import If from 'components/If/If';
 
 <>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
 
-<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />}</>
+<>{props.isHoliday && <MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />}</>
 
-<>{(props.dayOfWeek === 0 || props.dayOfWeek === 1) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
+<>{(props.isHoliday || props.dayOfWeek === 1) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
 
-<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/BogGospod" lang={props.lang} />}</>
+<>{props.isHoliday && <MdxLoader src="Matins/BogGospod" lang={props.lang} />}</>
 
-<>{props.dayOfWeek === 0 && props.troparions}</>
+<>{props.isHoliday && props.troparions}</>
 
-<>{(props.dayOfWeek === 0 || props.dayOfWeek === 2) && <MdxLoader src="Matins/Prayer2" lang={props.lang} />}</>
-<>{(props.dayOfWeek === 0 || props.dayOfWeek === 3) && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
-<>{(props.dayOfWeek === 0 || props.dayOfWeek === 4) && <MdxLoader src="Matins/Prayer4" lang={props.lang} />}</>
-<>{(props.dayOfWeek === 0 || props.dayOfWeek === 5) && <MdxLoader src="Matins/Prayer7" lang={props.lang} />}</>
+<>{(props.isHoliday || props.dayOfWeek === 2) && <MdxLoader src="Matins/Prayer2" lang={props.lang} />}</>
+<>{(props.isHoliday || props.dayOfWeek === 3) && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
+<>{(props.isHoliday || props.dayOfWeek === 4) && <MdxLoader src="Matins/Prayer4" lang={props.lang} />}</>
+<>{(props.isHoliday || props.dayOfWeek === 5) && <MdxLoader src="Matins/Prayer7" lang={props.lang} />}</>
 
-<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/Polijeley" lang={props.lang} />}</>
+<>{props.isHoliday && <MdxLoader src="Matins/Polijeley" lang={props.lang} />}</>
 
-<>{props.dayOfWeek === 0 && <Parts date={props.date} partNames={['shared.Величания']} Layout={props.SectionLayout} />}</>
+<>{props.isHoliday && <Parts date={props.date} partNames={['shared.Величания']} Layout={props.SectionLayout} />}</>
 
-<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/TropsVoskr" lang={props.lang} />}</>
+<>{props.isHoliday && <MdxLoader src="Matins/TropsVoskr" lang={props.lang} />}</>
 
-<>{(props.dayOfWeek === 0 || props.dayOfWeek === 6) && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
+<>{(props.isHoliday || props.dayOfWeek === 6) && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
 
-<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/Prayer10" lang={props.lang} />}</>
-<>{props.dayOfWeek === 0 && <MdxLoader src="Shared/Psalm50" lang={props.lang} />}</>
+<>{props.isHoliday && <MdxLoader src="Matins/Prayer10" lang={props.lang} />}</>
+<>{props.isHoliday && <MdxLoader src="Shared/Psalm50" lang={props.lang} />}</>
 <>{props.dayOfWeek === 0 && <MdxLoader src="Matins/PesnBogoroditsy" lang={props.lang} />}</>
 
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 
-<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/Sviat" lang={props.lang} />}</>
-<>{props.dayOfWeek === 0 && <Exapostilari date={props.date}/>}</>
+<>{props.isHoliday && <MdxLoader src="Matins/Sviat" lang={props.lang} />}</>
+<>{props.isHoliday && <Exapostilari date={props.date}/>}</>
 
 <MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
 
@@ -60,7 +60,7 @@ import If from 'components/If/If';
   {props.troparions}
 </If>
 
-<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/TropsOtp" lang={props.lang} glas={props.day.glas} />}</>
+<>{props.isHoliday && <MdxLoader src="Matins/TropsOtp" lang={props.lang} glas={props.day.glas} />}</>
 
 <span id="reading" />
 
@@ -70,11 +70,11 @@ import If from 'components/If/If';
 
 <Prokimens day={props.day} date={props.date} />
 
-<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/Prayer9" lang={props.lang} />}</>
+<>{props.isHoliday && <MdxLoader src="Matins/Prayer9" lang={props.lang} />}</>
 
-<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/Prokimen2" lang={props.lang} />}</>
+<>{props.isHoliday && <MdxLoader src="Matins/Prokimen2" lang={props.lang} />}</>
 
-<>{props.dayOfWeek === 0 && <MdxLoader src="Matins/Vstavka" lang={props.lang} />}</>
+<>{props.isHoliday && <MdxLoader src="Matins/Vstavka" lang={props.lang} />}</>
 
 **П** Премудрость! Станем благоговейно! Услышим святое евангелие!
 
