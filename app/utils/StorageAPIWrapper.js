@@ -1,3 +1,8 @@
+import { Plugins } from '@capacitor/core';
+import 'capacitor-data-storage-sqlite';
+
+const { CapacitorDataStorageSqlite } = Plugins;
+
 const StorageAPIWrapper = storage => {
     return {
         openStore: (options, cb) => {
@@ -75,4 +80,8 @@ const StorageAPIWrapper = storage => {
     };
 };
 
-export default StorageAPIWrapper;
+const wrapper = new StorageAPIWrapper(CapacitorDataStorageSqlite);
+
+export default () => {
+    return wrapper;
+};

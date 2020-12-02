@@ -1,9 +1,5 @@
-import { Plugins } from '@capacitor/core';
-import 'capacitor-data-storage-sqlite';
-import StorageAPIWrapper from './StorageAPIWrapper';
-
-const { CapacitorDataStorageSqlite } = Plugins;
-const wrapper = new StorageAPIWrapper(CapacitorDataStorageSqlite);
+import getWrapper from './StorageAPIWrapper';
+const wrapper = getWrapper();
 
 const cachedFetch = async (url, prefetch = false) => {
     return new Promise(function(resolve, reject) {

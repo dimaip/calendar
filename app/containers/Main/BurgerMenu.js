@@ -3,6 +3,8 @@ import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
 import Button from 'components/Button/Button';
 import CrossCircle from 'components/svgs/CrossCircle';
+import getWrapper from 'utils/StorageAPIWrapper';
+const wrapper = getWrapper();
 
 const BurgerMenu = ({ menuShown, setMenuShown }) => {
     const theme = useTheme();
@@ -108,14 +110,45 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                             VERSION
                         }
                         .{' '}
-                        <a
-                            href="https://c.psmb.ru/fix.html"
+                        <Button
                             className={css`
                                 text-decoration: underline;
                             `}
+                            onClick={() => {
+                                wrapper.openStore({ database: 'pb', table: 'requestsCache' }, () => {
+                                    wrapper.clear(() => {
+                                        if (navigator.serviceWorker) {
+                                            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                                                for (let registration of registrations) {
+                                                    registration.unregister();
+                                                }
+                                            });
+                                            caches
+                                                .keys()
+                                                .then(function(cacheNames) {
+                                                    return Promise.all(
+                                                        cacheNames
+                                                            .filter(function(cacheName) {
+                                                                return true;
+                                                            })
+                                                            .map(function(cacheName) {
+                                                                return caches.delete(cacheName);
+                                                            })
+                                                    );
+                                                })
+                                                .then(() => {
+                                                    alert(
+                                                        'Кажется у нас получилось все исправить, возвращаем вас в приложение'
+                                                    );
+                                                    window.location.replace('/');
+                                                });
+                                        }
+                                    });
+                                });
+                            }}
                         >
-                            Починить
-                        </a>
+                            Обновить данные
+                        </Button>
                     </div>
                 </div>
             </div>
