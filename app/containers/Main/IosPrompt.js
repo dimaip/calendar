@@ -6,7 +6,7 @@ import { dismissIosPrompt } from 'redux/actions/iosPrompt';
 import Button from 'components/Button/Button';
 
 const isCapacitor = () => {
-    return window.origin.includes('capacitor://');
+    return window.origin?.includes?.('capacitor://');
 };
 
 const isIphone = () => {
