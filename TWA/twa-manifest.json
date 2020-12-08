@@ -1,6 +1,6 @@
 {
   "packageId": "com.pb.twa",
-  "host": "c.psmb.ru",
+  "host": "molitva.app",
   "name": "Православное богослужение на русском языке",
   "launcherName": "ПБ",
   "display": "standalone",
@@ -12,7 +12,7 @@
   "backgroundColor": "#FFFFFF",
   "enableNotifications": false,
   "startUrl": "/?utm_source=homescreen&from_twa",
-  "iconUrl": "https://c.psmb.ru/android-chrome-512x512.png",
+  "iconUrl": "https://molitva.app/android-chrome-512x512.png",
   "splashScreenFadeOutDuration": 300,
   "signingKey": {
     "path": "./android.keystore",
@@ -22,7 +22,7 @@
   "appVersionCode": 2,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
-  "webManifestUrl": "https://c.psmb.ru/manifest.json",
+  "webManifestUrl": "https://molitva.app/manifest.json",
   "fallbackType": "customtabs",
   "features": {},
   "enableSiteSettingsShortcut": true,

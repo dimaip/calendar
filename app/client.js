@@ -29,7 +29,7 @@ if (isProd) {
     }
     Sentry.init?.({
         dsn: 'https://e5296954a22242bc85d59b9a36559c44@o360342.ingest.sentry.io/3629452',
-        release: 'c.psmb.ru@' + VERSION,
+        release: 'molitva.app@' + VERSION,
     });
     TagManager.initialize({
         gtmId: 'GTM-MSCF98P',
