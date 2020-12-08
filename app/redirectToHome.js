@@ -1,7 +1,7 @@
 import throttle from 'lodash.throttle';
 
 // Only activate for installed apps
-if (window.location.search.includes('utm_source=homescreen') || window.origin.includes('capacitor://')) {
+if (window.location.search.includes('utm_source=homescreen') || window.origin?.includes?.('capacitor://')) {
     // Keep track of last accessed time
     let lastAccessed = new Date();
     const updateLastAccessed = () => {
