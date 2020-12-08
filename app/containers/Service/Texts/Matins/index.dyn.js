@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
 import Prazdnichnaja from './Prazdnichnaja.mdx';
 import Lent from './Lent.mdx';
 import useDay from 'hooks/useDay';
@@ -59,7 +59,9 @@ const Matins = ({ date }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);
 
-    const isHoliday = dayOfWeek === 0 || day?.saints?.includes('5.svg') || day?.saints?.includes('6.svg');
+    const { feastType } = getFeastInfo(dateObj);
+
+    const isHoliday = dayOfWeek === 0 || feastType === 'great' || feastType === '12';
     const isFast =
         !isHoliday &&
         (day?.fastName === 'Петров пост' ||

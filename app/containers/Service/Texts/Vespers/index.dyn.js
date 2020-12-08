@@ -1,6 +1,6 @@
 import React from 'react';
 import dateFormat from 'dateformat';
-import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
 import Prazdnichnaja from './Prazdnichnaja.mdx';
 import Lent from './Lent.mdx';
 import useDay from 'hooks/useDay';
@@ -65,8 +65,8 @@ const Vespers = ({ date }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDate);
     const easterSeason = isEasterOffsetRange(0, 38);
     const isAscension = isEasterOffsetRange(39);
-    const isHoliday =
-        dayOfWeek === 6 || tomorrowDay?.saints?.includes('5.svg') || tomorrowDay?.saints?.includes('6.svg');
+    const { feastType } = getFeastInfo(tomorrowDateObj);
+    const isHoliday = dayOfWeek === 6 || feastType === 'great' || feastType === '12';
     const isFast =
         !isHoliday &&
         (tomorrowDay?.fastName === 'Петров пост' ||
