@@ -22,7 +22,7 @@ const Header = ({ children }) => {
                     z-index: 4;
                     left: 0;
                     right: 0;
-                    background-color: ${theme.colours.white};
+                    background-color: ${theme.colours.bgGrayLight};
                     display: flex;
                     flex-shrink: 0;
                     align-items: center;
