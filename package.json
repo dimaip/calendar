@@ -7,6 +7,7 @@
   "scripts": {
     "start": "cross-env PUBLIC_URL=http://192.168.1.68:3000 API_HOST=https://api.c.psmb.ru node server.js",
     "serve": "cross-env NODE_PORT=80 NODE_ENV=production node server.js",
+    "redirect": "cross-env NODE_PORT=80 NODE_ENV=production node redirect.js",
     "build": "cross-env PUBLIC_URL=https://c.psmb.ru API_HOST=https://api.c.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
     "build-aws": "cross-env PUBLIC_URL=https://molitva.app API_HOST=https://api.c.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
     "build-local": "cross-env PUBLIC_URL=http://localhost NODE_ENV=production webpack --config webpack.prod.js",
