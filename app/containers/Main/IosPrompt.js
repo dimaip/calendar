@@ -4,19 +4,7 @@ import { css } from 'emotion';
 import { useDispatch, useSelector } from 'react-redux';
 import { dismissIosPrompt } from 'redux/actions/iosPrompt';
 import Button from 'components/Button/Button';
-
-const isCapacitor = () => {
-    return window.origin?.includes?.('capacitor://');
-};
-
-const isIphone = () => {
-    const userAgent = window.navigator.userAgent.toLowerCase();
-    return /iphone|ipod/.test(userAgent);
-};
-
-// Detects if device is in standalone mode
-// @ts-ignore
-const isInStandaloneMode = () => 'standalone' in window.navigator && window.navigator.standalone;
+import { isCapacitor, isIphone, isInStandaloneMode } from 'utils/deviceInfo';
 
 const IosPrompt = () => {
     const theme = useTheme();
