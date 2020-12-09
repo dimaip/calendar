@@ -151,7 +151,7 @@
                         'Почему-то мы не смогли автоматически обновить приложение. Нажмите OK чтобы попробовать еще раз. Если это сообщение будет появляться снова, напишите нам на pb@psmb.ru'
                     );
                     if (response) {
-                        Sentry.captureMessage?.('Reloading app from index.html');
+                        Sentry && Sentry.captureMessage('Reloading app from index.html');
                         caches
                             .keys()
                             .then(function(cacheNames) {
@@ -169,7 +169,7 @@
                                 window.location.reload();
                             });
                     } else {
-                        Sentry?.captureMessage('User refused to reload app from index.html');
+                        Sentry && Sentry.captureMessage('User refused to reload app from index.html');
                     }
                 }
             });
