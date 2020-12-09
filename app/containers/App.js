@@ -7,6 +7,10 @@ import ZoomControl from 'components/ZoomControl/ZoomControl';
 import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 import { LangContext, LangDispatchContext, useLangReducer } from './Service/useLangReducer';
 import { Plugins } from '@capacitor/core';
+import { RecoilRoot } from 'recoil';
+import recoilPersist from 'recoil-persist';
+
+const { RecoilPersist, updateState } = recoilPersist(['scriptEditorIsActive']);
 
 const queryCache = new QueryCache({
     defaultConfig: {
@@ -28,17 +32,20 @@ export default ({ store }) => {
         Plugins.SplashScreen.hide();
     }, []);
     return (
-        <ReactQueryCacheProvider queryCache={queryCache}>
-            <Provider store={store}>
-                <LangContext.Provider value={langState}>
-                    <LangDispatchContext.Provider value={langDispatch}>
-                        <HashRouter>
-                            <Routes />
-                        </HashRouter>
-                        <ZoomControl />
-                    </LangDispatchContext.Provider>
-                </LangContext.Provider>
-            </Provider>
-        </ReactQueryCacheProvider>
+        <RecoilRoot initializeState={updateState}>
+            <RecoilPersist />
+            <ReactQueryCacheProvider queryCache={queryCache}>
+                <Provider store={store}>
+                    <LangContext.Provider value={langState}>
+                        <LangDispatchContext.Provider value={langDispatch}>
+                            <HashRouter>
+                                <Routes />
+                            </HashRouter>
+                            <ZoomControl />
+                        </LangDispatchContext.Provider>
+                    </LangContext.Provider>
+                </Provider>
+            </ReactQueryCacheProvider>
+        </RecoilRoot>
     );
 };
