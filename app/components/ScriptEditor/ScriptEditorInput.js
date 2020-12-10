@@ -17,17 +17,17 @@ const ScriptEditorInput = ({ id }) => {
     const storageKey = `ScriptEditor.${id}`;
     const storedReaderName = window.localStorage.getItem(storageKey);
 
-    const changeHandler = e => {
+    const changeInputHandler = e => {
         setInputReaderName(e.target.value);
     };
     const saveNameHandler = () => {
         localStorage.setItem(storageKey, inputReaderName);
         setInputReaderName(null);
     };
-    const startEditing = () => {
+    const toggleEditorHandler = () => {
         setInputReaderName(storedReaderName || '');
     };
-    const deleteHandler = () => {
+    const clearInputHandler = () => {
         window.localStorage.setItem(storageKey, '');
         setInputReaderName('');
     };
@@ -41,29 +41,28 @@ const ScriptEditorInput = ({ id }) => {
         >
             {scriptEditorIsActive ? (
                 <div>
-                    {inputReaderName === null ? (
-                        <div
-                            className={css`
-                                margin-right: 10px;
-                                margin-left: -5px;
-                            `}
-                        >
-                            <Button onClick={startEditing}>
-                                {storedReaderName ? (
-                                    <span
-                                        className={css`
-                                            color: ${theme.colours.darkGray};
-                                            text-transform: initial;
-                                            margin-right: 6px;
-                                        `}
-                                    >
-                                        {storedReaderName}
-                                    </span>
-                                ) : null}
-                                <Pencil colour={theme.colours.darkGray} />
-                            </Button>
-                        </div>
-                    ) : (
+                    <div
+                        className={css`
+                            margin-right: 10px;
+                            margin-left: -5px;
+                        `}
+                    >
+                        <Button onClick={toggleEditorHandler}>
+                            {storedReaderName ? (
+                                <span
+                                    className={css`
+                                        color: ${theme.colours.darkGray};
+                                        text-transform: initial;
+                                        margin-right: 6px;
+                                    `}
+                                >
+                                    {storedReaderName}
+                                </span>
+                            ) : null}
+                            <Pencil colour={theme.colours.darkGray} />
+                        </Button>
+                    </div>
+                    {inputReaderName !== null && (
                         <Drawer onClose={saveNameHandler}>
                             <label>
                                 <p
@@ -79,13 +78,14 @@ const ScriptEditorInput = ({ id }) => {
                                     `}
                                 >
                                     <Input
-                                        onChange={changeHandler}
+                                        onChange={changeInputHandler}
                                         onEnter={saveNameHandler}
                                         value={inputReaderName}
                                         placeholder="Введите имя…"
+                                        autoFocus
                                     />
                                     <Button
-                                        onClick={deleteHandler}
+                                        onClick={clearInputHandler}
                                         className={css`
                                             position: absolute;
                                             right: 0;

@@ -18,7 +18,6 @@ const ZoomControlToggle = () => {
                 toggleOpen();
             }}
             className={css`
-                padding: 12px !important;
                 margin-right: 6px;
                 font-size: 16px;
                 padding: 6px 6px !important;
