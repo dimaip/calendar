@@ -59,6 +59,10 @@ button:focus {
     box-sizing: border-box;
 }
 
+input {
+    color: inherit;
+}
+
 #shareAPIPolyfill-backdrop.visible,
 #shareAPIPolyfill-container.visible {
     z-index: 1;

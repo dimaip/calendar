@@ -1,20 +1,23 @@
 import React, { useContext } from 'react';
 import Button from 'components/Button/Button';
-import { useDispatch } from 'react-redux';
-import { toggleZoomControl } from 'redux/actions/zoom';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
+import Pencil from 'components/svgs/Pencil';
+import { useRecoilState } from 'recoil';
+import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
 import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 
-const ZoomControlToggle = () => {
-    const dispatch = useDispatch();
+const ScriptEditorToggle = () => {
     const theme = useTheme();
     const { toggleOpen } = useContext(DotsMenuContext);
+    const [scriptEditorIsActive, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
+    const label = scriptEditorIsActive ? 'Завершить редактирование' : 'Редактировать чин';
+
     return (
         <Button
-            title="Изменить шрифт"
+            title={label}
             onClick={() => {
-                dispatch(toggleZoomControl());
+                setScriptEditorIsActive(!scriptEditorIsActive);
                 toggleOpen();
             }}
             className={css`
@@ -33,16 +36,16 @@ const ZoomControlToggle = () => {
                     width: 20px;
                 `}
             >
-                Aa
+                <Pencil />
             </span>{' '}
             <span
                 className={css`
                     font-size: 13px;
                 `}
             >
-                Изменить шрифт
+                {label}
             </span>
         </Button>
     );
 };
-export default ZoomControlToggle;
+export default ScriptEditorToggle;

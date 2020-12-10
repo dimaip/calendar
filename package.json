@@ -59,6 +59,8 @@
     "react-scroll-restoration": "^1.0.6",
     "react-swipeable-views": "^0.13.9",
     "react-tippy": "^1.4.0",
+    "recoil": "^0.1.2",
+    "recoil-persist": "^0.7.0",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",

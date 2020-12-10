@@ -1,10 +1,15 @@
 import React from 'react';
 import { MDXProvider as OriginalMDXProvider } from '@mdx-js/react';
+import ScriptEditorInput from 'components/ScriptEditor/ScriptEditorInput';
 import './mdx.css';
 const mapping = {
     h1: ({ children }) => <h1 className="H1">{children}</h1>,
     h2: ({ children }) => <h2 className="H2">{children}</h2>,
-    h3: ({ children }) => <h3 className="H3">{children}</h3>,
+    h3: ({ children }) => (
+        <h3 className="H3">
+            {children} <ScriptEditorInput id={window.location.href + children} />
+        </h3>
+    ),
     p: ({ children }) => <p className="P">{children}</p>,
     strong: ({ children }) => <span className="Red">{children}</span>,
     blockquote: ({ children }) => <div className="Petit">{children}</div>,
