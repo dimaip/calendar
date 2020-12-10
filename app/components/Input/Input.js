@@ -2,10 +2,16 @@ import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
-const Input = ({ className = '', ...rest }) => {
+const Input = ({ className = '', onEnter = () => {}, ...rest }) => {
     const theme = useTheme();
+    const handleKeyDown = event => {
+        if (event.key === 'Enter') {
+            onEnter();
+        }
+    };
     return (
         <input
+            onKeyDown={handleKeyDown}
             {...rest}
             className={
                 css`
@@ -15,6 +21,7 @@ const Input = ({ className = '', ...rest }) => {
                     border-style: solid;
                     border-width: 1px;
                     border-color: ${theme.colours.lineGray};
+                    background-color: ${theme.colours.bgGray};
                 ` +
                 ' ' +
                 className

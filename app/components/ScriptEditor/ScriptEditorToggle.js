@@ -1,20 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'components/Button/Button';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import Pencil from 'components/svgs/Pencil';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
+import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 
 const ScriptEditorToggle = () => {
     const theme = useTheme();
-    const setScriptEditorIsActive = useSetRecoilState(scriptEditorIsActiveState);
+    const { toggleOpen } = useContext(DotsMenuContext);
+    const [scriptEditorIsActive, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
+    const label = scriptEditorIsActive ? 'Завершить редактирование' : 'Редактировать чин';
 
     return (
         <Button
-            title="Редактировать чин"
+            title={label}
             onClick={() => {
-                setScriptEditorIsActive(true);
+                setScriptEditorIsActive(!scriptEditorIsActive);
+                toggleOpen();
             }}
             className={css`
                 padding: 12px !important;
@@ -40,7 +44,7 @@ const ScriptEditorToggle = () => {
                     font-size: 13px;
                 `}
             >
-                Редактировать чин
+                {label}
             </span>
         </Button>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDXProvider as OriginalMDXProvider } from '@mdx-js/react';
-import ScriptEditorInput from 'components/ScriptEditorInput/ScriptEditorInput';
+import ScriptEditorInput from 'components/ScriptEditor/ScriptEditorInput';
 import './mdx.css';
 const mapping = {
     h1: ({ children }) => <h1 className="H1">{children}</h1>,

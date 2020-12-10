@@ -60,7 +60,7 @@ const ScriptEditorInput = ({ id }) => {
                                         {storedReaderName}
                                     </span>
                                 ) : null}
-                                <Pencil />
+                                <Pencil colour={theme.colours.darkGray} />
                             </Button>
                         </div>
                     ) : (
@@ -80,6 +80,7 @@ const ScriptEditorInput = ({ id }) => {
                                 >
                                     <Input
                                         onChange={changeHandler}
+                                        onEnter={saveNameHandler}
                                         value={inputReaderName}
                                         placeholder="Введите имя…"
                                     />
