@@ -4,15 +4,17 @@ import { useTheme } from 'emotion-theming';
 import Cross from 'components/svgs/Cross';
 import Button from 'components/Button/Button';
 import Pencil from 'components/svgs/Pencil';
-import Drawer from 'components/Drawer/Drawer';
+// import Drawer from 'components/Drawer/Drawer';
 import Input from 'components/Input/Input';
 import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
 import { useRecoilValue } from 'recoil';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
 const ScriptEditorInput = ({ id }) => {
     const theme = useTheme();
     const [inputReaderName, setInputReaderName] = useState(null);
     const scriptEditorIsActive = useRecoilValue(scriptEditorIsActiveState);
+    const [isDrawerOpened, setIsDrowerOpened] = useState(false);
 
     const storageKey = `ScriptEditor.${id}`;
     const storedReaderName = window.localStorage.getItem(storageKey);
@@ -23,13 +25,21 @@ const ScriptEditorInput = ({ id }) => {
     const saveNameHandler = () => {
         localStorage.setItem(storageKey, inputReaderName);
         setInputReaderName(null);
+        setIsDrowerOpened(true);
     };
     const toggleEditorHandler = () => {
         setInputReaderName(storedReaderName || '');
+        setIsDrowerOpened(true);
     };
     const clearInputHandler = () => {
         window.localStorage.setItem(storageKey, '');
         setInputReaderName('');
+    };
+    const toggleDrawer = () => {
+        localStorage.setItem(storageKey, inputReaderName);
+        setInputReaderName(null);
+        setIsDrowerOpened(true);
+        setIsDrowerOpened(!isDrawerOpened);
     };
 
     return (
@@ -63,41 +73,53 @@ const ScriptEditorInput = ({ id }) => {
                         </Button>
                     </div>
                     {inputReaderName !== null && (
-                        <Drawer onClose={saveNameHandler}>
-                            <label>
-                                <p
-                                    className={css`
-                                        margin-bottom: 8px;
-                                    `}
-                                >
-                                    Имя чтеца
-                                </p>
-                                <div
-                                    className={css`
-                                        position: relative;
-                                    `}
-                                >
-                                    <Input
-                                        onChange={changeInputHandler}
-                                        onEnter={saveNameHandler}
-                                        value={inputReaderName}
-                                        placeholder="Введите имя…"
-                                        autoFocus
-                                    />
-                                    <Button
-                                        onClick={clearInputHandler}
+                        <SwipeableDrawer
+                            onClose={toggleDrawer}
+                            onOpen={toggleDrawer}
+                            open
+                            swipeAreaWidth={20}
+                            anchor={`bottom`}
+                        >
+                            <div
+                                className={css`
+                                    margin: 50px;
+                                `}
+                            >
+                                <label>
+                                    <p
                                         className={css`
-                                            position: absolute;
-                                            right: 0;
-                                            font-size: 14px;
-                                            margin-left: 0px;
+                                            margin-bottom: 8px;
                                         `}
                                     >
-                                        <Cross />
-                                    </Button>
-                                </div>
-                            </label>
-                        </Drawer>
+                                        Имя чтеца
+                                    </p>
+                                    <div
+                                        className={css`
+                                            position: relative;
+                                        `}
+                                    >
+                                        <Input
+                                            onChange={changeInputHandler}
+                                            onEnter={saveNameHandler}
+                                            value={inputReaderName}
+                                            placeholder="Введите имя…"
+                                            autoFocus
+                                        />
+                                        <Button
+                                            onClick={clearInputHandler}
+                                            className={css`
+                                                position: absolute;
+                                                right: 0;
+                                                font-size: 14px;
+                                                margin-left: 0px;
+                                            `}
+                                        >
+                                            <Cross />
+                                        </Button>
+                                    </div>
+                                </label>
+                            </div>
+                        </SwipeableDrawer>
                     )}
                 </div>
             ) : null}

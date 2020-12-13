@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { css } from 'emotion';
 import getTheme from 'styles/getTheme';
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+
 const theme = getTheme();
 
 const Drawer = ({ children, onClose }) => {
