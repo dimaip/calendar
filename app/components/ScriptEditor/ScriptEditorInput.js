@@ -1,20 +1,18 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import Cross from 'components/svgs/Cross';
 import Button from 'components/Button/Button';
 import Pencil from 'components/svgs/Pencil';
-// import Drawer from 'components/Drawer/Drawer';
+import Drawer from 'components/Drawer/Drawer';
 import Input from 'components/Input/Input';
 import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
 import { useRecoilValue } from 'recoil';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 
 const ScriptEditorInput = ({ id }) => {
     const theme = useTheme();
     const [inputReaderName, setInputReaderName] = useState(null);
     const scriptEditorIsActive = useRecoilValue(scriptEditorIsActiveState);
-    const [isDrawerOpened, setIsDrowerOpened] = useState(false);
 
     const storageKey = `ScriptEditor.${id}`;
     const storedReaderName = window.localStorage.getItem(storageKey);
@@ -23,23 +21,15 @@ const ScriptEditorInput = ({ id }) => {
         setInputReaderName(e.target.value);
     };
     const saveNameHandler = () => {
-        localStorage.setItem(storageKey, inputReaderName);
+        window.localStorage.setItem(storageKey, inputReaderName);
         setInputReaderName(null);
-        setIsDrowerOpened(true);
     };
     const toggleEditorHandler = () => {
         setInputReaderName(storedReaderName || '');
-        setIsDrowerOpened(true);
     };
     const clearInputHandler = () => {
         window.localStorage.setItem(storageKey, '');
         setInputReaderName('');
-    };
-    const toggleDrawer = () => {
-        localStorage.setItem(storageKey, inputReaderName);
-        setInputReaderName(null);
-        setIsDrowerOpened(true);
-        setIsDrowerOpened(!isDrawerOpened);
     };
 
     return (
@@ -73,13 +63,7 @@ const ScriptEditorInput = ({ id }) => {
                         </Button>
                     </div>
                     {inputReaderName !== null && (
-                        <SwipeableDrawer
-                            onClose={toggleDrawer}
-                            onOpen={toggleDrawer}
-                            open
-                            swipeAreaWidth={20}
-                            anchor={`bottom`}
-                        >
+                        <Drawer onClose={saveNameHandler} onOpen={true} anchor={`bottom`} onEnter={saveNameHandler}>
                             <div
                                 className={css`
                                     margin: 50px;
@@ -100,7 +84,6 @@ const ScriptEditorInput = ({ id }) => {
                                     >
                                         <Input
                                             onChange={changeInputHandler}
-                                            onEnter={saveNameHandler}
                                             value={inputReaderName}
                                             placeholder="Введите имя…"
                                             autoFocus
@@ -119,7 +102,7 @@ const ScriptEditorInput = ({ id }) => {
                                     </div>
                                 </label>
                             </div>
-                        </SwipeableDrawer>
+                        </Drawer>
                     )}
                 </div>
             ) : null}
