@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import Cross from 'components/svgs/Cross';
@@ -31,7 +31,6 @@ const ScriptEditorInput = ({ id }) => {
         window.localStorage.setItem(storageKey, '');
         setInputReaderName('');
     };
-
     return (
         <div
             className={css`
@@ -63,45 +62,40 @@ const ScriptEditorInput = ({ id }) => {
                         </Button>
                     </div>
                     {inputReaderName !== null && (
-                        <Drawer onClose={saveNameHandler} onOpen={true} anchor={`bottom`} onEnter={saveNameHandler}>
-                            <div
-                                className={css`
-                                    margin: 50px;
-                                `}
-                            >
-                                <label>
-                                    <p
+                        <Drawer onClose={saveNameHandler}>
+                            <label>
+                                <p
+                                    className={css`
+                                        margin-bottom: 8px;
+                                    `}
+                                >
+                                    Имя чтеца
+                                </p>
+                                <div
+                                    className={css`
+                                        position: relative;
+                                    `}
+                                >
+                                    <Input
+                                        onChange={changeInputHandler}
+                                        onEnter={saveNameHandler}
+                                        value={inputReaderName}
+                                        placeholder="Введите имя…"
+                                        autoFocus
+                                    />
+                                    <Button
+                                        onClick={clearInputHandler}
                                         className={css`
-                                            margin-bottom: 8px;
+                                            position: absolute;
+                                            right: 0;
+                                            font-size: 14px;
+                                            margin-left: 0px;
                                         `}
                                     >
-                                        Имя чтеца
-                                    </p>
-                                    <div
-                                        className={css`
-                                            position: relative;
-                                        `}
-                                    >
-                                        <Input
-                                            onChange={changeInputHandler}
-                                            value={inputReaderName}
-                                            placeholder="Введите имя…"
-                                            autoFocus
-                                        />
-                                        <Button
-                                            onClick={clearInputHandler}
-                                            className={css`
-                                                position: absolute;
-                                                right: 0;
-                                                font-size: 14px;
-                                                margin-left: 0px;
-                                            `}
-                                        >
-                                            <Cross />
-                                        </Button>
-                                    </div>
-                                </label>
-                            </div>
+                                        <Cross />
+                                    </Button>
+                                </div>
+                            </label>
                         </Drawer>
                     )}
                 </div>

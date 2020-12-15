@@ -23,7 +23,7 @@ const ZoomControl = () => {
     const dispatch = useDispatch();
     return (
         zoomControlShown && (
-            <Drawer onClose={() => dispatch(toggleZoomControl())} anchor={`bottom`}>
+            <Drawer onClose={() => dispatch(toggleZoomControl())}>
                 <div
                     className={css`
                         text-align: center;
