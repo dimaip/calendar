@@ -6,6 +6,7 @@ const Input = ({ className = '', onEnter = () => {}, ...rest }) => {
     const theme = useTheme();
     const handleKeyDown = event => {
         if (event.key === 'Enter') {
+            event.preventDefault();
             onEnter();
         }
     };

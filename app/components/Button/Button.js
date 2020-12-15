@@ -5,6 +5,7 @@ const Button = props => (
     <button
         {...props}
         aria-label={props.title || undefined}
+        type="button"
         className={
             css`
                 cursor: pointer;

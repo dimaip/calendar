@@ -21,7 +21,7 @@ const ScriptEditorInput = ({ id }) => {
         setInputReaderName(e.target.value);
     };
     const saveNameHandler = () => {
-        localStorage.setItem(storageKey, inputReaderName);
+        window.localStorage.setItem(storageKey, inputReaderName);
         setInputReaderName(null);
     };
     const toggleEditorHandler = () => {
@@ -31,7 +31,6 @@ const ScriptEditorInput = ({ id }) => {
         window.localStorage.setItem(storageKey, '');
         setInputReaderName('');
     };
-
     return (
         <div
             className={css`
