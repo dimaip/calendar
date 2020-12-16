@@ -27,9 +27,7 @@ export function register() {
                                 // serviceWorker.controller points to the current SW. If it exists, it means it's an update.
                                 if (navigator.serviceWorker.controller) {
                                     console.log('SW update activated', VERSION);
-                                    // Now that we now it's not a first app install, we could reload to get the fresh app assets.
-                                    // But let's not, not to annoy users...
-                                    // window.location.reload();
+                                    window.location.reload();
                                 } else {
                                     // @TODO: display a "Content is cached for offline use." message.
                                     console.log('Fresh SW activated.', VERSION);
