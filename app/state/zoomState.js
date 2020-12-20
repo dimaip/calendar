@@ -1,11 +1,11 @@
 import { atom } from 'recoil';
 
-const setZoomState = atom({
-    key: 'setZoomState',
+const zoomState = atom({
+    key: 'zoomState',
     default: 1,
     persistence_UNSTABLE: {
         type: 'zoom',
     },
 });
 
-export default setZoomState;
+export default zoomState;

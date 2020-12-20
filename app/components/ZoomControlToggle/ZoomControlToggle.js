@@ -1,18 +1,15 @@
 import React, { useContext } from 'react';
 import Button from 'components/Button/Button';
-import { useDispatch } from 'react-redux';
-import { toggleZoomControl } from 'redux/actions/zoom';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 import zoomControlShownState from 'state/zoomControlShownState';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
 const ZoomControlToggle = () => {
-    const dispatch = useDispatch();
     const theme = useTheme();
     const { toggleOpen } = useContext(DotsMenuContext);
-    const [zoomControlShown, setZoomControlShown] = useRecoilState(zoomControlShownState);
+    const setZoomControlShown = useSetRecoilState(zoomControlShownState);
 
     return (
         <Button

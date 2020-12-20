@@ -3,7 +3,7 @@ import Button from 'components/Button/Button';
 import { css } from 'emotion';
 import Drawer from 'components/Drawer/Drawer';
 import zoomControlShownState from 'state/zoomControlShownState';
-import setZoomState from 'state/setZoomState';
+import zoomState from 'state/zoomState';
 import { useRecoilState } from 'recoil';
 
 const buttonStyle = css`
@@ -19,7 +19,7 @@ const buttonStyle = css`
 `;
 const ZoomControl = () => {
     const [zoomControlShown, setZoomControlShown] = useRecoilState(zoomControlShownState);
-    const [zoom, setZoom] = useRecoilState(setZoomState);
+    const [originalZoom, setZoom] = useRecoilState(zoomState);
 
     const handleKeyDown = event => {
         if (event.key === 'Enter') {
@@ -40,7 +40,7 @@ const ZoomControl = () => {
                         font-size: 24px;
                     `}
                 >
-                    {zoom >= 1 ? (zoom * 100).toPrecision(3) : (zoom * 100).toPrecision(2)}%
+                    {originalZoom >= 1 ? (originalZoom * 100).toPrecision(3) : (originalZoom * 100).toPrecision(2)}%
                 </div>
                 <div
                     className={css`
@@ -55,7 +55,7 @@ const ZoomControl = () => {
                             ${buttonStyle}
                             font-size: 14px;
                         `}
-                        onClick={() => zoom > 0.8 && setZoom(zoom - 0.1)}
+                        onClick={() => originalZoom > 0.8 && setZoom(originalZoom - 0.1)}
                         onKeyDown={handleKeyDown}
                     >
                         A-
@@ -66,7 +66,7 @@ const ZoomControl = () => {
                             ${buttonStyle}
                             font-size: 18px;
                         `}
-                        onClick={() => zoom < 1.5 && setZoom(zoom + 0.1)}
+                        onClick={() => originalZoom < 1.5 && setZoom(originalZoom + 0.1)}
                         onKeyDown={handleKeyDown}
                     >
                         A+
