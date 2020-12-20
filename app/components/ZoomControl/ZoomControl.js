@@ -21,12 +21,6 @@ const ZoomControl = () => {
     const [zoomControlShown, setZoomControlShown] = useRecoilState(zoomControlShownState);
     const [originalZoom, setZoom] = useRecoilState(zoomState);
 
-    const handleKeyDown = event => {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            setZoomControlShown(false);
-        }
-    };
     return (
         zoomControlShown && (
             <Drawer
@@ -56,7 +50,6 @@ const ZoomControl = () => {
                             font-size: 14px;
                         `}
                         onClick={() => originalZoom > 0.8 && setZoom(originalZoom - 0.1)}
-                        onKeyDown={handleKeyDown}
                     >
                         A-
                     </Button>
@@ -67,7 +60,6 @@ const ZoomControl = () => {
                             font-size: 18px;
                         `}
                         onClick={() => originalZoom < 1.5 && setZoom(originalZoom + 0.1)}
-                        onKeyDown={handleKeyDown}
                     >
                         A+
                     </Button>

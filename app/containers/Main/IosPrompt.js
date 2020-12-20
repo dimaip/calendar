@@ -3,12 +3,14 @@ import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
 import Button from 'components/Button/Button';
 import { isCapacitor, isIphone, isInStandaloneMode } from 'utils/deviceInfo';
+import { useRecoilState } from 'recoil';
+import iosPromptState from 'state/iosPromptState';
 
 const IosPrompt = () => {
     const theme = useTheme();
     const now = new Date();
     const [showIosPrompt, setShowIosPrompt] = useState(false);
-    const [iosPromptDismissed, setIosPromptDismissed] = useState(null);
+    const [iosPromptDismissed, setIosPromptDismissed] = useRecoilState(iosPromptState);
 
     useEffect(() => {
         let mounted = true;
