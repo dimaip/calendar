@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
-import { useDispatch, useSelector } from 'react-redux';
-import { dismissIosPrompt } from 'redux/actions/iosPrompt';
 import Button from 'components/Button/Button';
 import { isCapacitor, isIphone, isInStandaloneMode } from 'utils/deviceInfo';
 
 const IosPrompt = () => {
     const theme = useTheme();
-    const dispatch = useDispatch();
-
+    const now = new Date();
     const [showIosPrompt, setShowIosPrompt] = useState(false);
+    const [iosPromptDismissed, setIosPromptDismissed] = useState(null);
 
     useEffect(() => {
         let mounted = true;
@@ -25,8 +23,8 @@ const IosPrompt = () => {
     }, []);
 
     // @ts-ignore
-    const iosPromptDismissed = useSelector(state => state.settings.iosPromptDismissed);
-    const now = new Date();
+    // const iosPromptDismissed = useSelector(state => state.settings.iosPromptDismissed);
+
     // Bother users again in 60d
     const showAgain = !iosPromptDismissed || now.getTime() - iosPromptDismissed > 1000 * 3600 * 24 * 60;
     const shouldShowIosPrompt = !isCapacitor() && isIphone() && !isInStandaloneMode() && showAgain && showIosPrompt;
@@ -76,7 +74,7 @@ const IosPrompt = () => {
                     title="Закрыть"
                     onClick={() => {
                         const now = new Date();
-                        dispatch(dismissIosPrompt(now.getTime()));
+                        setIosPromptDismissed(now.getTime());
                     }}
                     className={css`
                         position: absolute;

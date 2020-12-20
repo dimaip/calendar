@@ -1,10 +1,10 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import Button from 'components/Button/Button';
-import { setZoom } from 'redux/actions/zoom';
 import { css } from 'emotion';
 import Drawer from 'components/Drawer/Drawer';
-import { toggleZoomControl } from 'redux/actions/zoom';
+import zoomControlShownState from 'state/zoomControlShownState';
+import setZoomState from 'state/setZoomState';
+import { useRecoilState } from 'recoil';
 
 const buttonStyle = css`
     width: 70px;
@@ -18,19 +18,29 @@ const buttonStyle = css`
     padding: 0 !important;
 `;
 const ZoomControl = () => {
-    const zoom = useSelector(state => state.settings.zoom);
-    const zoomControlShown = useSelector(state => state.ui.zoomControlShown);
-    const dispatch = useDispatch();
+    const [zoomControlShown, setZoomControlShown] = useRecoilState(zoomControlShownState);
+    const [zoom, setZoom] = useRecoilState(setZoomState);
+
+    const handleKeyDown = event => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            setZoomControlShown(false);
+        }
+    };
     return (
         zoomControlShown && (
-            <Drawer onClose={() => dispatch(toggleZoomControl())}>
+            <Drawer
+                onClose={() => {
+                    setZoomControlShown(false);
+                }}
+            >
                 <div
                     className={css`
                         text-align: center;
                         font-size: 24px;
                     `}
                 >
-                    {(zoom * 100).toPrecision(3)}%
+                    {zoom >= 1 ? (zoom * 100).toPrecision(3) : (zoom * 100).toPrecision(2)}%
                 </div>
                 <div
                     className={css`
@@ -40,12 +50,13 @@ const ZoomControl = () => {
                     `}
                 >
                     <Button
-                        title="Уменшить шрифт"
+                        title="Уменьшить шрифт"
                         className={css`
                             ${buttonStyle}
                             font-size: 14px;
                         `}
-                        onClick={() => dispatch(setZoom((zoom - 0.1).toPrecision(2)))}
+                        onClick={() => zoom > 0.8 && setZoom(zoom - 0.1)}
+                        onKeyDown={handleKeyDown}
                     >
                         A-
                     </Button>
@@ -55,7 +66,8 @@ const ZoomControl = () => {
                             ${buttonStyle}
                             font-size: 18px;
                         `}
-                        onClick={() => dispatch(setZoom((zoom + 0.1).toPrecision(2)))}
+                        onClick={() => zoom < 1.5 && setZoom(zoom + 0.1)}
+                        onKeyDown={handleKeyDown}
                     >
                         A+
                     </Button>
