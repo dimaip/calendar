@@ -18,8 +18,8 @@
     "path": "./android.keystore",
     "alias": "android"
   },
-  "appVersionName": "2",
-  "appVersionCode": 2,
+  "appVersionName": "5",
+  "appVersionCode": 5,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://molitva.app/manifest.json",
@@ -27,5 +27,5 @@
   "features": {},
   "enableSiteSettingsShortcut": true,
   "isChromeOSOnly": false,
-  "appVersion": "2"
+  "appVersion": "5"
 }
