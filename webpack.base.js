@@ -80,6 +80,11 @@ module.exports = {
                 exclude: /node_modules/,
             },
             {
+                test: /\.js$/,
+                use: 'babel-loader',
+                include: [/node_modules\/capacitor-data-storage-sqlite/],
+            },
+            {
                 test: /\.css$/, //global - without modules
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
