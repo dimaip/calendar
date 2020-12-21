@@ -19,7 +19,7 @@ const buttonStyle = css`
 `;
 const ZoomControl = () => {
     const [zoomControlShown, setZoomControlShown] = useRecoilState(zoomControlShownState);
-    const [originalZoom, setZoom] = useRecoilState(zoomState);
+    const [zoom, setZoom] = useRecoilState(zoomState);
 
     return (
         zoomControlShown && (
@@ -34,7 +34,7 @@ const ZoomControl = () => {
                         font-size: 24px;
                     `}
                 >
-                    {originalZoom >= 1 ? (originalZoom * 100).toPrecision(3) : (originalZoom * 100).toPrecision(2)}%
+                    {zoom >= 1 ? (zoom * 100).toPrecision(3) : (zoom * 100).toPrecision(2)}%
                 </div>
                 <div
                     className={css`
@@ -49,7 +49,7 @@ const ZoomControl = () => {
                             ${buttonStyle}
                             font-size: 14px;
                         `}
-                        onClick={() => originalZoom > 0.8 && setZoom(originalZoom - 0.1)}
+                        onClick={() => zoom > 0.8 && setZoom(zoom - 0.1)}
                     >
                         A-
                     </Button>
@@ -59,7 +59,7 @@ const ZoomControl = () => {
                             ${buttonStyle}
                             font-size: 18px;
                         `}
-                        onClick={() => originalZoom < 1.5 && setZoom(originalZoom + 0.1)}
+                        onClick={() => zoom < 1.5 && setZoom(zoom + 0.1)}
                     >
                         A+
                     </Button>

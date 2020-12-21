@@ -25,7 +25,6 @@ const IosPrompt = () => {
     }, []);
 
     // @ts-ignore
-    // const iosPromptDismissed = useSelector(state => state.settings.iosPromptDismissed);
 
     // Bother users again in 60d
     const showAgain = !iosPromptDismissed || now.getTime() - iosPromptDismissed > 1000 * 3600 * 24 * 60;
