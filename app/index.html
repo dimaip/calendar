@@ -152,7 +152,7 @@
                     );
                     if (response) {
                         Sentry && Sentry.captureMessage('Reloading app from index.html');
-                        windown.caches &&
+                        window.caches &&
                             caches
                                 .keys()
                                 .then(function(cacheNames) {
