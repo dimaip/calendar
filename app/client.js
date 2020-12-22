@@ -4,7 +4,7 @@ window.APP_LOADED = true;
 
 import './wdyr';
 
-import 'core-js';
+import 'babel-polyfill';
 import 'unfetch/polyfill/index.js';
 import 'element-closest-polyfill';
 import 'regenerator-runtime/runtime';
