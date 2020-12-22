@@ -76,13 +76,15 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                use: 'babel-loader',
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.js$/,
-                use: 'babel-loader',
-                include: [/node_modules\/capacitor-data-storage-sqlite/],
+                exclude: /node_modules\/(?!capacitor-data-storage-sqlite)(?!recoil).*$/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [['@babel/preset-env', { targets: { browsers: ['ie >= 11', 'safari > 9'] } }]],
+                        },
+                    },
+                ],
             },
             {
                 test: /\.css$/, //global - without modules
