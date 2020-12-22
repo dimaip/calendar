@@ -4,7 +4,7 @@ import { useTheme } from 'emotion-theming';
 const Burger = () => {
     const theme = useTheme();
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.695 13.5" width="13.695">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.695 13.5" width="13.695" height="13.5">
             <g
                 fill="none"
                 stroke={theme.colours.darkGray}

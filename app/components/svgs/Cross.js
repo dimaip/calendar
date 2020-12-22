@@ -8,6 +8,7 @@ const Cross = ({ white = false }) => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 18.29 19.89"
             width="10"
+            height="10.87"
             style={{ marginTop: 3, marginLeft: 5 }}
         >
             <path

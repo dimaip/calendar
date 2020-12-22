@@ -4,7 +4,7 @@ import { useTheme } from 'emotion-theming';
 const CrossCircle = () => {
     const theme = useTheme();
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42.414 42.414" width="42.414">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42.414 42.414" width="42.414" height="42.414">
             <path
                 d="M10.96 10.954a14.5 14.5 0 110 20.506 14.5 14.5 0 010-20.506z"
                 fill="none"

@@ -10,6 +10,7 @@ const CalendarIcon = ({ colour = null }) => {
                 display: block;
                 stroke: ${colour || theme.colours.darkGray};
             `}
+            width="17.56"
             height="17"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20.143 19.5"
