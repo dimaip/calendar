@@ -7,6 +7,7 @@ const Header = ({ children }) => {
     return (
         <div
             className={css`
+                height: 50px;
                 height: calc(50px + env(safe-area-inset-top));
                 user-select: none;
             `}
@@ -16,6 +17,7 @@ const Header = ({ children }) => {
                     padding-left: env(safe-area-inset-left);
                     padding-right: env(safe-area-inset-right);
                     padding-top: env(safe-area-inset-top);
+                    height: 50px;
                     height: calc(50px + env(safe-area-inset-top));
 
                     position: fixed;

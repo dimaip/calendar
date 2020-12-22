@@ -2,7 +2,7 @@
 // @ts-ignore
 window.APP_LOADED = true;
 
-import './wdyr';
+// import './wdyr';
 import './forEachPolyfill';
 import 'unfetch/polyfill/index.js';
 import 'element-closest-polyfill';
