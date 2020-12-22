@@ -76,7 +76,7 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules\/(?!capacitor-data-storage-sqlite)(?!recoil).*$/,
+                exclude: /node_modules\/(?!capacitor-data-storage-sqlite)(?!recoil)(?!unfetch).*$/,
                 use: [
                     {
                         loader: 'babel-loader',
