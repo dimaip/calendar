@@ -1,6 +1,7 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Parts from 'components/Parts/Parts';
 import Html from 'components/Html/Html';
+import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 <span id="nachalo" />
 
@@ -39,13 +40,7 @@ import Html from 'components/Html/Html';
 
 ## Чтения
 
-<>{props.dayOfWeek === 0 && <MdxLoader src="Vespers/Prokimens/Prokimen0" lang={props.lang} />}</>
-<>{props.dayOfWeek === 1 && <MdxLoader src="Vespers/Prokimens/Prokimen1" lang={props.lang} />}</>
-<>{props.dayOfWeek === 2 && <MdxLoader src="Vespers/Prokimens/Prokimen2" lang={props.lang} />}</>
-<>{props.dayOfWeek === 3 && <MdxLoader src="Vespers/Prokimens/Prokimen3" lang={props.lang} />}</>
-<>{props.dayOfWeek === 4 && <MdxLoader src="Vespers/Prokimens/Prokimen4" lang={props.lang} />}</>
-<>{props.dayOfWeek === 5 && <MdxLoader src="Vespers/Prokimens/Prokimen5" lang={props.lang} />}</>
-<>{props.dayOfWeek === 6 && <MdxLoader src="Vespers/Prokimens/Prokimen6" lang={props.lang} />}</>
+<Prokimens date={props.date} />
 
 <span id="reading" />
 

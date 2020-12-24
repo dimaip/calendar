@@ -1,7 +1,6 @@
 import React from 'react';
-import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
 import MdxLoader from '../../MdxLoader';
-import Html from 'components/Html/Html';
 import Parts from 'components/Parts/Parts';
 
 const Ending = ({ date, saints }) => {
@@ -9,6 +8,8 @@ const Ending = ({ date, saints }) => {
     const easterSeason = isEasterOffsetRange(0, 38);
     const dateObject = new Date(date);
     const isSunday = dateObject.getDay() === 0;
+
+    const { title } = getFeastInfo(dateObject);
 
     const otpust = (
         <Parts
@@ -33,6 +34,7 @@ const Ending = ({ date, saints }) => {
             otpust={otpust}
             saints={saints}
             isEasterOffsetRange={isEasterOffsetRange}
+            hideTverdina={isEasterOffsetRange(0, 49) || title === 'Рождество Христово' }
         />
     );
 };

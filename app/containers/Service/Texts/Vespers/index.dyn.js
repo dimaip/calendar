@@ -1,6 +1,7 @@
 import React from 'react';
 import dateFormat from 'dateformat';
 import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
+import Epiphany from './Epiphany.mdx';
 import Prazdnichnaja from './Prazdnichnaja.mdx';
 import Lent from './Lent.mdx';
 import useDay from 'hooks/useDay';
@@ -65,13 +66,31 @@ const Vespers = ({ date }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDate);
     const easterSeason = isEasterOffsetRange(0, 38);
     const isAscension = isEasterOffsetRange(39);
-    const { feastType } = getFeastInfo(tomorrowDateObj);
+    const { feastType, title } = getFeastInfo(tomorrowDateObj);
     const isHoliday = dayOfWeek === 6 || feastType === 'great' || feastType === '12';
     const isFast =
         !isHoliday &&
         (tomorrowDay?.fastName === 'Петров пост' ||
             tomorrowDay?.fastName === 'Успенский пост' ||
             tomorrowDay?.fastName === 'Рождественский пост');
+
+            console.log(dayOfWeek)
+
+    if (title === 'Рождество Христово') {
+        return (
+            <Epiphany
+                dayOfWeek={dayOfWeek}
+                troparions={troparions}
+                endHymns={endHymns}
+                readings={readings}
+                saints={saints}
+                otpust={otpust}
+                day={tomorrowDay}
+                date={tomorrowDate}
+            />
+        );
+    }
+    
     if (isFast) {
         return (
             <Lent
