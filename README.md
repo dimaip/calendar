@@ -2,7 +2,8 @@
 
 ## Installation
 
-First get this up and running (see its readme): https://github.com/dimaip/calendar-backend
+First get this up and running (see its readme):
+https://github.com/dimaip/calendar-backend
 
 Then:
 
