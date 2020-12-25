@@ -1,6 +1,6 @@
 import React, { useContext, createContext } from 'react';
 import { css } from 'emotion';
-import { LangContext } from 'containers/Service/useLangReducer';
+import { LangContext } from 'containers/Service/LangContext';
 import useWindowSize from 'hooks/useWindowSize';
 import zoomState from 'state/zoomState';
 import { useRecoilValue } from 'recoil';

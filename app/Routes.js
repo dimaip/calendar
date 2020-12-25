@@ -14,51 +14,58 @@ import useDay from 'hooks/useDay';
 import getTheme from 'styles/getTheme';
 import { ThemeProvider } from 'emotion-theming';
 import { css } from 'emotion';
+import langState from 'state/langState';
+import { useRecoilValue } from 'recoil';
+import { LangContext } from 'containers/Service/LangContext';
 
 const DateRoutes = () => {
     const { date } = useParams();
     const { data: day } = useDay(date);
     const theme = getTheme(day?.colour);
+    const langStateValue = useRecoilValue(langState);
+
     return (
-        <ThemeProvider theme={theme}>
-            <Global
-                styles={rcss`
+        <LangContext.Provider value={langStateValue}>
+            <ThemeProvider theme={theme}>
+                <Global
+                    styles={rcss`
                     body {
                         color: ${theme.colours.darkGray};
                         background-color: ${theme.colours.white};
                     }
                 `}
-            />
-            <Switch>
-                <Route exact path="/date/:date">
-                    <Main />
-                </Route>
-                <Route exact path="/date/:date/services">
-                    <Main services />
-                </Route>
-                <Route exact path="/date/:date/readings/:service">
-                    <Readings />
-                </Route>
-                <Route exact path="/date/:date/bReadings/:service">
-                    <Readings brother />
-                </Route>
-                <Route exact path="/date/:date/sermon/:sermonId">
-                    <Sermon />
-                </Route>
-                <Route exact path="/date/:date/saint/:saintId">
-                    <Saint />
-                </Route>
-                <Route exact path="/date/:date/thisday/:thisDayId">
-                    <ThisDay />
-                </Route>
-                <Route exact path="/date/:date/service/:serviceId">
-                    <Service />
-                </Route>
-                <Route>
-                    <NotFound />
-                </Route>
-            </Switch>
-        </ThemeProvider>
+                />
+                <Switch>
+                    <Route exact path="/date/:date">
+                        <Main />
+                    </Route>
+                    <Route exact path="/date/:date/services">
+                        <Main services />
+                    </Route>
+                    <Route exact path="/date/:date/readings/:service">
+                        <Readings />
+                    </Route>
+                    <Route exact path="/date/:date/bReadings/:service">
+                        <Readings brother />
+                    </Route>
+                    <Route exact path="/date/:date/sermon/:sermonId">
+                        <Sermon />
+                    </Route>
+                    <Route exact path="/date/:date/saint/:saintId">
+                        <Saint />
+                    </Route>
+                    <Route exact path="/date/:date/thisday/:thisDayId">
+                        <ThisDay />
+                    </Route>
+                    <Route exact path="/date/:date/service/:serviceId">
+                        <Service />
+                    </Route>
+                    <Route>
+                        <NotFound />
+                    </Route>
+                </Switch>
+            </ThemeProvider>
+        </LangContext.Provider>
     );
 };
 

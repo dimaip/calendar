@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
-import { LangContext } from 'containers/Service/useLangReducer';
+import { LangContext } from 'containers/Service/LangContext';
 import ReadingItemSingle from './ReadingItemSingle';
 import { ZoomContext } from 'components/Zoom/Zoom';
 

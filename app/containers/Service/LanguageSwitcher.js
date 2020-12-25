@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import SelectBox from '../../components/SelectBox/SelectBox';
 import { css } from 'emotion';
-import { LangContext, LangDispatchContext } from './useLangReducer';
+import { useRecoilState } from 'recoil';
+import langState from 'state/langState';
 
 const serviceLanguages = [
     {
@@ -19,19 +20,15 @@ const serviceLanguages = [
 ];
 
 const LanguageSwitcher = () => {
-    const { lang } = useContext(LangContext);
-    const dispatch = useContext(LangDispatchContext);
-    const setLang = lang => {
-        dispatch({ type: 'setLang', lang });
-    };
+    const [langStateValue, setLang] = useRecoilState(langState);
     return (
         <SelectBox
             className={css`
                 max-width: 59px;
             `}
             items={serviceLanguages}
-            value={lang}
-            onChange={setLang}
+            value={langStateValue.lang}
+            onChange={lang => setLang({ ...langStateValue, lang: lang })}
         />
     );
 };

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { css } from 'emotion';
 import useParts from 'hooks/useParts';
 import RteText from 'components/RteText/RteText';
-import { LangContext } from 'containers/Service/useLangReducer';
+import { LangContext } from 'containers/Service/LangContext';
 import { HeightUpdater } from 'components/HeightUpdate/HeightUpdater';
 
 const objAccess = (object, path) => path.split('.').reduce((acc, curr) => acc?.[curr], object);

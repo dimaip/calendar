@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { css } from 'emotion';
-import { LangContext, LangDispatchContext } from './useLangReducer';
 import Button from 'components/Button/Button';
 import Cross from 'components/svgs/Cross';
+import { useRecoilState } from 'recoil';
+import langState from 'state/langState';
 
 const ParallelLanguageBar = () => {
     {
-        const langState = useContext(LangContext);
-        const langDispatch = useContext(LangDispatchContext);
+        const [langStateValue, setLang] = useRecoilState(langState);
         return (
-            langState.lang === 'parallel' && (
+            langStateValue.lang === 'parallel' && (
                 <div
                     className={css`
                         height: 36px;
@@ -36,16 +36,17 @@ const ParallelLanguageBar = () => {
                                 text-align: left;
                             `}
                         >
-                            {langState.langA === 'ru' && 'Русский'}
-                            {langState.langA === 'csj' && 'Церковнослав.'}
+                            {langStateValue.langA === 'ru' && 'Русский'}
+                            {langStateValue.langA === 'csj' && 'Церковнослав.'}
                         </div>
                         <div>
                             <Button
                                 onClick={() =>
-                                    langDispatch(
-                                        // @ts-ignore
-                                        { type: 'toggleParallelLangs' }
-                                    )
+                                    setLang({
+                                        ...langStateValue,
+                                        langA: langStateValue.langB,
+                                        langB: langStateValue.langA,
+                                    })
                                 }
                             >
                                 <svg
@@ -114,8 +115,8 @@ const ParallelLanguageBar = () => {
                                     flex-grow: 1;
                                 `}
                             >
-                                {langState.langB === 'ru' && 'Русский'}
-                                {langState.langB === 'csj' && 'Церковнослав.'}
+                                {langStateValue.langB === 'ru' && 'Русский'}
+                                {langStateValue.langB === 'csj' && 'Церковнослав.'}
                             </div>
                             <Button
                                 className={css`
@@ -126,7 +127,7 @@ const ParallelLanguageBar = () => {
                                     margin-top: -6px;
                                 `}
                                 // @ts-ignore
-                                onClick={() => langDispatch({ type: 'setLang', lang: 'ru' })}
+                                onClick={() => setLang({ ...langStateValue, lang: 'ru' })}
                             >
                                 <Cross white />
                             </Button>

@@ -12,7 +12,6 @@ import './sharePolyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import configureStore from 'redux/store/configureStore';
 import App from 'containers/App';
 import * as serviceWorker from './serviceWorker';
 // @ts-ignore
@@ -44,13 +43,12 @@ try {
     console.warn(e);
 }
 
-const store = configureStore(preloadedState);
 const rootElement = document.getElementById('react-root');
 
 const render = Component => {
     ReactDOM.render(
         <AppContainer>
-            <Component store={store} />
+            <Component />
         </AppContainer>,
         rootElement
     );
