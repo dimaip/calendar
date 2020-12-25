@@ -4,7 +4,7 @@ const iosPromptDismissedState = atom({
     key: 'iosPromptDismissed',
     default: null,
     persistence_UNSTABLE: {
-        type: 'iosPrompt',
+        type: 'iosPromptDismissed',
     },
 });
 
