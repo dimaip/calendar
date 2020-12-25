@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-const iosPromptState = atom({
+const iosPromptDismissedState = atom({
     key: 'iosPrompt',
     default: null,
     persistence_UNSTABLE: {
@@ -8,4 +8,4 @@ const iosPromptState = atom({
     },
 });
 
-export default iosPromptState;
+export default iosPromptDismissedState;
