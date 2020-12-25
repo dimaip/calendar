@@ -10,7 +10,7 @@ import recoilPersist from 'recoil-persist';
 
 const { RecoilPersist, updateState } = recoilPersist([
     'scriptEditorIsActive',
-    'iosPrompt',
+    'iosPromptDismissed',
     'zoomControlIsShown',
     'zoomState',
     'langState',
