@@ -11,6 +11,7 @@ export default ({ colour = null }) => {
             `}
             xmlns="http://www.w3.org/2000/svg"
             width="16.564"
+            height="13.679"
             viewBox="0 0 16.564 13.679"
         >
             <path

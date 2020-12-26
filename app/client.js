@@ -2,10 +2,9 @@
 // @ts-ignore
 window.APP_LOADED = true;
 
-import './wdyr';
-
-import 'core-js';
-import 'unfetch/polyfill';
+// import './wdyr';
+import './forEachPolyfill';
+import 'unfetch/polyfill/index.js';
 import 'element-closest-polyfill';
 import 'regenerator-runtime/runtime';
 import './sharePolyfill';

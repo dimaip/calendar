@@ -12,7 +12,7 @@ const hash = Array(1)
     .join('');
 
 module.exports = merge(common, {
-    entry: ['client.js'],
+    entry: ['babel-polyfill', 'client.js'],
     mode: 'production',
     output: {
         filename: '[name].[contenthash].js',

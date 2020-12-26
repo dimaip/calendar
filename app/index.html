@@ -152,22 +152,23 @@
                     );
                     if (response) {
                         Sentry && Sentry.captureMessage('Reloading app from index.html');
-                        caches
-                            .keys()
-                            .then(function(cacheNames) {
-                                return Promise.all(
-                                    cacheNames
-                                        .filter(function(cacheName) {
-                                            return true;
-                                        })
-                                        .map(function(cacheName) {
-                                            return caches.delete(cacheName);
-                                        })
-                                );
-                            })
-                            .then(() => {
-                                window.location.reload();
-                            });
+                        window.caches &&
+                            caches
+                                .keys()
+                                .then(function(cacheNames) {
+                                    return Promise.all(
+                                        cacheNames
+                                            .filter(function(cacheName) {
+                                                return true;
+                                            })
+                                            .map(function(cacheName) {
+                                                return caches.delete(cacheName);
+                                            })
+                                    );
+                                })
+                                .then(function() {
+                                    window.location.reload();
+                                });
                     } else {
                         Sentry && Sentry.captureMessage('User refused to reload app from index.html');
                     }

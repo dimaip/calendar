@@ -11,6 +11,7 @@ export default ({ colour }) => {
             `}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 27.631 22.026"
+            width="23.20"
             height="18.5"
         >
             <g fill="none" strokeLinejoin="round">

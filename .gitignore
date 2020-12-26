@@ -12,8 +12,10 @@ convertBibleQuote/bible
 /www/version
 /www/index.html
 .gradle
-TWA/build
+TWA/build/
 TWA/app
 TWA/assetlinks.json
+TWA/local.properties
 android.keystore
 app-release-*
+.idea

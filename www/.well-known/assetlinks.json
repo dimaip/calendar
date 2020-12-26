@@ -22,5 +22,17 @@
                         "6C:F9:DB:A2:81:34:27:C0:64:01:1A:47:62:9E:59:05:35:E0:33:CD:CB:19:E0:22:EA:DE:A9:45:04:9C:2D:16"
                   ]
             }
+      },
+      {
+            "relation": [
+                  "delegate_permission/common.handle_all_urls"
+            ],
+            "target": {
+                  "namespace": "android_app",
+                  "package_name": "com.pb.twa",
+                  "sha256_cert_fingerprints": [
+                        "DE:AC:EB:33:78:40:A8:18:EC:72:B6:24:67:94:70:7D:DF:15:2C:3A:60:7C:B0:18:4C:7F:09:10:54:83:6F:6E"
+                  ]
+            }
       }
 ]

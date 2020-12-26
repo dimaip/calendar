@@ -25,24 +25,18 @@ const Drawer = ({ children, onClose }) => {
         >
             <div
                 className={css`
-                    width: 100%;
+                    position: absolute;
+                    margin: 0 auto;
+                    top: 16px;
+                    left: 0;
+                    right: 0;
+                    width: 36px;
+                    height: 4px;
+                    background-color: ${theme.colours.lineGray};
+                    border-radius: 8px;
                 `}
-            >
-                <div
-                    className={css`
-                        position: absolute;
-                        margin: 0 auto;
-                        top: 16px;
-                        left: 0;
-                        right: 0;
-                        width: 36px;
-                        height: 4px;
-                        background-color: ${theme.colours.lineGray};
-                        border-radius: 8px;
-                    `}
-                />
-                {children}
-            </div>
+            />
+            {children}
         </SwipeableDrawer>
     );
 };
