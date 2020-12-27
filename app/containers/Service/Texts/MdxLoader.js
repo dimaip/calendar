@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { css } from 'emotion';
-import { LangContext } from '../useLangReducer';
+import { LangContext } from '../LangContext';
 
 const catchFailedImport = e => {
     console.warn('Loading mdx file failed', e);
