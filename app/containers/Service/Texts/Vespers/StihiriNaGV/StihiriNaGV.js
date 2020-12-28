@@ -6,7 +6,6 @@ const DefatulStihiriNaGV = ({ day, date }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const glas = day?.glas;
-    console.log(glas, dayOfWeek)
     if (dayOfWeek === 0) {
         if (!glas) {
             return null;

@@ -74,8 +74,6 @@ const Vespers = ({ date }) => {
             tomorrowDay?.fastName === 'Успенский пост' ||
             tomorrowDay?.fastName === 'Рождественский пост');
 
-            console.log(dayOfWeek)
-
     if (title === 'Рождество Христово') {
         return (
             <Epiphany
@@ -90,7 +88,7 @@ const Vespers = ({ date }) => {
             />
         );
     }
-    
+
     if (isFast) {
         return (
             <Lent
