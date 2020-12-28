@@ -20,6 +20,9 @@ const Antifon2 = ({ date: dateString }) => {
     if (isDate(9, 27)) {
         return <MdxLoader src="Liturgies/Katekhumen/Antifon2Vozdvijenie" />;
     }
+    if (isDate(1, 7)) {
+        return <MdxLoader src="Liturgies/Katekhumen/Antifon2Christmas" />;
+    }
 
     return <MdxLoader src="Liturgies/Katekhumen/Antifon2" />;
 };
