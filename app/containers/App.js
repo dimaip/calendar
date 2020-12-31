@@ -14,6 +14,7 @@ const { RecoilPersist, updateState } = recoilPersist([
     'zoomControlIsShown',
     'zoomState',
     'langState',
+    'themeState',
 ]);
 
 const queryCache = new QueryCache({

@@ -31,6 +31,8 @@ import Parts from 'components/Parts/Parts';
 import BorderedSection from './BorderedSection';
 import { HeightUpdater } from 'components/HeightUpdate/HeightUpdater';
 import Banner from './Banner';
+import { useRecoilValue } from 'recoil';
+import themeState from 'state/themeState';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -39,13 +41,14 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
     const day = dayQuery.data;
     const externalDayQuery = useExternalDay(date);
     const { sermons, thisDays } = externalDayQuery.data || {};
+    const themeStateValue = useRecoilValue(themeState);
 
     const themeColour = useRef();
     if (day) {
         themeColour.current = day.colour;
     }
 
-    const theme = getTheme(themeColour.current);
+    const theme = getTheme(themeColour.current, themeStateValue);
     return (
         <HeightUpdater>
             <ThemeProvider theme={theme}>

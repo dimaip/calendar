@@ -17,13 +17,14 @@ import { css } from 'emotion';
 import langState from 'state/langState';
 import { useRecoilValue } from 'recoil';
 import { LangContext } from 'containers/Service/LangContext';
+import themeState from 'state/themeState';
 
 const DateRoutes = () => {
+    const themeStateValue = useRecoilValue(themeState);
     const { date } = useParams();
     const { data: day } = useDay(date);
-    const theme = getTheme(day?.colour);
+    const theme = getTheme(day?.colour, themeStateValue);
     const langStateValue = useRecoilValue(langState);
-
     return (
         <LangContext.Provider value={langStateValue}>
             <ThemeProvider theme={theme}>

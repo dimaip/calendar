@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { css } from 'emotion';
 import getTheme from 'styles/getTheme';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-
-const theme = getTheme();
+import { useRecoilValue } from 'recoil';
+import themeState from 'state/themeState';
 
 const Drawer = ({ children, onClose }) => {
+    const themeStateValue = useRecoilValue(themeState);
+    const theme = getTheme(null, themeStateValue);
+
     return (
         <SwipeableDrawer
             onClose={onClose}
