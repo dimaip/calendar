@@ -590,7 +590,7 @@ export const getFeastInfo = memoize(
             feastType = '12';
             calendarColour = 'red';
         }
-        if (new Date(y, 0, 7).getTime() <= date.getTime() && date.getTime() <= new Date(y, 0, 17).getTime()) {
+        if (new Date(y, 0, 7).getTime() <= date.getTime() && date.getTime() <= new Date(y, 0, 13).getTime()) {
             icon = 'christmas.svg';
         }
 
