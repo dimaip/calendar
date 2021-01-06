@@ -30,8 +30,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 ### Стихиры на «Господи, взываю»
 
-<Parts date={props.date} partNames={['vespers.Cтихиры на Господи взываю']} />
-
+<StihiriNaGV day={props.day} date={props.date} />
 <span id="vhod" />
 
 ### Вечерняя (входная) песнь «при возжжении светильника»
@@ -41,7 +40,6 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 ## Чтения
 
 <Prokimens date={props.date} />
-
 <span id="reading" />
 
 **П** Премудрость!
@@ -74,7 +72,6 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 ### Стихиры «на стихах»
 
 <Parts date={props.date} partNames={['vespers.Cтихиры на стихах']} />
-
 <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} lent />
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 

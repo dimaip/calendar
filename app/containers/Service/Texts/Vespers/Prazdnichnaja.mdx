@@ -1,8 +1,8 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Html from 'components/Html/Html';
 import Parts from 'components/Parts/Parts';
-import StihiriNaGV from './StihiriNaGV/StihiriNaGV'
-import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah'
+import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
+import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 <span id="nachalo" />
@@ -38,9 +38,6 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 ### Стихиры на «Господи, взываю»
 
 <StihiriNaGV day={props.day} date={props.date} />
-
-<Parts date={props.date} partNames={['vespers.Cтихиры на Господи взываю']} />
-
 <span id="vhod" />
 
 ## Вход
@@ -54,7 +51,6 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 ## Чтения
 
 <Prokimens date={props.date} />
-
 <span id="reading" />
 
 **П** Премудрость!
@@ -88,7 +84,6 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 ### Стихиры «на стихах»
 
 <StihiriNaStihah day={props.day} date={props.date} />
-
 <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} />
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
