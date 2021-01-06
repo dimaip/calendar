@@ -604,6 +604,9 @@ export const getFeastInfo = memoize(
             colour = red;
             calendarColour = 'red';
         }
+        if (new Date(y, 0, 19).getTime() <= date.getTime() && date.getTime() <= new Date(y, 0, 27).getTime()) {
+            icon = 'baptism.svg';
+        }
 
         if (new Date(y, 0, 7).getTime() <= date.getTime() && date.getTime() <= new Date(y, 0, 17).getTime()) {
             colour = red;
