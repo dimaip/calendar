@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Dots from 'components/svgs/Dots';
 import Button from 'components/Button/Button';
 import { css } from 'emotion';
+import ChangeThemeButton from 'components/ChangeThemeButton/ChangeThemeButton';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Share from 'components/Share/Share';
 import { useParams } from 'react-router-dom';
@@ -65,9 +66,8 @@ const DotsMenu = () => {
             </Button>
             {isOpen && (
                 <DropDown toggleOpen={toggleOpen}>
-                    <div>
-                        <ZoomControlToggle />
-                    </div>
+                    <ZoomControlToggle />
+                    <ChangeThemeButton />
                     <ScriptEditorToggle />
                     <Share date={date} />
                 </DropDown>

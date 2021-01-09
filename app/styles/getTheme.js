@@ -1,3 +1,5 @@
+import isDarkMode from 'utils/isDarkMode';
+
 const gray1a = '#201f24';
 const gray1b = '#2c2b32';
 const gray1c = '#38373f';
@@ -8,7 +10,8 @@ const gray4 = '#EFEFF4';
 const gray5 = '#fafafc';
 const gray6 = '#ffffff';
 
-const getTheme = (primary, dark) => {
+const getTheme = (primary, isDark) => {
+    const dark = isDark || isDarkMode();
     return {
         colours: {
             primary: primary || (dark ? '#E1B74D' : '#AE841A'),

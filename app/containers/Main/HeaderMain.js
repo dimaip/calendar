@@ -4,7 +4,6 @@ import { css } from 'emotion';
 import Button from 'components/Button/Button';
 import Burger from 'components/svgs/Burger';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
-import ThemeToggle from 'components/ThemeToggle/ThemeToggle';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import { useTheme } from 'emotion-theming';
@@ -75,7 +74,6 @@ const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) 
                         height: 100%;
                     `}
                 >
-                    <ThemeToggle />
                     {setNewDate && (
                         <>
                             <Today date={date} setNewDate={setNewDate} />

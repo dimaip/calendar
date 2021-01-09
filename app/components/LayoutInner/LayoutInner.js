@@ -4,7 +4,6 @@ import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
-import ThemeToggle from 'components/ThemeToggle/ThemeToggle';
 
 const LayoutInner = ({ children, left = null, right = null, paddedContent = true }) => {
     const { date } = useParams();
@@ -45,7 +44,6 @@ const LayoutInner = ({ children, left = null, right = null, paddedContent = true
                     `}
                 >
                     {right}
-                    <ThemeToggle />
                     <DotsMenu />
                 </div>
             </Header>
