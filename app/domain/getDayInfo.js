@@ -662,6 +662,7 @@ export const getFeastInfo = memoize(
             feastType = 'great';
             colour = red;
             calendarColour = 'blue';
+            icon = 'circumcision.svg';
         }
 
         if (new Date(y, 6, 7).getTime() == date.getTime()) {
