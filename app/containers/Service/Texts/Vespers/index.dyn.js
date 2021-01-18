@@ -2,6 +2,7 @@ import React from 'react';
 import dateFormat from 'dateformat';
 import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
 import Epiphany from './Epiphany.mdx';
+import Epiphany2 from './Epiphany2.mdx';
 import Prazdnichnaja from './Prazdnichnaja.mdx';
 import Lent from './Lent.mdx';
 import useDay from 'hooks/useDay';
@@ -77,6 +78,20 @@ const Vespers = ({ date }) => {
     if (title === 'Рождество Христово') {
         return (
             <Epiphany
+                dayOfWeek={dayOfWeek}
+                troparions={troparions}
+                endHymns={endHymns}
+                readings={readings}
+                saints={saints}
+                otpust={otpust}
+                day={tomorrowDay}
+                date={tomorrowDate}
+            />
+        );
+    }
+    if (title === 'Крещение Господне') {
+        return (
+            <Epiphany2
                 dayOfWeek={dayOfWeek}
                 troparions={troparions}
                 endHymns={endHymns}
