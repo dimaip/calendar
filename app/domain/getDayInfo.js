@@ -482,7 +482,8 @@ export const getFeastInfo = memoize(
                 isEasterOffsetRange(-3) ||
                 isEasterOffsetRange(-1) ||
                 new Date(y, 0, 6).getTime() == date.getTime() ||
-                new Date(y, 0, 14).getTime() == date.getTime()
+                new Date(y, 0, 14).getTime() == date.getTime() ||
+                new Date(y, 0, 18).getTime() == date.getTime()
             ) {
                 vasiliy = true;
             }
