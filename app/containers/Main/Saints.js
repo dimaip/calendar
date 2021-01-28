@@ -15,10 +15,14 @@ const Saints = ({ saints, date }) => {
                 }
                 ev.preventDefault();
                 const saintId = a.dataset.saint;
-                history.push({
-                    pathname: `/date/${date}/saint/${saintId}`,
-                    state: { backLink: history.location.pathname },
-                });
+                if (ev.metaKey || ev.ctrlKey) {
+                    window.open(`${process.env.PUBLIC_URL}/#/date/${date}/saint/${saintId}`, '_blank');
+                } else {
+                    history.push({
+                        pathname: `/date/${date}/saint/${saintId}`,
+                        state: { backLink: history.location.pathname },
+                    });
+                }
             });
         }
     }, []);
