@@ -91,7 +91,6 @@ module.exports = {
             2,
             {
                 'newlines-between': 'always',
-                pathGroups: [{ group: 'external', position: 'after' }],
                 pathGroupsExcludedImportTypes: ['builtin'],
             },
         ],
