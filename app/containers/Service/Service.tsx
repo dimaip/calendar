@@ -59,7 +59,7 @@ const Service = () => {
         if (serviceId) {
             const serviceIdUpper = toUpperCase(serviceId);
             const Component = React.lazy(() =>
-                import(`./Texts/${serviceIdUpper}/index.dyn.js`).catch(reloadOnFailedImport)
+                import(`./Texts/${serviceIdUpper}/index.dyn.tsx`).catch(reloadOnFailedImport)
             );
             setTextComponent(Component);
         }

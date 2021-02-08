@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect, useHistory, useParams } from 'react-router-dom';
-import Main from 'containers/Main/Main.js';
-import NotFound from 'components/NotFound/NotFound.js';
+import Main from 'containers/Main/Main';
+import NotFound from 'components/NotFound/NotFound';
 import Readings from 'containers/Readings/Readings';
 import dateFormat from 'dateformat';
 import Sermon from 'containers/Sermon/Sermon';

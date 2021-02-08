@@ -4,15 +4,11 @@ const { InjectManifest } = require('workbox-webpack-plugin');
 
 const hash = Array(1)
     .fill(null)
-    .map(() =>
-        Math.random()
-            .toString(36)
-            .substr(2)
-    )
+    .map(() => Math.random().toString(36).substr(2))
     .join('');
 
 module.exports = merge(common, {
-    entry: ['babel-polyfill', 'client.js'],
+    entry: ['babel-polyfill', 'client.tsx'],
     mode: 'production',
     output: {
         filename: '[name].[contenthash].js',

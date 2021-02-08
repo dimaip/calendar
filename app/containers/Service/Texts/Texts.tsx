@@ -5,7 +5,7 @@ import lpodTOC from './Lpod/TOC';
 import matinsTOC from './Matins/TOC';
 import vespersTOC from './Vespers/TOC';
 
-// New texts must be put into `Texts/ServiceIdUppercase/index.dyn.js` and then added here
+// New texts must be put into `Texts/ServiceIdUppercase/index.dyn.tsx` and then added here
 
 const makeServices = (date, readings = {}) => {
     const { vasiliy, lpod } = getFeastInfo(new Date(date));

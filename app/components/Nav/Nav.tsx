@@ -7,7 +7,7 @@ import { useTheme } from 'emotion-theming';
 import { subDays, format, parseISO } from 'date-fns';
 import { ru } from 'date-fns/locale';
 
-import Button from '../Button/Button.js';
+import Button from '../Button/Button';
 
 const Nav = ({ handleToggleClick, handleClickShift, date }) => {
     const theme = useTheme();
