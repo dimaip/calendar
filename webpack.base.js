@@ -75,14 +75,11 @@ module.exports = {
                 },
             },
             {
-                test: /\.js$/,
+                test: /\.(js|ts|tsx)$/,
                 exclude: /node_modules\/(?!capacitor-data-storage-sqlite)(?!recoil)(?!unfetch).*$/,
                 use: [
                     {
                         loader: 'babel-loader',
-                        options: {
-                            presets: [['@babel/preset-env', { targets: { browsers: ['ie >= 11', 'safari > 9'] } }]],
-                        },
                     },
                 ],
             },
@@ -124,6 +121,6 @@ module.exports = {
     resolve: {
         modules: ['node_modules', path.resolve(__dirname, './app')],
 
-        extensions: ['.js', '.json', '.jsx', '.css'],
+        extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css'],
     },
 };
