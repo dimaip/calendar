@@ -1,5 +1,6 @@
-import React from 'react';
 import { makeIsEasterOffsetRange, makeIsDate } from 'domain/getDayInfo';
+
+import React from 'react';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 const Antifon1 = ({ date: dateString }) => {

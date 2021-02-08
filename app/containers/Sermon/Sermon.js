@@ -14,7 +14,7 @@ const Sermon = () => {
     const { sermonId, date } = useParams();
     const { data: externalDay, status: externalDayStatus } = useExternalDay(date);
     const { sermons } = externalDay || {};
-    const sermon = sermons?.find(sermon => sermon.id === sermonId);
+    const sermon = sermons?.find((sermon) => sermon.id === sermonId);
 
     const theme = useTheme();
 

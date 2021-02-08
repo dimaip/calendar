@@ -1,7 +1,9 @@
+import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+
 import React from 'react';
+
 import ZlatoustMdx from './Zlatoust.mdx';
 import useLiturgy from './Vernie/useLiturgy';
-import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 
 const Zlatoust = ({ lang, date }) => {
     const { katekhumen, otpust, prichasten, saints, zadastoinik } = useLiturgy(lang, 'zlatoust');

@@ -1,15 +1,17 @@
+import { getFeastInfo } from 'domain/getDayInfo';
+
 import React, { useEffect } from 'react';
 import { useParams, Link, useHistory, useLocation } from 'react-router-dom';
 import { css } from 'emotion';
 import Loader from 'components/Loader/Loader';
-import ReadingsForService from './ReadingsForService';
-import ServiceSelector from './ServiceSelector';
 import useDay from 'hooks/useDay';
-import { getFeastInfo } from 'domain/getDayInfo';
 import Prayer from 'components/svgs/Prayer';
 import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
+
+import ServiceSelector from './ServiceSelector';
+import ReadingsForService from './ReadingsForService';
 
 const Readings = ({ brother = false }) => {
     const { service, date } = useParams();
@@ -27,7 +29,7 @@ const Readings = ({ brother = false }) => {
         }
     });
 
-    const setNewDate = dateString => {
+    const setNewDate = (dateString) => {
         history.push({
             pathname: `/date/${dateString}/readings/${service}`,
             state: {
@@ -75,7 +77,7 @@ const Readings = ({ brother = false }) => {
                 {...{
                     service,
                     services,
-                    onChange: value =>
+                    onChange: (value) =>
                         history.push({
                             pathname: `/date/${date}/${brother ? 'bReadings' : 'readings'}/${value}`,
                             state: {

@@ -9,12 +9,12 @@ const objAccess = (object, path) => path.split('.').reduce((acc, curr) => acc?.[
 
 const PartRenderer = ({ date, lang, partNames, fallback, alwaysShowFallback, Layout }) => {
     const { data: parts } = useParts(date, lang);
-    let texts = partNames.map(partName => objAccess(parts, partName) || []).flatten();
+    let texts = partNames.map((partName) => objAccess(parts, partName) || []).flatten();
     if (!texts?.length) {
         return fallback ? <Layout>{fallback}</Layout> : null;
     }
 
-    const exclusiveTexts = texts.filter(text => text.includes('ЗАМЕНА')).map(text => text.replace('ЗАМЕНА', ''));
+    const exclusiveTexts = texts.filter((text) => text.includes('ЗАМЕНА')).map((text) => text.replace('ЗАМЕНА', ''));
     texts = exclusiveTexts.length ? exclusiveTexts : texts;
 
     return (

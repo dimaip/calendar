@@ -9,7 +9,6 @@ import Saint from 'containers/Saint/Saint';
 import ThisDay from 'containers/ThisDay/ThisDay';
 import Service from 'containers/Service/Service';
 import { Global, css as rcss } from '@emotion/react';
-import checkVersion from './checkVersion';
 import useDay from 'hooks/useDay';
 import getTheme from 'styles/getTheme';
 import { ThemeProvider } from 'emotion-theming';
@@ -17,6 +16,8 @@ import { css } from 'emotion';
 import langState from 'state/langState';
 import { useRecoilValue } from 'recoil';
 import { LangContext } from 'containers/Service/LangContext';
+
+import checkVersion from './checkVersion';
 
 const DateRoutes = () => {
     const { date } = useParams();

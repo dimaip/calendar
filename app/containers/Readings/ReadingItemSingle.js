@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import Zoom, { ZoomContext } from 'components/Zoom/Zoom';
-import useReading from '../../hooks/useReading';
 import { useParams } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
@@ -10,6 +9,8 @@ import SelectBox from 'components/SelectBox/SelectBox';
 import Button from 'components/Button/Button';
 import Swap from 'components/svgs/Swap';
 import Cross from 'components/svgs/Cross';
+
+import useReading from '../../hooks/useReading';
 
 const ReadingItemSingle = ({
     readingVerse,
@@ -62,37 +63,35 @@ const ReadingItemSingle = ({
                         </div>
                     )}
                     {fragment.verses
-                        ?.map(verse => {
-                            return (
-                                <div key={verse.verse}>
-                                    {verse.type !== 'hidden' && (
-                                        <div
+                        ?.map((verse) => (
+                            <div key={verse.verse}>
+                                {verse.type !== 'hidden' && (
+                                    <div
+                                        className={css`
+                                            font-size: 18px;
+                                            line-height: 1.6;
+                                            margin-bottom: 12px;
+                                            color: ${theme.colours.darkGray};
+                                        `}
+                                    >
+                                        <span
                                             className={css`
-                                                font-size: 18px;
-                                                line-height: 1.6;
-                                                margin-bottom: 12px;
-                                                color: ${theme.colours.darkGray};
+                                                font-size: 12px;
+                                                color: ${theme.colours.gray};
                                             `}
                                         >
-                                            <span
-                                                className={css`
-                                                    font-size: 12px;
-                                                    color: ${theme.colours.gray};
-                                                `}
-                                            >
-                                                {verse.verse}
-                                            </span>{' '}
-                                            {verse.text.split('\n').map((text, index) => (
-                                                <span key={index}>
-                                                    {text}
-                                                    <br />
-                                                </span>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            );
-                        })
+                                            {verse.verse}
+                                        </span>{' '}
+                                        {verse.text.split('\n').map((text, index) => (
+                                            <span key={index}>
+                                                {text}
+                                                <br />
+                                            </span>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))
                         .filter(Boolean)}
                 </div>
             );
@@ -126,9 +125,9 @@ const ReadingItemSingle = ({
                             className={css`
                                 width: 100%;
                             `}
-                            onChange={value => setTranslation(value)}
+                            onChange={(value) => setTranslation(value)}
                             value={reading.translationCurrent}
-                            items={reading.translationList.map(i => ({ label: i.name, value: i.id }))}
+                            items={reading.translationList.map((i) => ({ label: i.name, value: i.id }))}
                         />
                     </div>
                 ) : null}
@@ -154,9 +153,8 @@ const ReadingItemSingle = ({
         </div>
     );
 };
-const ComplexReadingItemSingle = ({ readingVerse: complexReadingVerse, ...rest }) => {
-    return complexReadingVerse
+const ComplexReadingItemSingle = ({ readingVerse: complexReadingVerse, ...rest }) =>
+    complexReadingVerse
         .split('~')
-        .map(readingVerse => <ReadingItemSingle readingVerse={readingVerse} key={readingVerse} {...rest} />);
-};
+        .map((readingVerse) => <ReadingItemSingle readingVerse={readingVerse} key={readingVerse} {...rest} />);
 export default ComplexReadingItemSingle;

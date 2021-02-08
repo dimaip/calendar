@@ -15,17 +15,15 @@ const DefatulProkimen = ({ day, date }) => {
     return null;
 };
 
-const Prokimens = ({ day, date }) => {
-    return (
-        <>
-            <Parts
-                date={date}
-                partNames={['matins.Прокимен утрени']}
-                alwaysShowFallback
-                fallback={<DefatulProkimen day={day} date={date} />}
-            />
-        </>
-    );
-};
+const Prokimens = ({ day, date }) => (
+    <>
+        <Parts
+            date={date}
+            partNames={['matins.Прокимен утрени']}
+            alwaysShowFallback
+            fallback={<DefatulProkimen day={day} date={date} />}
+        />
+    </>
+);
 
 export default Prokimens;

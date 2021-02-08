@@ -60,7 +60,7 @@ const ThisDay = () => {
     const { data: externalDay, status: externalDayStatus } = useExternalDay(date);
     const { thisDays } = externalDay || {};
 
-    const thisDay = (thisDays || []).find(thisDay => thisDay.id === thisDayId);
+    const thisDay = (thisDays || []).find((thisDay) => thisDay.id === thisDayId);
     const theme = useTheme();
 
     return (

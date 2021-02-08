@@ -3,10 +3,11 @@ import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import LeftIcon from 'components/svgs/LeftIcon';
 import RightIcon from 'components/svgs/RightIcon';
-import Button from '../Button/Button.js';
 import { useTheme } from 'emotion-theming';
 import { subDays, format, parseISO } from 'date-fns';
 import { ru } from 'date-fns/locale';
+
+import Button from '../Button/Button.js';
 
 const Nav = ({ handleToggleClick, handleClickShift, date }) => {
     const theme = useTheme();

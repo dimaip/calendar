@@ -8,7 +8,7 @@ const Saints = ({ saints, date }) => {
     const history = useHistory();
     useEffect(() => {
         if (ref.current) {
-            ref.current.addEventListener('click', ev => {
+            ref.current.addEventListener('click', (ev) => {
                 const a = ev.target.closest('a');
                 if (!a || !ref.current.contains(a)) {
                     return null;

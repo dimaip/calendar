@@ -11,7 +11,7 @@ if (window.location.search.includes('utm_source=homescreen') || window.origin?.i
     window.addEventListener('touchstart', updateLastAccessedThrottled);
     window.addEventListener('click', updateLastAccessedThrottled);
 
-    document.addEventListener('visibilitychange', function() {
+    document.addEventListener('visibilitychange', function () {
         const sixHAgo = new Date();
         sixHAgo.setHours(-6);
         // If inactive for 6h and accessed from homescreen, redirect to home

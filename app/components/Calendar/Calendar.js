@@ -1,7 +1,8 @@
+import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
+
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { css } from 'emotion';
-import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
 import { DatePickerCalendar } from 'react-nice-dates';
 import { ru } from 'date-fns/locale';
 import './Calendar.scss';
@@ -11,25 +12,25 @@ const Calendar = ({ date, handleDayClick, onClose }) => {
     const theme = useTheme();
     const [month, setMonth] = useState(new Date(date));
     const modifiers = {
-        red: date => {
+        red: (date) => {
             const { calendarColour } = getFeastInfo(date);
             return calendarColour === 'red';
         },
-        blue: date => {
+        blue: (date) => {
             const { calendarColour } = getFeastInfo(date);
             return calendarColour === 'blue';
         },
-        gold: date => {
+        gold: (date) => {
             const { calendarColour } = getFeastInfo(date);
             const { calendarColour: calendarColourFeast } = getLentInfo(date);
             return calendarColour === 'gold' || calendarColourFeast === 'gold';
         },
-        green: date => {
+        green: (date) => {
             const { calendarColour } = getFeastInfo(date);
             const { calendarColour: calendarColourFeast } = getLentInfo(date);
             return calendarColour === 'green' || calendarColourFeast === 'green';
         },
-        pStrict: date => {
+        pStrict: (date) => {
             const { fastingLevel } = getLentInfo(date);
             return (
                 fastingLevel === 1 ||

@@ -15,15 +15,13 @@ const DefatulAliluja = ({ day, date }) => {
     return <MdxLoader src={`Liturgies/Katekhumen/Aliluja/WeekDays/${dayOfWeek}`} />;
 };
 
-const Aliluja = ({ day, date }) => {
-    return (
-        <Parts
-            date={date}
-            partNames={['liturgy.Аллилуарий']}
-            alwaysShowFallback
-            fallback={<DefatulAliluja day={day} date={date} />}
-        />
-    );
-};
+const Aliluja = ({ day, date }) => (
+    <Parts
+        date={date}
+        partNames={['liturgy.Аллилуарий']}
+        alwaysShowFallback
+        fallback={<DefatulAliluja day={day} date={date} />}
+    />
+);
 
 export default Aliluja;

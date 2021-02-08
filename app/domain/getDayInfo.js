@@ -22,7 +22,7 @@ const fastingLevels = {
     8: '',
 };
 
-const calculateEasterDateMemoized = memoize(year => {
+const calculateEasterDateMemoized = memoize((year) => {
     // Pascha Calculation
     let pascha_m;
     let pascha_d;
@@ -45,13 +45,13 @@ const calculateEasterDateMemoized = memoize(year => {
     return { d: pascha_d, m: pascha_m, y: year };
 });
 
-export const calculateEasterDate = year => {
+export const calculateEasterDate = (year) => {
     const { y, m, d } = calculateEasterDateMemoized(year);
     // Clone the date when accessing
     return new Date(y, m, d);
 };
 
-export const makeIsDate = date => (month, day) => {
+export const makeIsDate = (date) => (month, day) => {
     let d, m, y;
     if (typeof date === 'string') {
         const splitDateString = date.split('-');
@@ -65,7 +65,7 @@ export const makeIsDate = date => (month, day) => {
     return new Date(y, month - 1, day).getTime() == date.getTime();
 };
 
-export const makeIsEasterOffsetRange = date => (offsetBegin, offsetEnd) => {
+export const makeIsEasterOffsetRange = (date) => (offsetBegin, offsetEnd) => {
     let d, m, y;
     if (typeof date === 'string') {
         const splitDateString = date.split('-');
@@ -87,7 +87,7 @@ export const makeIsEasterOffsetRange = date => (offsetBegin, offsetEnd) => {
 };
 
 export const getLentInfo = memoize(
-    date => {
+    (date) => {
         const y = date.getFullYear();
         const m = date.getMonth();
         const d = date.getDate();
@@ -416,11 +416,11 @@ export const getLentInfo = memoize(
 
         return null;
     },
-    date => `${date.getFullYear()}${date.getMonth()}${date.getDate()}`
+    (date) => `${date.getFullYear()}${date.getMonth()}${date.getDate()}`
 );
 
 export const getFeastInfo = memoize(
-    _date => {
+    (_date) => {
         let title = '';
         let feastType = null;
         let colour = null;
@@ -711,5 +711,5 @@ export const getFeastInfo = memoize(
             lpod,
         };
     },
-    date => `${date.getFullYear()}${date.getMonth()}${date.getDate()}`
+    (date) => `${date.getFullYear()}${date.getMonth()}${date.getDate()}`
 );

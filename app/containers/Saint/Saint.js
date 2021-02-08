@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom';
 import { css } from 'emotion';
 import Loader from 'components/Loader/Loader';
 import Zoom from 'components/Zoom/Zoom';
-import useSaint from '../../hooks/useSaint';
 import ErrorMessage404 from 'components/ErrorMessage404/ErrorMessage404';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import RteText from 'components/RteText/RteText';
 import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
+
+import useSaint from '../../hooks/useSaint';
 
 const Saint = () => {
     const { saintId } = useParams();

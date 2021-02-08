@@ -15,17 +15,15 @@ const DefatulStepenna = ({ day, date }) => {
     return null;
 };
 
-const Stepenny = ({ day, date }) => {
-    return (
-        <>
-            <Parts
-                date={date}
-                partNames={['matins.Степенны']}
-                alwaysShowFallback
-                fallback={<DefatulStepenna day={day} date={date} />}
-            />
-        </>
-    );
-};
+const Stepenny = ({ day, date }) => (
+    <>
+        <Parts
+            date={date}
+            partNames={['matins.Степенны']}
+            alwaysShowFallback
+            fallback={<DefatulStepenna day={day} date={date} />}
+        />
+    </>
+);
 
 export default Stepenny;

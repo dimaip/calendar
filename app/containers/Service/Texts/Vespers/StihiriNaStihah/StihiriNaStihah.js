@@ -15,17 +15,15 @@ const DefatulStihiriNaStihah = ({ day, date }) => {
     return null;
 };
 
-const StihiriNaStihah = ({ day, date }) => {
-    return (
-        <>
-            <Parts
-                date={date}
-                partNames={['vespers.Cтихиры на стихах']}
-                alwaysShowFallback
-                fallback={<DefatulStihiriNaStihah day={day} date={date} />}
-            />
-        </>
-    );
-};
+const StihiriNaStihah = ({ day, date }) => (
+    <>
+        <Parts
+            date={date}
+            partNames={['vespers.Cтихиры на стихах']}
+            alwaysShowFallback
+            fallback={<DefatulStihiriNaStihah day={day} date={date} />}
+        />
+    </>
+);
 
 export default StihiriNaStihah;

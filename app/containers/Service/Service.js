@@ -1,27 +1,29 @@
+import { getFeastInfo } from 'domain/getDayInfo';
+
 import React, { Suspense, useState, useEffect, useContext } from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
 import ScrollRestoration from 'react-scroll-restoration';
-import MDXProvider from './MDXProvider';
 import { css } from 'emotion';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import Loader from 'components/Loader/Loader';
-import LanguageSwitcher from './LanguageSwitcher';
-import TOCSwitcher from './TOCSwitcher';
-import { getFeastInfo } from 'domain/getDayInfo';
-import makeServices from './Texts/Texts';
 import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
+
+import LanguageSwitcher from './LanguageSwitcher';
+import TOCSwitcher from './TOCSwitcher';
+import makeServices from './Texts/Texts';
+import MDXProvider from './MDXProvider';
 import ParallelLanguageBar from './ParallelLanguageBar';
 import { LangContext } from './LangContext';
-const reloadOnFailedImport = e => {
+const reloadOnFailedImport = (e) => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
     Sentry.captureException?.(e);
     location.reload();
 };
 
-const toUpperCase = name => name.charAt(0).toUpperCase() + name.slice(1);
+const toUpperCase = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 
 const Service = () => {
     const { serviceId: originalServiceId, date } = useParams();
@@ -46,7 +48,7 @@ const Service = () => {
     }
 
     const services = makeServices(date, day?.readings);
-    const service = services.find(service => service.id === (serviceId || originalServiceId));
+    const service = services.find((service) => service.id === (serviceId || originalServiceId));
 
     if (service?.skipRedirect) {
         serviceId = originalServiceId;
@@ -80,7 +82,7 @@ const Service = () => {
         }
     }
 
-    const setNewDate = dateString => {
+    const setNewDate = (dateString) => {
         history.push({
             pathname: `/date/${dateString}/service/${originalServiceId}`,
             state: { backLink: history.location.state?.backLink },

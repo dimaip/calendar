@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import SelectBox from '../../components/SelectBox/SelectBox';
 import { css } from 'emotion';
+
+import SelectBox from '../../components/SelectBox/SelectBox';
 
 const TOCSwitcher = ({ service, lang }) => {
     const data = service?.TOC;
     if (!data) {
         return null;
     }
-    const items = Object.keys(data).map(item => ({
+    const items = Object.keys(data).map((item) => ({
         value: item,
         label: data[item],
     }));
@@ -17,8 +18,8 @@ const TOCSwitcher = ({ service, lang }) => {
             let observer = null;
             if (data) {
                 observer = new IntersectionObserver(
-                    entries => {
-                        entries.forEach(entry => {
+                    (entries) => {
+                        entries.forEach((entry) => {
                             if (entry.isIntersecting && entry.target.id) {
                                 if (observer) {
                                     setActiveItem(entry.target.id);
@@ -34,7 +35,7 @@ const TOCSwitcher = ({ service, lang }) => {
 
                 // @TODO: any better way to do it without timeout?
                 // We keep on polling for dom nodes, till all nodes are found
-                const observeOrCue = nodeId => {
+                const observeOrCue = (nodeId) => {
                     if (!observer) {
                         return;
                     }
@@ -48,7 +49,7 @@ const TOCSwitcher = ({ service, lang }) => {
                     }
                 };
 
-                Object.keys(data).map(nodeId => {
+                Object.keys(data).map((nodeId) => {
                     observeOrCue(nodeId);
                 });
                 setTimeout(() => {}, 0);
@@ -81,7 +82,7 @@ const TOCSwitcher = ({ service, lang }) => {
             `}
             items={items}
             value={activeItem}
-            onChange={anchorID => {
+            onChange={(anchorID) => {
                 const domNode = document.getElementById(anchorID);
                 if (domNode) {
                     setActiveItem(anchorID);

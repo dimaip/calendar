@@ -17,7 +17,8 @@
         "cap-open": "yarn cap open ios",
         "lint": "yarn lint:eslint && yarn lint:tsc",
         "lint:eslint": "eslint --ext .js,.jsx,.ts,.tsx app",
-        "lint:tsc": "tsc --noEmit"
+        "lint:tsc": "tsc --noEmit",
+        "lint-fix": "eslint --ext .js,.jsx,.ts,.tsx app --fix"
     },
     "author": "PSMB.ru",
     "license": "ISC",

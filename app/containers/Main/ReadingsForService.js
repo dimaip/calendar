@@ -1,13 +1,15 @@
+import { getFeastInfo } from 'domain/getDayInfo';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
 import { Link, useParams, useLocation } from 'react-router-dom';
 import forEach from 'lodash.foreach';
-import ReadingGroup from './ReadingGroup';
 import { useTheme } from 'emotion-theming';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
-import { getFeastInfo } from 'domain/getDayInfo';
+
+import ReadingGroup from './ReadingGroup';
 
 const ReadingsForService = ({ title, readingsForService, brother }) => {
     const rendredReadingGroups = [];

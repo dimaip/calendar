@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Dots from 'components/svgs/Dots';
 import Button from 'components/Button/Button';
@@ -16,7 +16,7 @@ const DropDown = ({ toggleOpen, children }) => {
     return ReactDOM.createPortal(
         <>
             <div
-                onClick={e => {
+                onClick={(e) => {
                     e.stopPropagation();
                     toggleOpen();
                 }}

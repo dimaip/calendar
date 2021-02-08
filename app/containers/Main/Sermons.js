@@ -1,12 +1,13 @@
 import React from 'react';
 import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
-import SectionHeading from './SectionHeading';
 import SwipeableLink from 'components/SwipeableLink/SwipeableLink';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import SwipeableViews from 'react-swipeable-views';
 import { useLocation } from 'react-router-dom';
+
+import SectionHeading from './SectionHeading';
 
 const Sermons = ({ sermons, date, hideTitle = false }) => {
     const theme = useTheme();
@@ -37,7 +38,7 @@ const Sermons = ({ sermons, date, hideTitle = false }) => {
                         padding: 0 6px !important;
                     `}
                 >
-                    {sermons.map(sermon => (
+                    {sermons.map((sermon) => (
                         <SwipeableLink
                             to={{
                                 pathname: `/date/${date}/sermon/${sermon.id}`,

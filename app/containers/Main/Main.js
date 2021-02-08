@@ -2,34 +2,35 @@ import React, { useState, useRef, useCallback } from 'react';
 import { css } from 'emotion';
 import { ThemeProvider } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
-import ReadingList from './ReadingList';
 import HeaderMain from 'containers/Main/HeaderMain';
 import Nav from 'components/Nav/Nav';
-import HeadingBar from './HeadingBar';
 import Loader from 'components/Loader/Loader';
 import getTheme from 'styles/getTheme';
 import useDay from 'hooks/useDay';
 import BottomNav from 'components/BottomNav/BottomNav';
-import Saints from './Saints';
-import SectionHeading from './SectionHeading';
-import Links from './Links';
 import Zoom from 'components/Zoom/Zoom';
 import SolidSection from 'components/SolidSection/SolidSection';
-import Sermons from './Sermons';
-import ThisDays from './ThisDays';
 import useExternalDay from 'hooks/useExternalDay';
-import Services from './Services';
 import { parseISO, formatISO, subDays, addDays } from 'date-fns';
 import useReadings from 'hooks/useReadings';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
-import BurgerMenu from './BurgerMenu';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
-import IosPrompt from './IosPrompt';
+
 import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
 import Parts from 'components/Parts/Parts';
 import BorderedSection from './BorderedSection';
 import { HeightUpdater } from 'components/HeightUpdate/HeightUpdater';
+import IosPrompt from './IosPrompt';
+import BurgerMenu from './BurgerMenu';
+import Services from './Services';
+import ThisDays from './ThisDays';
+import Sermons from './Sermons';
+import Links from './Links';
+import SectionHeading from './SectionHeading';
+import Saints from './Saints';
+import HeadingBar from './HeadingBar';
+import ReadingList from './ReadingList';
 import Banner from './Banner';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
@@ -149,11 +150,11 @@ const Main = React.memo(({ services = false }) => {
     const calendarRef = useRef();
 
     const history = useHistory();
-    const setNewDate = dateString => {
+    const setNewDate = (dateString) => {
         history.push(`/date/${dateString}${services ? '/services' : ''}`);
     };
     const makeHandleClickShift = useCallback(
-        direction => () => {
+        (direction) => () => {
             switch (direction) {
                 case 'left':
                     setNewDate(formatISO(subDays(parseISO(date), 1), { representation: 'date' }));

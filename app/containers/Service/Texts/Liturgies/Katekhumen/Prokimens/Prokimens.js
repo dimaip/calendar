@@ -18,17 +18,15 @@ const DefatulProkimen = ({ day, date }) => {
     return <MdxLoader ref1={ref} src={`Liturgies/Katekhumen/Prokimens/WeekDays/${dayOfWeek}`} />;
 };
 
-const Prokimens = ({ day, date }) => {
-    return (
-        <>
-            <Parts
-                date={date}
-                partNames={['liturgy.Прокимен']}
-                alwaysShowFallback
-                fallback={<DefatulProkimen day={day} date={date} />}
-            />
-        </>
-    );
-};
+const Prokimens = ({ day, date }) => (
+    <>
+        <Parts
+            date={date}
+            partNames={['liturgy.Прокимен']}
+            alwaysShowFallback
+            fallback={<DefatulProkimen day={day} date={date} />}
+        />
+    </>
+);
 
 export default Prokimens;

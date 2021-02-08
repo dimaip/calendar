@@ -1,4 +1,5 @@
 import { getFeastInfo, makeIsEasterOffsetRange } from 'domain/getDayInfo';
+
 import liturgyTOC from './Liturgies/TOC';
 import lpodTOC from './Lpod/TOC';
 import matinsTOC from './Matins/TOC';

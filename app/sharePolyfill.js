@@ -6,7 +6,7 @@
 
 navigator.share =
     navigator.share ||
-    (function() {
+    (function () {
         const languages = {
             default: {
                 sms: 'SMS',
@@ -100,9 +100,9 @@ navigator.share =
             },
         };
 
-        let android = navigator.userAgent.match(/Android/i);
-        let ios = navigator.userAgent.match(/iPhone|iPad|iPod/i);
-        let mac = navigator.userAgent.match(/iPhone|iPad|iPod|Macintosh/i); // Test if mac to use ios/mac share icon on title, used to invoke the familiary concept.
+        const android = navigator.userAgent.match(/Android/i);
+        const ios = navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        const mac = navigator.userAgent.match(/iPhone|iPad|iPod|Macintosh/i); // Test if mac to use ios/mac share icon on title, used to invoke the familiary concept.
 
         const isDesktop = !(ios || android);
 
@@ -138,9 +138,9 @@ navigator.share =
         };
 
         function appendCSS(content) {
-            var css = content,
-                head = document.head || document.getElementsByTagName('head')[0],
-                style = document.createElement('style');
+            const css = content;
+            const head = document.head || document.getElementsByTagName('head')[0];
+            const style = document.createElement('style');
 
             style.type = 'text/css';
             if (style.styleSheet) {
@@ -401,7 +401,7 @@ navigator.share =
   </button>
   <button class="${
       !configs.skype ? 'hidden' : ''
-  } tool-icon skype skype-share" data-tool="skype" data-href="${url}" data-text="${title + ': ' + url}">
+  } tool-icon skype skype-share" data-tool="skype" data-href="${url}" data-text="${`${title}: ${url}`}">
    ${icon.skype}
    <span class="the-icon-title">${language.skype}</span>
   </button>
@@ -428,7 +428,7 @@ navigator.share =
                 }
 
                 // First, add the elements to the document in the current frame
-                requestAnimationFrame(_ => {
+                requestAnimationFrame((_) => {
                     document.body.appendChild(backdrop);
                     document.body.appendChild(container);
                     document.addEventListener('keyup', keyCloseEvent);
@@ -443,12 +443,12 @@ navigator.share =
                 });
 
                 function addSkypeSupport() {
-                    (function(r, d, s) {
+                    (function (r, d, s) {
                         r.loadSkypeWebSdkAsync =
                             r.loadSkypeWebSdkAsync ||
-                            function(p) {
-                                var js,
-                                    sjs = d.getElementsByTagName(s)[0];
+                            function (p) {
+                                let js;
+                                const sjs = d.getElementsByTagName(s)[0];
                                 if (d.getElementById(p.id)) {
                                     return;
                                 }
@@ -458,7 +458,7 @@ navigator.share =
                                 js.onload = p.callback;
                                 sjs.parentNode.insertBefore(js, sjs);
                             };
-                        var p = {
+                        const p = {
                             scriptToLoad: 'https://swx.cdn.skype.com/shared/v/latest/skypewebsdk.js',
                             id: 'skype_web_sdk',
                         };
@@ -467,9 +467,9 @@ navigator.share =
                 }
 
                 function bindEvents() {
-                    Array.from(container.querySelectorAll('.tool-icon')).forEach(tool => {
-                        tool.addEventListener('click', event => {
-                            const payload = text + ': ' + url;
+                    Array.from(container.querySelectorAll('.tool-icon')).forEach((tool) => {
+                        tool.addEventListener('click', (event) => {
+                            const payload = `${text}: ${url}`;
                             switch (tool.dataset.tool) {
                                 case 'copy': {
                                     navigator.clipboard.writeText(url);
@@ -480,7 +480,7 @@ navigator.share =
                                     break;
                                 }
                                 case 'email': {
-                                    window.open('mailto:' + '' + '?subject=' + title + '&body=' + url);
+                                    window.open(`${'mailto:' + '' + '?subject='}${title}&body=${url}`);
                                     break;
                                 }
                                 case 'sms': {
@@ -491,36 +491,28 @@ navigator.share =
                                 }
                                 case 'messenger': {
                                     window.open(
-                                        'http://www.facebook.com/dialog/send?' +
-                                            'app_id=' +
-                                            fbId +
-                                            '&display=popup' +
-                                            '&href=' +
-                                            encodeURIComponent(url) +
-                                            '&link=' +
-                                            encodeURIComponent(url) +
-                                            '&redirect_uri=' +
-                                            encodeURIComponent(url) +
-                                            '&quote=' +
-                                            encodeURIComponent(text)
+                                        `${'http://www.facebook.com/dialog/send?' + 'app_id='}${fbId}&display=popup` +
+                                            `&href=${encodeURIComponent(url)}&link=${encodeURIComponent(
+                                                url
+                                            )}&redirect_uri=${encodeURIComponent(url)}&quote=${encodeURIComponent(
+                                                text
+                                            )}`
                                     );
 
                                     break;
                                 }
                                 case 'facebook': {
                                     window.open(
-                                        'https://www.facebook.com/sharer/sharer.php?' +
-                                            'u=' +
-                                            encodeURIComponent(url) +
-                                            '&quote=' +
-                                            encodeURIComponent(text)
+                                        `${'https://www.facebook.com/sharer/sharer.php?' + 'u='}${encodeURIComponent(
+                                            url
+                                        )}&quote=${encodeURIComponent(text)}`
                                     );
                                     break;
                                 }
                                 case 'whatsapp': {
                                     window.open(
                                         (isDesktop ? 'https://api.whatsapp.com/send?text=' : 'whatsapp://send?text=') +
-                                            encodeURIComponent(text + '\n' + url)
+                                            encodeURIComponent(`${text}\n${url}`)
                                     );
                                     break;
                                 }
@@ -539,8 +531,8 @@ navigator.share =
                                 case 'telegram': {
                                     window.open(
                                         isDesktop
-                                            ? 'https://telegram.me/share/msg?url=' + url + '&text=' + text
-                                            : 'tg://msg?text=' + payload
+                                            ? `https://telegram.me/share/msg?url=${url}&text=${text}`
+                                            : `tg://msg?text=${payload}`
                                     );
                                     break;
                                 }

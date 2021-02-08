@@ -1,9 +1,10 @@
 import React from 'react';
 import { css } from 'emotion';
-import BorderedSection from './BorderedSection';
-import SectionHeading from './SectionHeading';
 import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
 import Parts from 'components/Parts/Parts';
+
+import BorderedSection from './BorderedSection';
+import SectionHeading from './SectionHeading';
 
 const Layout = ({ children }) => (
     <div

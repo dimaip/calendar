@@ -20,7 +20,7 @@ const Share = ({ date }) => {
                             text: day?.title,
                             url: window.location.href,
                         })
-                        .catch(error => console.log('Error sharing', error));
+                        .catch((error) => console.log('Error sharing', error));
                 }
             }}
             className={css`

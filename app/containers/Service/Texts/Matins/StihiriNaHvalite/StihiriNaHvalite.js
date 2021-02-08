@@ -15,17 +15,15 @@ const DefatulStihiriNaHvalite = ({ day, date }) => {
     return null;
 };
 
-const StihiriNaHvalite = ({ day, date }) => {
-    return (
-        <>
-            <Parts
-                date={date}
-                partNames={['matins.Cтихиры на хвалите']}
-                alwaysShowFallback
-                fallback={<DefatulStihiriNaHvalite day={day} date={date} />}
-            />
-        </>
-    );
-};
+const StihiriNaHvalite = ({ day, date }) => (
+    <>
+        <Parts
+            date={date}
+            partNames={['matins.Cтихиры на хвалите']}
+            alwaysShowFallback
+            fallback={<DefatulStihiriNaHvalite day={day} date={date} />}
+        />
+    </>
+);
 
 export default StihiriNaHvalite;

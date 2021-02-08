@@ -1,25 +1,29 @@
-import React from 'react';
-import { css } from 'emotion';
-
 import isGospel from 'domain/isGospel';
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
-import Antifon1 from './Antifon1/Antifon1';
-import Antifon2 from './Antifon2/Antifon2';
-import Antifon3 from './Antifon3/Antifon3';
+
+import React from 'react';
+import { css } from 'emotion';
 import SolidSection from 'components/SolidSection/SolidSection';
 import Hymns from 'containers/Main/Hymns';
-import useScrollToReadings from '../../useScrollToReadings';
 import forEach from 'lodash.foreach';
 import useExternalDay from 'hooks/useExternalDay';
 import Sermons from 'containers/Main/Sermons';
 import ReadingItem from 'containers/Readings/ReadingItem';
-import Aliluja from './Aliluja/Aliluja';
+import Parts from 'components/Parts/Parts';
+
+import useScrollToReadings from '../../useScrollToReadings';
 import VariableSection from '../../VariableSection';
+
+import Antifon1 from './Antifon1/Antifon1';
+import Antifon2 from './Antifon2/Antifon2';
+import Antifon3 from './Antifon3/Antifon3';
+
+import Aliluja from './Aliluja/Aliluja';
+
 import Trisvatoe from './Trisvatoe/Trisvatoe';
 import VhodnoiStih from './VhodnoiStih/VhodnoiStih';
 import Reading from './Reading/Reading';
 import KatekhumenMdx from './Katekhumen.mdx';
-import Parts from 'components/Parts/Parts';
 
 const Readings = ({ readings }) => (
     <>
@@ -31,13 +35,13 @@ const Readings = ({ readings }) => (
     </>
 );
 
-const getKatekhumenReadings = day => {
+const getKatekhumenReadings = (day) => {
     const readings = day?.readings;
     const readingsForService = readings?.['Литургия'];
 
     const readingVersesWithType = [];
     forEach(readingsForService, (readingVerses, type) => {
-        readingVerses.forEach(readingVerse => {
+        readingVerses.forEach((readingVerse) => {
             readingVersesWithType.push({
                 readingVerse,
                 type,
@@ -45,8 +49,8 @@ const getKatekhumenReadings = day => {
         });
     });
 
-    const apostolReadings = readingVersesWithType.filter(reading => !isGospel(reading.readingVerse));
-    const gospelReadings = readingVersesWithType.filter(reading => isGospel(reading.readingVerse));
+    const apostolReadings = readingVersesWithType.filter((reading) => !isGospel(reading.readingVerse));
+    const gospelReadings = readingVersesWithType.filter((reading) => isGospel(reading.readingVerse));
 
     const apostol = (
         <div className={css``}>

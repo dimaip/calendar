@@ -1,8 +1,9 @@
 import React from 'react';
-import SelectBox from '../../components/SelectBox/SelectBox';
 import { css } from 'emotion';
 import { useRecoilState } from 'recoil';
 import langState from 'state/langState';
+
+import SelectBox from '../../components/SelectBox/SelectBox';
 
 const serviceLanguages = [
     {
@@ -28,7 +29,7 @@ const LanguageSwitcher = () => {
             `}
             items={serviceLanguages}
             value={langStateValue.lang}
-            onChange={lang => setLang({ ...langStateValue, lang: lang })}
+            onChange={(lang) => setLang({ ...langStateValue, lang: lang })}
         />
     );
 };

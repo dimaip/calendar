@@ -10,7 +10,7 @@ export function register() {
 
             navigator.serviceWorker
                 .register(swUrl)
-                .then(registration => {
+                .then((registration) => {
                     registration.onupdatefound = () => {
                         const installingWorker = registration.installing;
                         if (installingWorker == null) {
@@ -38,7 +38,7 @@ export function register() {
                         };
                     };
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.error('Error during service worker registration:', error);
                 });
         });
@@ -48,10 +48,10 @@ export function register() {
 export function unregister() {
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.ready
-            .then(registration => {
+            .then((registration) => {
                 registration.unregister();
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error(error.message);
             });
     }

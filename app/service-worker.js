@@ -5,11 +5,11 @@ import * as googleAnalytics from 'workbox-google-analytics';
 
 googleAnalytics.initialize();
 
-self.addEventListener('install', function(event) {
+self.addEventListener('install', function (event) {
     // Activate without waiting for all tabs to close
     event.waitUntil(self.skipWaiting());
 });
-self.addEventListener('activate', function(event) {
+self.addEventListener('activate', function (event) {
     // Take over other tabs
     event.waitUntil(self.clients.claim());
 });

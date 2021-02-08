@@ -4,11 +4,13 @@ import useDay from 'hooks/useDay';
 import SolidSection from 'components/SolidSection/SolidSection';
 import Saints from 'containers/Main/Saints';
 import SectionHeading from 'containers/Main/SectionHeading';
+
+import Katekhumen from '../Katekhumen/Katekhumen';
+import VariableSection from '../../VariableSection';
+
 import Prichasten from './Prichasten/Prichasten';
 import Zadastoinik from './Zadastoinik/Zadastoinik';
 import Otpust from './Otpust/Otpust';
-import Katekhumen from '../Katekhumen/Katekhumen';
-import VariableSection from '../../VariableSection';
 
 const useLiturgy = (lang, serviceType) => {
     const { date } = useParams();

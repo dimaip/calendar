@@ -15,17 +15,15 @@ const DefatulStihiriNaGV = ({ day, date }) => {
     return null;
 };
 
-const StihiriNaGV = ({ day, date }) => {
-    return (
-        <>
-            <Parts
-                date={date}
-                partNames={['vespers.Cтихиры на Господи взываю']}
-                alwaysShowFallback
-                fallback={<DefatulStihiriNaGV day={day} date={date} />}
-            />
-        </>
-    );
-};
+const StihiriNaGV = ({ day, date }) => (
+    <>
+        <Parts
+            date={date}
+            partNames={['vespers.Cтихиры на Господи взываю']}
+            alwaysShowFallback
+            fallback={<DefatulStihiriNaGV day={day} date={date} />}
+        />
+    </>
+);
 
 export default StihiriNaGV;

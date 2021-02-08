@@ -8,15 +8,13 @@ const DefaultPrichasten = ({ date }) => {
     return <MdxLoader src={`Liturgies/Vernie/Prichasten/${dayOfWeek}`} />;
 };
 
-const Prichastens = ({ day, date }) => {
-    return (
-        <Parts
-            date={date}
-            partNames={['liturgy.Причастен']}
-            alwaysShowFallback
-            fallback={<DefaultPrichasten date={date} />}
-        />
-    );
-};
+const Prichastens = ({ day, date }) => (
+    <Parts
+        date={date}
+        partNames={['liturgy.Причастен']}
+        alwaysShowFallback
+        fallback={<DefaultPrichasten date={date} />}
+    />
+);
 
 export default Prichastens;

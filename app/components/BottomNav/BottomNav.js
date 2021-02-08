@@ -48,19 +48,19 @@ const BottomNav = ({ active }) => {
                     user-select: none;
                 `}
             >
-                <Link className={itemClass + ' ' + (active === 'calendar' ? activeClass : '')} to={`/date/${date}`}>
+                <Link className={`${itemClass} ${active === 'calendar' ? activeClass : ''}`} to={`/date/${date}`}>
                     <CalendarIcon colour={active === 'calendar' ? theme.colours.darkGray : theme.colours.lightGray} />
                     Календарь
                 </Link>
                 <Link
-                    className={itemClass + ' ' + (active === 'services' ? activeClass : '')}
+                    className={`${itemClass} ${active === 'services' ? activeClass : ''}`}
                     to={`/date/${date}/services`}
                 >
                     <Prayer colour={active === 'services' ? theme.colours.darkGray : theme.colours.lightGray} />
                     Богослужение
                 </Link>
                 <a
-                    className={itemClass + ' ' + (active === 'bible' ? activeClass : '')}
+                    className={`${itemClass} ${active === 'bible' ? activeClass : ''}`}
                     rel="noopener"
                     href="https://bible.psmb.ru"
                     target="_blank"

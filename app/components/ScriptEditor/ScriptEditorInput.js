@@ -17,7 +17,7 @@ const ScriptEditorInput = ({ id }) => {
     const storageKey = `ScriptEditor.${id}`;
     const storedReaderName = window.localStorage.getItem(storageKey);
 
-    const changeInputHandler = e => {
+    const changeInputHandler = (e) => {
         setInputReaderName(e.target.value);
     };
     const saveNameHandler = () => {

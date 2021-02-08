@@ -1,5 +1,5 @@
 const getVersion = () =>
-    fetch(`${process.env.PUBLIC_URL}/built/version.json`).then(response => {
+    fetch(`${process.env.PUBLIC_URL}/built/version.json`).then((response) => {
         if (!response.ok) {
             return;
         }

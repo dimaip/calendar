@@ -1,15 +1,16 @@
 import React, { useContext } from 'react';
 import { css } from 'emotion';
+
 import { LangContext } from '../LangContext';
 
-const catchFailedImport = e => {
+const catchFailedImport = (e) => {
     console.warn('Loading mdx file failed', e);
     Sentry.captureException?.(e);
 };
 
-const MdxLoader = props => {
-    let { lang, langA, langB } = useContext(LangContext);
-    let { src } = props;
+const MdxLoader = (props) => {
+    const { lang, langA, langB } = useContext(LangContext);
+    const { src } = props;
     if (lang === 'parallel') {
         const ComponentA = React.lazy(() => import(`containers/Service/Texts/${src}/${langA}.mdx`).catch(() => {}));
         const ComponentB = React.lazy(() => import(`containers/Service/Texts/${src}/${langB}.mdx`).catch(() => {}));

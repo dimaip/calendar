@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReadingsForService from './ReadingsForService';
 import forEach from 'lodash.foreach';
 import { css } from 'emotion';
+
+import ReadingsForService from './ReadingsForService';
 
 const ReadingList = ({ readings, brother = false }) => {
     const renderedReadings = [];

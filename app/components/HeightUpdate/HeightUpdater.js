@@ -6,9 +6,11 @@ export class HeightUpdater extends React.Component {
     componentDidMount() {
         this.context?.swipeableViews?.slideUpdateHeight();
     }
+
     componentDidUpdate() {
         this.context?.swipeableViews?.slideUpdateHeight();
     }
+
     render() {
         return this.props.children;
     }

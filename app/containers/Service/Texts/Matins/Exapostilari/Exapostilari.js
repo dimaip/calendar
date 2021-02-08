@@ -1,7 +1,8 @@
+import { calculateEasterDate } from 'domain/getDayInfo';
+
 import React from 'react';
 import Parts from 'components/Parts/Parts';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
-import { calculateEasterDate } from 'domain/getDayInfo';
 
 const DefatulExapostilari = ({ date }) => {
     const dateObj = new Date(date);
@@ -14,7 +15,7 @@ const DefatulExapostilari = ({ date }) => {
     let matinsKey = null;
     if (weeksSinceEaster >= 9) {
         matinsKey = ((weeksSinceEaster - 9) % 11) + 1;
-    } else if (1 < weeksSinceEaster) {
+    } else if (weeksSinceEaster > 1) {
         matinsKey = [1, 3, 4, 7, 8, 10, 9][weeksSinceEaster - 2];
     }
 
@@ -25,17 +26,15 @@ const DefatulExapostilari = ({ date }) => {
     return <MdxLoader src={`Matins/Exapostilari/${matinsKey}`} />;
 };
 
-const Exapostilari = ({ date }) => {
-    return (
-        <>
-            <Parts
-                date={date}
-                partNames={['shared.Эксапостиларии']}
-                alwaysShowFallback
-                fallback={<DefatulExapostilari date={date} />}
-            />
-        </>
-    );
-};
+const Exapostilari = ({ date }) => (
+    <>
+        <Parts
+            date={date}
+            partNames={['shared.Эксапостиларии']}
+            alwaysShowFallback
+            fallback={<DefatulExapostilari date={date} />}
+        />
+    </>
+);
 
 export default Exapostilari;

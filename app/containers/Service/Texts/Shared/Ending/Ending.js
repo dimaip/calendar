@@ -1,7 +1,9 @@
-import React from 'react';
 import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
-import MdxLoader from '../../MdxLoader';
+
+import React from 'react';
 import Parts from 'components/Parts/Parts';
+
+import MdxLoader from '../../MdxLoader';
 
 const Ending = ({ date, saints }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
@@ -34,7 +36,7 @@ const Ending = ({ date, saints }) => {
             otpust={otpust}
             saints={saints}
             isEasterOffsetRange={isEasterOffsetRange}
-            hideTverdina={isEasterOffsetRange(0, 49) || title === 'Рождество Христово' }
+            hideTverdina={isEasterOffsetRange(0, 49) || title === 'Рождество Христово'}
         />
     );
 };

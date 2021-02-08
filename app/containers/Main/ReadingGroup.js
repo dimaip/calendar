@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'emotion';
-import ReadingItem from './ReadingItem';
 import { useTheme } from 'emotion-theming';
 
+import ReadingItem from './ReadingItem';
+
 const ReadingGroup = ({ title, readingVerses }) => {
-    var items = readingVerses
-        .map(reading => {
-            return reading && <ReadingItem reading={reading} key={reading} />;
-        })
+    const items = readingVerses
+        .map((reading) => reading && <ReadingItem reading={reading} key={reading} />)
         .filter(Boolean);
 
     const theme = useTheme();

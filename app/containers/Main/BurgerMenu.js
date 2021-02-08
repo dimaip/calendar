@@ -118,20 +118,20 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                                 wrapper.openStore({ database: 'pb', table: 'requestsCache' }, () => {
                                     wrapper.clear(() => {
                                         if (navigator.serviceWorker) {
-                                            navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                                                for (let registration of registrations) {
+                                            navigator.serviceWorker.getRegistrations().then(function (registrations) {
+                                                for (const registration of registrations) {
                                                     registration.unregister();
                                                 }
                                             });
                                             caches
                                                 .keys()
-                                                .then(function(cacheNames) {
+                                                .then(function (cacheNames) {
                                                     return Promise.all(
                                                         cacheNames
-                                                            .filter(function(cacheName) {
+                                                            .filter(function (cacheName) {
                                                                 return true;
                                                             })
-                                                            .map(function(cacheName) {
+                                                            .map(function (cacheName) {
                                                                 return caches.delete(cacheName);
                                                             })
                                                     );

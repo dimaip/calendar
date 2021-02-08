@@ -17,7 +17,7 @@ const precache = async () => {
 
     const daylist = getDaysArray(new Date(), tillDate);
 
-    daylist.forEach(date => {
+    daylist.forEach((date) => {
         cachedFetch(`${process.env.API_HOST}/day/${date}`, true);
         cachedFetch(`${process.env.API_HOST}/parts/${date}/ru`, true);
         cachedFetch(`https://psmb.ru/?calendarDate=${date}`, true);

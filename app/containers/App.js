@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
+
 import Routes from '../Routes';
+
 import 'styles/reset.css';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
 import { QueryCache, ReactQueryCacheProvider } from 'react-query';

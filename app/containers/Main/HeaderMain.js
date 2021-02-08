@@ -1,6 +1,5 @@
 import React from 'react';
 import { css } from 'emotion';
-
 import Button from 'components/Button/Button';
 import Burger from 'components/svgs/Burger';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
@@ -39,51 +38,49 @@ const Today = ({ date, setNewDate }) => {
     );
 };
 
-const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => {
-    return (
-        <Header>
+const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => (
+    <Header>
+        <div
+            className={css`
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            `}
+        >
+            <div>
+                {setMenuShown && (
+                    <Button
+                        title="Меню"
+                        onClick={() => setMenuShown(!menuShown)}
+                        className={css`
+                            display: block;
+                            padding: 10px 18px;
+                            z-index: 1;
+                        `}
+                    >
+                        <Burger />
+                    </Button>
+                )}
+            </div>
             <div
                 className={css`
+                    z-index: 1;
                     display: flex;
-                    justify-content: space-between;
                     align-items: center;
-                    width: 100%;
+                    justify-content: center;
+                    height: 100%;
                 `}
             >
-                <div>
-                    {setMenuShown && (
-                        <Button
-                            title="Меню"
-                            onClick={() => setMenuShown(!menuShown)}
-                            className={css`
-                                display: block;
-                                padding: 10px 18px;
-                                z-index: 1;
-                            `}
-                        >
-                            <Burger />
-                        </Button>
-                    )}
-                </div>
-                <div
-                    className={css`
-                        z-index: 1;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        height: 100%;
-                    `}
-                >
-                    {setNewDate && (
-                        <>
-                            <Today date={date} setNewDate={setNewDate} />
-                            <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
-                        </>
-                    )}
-                    <DotsMenu />
-                </div>
+                {setNewDate && (
+                    <>
+                        <Today date={date} setNewDate={setNewDate} />
+                        <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
+                    </>
+                )}
+                <DotsMenu />
             </div>
-        </Header>
-    );
-};
+        </div>
+    </Header>
+);
 export default HeaderMain;

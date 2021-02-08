@@ -2,7 +2,7 @@ import { useTheme } from 'emotion-theming';
 import { useEffect } from 'react';
 import { css } from 'emotion';
 
-const formatTime = seconds => new Date(1000 * parseInt(seconds || 0)).toISOString().substr(14, 5);
+const formatTime = (seconds) => new Date(1000 * parseInt(seconds || 0)).toISOString().substr(14, 5);
 
 // Just a tiny little helper from back in the days
 const el = (tagName, attributes, children) => {
@@ -10,10 +10,10 @@ const el = (tagName, attributes, children) => {
         throw new Error('tagName must be a string');
     }
 
-    var element = document.createElement(tagName);
+    const element = document.createElement(tagName);
 
     if (attributes && typeof attributes === 'object') {
-        Object.keys(attributes).forEach(function(i) {
+        Object.keys(attributes).forEach(function (i) {
             // Set event handlers
             if (/on[A-Z][a-z]/.test(i)) {
                 element[i.toLowerCase()] = attributes[i];
@@ -27,7 +27,7 @@ const el = (tagName, attributes, children) => {
     if (typeof children === 'string') {
         element.innerHTML = children;
     } else if (children instanceof Array) {
-        children.forEach(function(child) {
+        children.forEach(function (child) {
             element.appendChild(child);
         });
     }
@@ -144,7 +144,7 @@ const augmentAudio = (audioElement, theme) => {
     };
     play.addEventListener('click', handlePlay);
 
-    const updateUI = time => {
+    const updateUI = (time) => {
         requestAnimationFrame(() => {
             const effectiveTime = Math.max(
                 0,
@@ -172,7 +172,7 @@ const augmentAudio = (audioElement, theme) => {
             '<svg width="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M152.443 136.417L359.557 255.99 152.443 375.583z"/></svg>';
     });
 
-    const preventTouch = event => {
+    const preventTouch = (event) => {
         event.preventDefault();
         event.stopPropagation();
     };
@@ -185,7 +185,7 @@ const augmentAudio = (audioElement, theme) => {
     timelineWrapper.addEventListener('touchstart', startTouch);
     timelineWrapper.addEventListener('mousedown', startTouch);
 
-    const getTimeFromEvent = event => {
+    const getTimeFromEvent = (event) => {
         const targetRatio =
             ((event.changedTouches ? event.changedTouches[0].clientX : event.clientX) -
                 timelineWrapper.getBoundingClientRect().left) /
@@ -194,7 +194,7 @@ const augmentAudio = (audioElement, theme) => {
         return audioElement.duration * targetRatio;
     };
 
-    const touchEnd = event => {
+    const touchEnd = (event) => {
         touching = false;
         audioElement.currentTime = getTimeFromEvent(event);
     };
@@ -205,7 +205,7 @@ const augmentAudio = (audioElement, theme) => {
         touching = false;
     });
 
-    const touchMove = event => {
+    const touchMove = (event) => {
         if (touching) {
             updateUI(getTimeFromEvent(event));
         }
@@ -215,11 +215,11 @@ const augmentAudio = (audioElement, theme) => {
     updateUI();
 };
 
-const useAudio = ref => {
+const useAudio = (ref) => {
     const theme = useTheme();
     useEffect(() => {
         if (ref?.current) {
-            ref.current.querySelectorAll('audio').forEach(audioElement => {
+            ref.current.querySelectorAll('audio').forEach((audioElement) => {
                 augmentAudio(audioElement, theme);
             });
         }

@@ -1,6 +1,4 @@
-export const isCapacitor = () => {
-    return window.origin?.includes?.('capacitor://');
-};
+export const isCapacitor = () => window.origin?.includes?.('capacitor://');
 
 export const isIphone = () => {
     const userAgent = window.navigator.userAgent.toLowerCase();

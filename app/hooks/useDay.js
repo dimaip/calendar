@@ -1,9 +1,10 @@
-import { useQuery } from 'react-query';
 import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
+
+import { useQuery } from 'react-query';
 import cachedFetch from 'utils/cachedFetch';
 
 export function fetchDay(key, { date }) {
-    return cachedFetch(`${process.env.API_HOST}/day/${date}`).then(res => {
+    return cachedFetch(`${process.env.API_HOST}/day/${date}`).then((res) => {
         let day = {};
         if (res) {
             const { comment, readings, bReadings, saints, seromns, title, glas, week } = res;
@@ -31,6 +32,6 @@ export function fetchDay(key, { date }) {
     });
 }
 
-const useDay = date => useQuery(['day', { date }], fetchDay, { retry: false });
+const useDay = (date) => useQuery(['day', { date }], fetchDay, { retry: false });
 
 export default useDay;

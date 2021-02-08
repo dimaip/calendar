@@ -1,5 +1,6 @@
 import React from 'react';
 import Tooltip from 'components/Tooltip/Tooltip';
+
 import useLiturgy from './Vernie/useLiturgy';
 import 'containers/Service/Texts/Shared.css';
 

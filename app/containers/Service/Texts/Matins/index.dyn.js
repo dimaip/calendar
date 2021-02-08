@@ -1,7 +1,6 @@
-import React from 'react';
 import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
-import Prazdnichnaja from './Prazdnichnaja.mdx';
-import Lent from './Lent.mdx';
+
+import React from 'react';
 import useDay from 'hooks/useDay';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 import Loader from 'components/Loader/Loader';
@@ -9,8 +8,12 @@ import { css } from 'emotion';
 import SolidSection from 'components/SolidSection/SolidSection';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';
-import Ending from '../Shared/Ending/Ending';
 import Parts from 'components/Parts/Parts';
+
+import Ending from '../Shared/Ending/Ending';
+
+import Prazdnichnaja from './Prazdnichnaja.mdx';
+import Lent from './Lent.mdx';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (

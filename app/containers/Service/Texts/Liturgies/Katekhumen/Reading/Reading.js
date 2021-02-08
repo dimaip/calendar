@@ -1,7 +1,8 @@
 import React from 'react';
-import Prokimens from '../Prokimens/Prokimens';
 import VariableSection from 'containers/Service/Texts/VariableSection';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
+
+import Prokimens from '../Prokimens/Prokimens';
 
 const Reading = ({ day, date }) => {
     const prokimen = (

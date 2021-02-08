@@ -1,12 +1,13 @@
 import React from 'react';
 import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
-import SectionHeading from './SectionHeading';
 import { Link, useLocation } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import makeServices from 'containers/Service/Texts/Texts';
 import groupBy from 'lodash.groupby';
+
+import SectionHeading from './SectionHeading';
 
 const OptionalLink = ({ enabled, ...rest }) =>
     enabled ? (
@@ -25,7 +26,7 @@ const Services = ({ date, readings }) => {
 
     const services = makeServices(date, readings);
 
-    const groupedServices = groupBy(services, service => service.group);
+    const groupedServices = groupBy(services, (service) => service.group);
 
     return (
         <div
@@ -45,7 +46,7 @@ const Services = ({ date, readings }) => {
             >
                 Текст службы адаптируется под выбранную дату. Активны только те службы, которые служатся в этот день
             </div>
-            {Object.keys(groupedServices).map(groupTitle => {
+            {Object.keys(groupedServices).map((groupTitle) => {
                 const servicesForGroup = groupedServices[groupTitle];
                 return (
                     <div
@@ -68,7 +69,7 @@ const Services = ({ date, readings }) => {
                                     margin: 0 -10px 18px -10px;
                                 `}
                             >
-                                {servicesForGroup.map(service => (
+                                {servicesForGroup.map((service) => (
                                     <OptionalLink
                                         enabled={service.enabled}
                                         className={css`

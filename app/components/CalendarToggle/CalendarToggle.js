@@ -16,7 +16,7 @@ const CalendarToggle = ({ date, setNewDate, iconOnly = false, calendarRef = null
 
     if (calendarRef) {
         useImperativeHandle(calendarRef, () => ({
-            setCalendarShown: val => {
+            setCalendarShown: (val) => {
                 setCalendarShown(val);
             },
             toggleCalendarShown: () => {
@@ -25,7 +25,7 @@ const CalendarToggle = ({ date, setNewDate, iconOnly = false, calendarRef = null
         }));
     }
 
-    const handleDayClick = day => {
+    const handleDayClick = (day) => {
         const dateString = dateFormat(day, 'yyyy-mm-dd');
 
         setNewDate(dateString);
@@ -59,20 +59,16 @@ const CalendarToggle = ({ date, setNewDate, iconOnly = false, calendarRef = null
         <>
             <Button
                 title={calendarShown ? 'Спрятать календарь' : 'Показать календарь'}
-                className={
-                    css`
-                        flex-shrink: 0;
-                        display: flex;
-                        align-items: center;
-                        border-radius: 5px;
-                        padding: 8px !important;
-                        line-height: 1.1;
-                        background-color: ${iconOnly ? theme.colours.bgGrayLight : theme.colours.bgGray} !important;
-                        font-size: 14px;
-                    ` +
-                    ' ' +
-                    className
-                }
+                className={`${css`
+                    flex-shrink: 0;
+                    display: flex;
+                    align-items: center;
+                    border-radius: 5px;
+                    padding: 8px !important;
+                    line-height: 1.1;
+                    background-color: ${iconOnly ? theme.colours.bgGrayLight : theme.colours.bgGray} !important;
+                    font-size: 14px;
+                `} ${className}`}
                 onClick={() => setCalendarShown(!calendarShown)}
             >
                 {toggle}
