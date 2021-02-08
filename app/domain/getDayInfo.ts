@@ -1,5 +1,6 @@
 import memoize from 'lodash.memoize';
-import isDarkMode from 'utils/isDarkMode';
+
+import isDarkMode from '../utils/isDarkMode';
 
 const dark = isDarkMode();
 
@@ -24,8 +25,8 @@ const fastingLevels = {
 
 const calculateEasterDateMemoized = memoize((year) => {
     // Pascha Calculation
-    let pascha_m;
-    let pascha_d;
+    let paschaM: number;
+    let paschaD: number;
     const r1 = year % 19;
     const r2 = year % 4;
     const r3 = year % 7;
@@ -36,13 +37,13 @@ const calculateEasterDateMemoized = memoize((year) => {
     const rc = 3 + r4 + r5;
 
     if (rc < 30) {
-        pascha_m = 3; // Pascha is  in April
-        pascha_d = rc; // Pascha day in Aplil
+        paschaM = 3; // Pascha is  in April
+        paschaD = rc; // Pascha day in Aplil
     } else {
-        pascha_m = 4; // Pascha is in May
-        pascha_d = rc - 30; // Pascha day in May
+        paschaM = 4; // Pascha is in May
+        paschaD = rc - 30; // Pascha day in May
     }
-    return { d: pascha_d, m: pascha_m, y: year };
+    return { d: paschaD, m: paschaM, y: year };
 });
 
 export const calculateEasterDate = (year) => {
