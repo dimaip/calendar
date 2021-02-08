@@ -618,6 +618,7 @@ export const getFeastInfo = memoize(
             feastType = '12';
             colour = blue;
             calendarColour = 'blue';
+            icon = 'candlemas.svg';
         }
 
         if (new Date(y, 3, 7).getTime() == date.getTime()) {
