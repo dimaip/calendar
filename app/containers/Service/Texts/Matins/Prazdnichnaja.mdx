@@ -32,6 +32,7 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 <>{(props.isHoliday || props.dayOfWeek === 5) && <MdxLoader src="Matins/Prayer7" lang={props.lang} />}</>
 
 <>{props.isHoliday && <MdxLoader src="Matins/Polijeley" lang={props.lang} />}</>
+<>{(props.isEasterOffsetRange(-9 * 7) || props.isEasterOffsetRange(-8 * 7) || props.isEasterOffsetRange(-7 * 7)) && <MdxLoader src="Matins/Psalm136" lang={props.lang} />}</>
 
 <>{props.isHoliday && <Parts date={props.date} partNames={['shared.Величания']} Layout={props.SectionLayout} />}</>
 
