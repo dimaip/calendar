@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CreateFileWebpack = require('create-file-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
 const sha = process.env.VERCEL_GITHUB_COMMIT_SHA || process.env.AWS_COMMIT_ID;
 
@@ -71,7 +71,7 @@ module.exports = {
                 test: /\.worker\.js$/,
                 use: {
                     loader: 'worker-loader',
-                    options: { publicPath: '/built/' },
+                    options: {publicPath: '/built/'},
                 },
             },
             {
@@ -80,6 +80,9 @@ module.exports = {
                 use: [
                     {
                         loader: 'babel-loader',
+                        options: {
+                            presets: [['@babel/preset-env', {targets: {browsers: ['ie >= 11', 'safari > 9']}}]],
+                        },
                     },
                 ],
             },
@@ -109,8 +112,8 @@ module.exports = {
                         loader: 'pattern-replace-loader',
                         options: {
                             multiple: [
-                                { search: '(\\s)\\/\\/(\\s)', replace: '$1**//**$2', flags: 'gi' },
-                                { search: '(\\s)\\/(\\s)', replace: '$1**/**$2', flags: 'gi' },
+                                {search: '(\\s)\\/\\/(\\s)', replace: '$1**//**$2', flags: 'gi'},
+                                {search: '(\\s)\\/(\\s)', replace: '$1**/**$2', flags: 'gi'},
                             ],
                         },
                     },
