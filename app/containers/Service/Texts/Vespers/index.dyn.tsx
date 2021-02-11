@@ -70,13 +70,15 @@ const Vespers = ({ date }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDate);
     const easterSeason = isEasterOffsetRange(0, 38);
     const isAscension = isEasterOffsetRange(39);
+    const vselenskayaRoditelskayaSubbota = isEasterOffsetRange(-8 * 7 - 1);
     const { feastType, title } = getFeastInfo(tomorrowDateObj);
     const isHoliday = dayOfWeek === 6 || feastType === 'great' || feastType === '12';
     const isFast =
         !isHoliday &&
         (tomorrowDay?.fastName === 'Петров пост' ||
             tomorrowDay?.fastName === 'Успенский пост' ||
-            tomorrowDay?.fastName === 'Рождественский пост');
+            tomorrowDay?.fastName === 'Рождественский пост' ||
+            vselenskayaRoditelskayaSubbota);
 
     if (title === 'Рождество Христово') {
         return (
