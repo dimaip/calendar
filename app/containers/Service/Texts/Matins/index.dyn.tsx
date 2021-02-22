@@ -65,11 +65,20 @@ const Matins = ({ date }) => {
     const { feastType } = getFeastInfo(dateObj);
 
     const isHoliday = dayOfWeek === 0 || feastType === 'great' || feastType === '12';
+
+    const vselenskayaRoditelskayaSubbota = isEasterOffsetRange(-8 * 7 - 1);
+    const lentSubbota2 = isEasterOffsetRange(-5 * 7 - 1);
+    const lentSubbota3 = isEasterOffsetRange(-4 * 7 - 1);
+    const lentSubbota4 = isEasterOffsetRange(-3 * 7 - 1);
     const isFast =
         !isHoliday &&
         (day?.fastName === 'Петров пост' ||
             day?.fastName === 'Успенский пост' ||
-            day?.fastName === 'Рождественский пост');
+            day?.fastName === 'Рождественский пост' ||
+            vselenskayaRoditelskayaSubbota ||
+            lentSubbota2 ||
+            lentSubbota3 ||
+            lentSubbota4);
 
     if (isFast) {
         return (
