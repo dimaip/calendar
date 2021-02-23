@@ -107,6 +107,7 @@ const Katekhumen = ({ date, day }) => {
     const easterOtdanie = isEasterOffsetRange(38);
     const brightOrOtdanie = brightWeek || easterOtdanie;
     const katekhumenProps = {
+        date,
         brightWeek,
         easterSeason,
         easterOtdanie,

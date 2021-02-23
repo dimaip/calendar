@@ -25,6 +25,13 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 <>{props.isHoliday && <MdxLoader src="Matins/BogGospod" lang={props.lang} />}</>
 
 <>{props.isHoliday && props.troparions}</>
+<If condition={props.isHoliday}>
+  {props.troparions}
+  <Parts
+      date={props.date}
+      partNames={['shared.Богородичен синаксарный']}
+  />
+</If>
 
 <>{(props.isHoliday || props.dayOfWeek === 2) && <MdxLoader src="Matins/Prayer2" lang={props.lang} />}</>
 <>{(props.isHoliday || props.dayOfWeek === 3) && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
@@ -60,6 +67,10 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
   ### Тропари
 
   {props.troparions}
+  <Parts
+    date={props.date}
+    partNames={['shared.Богородичен синаксарный']}
+  />
 </If>
 
 <>{props.dayOfWeek === 0 && <MdxLoader src="Matins/TropsOtp" lang={props.lang} glas={props.day.glas} />}</>
