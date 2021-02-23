@@ -1,6 +1,7 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Parts from 'components/Parts/Parts';
 import Html from 'components/Html/Html';
+import If from 'components/If/If';
 import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 <span id="nachalo" />
@@ -11,9 +12,13 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 **П** Благословен Бог наш ныне и всегда и во веки веков!
 
+<If condition={!props.sirnajaSedmitza}>
+
 **Ч** Аминь. Слава Тебе, Боже наш, слава Тебе!
 
 <MdxLoader src="Shared/Paraklit" lang={props.lang} />
+
+</If>
 
 <>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
 
@@ -75,12 +80,45 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} lent />
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-### Тропари
+<If condition={!(props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
 
-<>{props.troparions}</>
+  ### Тропари
 
-<MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+  <>{props.troparions}</>
 
-<>{props.otpust}</>
+  <Parts
+    date={props.date}
+    partNames={['shared.Богородичен синаксарный']}
+  />
+
+  <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+
+  <>{props.otpust}</>
+
+</If>
+
+<If condition={(props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
+
+  <MdxLoader src="Vespers/LentEnding1" lang={props.lang} />
+
+  ### Отпуст
+
+  <Parts
+      date={props.date}
+      partNames={['shared.Отпуст Синаксарный']}
+      fallback={
+          props.isSunday || props.easterSeason ? (
+              <MdxLoader src="Shared/Ending/EasterOtpust" />
+          ) : (
+              <MdxLoader src="Shared/Ending/Otpust" />
+          )
+      }
+  />
+
+  <>{props.saints}</>
+
+  <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} />
+
+</If>
 
 <>{props.endHymns}</>

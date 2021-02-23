@@ -65,11 +65,21 @@ const Matins = ({ date }) => {
     const { feastType } = getFeastInfo(dateObj);
 
     const isHoliday = dayOfWeek === 0 || feastType === 'great' || feastType === '12';
+
+    const sirnajaSedmitza = isEasterOffsetRange(-8 * 7 + 1, -8 * 7 + 5);
+    const vselenskayaRoditelskayaSubbota = isEasterOffsetRange(-8 * 7 - 1);
+    const lentSubbota2 = isEasterOffsetRange(-5 * 7 - 1);
+    const lentSubbota3 = isEasterOffsetRange(-4 * 7 - 1);
+    const lentSubbota4 = isEasterOffsetRange(-3 * 7 - 1);
+    const lentSubbotas = lentSubbota2 || lentSubbota3 || lentSubbota4;
+    const vospominanijaUsopshih = vselenskayaRoditelskayaSubbota || lentSubbotas;
     const isFast =
         !isHoliday &&
         (day?.fastName === 'Петров пост' ||
             day?.fastName === 'Успенский пост' ||
-            day?.fastName === 'Рождественский пост');
+            day?.fastName === 'Рождественский пост' ||
+            vospominanijaUsopshih ||
+            sirnajaSedmitza);
 
     if (isFast) {
         return (
@@ -84,6 +94,10 @@ const Matins = ({ date }) => {
                 day={day}
                 date={date}
                 isEasterOffsetRange={isEasterOffsetRange}
+                vospominanijaUsopshih={vospominanijaUsopshih}
+                vselenskayaRoditelskayaSubbota={vselenskayaRoditelskayaSubbota}
+                lentSubbotas={lentSubbotas}
+                sirnajaSedmitza={sirnajaSedmitza}
             />
         );
     }

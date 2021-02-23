@@ -1,5 +1,6 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Parts from 'components/Parts/Parts';
+import If from 'components/If/If';
 
 <span id="nachalo" />
 
@@ -13,7 +14,22 @@ import Parts from 'components/Parts/Parts';
 
 <>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
 
-<>{props.dayOfWeek === 0 || props.dayOfWeek === 1 && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
+<>{(props.dayOfWeek === 0 || props.dayOfWeek === 1 || props.vospominanijaUsopshih) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
+
+<>{props.vselenskayaRoditelskayaSubbota && <MdxLoader src="Matins/Aliluja1" lang={props.lang} />}</>
+<>{props.lentSubbotas && <MdxLoader src="Matins/Aliluja2" lang={props.lang} />}</>
+<If condition={props.vospominanijaUsopshih}>
+
+  ### Тропари
+  
+  {props.troparions}
+  
+  <Parts
+      date={props.date}
+      partNames={['shared.Богородичен синаксарный']}
+  />
+</If>
+
 <>{props.dayOfWeek === 0 || props.dayOfWeek === 2 && <MdxLoader src="Matins/Prayer2" lang={props.lang} />}</>
 <>{props.dayOfWeek === 0 || props.dayOfWeek === 3 && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
 <>{props.dayOfWeek === 0 || props.dayOfWeek === 4 && <MdxLoader src="Matins/Prayer4" lang={props.lang} />}</>
@@ -28,7 +44,7 @@ import Parts from 'components/Parts/Parts';
 ### Стихиры на «Хвалите»
 
 <Parts date={props.date} partNames={['matins.Cтихиры на хвалите']} />
-<MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} />
+<MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} short={props.vospominanijaUsopshih} />
 
 <span id="reading" />
 
@@ -69,12 +85,47 @@ import Parts from 'components/Parts/Parts';
 
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
+<If condition={!(props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5))}>
+
 ### Тропари
 
 <>{props.troparions}</>
 
+<Parts
+    date={props.date}
+    partNames={['shared.Богородичен синаксарный']}
+/>
+
 <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
 
 <>{props.otpust}</>
+
+</If>
+
+
+<If condition={(props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5))}>
+
+<MdxLoader src="Matins/LentEnding1" lang={props.lang} />
+
+### Отпуст
+
+<Parts
+    date={props.date}
+    partNames={['shared.Отпуст Синаксарный']}
+    saints={props.saints}
+    fallback={
+        props.isSunday || props.easterSeason ? (
+            <MdxLoader src="Shared/Ending/EasterOtpust" />
+        ) : (
+            <MdxLoader src="Shared/Ending/Otpust" />
+        )
+    }
+/>
+
+<>{props.saints}</>
+
+<MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} />
+
+</If>
 
 <>{props.endHymns}</>

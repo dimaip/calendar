@@ -1,6 +1,7 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Tooltip from 'components/Tooltip/Tooltip';
 import If from 'components/If/If';
+import Parts from 'components/Parts/Parts';
 
 # I. <br/> Литургия оглашаемых
 
@@ -77,6 +78,11 @@ import If from 'components/If/If';
 **Далее следуют тропари и кондаки праздника и храма.**
 
 {props.hymns}
+
+<Parts
+  date={props.date}
+  partNames={['liturgy.Богородичен литургический']}
+/>
 
 > **[Д** Господу помолимся!**]**
 

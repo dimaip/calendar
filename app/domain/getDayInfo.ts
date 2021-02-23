@@ -614,11 +614,13 @@ export const getFeastInfo = memoize(
             colour = red;
         }
 
-        if (new Date(y, 1, 15).getTime() <= date.getTime() && date.getTime() <= new Date(y, 1, 22).getTime()) {
+        if (new Date(y, 1, 15).getTime() === date.getTime()) {
             title = 'Сретение Господне';
             feastType = '12';
             colour = blue;
             calendarColour = 'blue';
+        }
+        if (new Date(y, 1, 15).getTime() <= date.getTime() && date.getTime() <= new Date(y, 1, 22).getTime()) {
             icon = 'candlemas.svg';
         }
 
