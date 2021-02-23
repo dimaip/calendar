@@ -74,11 +74,13 @@ const Vespers = ({ date }) => {
     const vselenskayaRoditelskayaSubbota = isEasterOffsetRange(-8 * 7 - 1);
     const { feastType, title } = getFeastInfo(tomorrowDateObj);
     const isHoliday = dayOfWeek === 6 || feastType === 'great' || feastType === '12';
+    const greatLent = tomorrowDay?.fastName === 'Великий пост';
     const isFast =
         !isHoliday &&
         (tomorrowDay?.fastName === 'Петров пост' ||
             tomorrowDay?.fastName === 'Успенский пост' ||
             tomorrowDay?.fastName === 'Рождественский пост' ||
+            tomorrowDay?.fastName === 'Великий пост' ||
             vselenskayaRoditelskayaSubbota ||
             sirnajaSedmitza);
 
@@ -125,6 +127,8 @@ const Vespers = ({ date }) => {
                 day={tomorrowDay}
                 date={tomorrowDate}
                 sirnajaSedmitza={sirnajaSedmitza}
+                greatLent={greatLent}
+                isEasterOffsetRange={isEasterOffsetRange}
             />
         );
     }

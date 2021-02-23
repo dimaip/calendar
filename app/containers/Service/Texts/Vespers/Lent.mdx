@@ -12,7 +12,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 **П** Благословен Бог наш ныне и всегда и во веки веков!
 
-<If condition={!props.sirnajaSedmitza}>
+<If condition={!props.sirnajaSedmitza && !props.greatLent}>
 
 **Ч** Аминь. Слава Тебе, Боже наш, слава Тебе!
 
@@ -28,7 +28,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 <>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 4) && <MdxLoader src="Vespers/Prayer4" lang={props.lang} />}</>
 <>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 5) && <MdxLoader src="Vespers/Prayer5" lang={props.lang} />}</>
 <>{!props.isAscension && props.dayOfWeek === 6 && <MdxLoader src="Vespers/Prayer6" lang={props.lang} />}</>
-<>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 0) && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}</>
+<>{!props.isAscension && !props.greatLent && (props.dayOfWeek === 6 || props.dayOfWeek === 0) && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}</>
 
 <MdxLoader src="Vespers/Prayer8" lang={props.lang} />
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
@@ -37,6 +37,14 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 <StihiriNaGV day={props.day} date={props.date} />
 <span id="vhod" />
+
+<If condition={props.dayOfWeek === 0 && props.greatLent}>
+
+  ## Вход
+
+  **П** Премудрость! Станем благоговейно!
+
+</If>
 
 ### Вечерняя (входная) песнь «при возжжении светильника»
 
@@ -80,7 +88,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} lent />
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-<If condition={!(props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
+<If condition={!(props.greatLent || props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
 
   ### Тропари
 
@@ -118,6 +126,40 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
   <>{props.saints}</>
 
   <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} />
+
+</If>
+
+
+<If condition={(props.greatLent)}>
+
+  <If condition={props.dayOfWeek === 0}>
+    <MdxLoader src="Vespers/LentEnding2" lang={props.lang} />
+  </If>
+  <If condition={props.dayOfWeek !== 0}>
+    <MdxLoader src="Vespers/LentEnding3" lang={props.lang} />
+  </If>
+
+  ### Отпуст
+
+  <Parts
+      date={props.date}
+      partNames={['shared.Отпуст Синаксарный']}
+      fallback={
+          props.isSunday || props.easterSeason ? (
+              <MdxLoader src="Shared/Ending/EasterOtpust" />
+          ) : (
+              <MdxLoader src="Shared/Ending/Otpust" />
+          )
+      }
+  />
+
+  <>{props.saints}</>
+
+  <If condition={props.isEasterOffsetRange(-7 * 7 + 1)}>
+    ### Чин прощения с пением 136 псалма
+
+    <MdxLoader src="Matins/Psalm136" lang={props.lang} />
+  </If>
 
 </If>
 
