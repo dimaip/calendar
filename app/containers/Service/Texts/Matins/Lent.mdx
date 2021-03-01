@@ -86,11 +86,11 @@ import If from 'components/If/If';
 <br />
 <MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
 
-**Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́.
+**Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́. **{props.greatLent ? '(дважды)' : ''}**
 
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-<If condition={!(props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5))}>
+<If condition={!((props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5)) || props.greatLent)}>
 
 ### Тропари
 
@@ -108,9 +108,14 @@ import If from 'components/If/If';
 </If>
 
 
-<If condition={(props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5))}>
+<If condition={(props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5)) || props.greatLent}>
 
+<If condition={!props.greatLent}>
 <MdxLoader src="Matins/LentEnding1" lang={props.lang} />
+</If>
+<If condition={props.greatLent}>
+<MdxLoader src="Matins/LentEnding2" lang={props.lang} />
+</If>
 
 ### Отпуст
 
@@ -129,7 +134,9 @@ import If from 'components/If/If';
 
 <>{props.saints}</>
 
+<If condition={!props.greatLent}>
 <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} />
+</If>
 
 </If>
 

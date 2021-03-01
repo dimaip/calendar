@@ -31,7 +31,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 <>{!props.isAscension && !props.greatLent && (props.dayOfWeek === 6 || props.dayOfWeek === 0) && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}</>
 
 <MdxLoader src="Vespers/Prayer8" lang={props.lang} />
-<MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
+<MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} greatLent={props.greatLent} />
 
 ### Стихиры на «Господи, взываю»
 
