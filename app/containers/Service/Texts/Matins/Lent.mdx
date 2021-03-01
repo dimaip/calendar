@@ -14,10 +14,11 @@ import If from 'components/If/If';
 
 <>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
 
-<>{(props.dayOfWeek === 0 || props.dayOfWeek === 1 || props.vospominanijaUsopshih) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
+<>{(props.dayOfWeek === 0 || props.dayOfWeek === 1 || props.vospominanijaUsopshih || props.greatLent) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
 
 <>{props.vselenskayaRoditelskayaSubbota && <MdxLoader src="Matins/Aliluja1" lang={props.lang} />}</>
 <>{props.lentSubbotas && <MdxLoader src="Matins/Aliluja2" lang={props.lang} />}</>
+<>{!props.lentSubbotas && props.greatLent && <MdxLoader src="Matins/Aliluja3" lang={props.lang} />}</>
 <If condition={props.vospominanijaUsopshih}>
 
   ### Тропари
@@ -46,6 +47,8 @@ import If from 'components/If/If';
 <Parts date={props.date} partNames={['matins.Cтихиры на хвалите']} />
 <MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} short={props.vospominanijaUsopshih} />
 
+<If condition={!props.greatLent}>
+
 <span id="reading" />
 
 ## Чтения
@@ -65,6 +68,8 @@ import If from 'components/If/If';
 **Н** Слава Тебе, Господи, слава Тебе!
 
 ### Проповедь
+
+</If>
 
 <>{(props.isEasterOffsetRange(0, 39) || props.dayOfWeek === 0) && <MdxLoader src="Matins/VoskresnajaPesn" lang={props.lang} />}</>
 
