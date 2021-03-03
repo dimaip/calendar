@@ -36,7 +36,7 @@ const Ending = ({ date, saints }) => {
             otpust={otpust}
             saints={saints}
             isEasterOffsetRange={isEasterOffsetRange}
-            hideTverdina={isEasterOffsetRange(0, 49) || title === 'Рождество Христово'}
+            hideTverdina={isEasterOffsetRange(-49, 49) || title === 'Рождество Христово'}
         />
     );
 };

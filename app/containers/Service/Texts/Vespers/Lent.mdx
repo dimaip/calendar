@@ -88,7 +88,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} lent />
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-<If condition={!(props.greatLent || props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
+<If condition={!((props.greatLent && props.dayOfWeek !== 5) || props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
 
   ### Тропари
 
@@ -130,7 +130,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 </If>
 
 
-<If condition={(props.greatLent)}>
+<If condition={(props.greatLent && props.dayOfWeek !== 5)}>
 
   <If condition={props.dayOfWeek === 0}>
     <MdxLoader src="Vespers/LentEnding2" lang={props.lang} />
