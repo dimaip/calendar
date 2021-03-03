@@ -16,7 +16,7 @@ const makeServices = (date, readings = {}) => {
         {
             title: 'Литургия Иоанна Златоуста',
             id: 'zlatoust',
-            enabled: readings['Литургия'] && !vasiliy,
+            enabled: readings['Литургия'] && !vasiliy && !lpod,
             calendar: true,
             lang: true,
             skipRedirect: false,
