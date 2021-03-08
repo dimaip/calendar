@@ -463,6 +463,7 @@ export const getFeastInfo = memoize(
                 isEasterOffsetRange(-4) ||
                 (date.getDay() !== 0 && // not weekend
                     date.getDay() !== 6 &&
+                    isEasterOffsetRange(-48, -1) && // During lent
                     (new Date(y, 2, 9).getTime() === date.getTime() || new Date(y, 2, 22).getTime() === date.getTime())) // glava Ioanna // 40 sev much
             ) {
                 lpod = true;
