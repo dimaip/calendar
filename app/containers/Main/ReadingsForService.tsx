@@ -23,6 +23,10 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
     let to;
     let effectiveTitle = title;
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
+
+    if (lpod && title === 'Литургия') {
+        return null;
+    }
     const location = useLocation();
     if (title === 'Литургия') {
         to = {
