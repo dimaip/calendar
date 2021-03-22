@@ -20,8 +20,6 @@ body {
     position: relative;
     /* Disable double-tap zoom on iOS */
     touch-action: manipulation;
-    /* Disable overscoll effect */
-    overscroll-behavior: none;
     /* Disable iOS link highlight */
     -webkit-tap-highlight-color: transparent;
     /* Disable iOS link callout */
