@@ -14,6 +14,8 @@ import TagManager from 'react-gtm-module';
 import * as serviceWorker from './serviceWorker';
 import Worker from './precache.worker.js';
 import './redirectToHome';
+import { isCapacitor } from 'utils/deviceInfo';
+import precache from 'precache';
 
 window.APP_LOADED = true;
 const isProd = process.env.NODE_ENV === 'production';
@@ -61,9 +63,12 @@ if (module.hot) {
 if (isProd) {
     serviceWorker.register();
 }
-
-const precacheWorker = new Worker();
-precacheWorker.postMessage('precache');
+if (isCapacitor()) {
+    precache();
+} else {
+    const precacheWorker = new Worker();
+    precacheWorker.postMessage('precache');
+}
 
 window.addEventListener('beforeinstallprompt', (e) => {
     e.userChoice.then((choiceResult) => {
