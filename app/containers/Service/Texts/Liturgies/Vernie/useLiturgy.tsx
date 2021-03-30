@@ -37,7 +37,7 @@ const useLiturgy = (lang, serviceType) => {
 
     const zadastoinik = <Zadastoinik date={date} />;
 
-    const katekhumen = <Katekhumen day={day} date={date} />;
+    const katekhumen = <Katekhumen day={day} date={date} serviceType={serviceType} />;
 
     return {
         saints,

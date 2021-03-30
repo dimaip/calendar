@@ -167,7 +167,12 @@ import Parts from 'components/Parts/Parts';
 
   ### Молитва об оглашаемых
 
-  <MdxLoader src="Liturgies/Katekhumen/Oglashaemie" />
+  <If condition={props.serviceType === 'zlatoust'}>
+    <MdxLoader src="Liturgies/Katekhumen/Oglashaemie" />
+  </If>
+  <If condition={props.serviceType === 'vasiliy'}>
+    <MdxLoader src="Liturgies/Katekhumen/OglashaemieVasiliy" />
+  </If>
 
   <MdxLoader src="Liturgies/Katekhumen/Izydite" />
 
