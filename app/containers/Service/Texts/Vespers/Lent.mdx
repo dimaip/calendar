@@ -14,10 +14,14 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 <If condition={!props.sirnajaSedmitza && !props.greatLent}>
 
-**Ч** Аминь. Слава Тебе, Боже наш, слава Тебе!
+  **Ч** Аминь. Слава Тебе, Боже наш, слава Тебе!
 
-<MdxLoader src="Shared/Paraklit" lang={props.lang} />
+  <MdxLoader src="Shared/Paraklit" lang={props.lang} />
 
+</If>
+
+<If condition={props.sirnajaSedmitza || props.greatLent}>
+  **Н** Аминь.
 </If>
 
 <>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
