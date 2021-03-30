@@ -630,7 +630,7 @@ export const getFeastInfo = memoize(
             feastType = '12';
             colour = blue;
             calendarColour = 'blue';
-            icon = 'annunciation.jpg';
+            icon = 'annunciation.svg';
         }
 
         if (new Date(y, 7, 19).getTime() === date.getTime()) {
