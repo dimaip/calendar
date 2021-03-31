@@ -2,7 +2,7 @@ import React from 'react';
 import Parts from 'components/Parts/Parts';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
-const DefatulProkimen = ({ date }) => {
+export const DefatulProkimen = ({ date }) => {
     const dateObj = new Date(date);
     let dayOfWeek = dateObj.getDay();
     dayOfWeek = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
