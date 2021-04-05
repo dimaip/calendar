@@ -2,7 +2,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Parts from 'components/Parts/Parts';
 import Html from 'components/Html/Html';
 import If from 'components/If/If';
-import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+import Prokimens, {DefatulProkimen} from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 <span id="nachalo" />
 
@@ -12,23 +12,33 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 **П** Благословен Бог наш ныне и всегда и во веки веков!
 
-<If condition={!props.sirnajaSedmitza && !props.greatLent}>
+<If condition={props.annunciation}>
+  <MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
+  <MdxLoader src="Vespers/Psalm103" lang={props.lang} chitaetsa />
+  <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
+</If>
 
-**Ч** Аминь. Слава Тебе, Боже наш, слава Тебе!
+<If condition={!props.sirnajaSedmitza && !props.greatLent && !props.annunciation}>
 
-<MdxLoader src="Shared/Paraklit" lang={props.lang} />
+  **Ч** Аминь. Слава Тебе, Боже наш, слава Тебе!
 
+  <MdxLoader src="Shared/Paraklit" lang={props.lang} />
+
+</If>
+
+<If condition={props.sirnajaSedmitza || props.greatLent}>
+  **Н** Аминь.
 </If>
 
 <>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
 
-<>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 1) && <MdxLoader src="Vespers/Prayer1" lang={props.lang} />}</>
-<>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 2) && <MdxLoader src="Vespers/Prayer2" lang={props.lang} />}</>
-<>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 3) && <MdxLoader src="Vespers/Prayer3" lang={props.lang} />}</>
-<>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 4) && <MdxLoader src="Vespers/Prayer4" lang={props.lang} />}</>
-<>{!props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 5) && <MdxLoader src="Vespers/Prayer5" lang={props.lang} />}</>
-<>{!props.isAscension && props.dayOfWeek === 6 && <MdxLoader src="Vespers/Prayer6" lang={props.lang} />}</>
-<>{!props.isAscension && !props.greatLent && (props.dayOfWeek === 6 || props.dayOfWeek === 0) && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}</>
+<>{!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 1) && <MdxLoader src="Vespers/Prayer1" lang={props.lang} />}</>
+<>{!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 2) && <MdxLoader src="Vespers/Prayer2" lang={props.lang} />}</>
+<>{!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 3) && <MdxLoader src="Vespers/Prayer3" lang={props.lang} />}</>
+<>{!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 4) && <MdxLoader src="Vespers/Prayer4" lang={props.lang} />}</>
+<>{!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 5) && <MdxLoader src="Vespers/Prayer5" lang={props.lang} />}</>
+<>{!props.annunciation && !props.isAscension && props.dayOfWeek === 6 && <MdxLoader src="Vespers/Prayer6" lang={props.lang} />}</>
+<>{!props.annunciation && !props.isAscension && !props.greatLent && (props.dayOfWeek === 6 || props.dayOfWeek === 0) && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}</>
 
 <MdxLoader src="Vespers/Prayer8" lang={props.lang} />
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} greatLent={props.greatLent} />
@@ -38,7 +48,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 <StihiriNaGV day={props.day} date={props.date} />
 <span id="vhod" />
 
-<If condition={props.dayOfWeek === 0 && props.greatLent}>
+<If condition={props.dayOfWeek === 0 && props.greatLent || props.annunciation}>
 
   ## Вход
 
@@ -52,7 +62,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 ## Чтения
 
-<Prokimens date={props.date} />
+{props.annunciation ? <DefatulProkimen date={props.date}/> :  <Prokimens date={props.date} />}
 <span id="reading" />
 
 **П** Премудрость!

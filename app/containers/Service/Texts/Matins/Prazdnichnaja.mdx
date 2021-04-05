@@ -24,7 +24,6 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 <>{props.isHoliday && <MdxLoader src="Matins/BogGospod" lang={props.lang} />}</>
 
-<>{props.isHoliday && props.troparions}</>
 <If condition={props.isHoliday}>
   {props.troparions}
   <Parts

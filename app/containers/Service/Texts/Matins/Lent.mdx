@@ -89,7 +89,7 @@ import If from 'components/If/If';
 <br />
 <MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
 
-**Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́. **{props.greatLent ? '(Дважды)' : ''}**
+**Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́. **{props.greatLent && props.dayOfWeek !== 6 && props.dayOfWeek !== 0 ? '(Дважды)' : ''}**
 
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 

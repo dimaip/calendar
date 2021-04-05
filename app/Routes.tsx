@@ -21,7 +21,13 @@ import checkVersion from './checkVersion';
 
 const DateRoutes = () => {
     const { date } = useParams();
-    const { data: day } = useDay(date);
+
+    const tomorrowDateObj = new Date(date);
+    tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
+    const tomorrowDate = dateFormat(tomorrowDateObj, 'yyyy-mm-dd');
+
+    const isVespers = document.location.href.includes('vespers');
+    const { data: day } = useDay(isVespers ? tomorrowDate : date);
     const theme = getTheme(day?.colour);
     const langStateValue = useRecoilValue(langState);
 

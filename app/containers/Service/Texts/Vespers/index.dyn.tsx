@@ -65,7 +65,8 @@ const Vespers = ({ date }) => {
             <Saints saints={tomorrowDay.saints} date={date} />
         </SolidSection>
     );
-    const otpust = <Ending date={tomorrowDate} saints={saints} />;
+    const isAnnunciation = tomorrowDay?.title === 'Благовещение Всесвятой Богородицы';
+    const otpust = <Ending date={tomorrowDate} saints={saints} annunciation={isAnnunciation} />;
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDate);
     const easterSeason = isEasterOffsetRange(0, 38);
@@ -113,9 +114,10 @@ const Vespers = ({ date }) => {
         );
     }
 
-    if (isFast) {
+    if (isFast || isAnnunciation) {
         return (
             <Lent
+                annunciation={isAnnunciation}
                 dayOfWeek={dayOfWeek}
                 troparions={troparions}
                 endHymns={endHymns}
@@ -127,7 +129,7 @@ const Vespers = ({ date }) => {
                 day={tomorrowDay}
                 date={tomorrowDate}
                 sirnajaSedmitza={sirnajaSedmitza}
-                greatLent={greatLent}
+                greatLent={greatLent && !isAnnunciation}
                 isEasterOffsetRange={isEasterOffsetRange}
             />
         );

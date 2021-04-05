@@ -67,7 +67,7 @@ const SectionLayout = ({ children }) => (
     </SolidSection>
 );
 
-const Katekhumen = ({ date, day }) => {
+const Katekhumen = ({ date, day, serviceType }) => {
     useScrollToReadings();
     const externalDayQuery = useExternalDay(date);
     const { apostol, gospel } = getKatekhumenReadings(day);
@@ -108,6 +108,7 @@ const Katekhumen = ({ date, day }) => {
     const brightOrOtdanie = brightWeek || easterOtdanie;
     const katekhumenProps = {
         date,
+        serviceType,
         brightWeek,
         easterSeason,
         easterOtdanie,
