@@ -628,6 +628,8 @@ export const getFeastInfo = memoize(
         if (new Date(y, 3, 7).getTime() === date.getTime()) {
             title = 'Благовещение Всесвятой Богородицы';
             feastType = '12';
+        }
+        if (new Date(y, 3, 7).getTime() <= date.getTime() && date.getTime() <= new Date(y, 3, 8).getTime()) {
             colour = blue;
             calendarColour = 'blue';
             icon = 'annunciation.svg';
