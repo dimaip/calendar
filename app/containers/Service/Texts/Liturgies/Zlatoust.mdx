@@ -5,11 +5,15 @@ import Tooltip from 'components/Tooltip/Tooltip';
 import If from 'components/If/If';
 import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
-<div className={css`margin-bottom: 24px;`} id="nachalo" />
+<If condition={!props.onlyVernie}>
 
-# Божественная литургия Иоанна Златоуста
+    <div className={css`margin-bottom: 24px;`} id="nachalo" />
 
-{props.katekhumen}
+    # Божественная литургия Иоанна Златоуста
+
+    {props.katekhumen}
+
+</If>
 
 <div id="vernie" />
 

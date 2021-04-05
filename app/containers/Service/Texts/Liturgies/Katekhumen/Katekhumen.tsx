@@ -35,7 +35,7 @@ const Readings = ({ readings }) => (
     </>
 );
 
-const getKatekhumenReadings = (day) => {
+export const getKatekhumenReadings = (day) => {
     const readings = day?.readings;
     const readingsForService = readings?.['Литургия'];
 
