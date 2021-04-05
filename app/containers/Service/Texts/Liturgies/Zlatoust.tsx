@@ -2,6 +2,7 @@ import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 
 import React from 'react';
 import useDay from 'hooks/useDay';
+import dateFormat from 'dateformat';
 
 import ZlatoustMdx from './Zlatoust.mdx';
 import VespersWithZlatoustMdx from './VespersWithZlatoust.mdx';
@@ -37,9 +38,19 @@ const Zlatoust = ({ lang, date }) => {
     };
     if (isAnnunciation) {
         const { apostol, gospel } = getKatekhumenReadings(day);
+        const tomorrowDateObj = new Date(date);
+        tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
+        const tomorrowDate = dateFormat(tomorrowDateObj, 'yyyy-mm-dd');
+        const { data: tomorrowDay } = useDay(tomorrowDate);
         return (
             <>
-                <VespersWithZlatoustMdx {...props} apostol={apostol} gospel={gospel} />
+                <VespersWithZlatoustMdx
+                    {...props}
+                    apostol={apostol}
+                    gospel={gospel}
+                    tomorrowDate={tomorrowDate}
+                    tomorrowDay={tomorrowDay}
+                />
                 <ZlatoustMdx {...props} onlyVernie />
             </>
         );
