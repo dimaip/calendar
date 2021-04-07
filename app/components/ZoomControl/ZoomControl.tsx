@@ -17,55 +17,53 @@ const buttonStyle = css`
     margin: 12px;
     padding: 0 !important;
 `;
-const ZoomControl = () => {
+const ZoomControl = (): JSX.Element | null => {
     const [zoomControlShown, setZoomControlShown] = useRecoilState(zoomControlShownState);
     const [zoom, setZoom] = useRecoilState(zoomState);
 
-    return (
-        zoomControlShown && (
-            <Drawer
-                onClose={() => {
-                    setZoomControlShown(false);
-                }}
+    return zoomControlShown ? (
+        <Drawer
+            onClose={() => {
+                setZoomControlShown(false);
+            }}
+        >
+            <div
+                className={css`
+                    text-align: center;
+                    font-size: 24px;
+                `}
             >
-                <div
+                {zoom >= 1 ? (zoom * 100).toPrecision(3) : (zoom * 100).toPrecision(2)}%
+            </div>
+            <div
+                className={css`
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                `}
+            >
+                <Button
+                    title="Уменьшить шрифт"
                     className={css`
-                        text-align: center;
-                        font-size: 24px;
+                        ${buttonStyle}
+                        font-size: 14px;
                     `}
+                    onClick={() => zoom > 0.8 && setZoom(zoom - 0.1)}
                 >
-                    {zoom >= 1 ? (zoom * 100).toPrecision(3) : (zoom * 100).toPrecision(2)}%
-                </div>
-                <div
+                    A-
+                </Button>
+                <Button
+                    title="Увеличить шрифт"
                     className={css`
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
+                        ${buttonStyle}
+                        font-size: 18px;
                     `}
+                    onClick={() => zoom < 1.5 && setZoom(zoom + 0.1)}
                 >
-                    <Button
-                        title="Уменьшить шрифт"
-                        className={css`
-                            ${buttonStyle}
-                            font-size: 14px;
-                        `}
-                        onClick={() => zoom > 0.8 && setZoom(zoom - 0.1)}
-                    >
-                        A-
-                    </Button>
-                    <Button
-                        title="Увеличить шрифт"
-                        className={css`
-                            ${buttonStyle}
-                            font-size: 18px;
-                        `}
-                        onClick={() => zoom < 1.5 && setZoom(zoom + 0.1)}
-                    >
-                        A+
-                    </Button>
-                </div>
-            </Drawer>
-        )
-    );
+                    A+
+                </Button>
+            </div>
+        </Drawer>
+    ) : null;
 };
 export default ZoomControl;
