@@ -14,10 +14,12 @@ import getTheme from 'styles/getTheme';
 import { ThemeProvider } from 'emotion-theming';
 import { css } from 'emotion';
 import langState from 'state/langState';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { LangContext } from 'containers/Service/LangContext';
 
 import checkVersion from './checkVersion';
+import pendingUpdateState from 'state/pendingUpdateState';
+import UpdatePrompt from 'components/UpdatePrompt/UpdatePrompt';
 
 const DateRoutes = () => {
     const { date } = useParams();
@@ -71,6 +73,7 @@ const DateRoutes = () => {
                         <NotFound />
                     </Route>
                 </Switch>
+                <UpdatePrompt />
             </ThemeProvider>
         </LangContext.Provider>
     );
@@ -78,7 +81,13 @@ const DateRoutes = () => {
 
 export default () => {
     const history = useHistory();
-    history.listen(checkVersion);
+    const setPendingUpdate = useSetRecoilState(pendingUpdateState);
+    history.listen(async () => {
+        const newVersion = await checkVersion();
+        if (newVersion) {
+            setPendingUpdate(newVersion);
+        }
+    });
     return (
         <div
             className={css`

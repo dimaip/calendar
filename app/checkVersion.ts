@@ -1,14 +1,15 @@
-const getVersion = () =>
+let version: null | string = null;
+let cacheTime: number | null = null;
+
+const getVersion = async (): Promise<typeof version> =>
     fetch(`${process.env.PUBLIC_URL}/built/version.json`).then((response) => {
         if (!response.ok) {
-            return;
+            return null;
         }
-        return response.json();
+        return (response.json() as unknown) as string;
     });
 
-let version = null;
-let cacheTime = null;
-const getVersionThrottled = async () => {
+const getVersionThrottled = async (): Promise<typeof version> => {
     const now = new Date().getTime();
     if (!cacheTime || now - cacheTime > 60 * 1000) {
         cacheTime = now;
@@ -17,7 +18,8 @@ const getVersionThrottled = async () => {
     return version;
 };
 
-const checkVersion = async () => {
+// Returns a promise that resolves to the new version id in case of update
+const checkVersion = async (): Promise<typeof version> => {
     if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
         const version = await getVersionThrottled();
 
@@ -28,6 +30,7 @@ const checkVersion = async () => {
                 const registation = await navigator.serviceWorker.getRegistration();
                 if (registation) {
                     await registation.update();
+                    return version;
                     console.log('Registration update successul');
                 }
             } catch (e) {
@@ -36,6 +39,7 @@ const checkVersion = async () => {
             }
         }
     }
+    return null;
 };
 
 export default checkVersion;
