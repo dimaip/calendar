@@ -10,9 +10,12 @@ import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import App from 'containers/App';
 import TagManager from 'react-gtm-module';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 
 import * as serviceWorker from './serviceWorker';
 import Worker from './precache.worker.js';
+
 import './redirectToHome';
 import { isCapacitor } from 'utils/deviceInfo';
 import precache from 'precache';
@@ -26,7 +29,10 @@ if (isProd) {
     }
     Sentry.init?.({
         dsn: 'https://e5296954a22242bc85d59b9a36559c44@o360342.ingest.sentry.io/3629452',
+        integrations: [new Integrations.BrowserTracing()],
         release: `molitva.app@${VERSION}`,
+
+        tracesSampleRate: 0.1,
     });
     TagManager.initialize({
         gtmId: 'GTM-MSCF98P',

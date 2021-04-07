@@ -137,40 +137,35 @@
             />
             <path fill="none" d="M0 0h375v667H0z" />
         </svg>
-        <div style="display: none;" id="react-root"></div>
+        <div style="display: none" id="react-root"></div>
         <div id="react-portal"></div>
-        <script
-            src="https://browser.sentry-cdn.com/5.18.0/bundle.min.js"
-            integrity="sha384-9M0M/t9hmfACAyfoyFXXyzRbljCren5OjRJhHwZHJzuzFt02ZB67XZO27O1tml6L"
-            crossorigin="anonymous"
-        ></script>
         <script>
-            window.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('DOMContentLoaded', function () {
                 if (!window.APP_LOADED) {
                     const response = confirm(
                         'Почему-то мы не смогли автоматически обновить приложение. Нажмите OK чтобы попробовать еще раз. Если это сообщение будет появляться снова, напишите нам на pb@psmb.ru'
                     );
                     if (response) {
-                        Sentry && Sentry.captureMessage('Reloading app from index.html');
+                        // Sentry && Sentry.captureMessage('Reloading app from index.html');
                         window.caches &&
                             caches
                                 .keys()
-                                .then(function(cacheNames) {
+                                .then(function (cacheNames) {
                                     return Promise.all(
                                         cacheNames
-                                            .filter(function(cacheName) {
+                                            .filter(function (cacheName) {
                                                 return true;
                                             })
-                                            .map(function(cacheName) {
+                                            .map(function (cacheName) {
                                                 return caches.delete(cacheName);
                                             })
                                     );
                                 })
-                                .then(function() {
+                                .then(function () {
                                     window.location.reload();
                                 });
                     } else {
-                        Sentry && Sentry.captureMessage('User refused to reload app from index.html');
+                        // Sentry && Sentry.captureMessage('User refused to reload app from index.html');
                     }
                 }
             });
