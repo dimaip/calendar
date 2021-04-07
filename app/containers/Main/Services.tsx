@@ -6,12 +6,13 @@ import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import makeServices from 'containers/Service/Texts/Texts';
 import groupBy from 'lodash.groupby';
+import { useAuth0 } from '@auth0/auth0-react';
 
 import SectionHeading from './SectionHeading';
 
 const OptionalLink = ({ enabled, ...rest }) =>
     enabled ? (
-        // @ts-ignore
+        // @ts-expect-error
         <Link {...rest} />
     ) : (
         <span title="Данная служба в этот день не совершается" className={rest.className}>
@@ -23,6 +24,8 @@ const Services = ({ date, readings }) => {
     const theme = useTheme();
 
     const location = useLocation();
+
+    const { isLoading, isAuthenticated, error, user, loginWithRedirect, logout } = useAuth0();
 
     const services = makeServices(date, readings);
 
@@ -46,6 +49,16 @@ const Services = ({ date, readings }) => {
             >
                 Текст службы адаптируется под выбранную дату. Активны только те службы, которые служатся в этот день
             </div>
+            {isLoading ? (
+                'Loading'
+            ) : isAuthenticated ? (
+                <div>
+                    Hello {user.name} <button onClick={async () => logout()}>Log Out</button>
+                </div>
+            ) : (
+                <button onClick={async () => loginWithRedirect()}>Log In</button>
+            )}
+
             {Object.keys(groupedServices).map((groupTitle) => {
                 const servicesForGroup = groupedServices[groupTitle];
                 return (
