@@ -6,6 +6,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useRecoilState } from 'recoil';
 import pendingUpdateState from 'state/pendingUpdateState';
 import { useTheme } from 'emotion-theming';
+import { css } from 'emotion';
 
 export default function UpdatePrompt(): JSX.Element {
     const [pendingVersion, setPendingVersion] = useRecoilState(pendingUpdateState);
@@ -21,6 +22,9 @@ export default function UpdatePrompt(): JSX.Element {
 
     return (
         <Snackbar
+            className={css`
+                padding-bottom: env(safe-area-inset-top);
+            `}
             anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'left',

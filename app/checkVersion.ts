@@ -30,8 +30,8 @@ const checkVersion = async (): Promise<typeof version> => {
                 const registation = await navigator.serviceWorker.getRegistration();
                 if (registation) {
                     await registation.update();
-                    return version;
                     console.log('Registration update successul');
+                    return version;
                 }
             } catch (e) {
                 console.log('Failed updating SW, reloading', e);
