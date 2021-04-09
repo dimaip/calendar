@@ -3,7 +3,7 @@ import cachedFetch from 'utils/cachedFetch';
 
 import useReadings from './useReadings';
 
-export function fetchReading(key, { link, translation }) {
+export function fetchReading(link, translation) {
     return cachedFetch(`${process.env.API_HOST}/reading/${encodeURI(link)}&translation=${translation}`).then((res) => {
         let reading = {};
         if (res) {
@@ -26,7 +26,9 @@ export function fetchReading(key, { link, translation }) {
 
 const useReading = (link, translation, date) => {
     const { data: readings, status: readingsStatus } = useReadings(date);
-    const readingQuery = useQuery(['reading', { link, translation }], fetchReading, { retry: false });
+    const readingQuery = useQuery(['reading', { link, translation }], () => fetchReading(link, translation), {
+        retry: false,
+    });
     if (readings?.[link] && translation === 'default') {
         return {
             data: readings[link],

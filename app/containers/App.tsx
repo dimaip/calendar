@@ -1,14 +1,19 @@
 import React, { useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
+import PullToRefresh from 'react-simple-pull-to-refresh';
 
 import Routes from '../Routes';
 
 import 'styles/reset.css';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
-import { QueryCache, ReactQueryCacheProvider } from 'react-query';
+
+import { QueryClient, QueryClientProvider } from 'react-query';
+
 import { Plugins } from '@capacitor/core';
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, useSetRecoilState } from 'recoil';
 import recoilPersist from 'recoil-persist';
+import pendingUpdateState from 'state/pendingUpdateState';
+import checkVersion from 'checkVersion';
 
 const { RecoilPersist, updateState } = recoilPersist([
     'scriptEditorIsActive',
@@ -18,7 +23,7 @@ const { RecoilPersist, updateState } = recoilPersist([
     'langState',
 ]);
 
-const queryCache = new QueryCache({
+const queryClient = new QueryClient({
     defaultConfig: {
         queries: {
             refetchOnWindowFocus: false,
@@ -28,6 +33,7 @@ const queryCache = new QueryCache({
 });
 
 export default () => {
+    const setPendingUpdate = useSetRecoilState(pendingUpdateState);
     useEffect(() => {
         const loader = document.getElementById('loader');
         const reactRoot = document.getElementById('react-root');
@@ -40,12 +46,21 @@ export default () => {
     return (
         <RecoilRoot initializeState={updateState}>
             <RecoilPersist />
-            <ReactQueryCacheProvider queryCache={queryCache}>
+            <QueryClientProvider client={queryClient}>
                 <HashRouter>
-                    <Routes />
+                    <PullToRefresh
+                        onRefresh={async () => {
+                            const newVersion = await checkVersion();
+                            if (newVersion) {
+                                setPendingUpdate(newVersion);
+                            }
+                        }}
+                    >
+                        <Routes />
+                    </PullToRefresh>
                 </HashRouter>
                 <ZoomControl />
-            </ReactQueryCacheProvider>
+            </QueryClientProvider>
         </RecoilRoot>
     );
 };

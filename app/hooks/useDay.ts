@@ -3,7 +3,7 @@ import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
 import { useQuery } from 'react-query';
 import cachedFetch from 'utils/cachedFetch';
 
-export function fetchDay(key, { date }) {
+export function fetchDay(date) {
     return cachedFetch(`${process.env.API_HOST}/day/${date}`).then((res) => {
         let day = {};
         if (res) {
@@ -32,6 +32,6 @@ export function fetchDay(key, { date }) {
     });
 }
 
-const useDay = (date) => useQuery(['day', { date }], fetchDay, { retry: false });
+const useDay = (date) => useQuery(['day', { date }], () => fetchDay(date), { retry: false });
 
 export default useDay;
