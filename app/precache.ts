@@ -11,21 +11,25 @@ const getDaysArray = (start, end) => {
     }
     return arr;
 };
-const precache = async () => {
+const precache = async (fromRefresh = false): Promise<void> => {
     const tillDate = new Date();
     tillDate.setDate(tillDate.getDate() + PRECACHE_DAYS);
 
     const daylist = getDaysArray(new Date(), tillDate);
 
-    daylist.forEach((date) => {
-        cachedFetch(`${process.env.API_HOST}/day/${date}`, true);
-        cachedFetch(`${process.env.API_HOST}/parts/${date}/ru`, true);
-        cachedFetch(`https://psmb.ru/?calendarDate=${date}`, true);
-        cachedFetch(`${process.env.API_HOST}/readings/${date}`, true);
-    });
+    await Promise.all(
+        daylist.map(async (date) =>
+            Promise.all([
+                cachedFetch(`${process.env.API_HOST}/day/${date}`, !fromRefresh),
+                cachedFetch(`${process.env.API_HOST}/parts/${date}/ru`, !fromRefresh),
+                cachedFetch(`https://psmb.ru/?calendarDate=${date}`, !fromRefresh),
+                cachedFetch(`${process.env.API_HOST}/readings/${date}`, !fromRefresh),
+            ])
+        )
+    );
 
     setTimeout(() => {
-        precache();
+        void precache();
     }, PRECACHE_INTERVAL);
 };
 export default precache;

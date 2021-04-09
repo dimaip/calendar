@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
-import PullToRefresh from 'react-simple-pull-to-refresh';
+import Pullable from 'react-pullable';
 
 import Routes from '../Routes';
 
@@ -14,6 +14,7 @@ import { RecoilRoot, useSetRecoilState } from 'recoil';
 import recoilPersist from 'recoil-persist';
 import pendingUpdateState from 'state/pendingUpdateState';
 import checkVersion from 'checkVersion';
+import precache from 'precache';
 
 const { RecoilPersist, updateState } = recoilPersist([
     'scriptEditorIsActive',
@@ -48,16 +49,19 @@ export default () => {
             <RecoilPersist />
             <QueryClientProvider client={queryClient}>
                 <HashRouter>
-                    <PullToRefresh
+                    <Pullable
+                        spinnerColor="#fff"
                         onRefresh={async () => {
                             const newVersion = await checkVersion();
                             if (newVersion) {
                                 setPendingUpdate(newVersion);
                             }
+                            await precache(true);
+                            await queryClient.refetchQueries();
                         }}
                     >
                         <Routes />
-                    </PullToRefresh>
+                    </Pullable>
                 </HashRouter>
                 <ZoomControl />
             </QueryClientProvider>
