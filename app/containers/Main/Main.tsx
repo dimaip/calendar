@@ -164,7 +164,7 @@ const Main = React.memo(({ services = false }) => {
                     break;
             }
         },
-        [date]
+        [date, services]
     );
     const handleToggleClick = useCallback(() => {
         calendarRef?.current?.toggleCalendarShown(true);
