@@ -20,10 +20,19 @@ const precache = async (fromRefresh = false): Promise<void> => {
     await Promise.all(
         daylist.map(async (date) =>
             Promise.all([
-                cachedFetch(`${process.env.API_HOST}/day/${date}`, !fromRefresh),
-                cachedFetch(`${process.env.API_HOST}/parts/${date}/ru`, !fromRefresh),
-                cachedFetch(`https://psmb.ru/?calendarDate=${date}`, !fromRefresh),
-                cachedFetch(`${process.env.API_HOST}/readings/${date}`, !fromRefresh),
+                cachedFetch(`${process.env.API_HOST}/day/${date}`, fromRefresh ? 'PREFETCH_RELOAD' : 'PREFETCH_NORMAL'),
+                cachedFetch(
+                    `${process.env.API_HOST}/parts/${date}/ru`,
+                    fromRefresh ? 'PREFETCH_RELOAD' : 'PREFETCH_NORMAL'
+                ),
+                cachedFetch(
+                    `https://psmb.ru/?calendarDate=${date}`,
+                    fromRefresh ? 'PREFETCH_RELOAD' : 'PREFETCH_NORMAL'
+                ),
+                cachedFetch(
+                    `${process.env.API_HOST}/readings/${date}`,
+                    fromRefresh ? 'PREFETCH_RELOAD' : 'PREFETCH_NORMAL'
+                ),
             ])
         )
     );
