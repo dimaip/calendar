@@ -25,10 +25,11 @@ const { RecoilPersist, updateState } = recoilPersist([
 ]);
 
 const queryClient = new QueryClient({
-    defaultConfig: {
+    defaultOptions: {
         queries: {
-            refetchOnWindowFocus: false,
             refetchOnMount: false,
+            refetchOnWindowFocus: false,
+            refetchOnReconnect: false,
         },
     },
 });
