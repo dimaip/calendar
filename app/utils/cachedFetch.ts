@@ -82,6 +82,11 @@ const cachedFetch = async (
             }
             return JSON.parse(json);
         })
-        .catch((e) => console.warn(e));
+        .catch((e) => {
+            console.warn(e);
+            if (source === 'NORMAL') {
+                throw e;
+            }
+        });
 
 export default cachedFetch;
