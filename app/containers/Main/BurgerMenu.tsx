@@ -3,11 +3,16 @@ import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
 import Button from 'components/Button/Button';
 import CrossCircle from 'components/svgs/CrossCircle';
-import getWrapper from 'utils/StorageAPIWrapper';
-const wrapper = getWrapper();
+import { useSetRecoilState } from 'recoil';
+import pendingUpdateState from 'state/pendingUpdateState';
+import checkVersion from 'checkVersion';
+import precache from 'precache';
+import { useQueryClient } from 'react-query';
 
 const BurgerMenu = ({ menuShown, setMenuShown }) => {
     const theme = useTheme();
+    const setPendingUpdate = useSetRecoilState(pendingUpdateState);
+    const queryClient = useQueryClient();
     return (
         <>
             <div
@@ -114,37 +119,13 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                             className={css`
                                 text-decoration: underline;
                             `}
-                            onClick={() => {
-                                wrapper.openStore({ database: 'pb', table: 'requestsCache' }, () => {
-                                    wrapper.clear(() => {
-                                        if (navigator.serviceWorker) {
-                                            navigator.serviceWorker.getRegistrations().then(function (registrations) {
-                                                for (const registration of registrations) {
-                                                    registration.unregister();
-                                                }
-                                            });
-                                            caches
-                                                .keys()
-                                                .then(function (cacheNames) {
-                                                    return Promise.all(
-                                                        cacheNames
-                                                            .filter(function (cacheName) {
-                                                                return true;
-                                                            })
-                                                            .map(function (cacheName) {
-                                                                return caches.delete(cacheName);
-                                                            })
-                                                    );
-                                                })
-                                                .then(() => {
-                                                    alert(
-                                                        'Кажется у нас получилось все исправить, возвращаем вас в приложение'
-                                                    );
-                                                    window.location.replace('/');
-                                                });
-                                        }
-                                    });
-                                });
+                            onClick={async () => {
+                                const newVersion = await checkVersion();
+                                if (newVersion) {
+                                    setPendingUpdate(newVersion);
+                                }
+                                await precache(true);
+                                await queryClient.refetchQueries();
                             }}
                         >
                             Обновить данные
