@@ -26,4 +26,4 @@ registerRoute(new RegExp(`^${apiHostRegexp}/clear-cache`), new NetworkOnly());
 registerRoute(new RegExp('/built/version.json'), new NetworkOnly());
 // registerRoute(new RegExp('^https://psmb.ru'), new StaleWhileRevalidate());
 registerRoute(new RegExp('/assets/'), new CacheFirst());
-registerRoute(new RegExp(`^${publicUrlRegexp}/.*\\.(png|ico|svg|json)`), new StaleWhileRevalidate());
+registerRoute(new RegExp(`^${publicUrlRegexp}/.*\\.(png|ico|svg)`), new StaleWhileRevalidate());
