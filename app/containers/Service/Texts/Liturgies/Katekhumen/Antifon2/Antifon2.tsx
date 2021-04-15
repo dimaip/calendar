@@ -15,6 +15,9 @@ const Antifon2 = ({ date: dateString }) => {
     if (isEasterOffsetRange(49)) {
         return <MdxLoader src="Liturgies/Katekhumen/Antifon2Pentecost" />;
     }
+    if (isEasterOffsetRange(-7)) {
+        return <MdxLoader src="Liturgies/Katekhumen/Antifon2VhodGospoden" />;
+    }
     if (isDate(8, 19)) {
         return <MdxLoader src="Liturgies/Katekhumen/Antifon2Transfiguration" />;
     }

@@ -3,6 +3,8 @@ import Parts from 'components/Parts/Parts';
 import Html from 'components/Html/Html';
 import If from 'components/If/If';
 import Prokimens, {DefatulProkimen} from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
+import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
 <span id="nachalo" />
 
@@ -94,7 +96,7 @@ import Prokimens, {DefatulProkimen} from 'containers/Service/Texts/Vespers/Proki
 
 ### Стихиры «на стихах»
 
-<Parts date={props.date} partNames={['vespers.Cтихиры на стихах']} />
+<StihiriNaStihah day={props.day} date={props.date} />
 <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} lent />
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
