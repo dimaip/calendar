@@ -72,9 +72,13 @@ const Matins = ({ date }) => {
     const lentSubbota3 = isEasterOffsetRange(-4 * 7 - 1);
     const lentSubbota4 = isEasterOffsetRange(-3 * 7 - 1);
     const lentSubbotas = lentSubbota2 || lentSubbota3 || lentSubbota4;
+    const lentSubbota5 = isEasterOffsetRange(-2 * 7 - 1);
+    const lazarevaSubbota = isEasterOffsetRange(-1 * 7 - 1);
     const vospominanijaUsopshih = vselenskayaRoditelskayaSubbota || lentSubbotas;
     const greatLent = day?.fastName === 'Великий пост';
     const isFast =
+        !lazarevaSubbota &&
+        !lentSubbota5 &&
         !isHoliday &&
         (day?.fastName === 'Петров пост' ||
             day?.fastName === 'Успенский пост' ||
