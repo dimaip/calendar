@@ -1,6 +1,7 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Parts from 'components/Parts/Parts';
 import If from 'components/If/If';
+import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostilari';
 
 <span id="nachalo" />
 
@@ -47,6 +48,8 @@ import If from 'components/If/If';
 <MdxLoader src="Matins/Prayer10" lang={props.lang} />
 <MdxLoader src="Shared/Psalm50" lang={props.lang} />
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
+
+<Exapostilari date={props.date}/>
 <MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} lent />
 
 ### Стихиры на «Хвалите»
