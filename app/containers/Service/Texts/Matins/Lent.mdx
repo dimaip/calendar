@@ -52,7 +52,7 @@ import If from 'components/If/If';
 ### Стихиры на «Хвалите»
 
 <Parts date={props.date} partNames={['matins.Cтихиры на хвалите']} />
-<MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} short={props.vospominanijaUsopshih || props.isEasterOffsetRange(-(7*6+1))} />
+<MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} short={props.isEasterOffsetRange(-6, -4) || props.vospominanijaUsopshih || props.isEasterOffsetRange(-(7*6+1))} />
 
 <If condition={!props.greatLent || props.dayOfWeek === 6}>
 
