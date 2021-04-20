@@ -22,6 +22,10 @@ import If from 'components/If/If';
     <>{!props.lentSubbotas && props.greatLent && <MdxLoader src="Matins/Aliluja3" lang={props.lang} />}</>
 </If>
 
+
+<If condition={props.isEasterOffsetRange(-6, -4)}>
+    <MdxLoader src="Shared/TroparionPassion" lang={props.lang} />
+</If>
 <If condition={props.vospominanijaUsopshih}>
 
   ### Тропари
