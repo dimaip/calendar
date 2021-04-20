@@ -13,7 +13,7 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
 
 **Н** Аминь.
 
-<>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
+<>{props.isEasterOffsetRange(-3, -2) && <MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />}</>
 
 <If condition={!props.isEasterOffsetRange(-(7*6+1))}>
     <>{(props.dayOfWeek === 0 || props.dayOfWeek === 1 || props.vospominanijaUsopshih || props.greatLent) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
@@ -27,6 +27,9 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
 <If condition={props.isEasterOffsetRange(-6, -4)}>
     <MdxLoader src="Shared/TroparionPassion" lang={props.lang} />
 </If>
+<If condition={props.isEasterOffsetRange(-3, -2)}>
+    <MdxLoader src="Shared/TroparionPassion2" lang={props.lang} />
+</If>
 <If condition={props.vospominanijaUsopshih}>
 
   ### Тропари
@@ -39,6 +42,30 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
   />
 </If>
 
+<If condition={props.isEasterOffsetRange(-3)}>
+
+    <span id="reading" />
+
+    ## Чтения
+
+    **П** Премудрость! Станем благоговейно! Услышим святое евангелие!
+
+    **П** От **(имя)** святого благовестия чтение.
+
+    **Н** Слава Тебе, Господи, слава Тебе!
+
+    **П** Будем внимательны!
+
+    <br />
+
+    <>{props.readings}</>
+
+    **Н** Слава Тебе, Господи, слава Тебе!
+
+    ### Проповедь
+
+</If>
+
 <>{props.dayOfWeek === 0 || props.dayOfWeek === 2 && <MdxLoader src="Matins/Prayer2" lang={props.lang} />}</>
 <>{props.dayOfWeek === 0 || props.dayOfWeek === 3 && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
 <>{props.dayOfWeek === 0 || props.dayOfWeek === 4 && <MdxLoader src="Matins/Prayer4" lang={props.lang} />}</>
@@ -47,6 +74,11 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
 
 <MdxLoader src="Matins/Prayer10" lang={props.lang} />
 <MdxLoader src="Shared/Psalm50" lang={props.lang} />
+
+<If condition={props.isEasterOffsetRange(-3)}>
+    <MdxLoader src="Matins/PassionThursdayCanon" lang={props.lang} />
+</If>
+
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 
 <Exapostilari date={props.date}/>
@@ -55,7 +87,7 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
 ### Стихиры на «Хвалите»
 
 <Parts date={props.date} partNames={['matins.Cтихиры на хвалите']} />
-<MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} short={props.isEasterOffsetRange(-6, -4) || props.vospominanijaUsopshih || props.isEasterOffsetRange(-(7*6+1))} />
+<MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} short={props.isEasterOffsetRange(-6, -2) || props.vospominanijaUsopshih || props.isEasterOffsetRange(-(7*6+1))} />
 
 <If condition={props.isEasterOffsetRange(-6, -4) || !props.greatLent || props.dayOfWeek === 6}>
 
@@ -96,15 +128,28 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
 <br />
 <MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
 
-**Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́. **{props.greatLent && props.dayOfWeek !== 6 && props.dayOfWeek !== 0 ? '(Дважды)' : ''}**
+<If condition={props.isEasterOffsetRange(-3)}>
+    <MdxLoader src="Matins/PassionThursdayStihiriNaStihah" lang={props.lang} />
+</If>
+
+<If condition={props.isEasterOffsetRange(-2)}>
+    <MdxLoader src="Matins/PassionFridayStihiriNaStihah" lang={props.lang} />
+</If>
+
+**Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́. **{!props.isEasterOffsetRange(-3,-2) && props.greatLent && props.dayOfWeek !== 6 && props.dayOfWeek !== 0 ? '(Дважды)' : ''}**
 
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-<If condition={!((props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5)) || (props.greatLent && props.dayOfWeek !== 6))}>
+<If condition={props.isEasterOffsetRange(-3) || !((props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5)) || (props.greatLent && props.dayOfWeek !== 6))}>
 
-    ### Тропари
+    <If condition={!props.isEasterOffsetRange(-3)}>
+        ### Тропари
 
-    <>{props.troparions}</>
+        <>{props.troparions}</>
+    </If>
+    <If condition={props.isEasterOffsetRange(-3)}>
+        <MdxLoader src="Shared/TroparionPassion2" lang={props.lang} />
+    </If>
 
     <Parts
         date={props.date}
@@ -118,7 +163,7 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
 </If>
 
 
-<If condition={(props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5)) || (props.greatLent && props.dayOfWeek !== 6)}>
+<If condition={!props.isEasterOffsetRange(-3) && ((props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5)) || (props.greatLent && props.dayOfWeek !== 6))}>
 
     <If condition={!props.greatLent}>
         <MdxLoader src="Matins/LentEnding1" lang={props.lang} />
@@ -134,11 +179,7 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
         partNames={['shared.Отпуст Синаксарный']}
         saints={props.saints}
         fallback={
-            props.isSunday || props.easterSeason ? (
-                <MdxLoader src="Shared/Ending/EasterOtpust" />
-            ) : (
-                <MdxLoader src="Shared/Ending/Otpust" />
-            )
+            <MdxLoader src="Shared/Ending/Otpust" />
         }
     />
 
