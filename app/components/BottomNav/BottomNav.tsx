@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { Link, useParams } from 'react-router-dom';
 import { useTheme } from 'emotion-theming';
-import CalendarIcon from 'components/svgs/CalendarIcon';
+import CrossIcon from 'components/svgs/CrossIcon';
 import Bible from 'components/svgs/Bible';
 import Prayer from 'components/svgs/Prayer';
 
@@ -11,10 +11,10 @@ const BottomNav = ({ active }) => {
     const theme = useTheme();
 
     const itemClass = css`
-        height: 50px;
+        height: 60px;
         font-size: 13px;
         padding: 9px 12px;
-        color: ${theme.colours.lightGray};
+        color: ${theme.colours.gray};
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -22,18 +22,18 @@ const BottomNav = ({ active }) => {
         align-items: center;
     `;
     const activeClass = css`
-        color: ${theme.colours.darkGray} !important;
+        color: ${theme.colours.blue} !important;
     `;
 
     return (
         <div
             className={css`
-                height: calc(50px + env(safe-area-inset-bottom));
+                height: calc(60px + env(safe-area-inset-bottom));
             `}
         >
             <div
                 className={css`
-                    height: calc(50px + env(safe-area-inset-bottom));
+                    height: calc(60px + env(safe-area-inset-bottom));
                     flex-shrink: 0;
                     display: flex;
                     justify-content: space-evenly;
@@ -49,14 +49,14 @@ const BottomNav = ({ active }) => {
                 `}
             >
                 <Link className={`${itemClass} ${active === 'calendar' ? activeClass : ''}`} to={`/date/${date}`}>
-                    <CalendarIcon colour={active === 'calendar' ? theme.colours.darkGray : theme.colours.lightGray} />
+                    <CrossIcon colour={active === 'calendar' ? theme.colours.blue : theme.colours.gray} />
                     Календарь
                 </Link>
                 <Link
                     className={`${itemClass} ${active === 'services' ? activeClass : ''}`}
                     to={`/date/${date}/services`}
                 >
-                    <Prayer colour={active === 'services' ? theme.colours.darkGray : theme.colours.lightGray} />
+                    <Prayer colour={active === 'services' ? theme.colours.blue : theme.colours.gray} />
                     Богослужение
                 </Link>
                 <a
@@ -65,7 +65,7 @@ const BottomNav = ({ active }) => {
                     href="https://bible.psmb.ru"
                     target="_blank"
                 >
-                    <Bible colour={active === 'bible' ? theme.colours.darkGray : theme.colours.lightGray} />
+                    <Bible colour={active === 'bible' ? theme.colours.blue : theme.colours.gray} />
                     Библия
                 </a>
             </div>

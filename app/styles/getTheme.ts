@@ -9,6 +9,7 @@ const gray3 = '#CECED2';
 const gray4 = '#EFEFF4';
 const gray5 = '#fafafc';
 const gray6 = '#ffffff';
+const blue = '#4169E1';
 
 const getTheme = (primary) => {
     const dark = isDarkMode();
@@ -25,6 +26,7 @@ const getTheme = (primary) => {
             lineGray: dark ? gray2a : gray3,
             red: '#ff4e4e',
             white: dark ? gray1a : gray6,
+            blue,
         },
     };
 };
