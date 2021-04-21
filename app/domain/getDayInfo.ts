@@ -510,7 +510,7 @@ export const getFeastInfo = memoize(
             feastType = '12';
             colour = green;
             calendarColour = 'green';
-            icon = 'vhod.jpg';
+            icon = 'vhod.svg';
         }
 
         if (isEasterOffsetRange(39, 47)) {
