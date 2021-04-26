@@ -17,6 +17,7 @@ import Lent from './Lent.mdx';
 import Prazdnichnaja from './Prazdnichnaja.mdx';
 import Epiphany from './Epiphany.mdx';
 import Epiphany2 from './Epiphany2.mdx';
+import PassionThursday from './PassionThursday.mdx';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -85,6 +86,21 @@ const Vespers = ({ date }) => {
             vselenskayaRoditelskayaSubbota ||
             sirnajaSedmitza);
 
+    if (isEasterOffsetRange(-2)) {
+        return (
+            <PassionThursday
+                dayOfWeek={dayOfWeek}
+                troparions={troparions}
+                endHymns={endHymns}
+                readings={readings}
+                saints={saints}
+                otpust={otpust}
+                day={tomorrowDay}
+                date={tomorrowDate}
+                previousDate={date}
+            />
+        );
+    }
     if (title === 'Рождество Христово') {
         return (
             <Epiphany
@@ -128,6 +144,7 @@ const Vespers = ({ date }) => {
                 otpust={otpust}
                 day={tomorrowDay}
                 date={tomorrowDate}
+                previousDate={date}
                 sirnajaSedmitza={sirnajaSedmitza}
                 greatLent={greatLent && !isAnnunciation}
                 isEasterOffsetRange={isEasterOffsetRange}

@@ -158,14 +158,10 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
   ### Отпуст
 
   <Parts
-      date={props.date}
+      date={props.isEasterOffsetRange(-3, -2) ? props.previousDate : props.date}
       partNames={['shared.Отпуст Синаксарный']}
       fallback={
-          props.isSunday || props.easterSeason ? (
-              <MdxLoader src="Shared/Ending/EasterOtpust" />
-          ) : (
-              <MdxLoader src="Shared/Ending/Otpust" />
-          )
+           <MdxLoader src="Shared/Ending/Otpust" />
       }
   />
 
