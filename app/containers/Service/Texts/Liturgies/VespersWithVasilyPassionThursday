@@ -1,0 +1,175 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Tooltip from 'components/Tooltip/Tooltip';
+import If from 'components/If/If';
+import Parts from 'components/Parts/Parts';
+import { css } from 'emotion';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
+
+import Html from 'components/Html/Html';
+import StihiriNaGV from '../Vespers/StihiriNaGV/StihiriNaGV';
+import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+import Trisvatoe from './Katekhumen/Trisvatoe/Trisvatoe';
+import Reading from './Katekhumen/Reading/Reading';
+
+<span id="nachalo" />
+
+# Вечерня в соединении с Литургией Василия Великого
+
+# I. <br /> Вечерня
+
+<MdxLoader src="Liturgies/Katekhumen/Vozglas" /> без Аминь
+
+<MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
+
+<MdxLoader src="Vespers/Psalm103" lang={props.lang} chitaetsa />
+
+<MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
+
+<MdxLoader src="Vespers/Prayer8" lang={props.lang} />
+
+<MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
+
+### Стихиры на «Господи, взываю»
+
+<StihiriNaGV day={props.tomorrowDay} date={props.tomorrowDate} />
+<span id="vhod" />
+
+## Вход
+
+<MdxLoader src="Vespers/PremudrostVhod" lang={props.lang} />
+
+### Вечерняя (входная) песнь «при возжжении светильника»
+
+<MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
+
+## Чтения
+
+<Parts date={props.date} partNames={['vespers.Прокимен триоди 1']} />
+
+<span id="reading" />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+  <ReadingsForService readingsForService={{'Великого Четверга': ['Исх. XIX, 10-19.']}} />
+</div>
+
+<br />
+
+<Parts date={props.date} partNames={['vespers.Прокимен триоди 2']} />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+  <ReadingsForService readingsForService={{' Великого Четверга ': [' Иов. XXXVIII, 1-23, XLII, 1-5.']}} />
+</div>
+
+<br />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+  <ReadingsForService readingsForService={{' Великого Четверга ': [' Ис. L, 4–11.']}} />
+</div>
+
+### Проповедь
+
+### Малая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+
+<Trisvatoe date={props.date} />
+
+## (4) Чтения и прошения верных
+
+<Reading day={props.day} date={props.date} />
+
+## Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+<div
+    className={css`
+        margin: 0 5px;
+    `}
+>
+    {props.apostol}
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
+
+## Проповедь
+
+> **[Д** Господу помолимся!**]**
+
+<span id="gospel"/>
+
+### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+
+<MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+
+<MdxLoader src="Liturgies/Katekhumen/BlessBeforeGosp" />
+
+{props.aliluja}
+
+<MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
+
+## Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div
+    className={css`
+        margin: 0 5px;
+    `}
+>
+    {props.gospel}
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+
+## Проповедь
+
+{props.sermons}
+
+<MdxLoader src="Liturgies/Katekhumen/SugubajaEktenia" />
+
+### Молитва при усердном (сугубом) молении
+
+<MdxLoader src="Liturgies/Katekhumen/Userdnaya" />
+
+{/* @TODO: hide on Sundays and feasts */}
+
+<If condition={!props.brightOrOtdanie}>
+  <>
+    ### <b>[</b>Cугубая заупокойная ектения <Tooltip>Не читается в храмовые (престольные) и двунадесятые праздники и, как правило, в воскресные дни, дни Святок и всей св. Пятидесятницы.</Tooltip>
+
+<MdxLoader src="Liturgies/Katekhumen/Zaupokoynaya" />
+
+    ### Молитва об усопших
+
+<MdxLoader src="Liturgies/Katekhumen/Usopshiye" />  </>
+</If>
+
+{/* @TODO: спрятать всегда, когда поется "Все вы во Христа крестившиеся", см. по табличке */}
+<If condition={!props.brightWeek}>
+
+  <span id="oglashaemie" />
+
+  ## \*\*\*
+
+  ## (5) Отпуст оглашаемых<br/>(если есть)
+
+  <MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
+
+  ### Молитва об оглашаемых
+
+  <If condition={props.serviceType === 'zlatoust'}>
+    <MdxLoader src="Liturgies/Katekhumen/Oglashaemie" />
+  </If>
+  <If condition={props.serviceType === 'vasiliy'}>
+    <MdxLoader src="Liturgies/Katekhumen/OglashaemieVasiliy" />
+  </If>
+
+  <MdxLoader src="Liturgies/Katekhumen/Izydite" />
+
+  **[Все непричащающиеся с благоговением покидают церковь.]**
+
+</If>
+
+
