@@ -2,7 +2,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Html from 'components/Html/Html';
 import Parts from 'components/Parts/Parts';
 import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
-import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+import Prokimens from 'containers/Service/Texts/Liturgies/Katekhumen/Prokimens/Prokimens';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <span id="nachalo" />
@@ -66,14 +66,14 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 ### Проповедь
 
-<Prokimens date={props.date} />
+<Prokimens date={props.previousDate} />
 
 <ReadingsForService readingsForService={{'Великого Четверга': ['1 Кор., 149 зач., XI, 23-32.']}} />
 
 ### Проповедь
 
 <Parts
-  date={props.date}
+  date={props.previousDate}
   partNames={['liturgy.Аллилуарий']}
 />
 
