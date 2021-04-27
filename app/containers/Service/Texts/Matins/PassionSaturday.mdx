@@ -5,6 +5,7 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
 import Parts from 'components/Parts/Parts';
 import If from 'components/If/If';
 import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <span id="nachalo" />
 
@@ -76,8 +77,8 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 <Prokimens date={props.date} />
 
 <ReadingsForService readingsForService={{'Великой Cубботы': [
-  '1 Кор., 133 зач., V, 6-8; '
-  'Гал., 206 зач., III, 13-14. '
+  '1 Кор., 133 зач., V, 6-8;',
+  'Гал., 206 зач., III, 13-14.'
 ]}} />
 
 ### Проповедь
@@ -87,7 +88,7 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
   partNames={['liturgy.Аллилуарий']}
 />
 
-<ReadingsForService readingsForService={{'Великой Субботы': [' Мф., 114 зач., XXVII, 62-66.']}} />
+<ReadingsForService readingsForService={{'Великой Субботы': ['Мф., 114 зач., XXVII, 62-66.']}} />
 
 ### Проповедь
 
