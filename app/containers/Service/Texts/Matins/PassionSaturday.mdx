@@ -1,0 +1,106 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Prokimens from 'containers/Service/Texts/Matins/Prokimens/Prokimens';
+import Stepenny from 'containers/Service/Texts/Matins/Stepenny/Stepenny';
+import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostilari';
+import Parts from 'components/Parts/Parts';
+import If from 'components/If/If';
+import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
+
+<span id="nachalo" />
+
+# Утреня
+
+<br />
+
+**П** Слава святой, и единосущной, и животворящей, и нераздельной Троице ныне и всегда и во веки веков!
+
+**Н** Аминь.
+
+<MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />
+
+<MdxLoader src="Matins/Prayer1" lang={props.lang} />
+
+<MdxLoader src="Matins/BogGospod" lang={props.lang} />
+
+{props.troparions}
+
+<MdxLoader src="Shared/Neporochny1" lang={props.lang} />
+
+<MdxLoader src="Matins/MalajaEkteniaVS1" lang={props.lang} />
+
+<MdxLoader src="Shared/Neporochny2" lang={props.lang} />
+
+<MdxLoader src="Matins/MalajaEkteniaVS2" lang={props.lang} />
+
+<MdxLoader src="Shared/Neporochny3" lang={props.lang} />
+
+<MdxLoader src="Matins/MalajaEkteniaVS3" lang={props.lang} />
+
+<MdxLoader src="Matins/TropsVoskr" lang={props.lang} />
+
+<>{props.isHoliday && <MdxLoader src="Matins/Prayer10" lang={props.lang} />}</>
+<>{props.isHoliday && <MdxLoader src="Shared/Psalm50" lang={props.lang} />}</>
+
+<MdxLoader src="Matins/PassionThursdayCanon" lang={props.lang} />
+
+<MdxLoader src="Matins/Prayer11" lang={props.lang} />
+
+<MdxLoader src="Matins/Sviat" lang={props.lang} />
+
+<MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
+
+### Стихиры на «Хвалите»
+
+<StihiriNaHvalite date={props.date} day={props.day} />
+<MdxLoader src="Matins/Slavoslovie" lang={props.lang} />
+
+## Чтения
+
+**П** Премудрость! Станем благоговейно!
+
+<MdxLoader src="Shared/DostopJosef" lang={props.lang} />
+<MdxLoader src="Shared/TropProrSaturday" lang={props.lang} />
+
+<Prokimens day={props.day} date={props.date} />
+<span id="reading" />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+  <ReadingsForService readingsForService={{'Великой Субботы': ['Иез. XXXVII, 1-14.']}} />
+</div>
+
+<br />
+### Проповедь
+
+<Prokimens date={props.date} />
+
+<ReadingsForService readingsForService={{'Великой Cубботы': [
+  '1 Кор., 133 зач., V, 6-8; '
+  'Гал., 206 зач., III, 13-14. '
+]}} />
+
+### Проповедь
+
+<Parts
+  date={props.date}
+  partNames={['liturgy.Аллилуарий']}
+/>
+
+<ReadingsForService readingsForService={{'Великой Субботы': [' Мф., 114 зач., XXVII, 62-66.']}} />
+
+### Проповедь
+
+<MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+
+## Заключение
+
+**П** Завершим нашу утреннюю молитву Господу!
+
+<MdxLoader src="Matins/Prayer12" lang={props.lang} />
+<br />
+<MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
+
+<>{props.otpust}</>
+
+<MdxLoader src="Shared/PriditeUblazhim" />
