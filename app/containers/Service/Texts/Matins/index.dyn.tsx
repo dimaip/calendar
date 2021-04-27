@@ -14,6 +14,7 @@ import Ending from '../Shared/Ending/Ending';
 
 import Prazdnichnaja from './Prazdnichnaja.mdx';
 import PassionFriday from './PassionFriday.mdx';
+import PassionSaturday from './PassionSaturday.mdx';
 import Lent from './Lent.mdx';
 
 const Readings = ({ readingsForService, day }) =>
@@ -104,6 +105,9 @@ const Matins = ({ date }) => {
     };
     if (isEasterOffsetRange(-2)) {
         return <PassionFriday {...props} />;
+    }
+    if (isEasterOffsetRange(-1)) {
+        return <PassionSaturday {...props} />;
     }
     if (isFast) {
         return (
