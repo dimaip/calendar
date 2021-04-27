@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { css } from 'emotion';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Tooltip from 'components/Tooltip/Tooltip';
@@ -40,14 +41,17 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
 ## (2) Вход
 
-
-
 <If condition={props.isEasterOffsetRange(-3)}>
     ### Входная песнь Литургии верных
     <MdxLoader src="Shared/TrapeziTainstvennoi" />
     **(Дважды)**
 </If>
-<If condition={!props.isEasterOffsetRange(-3)}>
+<If condition={props.isEasterOffsetRange(-1)}>
+    ### Входная песнь Литургии верных
+    <MdxLoader src="Liturgies/Vernie/DaMolchit" />
+    **(Дважды)**
+</If>
+<If condition={!props.isEasterOffsetRange(-3) && !props.isEasterOffsetRange(-1)}>
     ### Херувимская песнь <br /> (входная песнь Литургии верных)
     <MdxLoader src="Liturgies/Vernie/Heruvimskaya" />
 </If>
@@ -65,7 +69,12 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
     <MdxLoader src="Shared/TrapeziTainstvennoi" />
     Аллилуия.
 </If>
-<If condition={!props.isEasterOffsetRange(-3)}>
+<If condition={props.isEasterOffsetRange(-1)}>
+    **2-я часть Входной песни:**
+    <MdxLoader src="Liturgies/Vernie/DaMolchit" />
+    Аллилуия.
+</If>
+<If condition={!props.isEasterOffsetRange(-3) && !props.isEasterOffsetRange(-1)}>
     **2-я часть Херувимской песни:**
     <MdxLoader src="Liturgies/Vernie/Heruvimskaya2VV" />
 </If>
