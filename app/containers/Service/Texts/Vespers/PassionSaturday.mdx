@@ -1,0 +1,114 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Html from 'components/Html/Html';
+import Parts from 'components/Parts/Parts';
+import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
+import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
+
+<span id="nachalo" />
+
+# Вечерня
+
+<br />
+
+**П** Благословен Бог наш ныне и всегда и во веки веков!
+
+<MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
+<MdxLoader src="Vespers/Psalm103" chitaetsa lang={props.lang} />
+
+<MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
+
+<MdxLoader src="Vespers/Prayer8" lang={props.lang} />
+<MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
+
+### Стихиры на «Господи, взываю»
+
+<StihiriNaGV day={props.day} date={props.date} />
+<span id="vhod" />
+
+## Вход
+
+<MdxLoader src="Vespers/PremudrostVhod" lang={props.lang} />
+
+### Вечерняя (входная) песнь «при возжжении светильника»
+
+<MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
+
+## Чтения
+
+**Д** Премудрость!
+
+<span id="reading" />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<br />
+
+<>{props.readings}</>
+
+### Проповедь
+
+<Prokimens date={props.date} />
+
+<ReadingsForService readingsForService={{'Великой Субботы': ['Рим., 91 зач., VI, 3–11.']}} />
+
+### Проповедь
+
+<Parts
+  date={props.date}
+  partNames={['liturgy.Аллилуарий']}
+/>
+
+<ReadingsForService readingsForService={{'Великой Субботы': [Мф., 115 зач., XXVIII, 1-20. ']}} />
+
+### Проповедь
+
+<MdxLoader src="Shared/SugubajaPolnaja" lang={props.lang} />
+
+<MdxLoader src="Vespers/Udostoi" lang={props.lang} />
+
+## Заключение
+
+**П** Завершим нашу вечернюю молитву Господу!
+
+<MdxLoader src="Vespers/Prayer9" lang={props.lang} />
+<br />
+<MdxLoader src="Vespers/PrayerGlavopriklonnaja" lang={props.lang} />
+
+<MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} />
+<MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
+
+<MdxLoader src="Shared/TropVelSub" lang={props.lang} />
+
+
+<span id="otpust" />
+<br />
+
+**П** Премудрость!
+
+**Н** Благослови!
+
+**П** Благословен Христос Бог наш ныне и всегда и во веки веков!
+
+**Н** Аминь. Утверди́, Боже, святую православную веру православных христиан во век века.
+
+**П** Всесвятая Богородица, помогай нам **(или:** спаси нас**)**!
+
+**Н** Чествуемую превыше херувимов, и славную несравненно более серафимов, девственно Бога-Слово родившую, поистине Богородицу – тебя величаем.
+
+**П** Слава Тебе, Христе Боже, Надежда наша, слава Тебе!
+
+**Н Слава, и ныне.** Господи, помилуй **(трижды)**. Благослови!
+
+### Отпуст
+
+<Parts
+  date={props.previousDate}
+  partNames={['shared.Отпуст Синаксарный']}
+  fallback={
+    <MdxLoader src="Shared/Ending/Otpust" />
+  }
+/>
+
+<MdxLoader src="Shared/SouzomLubvi" />
+<MdxLoader src="Shared/TrapeziTainstvennoi" />
