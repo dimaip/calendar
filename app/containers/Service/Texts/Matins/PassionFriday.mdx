@@ -5,6 +5,7 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
 import Parts from 'components/Parts/Parts';
 import If from 'components/If/If';
 import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <span id="nachalo" />
 
@@ -46,30 +47,30 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 <MdxLoader src="Matins/AntifonyVelPiat6" lang={props.lang} />
 
-<ReadingsForService readingsForService={{'Великой Пятницы': [Мф., 109 зач., XXVI, 57-75.']}} />
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Мф., 109 зач., XXVI, 57-75.']}} />
 
 <MdxLoader src="Matins/AntifonyVelPiat9" lang={props.lang} />
 
-<ReadingsForService readingsForService={{'Великой Пятницы': [Ин., 59 зач., XVIII, 28 - XIX, 16.']}} />
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Ин., 59 зач., XVIII, 28 - XIX, 16.']}} />
 
 <MdxLoader src="Matins/AntifonyVelPiat12" lang={props.lang} />
 
-<ReadingsForService readingsForService={{'Великой Пятницы': [Мф., 111 зач., XXVII, 3-32.']}} />
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Мф., 111 зач., XXVII, 3-32.']}} />
 
 <MdxLoader src="Matins/AntifonyVelPiat15" lang={props.lang} />
 
-<ReadingsForService readingsForService={{'Великой Пятницы': [Мк., 67 зач., XV, 16-32.']}} />
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Мк., 67 зач., XV, 16-32.']}} />
 
 <MdxLoader src="Shared/Blazhenstva" lang={props.lang} />
 
 <Prokimens day={props.day} date={props.date} />
 
-<ReadingsForService readingsForService={{'Великой Пятницы': [Мф., 113 зач., XXVII, 33-54.']}} />
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Мф., 113 зач., XXVII, 33-54.']}} />
 
 <MdxLoader src="Matins/Prayer10" lang={props.lang} />
 <MdxLoader src="Shared/Psalm50" lang={props.lang} />
 
-<ReadingsForService readingsForService={{'Великой Пятницы': [Лк., 111 зач., XXIII, 32-49.']}} />
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Лк., 111 зач., XXIII, 32-49.']}} />
 
 <MdxLoader src="Matins/PassionFridayCanon" lang={props.lang} />
 
@@ -77,7 +78,7 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 <Exapostilari date={props.date}/>
 
-<ReadingsForService readingsForService={{'Великой Пятницы': [Ин., 61 зач., XIX, 25-37.']}} />
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Ин., 61 зач., XIX, 25-37.']}} />
 
 <MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} lent />
 
@@ -85,9 +86,9 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 <Parts date={props.date} partNames={['matins.Cтихиры на хвалите']} />
 
-<ReadingsForService readingsForService={{'Великой Пятницы': [Мк., 69 зач., XV, 43-47.']}} />
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Мк., 69 зач., XV, 43-47.']}} />
 
-<MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} short={props.isEasterOffsetRange(-2) />
+<MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} short={props.isEasterOffsetRange(-2)} />
 
 ## Заключение
 
@@ -97,16 +98,16 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 <br />
 <MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
 
-<ReadingsForService readingsForService={{'Великой Пятницы': [Ин., 62 зач., XIX, 38-42.']}} />
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Ин., 62 зач., XIX, 38-42.']}} />
 
 <MdxLoader src="Matins/PassionFridayStihiriNaStihah" lang={props.lang} />
 
-<ReadingsForService readingsForService={{'Великой Пятницы': [Мф., 114 зач., XXVII, 62-66.']}} />
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Мф., 114 зач., XXVII, 62-66.']}} />
 
 **Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́.
 
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-<MdxLoader src="Shared/TropProrFriday" lang={props.lang} />
+<MdxLoader src="Matins/TropProrPassionFriday" lang={props.lang} />
 
 <>{props.otpust}</>
