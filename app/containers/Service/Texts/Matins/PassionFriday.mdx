@@ -1,0 +1,112 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Prokimens from 'containers/Service/Texts/Matins/Prokimens/Prokimens';
+import Stepenny from 'containers/Service/Texts/Matins/Stepenny/Stepenny';
+import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostilari';
+import Parts from 'components/Parts/Parts';
+import If from 'components/If/If';
+import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
+
+<span id="nachalo" />
+
+# Утреня
+
+<br />
+
+**П** Слава святой, и единосущной, и животворящей, и нераздельной Троице ныне и всегда и во веки веков!
+
+**Н** Аминь.
+
+<MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />
+
+<MdxLoader src="Matins/Prayer1" lang={props.lang} />
+
+<MdxLoader src="Matins/Aliluja4" lang={props.lang} />
+
+<MdxLoader src="Shared/TroparionPassion2" lang={props.lang} />
+
+**П** Премудрость! Станем благоговейно! Услышим святое евангелие!
+
+**П** От **(имя)** святого благовестия чтение.
+
+**Н** Слава Тебе, Господи, слава Тебе!
+
+**П** Будем внимательны!
+
+<br />
+
+<>{props.readings}</>
+
+**Н** Слава Тебе, Господи, слава Тебе!
+
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Ин., 46 зач., XIII, 31 - XVIII, 1.']}} />
+
+<MdxLoader src="Matins/AntifonyVelPiat3" lang={props.lang} />
+	
+<ReadingsForService readingsForService={{'Великой Пятницы': ['Ин., 58 зач., XVIII, 1-28.']}} />
+
+<MdxLoader src="Matins/AntifonyVelPiat6" lang={props.lang} />
+
+<ReadingsForService readingsForService={{'Великой Пятницы': [Мф., 109 зач., XXVI, 57-75.']}} />
+
+<MdxLoader src="Matins/AntifonyVelPiat9" lang={props.lang} />
+
+<ReadingsForService readingsForService={{'Великой Пятницы': [Ин., 59 зач., XVIII, 28 - XIX, 16.']}} />
+
+<MdxLoader src="Matins/AntifonyVelPiat12" lang={props.lang} />
+
+<ReadingsForService readingsForService={{'Великой Пятницы': [Мф., 111 зач., XXVII, 3-32.']}} />
+
+<MdxLoader src="Matins/AntifonyVelPiat15" lang={props.lang} />
+
+<ReadingsForService readingsForService={{'Великой Пятницы': [Мк., 67 зач., XV, 16-32.']}} />
+
+<MdxLoader src="Shared/Blazhenstva" lang={props.lang} />
+
+<Prokimens day={props.day} date={props.date} />
+
+<ReadingsForService readingsForService={{'Великой Пятницы': [Мф., 113 зач., XXVII, 33-54.']}} />
+
+<MdxLoader src="Matins/Prayer10" lang={props.lang} />
+<MdxLoader src="Shared/Psalm50" lang={props.lang} />
+
+<ReadingsForService readingsForService={{'Великой Пятницы': [Лк., 111 зач., XXIII, 32-49.']}} />
+
+<MdxLoader src="Matins/PassionFridayCanon" lang={props.lang} />
+
+<MdxLoader src="Matins/Prayer11" lang={props.lang} />
+
+<Exapostilari date={props.date}/>
+
+<ReadingsForService readingsForService={{'Великой Пятницы': [Ин., 61 зач., XIX, 25-37.']}} />
+
+<MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} lent />
+
+### Стихиры на «Хвалите»
+
+<Parts date={props.date} partNames={['matins.Cтихиры на хвалите']} />
+
+<ReadingsForService readingsForService={{'Великой Пятницы': [Мк., 69 зач., XV, 43-47.']}} />
+
+<MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} short={props.isEasterOffsetRange(-2) />
+
+## Заключение
+
+**П** Завершим нашу утреннюю молитву Господу!
+
+<MdxLoader src="Matins/Prayer12" lang={props.lang} />
+<br />
+<MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
+
+<ReadingsForService readingsForService={{'Великой Пятницы': [Ин., 62 зач., XIX, 38-42.']}} />
+
+<MdxLoader src="Matins/PassionFridayStihiriNaStihah" lang={props.lang} />
+
+<ReadingsForService readingsForService={{'Великой Пятницы': [Мф., 114 зач., XXVII, 62-66.']}} />
+
+**Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́.
+
+<MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
+
+<MdxLoader src="Shared/TropProrFriday" lang={props.lang} />
+
+<>{props.otpust}</>
