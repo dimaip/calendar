@@ -18,6 +18,8 @@ import Prazdnichnaja from './Prazdnichnaja.mdx';
 import Epiphany from './Epiphany.mdx';
 import Epiphany2 from './Epiphany2.mdx';
 import PassionThursday from './PassionThursday.mdx';
+import PassionFriday from './PassionFriday.mdx';
+import PassionSaturday from './PassionSaturday.mdx';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -86,86 +88,49 @@ const Vespers = ({ date }) => {
             vselenskayaRoditelskayaSubbota ||
             sirnajaSedmitza);
 
+    const props = {
+        dayOfWeek,
+        troparions,
+        endHymns,
+        readings,
+        saints,
+        easterSeason,
+        isAscension,
+        otpust,
+        day: tomorrowDay,
+        date: tomorrowDate,
+        previousDate: date,
+        isHoliday,
+        isEasterOffsetRange,
+    };
+
     if (isEasterOffsetRange(-2)) {
-        return (
-            <PassionThursday
-                dayOfWeek={dayOfWeek}
-                troparions={troparions}
-                endHymns={endHymns}
-                readings={readings}
-                saints={saints}
-                otpust={otpust}
-                day={tomorrowDay}
-                date={tomorrowDate}
-                previousDate={date}
-            />
-        );
+        return <PassionThursday {...props} />;
+    }
+    if (isEasterOffsetRange(-1)) {
+        return <PassionFriday {...props} />;
+    }
+    if (isEasterOffsetRange(0)) {
+        return <PassionSaturday {...props} />;
     }
     if (title === 'Рождество Христово') {
-        return (
-            <Epiphany
-                dayOfWeek={dayOfWeek}
-                troparions={troparions}
-                endHymns={endHymns}
-                readings={readings}
-                saints={saints}
-                otpust={otpust}
-                day={tomorrowDay}
-                date={tomorrowDate}
-            />
-        );
+        return <Epiphany {...props} />;
     }
     if (title === 'Крещение Господне') {
-        return (
-            <Epiphany2
-                dayOfWeek={dayOfWeek}
-                troparions={troparions}
-                endHymns={endHymns}
-                readings={readings}
-                saints={saints}
-                otpust={otpust}
-                day={tomorrowDay}
-                date={tomorrowDate}
-            />
-        );
+        return <Epiphany2 {...props} />;
     }
 
     if (isFast || isAnnunciation) {
         return (
             <Lent
+                {...props}
                 annunciation={isAnnunciation}
-                dayOfWeek={dayOfWeek}
-                troparions={troparions}
-                endHymns={endHymns}
-                readings={readings}
-                saints={saints}
-                easterSeason={easterSeason}
-                isAscension={isAscension}
-                otpust={otpust}
-                day={tomorrowDay}
-                date={tomorrowDate}
-                previousDate={date}
                 sirnajaSedmitza={sirnajaSedmitza}
                 greatLent={greatLent && !isAnnunciation}
-                isEasterOffsetRange={isEasterOffsetRange}
             />
         );
     }
-    return (
-        <Prazdnichnaja
-            dayOfWeek={dayOfWeek}
-            troparions={troparions}
-            endHymns={endHymns}
-            readings={readings}
-            saints={saints}
-            easterSeason={easterSeason}
-            isAscension={isAscension}
-            otpust={otpust}
-            day={tomorrowDay}
-            date={tomorrowDate}
-            isHoliday={isHoliday}
-        />
-    );
+    return <Prazdnichnaja {...props} />;
 };
 
 export default Vespers;

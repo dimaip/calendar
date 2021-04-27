@@ -13,6 +13,8 @@ import Parts from 'components/Parts/Parts';
 import Ending from '../Shared/Ending/Ending';
 
 import Prazdnichnaja from './Prazdnichnaja.mdx';
+import PassionFriday from './PassionFriday.mdx';
+import PassionSaturday from './PassionSaturday.mdx';
 import Lent from './Lent.mdx';
 
 const Readings = ({ readingsForService, day }) =>
@@ -87,20 +89,31 @@ const Matins = ({ date }) => {
             vospominanijaUsopshih ||
             sirnajaSedmitza);
 
+    const props = {
+        dayOfWeek,
+        troparions,
+        endHymns,
+        readings,
+        saints,
+        easterSeason,
+        otpust,
+        day,
+        date,
+        isEasterOffsetRange,
+        SectionLayout,
+        isHoliday,
+    };
+    if (isEasterOffsetRange(-2)) {
+        return <PassionFriday {...props} />;
+    }
+    if (isEasterOffsetRange(-1)) {
+        return <PassionSaturday {...props} />;
+    }
     if (isFast) {
         return (
             <Lent
-                dayOfWeek={dayOfWeek}
-                troparions={troparions}
-                endHymns={endHymns}
-                readings={readings}
-                saints={saints}
-                easterSeason={easterSeason}
-                otpust={otpust}
-                day={day}
-                date={date}
+                {...props}
                 greatLent={greatLent}
-                isEasterOffsetRange={isEasterOffsetRange}
                 vospominanijaUsopshih={vospominanijaUsopshih}
                 vselenskayaRoditelskayaSubbota={vselenskayaRoditelskayaSubbota}
                 lentSubbotas={lentSubbotas}
@@ -109,22 +122,7 @@ const Matins = ({ date }) => {
         );
     }
 
-    return (
-        <Prazdnichnaja
-            dayOfWeek={dayOfWeek}
-            troparions={troparions}
-            endHymns={endHymns}
-            readings={readings}
-            saints={saints}
-            easterSeason={easterSeason}
-            otpust={otpust}
-            day={day}
-            date={date}
-            isEasterOffsetRange={isEasterOffsetRange}
-            SectionLayout={SectionLayout}
-            isHoliday={isHoliday}
-        />
-    );
+    return <Prazdnichnaja {...props} />;
 };
 
 export default Matins;

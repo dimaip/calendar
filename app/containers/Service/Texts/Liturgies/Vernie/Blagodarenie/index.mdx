@@ -26,6 +26,9 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
   <MdxLoader src="Shared/EasterTroparion" />
 )}
 
-{!props.brightWeek && (
+{!props.brightWeek && !props.isEasterOffsetRange(-3) && (
   <MdxLoader src="Liturgies/Vernie/Blagodarenie/DaIspolnatsa" />
+)}
+{props.isEasterOffsetRange(-3) && (
+  <MdxLoader src="Shared/TrapeziTainstvennoi" />
 )}

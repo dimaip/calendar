@@ -4,11 +4,13 @@ import Tooltip from 'components/Tooltip/Tooltip';
 import If from 'components/If/If';
 import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
-<div className={css`margin-bottom: 24px;`} id="nachalo" />
+<If condition={!props.onlyVernie}>
+    <div className={css`margin-bottom: 24px;`} id="nachalo" />
 
-# Божественная литургия Василия Великого
+    # Божественная литургия Василия Великого
 
-{props.katekhumen}
+    {props.katekhumen}
+</If>
 
 <div id="vernie" />
 
@@ -38,9 +40,17 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
 ## (2) Вход
 
-### Херувимская песнь <br /> (входная песнь Литургии верных)
 
-<MdxLoader src="Liturgies/Vernie/Heruvimskaya" />
+
+<If condition={props.isEasterOffsetRange(-3)}>
+    ### Входная песнь Литургии верных
+    <MdxLoader src="Shared/TrapeziTainstvennoi" />
+    **(Дважды)**
+</If>
+<If condition={!props.isEasterOffsetRange(-3)}>
+    ### Херувимская песнь <br /> (входная песнь Литургии верных)
+    <MdxLoader src="Liturgies/Vernie/Heruvimskaya" />
+</If>
 
 <MdxLoader src="Liturgies/Vernie/Dialog" />
 
@@ -50,9 +60,15 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
 <MdxLoader src="Liturgies/Vernie/ProskPominVV" />
 
-**2-я часть Херувимской песни:**
-
-<MdxLoader src="Liturgies/Vernie/Heruvimskaya2VV" />
+<If condition={props.isEasterOffsetRange(-3)}>
+    **2-я часть Входной песни:**
+    <MdxLoader src="Shared/TrapeziTainstvennoi" />
+    Аллилуия.
+</If>
+<If condition={!props.isEasterOffsetRange(-3)}>
+    **2-я часть Херувимской песни:**
+    <MdxLoader src="Liturgies/Vernie/Heruvimskaya2VV" />
+</If>
 
 ### Просительная ектения
 

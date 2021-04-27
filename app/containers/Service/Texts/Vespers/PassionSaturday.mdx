@@ -2,7 +2,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Html from 'components/Html/Html';
 import Parts from 'components/Parts/Parts';
 import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
-import Prokimens from 'containers/Service/Texts/Liturgies/Katekhumen/Prokimens/Prokimens';
+import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <span id="nachalo" />
@@ -36,54 +36,30 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 ## Чтения
 
-<Parts date={props.date} partNames={['vespers.Прокимен триоди 1']} />
+**Д** Премудрость!
 
 <span id="reading" />
 
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
-<div>
-  <ReadingsForService readingsForService={{'Великого Четверга': ['Исх. XIX, 10-19.']}} />
-</div>
-
 <br />
 
-<Parts date={props.date} partNames={['vespers.Прокимен триоди 2']} />
-
-<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
-
-<div>
-  <ReadingsForService readingsForService={{'Великого Четверга': [' Иов. XXXVIII, 1-23, XLII, 1-5.']}} />
-</div>
-
-<br />
-
-<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
-
-<div>
-  <ReadingsForService readingsForService={{'Великого Четверга': [' Ис. L, 4–11.']}} />
-</div>
+<>{props.readings}</>
 
 ### Проповедь
 
-<Prokimens date={props.previousDate} />
+<Prokimens date={props.date} />
 
-<ReadingsForService readingsForService={{'Великого Четверга': ['1 Кор., 149 зач., XI, 23-32.']}} />
+<ReadingsForService readingsForService={{'Великой Субботы': ['Рим., 91 зач., VI, 3–11.']}} />
 
 ### Проповедь
 
 <Parts
-  date={props.previousDate}
+  date={props.date}
   partNames={['liturgy.Аллилуарий']}
 />
 
-<ReadingsForService readingsForService={{'Великого Четверга': [
-  'Мф., 107 зач., XXVI, 1-20.',
-  'Ин., 44 зач., XIII, 3-17.',
-  'Мф., 108 зач. (от полу́), XXVI, 21-39.',
-  'Лк., 109 зач., XXII, 43-45.',
-  'Мф., 108 зач., XXVI, 40 - XXVII, 2.'
-]}} />
+<ReadingsForService readingsForService={{'Великой Субботы': ['Мф., 115 зач., XXVIII, 1-20. ']}} />
 
 ### Проповедь
 
@@ -102,7 +78,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} />
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-<Parts date={props.date} partNames={['shared.Тропари']} />
+<MdxLoader src="Shared/TropVelSub" lang={props.lang} />
 
 
 <span id="otpust" />
