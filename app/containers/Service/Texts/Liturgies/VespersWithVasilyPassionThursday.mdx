@@ -17,7 +17,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
 # I. <br /> Вечерня
 
-<MdxLoader src="Liturgies/Katekhumen/Vozglas" /> без Аминь
+<MdxLoader src="Liturgies/Katekhumen/Vozglas" noAmin />
 
 <MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
 
@@ -44,7 +44,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
 ## Чтения
 
-<Parts date={props.date} partNames={['vespers.Прокимен триоди 1']} />
+<Parts date={props.tomorrowDate} partNames={['vespers.Прокимен триоди 1']} />
 
 <span id="reading" />
 
@@ -56,12 +56,12 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <br />
 
-<Parts date={props.date} partNames={['vespers.Прокимен триоди 2']} />
+<Parts date={props.tomorrowDate} partNames={['vespers.Прокимен триоди 2']} />
 
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
 <div>
-  <ReadingsForService readingsForService={{' Великого Четверга ': [' Иов. XXXVIII, 1-23, XLII, 1-5.']}} />
+  <ReadingsForService readingsForService={{'Великого Четверга': [' Иов. XXXVIII, 1-23, XLII, 1-5.']}} />
 </div>
 
 <br />
@@ -69,7 +69,7 @@ import Reading from './Katekhumen/Reading/Reading';
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
 <div>
-  <ReadingsForService readingsForService={{' Великого Четверга ': [' Ис. L, 4–11.']}} />
+  <ReadingsForService readingsForService={{'Великого Четверга': [' Ис. L, 4–11.']}} />
 </div>
 
 ### Проповедь
@@ -171,5 +171,3 @@ import Reading from './Katekhumen/Reading/Reading';
   **[Все непричащающиеся с благоговением покидают церковь.]**
 
 </If>
-
-
