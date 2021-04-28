@@ -3,11 +3,18 @@ import Parts from 'components/Parts/Parts';
 
 import MdxLoader from '../../../MdxLoader';
 
-const Zadastoinik = ({ date }) => (
+const ZadastoinikFallback = ({ serviceType }) => {
+    if (serviceType === 'vasiliy') {
+        return <MdxLoader src="Liturgies/Vernie/Zadastoinik/ZadastoinikVV" />;
+    }
+    return <MdxLoader src="Liturgies/Vernie/Zadastoinik/Zadastoinik" />;
+};
+
+const Zadastoinik = ({ date, serviceType }) => (
     <Parts
         date={date}
         partNames={['liturgy.Задостойник']}
-        fallback={<MdxLoader src="Liturgies/Vernie/Zadastoinik" />}
+        fallback={<ZadastoinikFallback serviceType={serviceType} />}
     />
 );
 export default Zadastoinik;

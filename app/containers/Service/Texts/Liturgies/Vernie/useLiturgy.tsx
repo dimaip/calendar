@@ -35,7 +35,7 @@ const useLiturgy = (lang, serviceType) => {
         </VariableSection>
     );
 
-    const zadastoinik = <Zadastoinik date={date} />;
+    const zadastoinik = <Zadastoinik date={date} serviceType={serviceType} />;
 
     const katekhumen = <Katekhumen day={day} date={date} serviceType={serviceType} />;
 
