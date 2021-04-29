@@ -35,14 +35,14 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Shared/Neporochny3" lang={props.lang} />
 
-<MdxLoader src="Matins/MalajaEkteniaVS3" lang={props.lang} />
-
 <MdxLoader src="Matins/TropsVoskr" lang={props.lang} />
+
+<MdxLoader src="Matins/MalajaEkteniaVS3" lang={props.lang} />
 
 <>{props.isHoliday && <MdxLoader src="Matins/Prayer10" lang={props.lang} />}</>
 <>{props.isHoliday && <MdxLoader src="Shared/Psalm50" lang={props.lang} />}</>
 
-<MdxLoader src="Matins/PassionThursdayCanon" lang={props.lang} />
+<MdxLoader src="Matins/PassionSaturdayCanon" lang={props.lang} />
 
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 
@@ -57,7 +57,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 ## Чтения
 
-**П** Премудрость! Станем благоговейно!
+**П** Премудрость! **(Поднимает Священное писание)** Станем благоговейно!
 
 <MdxLoader src="Shared/DostopJosef" lang={props.lang} />
 <MdxLoader src="Shared/TropProrSaturday" lang={props.lang} />
@@ -74,7 +74,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <br />
 ### Проповедь
 
-<Prokimens date={props.date} />
+<MdxLoader src="Matins/Prokimen2UtrVelSub" lang={props.lang} />
 
 <ReadingsForService readingsForService={{'Великой Cубботы': [
   '1 Кор., 133 зач., V, 6-8;',
