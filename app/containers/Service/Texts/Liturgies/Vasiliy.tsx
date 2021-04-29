@@ -17,33 +17,31 @@ const Vasiliy = ({ lang, date }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
-    const day = useDay(date);
+    const { data: day } = useDay(date);
+
+    const { apostol, gospel } = getKatekhumenReadings(day);
+    const tomorrowDateObj = new Date(date);
+    tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
+    const tomorrowDate = dateFormat(tomorrowDateObj, 'yyyy-mm-dd');
 
     const props = {
         lang,
         date,
+        tomorrowDate,
         katekhumen,
         otpust,
         prichasten,
         saints,
         dayOfWeek,
         zadastoinik,
+        apostol,
+        gospel,
         isEasterOffsetRange,
     };
-
-    const { apostol, gospel } = getKatekhumenReadings(day);
-    const tomorrowDateObj = new Date(date);
-    tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
-    const tomorrowDate = dateFormat(tomorrowDateObj, 'yyyy-mm-dd');
     if (isEasterOffsetRange(-3)) {
         return (
             <>
-                <VespersWithVasilyPassionThursdayMdx
-                    {...props}
-                    apostol={apostol}
-                    gospel={gospel}
-                    tomorrowDate={tomorrowDate}
-                />
+                <VespersWithVasilyPassionThursdayMdx {...props} />
                 <VasiliyMdx {...props} onlyVernie />
             </>
         );
@@ -51,12 +49,7 @@ const Vasiliy = ({ lang, date }) => {
     if (isEasterOffsetRange(-1)) {
         return (
             <>
-                <VespersWithVasilyPassionSaturdayMdx
-                    {...props}
-                    apostol={apostol}
-                    gospel={gospel}
-                    tomorrowDate={tomorrowDate}
-                />
+                <VespersWithVasilyPassionSaturdayMdx {...props} />
                 <VasiliyMdx {...props} onlyVernie />
             </>
         );
