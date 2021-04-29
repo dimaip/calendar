@@ -54,10 +54,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 ### Проповедь
 
-<Parts
-  date={props.date}
-  partNames={['liturgy.Аллилуарий']}
-/>
+<MdxLoader src="Vespers/VmestoAlliluia" lang={props.lang} />
 
 <ReadingsForService readingsForService={{'Великой Субботы': ['Мф., 115 зач., XXVIII, 1-20. ']}} />
 
@@ -109,6 +106,3 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     <MdxLoader src="Shared/Ending/Otpust" />
   }
 />
-
-<MdxLoader src="Shared/SouzomLubvi" />
-<MdxLoader src="Shared/TrapeziTainstvennoi" />
