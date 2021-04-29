@@ -1,6 +1,11 @@
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 
 import React from 'react';
+import useDay from 'hooks/useDay';
+import Loader from 'components/Loader/Loader';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
+import dateFormat from 'dateformat';
+import { css } from 'emotion';
 
 import useLiturgy from './Vernie/useLiturgy';
 import VasiliyMdx from './Vasiliy.mdx';
@@ -8,9 +13,6 @@ import VespersWithVasilyPassionThursdayMdx from './VespersWithVasilyPassionThurs
 import VespersWithVasilyPassionSaturdayMdx from './VespersWithVasilyPassionSaturday.mdx';
 import 'containers/Service/Texts/Shared.css';
 import { getKatekhumenReadings } from './Katekhumen/Katekhumen';
-
-import useDay from 'hooks/useDay';
-import dateFormat from 'dateformat';
 
 const Vasiliy = ({ lang, date }) => {
     const { katekhumen, saints, prichasten, otpust, zadastoinik } = useLiturgy(lang, 'vasiliy');
@@ -23,6 +25,21 @@ const Vasiliy = ({ lang, date }) => {
     const tomorrowDateObj = new Date(date);
     tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
     const tomorrowDate = dateFormat(tomorrowDateObj, 'yyyy-mm-dd');
+
+    const readingsForService = day?.readings?.['Вечерня'];
+    const vespersReadings = readingsForService ? (
+        Boolean(day) ? (
+            <div
+                className={css`
+                    padding: 0 18px;
+                `}
+            >
+                <ReadingsForService readingsForService={readingsForService} />
+            </div>
+        ) : (
+            <Loader />
+        )
+    ) : null;
 
     const props = {
         lang,
@@ -41,7 +58,7 @@ const Vasiliy = ({ lang, date }) => {
     if (isEasterOffsetRange(-3)) {
         return (
             <>
-                <VespersWithVasilyPassionThursdayMdx {...props} />
+                <VespersWithVasilyPassionThursdayMdx {...props} readings={vespersReadings} />
                 <VasiliyMdx {...props} onlyVernie />
             </>
         );
@@ -49,7 +66,7 @@ const Vasiliy = ({ lang, date }) => {
     if (isEasterOffsetRange(-1)) {
         return (
             <>
-                <VespersWithVasilyPassionSaturdayMdx {...props} />
+                <VespersWithVasilyPassionSaturdayMdx {...props} readings={vespersReadings} />
                 <VasiliyMdx {...props} onlyVernie />
             </>
         );
