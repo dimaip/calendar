@@ -125,12 +125,6 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 ### Отпуст
 
-<Parts
-  date={props.previousDate}
-  partNames={['shared.Отпуст Синаксарный']}
-  fallback={
-    <MdxLoader src="Shared/Ending/Otpust" />
-  }
-/>
+<>{props.otpust}</>
 
 <MdxLoader src="Shared/PriditeUblazhim" />
