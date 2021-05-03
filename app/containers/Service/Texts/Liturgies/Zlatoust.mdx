@@ -188,9 +188,10 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 ### Молитва «в сосудохранилище» <br />(перед снятием священных одежд и на потребление <br />св. даров или перед агапической трапезой)
 
 <MdxLoader src="Liturgies/Vernie/Sosudohran" />
-{props.brightWeek && <MdxLoader src="Shared/EasterTroparion" />}
+{props.brightWeek && <MdxLoader src="Shared/EasterTroparion3x" />}
 {!props.brightWeek && <MdxLoader src="Liturgies/Vernie/DaBudetImja" />}
-<MdxLoader src="Liturgies/Vernie/Psalom33" />
+{props.brightWeek && <MdxLoader src="Shared/EasterTroparion12x" />}
+{!props.brightWeek && <MdxLoader src="Liturgies/Psalom33" />}
 
 ### Бла­го­словляя народ на уход, возможно, после об­щей трапезы:
 
