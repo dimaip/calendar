@@ -13,9 +13,7 @@ import Parts from 'components/Parts/Parts';
 
 <MdxLoader src="Liturgies/Katekhumen/Vozglas" />
 
-{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" />}
-
-{props.brightOrOtdanie && <MdxLoader src="Liturgies/Katekhumen/DaVosstanetBog" />}
+{props.easterSeason && (props.brightOrOtdanie ? <MdxLoader src="Shared/DaVosstanetBog" /> : <MdxLoader src="Shared/EasterTroparion3x" />)}
 
 ### Великая ектения
 

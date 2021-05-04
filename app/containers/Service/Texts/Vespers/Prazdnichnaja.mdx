@@ -4,6 +4,7 @@ import Parts from 'components/Parts/Parts';
 import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
 import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+import If from 'components/If/If';
 
 <span id="nachalo" />
 
@@ -15,22 +16,22 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 **Н** Аминь.
 
-<>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
+{props.easterSeason && (props.brightOrOtdanie ? <MdxLoader src="Shared/DaVosstanetBog" /> : <MdxLoader src="Shared/EasterTroparion3x" />)}
 
-<>{props.isHoliday && <MdxLoader src="Vespers/Priidite" lang={props.lang} />}</>
+<>{props.isHoliday && !props.easterSeason && <MdxLoader src="Vespers/Priidite" lang={props.lang} />}</>
 
 <>{props.isHoliday && <MdxLoader src="Vespers/Psalm103" lang={props.lang} />}</>
 
-<>{props.isHoliday && <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />}</>
+<>{(props.isHoliday || props.brightWeek) && <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />}</>
 
-<>{!props.isAscension && (props.isHoliday || props.dayOfWeek === 1) && <MdxLoader src="Vespers/Prayer1" lang={props.lang} />}</>
+<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 1) && <MdxLoader src="Vespers/Prayer1" lang={props.lang} />}</>
 <>{props.isHoliday && <MdxLoader src="Vespers/Kafisma" lang={props.lang} />}</>
-<>{!props.isAscension && (props.isHoliday || props.dayOfWeek === 2) && <MdxLoader src="Vespers/Prayer2" lang={props.lang} />}</>
-<>{!props.isAscension && (props.isHoliday || props.dayOfWeek === 3) && <MdxLoader src="Vespers/Prayer3" lang={props.lang} />}</>
-<>{!props.isAscension && (props.isHoliday || props.dayOfWeek === 4) && <MdxLoader src="Vespers/Prayer4" lang={props.lang} />}</>
-<>{!props.isAscension && (props.isHoliday || props.dayOfWeek === 5) && <MdxLoader src="Vespers/Prayer5" lang={props.lang} />}</>
-<>{!props.isAscension && props.isHoliday && <MdxLoader src="Vespers/Prayer6" lang={props.lang} />}</>
-<>{!props.isAscension && (props.isHoliday || props.dayOfWeek === 0) && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}</>
+<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 2) && <MdxLoader src="Vespers/Prayer2" lang={props.lang} />}</>
+<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 3) && <MdxLoader src="Vespers/Prayer3" lang={props.lang} />}</>
+<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 4) && <MdxLoader src="Vespers/Prayer4" lang={props.lang} />}</>
+<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 5) && <MdxLoader src="Vespers/Prayer5" lang={props.lang} />}</>
+<>{!props.brightWeek && !props.isAscension && props.isHoliday && <MdxLoader src="Vespers/Prayer6" lang={props.lang} />}</>
+<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 0) && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}</>
 
 <MdxLoader src="Vespers/Prayer8" lang={props.lang} />
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
@@ -84,16 +85,22 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 ### Стихиры «на стихах»
 
 <StihiriNaStihah day={props.day} date={props.date} />
-<MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} />
-<MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-### Тропари
+<If condition={!props.brightWeek}>
+  <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} />
+  <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-<>{props.troparions}</>
-<Parts
-  date={props.date}
-  partNames={['shared.Богородичен синаксарный']}
-/>
+  ### Тропари
+
+  <>{props.troparions}</>
+  <Parts
+    date={props.date}
+    partNames={['shared.Богородичен синаксарный']}
+  />
+</If>
+<If condition={props.brightWeek}>
+  <MdxLoader src="Shared/EasterTroparion3x" />
+</If>
 
 <>{props.otpust}</>
 

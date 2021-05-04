@@ -63,6 +63,9 @@ const Matins = ({ date }) => {
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);
+    const brightWeek = isEasterOffsetRange(0, 6);
+    const easterOtdanie = isEasterOffsetRange(38);
+    const brightOrOtdanie = brightWeek || easterOtdanie;
 
     const { feastType } = getFeastInfo(dateObj);
 
@@ -96,6 +99,8 @@ const Matins = ({ date }) => {
         readings,
         saints,
         easterSeason,
+        brightOrOtdanie,
+        brightWeek,
         otpust,
         day,
         date,

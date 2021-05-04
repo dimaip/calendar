@@ -66,7 +66,7 @@ export const makeIsDate = (date) => (month, day) => {
     return new Date(y, month - 1, day).getTime() === date.getTime();
 };
 
-export const makeIsEasterOffsetRange = (date) => (offsetBegin, offsetEnd) => {
+export const makeIsEasterOffsetRange = (date) => (offsetBegin, offsetEnd = undefined) => {
     let d, m, y;
     if (typeof date === 'string') {
         const splitDateString = date.split('-');

@@ -73,6 +73,9 @@ const Vespers = ({ date }) => {
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDate);
     const easterSeason = isEasterOffsetRange(0, 38);
+    const brightWeek = isEasterOffsetRange(0, 6);
+    const easterOtdanie = isEasterOffsetRange(38);
+    const brightOrOtdanie = brightWeek || easterOtdanie;
     const isAscension = isEasterOffsetRange(39);
     const sirnajaSedmitza = isEasterOffsetRange(-8 * 7 + 1, -8 * 7 + 6);
     const vselenskayaRoditelskayaSubbota = isEasterOffsetRange(-8 * 7 - 1);
@@ -95,6 +98,8 @@ const Vespers = ({ date }) => {
         readings,
         saints,
         easterSeason,
+        brightWeek,
+        brightOrOtdanie,
         isAscension,
         otpust,
         day: tomorrowDay,
