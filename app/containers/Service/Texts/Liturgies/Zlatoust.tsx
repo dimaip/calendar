@@ -21,6 +21,7 @@ const Zlatoust = ({ lang, date }) => {
     const brightWeek = isEasterOffsetRange(0, 6);
     const easterSeason = isEasterOffsetRange(0, 38);
     const easterOtdanie = isEasterOffsetRange(38);
+    const brightOrOtdanie = brightWeek || easterOtdanie;
 
     const props = {
         lang,
@@ -32,6 +33,7 @@ const Zlatoust = ({ lang, date }) => {
         zadastoinik,
         dayOfWeek,
         brightWeek,
+        brightOrOtdanie,
         easterSeason,
         easterOtdanie,
         isEasterOffsetRange,

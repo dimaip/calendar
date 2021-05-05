@@ -157,7 +157,7 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
 ## Причащение народа в храме
 
-<MdxLoader src="Liturgies/Vernie/PrichPeople" />
+<MdxLoader src="Liturgies/Vernie/PrichPeople" brightWeek={props.brightWeek} />
 <MdxLoader src="Liturgies/Vernie/PrichStihPeople" />
 
 ## После причащения
@@ -211,6 +211,10 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
 {props.otpust}
 {props.saints}
+
+<If condition={props.easterSeason && (props.brightOrOtdanie || props.dayOfWeek === 0)}>
+    <MdxLoader src="Shared/Ending/EasterEndingGreeting" />
+</If>
 
 ### Многолетие<br />(при закрытии завесы)
 
