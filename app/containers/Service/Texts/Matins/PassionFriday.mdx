@@ -6,6 +6,7 @@ import Parts from 'components/Parts/Parts';
 import If from 'components/If/If';
 import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
+import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
 <span id="nachalo" />
 
@@ -90,7 +91,8 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 **Н** Слава Тебе, Господи, слава Тебе!
 
 <MdxLoader src="Matins/Prayer10" lang={props.lang} />
-<MdxLoader src="Shared/Psalm50" lang={props.lang} />
+
+<Psalm50 lang={props.lang} />
 
 <div>
   <ReadingsForService readingsForService={{'Великой Пятницы': ['Лк., 111 зач., XXIII, 32-49.']}} />

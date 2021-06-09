@@ -5,6 +5,7 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
 import Parts from 'components/Parts/Parts';
 import If from 'components/If/If';
 import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
+import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
 <span id="nachalo" />
 
@@ -47,7 +48,7 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 <>{(props.isHoliday || props.dayOfWeek === 6) && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
 
 <>{props.isHoliday && <MdxLoader src="Matins/Prayer10" lang={props.lang} />}</>
-<>{props.isHoliday && <MdxLoader src="Shared/Psalm50" lang={props.lang} />}</>
+<>{props.isHoliday && <Psalm50 lang={props.lang} />}</>
 <>{props.dayOfWeek === 0 && <MdxLoader src="Matins/PesnBogoroditsy" lang={props.lang} />}</>
 
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
