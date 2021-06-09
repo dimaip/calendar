@@ -1,9 +1,10 @@
 import Tooltip from 'components/Tooltip/Tooltip';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
 # I. На утренней молитве
 
-<MdxLoader src="ChinPrigotovlenija/Vstuplenie" />
+<MdxLoader src="ChinPrigotovlenija/Vstuplenie" isEasterOffsetRange={props.isEasterOffsetRange} />
 
 ### Псалом 22
 
@@ -23,9 +24,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 <MdxLoader src="ChinPrigotovlenija/Trops" />
 
-### Псалом 50
-
-<MdxLoader src="Shared/Psalm50" />
+<Psalm50 lang={props.lang} />
 
 ## Канон, глас 2
 

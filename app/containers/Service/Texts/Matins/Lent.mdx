@@ -2,6 +2,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Parts from 'components/Parts/Parts';
 import If from 'components/If/If';
 import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostilari';
+import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx'
 
 <span id="nachalo" />
 
@@ -75,7 +76,8 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
 </If>
 
 <MdxLoader src="Matins/Prayer10" lang={props.lang} />
-<MdxLoader src="Shared/Psalm50" lang={props.lang} />
+
+<Psalm50 lang={props.lang} />
 
 <If condition={props.isEasterOffsetRange(-3)}>
     <MdxLoader src="Matins/PassionThursdayCanon" lang={props.lang} />
