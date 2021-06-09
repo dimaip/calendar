@@ -16,8 +16,17 @@ import { css } from 'emotion';
 import langState from 'state/langState';
 import { useRecoilValue } from 'recoil';
 import { LangContext } from 'containers/Service/LangContext';
+import Paywall from 'containers/Checkout/Paywall';
+import { useSubscriptionService } from 'stateMachines/subscription';
 
 import checkVersion from './checkVersion';
+import NoSubscription from 'containers/Checkout/NoSubscription';
+import Paying from 'containers/Checkout/Paying';
+import PaymentSuccess from 'containers/Checkout/PaymentSuccess';
+import PaymentFailure from 'containers/Checkout/PaymentFailure';
+import { useAuth0 } from '@auth0/auth0-react';
+import Compare from 'containers/Checkout/Compare';
+import NoDarkMode from 'components/NoDarkMode/NoDarkMode';
 
 const DateRoutes = () => {
     const { date } = useParams();
@@ -34,14 +43,6 @@ const DateRoutes = () => {
     return (
         <LangContext.Provider value={langStateValue}>
             <ThemeProvider theme={theme}>
-                <Global
-                    styles={rcss`
-                    body {
-                        color: ${theme.colours.darkGray};
-                        background-color: ${theme.colours.white};
-                    }
-                `}
-                />
                 <Switch>
                     <Route exact path="/date/:date">
                         <Main />
@@ -76,29 +77,66 @@ const DateRoutes = () => {
     );
 };
 
+const StateMachineRoutes = () => {
+    const [state] = useSubscriptionService();
+
+    console.log(state);
+
+    const StateComponent = Object.values(state.meta).find((m) => m.component)?.component;
+    if (StateComponent) {
+        return (
+            <NoDarkMode>
+                <StateComponent />
+            </NoDarkMode>
+        );
+    }
+
+    return (
+        <Switch>
+            <Route
+                exact
+                path="/"
+                render={() => {
+                    const date = dateFormat(new Date(), 'yyyy-mm-dd');
+                    return <Redirect to={`/date/${date}`} />;
+                }}
+            />
+            <Route path="/date/:date">
+                <div
+                    className={css`
+                        max-width: 640px;
+                    `}
+                >
+                    <DateRoutes />
+                </div>
+            </Route>
+        </Switch>
+    );
+};
+
 export default () => {
     const history = useHistory();
     history.listen(checkVersion);
+
+    const theme = getTheme();
+
     return (
-        <div
-            className={css`
-                max-width: 640px;
-                margin: 0 auto;
-            `}
-        >
-            <Switch>
-                <Route
-                    exact
-                    path="/"
-                    render={() => {
-                        const date = dateFormat(new Date(), 'yyyy-mm-dd');
-                        return <Redirect to={`/date/${date}`} />;
-                    }}
-                />
-                <Route path="/date/:date">
-                    <DateRoutes />
-                </Route>
-            </Switch>
-        </div>
+        <ThemeProvider theme={theme}>
+            <Global
+                styles={rcss`
+                    body {
+                        color: ${theme.colours.darkGray};
+                        background-color: ${theme.colours.white};
+                    }
+                `}
+            />
+            <div
+                className={css`
+                    margin: 0 auto;
+                `}
+            >
+                <StateMachineRoutes />
+            </div>
+        </ThemeProvider>
     );
 };

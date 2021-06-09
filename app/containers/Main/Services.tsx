@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import makeServices from 'containers/Service/Texts/Texts';
 import groupBy from 'lodash.groupby';
 import { useAuth0 } from '@auth0/auth0-react';
+import Lock from 'components/svgs/Lock';
+import { useSubscriptionService } from 'stateMachines/subscription';
 
 import SectionHeading from './SectionHeading';
 
@@ -21,9 +23,10 @@ const OptionalLink = ({ enabled, ...rest }) =>
     );
 
 const Services = ({ date, readings }) => {
+    const [state, send] = useSubscriptionService();
+    const locked = true;
     const theme = useTheme();
-
-    const location = useLocation();
+    const history = useHistory();
 
     const { isLoading, isAuthenticated, error, user, loginWithRedirect, logout } = useAuth0();
 
@@ -83,52 +86,61 @@ const Services = ({ date, readings }) => {
                                 `}
                             >
                                 {servicesForGroup.map((service) => (
-                                    <OptionalLink
-                                        enabled={service.enabled}
-                                        className={css`
-                                            cursor: ${service.enabled ? 'pointer' : 'arrow'};
-                                            user-select: none;
-                                        `}
-                                        to={{
-                                            pathname: `/date/${date}/service/${service.id}`,
-                                            state: {
-                                                backLink: location.pathname,
-                                            },
-                                        }}
+                                    // <OptionalLink
+                                    //     enabled={service.enabled}
+                                    //     className={css`
+                                    //         cursor: ${service.enabled ? 'pointer' : 'arrow'};
+                                    //         user-select: none;
+                                    //     `}
+                                    //     to={{
+                                    //         pathname: `/date/${date}/service/${service.id}`,
+                                    //         state: {
+                                    //             backLink: location.pathname,
+                                    //         },
+                                    //     }}
+                                    //     key={service.id}
+                                    // >
+                                    <ButtonBox
                                         key={service.id}
+                                        onClick={() => {
+                                            history.push(`/date/${date}/service/${service.id}`);
+                                            send({
+                                                type: 'CHOOSE_BOOK',
+                                                serviceId: service.id,
+                                            });
+                                        }}
                                     >
-                                        <ButtonBox>
+                                        <div
+                                            className={css`
+                                                display: flex;
+                                                opacity: ${service.enabled ? 1 : 0.2};
+                                            `}
+                                        >
                                             <div
                                                 className={css`
-                                                    display: flex;
-                                                    opacity: ${service.enabled ? 1 : 0.2};
+                                                    flex-grow: 1;
+                                                    flex-shrink: 1;
                                                 `}
                                             >
-                                                <div
+                                                <p
                                                     className={css`
-                                                        flex-grow: 1;
-                                                        flex-shrink: 1;
+                                                        margin-bottom: -4px;
                                                     `}
                                                 >
-                                                    <p
-                                                        className={css`
-                                                            margin-bottom: -4px;
-                                                        `}
-                                                    >
-                                                        {service.title}
-                                                    </p>
-                                                </div>
-                                                <div
-                                                    className={css`
-                                                        flex-grow: 0;
-                                                        flex-shrink: 0;
-                                                    `}
-                                                >
-                                                    <RightIcon />
-                                                </div>
+                                                    {service.title}
+                                                </p>
                                             </div>
-                                        </ButtonBox>
-                                    </OptionalLink>
+                                            <div
+                                                className={css`
+                                                    flex-grow: 0;
+                                                    flex-shrink: 0;
+                                                `}
+                                            >
+                                                {service.subscriptions ? <Lock /> : <RightIcon />}
+                                            </div>
+                                        </div>
+                                    </ButtonBox>
+                                    // </OptionalLink>
                                 ))}
                             </div>
                         </div>

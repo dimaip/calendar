@@ -10,6 +10,7 @@ import Loader from 'components/Loader/Loader';
 import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
+import { useSubscriptionService } from 'stateMachines/subscription';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
@@ -28,6 +29,22 @@ const toUpperCase = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 const Service = () => {
     const { serviceId: originalServiceId, date } = useParams();
     const { data: day } = useDay(date);
+    const [state, send] = useSubscriptionService();
+
+    const machineLoaded = state.matches('loaded');
+
+    useEffect(() => {
+        if (machineLoaded) {
+            send({
+                type: 'CHOOSE_BOOK',
+                serviceId: originalServiceId,
+            });
+        }
+    }, [machineLoaded]);
+
+    if (!originalServiceId) {
+        return <div>No service id</div>;
+    }
     const theme = useTheme();
 
     const history = useHistory();
@@ -58,7 +75,7 @@ const Service = () => {
     useEffect(() => {
         if (serviceId) {
             const serviceIdUpper = toUpperCase(serviceId);
-            const Component = React.lazy(() =>
+            const Component = React.lazy(async () =>
                 import(`./Texts/${serviceIdUpper}/index.dyn.tsx`).catch(reloadOnFailedImport)
             );
             setTextComponent(Component);
@@ -68,7 +85,7 @@ const Service = () => {
     if (!day) {
         return <Loader />;
     }
-
+    console.log(serviceId, 'aasd');
     // If service not found, redirect
     if (!serviceId) {
         if (day?.readings) {

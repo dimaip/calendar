@@ -1,5 +1,13 @@
 // Signals to script in index.html that the app assets have been loaded
 // import './wdyr';
+
+import { inspect } from '@xstate/inspect';
+
+inspect({
+    url: 'https://statecharts.io/inspect',
+    iframe: false,
+});
+
 import './forEachPolyfill';
 import 'unfetch/polyfill/index.js';
 import 'element-closest-polyfill';

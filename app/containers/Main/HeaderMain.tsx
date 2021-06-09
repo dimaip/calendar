@@ -6,6 +6,7 @@ import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import { useTheme } from 'emotion-theming';
+import { useSubscriptionService } from 'stateMachines/subscription';
 
 const Today = ({ date, setNewDate }) => {
     const theme = useTheme();
@@ -38,49 +39,61 @@ const Today = ({ date, setNewDate }) => {
     );
 };
 
-const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => (
-    <Header>
-        <div
-            className={css`
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-            `}
-        >
-            <div>
-                {setMenuShown && (
-                    <Button
-                        title="Меню"
-                        onClick={() => setMenuShown(!menuShown)}
-                        className={css`
-                            display: block;
-                            padding: 10px 18px;
-                            z-index: 1;
-                        `}
-                    >
-                        <Burger />
-                    </Button>
-                )}
-            </div>
+const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => {
+    const [state, send] = useSubscriptionService();
+    return (
+        <Header>
             <div
                 className={css`
-                    z-index: 1;
                     display: flex;
+                    justify-content: space-between;
                     align-items: center;
-                    justify-content: center;
-                    height: 100%;
+                    width: 100%;
                 `}
             >
-                {setNewDate && (
-                    <>
-                        <Today date={date} setNewDate={setNewDate} />
-                        <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
-                    </>
-                )}
-                <DotsMenu />
+                <div>
+                    {setMenuShown && (
+                        <Button
+                            title="Меню"
+                            onClick={() => setMenuShown(!menuShown)}
+                            className={css`
+                                display: block;
+                                padding: 10px 18px;
+                                z-index: 1;
+                            `}
+                        >
+                            <Burger />
+                        </Button>
+                    )}
+                </div>
+                <div
+                    className={css`
+                        z-index: 1;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100%;
+                    `}
+                >
+                    <Button
+                        onClick={() => {
+                            send({
+                                type: 'PROFILE_CLICK',
+                            });
+                        }}
+                    >
+                        Profile
+                    </Button>
+                    {setNewDate && (
+                        <>
+                            <Today date={date} setNewDate={setNewDate} />
+                            <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
+                        </>
+                    )}
+                    <DotsMenu />
+                </div>
             </div>
-        </div>
-    </Header>
-);
+        </Header>
+    );
+};
 export default HeaderMain;

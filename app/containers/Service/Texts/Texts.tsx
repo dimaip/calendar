@@ -103,6 +103,7 @@ const makeServices = (date, readings = {}) => {
             skipRedirect: true,
             group: 'Домашнее молитвенное правило',
             TOC: matinsTOC,
+            subscriptions: ['main'],
         },
         {
             title: 'Краткая вечерня',
@@ -113,6 +114,7 @@ const makeServices = (date, readings = {}) => {
             skipRedirect: true,
             group: 'Домашнее молитвенное правило',
             TOC: vespersTOC,
+            subscriptions: ['main'],
         },
     ];
 };

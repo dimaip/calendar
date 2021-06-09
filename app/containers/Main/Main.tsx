@@ -16,11 +16,11 @@ import useReadings from 'hooks/useReadings';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
-
 import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
 import Parts from 'components/Parts/Parts';
-import BorderedSection from './BorderedSection';
 import { HeightUpdater } from 'components/HeightUpdate/HeightUpdater';
+
+import BorderedSection from './BorderedSection';
 import IosPrompt from './IosPrompt';
 import BurgerMenu from './BurgerMenu';
 import Services from './Services';

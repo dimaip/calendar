@@ -2,7 +2,7 @@ import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
-const ButtonBox = (props) => {
+const ButtonBox = ({ className, children, ...rest }): JSX.Element => {
     const theme = useTheme();
     return (
         <div
@@ -19,9 +19,10 @@ const ButtonBox = (props) => {
                     top: 1px;
                     background-color: ${theme.colours.bgGrayLight};
                 }
-            `} ${props.className}`}
+            `} ${className}`}
+            {...rest}
         >
-            {props.children}
+            {children}
         </div>
     );
 };
