@@ -44,6 +44,16 @@ const makeServices = (date, readings = {}) => {
             TOC: lpodTOC,
         },
         {
+            title: 'Великая вечерня',
+            id: 'vespersChurch',
+            enabled: isEasterOffsetRange(49),
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Богослужебные тексты',
+            TOC: vespersTOC,
+        },
+        {
             title: 'Канон Пасхи',
             id: 'easterKanon',
             enabled:
@@ -107,7 +117,7 @@ const makeServices = (date, readings = {}) => {
         {
             title: 'Краткая вечерня',
             id: 'vespers',
-            enabled: true,
+            enabled: !isEasterOffsetRange(49),
             calendar: true,
             lang: false,
             skipRedirect: true,
