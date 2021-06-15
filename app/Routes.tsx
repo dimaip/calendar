@@ -80,8 +80,6 @@ const DateRoutes = () => {
 const StateMachineRoutes = () => {
     const [state] = useSubscriptionService();
 
-    console.log(state);
-
     const StateComponent = Object.values(state.meta).find((m) => m.component)?.component;
     if (StateComponent) {
         return (

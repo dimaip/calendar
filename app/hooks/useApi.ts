@@ -19,11 +19,7 @@ export const useApi = <T>(url: string): Result<T> & { refresh: () => void } => {
     useEffect(() => {
         void (async () => {
             try {
-                const accessToken = await getAccessTokenSilently({
-                    // audience: 'https://payments.molitva.app',
-                    // scope: 'read:profile',
-                });
-                console.log(accessToken);
+                const accessToken = await getAccessTokenSilently();
                 const res = await fetch(url, {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,

@@ -235,6 +235,7 @@ export default Machine({
         serviceId: null,
         initialLocation: null,
         alreadySubscribedChosen: false,
+        subscriptionInfo: null,
     },
     type: 'compound',
     on: {
@@ -242,6 +243,7 @@ export default Machine({
             actions: assign({
                 isAuthenticated: (c, e) => e.isAuthenticated,
                 user: (c, e) => e.user,
+                subscriptionInfo: (c, e) => e.subscriptionInfo,
             }),
         },
     },
@@ -253,6 +255,7 @@ export default Machine({
                     actions: assign({
                         isAuthenticated: (c, e) => e.isAuthenticated,
                         user: (c, e) => e.user,
+                        subscriptionInfo: (c, e) => e.subscriptionInfo,
                     }),
                 },
             },

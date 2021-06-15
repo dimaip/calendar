@@ -9,6 +9,7 @@ import { QueryCache, ReactQueryCacheProvider } from 'react-query';
 import { Plugins } from '@capacitor/core';
 import { RecoilRoot } from 'recoil';
 import recoilPersist from 'recoil-persist';
+import { useApi } from 'hooks/useApi';
 import { Auth0Provider, useAuth0 } from '@auth0/auth0-react';
 import { useMachine } from '@xstate/react';
 import subscription, { SubscriptionMachineContext } from 'stateMachines/subscription';
@@ -50,37 +51,41 @@ const Inner = (): JSX.Element => {
         localStorage.removeItem('xStateAuthContext');
     }
 
-    const { isLoading, isAuthenticated, error, user, loginWithRedirect, logout } = useAuth0();
+    const { isLoading, isAuthenticated, error, user, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0();
+
+    const { data: subscriptionInfo, loading: subscriptionLoading, error: apiError } = useApi(
+        'http://localhost:3001/profile/subscriptionInfo'
+    );
 
     const [state, send, service] = useMachine(subscription, {
         devTools: true,
         state: initialState,
         guards: {
             isAuthenticated: (c) => c.isAuthenticated,
-            subscribed: (c, e) => Boolean(c.user1),
+            subscribed: (c, e) => c.subscriptionInfo?.active,
             alreadySubscribedChosen: (c, e) => c.alreadySubscribedChosen,
         },
         actions: {
             authenticateUser: (context, event) => {
-                loginWithRedirect();
+                void loginWithRedirect();
             },
         },
     });
+
+    const authLoading = subscriptionLoading || isLoading;
 
     useEffect(() => {
         send('BOOT');
     }, []);
     useEffect(() => {
-        if (!isLoading) {
-            send('AUTH_LOADED', { isAuthenticated, user });
+        if (!authLoading) {
+            send('AUTH_LOADED', { isAuthenticated, user, subscriptionInfo });
         }
-    }, [isLoading]);
+    }, [authLoading, subscriptionInfo, user]);
 
     service.onTransition((state, ...rest) => {
         const authState = state.toStrings().find((s) => s.endsWith('.authentication.authenticate'));
-        console.log(state.value);
         if (authState) {
-            console.log(authState);
             localStorage.setItem('xStateAuthContext', JSON.stringify({ state: state.value, context: state.context }));
         }
     });

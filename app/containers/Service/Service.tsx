@@ -85,7 +85,6 @@ const Service = () => {
     if (!day) {
         return <Loader />;
     }
-    console.log(serviceId, 'aasd');
     // If service not found, redirect
     if (!serviceId) {
         if (day?.readings) {
