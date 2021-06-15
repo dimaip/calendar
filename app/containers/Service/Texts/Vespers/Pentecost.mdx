@@ -5,6 +5,7 @@ import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
 import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 import If from 'components/If/If';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 # Великая Вечерня в День Пятидесятницы
 
@@ -47,15 +48,15 @@ import If from 'components/If/If';
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
 <div>
-  <ReadingsForService readingsForService={{'Пятидесятнице': ['Числ. XI, 16-17; 24-29.']}} />
+    <ReadingsForService readingsForService={{ Пятидесятнице: ['Числ. XI, 16-17; 24-29.'] }} />
 </div>
 
 <div>
-  <ReadingsForService readingsForService={{'Пятидесятнице': ['Иоил. II, 23-32.']}} />
+    <ReadingsForService readingsForService={{ Пятидесятнице: ['Иоил. II, 23-32.'] }} />
 </div>
 
 <div>
-  <ReadingsForService readingsForService={{'Пятидесятнице': ['Иез. XXXVI, 24-28.']}} />
+    <ReadingsForService readingsForService={{ Пятидесятнице: ['Иез. XXXVI, 24-28.'] }} />
 </div>
 
 <MdxLoader src="Vespers/MirTebeParemiya" />
