@@ -164,6 +164,7 @@ const protectedItemAccessAuthenticated = {
 };
 
 const profileAccess = {
+    id: 'profileAccess',
     initial: 'hasAuthenticated',
     states: {
         hasAuthenticated: {
@@ -239,7 +240,7 @@ export default Machine({
     },
     type: 'compound',
     on: {
-        AUTH_LOADED: {
+        AUTH_LOADED_DATA: {
             actions: assign({
                 isAuthenticated: (c, e) => e.isAuthenticated,
                 user: (c, e) => e.user,
@@ -249,14 +250,46 @@ export default Machine({
     },
     states: {
         loading: {
+            type: 'compound',
+            initial: 'idle',
             on: {
                 AUTH_LOADED: {
                     target: 'loaded',
-                    actions: assign({
-                        isAuthenticated: (c, e) => e.isAuthenticated,
-                        user: (c, e) => e.user,
-                        subscriptionInfo: (c, e) => e.subscriptionInfo,
-                    }),
+                },
+                CHOOSE_BOOK: [
+                    {
+                        target: '#protectedItemAccessWaiting',
+                        actions: assign({
+                            serviceId: (c, e) => e.serviceId,
+                        }),
+                    },
+                ],
+                PROFILE_CLICK: [
+                    {
+                        target: '#profileAccessWaiting',
+                        actions: assign({
+                            serviceId: (c, e) => e.serviceId,
+                        }),
+                    },
+                ],
+            },
+            states: {
+                idle: {},
+                protectedItemAccessWaiting: {
+                    id: 'protectedItemAccessWaiting',
+                    on: {
+                        AUTH_LOADED: {
+                            target: '#protectedItemAccess',
+                        },
+                    },
+                },
+                profileAccessWaiting: {
+                    id: 'profileAccessWaiting',
+                    on: {
+                        AUTH_LOADED: {
+                            target: '#profileAccess',
+                        },
+                    },
                 },
             },
         },
@@ -269,7 +302,7 @@ export default Machine({
                     on: {
                         CHOOSE_BOOK: [
                             {
-                                target: 'protectedItemAccess',
+                                target: '#protectedItemAccess',
                                 actions: assign({
                                     serviceId: (c, e) => e.serviceId,
                                 }),
@@ -283,6 +316,7 @@ export default Machine({
                     },
                 },
                 protectedItemAccess: {
+                    id: 'protectedItemAccess',
                     initial: 'hasAuthenticated',
                     states: {
                         hasAuthenticated: {

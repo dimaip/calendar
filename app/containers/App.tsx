@@ -79,7 +79,10 @@ const Inner = (): JSX.Element => {
     }, []);
     useEffect(() => {
         if (!authLoading) {
-            send('AUTH_LOADED', { isAuthenticated, user, subscriptionInfo });
+            setTimeout(() => {
+                send('AUTH_LOADED_DATA', { isAuthenticated, user, subscriptionInfo });
+                send('AUTH_LOADED');
+            }, 5000);
         }
     }, [authLoading, subscriptionInfo, user]);
 
