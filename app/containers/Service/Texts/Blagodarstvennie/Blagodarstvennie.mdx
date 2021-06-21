@@ -1,0 +1,78 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import If from 'components/If/If';
+
+# Благодарственные молитвы
+
+**По окончании трапезы:**
+
+**П** Слава Тебе, Боже! **(Трижды.)**
+
+### Молитва 1
+
+<MdxLoader src="Blagodarstvennie/Molitva1" />
+
+### Молитва 2, св. Василия Великого
+
+<MdxLoader src="Blagodarstvennie/Molitva2" />
+
+### Молитва 3, Симеона Метафраста
+
+<MdxLoader src="Blagodarstvennie/Molitva3" />
+
+### Молитва 4
+
+<MdxLoader src="Blagodarstvennie/Molitva4" />
+
+### Молитва 5
+
+<MdxLoader src="Blagodarstvennie/Molitva5" />
+
+<MdxLoader src="Shared/PrayerSimeona" />
+
+<MdxLoader src="Shared/STrisvatogo2" />
+
+<If condition={!props.vasiliy && !props.lpod}>
+  ### Отпустительный тропарь св. Иоанна Златоуста, глас 8
+
+  <MdxLoader src="Blagodarstvennie/TropIZ" />
+
+  **Слава.**
+
+  ### Кондак, его же, глас 6
+
+  <MdxLoader src="Blagodarstvennie/KondIZ" />
+</If>
+
+<If condition={props.vasiliy}>
+  ### Отпустительный тропарь св. Василия Великого, глас 1
+
+  <MdxLoader src="Blagodarstvennie/TropVV" />
+
+  **Слава.**
+
+  ### Кондак, его же, глас 4
+
+  <MdxLoader src="Blagodarstvennie/KondVV" />
+</If>
+
+<If condition={props.lpod}>
+  ### Отпустительный тропарь св. Григория Двоеслова, глас 4
+
+  <MdxLoader src="Blagodarstvennie/TropGD" />
+
+  **Слава.**
+
+  ### Кондак, его же, глас 3
+
+  <MdxLoader src="Blagodarstvennie/KondGD" />
+</If>
+
+**И ныне.**
+
+### Богородичен, глас 6
+
+<MdxLoader src="Blagodarstvennie/Bogorodichen" />
+
+**Или ещё тропарь дня.**
+
+<MdxLoader src="Blagodarstvennie/Okonchanie" />

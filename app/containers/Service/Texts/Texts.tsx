@@ -82,7 +82,7 @@ const makeServices = (date, readings = {}) => {
             id: 'blagodarstvennie',
             enabled: true,
             calendar: false,
-            lang: false,
+            lang: true,
             skipRedirect: true,
             group: 'Богослужебные тексты',
         },
