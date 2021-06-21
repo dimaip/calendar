@@ -7,6 +7,11 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 const DefatulExapostilari = ({ date }) => {
     const dateObj = new Date(date);
 
+    const day = dateObj.getDay();
+    if (day !== 0) {
+        return null;
+    }
+
     const y = dateObj.getFullYear();
 
     const easterDate = calculateEasterDate(y);
