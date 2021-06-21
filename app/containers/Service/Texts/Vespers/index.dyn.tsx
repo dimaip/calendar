@@ -20,6 +20,7 @@ import Epiphany2 from './Epiphany2.mdx';
 import PassionThursday from './PassionThursday.mdx';
 import PassionFriday from './PassionFriday.mdx';
 import PassionSaturday from './PassionSaturday.mdx';
+import Pentecost from './Pentecost.mdx';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -109,6 +110,9 @@ const Vespers = ({ date }) => {
         isEasterOffsetRange,
     };
 
+    if (isEasterOffsetRange(50)) {
+        return <Pentecost {...props} />;
+    }
     if (isEasterOffsetRange(-2)) {
         return <PassionThursday {...props} />;
     }
