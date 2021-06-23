@@ -16,16 +16,9 @@ import { css } from 'emotion';
 import langState from 'state/langState';
 import { useRecoilValue } from 'recoil';
 import { LangContext } from 'containers/Service/LangContext';
-import Paywall from 'containers/Checkout/Paywall';
 import { useSubscriptionService } from 'stateMachines/subscription';
 
 import checkVersion from './checkVersion';
-import NoSubscription from 'containers/Checkout/NoSubscription';
-import Paying from 'containers/Checkout/Paying';
-import PaymentSuccess from 'containers/Checkout/PaymentSuccess';
-import PaymentFailure from 'containers/Checkout/PaymentFailure';
-import { useAuth0 } from '@auth0/auth0-react';
-import Compare from 'containers/Checkout/Compare';
 import NoDarkMode from 'components/NoDarkMode/NoDarkMode';
 
 const DateRoutes = () => {
@@ -82,11 +75,7 @@ const StateMachineRoutes = () => {
 
     const StateComponent = Object.values(state.meta).find((m) => m.component)?.component;
     if (StateComponent) {
-        return (
-            <NoDarkMode>
-                <StateComponent />
-            </NoDarkMode>
-        );
+        return <StateComponent />;
     }
 
     return (
@@ -103,6 +92,7 @@ const StateMachineRoutes = () => {
                 <div
                     className={css`
                         max-width: 640px;
+                        margin: 0 auto;
                     `}
                 >
                     <DateRoutes />

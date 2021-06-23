@@ -26,109 +26,107 @@ const Compare = (): JSX.Element => {
     const theme = useTheme();
     const [_, send] = useSubscriptionService();
     return (
-        <NoDarkMode>
+        <div
+            className={css`
+                width: 100vw;
+                background-color: ${theme.colours.white};
+            `}
+        >
             <div
                 className={css`
-                    width: 100vw;
-                    background-color: ${theme.colours.white};
+                    margin: 0 auto;
+                    height: 100vh;
+                    max-width: 640px;
+                    padding: 0 24px;
+                    text-align: center;
+
+                    display: flex;
+                    flex-direction: column;
                 `}
             >
+                <Button
+                    className={css`
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                    `}
+                    onClick={() => {
+                        send('STAY_FREE');
+                    }}
+                >
+                    <Cross2 />
+                </Button>
                 <div
                     className={css`
-                        margin: 0 auto;
-                        height: 100vh;
-                        max-width: 640px;
-                        padding: 0 24px;
-                        text-align: center;
-
                         display: flex;
-                        flex-direction: column;
+                        height: 100%;
+                        margin: 72px 0;
                     `}
                 >
-                    <Button
-                        className={css`
-                            position: absolute;
-                            top: 0;
-                            right: 0;
-                        `}
-                        onClick={() => {
-                            send('STAY_FREE');
-                        }}
-                    >
-                        <Cross2 />
-                    </Button>
                     <div
                         className={css`
+                            width: 50%;
+                            border-right: 1px solid ${gray3};
+                            padding-right: 24px;
+
                             display: flex;
-                            height: 100%;
-                            margin: 72px 0;
+                            flex-direction: column;
                         `}
                     >
                         <div
                             className={css`
-                                width: 50%;
-                                border-right: 1px solid ${gray3};
-                                padding-right: 24px;
-
-                                display: flex;
-                                flex-direction: column;
+                                flex-grow: 1;
                             `}
                         >
-                            <div
-                                className={css`
-                                    flex-grow: 1;
-                                `}
-                            >
-                                <div className={headingStyle}>Бесплатно</div>
-                                <div className={textStyle}>Литургия Иоанна Златоуста</div>
-                                <div className={textStyle}>Литургия Василия Великого</div>
-                            </div>
-                            <Button
-                                variant="white"
-                                border
-                                onClick={() => {
-                                    send('STAY_FREE');
-                                }}
-                            >
-                                Продолжить
-                            </Button>
+                            <div className={headingStyle}>Бесплатно</div>
+                            <div className={textStyle}>Литургия Иоанна Златоуста</div>
+                            <div className={textStyle}>Литургия Василия Великого</div>
                         </div>
+                        <Button
+                            variant="white"
+                            border
+                            onClick={() => {
+                                send('STAY_FREE');
+                            }}
+                        >
+                            Продолжить
+                        </Button>
+                    </div>
+                    <div
+                        className={css`
+                            width: 50%;
+                            padding-left: 24px;
+
+                            display: flex;
+                            flex-direction: column;
+                        `}
+                    >
                         <div
                             className={css`
-                                width: 50%;
-                                padding-left: 24px;
-
-                                display: flex;
-                                flex-direction: column;
+                                flex-grow: 1;
                             `}
                         >
-                            <div
-                                className={css`
-                                    flex-grow: 1;
-                                `}
-                            >
-                                <div className={headingStyle}>59 ₽/мес.</div>
-                                <div className={textStyle}>Домашнее моливенное правило Утреннее и Вечернее</div>
-                                <div className={textStyle}>Часослов Шестой час и Полуночница</div>
-                            </div>
-                            <Button
-                                variant="blue"
-                                border
-                                onClick={() => {
-                                    send('SUBSCRIBE');
-                                }}
-                            >
-                                Оформить
-                            </Button>
+                            <div className={headingStyle}>59 ₽/мес.</div>
+                            <div className={textStyle}>Домашнее моливенное правило Утреннее и Вечернее</div>
+                            <div className={textStyle}>Часослов Шестой час и Полуночница</div>
                         </div>
+                        <Button
+                            variant="blue"
+                            border
+                            onClick={() => {
+                                send('SUBSCRIBE');
+                            }}
+                        >
+                            Оформить
+                        </Button>
                     </div>
                 </div>
             </div>
-        </NoDarkMode>
+        </div>
     );
 };
 
-export default Compare;
+export default NoDarkMode(Compare);
 
 // <div>
 //     Compare our plans

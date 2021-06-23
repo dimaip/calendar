@@ -5,6 +5,7 @@ import { useSubscriptionService } from 'stateMachines/subscription';
 import { useTheme } from 'emotion-theming';
 import Cross2 from 'components/svgs/Cross2';
 import Praying from 'components/svgs/Praying';
+import NoDarkMode from 'components/NoDarkMode/NoDarkMode';
 
 const PaymentSuccess = (): JSX.Element => {
     const [_, send] = useSubscriptionService();
@@ -93,4 +94,4 @@ const PaymentSuccess = (): JSX.Element => {
     );
 };
 
-export default PaymentSuccess;
+export default NoDarkMode(PaymentSuccess);

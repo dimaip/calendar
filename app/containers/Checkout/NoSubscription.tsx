@@ -4,6 +4,7 @@ import Button from 'components/Button/Button';
 import { useTheme } from 'emotion-theming';
 import { useSubscriptionService } from 'stateMachines/subscription';
 import Cross2 from 'components/svgs/Cross2';
+import NoDarkMode from 'components/NoDarkMode/NoDarkMode';
 
 const NoSubscription = (): JSX.Element => {
     const [_, send] = useSubscriptionService();
@@ -110,4 +111,4 @@ const NoSubscription = (): JSX.Element => {
     );
 };
 
-export default NoSubscription;
+export default NoDarkMode(NoSubscription);

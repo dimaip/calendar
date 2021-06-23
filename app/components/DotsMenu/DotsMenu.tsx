@@ -59,6 +59,7 @@ const DotsMenu = () => {
                 onClick={toggleOpen}
                 className={css`
                     margin-top: 1px;
+                    padding: 8px;
                 `}
             >
                 <Dots />

@@ -33,118 +33,116 @@ const Paywall = ({ authenticated = false }): JSX.Element => {
     const [_, send] = useSubscriptionService();
     const theme = useTheme();
     return (
-        <NoDarkMode>
+        <div
+            className={css`
+                background-color: ${theme.colours.blue};
+                width: 100vw;
+            `}
+        >
             <div
                 className={css`
-                    background-color: ${theme.colours.blue};
-                    width: 100vw;
+                    margin: 0 auto;
+                    height: 100vh;
+                    max-width: 640px;
+                    padding: 0 24px;
+                    text-align: center;
+
+                    display: flex;
+                    flex-direction: column;
                 `}
             >
+                <Button
+                    className={css`
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                    `}
+                    onClick={() => {
+                        send('CLOSE');
+                    }}
+                >
+                    <Cross2 white />
+                </Button>
                 <div
                     className={css`
-                        margin: 0 auto;
-                        height: 100vh;
-                        max-width: 640px;
-                        padding: 0 24px;
-                        text-align: center;
+                        flex-grow: 1;
 
                         display: flex;
                         flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
                     `}
                 >
-                    <Button
-                        className={css`
-                            position: absolute;
-                            top: 0;
-                            right: 0;
-                        `}
-                        onClick={() => {
-                            send('CLOSE');
-                        }}
-                    >
-                        <Cross2 white />
-                    </Button>
-                    <div
-                        className={css`
-                            flex-grow: 1;
-
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-                            align-items: center;
-                        `}
-                    >
-                        <div>
-                            <div
-                                className={css`
-                                    font-size: 30px;
-                                    margin-bottom: 24px;
-                                `}
-                            >
-                                <span
-                                    className={css`
-                                        font-size: 90px;
-                                    `}
-                                >
-                                    59
-                                </span>{' '}
-                                ₽/мес.
-                            </div>
-                            <Feature title="Домашнее моливенное правило" subTitle="Утреня и Вечерня" />
-                            <Feature title="Часослов" subTitle="Шестой час и Полуночница" />
-                        </div>
-                    </div>
-                    <Button
-                        variant="white"
-                        size="large"
-                        onClick={() => {
-                            send('SUBSCRIBE');
-                        }}
-                        className={css`
-                            margin-bottom: 16px !important;
-                        `}
-                    >
-                        Оформить за 59 ₽ в месяц
-                    </Button>
-                    <Button
-                        variant="black"
-                        size="large"
-                        onClick={() => {
-                            send('SUBSCRIBE');
-                        }}
-                    >
-                        Оформить за 599 ₽ в год
-                    </Button>
-
-                    {!authenticated && (
-                        <Button
-                            onClick={() => {
-                                send('ALREADY_SUBSCRIBED');
-                            }}
+                    <div>
+                        <div
+                            className={css`
+                                font-size: 30px;
+                                margin-bottom: 24px;
+                            `}
                         >
-                            <div
+                            <span
                                 className={css`
-                                    font-size: 14px;
-                                    text-decoration: underline !important;
+                                    font-size: 90px;
                                 `}
                             >
-                                Уже есть подписка?
-                            </div>
-                        </Button>
-                    )}
-
-                    <div
-                        className={css`
-                            font-size: 10px;
-                            margin: 0 -24px;
-                        `}
-                    >
-                        <Button>Условия использования</Button> | <Button>Политика конфеденциальности</Button>
+                                59
+                            </span>{' '}
+                            ₽/мес.
+                        </div>
+                        <Feature title="Домашнее моливенное правило" subTitle="Утреня и Вечерня" />
+                        <Feature title="Часослов" subTitle="Шестой час и Полуночница" />
                     </div>
                 </div>
+                <Button
+                    variant="white"
+                    size="large"
+                    onClick={() => {
+                        send('SUBSCRIBE');
+                    }}
+                    className={css`
+                        margin-bottom: 16px !important;
+                    `}
+                >
+                    Оформить за 59 ₽ в месяц
+                </Button>
+                <Button
+                    variant="black"
+                    size="large"
+                    onClick={() => {
+                        send('SUBSCRIBE');
+                    }}
+                >
+                    Оформить за 599 ₽ в год
+                </Button>
+
+                {!authenticated && (
+                    <Button
+                        onClick={() => {
+                            send('ALREADY_SUBSCRIBED');
+                        }}
+                    >
+                        <div
+                            className={css`
+                                font-size: 14px;
+                                text-decoration: underline !important;
+                            `}
+                        >
+                            Уже есть подписка?
+                        </div>
+                    </Button>
+                )}
+
+                <div
+                    className={css`
+                        font-size: 10px;
+                        margin: 0 -24px;
+                    `}
+                >
+                    <Button>Условия использования</Button> | <Button>Политика конфеденциальности</Button>
+                </div>
             </div>
-        </NoDarkMode>
+        </div>
     );
 };
 
-export default Paywall;
+export default NoDarkMode(Paywall);

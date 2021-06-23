@@ -7,6 +7,7 @@ import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import { useTheme } from 'emotion-theming';
 import { useSubscriptionService } from 'stateMachines/subscription';
+import ProfileLink from './ProfileLink';
 
 const Today = ({ date, setNewDate }) => {
     const theme = useTheme();
@@ -40,7 +41,7 @@ const Today = ({ date, setNewDate }) => {
 };
 
 const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => {
-    const [state, send] = useSubscriptionService();
+    const [_state, send] = useSubscriptionService();
     return (
         <Header>
             <div
@@ -75,21 +76,13 @@ const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) 
                         height: 100%;
                     `}
                 >
-                    <Button
-                        onClick={() => {
-                            send({
-                                type: 'PROFILE_CLICK',
-                            });
-                        }}
-                    >
-                        Profile
-                    </Button>
                     {setNewDate && (
                         <>
                             <Today date={date} setNewDate={setNewDate} />
                             <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
                         </>
                     )}
+                    <ProfileLink />
                     <DotsMenu />
                 </div>
             </div>
