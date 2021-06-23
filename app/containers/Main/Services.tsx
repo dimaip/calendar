@@ -24,11 +24,8 @@ const OptionalLink = ({ enabled, ...rest }) =>
 
 const Services = ({ date, readings }) => {
     const [state, send] = useSubscriptionService();
-    const locked = true;
     const theme = useTheme();
     const history = useHistory();
-
-    const { isLoading, isAuthenticated, error, user, loginWithRedirect, logout } = useAuth0();
 
     const services = makeServices(date, readings);
 
@@ -52,15 +49,6 @@ const Services = ({ date, readings }) => {
             >
                 Текст службы адаптируется под выбранную дату. Активны только те службы, которые служатся в этот день
             </div>
-            {isLoading ? (
-                'Loading'
-            ) : isAuthenticated ? (
-                <div>
-                    Hello {user.name} <button onClick={async () => logout()}>Log Out</button>
-                </div>
-            ) : (
-                <button onClick={async () => loginWithRedirect()}>Log In</button>
-            )}
 
             {Object.keys(groupedServices).map((groupTitle) => {
                 const servicesForGroup = groupedServices[groupTitle];

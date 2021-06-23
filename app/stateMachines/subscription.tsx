@@ -217,6 +217,9 @@ const profileAccess = {
                 CLOSE: {
                     target: '#outside',
                 },
+                SUBSCRIBE: {
+                    target: 'paywall',
+                },
             },
             meta: {
                 component: Profile,

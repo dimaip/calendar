@@ -89,14 +89,7 @@ const StateMachineRoutes = () => {
                 }}
             />
             <Route path="/date/:date">
-                <div
-                    className={css`
-                        max-width: 640px;
-                        margin: 0 auto;
-                    `}
-                >
-                    <DateRoutes />
-                </div>
+                <DateRoutes />
             </Route>
         </Switch>
     );
@@ -121,6 +114,9 @@ export default () => {
             <div
                 className={css`
                     margin: 0 auto;
+                    display: flex;
+                    flex-direction: column;
+                    height: 100vh;
                 `}
             >
                 <StateMachineRoutes />

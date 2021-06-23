@@ -204,7 +204,7 @@ const Main = React.memo(({ services = false }) => {
         [goLeft, goRight]
     );
     return (
-        <div>
+        <>
             <HeaderMain
                 calendarRef={calendarRef}
                 menuShown={menuShown}
@@ -215,6 +215,7 @@ const Main = React.memo(({ services = false }) => {
             <div
                 className={css`
                     flex-grow: 1;
+                    margin-top: calc(50px + env(safe-area-inset-top));
                 `}
             >
                 <VirtualizeSwipeableViews
@@ -230,7 +231,7 @@ const Main = React.memo(({ services = false }) => {
             <BurgerMenu menuShown={menuShown} setMenuShown={setMenuShown} />
             <BottomNav active={services ? 'services' : 'calendar'} />
             <IosPrompt />
-        </div>
+        </>
     );
 });
 
