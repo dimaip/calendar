@@ -1,14 +1,20 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { css } from 'emotion';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useTheme } from 'emotion-theming';
 import CalendarIcon from 'components/svgs/CalendarIcon';
 import Bible from 'components/svgs/Bible';
 import Prayer from 'components/svgs/Prayer';
+import { useSubscriptionService } from 'stateMachines/subscription';
+import Button from 'components/Button/Button';
 
 const BottomNav = ({ active }) => {
     const { date } = useParams();
     const theme = useTheme();
+    const history = useHistory();
+    const [state, send] = useSubscriptionService();
+    const isProfile = state.matches('loaded.profileAccess.profile');
 
     const itemClass = css`
         height: 50px;
@@ -48,24 +54,39 @@ const BottomNav = ({ active }) => {
                     user-select: none;
                 `}
             >
-                <Link className={`${itemClass} ${active === 'calendar' ? activeClass : ''}`} to={`/date/${date}`}>
-                    <CalendarIcon colour={active === 'calendar' ? theme.colours.darkGray : theme.colours.lightGray} />
-                    Календарь
-                </Link>
-                <Link
-                    className={`${itemClass} ${active === 'services' ? activeClass : ''}`}
-                    to={`/date/${date}/services`}
+                <Button
+                    onClick={() => {
+                        history.push(`/date/${date}`);
+                        send('CLOSE');
+                    }}
+                    className={`${itemClass} ${!isProfile && active === 'calendar' ? activeClass : ''}`}
                 >
-                    <Prayer colour={active === 'services' ? theme.colours.darkGray : theme.colours.lightGray} />
+                    <CalendarIcon
+                        colour={!isProfile && active === 'calendar' ? theme.colours.darkGray : theme.colours.lightGray}
+                    />
+                    Календарь
+                </Button>
+                <Button
+                    onClick={() => {
+                        history.push(`/date/${date}/services`);
+                        send('CLOSE');
+                    }}
+                    className={`${itemClass} ${!isProfile && active === 'services' ? activeClass : ''}`}
+                >
+                    <Prayer
+                        colour={!isProfile && active === 'services' ? theme.colours.darkGray : theme.colours.lightGray}
+                    />
                     Богослужение
-                </Link>
+                </Button>
                 <a
-                    className={`${itemClass} ${active === 'bible' ? activeClass : ''}`}
+                    className={`${itemClass} ${!isProfile && active === 'bible' ? activeClass : ''}`}
                     rel="noopener"
                     href="https://bible.psmb.ru"
                     target="_blank"
                 >
-                    <Bible colour={active === 'bible' ? theme.colours.darkGray : theme.colours.lightGray} />
+                    <Bible
+                        colour={!isProfile && active === 'bible' ? theme.colours.darkGray : theme.colours.lightGray}
+                    />
                     Библия
                 </a>
             </div>

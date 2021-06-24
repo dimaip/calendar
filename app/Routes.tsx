@@ -75,7 +75,11 @@ const StateMachineRoutes = () => {
 
     const StateComponent = Object.values(state.meta).find((m) => m.component)?.component;
     if (StateComponent) {
-        return <StateComponent />;
+        return (
+            <Route path="/date/:date">
+                <StateComponent />
+            </Route>
+        );
     }
 
     return (

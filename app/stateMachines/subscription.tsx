@@ -212,6 +212,7 @@ const profileAccess = {
             ...paymentState,
         },
         profile: {
+            id: 'profile',
             type: 'final',
             on: {
                 CLOSE: {

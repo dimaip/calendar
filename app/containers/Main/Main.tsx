@@ -216,6 +216,9 @@ const Main = React.memo(({ services = false }) => {
                 className={css`
                     flex-grow: 1;
                     margin-top: calc(50px + env(safe-area-inset-top));
+                    max-width: 640px;
+                    margin-left: auto;
+                    margin-right: auto;
                 `}
             >
                 <VirtualizeSwipeableViews
