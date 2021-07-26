@@ -105,6 +105,15 @@ const makeServices = (date, readings = {}) => {
             group: 'Богослужебные тексты',
         },
         {
+            title: 'Лития',
+            id: 'litiya',
+            enabled: true,
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
+            group: 'Богослужебные тексты',
+        },
+        {
             title: 'Краткая утреня',
             id: 'matins',
             enabled: true,
