@@ -11,7 +11,11 @@ const PartRenderer = ({ date, lang, partNames, fallback, alwaysShowFallback, Lay
     const { data: parts } = useParts(date, lang);
     let texts = partNames.map((partName) => objAccess(parts, partName) || []).flatten();
     if (!texts?.length) {
-        return fallback ? <Layout>{fallback}</Layout> : null;
+        return fallback ? (
+            <HeightUpdater>
+                <Layout>{fallback}</Layout>
+            </HeightUpdater>
+        ) : null;
     }
 
     const exclusiveTexts = texts.filter((text) => text.includes('ЗАМЕНА')).map((text) => text.replace('ЗАМЕНА', ''));
