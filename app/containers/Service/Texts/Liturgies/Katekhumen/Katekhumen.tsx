@@ -4,7 +4,6 @@ import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import React from 'react';
 import { css } from 'emotion';
 import SolidSection from 'components/SolidSection/SolidSection';
-import Hymns from 'containers/Main/Hymns';
 import forEach from 'lodash.foreach';
 import useExternalDay from 'hooks/useExternalDay';
 import Sermons from 'containers/Main/Sermons';

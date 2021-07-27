@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, Suspense } from 'react';
 import { css } from 'emotion';
 import { ThemeProvider } from 'emotion-theming';
 import { useParams, useHistory } from 'react-router-dom';
@@ -32,6 +32,9 @@ import Saints from './Saints';
 import HeadingBar from './HeadingBar';
 import ReadingList from './ReadingList';
 import Banner from './Banner';
+import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
+import MDXProvider from 'containers/Service/MDXProvider';
+import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -100,14 +103,16 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                                     <LanguageSwitcher />
                                                                 </div>
                                                             </div>
-                                                            <Parts
-                                                                date={date}
-                                                                partNames={[
-                                                                    'shared.Тропари',
-                                                                    'shared.Кондаки',
-                                                                    'shared.Величания',
-                                                                ]}
-                                                            />
+                                                            <MDXProvider>
+                                                                <Suspense fallback={<Loader />}>
+                                                                    <Troparions date={date} day={day} />
+                                                                    <Kondacs date={date} day={day} />
+                                                                    <Parts
+                                                                        date={date}
+                                                                        partNames={['shared.Величания']}
+                                                                    />
+                                                                </Suspense>
+                                                            </MDXProvider>
                                                         </BorderedSection>
 
                                                         {day.bReadings && Object.keys(day.bReadings).length > 0 && (

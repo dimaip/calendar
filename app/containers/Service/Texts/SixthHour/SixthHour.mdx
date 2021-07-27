@@ -1,14 +1,20 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import If from 'components/If/If';
+import Parts from 'components/Parts/Parts';
+import Tropar6Chasa from 'containers/Service/Texts/SixthHour/Tropar6Chasa/index.mdx';
+import SlavaLayout from 'containers/Service/Texts/SixthHour/SlavaLayout.mdx';
+import { SundayTroparions } from 'containers/Service/Texts/Shared/Troparions/Troparions';
 
 # Шестой час
 
 ## (1) Вступление
 
-<MdxLoader src="Shared/Pridite3" />
-
-От Пасхи до Отдания
-
-<MdxLoader src="Shared/EasterTroparion3x" /> вместо Н поставить Ч
+<If condition={!props.isEasterOffsetRange(0, 39)}>
+    <MdxLoader src="Shared/Pridite3" />
+</If>
+<If condition={props.isEasterOffsetRange(0, 39)}>
+    <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
+</If>
 
 ## (2) Трипсалмие
 
@@ -30,13 +36,17 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 ## (3) Тропарь часа и другие тропари и кондаки
 
-### Тропарь шестого часа, глас 2
-
-<MdxLoader src="SixthHour/Tropar6Chasa" />
-
-**Слава.**
-
-В воскресенье, двунадесятые и великие праздники тропарь шестого часа опускается (на цся все дни, когда есть праздничный тропарь), но сразу **Слава.** и тропарь праздника (ввести колонку "Тропарь на часах")
+<If condition={props.dayOfWeek === 0}>
+    **Слава.**
+    <SundayTroparions date={props.date} day={props.day} />
+</If>
+<Parts
+    date={props.date}
+    partNames={['shared.Тропарь на часах']}
+    fallback={props.dayOfWeek !== 0 && <Tropar6Chasa />}
+    Layout={SlavaLayout}
+    lang={props.lang}
+/>
 
 **И ныне. Богородичен:**
 
@@ -62,15 +72,19 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 <MdxLoader src="Shared/ZakluchenieChasov" />
 
-Только Великим постом
+<If condition={props.greatLent && props.dayOfWeek !== 6 && props.dayOfWeek !== 0 }>
+  ### Молитва Св. Ефрема Сирина
 
-### Молитва Св. Ефрема Сирина
+{' '}
 
 <MdxLoader src="Shared/EfremSirin" />
 
+{' '}
+
 <MdxLoader src="Shared/STrisvatogo" />
 
-<MdxLoader src="Shared/GospodiPomiluy12" />
+  <MdxLoader src="Shared/GospodiPomiluy12" />
+</If>
 
 ### Молитва шестого часа, св. Василия Великого
 
