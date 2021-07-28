@@ -5,11 +5,28 @@ import RteText from 'components/RteText/RteText';
 import { LangContext } from 'containers/Service/LangContext';
 import { HeightUpdater } from 'components/HeightUpdate/HeightUpdater';
 
-const objAccess = (object, path) => path.split('.').reduce((acc, curr) => acc?.[curr], object);
+const objAccess = (object, path, serviceType = null) => {
+    const result = path.split('.').reduce((acc, curr) => acc?.[curr], object);
+    return result
+        ?.map((obj) => {
+            if (!serviceType || !obj.services) {
+                return obj.value;
+            }
+            if (obj.services.includes(serviceType)) {
+                return obj.value;
+            }
+            return null;
+        })
+        .filter(Boolean);
+};
 
-const PartRenderer = ({ date, lang, partNames, fallback, alwaysShowFallback, Layout }) => {
+const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShowFallback, Layout }) => {
     const { data: parts } = useParts(date, lang);
-    let texts = partNames.map((partName) => objAccess(parts, partName) || []).flatten();
+    let texts = partNames
+        .map((partName) => {
+            return objAccess(parts, partName, serviceType) || [];
+        })
+        .flatten();
     if (!texts?.length) {
         return fallback ? (
             <HeightUpdater>
@@ -49,6 +66,7 @@ const PartRenderer = ({ date, lang, partNames, fallback, alwaysShowFallback, Lay
 const Parts = ({
     date,
     partNames,
+    serviceType = null,
     fallback = null,
     alwaysShowFallback = false,
     Layout = ({ children }) => children,
@@ -74,6 +92,7 @@ const Parts = ({
                     <LangContext.Provider value={langStateA}>
                         <PartRenderer
                             fallback={fallback}
+                            serviceType={serviceType}
                             alwaysShowFallback={alwaysShowFallback}
                             date={date}
                             partNames={partNames}
@@ -91,6 +110,7 @@ const Parts = ({
                     <LangContext.Provider value={langStateB}>
                         <PartRenderer
                             fallback={fallback}
+                            serviceType={serviceType}
                             alwaysShowFallback={alwaysShowFallback}
                             date={date}
                             partNames={partNames}

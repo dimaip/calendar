@@ -2,7 +2,7 @@ import React from 'react';
 import Parts from 'components/Parts/Parts';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
-const DefaultKondacs = ({ day, date }) => {
+export const SundayKondacs = ({ day, date }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const glas = day?.glas;
@@ -15,12 +15,13 @@ const DefaultKondacs = ({ day, date }) => {
     return null;
 };
 
-const Kondacs = ({ day, date }) => (
+const Kondacs = ({ day, date, serviceType = null }) => (
     <Parts
         date={date}
         partNames={['shared.Кондаки']}
         alwaysShowFallback
-        fallback={<DefaultKondacs day={day} date={date} />}
+        fallback={<SundayKondacs day={day} date={date} />}
+        serviceType={serviceType}
     />
 );
 

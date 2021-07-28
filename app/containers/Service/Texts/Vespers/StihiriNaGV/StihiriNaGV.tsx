@@ -21,6 +21,7 @@ const StihiriNaGV = ({ day, date }) => (
             date={date}
             partNames={['vespers.Cтихиры на Господи взываю']}
             alwaysShowFallback
+            serviceType="Вечерня"
             fallback={<DefatulStihiriNaGV day={day} date={date} />}
         />
     </>

@@ -2,7 +2,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Parts from 'components/Parts/Parts';
 import If from 'components/If/If';
 import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostilari';
-import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx'
+import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
 <span id="nachalo" />
 
@@ -22,8 +22,8 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx'
     <>{props.vselenskayaRoditelskayaSubbota && <MdxLoader src="Matins/Aliluja1" lang={props.lang} />}</>
     <>{props.lentSubbotas && <MdxLoader src="Matins/Aliluja2" lang={props.lang} />}</>
     <>{!props.lentSubbotas && props.greatLent && <MdxLoader src="Matins/Aliluja3" lang={props.lang} />}</>
-</If>
 
+</If>
 
 <If condition={props.isEasterOffsetRange(-6, -4)}>
     <MdxLoader src="Shared/TroparionPassion" lang={props.lang} />
@@ -33,13 +33,14 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx'
 </If>
 <If condition={props.vospominanijaUsopshih}>
 
-  ### Тропари
-  
-  {props.troparions}
-  
+### Тропари
+
+{props.troparions}
+
   <Parts
       date={props.date}
       partNames={['shared.Богородичен синаксарный']}
+      serviceType="Утреня"
   />
 </If>
 
@@ -67,12 +68,12 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx'
 
 </If>
 
-<If condition={!props.isEasterOffsetRange(-3,-2)}>
-    <>{props.dayOfWeek === 0 || props.dayOfWeek === 2 && <MdxLoader src="Matins/Prayer2" lang={props.lang} />}</>
-    <>{props.dayOfWeek === 0 || props.dayOfWeek === 3 && <MdxLoader src="Matins/Prayer3" lang={props.lang} />}</>
-    <>{props.dayOfWeek === 0 || props.dayOfWeek === 4 && <MdxLoader src="Matins/Prayer4" lang={props.lang} />}</>
-    <>{props.dayOfWeek === 0 || props.dayOfWeek === 5 && <MdxLoader src="Matins/Prayer7" lang={props.lang} />}</>
-    <>{props.dayOfWeek === 0 || props.dayOfWeek === 6 && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
+<If condition={!props.isEasterOffsetRange(-3, -2)}>
+    <>{props.dayOfWeek === 0 || (props.dayOfWeek === 2 && <MdxLoader src="Matins/Prayer2" lang={props.lang} />)}</>
+    <>{props.dayOfWeek === 0 || (props.dayOfWeek === 3 && <MdxLoader src="Matins/Prayer3" lang={props.lang} />)}</>
+    <>{props.dayOfWeek === 0 || (props.dayOfWeek === 4 && <MdxLoader src="Matins/Prayer4" lang={props.lang} />)}</>
+    <>{props.dayOfWeek === 0 || (props.dayOfWeek === 5 && <MdxLoader src="Matins/Prayer7" lang={props.lang} />)}</>
+    <>{props.dayOfWeek === 0 || (props.dayOfWeek === 6 && <MdxLoader src="Matins/Prayer8" lang={props.lang} />)}</>
 </If>
 
 <MdxLoader src="Matins/Prayer10" lang={props.lang} />
@@ -85,13 +86,17 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx'
 
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 
-<Exapostilari date={props.date}/>
+<Exapostilari date={props.date} />
 <MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} lent />
 
 ### Стихиры на «Хвалите»
 
-<Parts date={props.date} partNames={['matins.Cтихиры на хвалите']} />
-<MdxLoader src="Matins/SlavoslovieLent" lang={props.lang} short={props.isEasterOffsetRange(-6, -2) || props.vospominanijaUsopshih || props.isEasterOffsetRange(-(7*6+1))} />
+<Parts date={props.date} partNames={['matins.Cтихиры на хвалите']} serviceType="Утреня" />
+<MdxLoader
+    src="Matins/SlavoslovieLent"
+    lang={props.lang}
+    short={props.isEasterOffsetRange(-6, -2) || props.vospominanijaUsopshih || props.isEasterOffsetRange(-(7 * 6 + 1))}
+/>
 
 <If condition={props.isEasterOffsetRange(-6, -4) || !props.greatLent || props.dayOfWeek === 6}>
 
@@ -117,7 +122,11 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx'
 
 </If>
 
-<>{(props.isEasterOffsetRange(0, 39) || props.dayOfWeek === 0) && <MdxLoader src="Matins/VoskresnajaPesn" lang={props.lang} />}</>
+<>
+    {(props.isEasterOffsetRange(0, 39) || props.dayOfWeek === 0) && (
+        <MdxLoader src="Matins/VoskresnajaPesn" lang={props.lang} />
+    )}
+</>
 
 <MdxLoader src="Shared/EkteniaOglash" lang={props.lang} />
 <MdxLoader src="Matins/PrayerKatekhumens" lang={props.lang} />
@@ -158,6 +167,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx'
     <Parts
         date={props.date}
         partNames={['shared.Богородичен синаксарный']}
+        serviceType="Утреня"
     />
 
     <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
@@ -165,7 +175,6 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx'
     <>{props.otpust}</>
 
 </If>
-
 
 <If condition={!props.isEasterOffsetRange(-3) && ((props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5)) || (props.greatLent && props.dayOfWeek !== 6))}>
 
@@ -185,6 +194,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx'
         fallback={
             <MdxLoader src="Shared/Ending/Otpust" />
         }
+        serviceType="Утреня"
     />
 
     <>{props.saints}</>

@@ -14,6 +14,7 @@ const Prichastens = ({ day, date }) => (
         partNames={['liturgy.Причастен']}
         alwaysShowFallback
         fallback={<DefaultPrichasten date={date} />}
+        serviceType="Литургия"
     />
 );
 

@@ -72,8 +72,8 @@ const Katekhumen = ({ date, day, serviceType }) => {
 
     const hymns = (
         <SectionLayout>
-            <Troparions date={date} day={day} />
-            <Kondacs date={date} day={day} />
+            <Troparions date={date} day={day} serviceType="Литургия" />
+            <Kondacs date={date} day={day} serviceType="Литургия" />
         </SectionLayout>
     );
 

@@ -2,7 +2,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Parts from 'components/Parts/Parts';
 import Html from 'components/Html/Html';
 import If from 'components/If/If';
-import Prokimens, {DefatulProkimen} from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+import Prokimens, { DefatulProkimen } from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
 import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
@@ -15,32 +15,59 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 **П** Благословен Бог наш ныне и всегда и во веки веков!
 
 <If condition={props.annunciation}>
-  <MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
-  <MdxLoader src="Vespers/Psalm103" lang={props.lang} chitaetsa />
-  <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
+    <MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
+    <MdxLoader src="Vespers/Psalm103" lang={props.lang} chitaetsa />
+    <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
 </If>
 
 <If condition={!props.sirnajaSedmitza && !props.greatLent && !props.annunciation}>
 
-  **Ч** Аминь. Слава Тебе, Боже наш, слава Тебе!
+**Ч** Аминь. Слава Тебе, Боже наш, слава Тебе!
 
-  <MdxLoader src="Shared/Paraklit" lang={props.lang} />
+<MdxLoader src="Shared/Paraklit" lang={props.lang} />
 
 </If>
 
-<If condition={props.sirnajaSedmitza || props.greatLent}>
-  **Н** Аминь.
-</If>
+<If condition={props.sirnajaSedmitza || props.greatLent}>**Н** Аминь.</If>
 
 <>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
 
-<>{!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 1) && <MdxLoader src="Vespers/Prayer1" lang={props.lang} />}</>
-<>{!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 2) && <MdxLoader src="Vespers/Prayer2" lang={props.lang} />}</>
-<>{!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 3) && <MdxLoader src="Vespers/Prayer3" lang={props.lang} />}</>
-<>{!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 4) && <MdxLoader src="Vespers/Prayer4" lang={props.lang} />}</>
-<>{!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 5) && <MdxLoader src="Vespers/Prayer5" lang={props.lang} />}</>
-<>{!props.annunciation && !props.isAscension && props.dayOfWeek === 6 && <MdxLoader src="Vespers/Prayer6" lang={props.lang} />}</>
-<>{!props.annunciation && !props.isAscension && !props.greatLent && (props.dayOfWeek === 6 || props.dayOfWeek === 0) && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}</>
+<>
+    {!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 1) && (
+        <MdxLoader src="Vespers/Prayer1" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 2) && (
+        <MdxLoader src="Vespers/Prayer2" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 3) && (
+        <MdxLoader src="Vespers/Prayer3" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 4) && (
+        <MdxLoader src="Vespers/Prayer4" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 5) && (
+        <MdxLoader src="Vespers/Prayer5" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.annunciation && !props.isAscension && props.dayOfWeek === 6 && (
+        <MdxLoader src="Vespers/Prayer6" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.annunciation &&
+        !props.isAscension &&
+        !props.greatLent &&
+        (props.dayOfWeek === 6 || props.dayOfWeek === 0) && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}
+</>
 
 <MdxLoader src="Vespers/Prayer8" lang={props.lang} />
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} greatLent={props.greatLent} />
@@ -52,9 +79,9 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
 <If condition={props.dayOfWeek === 0 && props.greatLent || props.annunciation}>
 
-  ## Вход
+## Вход
 
-  **П** Премудрость! Станем благоговейно!
+**П** Премудрость! Станем благоговейно!
 
 </If>
 
@@ -64,7 +91,8 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
 ## Чтения
 
-{props.annunciation ? <DefatulProkimen date={props.date}/> :  <Prokimens date={props.date} />}
+{props.annunciation ? <DefatulProkimen date={props.date}/> : <Prokimens date={props.date} />}
+
 <span id="reading" />
 
 **П** Премудрость!
@@ -102,75 +130,72 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
 <If condition={!((props.greatLent && props.dayOfWeek !== 5) || props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
 
-  ### Тропари
+### Тропари
 
-  <>{props.troparions}</>
+<>{props.troparions}</>
 
-  <Parts
-    date={props.date}
-    partNames={['shared.Богородичен синаксарный']}
-  />
+<Parts date={props.date} partNames={['shared.Богородичен синаксарный']} serviceType="Вечерня" />
 
-  <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+<MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
 
-  <>{props.otpust}</>
+<>{props.otpust}</>
 
 </If>
 
 <If condition={(props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
 
-  <MdxLoader src="Vespers/LentEnding1" lang={props.lang} />
+<MdxLoader src="Vespers/LentEnding1" lang={props.lang} />
 
-  ### Отпуст
+### Отпуст
 
-  <Parts
-      date={props.date}
-      partNames={['shared.Отпуст Синаксарный']}
-      fallback={
-          props.isSunday || props.easterSeason ? (
-              <MdxLoader src="Shared/Ending/EasterOtpust" />
-          ) : (
-              <MdxLoader src="Shared/Ending/Otpust" />
-          )
-      }
-  />
+<Parts
+    date={props.date}
+    partNames={['shared.Отпуст Синаксарный']}
+    fallback={
+        props.isSunday || props.easterSeason ? (
+            <MdxLoader src="Shared/Ending/EasterOtpust" />
+        ) : (
+            <MdxLoader src="Shared/Ending/Otpust" />
+        )
+    }
+    serviceType="Вечерня"
+/>
 
-  <>{props.saints}</>
+<>{props.saints}</>
 
-  <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} />
+<MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} />
 
 </If>
 
-
 <If condition={(props.greatLent && props.dayOfWeek !== 5)}>
 
-  <If condition={!props.isEasterOffsetRange(-5, -3) && props.dayOfWeek === 0}>
+<If condition={!props.isEasterOffsetRange(-5, -3) && props.dayOfWeek === 0}>
     <MdxLoader src="Vespers/LentEnding2" lang={props.lang} />
-  </If>
-  <If condition={!props.isEasterOffsetRange(-5, -3) && props.dayOfWeek !== 0}>
+</If>
+<If condition={!props.isEasterOffsetRange(-5, -3) && props.dayOfWeek !== 0}>
     <MdxLoader src="Vespers/LentEnding3" lang={props.lang} />
-  </If>
-  <If condition={props.isEasterOffsetRange(-5, -3)}>
-      <MdxLoader src="Shared/TroparionPassion" lang={props.lang} />
-      <MdxLoader src="Vespers/LentEnding5" lang={props.lang} />
-  </If>
+</If>
+<If condition={props.isEasterOffsetRange(-5, -3)}>
+    <MdxLoader src="Shared/TroparionPassion" lang={props.lang} />
+    <MdxLoader src="Vespers/LentEnding5" lang={props.lang} />
+</If>
 
-  ### Отпуст
+### Отпуст
 
-  <Parts
-      date={props.isEasterOffsetRange(-3, -2) ? props.previousDate : props.date}
-      partNames={['shared.Отпуст Синаксарный']}
-      fallback={
-           <MdxLoader src="Shared/Ending/Otpust" />
-      }
-  />
+<Parts
+    date={props.isEasterOffsetRange(-3, -2) ? props.previousDate : props.date}
+    partNames={['shared.Отпуст Синаксарный']}
+    fallback={<MdxLoader src="Shared/Ending/Otpust" />}
+    serviceType="Вечерня"
+/>
 
-  <>{props.saints}</>
+<>{props.saints}</>
 
   <If condition={props.isEasterOffsetRange(-7 * 7 + 1)}>
     ### Чин прощения с пением 136 псалма
 
     <MdxLoader src="Matins/Psalm136" lang={props.lang} />
+
   </If>
 
 </If>

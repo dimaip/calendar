@@ -23,6 +23,7 @@ const Prokimens = ({ day, date }) => (
             partNames={['liturgy.Прокимен']}
             alwaysShowFallback
             fallback={<DefatulProkimen day={day} date={date} />}
+            serviceType="Литургия"
         />
     </>
 );

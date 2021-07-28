@@ -38,7 +38,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 ## Чтения
 
-<Parts date={props.date} partNames={['vespers.Прокимен триоди 1']} />
+<Parts date={props.date} partNames={['vespers.Прокимен триоди 1']} serviceType="Вечерня" />
 
 <span id="reading" />
 
@@ -50,7 +50,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <br />
 
-<Parts date={props.date} partNames={['vespers.Прокимен триоди 2']} />
+<Parts date={props.date} partNames={['vespers.Прокимен триоди 2']} serviceType="Вечерня" />
 
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
@@ -76,7 +76,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 ### Проповедь
 
-<Parts date={props.previousDate} partNames={['liturgy.Аллилуарий']} />
+<Parts date={props.previousDate} partNames={['liturgy.Аллилуарий']} serviceType="Вечерня" />
 
 <div>
     <ReadingsForService
@@ -107,7 +107,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} />
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-<Troparions date={props.date} day={props.day} />
+<Troparions date={props.date} day={props.day} serviceType="Вечерня" />
 
 <span id="otpust" />
 <br />

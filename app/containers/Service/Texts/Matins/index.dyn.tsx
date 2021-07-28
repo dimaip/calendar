@@ -40,14 +40,14 @@ const Matins = ({ date }) => {
 
     const troparions = (
         <SectionLayout>
-            <Troparions date={date} day={day} />
+            <Troparions date={date} day={day} serviceType="Утреня" />
         </SectionLayout>
     );
 
     const endHymns = (
         <SectionLayout>
-            <Kondacs date={date} day={day} />
-            <Parts date={date} partNames={['shared.Величания']} />
+            <Kondacs date={date} day={day} serviceType="Утреня" />
+            <Parts date={date} partNames={['shared.Величания']} serviceType="Утреня" />
         </SectionLayout>
     );
 

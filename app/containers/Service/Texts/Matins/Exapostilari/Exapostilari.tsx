@@ -38,6 +38,7 @@ const Exapostilari = ({ date }) => (
             partNames={['shared.Эксапостиларии']}
             alwaysShowFallback
             fallback={<DefatulExapostilari date={date} />}
+            serviceType="Утреня"
         />
     </>
 );
