@@ -3,6 +3,7 @@ import Html from 'components/Html/Html';
 import Parts from 'components/Parts/Parts';
 import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
 import Prokimens from 'containers/Service/Texts/Liturgies/Katekhumen/Prokimens/Prokimens';
+import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <span id="nachalo" />
@@ -43,7 +44,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
 <div>
-  <ReadingsForService readingsForService={{'Великого Четверга': ['Исх. XIX, 10-19.']}} />
+    <ReadingsForService readingsForService={{ 'Великого Четверга': ['Исх. XIX, 10-19.'] }} />
 </div>
 
 <br />
@@ -53,7 +54,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
 <div>
-  <ReadingsForService readingsForService={{'Великого Четверга': [' Иов. XXXVIII, 1-23, XLII, 1-5.']}} />
+    <ReadingsForService readingsForService={{ 'Великого Четверга': [' Иов. XXXVIII, 1-23, XLII, 1-5.'] }} />
 </div>
 
 <br />
@@ -61,7 +62,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
 <div>
-  <ReadingsForService readingsForService={{'Великого Четверга': [' Ис. L, 4–11.']}} />
+    <ReadingsForService readingsForService={{ 'Великого Четверга': [' Ис. L, 4–11.'] }} />
 </div>
 
 ### Проповедь
@@ -69,24 +70,25 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <Prokimens date={props.previousDate} />
 
 <div>
-  <ReadingsForService readingsForService={{'Великого Четверга': ['1 Кор., 149 зач., XI, 23-32.']}} />
+    <ReadingsForService readingsForService={{ 'Великого Четверга': ['1 Кор., 149 зач., XI, 23-32.'] }} />
 </div>
 
 ### Проповедь
 
-<Parts
-  date={props.previousDate}
-  partNames={['liturgy.Аллилуарий']}
-/>
+<Parts date={props.previousDate} partNames={['liturgy.Аллилуарий']} />
 
 <div>
-  <ReadingsForService readingsForService={{'Великого Четверга': [
-    'Мф., 107 зач., XXVI, 1-20.',
-    'Ин., 44 зач., XIII, 3-17.',
-    'Мф., 108 зач. (от полу́), XXVI, 21-39.',
-    'Лк., 109 зач., XXII, 43-45.',
-    'Мф., 108 зач., XXVI, 40 - XXVII, 2.'
-  ]}} />
+    <ReadingsForService
+        readingsForService={{
+            'Великого Четверга': [
+                'Мф., 107 зач., XXVI, 1-20.',
+                'Ин., 44 зач., XIII, 3-17.',
+                'Мф., 108 зач. (от полу́), XXVI, 21-39.',
+                'Лк., 109 зач., XXII, 43-45.',
+                'Мф., 108 зач., XXVI, 40 - XXVII, 2.',
+            ],
+        }}
+    />
 </div>
 
 ### Проповедь
@@ -106,8 +108,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} />
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-<Parts date={props.date} partNames={['shared.Тропари']} />
-
+<Troparions date={props.date} day={props.day} />
 
 <span id="otpust" />
 <br />
@@ -131,11 +132,9 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 ### Отпуст
 
 <Parts
-  date={props.previousDate}
-  partNames={['shared.Отпуст Синаксарный']}
-  fallback={
-    <MdxLoader src="Shared/Ending/Otpust" />
-  }
+    date={props.previousDate}
+    partNames={['shared.Отпуст Синаксарный']}
+    fallback={<MdxLoader src="Shared/Ending/Otpust" />}
 />
 
 <MdxLoader src="Shared/SouzomLubvi" />

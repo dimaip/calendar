@@ -9,6 +9,7 @@ import SolidSection from 'components/SolidSection/SolidSection';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';
 import Parts from 'components/Parts/Parts';
+import { SectionLayout } from 'components/SectionLayout/SectionLayout';
 
 import Ending from '../Shared/Ending/Ending';
 
@@ -16,6 +17,8 @@ import Prazdnichnaja from './Prazdnichnaja.mdx';
 import PassionFriday from './PassionFriday.mdx';
 import PassionSaturday from './PassionSaturday.mdx';
 import Lent from './Lent.mdx';
+import Kondacs from '../Shared/Kondacs/Kondacs';
+import Troparions from '../Shared/Troparions/Troparions';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -30,20 +33,23 @@ const Readings = ({ readingsForService, day }) =>
         <Loader />
     );
 
-const SectionLayout = ({ children }) => (
-    <SolidSection marginTop={24} marginBottom={24} paddingTop={12} marginHorizontal={-12}>
-        {children}
-    </SolidSection>
-);
-
 const Matins = ({ date }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
 
-    const troparions = <Parts date={date} partNames={['shared.Тропари']} Layout={SectionLayout} />;
+    const troparions = (
+        <SectionLayout>
+            <Troparions date={date} day={day} />
+        </SectionLayout>
+    );
 
-    const endHymns = <Parts date={date} partNames={['shared.Кондаки', 'shared.Величания']} Layout={SectionLayout} />;
+    const endHymns = (
+        <SectionLayout>
+            <Kondacs date={date} day={day} />
+            <Parts date={date} partNames={['shared.Величания']} />
+        </SectionLayout>
+    );
 
     const readingsForService = day?.bReadings?.['Утром'] || day?.readings?.['Утреня'];
     const readings = (
