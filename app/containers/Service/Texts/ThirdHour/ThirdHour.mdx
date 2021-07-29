@@ -1,5 +1,9 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Tropar3Chasa from 'containers/Service/Texts/ThirdHour/Tropar3Chasa/index.mdx';
+import If from 'components/If/If';
+import { SundayTroparions } from 'containers/Service/Texts/Shared/Troparions/Troparions';
+import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+import Parts from 'components/Parts/Parts';
 
 # Третий час
 
@@ -40,8 +44,6 @@ import Tropar3Chasa from 'containers/Service/Texts/ThirdHour/Tropar3Chasa/index.
 
 ## (3) Тропарь часа и другие тропари и кондаки
 
-**Слава.**
-
 <If condition={props.dayOfWeek === 0}>
     <SundayTroparions date={props.date} day={props.day} />
 </If>
@@ -52,6 +54,8 @@ import Tropar3Chasa from 'containers/Service/Texts/ThirdHour/Tropar3Chasa/index.
     fallback={props.dayOfWeek !== 0 && <Tropar3Chasa />}
     lang={props.lang}
 />
+
+**Слава.**
 
 **И ныне. Богородичен:**
 
