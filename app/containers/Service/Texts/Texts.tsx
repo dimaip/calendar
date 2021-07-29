@@ -54,6 +54,15 @@ const makeServices = (date, readings = {}) => {
             TOC: vespersTOC,
         },
         {
+            title: 'Третий час',
+            id: 'thirdHour',
+            enabled: !isEasterOffsetRange(0, 6),
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Богослужебные тексты',
+        },
+        {
             title: 'Шестой час',
             id: 'sixthHour',
             enabled: !isEasterOffsetRange(0, 6),

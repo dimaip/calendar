@@ -1,35 +1,38 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
-import If from 'components/If/If';
-import Parts from 'components/Parts/Parts';
-import Tropar6Chasa from 'containers/Service/Texts/SixthHour/Tropar6Chasa/index.mdx';
-import SlavaLayout from 'containers/Service/Texts/SixthHour/SlavaLayout.mdx';
-import { SundayTroparions } from 'containers/Service/Texts/Shared/Troparions/Troparions';
-import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+import Tropar3Chasa from 'containers/Service/Texts/ThirdHour/Tropar3Chasa/index.mdx';
 
-# Шестой час
+# Третий час
 
 ## (1) Вступление
 
-<If condition={!props.isEasterOffsetRange(0, 39)}>
-    <MdxLoader src="Shared/Pridite3" />
+<MdxLoader src="Shared/Vozglas" />
+
+<MdxLoader src="Shared/SlavaTebe" />
+
+<If condition={!props.isEasterOffsetRange(0, 49)}>
+    <MdxLoader src="Shared/ParaklitChit" />
 </If>
 <If condition={props.isEasterOffsetRange(0, 39)}>
     <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
 </If>
 
+### Обычное начало
+
+<MdxLoader src="Shared/ObichnoeNachalo" />
+
 ## (2) Трипсалмие
 
-### Псалом 53
+### Псалом 16
 
-<MdxLoader src="Shared/Psalm53" />
+<MdxLoader src="Shared/Psalm16" />
 
-### Псалом 54
+### Псалом 24
 
-<MdxLoader src="Shared/Psalm54" />
+<MdxLoader src="Shared/Psalm24" />
 
-### Псалом 90
+### Псалом 50
 
-<MdxLoader src="Shared/Psalm90" />
+<MdxLoader src="Shared/Psalm50" />
 
 <MdxLoader src="Shared/AfterTripsalm" />
 
@@ -45,20 +48,20 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 <Parts
     date={props.date}
     partNames={['shared.Тропари']}
-    serviceType="6-й час"
-    fallback={props.dayOfWeek !== 0 && <Tropar6Chasa />}
+    serviceType="3-й час"
+    fallback={props.dayOfWeek !== 0 && <Tropar3Chasa />}
     lang={props.lang}
 />
 
 **И ныне. Богородичен:**
 
-<MdxLoader src="SixthHour/Bogorodichen" />
+<MdxLoader src="ThirdHour/Bogorodichen" />
 
-<MdxLoader src="SixthHour/Tropar6Chasa2" />
+<MdxLoader src="ThirdHour/Tropar3Chasa2" />
 
 <MdxLoader src="Shared/STrisvatogo" />
 
-### Кондаки, глас 2
+### Тропари, глас 8
 
 <If condition={props.dayOfWeek === 0}>
     <SundayKondacs date={props.date} day={props.day} />
@@ -66,8 +69,8 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 <Parts
     date={props.date}
     partNames={['shared.Кондаки']}
-    serviceType="6-й час"
-    fallback={props.dayOfWeek !== 0 && <MdxLoader src="SixthHour/Kondaks" dayOfWeek={props.dayOfWeek} />}
+    serviceType="3-й час"
+    fallback={props.dayOfWeek !== 0 && <MdxLoader src="ThirdHour/Tropar3Chasa3" />}
     lang={props.lang}
 />
 
@@ -87,10 +90,13 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
     <MdxLoader src="Shared/EfremSirin" />
 
     <MdxLoader src="Shared/STrisvatogo" />
+
     <MdxLoader src="Shared/GospodiPomiluy12" />
 
 </If>
 
-### Молитва шестого часа, св. Василия Великого
+### Молитва третьего часа, св. Мардария
 
-<MdxLoader src="SixthHour/Molitva6Chasa" />
+<MdxLoader src="Shared/MolitvaChasaMardariya" />
+
+<MdxLoader src="ThirdHour/OtpustMaliy" />
