@@ -82,17 +82,13 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 <MdxLoader src="Shared/ZakluchenieChasov" />
 
 <If condition={props.greatLent && props.dayOfWeek !== 6 && props.dayOfWeek !== 0 }>
-  ### Молитва Св. Ефрема Сирина
+    ### Молитва Св. Ефрема Сирина
 
-{' '}
+    <MdxLoader src="Shared/EfremSirin" />
 
-<MdxLoader src="Shared/EfremSirin" />
+    <MdxLoader src="Shared/STrisvatogo" />
+    <MdxLoader src="Shared/GospodiPomiluy12" />
 
-{' '}
-
-<MdxLoader src="Shared/STrisvatogo" />
-
-  <MdxLoader src="Shared/GospodiPomiluy12" />
 </If>
 
 ### Молитва шестого часа, св. Василия Великого

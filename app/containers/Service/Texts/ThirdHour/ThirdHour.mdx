@@ -1,4 +1,5 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Tropar3Chasa from 'containers/Service/Texts/ThirdHour/Tropar3Chasa/index.mdx';
 
 # Третий час
 
@@ -8,13 +9,12 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 <MdxLoader src="Shared/SlavaTebe" />
 
-<MdxLoader src="Shared/ParaklitChit" />
-
-От Пасхи до Отдания
-
-<MdxLoader src="Shared/EasterTroparion3x" /> вместо Н поставить Ч
-
-От Вознесения до Пятидесятницы ничего
+<If condition={!props.isEasterOffsetRange(0, 49)}>
+    <MdxLoader src="Shared/ParaklitChit" />
+</If>
+<If condition={props.isEasterOffsetRange(0, 39)}>
+    <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
+</If>
 
 ### Обычное начало
 
@@ -40,13 +40,18 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 ## (3) Тропарь часа и другие тропари и кондаки
 
-### Тропарь третьего часа, глас 6
-
-<MdxLoader src="ThirdHour/Tropar3Chasa" />
-
 **Слава.**
 
-В воскресенье, двунадесятые и великие праздники тропарь третьего часа опускается (на цся все дни, когда есть праздничный тропарь), но сразу **Слава.** и тропарь праздника (ввести колонку "Тропарь на часах")
+<If condition={props.dayOfWeek === 0}>
+    <SundayTroparions date={props.date} day={props.day} />
+</If>
+<Parts
+    date={props.date}
+    partNames={['shared.Тропари']}
+    serviceType="3-й час"
+    fallback={props.dayOfWeek !== 0 && <Tropar3Chasa />}
+    lang={props.lang}
+/>
 
 **И ныне. Богородичен:**
 
@@ -58,9 +63,16 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 ### Тропари, глас 8
 
-<MdxLoader src="ThirdHour/Tropar3Chasa3" />
-
-В воскресенье, двунадесятые и великие праздники вместо этих тропарей - кондак праздника (на цся все дни, когда есть праздничный кондак) (ввести колонку "Кондак на часах")
+<If condition={props.dayOfWeek === 0}>
+    <SundayKondacs date={props.date} day={props.day} />
+</If>
+<Parts
+    date={props.date}
+    partNames={['shared.Кондаки']}
+    serviceType="3-й час"
+    fallback={props.dayOfWeek !== 0 && <MdxLoader src="ThirdHour/Tropar3Chasa3" />}
+    lang={props.lang}
+/>
 
 <MdxLoader src="Shared/GospodiPomiluy40" />
 
@@ -72,15 +84,16 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 <MdxLoader src="Shared/ZakluchenieChasov" />
 
-Только Великим постом
+<If condition={props.greatLent && props.dayOfWeek !== 6 && props.dayOfWeek !== 0 }>
+    ### Молитва Св. Ефрема Сирина
 
-### Молитва Св. Ефрема Сирина
+    <MdxLoader src="Shared/EfremSirin" />
 
-<MdxLoader src="Shared/EfremSirin" />
+    <MdxLoader src="Shared/STrisvatogo" />
 
-<MdxLoader src="Shared/STrisvatogo" />
+    <MdxLoader src="Shared/GospodiPomiluy12" />
 
-<MdxLoader src="Shared/GospodiPomiluy12" />
+</If>
 
 ### Молитва третьего часа, св. Мардария
 
