@@ -22,6 +22,7 @@ const StihiriNaHvalite = ({ day, date }) => (
             partNames={['matins.Cтихиры на хвалите']}
             alwaysShowFallback
             fallback={<DefatulStihiriNaHvalite day={day} date={date} />}
+            serviceType="Утреня"
         />
     </>
 );

@@ -1,0 +1,100 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import If from 'components/If/If';
+import Parts from 'components/Parts/Parts';
+import Tropar6Chasa from 'containers/Service/Texts/SixthHour/Tropar6Chasa/index.mdx';
+import SlavaLayout from 'containers/Service/Texts/SixthHour/SlavaLayout.mdx';
+import { SundayTroparions } from 'containers/Service/Texts/Shared/Troparions/Troparions';
+import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+
+# Шестой час
+
+## (1) Вступление
+
+<If condition={!props.isEasterOffsetRange(0, 39)}>
+    <MdxLoader src="Shared/Pridite3" />
+</If>
+<If condition={props.isEasterOffsetRange(0, 39)}>
+    <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
+</If>
+
+## (2) Трипсалмие
+
+### Псалом 53
+
+<MdxLoader src="Shared/Psalm53" />
+
+### Псалом 54
+
+<MdxLoader src="Shared/Psalm54" />
+
+### Псалом 90
+
+<MdxLoader src="Shared/Psalm90" />
+
+<MdxLoader src="Shared/AfterTripsalm" />
+
+<MdxLoader src="Shared/GospodiPomiluy3" />
+
+## (3) Тропарь часа и другие тропари и кондаки
+
+**Слава.**
+
+<If condition={props.dayOfWeek === 0}>
+    <SundayTroparions date={props.date} day={props.day} />
+</If>
+<Parts
+    date={props.date}
+    partNames={['shared.Тропари']}
+    serviceType="6-й час"
+    fallback={props.dayOfWeek !== 0 && <Tropar6Chasa />}
+    lang={props.lang}
+/>
+
+**И ныне. Богородичен:**
+
+<MdxLoader src="SixthHour/Bogorodichen" />
+
+<MdxLoader src="SixthHour/Tropar6Chasa2" />
+
+<MdxLoader src="Shared/STrisvatogo" />
+
+### Кондаки, глас 2
+
+<If condition={props.dayOfWeek === 0}>
+    <SundayKondacs date={props.date} day={props.day} />
+</If>
+<Parts
+    date={props.date}
+    partNames={['shared.Кондаки']}
+    serviceType="6-й час"
+    fallback={props.dayOfWeek !== 0 && <MdxLoader src="SixthHour/Kondaks" dayOfWeek={props.dayOfWeek} />}
+    lang={props.lang}
+/>
+
+<MdxLoader src="Shared/GospodiPomiluy40" />
+
+## (4) Общая молитва часов
+
+<MdxLoader src="Shared/MolitvaChasov" />
+
+## (5) Заключение
+
+<MdxLoader src="Shared/ZakluchenieChasov" />
+
+<If condition={props.greatLent && props.dayOfWeek !== 6 && props.dayOfWeek !== 0 }>
+  ### Молитва Св. Ефрема Сирина
+
+{' '}
+
+<MdxLoader src="Shared/EfremSirin" />
+
+{' '}
+
+<MdxLoader src="Shared/STrisvatogo" />
+
+  <MdxLoader src="Shared/GospodiPomiluy12" />
+</If>
+
+### Молитва шестого часа, св. Василия Великого
+
+<MdxLoader src="SixthHour/Molitva6Chasa" />
