@@ -37,8 +37,6 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 
 ## (3) Тропарь часа и другие тропари и кондаки
 
-**Слава.**
-
 <If condition={props.dayOfWeek === 0}>
     <SundayTroparions date={props.date} day={props.day} />
 </If>
@@ -49,6 +47,8 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
     fallback={props.dayOfWeek !== 0 && <Tropar6Chasa />}
     lang={props.lang}
 />
+
+**Слава.**
 
 **И ныне. Богородичен:**
 
