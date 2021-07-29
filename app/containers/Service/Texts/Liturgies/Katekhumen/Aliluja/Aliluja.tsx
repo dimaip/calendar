@@ -21,6 +21,7 @@ const Aliluja = ({ day, date }) => (
         partNames={['liturgy.Аллилуарий']}
         alwaysShowFallback
         fallback={<DefatulAliluja day={day} date={date} />}
+        serviceType="Литургия"
     />
 );
 

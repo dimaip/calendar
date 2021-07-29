@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { MDXProvider as OriginalMDXProvider } from '@mdx-js/react';
 import ScriptEditorInput from 'components/ScriptEditor/ScriptEditorInput';
 import './mdx.css';
+import useAudio from 'hooks/useAudio';
+
 const mapping = {
     h1: ({ children }) => <h1 className="H1">{children}</h1>,
     h2: ({ children }) => <h2 className="H2">{children}</h2>,
@@ -15,6 +17,12 @@ const mapping = {
     blockquote: ({ children }) => <div className="Petit">{children}</div>,
     inlineCode: ({ children }) => <span className="PetitInline">{children}</span>,
     del: ({ children }) => <span className="Super">{children}</span>,
+
+    wrapper: (props) => {
+        const ref = useRef();
+        useAudio(ref);
+        return <div {...props} ref={ref} />;
+    },
 };
 
 const MDXProvider = ({ children }) => <OriginalMDXProvider components={mapping}>{children}</OriginalMDXProvider>;

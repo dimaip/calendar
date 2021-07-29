@@ -15,6 +15,7 @@ const Zadastoinik = ({ date, serviceType }) => (
         date={date}
         partNames={['liturgy.Задостойник']}
         fallback={<ZadastoinikFallback serviceType={serviceType} />}
+        serviceType="Литургия"
     />
 );
 export default Zadastoinik;

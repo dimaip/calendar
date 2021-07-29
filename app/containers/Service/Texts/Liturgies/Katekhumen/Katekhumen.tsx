@@ -4,22 +4,21 @@ import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import React from 'react';
 import { css } from 'emotion';
 import SolidSection from 'components/SolidSection/SolidSection';
-import Hymns from 'containers/Main/Hymns';
 import forEach from 'lodash.foreach';
 import useExternalDay from 'hooks/useExternalDay';
 import Sermons from 'containers/Main/Sermons';
 import ReadingItem from 'containers/Readings/ReadingItem';
-import Parts from 'components/Parts/Parts';
+import { SectionLayout } from 'components/SectionLayout/SectionLayout';
 
 import useScrollToReadings from '../../useScrollToReadings';
 import VariableSection from '../../VariableSection';
+import Troparions from '../../Shared/Troparions/Troparions';
+import Kondacs from '../../Shared/Kondacs/Kondacs';
 
 import Antifon1 from './Antifon1/Antifon1';
 import Antifon2 from './Antifon2/Antifon2';
 import Antifon3 from './Antifon3/Antifon3';
-
 import Aliluja from './Aliluja/Aliluja';
-
 import Trisvatoe from './Trisvatoe/Trisvatoe';
 import VhodnoiStih from './VhodnoiStih/VhodnoiStih';
 import Reading from './Reading/Reading';
@@ -61,12 +60,6 @@ export const getKatekhumenReadings = (day) => {
     return { apostol, gospel };
 };
 
-const SectionLayout = ({ children }) => (
-    <SolidSection marginTop={24} marginBottom={24} paddingTop={18} marginHorizontal={-12}>
-        {children}
-    </SolidSection>
-);
-
 const Katekhumen = ({ date, day, serviceType }) => {
     useScrollToReadings();
     const externalDayQuery = useExternalDay(date);
@@ -77,7 +70,12 @@ const Katekhumen = ({ date, day, serviceType }) => {
     const antifon3 = <Antifon3 date={date} />;
     const reading = <Reading day={day} date={date} />;
 
-    const hymns = <Parts date={date} partNames={['shared.Тропари', 'shared.Кондаки']} Layout={SectionLayout} />;
+    const hymns = (
+        <SectionLayout>
+            <Troparions date={date} day={day} serviceType="Литургия" />
+            <Kondacs date={date} day={day} serviceType="Литургия" />
+        </SectionLayout>
+    );
 
     const aliluja = (
         <VariableSection date={date}>
