@@ -49,7 +49,7 @@ const Vespers = ({ date }) => {
 
     const troparions = (
         <SectionLayout>
-            <Troparions date={date} day={day} serviceType="Вечерня" />
+            <Troparions date={tomorrowDate} day={day} serviceType="Вечерня" />
         </SectionLayout>
     );
 
