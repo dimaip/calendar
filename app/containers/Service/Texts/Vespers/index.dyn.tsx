@@ -49,13 +49,13 @@ const Vespers = ({ date }) => {
 
     const troparions = (
         <SectionLayout>
-            <Troparions date={tomorrowDate} day={day} serviceType="Вечерня" />
+            <Troparions date={tomorrowDate} day={tomorrowDay} serviceType="Вечерня" />
         </SectionLayout>
     );
 
     const endHymns = (
         <SectionLayout>
-            <Kondacs date={tomorrowDate} day={day} serviceType="Вечерня" />
+            <Kondacs date={tomorrowDate} day={tomorrowDay} serviceType="Вечерня" />
             <Parts date={tomorrowDate} partNames={['shared.Величания']} serviceType="Вечерня" />
         </SectionLayout>
     );
