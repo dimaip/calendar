@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import { MDXProvider as OriginalMDXProvider } from '@mdx-js/react';
 import ScriptEditorInput from 'components/ScriptEditor/ScriptEditorInput';
+import If, { Then, Else } from 'components/If/If';
+import Tooltip from 'components/Tooltip/Tooltip';
 import './mdx.css';
 import useAudio from 'hooks/useAudio';
 
@@ -17,6 +19,11 @@ const mapping = {
     blockquote: ({ children }) => <div className="Petit">{children}</div>,
     inlineCode: ({ children }) => <span className="PetitInline">{children}</span>,
     del: ({ children }) => <span className="Super">{children}</span>,
+
+    If,
+    Then,
+    Else,
+    Tooltip,
 
     wrapper: (props) => {
         const ref = useRef();
