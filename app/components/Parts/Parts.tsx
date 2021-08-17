@@ -20,13 +20,16 @@ const objAccess = (object, path, serviceType = null) => {
         .filter(Boolean);
 };
 
-const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShowFallback, Layout }) => {
+const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShowFallback, Layout, partsProcessor }) => {
     const { data: parts } = useParts(date, lang);
     let texts = partNames
         .map((partName) => {
             return objAccess(parts, partName, serviceType) || [];
         })
         .flatten();
+
+    const exclusiveTexts = texts.filter((text) => text.includes('ЗАМЕНА')).map((text) => text.replace('ЗАМЕНА', ''));
+    texts = partsProcessor(exclusiveTexts.length ? exclusiveTexts : texts);
     if (!texts?.length) {
         return fallback ? (
             <HeightUpdater>
@@ -35,28 +38,29 @@ const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShow
         ) : null;
     }
 
-    const exclusiveTexts = texts.filter((text) => text.includes('ЗАМЕНА')).map((text) => text.replace('ЗАМЕНА', ''));
-    texts = exclusiveTexts.length ? exclusiveTexts : texts;
-
     return (
         <HeightUpdater>
             <Layout>
                 <div>
                     {alwaysShowFallback && !exclusiveTexts.length && fallback}
-                    {texts?.map?.((text, index) => (
-                        <RteText
-                            key={index}
-                            html={text}
-                            className={css`
-                                margin-bottom: 12px;
+                    {texts?.map?.((element, index) =>
+                        typeof element === 'string' ? (
+                            <RteText
+                                key={index}
+                                html={element}
+                                className={css`
+                                    margin-bottom: 12px;
 
-                                & ._-ОСНОВНОЙ_Основной-отст1-5 {
-                                    text-indent: 0;
-                                    margin-left: 0;
-                                }
-                            `}
-                        />
-                    ))}
+                                    & ._-ОСНОВНОЙ_Основной-отст1-5 {
+                                        text-indent: 0;
+                                        margin-left: 0;
+                                    }
+                                `}
+                            />
+                        ) : (
+                            element
+                        )
+                    )}
                 </div>
             </Layout>
         </HeightUpdater>
@@ -70,6 +74,7 @@ const Parts = ({
     fallback = null,
     alwaysShowFallback = false,
     Layout = ({ children }) => children,
+    partsProcessor = (parts) => parts,
 }) => {
     const { lang, langA, langB } = useContext(LangContext);
     if (lang === 'parallel') {
@@ -98,6 +103,7 @@ const Parts = ({
                             partNames={partNames}
                             Layout={Layout}
                             lang={langA}
+                            partsProcessor={partsProcessor}
                         />
                     </LangContext.Provider>
                 </div>
@@ -116,6 +122,7 @@ const Parts = ({
                             partNames={partNames}
                             Layout={Layout}
                             lang={langB}
+                            partsProcessor={partsProcessor}
                         />
                     </LangContext.Provider>
                 </div>
@@ -131,6 +138,7 @@ const Parts = ({
             partNames={partNames}
             Layout={Layout}
             lang={lang}
+            partsProcessor={partsProcessor}
         />
     );
 };

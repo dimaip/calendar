@@ -3,6 +3,8 @@ import { MDXProvider as OriginalMDXProvider } from '@mdx-js/react';
 import ScriptEditorInput from 'components/ScriptEditor/ScriptEditorInput';
 import If, { Then, Else } from 'components/If/If';
 import Tooltip from 'components/Tooltip/Tooltip';
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Parts from 'components/Parts/Parts';
 import './mdx.css';
 import useAudio from 'hooks/useAudio';
 
@@ -14,6 +16,7 @@ const mapping = {
             {children} <ScriptEditorInput id={window.location.href + children} />
         </h3>
     ),
+    h4: ({ children }) => <h4 className="H4">{children}</h4>,
     p: ({ children }) => <p className="P">{children}</p>,
     strong: ({ children }) => <span className="Red">{children}</span>,
     blockquote: ({ children }) => <div className="Petit">{children}</div>,
@@ -24,6 +27,8 @@ const mapping = {
     Then,
     Else,
     Tooltip,
+    MdxLoader,
+    Parts,
 
     wrapper: (props) => {
         const ref = useRef();

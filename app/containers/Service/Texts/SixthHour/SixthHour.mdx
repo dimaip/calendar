@@ -1,5 +1,3 @@
-import MdxLoader from 'containers/Service/Texts/MdxLoader';
-import If from 'components/If/If';
 import Parts from 'components/Parts/Parts';
 import Tropar6Chasa from 'containers/Service/Texts/SixthHour/Tropar6Chasa/index.mdx';
 import SlavaLayout from 'containers/Service/Texts/SixthHour/SlavaLayout.mdx';
@@ -37,18 +35,34 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 
 ## (3) Тропарь часа и другие тропари и кондаки
 
-<If condition={props.dayOfWeek === 0}>
-    <SundayTroparions date={props.date} day={props.day} />
-</If>
 <Parts
     date={props.date}
     partNames={['shared.Тропари']}
     serviceType="6-й час"
-    fallback={props.dayOfWeek !== 0 && <Tropar6Chasa />}
     lang={props.lang}
+    partsProcessor={(parts) => {
+        if (props.dayOfWeek === 0) {
+            if (parts.length === 0) {
+                return ['<p><strong>Слава</strong></p>', <SundayTroparions date={props.date} day={props.day} />];
+            } else {
+                return [
+                    <SundayTroparions date={props.date} day={props.day} />,
+                    '<p><strong>Слава</strong></p>',
+                    ...parts,
+                ];
+            }
+        } else {
+            if (parts.length === 0) {
+                return [<Tropar6Chasa />, '<p><strong>Слава</strong></p>'];
+            } else if (parts.length === 1) {
+                return ['<p><strong>Слава</strong></p>', parts[0]];
+            } else {
+                const [firstPart, ...restParts] = parts;
+                return [firstPart, '<p><strong>Слава</strong></p>', ...restParts];
+            }
+        }
+    }}
 />
-
-**Слава.**
 
 **И ныне. Богородичен, глас 2:**
 
