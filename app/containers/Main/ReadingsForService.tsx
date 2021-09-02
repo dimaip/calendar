@@ -52,7 +52,12 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
     }
 
     return (
-        <Link to={to}>
+        <Link
+            to={to}
+            onClick={() => {
+                window.scrollTo({ top: 0 });
+            }}
+        >
             <ButtonBox>
                 <h2
                     className={css`
