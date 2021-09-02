@@ -104,14 +104,16 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                                 </div>
                                                             </div>
                                                             <MDXProvider>
-                                                                <Suspense fallback={<Loader />}>
-                                                                    <Troparions date={date} day={day} />
-                                                                    <Kondacs date={date} day={day} />
-                                                                    <Parts
-                                                                        date={date}
-                                                                        partNames={['shared.Величания']}
-                                                                    />
-                                                                </Suspense>
+                                                                <div className="mainHymns">
+                                                                    <Suspense fallback={<Loader />}>
+                                                                        <Troparions date={date} day={day} />
+                                                                        <Kondacs date={date} day={day} />
+                                                                        <Parts
+                                                                            date={date}
+                                                                            partNames={['shared.Величания']}
+                                                                        />
+                                                                    </Suspense>
+                                                                </div>
                                                             </MDXProvider>
                                                         </BorderedSection>
 
