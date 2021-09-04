@@ -55,7 +55,7 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
         <Link
             to={to}
             onClick={() => {
-                window.scrollTo({ top: 0 });
+                window.scrollTo(0, 0);
             }}
         >
             <ButtonBox>
