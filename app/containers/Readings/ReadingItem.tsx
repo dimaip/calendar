@@ -29,7 +29,7 @@ const ReadingItem = ({ type, readingVerse }) => {
                     /* box-shadow: 0px 0px 3px #bbb; */
                 `}
             >
-                {type != 'unnamed' && (
+                {type !== 'unnamed' && (
                     <div
                         className={css`
                             font-size: 16px;

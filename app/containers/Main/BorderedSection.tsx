@@ -11,6 +11,7 @@ const BorderedSection = ({ children }) => {
                 margin: 0 -18px 18px -18px;
                 padding: 0 18px 1px 18px;
                 background-color: ${theme.colours.white};
+                width: fit-content;
             `}
         >
             {children}

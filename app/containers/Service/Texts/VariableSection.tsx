@@ -12,6 +12,7 @@ const VariableSection = ({ children, date }) => {
                 background: ${theme.colours.bgGray};
                 margin: 24px -12px 24px -12px;
                 padding: 12px 12px 12px 12px;
+                width: fit-content;
             `}
         >
             <div
