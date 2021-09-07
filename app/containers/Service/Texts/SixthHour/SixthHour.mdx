@@ -43,22 +43,25 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
     partsProcessor={(parts) => {
         if (props.dayOfWeek === 0) {
             if (parts.length === 0) {
-                return ['<p><strong>Слава</strong></p>', <SundayTroparions date={props.date} day={props.day} />];
+                return [
+                    'НЕТЗАМЕНЫ<p><strong>Слава</strong></p>',
+                    <SundayTroparions date={props.date} day={props.day} />,
+                ];
             } else {
                 return [
                     <SundayTroparions date={props.date} day={props.day} />,
-                    '<p><strong>Слава</strong></p>',
+                    'НЕТЗАМЕНЫ<p><strong>Слава</strong></p>',
                     ...parts,
                 ];
             }
         } else {
             if (parts.length === 0) {
-                return [<Tropar6Chasa />, '<p><strong>Слава</strong></p>'];
+                return [<Tropar6Chasa />, 'НЕТЗАМЕНЫ<p><strong>Слава</strong></p>'];
             } else if (parts.length === 1) {
-                return ['<p><strong>Слава</strong></p>', parts[0]];
+                return ['НЕТЗАМЕНЫ<p><strong>Слава</strong></p>', parts[0]];
             } else {
                 const [firstPart, ...restParts] = parts;
-                return [firstPart, '<p><strong>Слава</strong></p>', ...restParts];
+                return [firstPart, 'НЕТЗАМЕНЫ<p><strong>Слава</strong></p>', ...restParts];
             }
         }
     }}

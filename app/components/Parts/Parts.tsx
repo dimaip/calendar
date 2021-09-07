@@ -28,8 +28,14 @@ const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShow
         })
         .flatten();
 
-    const exclusiveTexts = texts.filter((text) => text.includes('ЗАМЕНА')).map((text) => text.replace('ЗАМЕНА', ''));
-    texts = partsProcessor(exclusiveTexts.length ? exclusiveTexts : texts);
+    texts = partsProcessor(texts);
+    const hasExclusiveTexts = Boolean(texts.find((text) => text.includes?.('ЗАМЕНА')));
+    const exclusiveTextsAndPlain = texts
+        .filter((text) => text.includes?.('ЗАМЕНА') || text.includes?.('НЕТЗАМЕНЫ'))
+        .map((text) => text.replace('ЗАМЕНА', '').replace('НЕТЗАМЕНЫ', ''));
+    texts = hasExclusiveTexts
+        ? exclusiveTextsAndPlain
+        : texts.map((text) => (typeof text === 'string' ? text.replace('НЕТЗАМЕНЫ', '') : text));
     if (!texts?.length) {
         return fallback ? (
             <HeightUpdater>
