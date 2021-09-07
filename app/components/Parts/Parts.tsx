@@ -48,7 +48,7 @@ const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShow
         <HeightUpdater>
             <Layout>
                 <div>
-                    {alwaysShowFallback && !exclusiveTexts.length && fallback}
+                    {alwaysShowFallback && !hasExclusiveTexts && fallback}
                     {texts?.map?.((element, index) =>
                         typeof element === 'string' ? (
                             <RteText
