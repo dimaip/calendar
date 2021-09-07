@@ -52,28 +52,26 @@ import Parts from 'components/Parts/Parts';
     partsProcessor={(parts) => {
         if (props.dayOfWeek === 0) {
             if (parts.length === 0) {
-                return ['<p><strong>Слава</strong></p>', <SundayTroparions date={props.date} day={props.day} />];
+                return ['<p><strong>Слава.</strong></p>', <SundayTroparions date={props.date} day={props.day} />];
             } else {
                 return [
                     <SundayTroparions date={props.date} day={props.day} />,
-                    '<p><strong>Слава</strong></p>',
+                    '<p><strong>Слава.</strong></p>',
                     ...parts,
                 ];
             }
         } else {
             if (parts.length === 0) {
-                return [<Tropar3Chasa />, '<p><strong>Слава</strong></p>'];
+                return [<Tropar3Chasa />, '<p><strong>Слава.</strong></p>'];
             } else if (parts.length === 1) {
-                return ['<p><strong>Слава</strong></p>', parts[0]];
+                return ['<p><strong>Слава.</strong></p>', parts[0]];
             } else {
                 const [firstPart, ...restParts] = parts;
-                return [firstPart, '<p><strong>Слава</strong></p>', ...restParts];
+                return [firstPart, '<p><strong>Слава.</strong></p>', ...restParts];
             }
         }
     }}
 />
-
-**Слава.**
 
 **И ныне. Богородичен, глас 6:**
 
