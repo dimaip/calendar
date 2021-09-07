@@ -10,7 +10,6 @@ import Sermons from 'containers/Main/Sermons';
 import ReadingItem from 'containers/Readings/ReadingItem';
 import { SectionLayout } from 'components/SectionLayout/SectionLayout';
 
-import useScrollToReadings from '../../useScrollToReadings';
 import VariableSection from '../../VariableSection';
 import Troparions from '../../Shared/Troparions/Troparions';
 import Kondacs from '../../Shared/Kondacs/Kondacs';
@@ -61,7 +60,6 @@ export const getKatekhumenReadings = (day) => {
 };
 
 const Katekhumen = ({ date, day, serviceType }) => {
-    useScrollToReadings();
     const externalDayQuery = useExternalDay(date);
     const { apostol, gospel } = getKatekhumenReadings(day);
 
