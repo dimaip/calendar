@@ -20,7 +20,6 @@ const SolidSection = ({
                 background: ${theme.colours.bgGray};
                 margin: ${marginTop}px ${marginHorizontal}px ${marginBottom}px ${marginHorizontal}px;
                 padding: ${paddingTop}px 18px ${paddingBottom}px 18px;
-                width: fit-content;
             `}`}
         >
             {children}
