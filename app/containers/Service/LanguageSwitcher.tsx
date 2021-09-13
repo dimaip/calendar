@@ -29,7 +29,9 @@ const LanguageSwitcher = () => {
             `}
             items={serviceLanguages}
             value={langStateValue.lang}
-            onChange={(lang) => setLang({ ...langStateValue, lang: lang })}
+            onChange={(lang) => {
+                setLang({ ...langStateValue, lang });
+            }}
         />
     );
 };

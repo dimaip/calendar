@@ -24,14 +24,42 @@ import If from 'components/If/If';
 
 <>{(props.isHoliday || props.brightWeek) && <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />}</>
 
-<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 1) && <MdxLoader src="Vespers/Prayer1" lang={props.lang} />}</>
+<>
+    {!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 1) && (
+        <MdxLoader src="Vespers/Prayer1" lang={props.lang} />
+    )}
+</>
 <>{props.isHoliday && <MdxLoader src="Vespers/Kafisma" lang={props.lang} />}</>
-<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 2) && <MdxLoader src="Vespers/Prayer2" lang={props.lang} />}</>
-<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 3) && <MdxLoader src="Vespers/Prayer3" lang={props.lang} />}</>
-<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 4) && <MdxLoader src="Vespers/Prayer4" lang={props.lang} />}</>
-<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 5) && <MdxLoader src="Vespers/Prayer5" lang={props.lang} />}</>
-<>{!props.brightWeek && !props.isAscension && props.isHoliday && <MdxLoader src="Vespers/Prayer6" lang={props.lang} />}</>
-<>{!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 0) && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}</>
+<>
+    {!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 2) && (
+        <MdxLoader src="Vespers/Prayer2" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 3) && (
+        <MdxLoader src="Vespers/Prayer3" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 4) && (
+        <MdxLoader src="Vespers/Prayer4" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 5) && (
+        <MdxLoader src="Vespers/Prayer5" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.brightWeek && !props.isAscension && props.isHoliday && (
+        <MdxLoader src="Vespers/Prayer6" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 0) && (
+        <MdxLoader src="Vespers/Prayer7" lang={props.lang} />
+    )}
+</>
 
 <MdxLoader src="Vespers/Prayer8" lang={props.lang} />
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
@@ -87,19 +115,21 @@ import If from 'components/If/If';
 <StihiriNaStihah day={props.day} date={props.date} />
 
 <If condition={!props.brightWeek}>
-  <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} />
-  <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
+    <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} />
+    <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-  ### Тропари
+    ### Тропари
 
-  <>{props.troparions}</>
-  <Parts
-    date={props.date}
-    partNames={['shared.Богородичен синаксарный']}
-  />
+    <>{props.troparions}</>
+    <Parts
+        date={props.date}
+        partNames={['shared.Богородичен']}
+        serviceType="Вечерня"
+    />
+
 </If>
 <If condition={props.brightWeek}>
-  <MdxLoader src="Shared/EasterTroparion3x" />
+    <MdxLoader src="Shared/EasterTroparion3x" />
 </If>
 
 <>{props.otpust}</>

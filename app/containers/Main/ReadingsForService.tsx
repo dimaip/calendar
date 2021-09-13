@@ -31,13 +31,13 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
     if (title === 'Литургия') {
         to = {
             pathname: `/date/${date}/readings/Литургия`,
-            state: { backLink: location.pathname, scrollToReadings: true },
+            state: { backLink: location.pathname },
         };
         effectiveTitle += ` ${vasiliy ? 'Василия Великого' : 'Иоанна Златоуста'}`;
     } else if (title === 'Вечерня' && lpod) {
         to = {
             pathname: `/date/${date}/readings/Вечерня`,
-            state: { backLink: location.pathname, scrollToReadings: true },
+            state: { backLink: location.pathname },
         };
         effectiveTitle = 'Литургия преждеосвященных даров';
     } else if (brother) {
@@ -52,7 +52,12 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
     }
 
     return (
-        <Link to={to}>
+        <Link
+            to={to}
+            onClick={() => {
+                window.scrollTo(0, 0);
+            }}
+        >
             <ButtonBox>
                 <h2
                     className={css`

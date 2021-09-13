@@ -18,7 +18,7 @@ const ReadingItemSingle = ({
     type,
     isParallel = false,
     toggleParallel = null,
-}) => {
+}): JSX.Element => {
     const zoom = useContext(ZoomContext);
     const [translation, setTranslation] = useState(null);
     const { date } = useParams();
@@ -148,7 +148,7 @@ const ReadingItemSingle = ({
                     margin-top: 8px;
                 `}
             >
-                <Zoom isBibleParallel={isParallel}>{readingText}</Zoom>
+                <Zoom>{readingText}</Zoom>
             </div>
         </div>
     );

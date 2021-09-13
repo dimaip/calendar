@@ -69,7 +69,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
 <div>
-  <ReadingsForService readingsForService={{'Великой Субботы': ['Иез. XXXVII, 1-14.']}} />
+    <ReadingsForService readingsForService={{ 'Великой Субботы': ['Иез. XXXVII, 1-14.'] }} />
 </div>
 
 <br />
@@ -78,21 +78,17 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 <MdxLoader src="Matins/Prokimen2UtrVelSub" lang={props.lang} />
 
 <div>
-  <ReadingsForService readingsForService={{'Великой Cубботы': [
-    '1 Кор., 133 зач., V, 6-8;',
-    'Гал., 206 зач., III, 13-14.'
-  ]}} />
+    <ReadingsForService
+        readingsForService={{ 'Великой Cубботы': ['1 Кор., 133 зач., V, 6-8;', 'Гал., 206 зач., III, 13-14.'] }}
+    />
 </div>
 
 ### Проповедь
 
-<Parts
-  date={props.date}
-  partNames={['liturgy.Аллилуарий']}
-/>
+<Parts date={props.date} partNames={['liturgy.Аллилуарий']} serviceType="Утреня" />
 
 <div>
-  <ReadingsForService readingsForService={{'Великой Субботы': ['Мф., 114 зач., XXVII, 62-66.']}} />
+    <ReadingsForService readingsForService={{ 'Великой Субботы': ['Мф., 114 зач., XXVII, 62-66.'] }} />
 </div>
 
 ### Проповедь

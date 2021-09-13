@@ -67,6 +67,7 @@ import Reading from './Katekhumen/Reading/Reading';
 <Reading day={props.day} date={props.date} />
 
 ## Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
 <div
     className={css`
         margin: 0 5px;
@@ -81,7 +82,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
 > **[Д** Господу помолимся!**]**
 
-<span id="gospel"/>
+<span id="gospel" />
 
 ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
 
@@ -115,7 +116,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/Userdnaya" />
 
-{/* @TODO: hide on Sundays and feasts */}
+{false && '@TODO: hide on Sundays and feasts'}
 
 <If condition={!props.brightOrOtdanie}>
   <>
@@ -128,30 +129,35 @@ import Reading from './Katekhumen/Reading/Reading';
 <MdxLoader src="Liturgies/Katekhumen/Usopshiye" />  </>
 </If>
 
-{/* @TODO: спрятать всегда, когда поется "Все вы во Христа крестившиеся", см. по табличке */}
+{false && "@TODO: спрятать всегда, когда поется 'Все вы во Христа крестившиеся', см. по табличке"}
+
 <If condition={!props.brightWeek}>
 
-  <span id="oglashaemie" />
+    <span id="oglashaemie" />
 
-  ## \*\*\*
+    ## \*\*\*
 
-  ## (5) Отпуст оглашаемых<br/>(если есть)
+    ## (5) Отпуст оглашаемых<br/>(если есть)
 
-  <MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
 
-  ### Молитва об оглашаемых
 
-  <If condition={props.serviceType === 'zlatoust'}>
-    <MdxLoader src="Liturgies/Katekhumen/Oglashaemie" />
-  </If>
-  <If condition={props.serviceType === 'vasiliy'}>
-    <MdxLoader src="Liturgies/Katekhumen/OglashaemieVasiliy" />
-  </If>
+    <MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
 
-  <MdxLoader src="Liturgies/Katekhumen/Izydite" />
+    ### Молитва об оглашаемых
 
-  **[Все непричащающиеся с благоговением покидают церковь.]**
+
+
+    <If condition={props.serviceType === 'zlatoust'}>
+        <MdxLoader src="Liturgies/Katekhumen/Oglashaemie" />
+    </If>
+    <If condition={props.serviceType === 'vasiliy'}>
+        <MdxLoader src="Liturgies/Katekhumen/OglashaemieVasiliy" />
+    </If>
+
+
+
+    <MdxLoader src="Liturgies/Katekhumen/Izydite" />
+
+    **[Все непричащающиеся с благоговением покидают церковь.]**
 
 </If>
-
-

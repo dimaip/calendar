@@ -22,6 +22,7 @@ const Prokimens = ({ day, date }) => (
             partNames={['matins.Прокимен утрени']}
             alwaysShowFallback
             fallback={<DefatulProkimen day={day} date={date} />}
+            serviceType="Утреня"
         />
     </>
 );

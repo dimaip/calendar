@@ -51,7 +51,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <Prokimens date={props.date} />
 
 <div>
-  <ReadingsForService readingsForService={{ 'Великой Субботы': ['Рим., 91 зач., VI, 3–11.'] }} />
+    <ReadingsForService readingsForService={{ 'Великой Субботы': ['Рим., 91 зач., VI, 3–11.'] }} />
 </div>
 
 ### Проповедь
@@ -59,7 +59,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <MdxLoader src="Vespers/VmestoAlliluia" lang={props.lang} />
 
 <div>
-  <ReadingsForService readingsForService={{ 'Великой Субботы': ['Мф., 115 зач., XXVIII, 1-20. '] }} />
+    <ReadingsForService readingsForService={{ 'Великой Субботы': ['Мф., 115 зач., XXVIII, 1-20. '] }} />
 </div>
 
 ### Проповедь
@@ -102,7 +102,4 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 ### Отпуст
 
-<Parts
-    date={props.previousDate}
-    partNames={['liturgy.Отпуст']}
-/>
+<Parts date={props.previousDate} partNames={['liturgy.Отпуст']} serviceType="Вечерня" />

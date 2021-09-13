@@ -7,15 +7,13 @@ const DefatulProkimen = ({ day, date }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const glas = day?.glas;
-    const ref = useRef();
-    useAudio(ref);
     if (dayOfWeek === 0) {
         if (!glas) {
             return null;
         }
-        return <MdxLoader ref1={ref} src={`Liturgies/Katekhumen/Prokimens/Sunday/Glas${glas}`} />;
+        return <MdxLoader src={`Liturgies/Katekhumen/Prokimens/Sunday/Glas${glas}`} />;
     }
-    return <MdxLoader ref1={ref} src={`Liturgies/Katekhumen/Prokimens/WeekDays/${dayOfWeek}`} />;
+    return <MdxLoader src={`Liturgies/Katekhumen/Prokimens/WeekDays/${dayOfWeek}`} />;
 };
 
 const Prokimens = ({ day, date }) => (
@@ -25,6 +23,7 @@ const Prokimens = ({ day, date }) => (
             partNames={['liturgy.Прокимен']}
             alwaysShowFallback
             fallback={<DefatulProkimen day={day} date={date} />}
+            serviceType="Литургия"
         />
     </>
 );

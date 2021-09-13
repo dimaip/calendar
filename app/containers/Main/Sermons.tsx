@@ -44,6 +44,9 @@ const Sermons = ({ sermons, date, hideTitle = false }) => {
                                 pathname: `/date/${date}/sermon/${sermon.id}`,
                                 state: { backLink: location.pathname },
                             }}
+                            onClick={() => {
+                                window.scrollTo(0, 0);
+                            }}
                             key={sermon.id}
                         >
                             <ButtonBox

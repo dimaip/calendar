@@ -2,19 +2,17 @@ import React, { useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
 import Pullable from 'react-pullable';
 
-import Routes from '../Routes';
-
 import 'styles/reset.css';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
-
 import { QueryClient, QueryClientProvider } from 'react-query';
-
 import { Plugins } from '@capacitor/core';
 import { RecoilRoot, useSetRecoilState } from 'recoil';
 import recoilPersist from 'recoil-persist';
 import pendingUpdateState from 'state/pendingUpdateState';
 import checkVersion from 'checkVersion';
 import precache from 'precache';
+
+import Routes from '../Routes';
 
 const { RecoilPersist, updateState } = recoilPersist([
     'scriptEditorIsActive',
