@@ -8,15 +8,17 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 <MdxLoader src="Shared/Vozglas" />
 
-<MdxLoader src="Shared/SlavaTebe" />
-
-<MdxLoader src="Shared/ParaklitChit" />
-
-От Пасхи до Отдания
-
-<MdxLoader src="Shared/EasterTroparion3x" /> вместо Н поставить Ч
-
-От Вознесения до Пятидесятницы ничего
+<If condition={props.isEasterOffsetRange(0, 39)}>
+    <Then>
+        <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
+    </Then>
+    <Else>
+        <If condition={!props.isEasterOffsetRange(40, 49)}>
+            <MdxLoader src="Shared/SlavaTebe" />
+            <MdxLoader src="Shared/ParaklitChit" />
+        </If>
+    </Else>
+</If>
 
 ### Обычное начало
 
@@ -28,168 +30,220 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 <MdxLoader src="Shared/Psalm50" />
 
-### Псалом 118 (17-я кафизма) - вседневная
+<If condition={props.dayOfWeek !== 6 && props.dayOfWeek !== 0}>
+    ### Псалом 118 (17-я кафизма)
+    <MdxLoader src="Shared/Psalm118" />
+</If>
 
-<MdxLoader src="Shared/Psalm118" /> - вседневная
+<If condition={props.dayOfWeek === 6}>
+### 9-я кафизма
 
-### 9-я кафизма - субботняя
+#### Псалом 64
 
-### Псалом 64 - субботняя
+<MdxLoader src="Shared/Psalm64" />
 
-<MdxLoader src="Shared/Psalm64" /> - субботняя
+#### Псалом 65
 
-### Псалом 65 - субботняя
+<MdxLoader src="Shared/Psalm65" />
 
-<MdxLoader src="Shared/Psalm65" /> - субботняя
+#### Псалом 66
 
-### Псалом 66 - субботняя
+<MdxLoader src="Shared/Psalm66" />
+<MdxLoader src="Shared/BetweenStats" />
 
-<MdxLoader src="Shared/Psalm66" /> - субботняя
+#### Псалом 67
 
-<MdxLoader src="Shared/BetweenStats" /> - субботняя
+<MdxLoader src="Shared/Psalm67" />
+<MdxLoader src="Shared/BetweenStats" />
 
-### Псалом 67 - субботняя
+#### Псалом 68
 
-<MdxLoader src="Shared/Psalm67" /> - субботняя
+<MdxLoader src="Shared/Psalm68" />
 
-<MdxLoader src="Shared/BetweenStats" /> - субботняя
+#### Псалом 69
 
-### Псалом 68 - субботняя
+<MdxLoader src="Shared/Psalm69" />
+<MdxLoader src="Shared/AfterTripsalm" />
 
-<MdxLoader src="Shared/Psalm68" />- субботняя
+</If>
 
-### Псалом 69- субботняя
+<If condition={props.dayOfWeek === 0}>
+### Канон животворящей Троице текущего гласа (из Октоиха)
 
-<MdxLoader src="Shared/Psalm69" />- субботняя
+### Припевы (троичные величания) прп. Григория Синаита на глас Недели
 
-<MdxLoader src="Shared/AfterTripsalm" /> - субботняя
+**Глас {props.day.glas}**
 
-### Канон животворящей Троице текущего гласа (из Октоиха) - воскресение
+<MdxLoader src="Polunochnica/Pripevy" />
+</If>
 
-### Припевы (троичные величания) прп. Григория Синаита на глас Недели (попробовать поставить номер гласа) - воскресение
+<If condition={props.dayOfWeek === 6}>
+### Символ веры
+<MdxLoader src="Shared/SimvolVery" />
 
-<MdxLoader src="Polunochnica/Pripevy" /> - воскресение
+## (3) Тропари
 
-### Символ веры - вседневная, субботняя
+<MdxLoader src="Shared/STrisvatogo" />
+</If>
 
-<MdxLoader src="Shared/SimvolVery" /> - вседневная, субботняя
+<If condition={props.dayOfWeek !== 6 && props.dayOfWeek !== 0}>
+### Тропари, глас 8
 
-## (3) Тропари - вседневная, суббота
+<MdxLoader src="Polunochnica/TroparPolunochnica" />
+</If>
 
-<MdxLoader src="Shared/STrisvatogo" /> - вседневная, суббота
+<If condition={props.dayOfWeek === 6}>
+### Тропари, глас 2
 
-### Тропари, глас 8 - вседневная
+<MdxLoader src="Polunochnica/TroparPolunochnica3" />
+</If>
 
-<MdxLoader src="Polunochnica/TroparPolunochnica" /> - вседневная
+<Parts date={props.date} partNames={['shared.Тропари']} serviceType="Полуночница" lang={props.lang} />
 
-### Тропари, глас 2 - суббота
+<If condition={props.dayOfWeek !== 0}>
+    <MdxLoader src="Shared/GospodiPomiluy40" />
+</If>
 
-<MdxLoader src="Polunochnica/TroparPolunochnica3" /> - суббота
+<If condition={props.dayOfWeek === 0}>
+## (3) Ипакои́
 
-На двунадесятые и великие праздники здесь - тропарь праздника
+<MdxLoader src="Shared/STrisvatogo" />
 
-<MdxLoader src="Shared/GospodiPomiluy40" /> - вседневная, суббота
+<MdxLoader src="Shared/IpakoyiVoskr" />
 
-## (3) Ипакои́ - воскресение
+<MdxLoader src="Shared/GospodiPomiluy40" />
+</If>
 
-<MdxLoader src="Shared/STrisvatogo" /> - воскресение
+<If condition={props.dayOfWeek === 0}>
+<Then>
 
-<MdxLoader src="Shared/IpakoyiVoskr" /> - воскресение
+## (4) Заключение
 
-<MdxLoader src="Shared/GospodiPomiluy40" /> - воскресение
+</Then>
+<Else>
 
-## (4) Общая молитва часов - вседневная, суббота
+## (4) Общая молитва часов
 
-<MdxLoader src="Shared/MolitvaChasov" /> - вседневная, суббота
+<MdxLoader src="Shared/MolitvaChasov" />
 
-## (5) Заключение - вседневная, суббота
+## (5) Заключение
 
-## (4) Заключение - воскресенье
+</Else>
+</If>
 
-<MdxLoader src="Shared/ZakluchenieChasov" /> - не забыть поставить вариативность в самом файле, в воскр. убрать Господи, помилуй (3)
+<MdxLoader src="Shared/ZakluchenieChasov" polunochnitsa dayOfWeek={props.dayOfWeek} />
 
-### Покаянная молитва ко Всесвятой Троице, творение Марка-монаха - воскресенье
+<If condition={props.dayOfWeek === 0}>
+### Покаянная молитва ко Всесвятой Троице, творение Марка-монаха
 
-<MdxLoader src="Polunochnica/MolitvaMarka" /> - воскресенье
+<MdxLoader src="Polunochnica/MolitvaMarka" />
 
-<MdxLoader src="Polunochnica/OtpustMaliyVoskr" /> - воскресенье
+<MdxLoader src="Polunochnica/OtpustMaliyVoskr" />
 
-### Чин прощения - воскресенье
+### Чин прощения
 
-<MdxLoader src="Shared/ChinProscheniya" /> - воскресенье
+<MdxLoader src="Shared/ChinProscheniya" />
 
-### Заключительная ектения - воскресенье
+### Заключительная ектения
 
-<MdxLoader src="Shared/ZakluchEkteniya" /> - воскресенье
+<MdxLoader src="Shared/ZakluchEkteniya" />
+</If>
 
-### Молитва Св. Ефрема Сирина - Только Великим постом, вседневная
+<If condition={props.greatLent && props.dayOfWeek !== 0 && props.dayOfWeek !== 6}>
+### Молитва Св. Ефрема Сирина
 
-<MdxLoader src="Shared/EfremSirin" /> - Только Великим постом, вседневная
+<MdxLoader src="Shared/EfremSirin" />
+</If>
 
-### Молитва часа, св. Мардария - вседневная, суббота
+<If condition={props.dayOfWeek === 0}>
+### Молитва часа, св. Мардария
 
-<MdxLoader src="Shared/MolitvaChasaMardariya" /> - вседневная
+<MdxLoader src="Shared/MolitvaChasaMardariya" />
+</If>
 
-Далее две молитвы читаются только с 4 октября по Вербное воскресенье, только в будни
+<If condition={props.afterOct4BeforeVerbnoe && props.dayOfWeek !== 0 && props.dayOfWeek !== 6}>
 
-### Молитва первая, св. Василия Великого - вседневная
+### Молитва первая, св. Василия Великого
 
-<MdxLoader src="Polunochnica/MolitvaVV1" /> - вседневная
+<MdxLoader src="Polunochnica/MolitvaVV1" />
 
-### Молитва вторая, св. Василия Великого - вседневная
+### Молитва вторая, св. Василия Великого
 
-<MdxLoader src="Polunochnica/MolitvaVV2" /> - вседневная
+<MdxLoader src="Polunochnica/MolitvaVV2" />
+</If>
 
-<MdxLoader src="Polunochnica/MolitvaEvstratiya" /> в субботу только
+<If condition={props.dayOfWeek === 6}>
+    <MdxLoader src="Polunochnica/MolitvaEvstratiya" />
+</If>
 
-# II. Ночная заупокойная молитва - вседневная, суббота
+<If condition={props.dayOfWeek !== 0}>
+    # II. Ночная заупокойная молитва
 
-## (1) Вступление - вседневная, суббота
+    ## (1) Вступление
 
-<MdxLoader src="Shared/Pridite3" /> - вседневная, суббота
+    <MdxLoader src="Shared/Pridite3" />
 
-## (2) Двупсалмие - вседневная, суббота
+    ## (2) Двупсалмие
 
-### Псалом 120 - вседневная, суббота
+    ### Псалом 120
 
-<MdxLoader src="Shared/Psalm120" /> - вседневная, суббота
+    <MdxLoader src="Shared/Psalm120" />
 
-### Псалом 133 - вседневная, суббота
+    ### Псалом 133
 
-<MdxLoader src="Shared/Psalm133" /> - вседневная, суббота
+    <MdxLoader src="Shared/Psalm133" />
 
-## (3) Заупокойные тропари и кондаки - вседневная, суббота
+    ## (3) Заупокойные тропари и кондаки
 
-<MdxLoader src="Shared/STrisvatogo" /> - вседневная, суббота
+    <MdxLoader src="Shared/STrisvatogo" />
 
-**Далее читаются или поются тропари, глас 2:** - вседневная, суббота
+    <If condition={props.isHoliday}>
+        <Then>
+            <Parts
+                date={props.date}
+                partNames={['shared.Кондаки']}
+                serviceType="Полуночница"
+                lang={props.lang}
+            />
+        </Then>
+        <Else>
+            **Далее читаются или поются тропари, глас 2:**
 
-<MdxLoader src="Polunochnica/TroparPolunochnica2" /> - вседневная, суббота
+            <MdxLoader src="Polunochnica/TroparPolunochnica2" />
+        </Else>
+    </If>
 
-В праздники вместо этих тропарей и кондака читается кондак праздника. В этом случае следующая Молитва за усопших опускается.
+    <MdxLoader src="Shared/GospodiPomiluy12" />
 
-<MdxLoader src="Shared/GospodiPomiluy12" /> - вседневная, суббота
+    <If condition={props.isHoliday}>
+        <Then>
+            ## (4) Заключение
+        </Then>
+        <Else>
+            ## (4) Молитва за усопших
 
-## (4) Молитва за усопших - вседневная, суббота (кроме праздников)
+            <MdxLoader src="Polunochnica/MolitvaZaUsopshih" />
 
-<MdxLoader src="Polunochnica/MolitvaZaUsopshih" /> - вседневная, суббота (кроме праздников)
+            ## (5) Заключение
+        </Else>
+    </If>
 
-## (5) Заключение - на великие и двунадесятые праздники этот пункт (4)
+    ### Молитва
 
-### Молитва - вседневная, суббота
+    <MdxLoader src="Polunochnica/Molitva" />
 
-<MdxLoader src="Polunochnica/Molitva" /> - вседневная, суббота
+    ### Молитва другая, св. Иоанникия
 
-### Молитва другая, св. Иоанникия - вседневная, суббота
+    <MdxLoader src="Polunochnica/MolitvaIoannikiya" />
 
-<MdxLoader src="Polunochnica/MolitvaIoannikiya" /> - вседневная, суббота
+    <MdxLoader src="Polunochnica/OtpustMaliy" />
 
-<MdxLoader src="Polunochnica/OtpustMaliy" /> - вседневная, суббота
+    ### Чин прощения
 
-### Чин прощения - вседневная, суббота
+    <MdxLoader src="Shared/ChinProscheniya" />
 
-<MdxLoader src="Shared/ChinProscheniya" /> - вседневная, суббота
+    ### Заключительная ектения
 
-### Заключительная ектения - вседневная, суббота
+    <MdxLoader src="Shared/ZakluchEkteniya" />
 
-<MdxLoader src="Shared/ZakluchEkteniya" /> - вседневная, суббота
+</If>
