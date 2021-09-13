@@ -1,0 +1,249 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+
+# Полуночница
+
+# I. Молитва полуночного часа
+
+## (1) Вступление
+
+<MdxLoader src="Shared/Vozglas" />
+
+<If condition={props.isEasterOffsetRange(0, 39)}>
+    <Then>
+        <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
+    </Then>
+    <Else>
+        <If condition={!props.isEasterOffsetRange(40, 49)}>
+            <MdxLoader src="Shared/SlavaTebe" />
+            <MdxLoader src="Shared/ParaklitChit" />
+        </If>
+    </Else>
+</If>
+
+### Обычное начало
+
+<MdxLoader src="Shared/ObichnoeNachalo" />
+
+## (2) Псалмы (антифоны)
+
+### Псалом 50
+
+<MdxLoader src="Shared/Psalm50" />
+
+<If condition={props.dayOfWeek !== 6 && props.dayOfWeek !== 0}>
+    ### Псалом 118 (17-я кафизма)
+    <MdxLoader src="Shared/Psalm118" />
+</If>
+
+<If condition={props.dayOfWeek === 6}>
+### 9-я кафизма
+
+#### Псалом 64
+
+<MdxLoader src="Shared/Psalm64" />
+
+#### Псалом 65
+
+<MdxLoader src="Shared/Psalm65" />
+
+#### Псалом 66
+
+<MdxLoader src="Shared/Psalm66" />
+<MdxLoader src="Shared/BetweenStats" />
+
+#### Псалом 67
+
+<MdxLoader src="Shared/Psalm67" />
+<MdxLoader src="Shared/BetweenStats" />
+
+#### Псалом 68
+
+<MdxLoader src="Shared/Psalm68" />
+
+#### Псалом 69
+
+<MdxLoader src="Shared/Psalm69" />
+<MdxLoader src="Shared/AfterTripsalm" />
+
+</If>
+
+<If condition={props.dayOfWeek === 0}>
+### Канон животворящей Троице текущего гласа (из Октоиха)
+
+### Припевы (троичные величания) прп. Григория Синаита на глас Недели
+
+**Глас {props.day.glas}**
+
+<MdxLoader src="Polunochnica/Pripevy" />
+</If>
+
+<If condition={props.dayOfWeek === 6}>
+### Символ веры
+<MdxLoader src="Shared/SimvolVery" />
+
+## (3) Тропари
+
+<MdxLoader src="Shared/STrisvatogo" />
+</If>
+
+<If condition={props.dayOfWeek !== 6 && props.dayOfWeek !== 0}>
+### Тропари, глас 8
+
+<MdxLoader src="Polunochnica/TroparPolunochnica" />
+</If>
+
+<If condition={props.dayOfWeek === 6}>
+### Тропари, глас 2
+
+<MdxLoader src="Polunochnica/TroparPolunochnica3" />
+</If>
+
+<Parts date={props.date} partNames={['shared.Тропари']} serviceType="Полуночница" lang={props.lang} />
+
+<If condition={props.dayOfWeek !== 0}>
+    <MdxLoader src="Shared/GospodiPomiluy40" />
+</If>
+
+<If condition={props.dayOfWeek === 0}>
+## (3) Ипакои́
+
+<MdxLoader src="Shared/STrisvatogo" />
+
+<MdxLoader src="Shared/IpakoyiVoskr" />
+
+<MdxLoader src="Shared/GospodiPomiluy40" />
+</If>
+
+<If condition={props.dayOfWeek === 0}>
+<Then>
+
+## (4) Заключение
+
+</Then>
+<Else>
+
+## (4) Общая молитва часов
+
+<MdxLoader src="Shared/MolitvaChasov" />
+
+## (5) Заключение
+
+</Else>
+</If>
+
+<MdxLoader src="Shared/ZakluchenieChasov" polunochnitsa dayOfWeek={props.dayOfWeek} />
+
+<If condition={props.dayOfWeek === 0}>
+### Покаянная молитва ко Всесвятой Троице, творение Марка-монаха
+
+<MdxLoader src="Polunochnica/MolitvaMarka" />
+
+<MdxLoader src="Polunochnica/OtpustMaliyVoskr" />
+
+### Чин прощения
+
+<MdxLoader src="Shared/ChinProscheniya" />
+
+### Заключительная ектения
+
+<MdxLoader src="Shared/ZakluchEkteniya" />
+</If>
+
+<If condition={props.greatLent && props.dayOfWeek !== 0 && props.dayOfWeek !== 6}>
+### Молитва Св. Ефрема Сирина
+
+<MdxLoader src="Shared/EfremSirin" />
+</If>
+
+<If condition={props.dayOfWeek === 0}>
+### Молитва часа, св. Мардария
+
+<MdxLoader src="Shared/MolitvaChasaMardariya" />
+</If>
+
+<If condition={props.afterOct4BeforeVerbnoe && props.dayOfWeek !== 0 && props.dayOfWeek !== 6}>
+
+### Молитва первая, св. Василия Великого
+
+<MdxLoader src="Polunochnica/MolitvaVV1" />
+
+### Молитва вторая, св. Василия Великого
+
+<MdxLoader src="Polunochnica/MolitvaVV2" />
+</If>
+
+<If condition={props.dayOfWeek === 6}>
+    <MdxLoader src="Polunochnica/MolitvaEvstratiya" />
+</If>
+
+<If condition={props.dayOfWeek !== 0}>
+    # II. Ночная заупокойная молитва
+
+    ## (1) Вступление
+
+    <MdxLoader src="Shared/Pridite3" />
+
+    ## (2) Двупсалмие
+
+    ### Псалом 120
+
+    <MdxLoader src="Shared/Psalm120" />
+
+    ### Псалом 133
+
+    <MdxLoader src="Shared/Psalm133" />
+
+    ## (3) Заупокойные тропари и кондаки
+
+    <MdxLoader src="Shared/STrisvatogo" />
+
+    <If condition={props.isHoliday}>
+        <Then>
+            <Parts
+                date={props.date}
+                partNames={['shared.Кондаки']}
+                serviceType="Полуночница"
+                lang={props.lang}
+            />
+        </Then>
+        <Else>
+            **Далее читаются или поются тропари, глас 2:**
+
+            <MdxLoader src="Polunochnica/TroparPolunochnica2" />
+        </Else>
+    </If>
+
+    <MdxLoader src="Shared/GospodiPomiluy12" />
+
+    <If condition={props.isHoliday}>
+        <Then>
+            ## (4) Заключение
+        </Then>
+        <Else>
+            ## (4) Молитва за усопших
+
+            <MdxLoader src="Polunochnica/MolitvaZaUsopshih" />
+
+            ## (5) Заключение
+        </Else>
+    </If>
+
+    ### Молитва
+
+    <MdxLoader src="Polunochnica/Molitva" />
+
+    ### Молитва другая, св. Иоанникия
+
+    <MdxLoader src="Polunochnica/MolitvaIoannikiya" />
+
+    <MdxLoader src="Polunochnica/OtpustMaliy" />
+
+    ### Чин прощения
+
+    <MdxLoader src="Shared/ChinProscheniya" />
+
+    ### Заключительная ектения
+
+    <MdxLoader src="Shared/ZakluchEkteniya" />
+
+</If>

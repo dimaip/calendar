@@ -72,6 +72,15 @@ const makeServices = (date, readings = {}) => {
             group: 'Богослужебные тексты',
         },
         {
+            title: 'Полуночница',
+            id: 'polunochnica',
+            enabled: true,
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Богослужебные тексты',
+        },
+        {
             title: 'Канон Пасхи',
             id: 'easterKanon',
             enabled:
