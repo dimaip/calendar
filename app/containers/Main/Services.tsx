@@ -82,9 +82,6 @@ const Services = ({ date, readings }) => {
                                                 backLink: location.pathname,
                                             },
                                         }}
-                                        onClick={() => {
-                                            window.scrollTo(0, 0);
-                                        }}
                                         key={service.id}
                                     >
                                         <ButtonBox>

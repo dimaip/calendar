@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
 import Pullable from 'react-pullable';
-
+import ScrollRestoration from 'components/ScrollRestoration/ScrollRestoration';
 import 'styles/reset.css';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -48,6 +48,7 @@ export default () => {
             <RecoilPersist />
             <QueryClientProvider client={queryClient}>
                 <HashRouter>
+                    <ScrollRestoration />
                     <Pullable
                         spinnerColor="#fff"
                         onRefresh={async () => {

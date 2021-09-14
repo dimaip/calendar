@@ -2,7 +2,7 @@ import { getFeastInfo } from 'domain/getDayInfo';
 
 import React, { Suspense, useState, useEffect, useContext } from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
-import ScrollRestoration from 'react-scroll-restoration';
+
 import { css } from 'emotion';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
@@ -154,7 +154,6 @@ const Service = () => {
 
                             <MDXProvider>
                                 <Suspense fallback={<Loader />}>
-                                    <ScrollRestoration />
                                     {TextComponent && <TextComponent date={date} lang={langState.lang} />}
                                 </Suspense>
                             </MDXProvider>
