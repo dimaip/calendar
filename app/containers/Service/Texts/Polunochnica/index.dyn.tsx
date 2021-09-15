@@ -21,11 +21,11 @@ const Polunochnica = ({ date }): JSX.Element => {
 
     const y = tomorrowDateObj.getFullYear();
 
-    const oct4 = new Date(y, 9, 4);
+    const oct5 = new Date(y, 9, 5);
     const verbnoe = calculateEasterDate(y);
     verbnoe.setDate(verbnoe.getDate() - 7);
 
-    const afterOct4BeforeVerbnoe = tomorrowDateObj < verbnoe || tomorrowDateObj > oct4;
+    const afterOct5BeforeVerbnoe = tomorrowDateObj < verbnoe || tomorrowDateObj > oct5;
 
     const { feastType } = getFeastInfo(tomorrowDateObj);
     const isHoliday = feastType === 'great' || feastType === '12';
@@ -37,7 +37,7 @@ const Polunochnica = ({ date }): JSX.Element => {
         dayOfWeek,
         isHoliday,
         day: tomorrowDay || {},
-        afterOct4BeforeVerbnoe,
+        afterOct5BeforeVerbnoe,
     };
 
     return <PolunochnicaMdx {...props} />;

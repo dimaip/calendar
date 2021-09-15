@@ -1,5 +1,6 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import IpakoyiVoskr from 'containers/Service/Texts/Shared/IpakoyiVoskr/IpakoyiVoskr';
+import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolunochnica/index.mdx';
 
 # Полуночница
 
@@ -9,12 +10,12 @@ import IpakoyiVoskr from 'containers/Service/Texts/Shared/IpakoyiVoskr/IpakoyiVo
 
 <MdxLoader src="Shared/Vozglas" />
 
-<If condition={props.isEasterOffsetRange(0, 39)}>
+<If condition={props.isEasterOffsetRange(0, 38)}>
     <Then>
         <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
     </Then>
     <Else>
-        <If condition={!props.isEasterOffsetRange(40, 49)}>
+        <If condition={!props.isEasterOffsetRange(39, 48)}>
             <MdxLoader src="Shared/SlavaTebe" />
             <MdxLoader src="Shared/ParaklitChit" />
         </If>
@@ -87,19 +88,13 @@ import IpakoyiVoskr from 'containers/Service/Texts/Shared/IpakoyiVoskr/IpakoyiVo
 <MdxLoader src="Shared/STrisvatogo" />
 </If>
 
-<If condition={props.dayOfWeek !== 6 && props.dayOfWeek !== 0}>
-### Тропари, глас 8
-
-<MdxLoader src="Polunochnica/TroparPolunochnica" />
-</If>
-
-<If condition={props.dayOfWeek === 6}>
-### Тропари, глас 2
-
-<MdxLoader src="Polunochnica/TroparPolunochnica3" />
-</If>
-
-<Parts date={props.date} partNames={['shared.Тропари']} serviceType="Полуночница" lang={props.lang} />
+<Parts
+    date={props.date}
+    partNames={['shared.Тропари']}
+    serviceType="Полуночница"
+    lang={props.lang}
+    fallback={<TroparPolunochnica dayOfWeek={props.dayOfWeek} />}
+/>
 
 <If condition={props.dayOfWeek !== 0}>
     <MdxLoader src="Shared/GospodiPomiluy40" />
@@ -162,7 +157,7 @@ import IpakoyiVoskr from 'containers/Service/Texts/Shared/IpakoyiVoskr/IpakoyiVo
 <MdxLoader src="Shared/MolitvaChasaMardariya" />
 </If>
 
-<If condition={props.afterOct4BeforeVerbnoe && props.dayOfWeek !== 0 && props.dayOfWeek !== 6}>
+<If condition={props.afterOct5BeforeVerbnoe && props.dayOfWeek !== 0 && props.dayOfWeek !== 6}>
 
 ### Молитва первая, св. Василия Великого
 
@@ -198,21 +193,13 @@ import IpakoyiVoskr from 'containers/Service/Texts/Shared/IpakoyiVoskr/IpakoyiVo
 
     <MdxLoader src="Shared/STrisvatogo" />
 
-    <If condition={props.isHoliday}>
-        <Then>
-            <Parts
-                date={props.date}
-                partNames={['shared.Кондаки']}
-                serviceType="Полуночница"
-                lang={props.lang}
-            />
-        </Then>
-        <Else>
-            **Далее читаются или поются тропари, глас 2:**
-
-            <MdxLoader src="Polunochnica/TroparPolunochnica2" />
-        </Else>
-    </If>
+    <Parts
+        date={props.date}
+        partNames={['shared.Кондаки']}
+        serviceType="Полуночница"
+        lang={props.lang}
+        fallback={<MdxLoader src="Polunochnica/TroparPolunochnica2" />}
+    />
 
     <MdxLoader src="Shared/GospodiPomiluy12" />
 
