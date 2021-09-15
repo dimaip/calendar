@@ -1,4 +1,5 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import IpakoyiVoskr from 'containers/Service/Texts/Shared/IpakoyiVoskr/IpakoyiVoskr';
 
 # Полуночница
 
@@ -77,7 +78,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 <MdxLoader src="Polunochnica/Pripevy" />
 </If>
 
-<If condition={props.dayOfWeek === 6}>
+<If condition={props.dayOfWeek !== 0}>
 ### Символ веры
 <MdxLoader src="Shared/SimvolVery" />
 
@@ -109,7 +110,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 <MdxLoader src="Shared/STrisvatogo" />
 
-<MdxLoader src="Shared/IpakoyiVoskr" />
+<IpakoyiVoskr day={props.day} date={props.date} />
 
 <MdxLoader src="Shared/GospodiPomiluy40" />
 </If>
@@ -155,7 +156,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 <MdxLoader src="Shared/EfremSirin" />
 </If>
 
-<If condition={props.dayOfWeek === 0}>
+<If condition={props.dayOfWeek !== 0}>
 ### Молитва часа, св. Мардария
 
 <MdxLoader src="Shared/MolitvaChasaMardariya" />
