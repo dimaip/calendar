@@ -132,6 +132,15 @@ const makeServices = (date, readings = {}) => {
             group: 'Богослужебные тексты',
         },
         {
+            title: 'Молитва о жертвах советских репрессий',
+            id: 'molitvaPamyati',
+            enabled: true,
+            calendar: false,
+            lang: false,
+            skipRedirect: true,
+            group: 'Богослужебные тексты',
+        },
+        {
             title: 'Краткая утреня',
             id: 'matins',
             enabled: true,
