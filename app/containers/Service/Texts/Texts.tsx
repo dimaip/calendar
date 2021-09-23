@@ -20,7 +20,7 @@ const makeServices = (date, readings = {}) => {
             calendar: true,
             lang: true,
             skipRedirect: false,
-            group: 'Богослужебные тексты',
+            group: 'Литургия',
             TOC: liturgyTOC,
         },
         {
@@ -30,7 +30,7 @@ const makeServices = (date, readings = {}) => {
             calendar: true,
             lang: true,
             skipRedirect: false,
-            group: 'Богослужебные тексты',
+            group: 'Литургия',
             TOC: liturgyTOC,
         },
         {
@@ -40,18 +40,18 @@ const makeServices = (date, readings = {}) => {
             calendar: true,
             lang: true,
             skipRedirect: false,
-            group: 'Богослужебные тексты',
+            group: 'Литургия',
             TOC: lpodTOC,
         },
+
         {
-            title: 'Великая вечерня',
-            id: 'vespersChurch',
-            enabled: isEasterOffsetRange(49),
-            calendar: true,
-            lang: true,
+            title: 'Пасхальные часы',
+            id: 'easterHours',
+            enabled: isEasterOffsetRange(0, 6),
+            calendar: false,
+            lang: false,
             skipRedirect: true,
-            group: 'Богослужебные тексты',
-            TOC: vespersTOC,
+            group: 'Часослов',
         },
         {
             title: 'Третий час',
@@ -60,7 +60,7 @@ const makeServices = (date, readings = {}) => {
             calendar: true,
             lang: true,
             skipRedirect: true,
-            group: 'Богослужебные тексты',
+            group: 'Часослов',
         },
         {
             title: 'Шестой час',
@@ -69,7 +69,17 @@ const makeServices = (date, readings = {}) => {
             calendar: true,
             lang: true,
             skipRedirect: true,
-            group: 'Богослужебные тексты',
+            group: 'Часослов',
+        },
+        {
+            title: 'Великая вечерня',
+            id: 'vespersChurch',
+            enabled: isEasterOffsetRange(49),
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Часослов',
+            TOC: vespersTOC,
         },
         {
             title: 'Полуночница',
@@ -78,59 +88,9 @@ const makeServices = (date, readings = {}) => {
             calendar: true,
             lang: true,
             skipRedirect: true,
-            group: 'Богослужебные тексты',
+            group: 'Часослов',
         },
-        {
-            title: 'Канон Пасхи',
-            id: 'easterKanon',
-            enabled:
-                isEasterOffsetRange(0, 6) ||
-                isEasterOffsetRange(7 * 2) ||
-                isEasterOffsetRange(7 * 3) ||
-                isEasterOffsetRange(7 * 4) ||
-                isEasterOffsetRange(7 * 5) ||
-                isEasterOffsetRange(38),
-            calendar: false,
-            lang: false,
-            skipRedirect: true,
-            group: 'Богослужебные тексты',
-        },
-        {
-            title: 'Пасхальные часы',
-            id: 'easterHours',
-            enabled: isEasterOffsetRange(0, 6),
-            calendar: false,
-            lang: false,
-            skipRedirect: true,
-            group: 'Богослужебные тексты',
-        },
-        {
-            title: 'Благодарственные молитвы',
-            id: 'blagodarstvennie',
-            enabled: true,
-            calendar: false,
-            lang: true,
-            skipRedirect: true,
-            group: 'Богослужебные тексты',
-        },
-        {
-            title: 'Покаянный канон',
-            id: 'pokajanni',
-            enabled: true,
-            calendar: false,
-            lang: true,
-            skipRedirect: true,
-            group: 'Богослужебные тексты',
-        },
-        {
-            title: 'Чин приготовления',
-            id: 'chinPrigotovlenija',
-            enabled: true,
-            calendar: true,
-            lang: true,
-            skipRedirect: true,
-            group: 'Богослужебные тексты',
-        },
+
         {
             title: 'Молитва о жертвах советских репрессий',
             id: 'molitvaPamyati',
@@ -138,8 +98,9 @@ const makeServices = (date, readings = {}) => {
             calendar: false,
             lang: false,
             skipRedirect: true,
-            group: 'Богослужебные тексты',
+            group: 'Требы',
         },
+
         {
             title: 'Краткая утреня',
             id: 'matins',
@@ -147,7 +108,7 @@ const makeServices = (date, readings = {}) => {
             calendar: true,
             lang: false,
             skipRedirect: true,
-            group: 'Домашнее молитвенное правило',
+            group: 'Домашняя молитва',
             TOC: matinsTOC,
         },
         {
@@ -157,8 +118,35 @@ const makeServices = (date, readings = {}) => {
             calendar: true,
             lang: false,
             skipRedirect: true,
-            group: 'Домашнее молитвенное правило',
+            group: 'Домашняя молитва',
             TOC: vespersTOC,
+        },
+        {
+            title: 'Покаянный канон',
+            id: 'pokajanni',
+            enabled: true,
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
+            group: 'Домашняя молитва',
+        },
+        {
+            title: 'Чин приготовления',
+            id: 'chinPrigotovlenija',
+            enabled: true,
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Домашняя молитва',
+        },
+        {
+            title: 'Благодарственные молитвы',
+            id: 'blagodarstvennie',
+            enabled: true,
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
+            group: 'Домашняя молитва',
         },
     ];
 };
