@@ -91,15 +91,15 @@ const makeServices = (date, readings = {}) => {
             group: 'Часослов',
         },
 
-        {
-            title: 'Молитва о жертвах советских репрессий',
-            id: 'molitvaPamyati',
-            enabled: true,
-            calendar: false,
-            lang: false,
-            skipRedirect: true,
-            group: 'Требы',
-        },
+        // {
+        //     title: 'Молитва о жертвах советских репрессий',
+        //     id: 'molitvaPamyati',
+        //     enabled: true,
+        //     calendar: false,
+        //     lang: false,
+        //     skipRedirect: true,
+        //     group: 'Требы',
+        // },
 
         {
             title: 'Краткая утреня',
