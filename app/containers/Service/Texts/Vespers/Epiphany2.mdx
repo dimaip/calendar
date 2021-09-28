@@ -4,6 +4,8 @@ import Parts from 'components/Parts/Parts';
 import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
 import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
+import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
 
 <span id="nachalo" />
 
@@ -20,15 +22,19 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Vespers/Prayer1" lang={props.lang} />
 
-<>{(props.dayOfWeek === 6 || props.dayOfWeek === 0) && (<>
-  <MdxLoader src="Vespers/Kafisma" lang={props.lang} />
-  <MdxLoader src="Vespers/Prayer2" lang={props.lang} />
-  <MdxLoader src="Vespers/Prayer3" lang={props.lang} />
-  <MdxLoader src="Vespers/Prayer4" lang={props.lang} />
-  <MdxLoader src="Vespers/Prayer5" lang={props.lang} />
-  <MdxLoader src="Vespers/Prayer6" lang={props.lang} />
-  <MdxLoader src="Vespers/Prayer7" lang={props.lang} />
-</>)}</>
+<>
+    {(props.dayOfWeek === 6 || props.dayOfWeek === 0) && (
+        <>
+            <MdxLoader src="Vespers/Kafisma" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer2" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer3" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer4" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer5" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer6" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer7" lang={props.lang} />
+        </>
+    )}
+</>
 
 <MdxLoader src="Vespers/Prayer8" lang={props.lang} />
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
@@ -138,7 +144,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 так кого мне страшиться?
 
 <div>
-  <ReadingsForService readingsForService={{'Богоявления': ['1 Кор., 143 зач., IX, 19–27.']}} />
+    <ReadingsForService readingsForService={{ Богоявления: ['1 Кор., 143 зач., IX, 19–27.'] }} />
 </div>
 
 ### Проповедь
@@ -152,7 +158,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 **Стих** Меж Адамовых сыно́в ты прекраснее всех.
 
 <div>
-  <ReadingsForService readingsForService={{'Богоявления': ['Лк., III, 1-18.']}} />
+    <ReadingsForService readingsForService={{ Богоявления: ['Лк., III, 1-18.'] }} />
 </div>
 
 ### Проповедь
@@ -170,8 +176,8 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <>{props.otpust}</>
 
-<Parts date={props.date} partNames={['shared.Тропари']} />
+<Troparions date={props.date} day={props.day} serviceType="Вечерня" />
 
 **Слава, и ныне.**
 
-<Parts date={props.date} partNames={['shared.Кондаки']} />
+<Kondacs date={props.date} day={props.day} serviceType="Вечерня" />

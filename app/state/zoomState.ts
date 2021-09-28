@@ -1,11 +1,11 @@
 import { atom } from 'recoil';
 
+import { persistAtom } from './persistAtom';
+
 const zoomState = atom({
     key: 'zoomState',
     default: 1,
-    persistence_UNSTABLE: {
-        type: 'zoomState',
-    },
+    effects_UNSTABLE: [persistAtom],
 });
 
 export default zoomState;

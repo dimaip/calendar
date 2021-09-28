@@ -31,9 +31,11 @@ const RteText = React.forwardRef(({ html, className = '' }, ref) => {
                 }
 
                 & h5 {
-                    font-weight: bold;
-                    margin-top: 24px;
-                    margin-bottom: 12px;
+                    color: ${theme.colours.red};
+                    font-size: 18px;
+                    line-height: 1.3;
+                    margin-bottom: 0;
+                    margin-top: 28px;
                 }
 
                 & a {

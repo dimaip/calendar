@@ -16,6 +16,11 @@ const Fallback = ({ serviceType, date }) => {
 };
 
 const Otpust = ({ date, serviceType }) => (
-    <Parts partNames={['liturgy.Отпуст']} date={date} fallback={<Fallback date={date} serviceType={serviceType} />} />
+    <Parts
+        partNames={['liturgy.Отпуст']}
+        date={date}
+        serviceType="Литургия"
+        fallback={<Fallback date={date} serviceType={serviceType} />}
+    />
 );
 export default Otpust;

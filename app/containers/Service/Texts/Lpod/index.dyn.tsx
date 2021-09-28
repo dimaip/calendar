@@ -7,7 +7,6 @@ import ReadingItem from 'containers/Readings/ReadingItem';
 import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
 
-import useScrollToReadings from '../useScrollToReadings';
 import 'containers/Service/Texts/Shared.css';
 
 const Readings = ({ readings }) => (
@@ -23,7 +22,6 @@ const Readings = ({ readings }) => (
 const Lpod = ({ lang }) => {
     const { date } = useParams();
     const { data: day } = useDay(date);
-    useScrollToReadings();
 
     const readings = day?.readings;
     const readingsForService = readings?.['Вечерня'];

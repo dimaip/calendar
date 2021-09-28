@@ -1,28 +1,17 @@
 import React, { useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
 import Pullable from 'react-pullable';
-
-import Routes from '../Routes';
-
+import ScrollRestoration from 'components/ScrollRestoration/ScrollRestoration';
 import 'styles/reset.css';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
-
 import { QueryClient, QueryClientProvider } from 'react-query';
-
 import { Plugins } from '@capacitor/core';
 import { RecoilRoot, useSetRecoilState } from 'recoil';
-import recoilPersist from 'recoil-persist';
 import pendingUpdateState from 'state/pendingUpdateState';
 import checkVersion from 'checkVersion';
 import precache from 'precache';
 
-const { RecoilPersist, updateState } = recoilPersist([
-    'scriptEditorIsActive',
-    'iosPromptDismissed',
-    'zoomControlIsShown',
-    'zoomState',
-    'langState',
-]);
+import Routes from '../Routes';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -46,10 +35,10 @@ export default () => {
         Plugins.SplashScreen.hide();
     }, []);
     return (
-        <RecoilRoot initializeState={updateState}>
-            <RecoilPersist />
+        <RecoilRoot>
             <QueryClientProvider client={queryClient}>
                 <HashRouter>
+                    <ScrollRestoration />
                     <Pullable
                         spinnerColor="#fff"
                         onRefresh={async () => {

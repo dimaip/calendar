@@ -12,7 +12,11 @@ const DefaultVhodnoiStih = ({ date }) => {
 };
 
 const VhodnoiStih = ({ date }) => (
-    <Parts partNames={['liturgy.Входной стих']} date={date} fallback={<DefaultVhodnoiStih date={date} />} />
+    <Parts
+        partNames={['liturgy.Входной стих']}
+        date={date}
+        fallback={<DefaultVhodnoiStih date={date} serviceType="Литургия" />}
+    />
 );
 
 export default VhodnoiStih;
