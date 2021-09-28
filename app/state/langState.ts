@@ -1,6 +1,8 @@
 import { atom } from 'recoil';
 import { restoreScroll } from 'utils/restoreScroll';
 
+import { persistAtom } from './persistAtom';
+
 const langState = atom({
     key: 'langState',
     default: {
@@ -8,10 +10,8 @@ const langState = atom({
         langA: 'ru',
         langB: 'csj',
     },
-    persistence_UNSTABLE: {
-        type: 'langState',
-    },
     effects_UNSTABLE: [
+        persistAtom,
         ({ onSet }) => {
             onSet(() => {
                 restoreScroll();

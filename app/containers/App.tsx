@@ -7,20 +7,11 @@ import ZoomControl from 'components/ZoomControl/ZoomControl';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Plugins } from '@capacitor/core';
 import { RecoilRoot, useSetRecoilState } from 'recoil';
-import recoilPersist from 'recoil-persist';
 import pendingUpdateState from 'state/pendingUpdateState';
 import checkVersion from 'checkVersion';
 import precache from 'precache';
 
 import Routes from '../Routes';
-
-const { RecoilPersist, updateState } = recoilPersist([
-    'scriptEditorIsActive',
-    'iosPromptDismissed',
-    'zoomControlIsShown',
-    'zoomState',
-    'langState',
-]);
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -44,8 +35,7 @@ export default () => {
         Plugins.SplashScreen.hide();
     }, []);
     return (
-        <RecoilRoot initializeState={updateState}>
-            <RecoilPersist />
+        <RecoilRoot>
             <QueryClientProvider client={queryClient}>
                 <HashRouter>
                     <ScrollRestoration />

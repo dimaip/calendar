@@ -1,11 +1,11 @@
 import { atom } from 'recoil';
 
+import { persistAtom } from './persistAtom';
+
 const scriptEditorIsActiveState = atom({
     key: 'scriptEditorIsActive',
     default: false,
-    persistence_UNSTABLE: {
-        type: 'scriptEditorIsActive',
-    },
+    effects_UNSTABLE: [persistAtom],
 });
 
 export default scriptEditorIsActiveState;

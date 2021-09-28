@@ -4739,6 +4739,11 @@ gud@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/gud/-/gud-1.0.0.tgz#a489581b17e6a70beca9abe3ae57de7a499852c0"
 
+hamt_plus@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/hamt_plus/-/hamt_plus-1.0.2.tgz#e21c252968c7e33b20f6a1b094cd85787a265601"
+  integrity sha1-4hwlKWjH4zsg9qGwlM2FeHomVgE=
+
 har-schema@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/har-schema/-/har-schema-2.0.0.tgz#a94c2224ebcac04782a0d9035521f24735b7ec92"
@@ -7579,13 +7584,17 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-recoil-persist@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/recoil-persist/-/recoil-persist-0.7.0.tgz#0720490888c582f546c818eb3364a009918650cf"
+recoil-persist@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/recoil-persist/-/recoil-persist-3.0.0.tgz#30f8fb5d62a4a0e3d660b07dcb75cbb4a0bcab24"
+  integrity sha512-ZQB/U26uLdm2bDPh9HR44WamHz30XUD0cqAUnqSDuIKRTHsyjqccJ3ThXfoFYnG9QpOUcPSve6ElHseVll2g+w==
 
-recoil@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.1.2.tgz#844c612f535826dbe54c977761a67ded16f6d063"
+recoil@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.4.1.tgz#1cb2171bc98d41361507131a059d7c3525d8c4fe"
+  integrity sha512-vp6KPwlHOjJ4bJofmdDchmgI9ilMTCoUisK8/WYLl8dThH7e7KmtZttiLgvDb2Em99dUfTEsk8vT8L1nUMgqXQ==
+  dependencies:
+    hamt_plus "1.0.2"
 
 redent@^1.0.0:
   version "1.0.0"

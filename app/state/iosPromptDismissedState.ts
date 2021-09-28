@@ -1,11 +1,11 @@
 import { atom } from 'recoil';
 
+import { persistAtom } from './persistAtom';
+
 const iosPromptDismissedState = atom({
     key: 'iosPromptDismissed',
     default: null,
-    persistence_UNSTABLE: {
-        type: 'iosPromptDismissed',
-    },
+    effects_UNSTABLE: [persistAtom],
 });
 
 export default iosPromptDismissedState;
