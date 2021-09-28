@@ -102,7 +102,16 @@ const makeServices = (date, readings = {}) => {
         // },
 
         {
-            title: 'Краткая утреня',
+            title: 'Лития',
+            id: 'litiya',
+            enabled: true,
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
+            group: 'Требы',
+        },
+        {
+            title: 'Утреня братским чином',
             id: 'matins',
             enabled: true,
             calendar: true,
@@ -112,7 +121,7 @@ const makeServices = (date, readings = {}) => {
             TOC: matinsTOC,
         },
         {
-            title: 'Краткая вечерня',
+            title: 'Вечерня братским чином',
             id: 'vespers',
             enabled: !isEasterOffsetRange(49),
             calendar: true,
