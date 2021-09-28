@@ -5,37 +5,68 @@ import RteText from 'components/RteText/RteText';
 import { LangContext } from 'containers/Service/LangContext';
 import { HeightUpdater } from 'components/HeightUpdate/HeightUpdater';
 
-const objAccess = (object, path) => path.split('.').reduce((acc, curr) => acc?.[curr], object);
+const objAccess = (object, path, serviceType = null) => {
+    const result = path.split('.').reduce((acc, curr) => acc?.[curr], object);
+    return result
+        ?.map((obj) => {
+            if (!serviceType || !obj.services) {
+                return obj.value;
+            }
+            if (obj.services.includes(serviceType)) {
+                return obj.value;
+            }
+            return null;
+        })
+        .filter(Boolean);
+};
 
-const PartRenderer = ({ date, lang, partNames, fallback, alwaysShowFallback, Layout }) => {
+const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShowFallback, Layout, partsProcessor }) => {
     const { data: parts } = useParts(date, lang);
-    let texts = partNames.map((partName) => objAccess(parts, partName) || []).flatten();
-    if (!texts?.length) {
-        return fallback ? <Layout>{fallback}</Layout> : null;
-    }
+    let texts = partNames
+        .map((partName) => {
+            return objAccess(parts, partName, serviceType) || [];
+        })
+        .flatten();
 
-    const exclusiveTexts = texts.filter((text) => text.includes('ЗАМЕНА')).map((text) => text.replace('ЗАМЕНА', ''));
-    texts = exclusiveTexts.length ? exclusiveTexts : texts;
+    texts = partsProcessor(texts);
+    const hasExclusiveTexts = Boolean(texts.find((text) => text.includes?.('ЗАМЕНА')));
+    const exclusiveTextsAndPlain = texts
+        .filter((text) => text.includes?.('ЗАМЕНА') || text.includes?.('НЕТЗАМЕНЫ'))
+        .map((text) => text.replace('ЗАМЕНА', '').replace('НЕТЗАМЕНЫ', ''));
+    texts = hasExclusiveTexts
+        ? exclusiveTextsAndPlain
+        : texts.map((text) => (typeof text === 'string' ? text.replace('НЕТЗАМЕНЫ', '') : text));
+    if (!texts?.length) {
+        return fallback ? (
+            <HeightUpdater>
+                <Layout>{fallback}</Layout>
+            </HeightUpdater>
+        ) : null;
+    }
 
     return (
         <HeightUpdater>
             <Layout>
                 <div>
-                    {alwaysShowFallback && !exclusiveTexts.length && fallback}
-                    {texts?.map?.((text, index) => (
-                        <RteText
-                            key={index}
-                            html={text}
-                            className={css`
-                                margin-bottom: 12px;
+                    {alwaysShowFallback && !hasExclusiveTexts && fallback}
+                    {texts?.map?.((element, index) =>
+                        typeof element === 'string' ? (
+                            <RteText
+                                key={index}
+                                html={element}
+                                className={css`
+                                    margin-bottom: 12px;
 
-                                & ._-ОСНОВНОЙ_Основной-отст1-5 {
-                                    text-indent: 0;
-                                    margin-left: 0;
-                                }
-                            `}
-                        />
-                    ))}
+                                    & ._-ОСНОВНОЙ_Основной-отст1-5 {
+                                        text-indent: 0;
+                                        margin-left: 0;
+                                    }
+                                `}
+                            />
+                        ) : (
+                            element
+                        )
+                    )}
                 </div>
             </Layout>
         </HeightUpdater>
@@ -45,9 +76,11 @@ const PartRenderer = ({ date, lang, partNames, fallback, alwaysShowFallback, Lay
 const Parts = ({
     date,
     partNames,
+    serviceType = null,
     fallback = null,
     alwaysShowFallback = false,
     Layout = ({ children }) => children,
+    partsProcessor = (parts) => parts,
 }) => {
     const { lang, langA, langB } = useContext(LangContext);
     if (lang === 'parallel') {
@@ -58,7 +91,6 @@ const Parts = ({
                 className={css`
                     display: flex;
                     margin: 0 -12px;
-                    min-width: ${lang === 'parallel' ? '444px' : '296px'};
                 `}
             >
                 <div
@@ -70,11 +102,13 @@ const Parts = ({
                     <LangContext.Provider value={langStateA}>
                         <PartRenderer
                             fallback={fallback}
+                            serviceType={serviceType}
                             alwaysShowFallback={alwaysShowFallback}
                             date={date}
                             partNames={partNames}
                             Layout={Layout}
                             lang={langA}
+                            partsProcessor={partsProcessor}
                         />
                     </LangContext.Provider>
                 </div>
@@ -87,11 +121,13 @@ const Parts = ({
                     <LangContext.Provider value={langStateB}>
                         <PartRenderer
                             fallback={fallback}
+                            serviceType={serviceType}
                             alwaysShowFallback={alwaysShowFallback}
                             date={date}
                             partNames={partNames}
                             Layout={Layout}
                             lang={langB}
+                            partsProcessor={partsProcessor}
                         />
                     </LangContext.Provider>
                 </div>
@@ -107,6 +143,7 @@ const Parts = ({
             partNames={partNames}
             Layout={Layout}
             lang={lang}
+            partsProcessor={partsProcessor}
         />
     );
 };

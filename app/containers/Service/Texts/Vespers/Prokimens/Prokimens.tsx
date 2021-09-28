@@ -11,7 +11,12 @@ export const DefatulProkimen = ({ date }) => {
 
 const Prokimens = ({ date }) => (
     <>
-        <Parts date={date} partNames={['vespers.Прокимен вечерни']} fallback={<DefatulProkimen date={date} />} />
+        <Parts
+            date={date}
+            partNames={['vespers.Прокимен вечерни']}
+            serviceType="Вечерня"
+            fallback={<DefatulProkimen date={date} />}
+        />
     </>
 );
 

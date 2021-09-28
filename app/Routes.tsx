@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Route, Switch, Redirect, useHistory, useParams } from 'react-router-dom';
 import Main from 'containers/Main/Main';
 import NotFound from 'components/NotFound/NotFound';
@@ -20,6 +20,7 @@ import { LangContext } from 'containers/Service/LangContext';
 import checkVersion from './checkVersion';
 import pendingUpdateState from 'state/pendingUpdateState';
 import UpdatePrompt from 'components/UpdatePrompt/UpdatePrompt';
+import isParallelState from 'state/isParallel';
 
 const DateRoutes = () => {
     const { date } = useParams();
@@ -33,6 +34,8 @@ const DateRoutes = () => {
     const theme = getTheme(day?.colour);
     const langStateValue = useRecoilValue(langState);
 
+    const isParallel = useRecoilValue(isParallelState);
+
     return (
         <LangContext.Provider value={langStateValue}>
             <ThemeProvider theme={theme}>
@@ -41,6 +44,7 @@ const DateRoutes = () => {
                     body {
                         color: ${theme.colours.darkGray};
                         background-color: ${theme.colours.white};
+                        min-width: ${isParallel ? '454px' : 'auto'};
                     }
                 `}
                 />

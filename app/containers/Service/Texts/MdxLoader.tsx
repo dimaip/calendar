@@ -21,7 +21,6 @@ const MdxLoader = (props) => {
                 className={css`
                     display: flex;
                     margin: 0 -12px;
-                    min-width: ${lang === 'parallel' ? '444px' : '296px'};
                 `}
             >
                 <div

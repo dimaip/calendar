@@ -21,6 +21,7 @@ const StihiriNaStihah = ({ day, date }) => (
             date={date}
             partNames={['vespers.Cтихиры на стихах']}
             alwaysShowFallback
+            serviceType="Вечерня"
             fallback={<DefatulStihiriNaStihah day={day} date={date} />}
         />
     </>

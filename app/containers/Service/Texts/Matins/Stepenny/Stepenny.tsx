@@ -22,6 +22,7 @@ const Stepenny = ({ day, date }) => (
             partNames={['matins.Степенны']}
             alwaysShowFallback
             fallback={<DefatulStepenna day={day} date={date} />}
+            serviceType="Утреня"
         />
     </>
 );
