@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
-import Cross from 'components/svgs/Cross';
 import Button from 'components/Button/Button';
 import Pencil from 'components/svgs/Pencil';
 import Drawer from 'components/Drawer/Drawer';
@@ -25,10 +24,6 @@ const NamesEditorInput = ({ type }: { type: string }): JSX.Element => {
     };
     const toggleEditorHandler = (): void => {
         setInputReaderName(names || '');
-    };
-    const clearInputHandler = (): void => {
-        setNames('');
-        setInputReaderName('');
     };
     return (
         <span>
@@ -74,17 +69,6 @@ const NamesEditorInput = ({ type }: { type: string }): JSX.Element => {
                                 placeholder="Введите имена…"
                                 autoFocus
                             />
-                            <Button
-                                onClick={clearInputHandler}
-                                className={css`
-                                    position: absolute;
-                                    right: 0;
-                                    font-size: 14px;
-                                    margin-left: 0px;
-                                `}
-                            >
-                                <Cross />
-                            </Button>
                         </div>
                     </label>
                 </Drawer>
