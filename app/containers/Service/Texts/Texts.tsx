@@ -111,7 +111,7 @@ const makeServices = (date, readings = {}) => {
             group: 'Требы',
         },
         {
-            title: 'Краткая утреня',
+            title: 'Утреня братским чином',
             id: 'matins',
             enabled: true,
             calendar: true,
@@ -121,7 +121,7 @@ const makeServices = (date, readings = {}) => {
             TOC: matinsTOC,
         },
         {
-            title: 'Краткая вечерня',
+            title: 'Вечерня братским чином',
             id: 'vespers',
             enabled: !isEasterOffsetRange(49),
             calendar: true,
