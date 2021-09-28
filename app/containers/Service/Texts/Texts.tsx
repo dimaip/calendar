@@ -108,7 +108,7 @@ const makeServices = (date, readings = {}) => {
             calendar: false,
             lang: true,
             skipRedirect: true,
-            group: 'Богослужебные тексты',
+            group: 'Требы',
         },
         {
             title: 'Краткая утреня',
