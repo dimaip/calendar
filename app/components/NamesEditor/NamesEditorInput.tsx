@@ -7,6 +7,7 @@ import Drawer from 'components/Drawer/Drawer';
 import Textarea from 'components/Textarea/Textarea';
 import { useRecoilState } from 'recoil';
 import namesState from 'state/namesState';
+import TagManager from 'react-gtm-module';
 
 const NamesEditorInput = ({ type }: { type: string }): JSX.Element => {
     const theme = useTheme();
@@ -21,9 +22,23 @@ const NamesEditorInput = ({ type }: { type: string }): JSX.Element => {
     const saveNameHandler = (): void => {
         setNames(inputReaderName?.trim() || '');
         setInputReaderName(null);
+        TagManager.dataLayer({
+            dataLayer: {
+                event: 'namesSubmit',
+                namesType: type,
+            },
+        });
     };
     const toggleEditorHandler = (): void => {
         setInputReaderName(names || '');
+        if (names) {
+            TagManager.dataLayer({
+                dataLayer: {
+                    event: 'namesOpen',
+                    namesType: type,
+                },
+            });
+        }
     };
     return (
         <span>

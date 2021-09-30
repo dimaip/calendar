@@ -88,6 +88,7 @@
         "@babel/preset-react": "^7.8.3",
         "@babel/preset-typescript": "^7.12.13",
         "@mdx-js/loader": "^2.0.0-next",
+        "@types/react-gtm-module": "^2.0.1",
         "@types/react-router-dom": "^5.1.8",
         "@typescript-eslint/eslint-plugin": "^4.11.0",
         "@welldone-software/why-did-you-render": "^4.3.2",

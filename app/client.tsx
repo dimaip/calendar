@@ -36,6 +36,10 @@ if (isProd) {
     });
     TagManager.initialize({
         gtmId: 'GTM-MSCF98P',
+        events: {
+            namesOpen: 'Names Open',
+            namesSubmit: 'Names Submit',
+        },
     });
 }
 
