@@ -75,15 +75,19 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 
 <MdxLoader src="Shared/STrisvatogo" />
 
-<If condition={props.dayOfWeek === 0}>
-    <SundayKondacs date={props.date} day={props.day} />
-</If>
 <Parts
     date={props.date}
     partNames={['shared.Кондаки']}
     serviceType="6-й час"
     fallback={props.dayOfWeek !== 0 && <MdxLoader src="SixthHour/Kondaks" dayOfWeek={props.dayOfWeek} />}
     lang={props.lang}
+    partsProcessor={(parts) => {
+        if (props.dayOfWeek === 0) {
+            return [<SundayKondacs date={props.date} day={props.day} />, ...parts];
+        } else {
+            return parts;
+        }
+    }}
 />
 
 <MdxLoader src="Shared/GospodiPomiluy40" />
