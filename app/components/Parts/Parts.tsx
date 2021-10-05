@@ -138,6 +138,7 @@ const Parts = ({
     return (
         <PartRenderer
             fallback={fallback}
+            serviceType={serviceType}
             alwaysShowFallback={alwaysShowFallback}
             date={date}
             partNames={partNames}
