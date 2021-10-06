@@ -35,6 +35,7 @@ import Banner from './Banner';
 import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
 import MDXProvider from 'containers/Service/MDXProvider';
 import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+import Oct30 from './Oct30';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -132,6 +133,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                         <Sermons date={date} sermons={sermons} />
                                                     </>
                                                 )}
+                                                <Oct30 />
                                                 <Banner />
                                             </SolidSection>
                                         </div>
