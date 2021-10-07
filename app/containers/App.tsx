@@ -6,7 +6,7 @@ import 'styles/reset.css';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Plugins } from '@capacitor/core';
-import { RecoilRoot, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import pendingUpdateState from 'state/pendingUpdateState';
 import checkVersion from 'checkVersion';
 import precache from 'precache';
@@ -35,26 +35,24 @@ export default () => {
         Plugins.SplashScreen.hide();
     }, []);
     return (
-        <RecoilRoot>
-            <QueryClientProvider client={queryClient}>
-                <HashRouter>
-                    <ScrollRestoration />
-                    <Pullable
-                        spinnerColor="#fff"
-                        onRefresh={async () => {
-                            const newVersion = await checkVersion();
-                            if (newVersion) {
-                                setPendingUpdate(newVersion);
-                            }
-                            await precache(true);
-                            await queryClient.refetchQueries();
-                        }}
-                    >
-                        <Routes />
-                    </Pullable>
-                </HashRouter>
-                <ZoomControl />
-            </QueryClientProvider>
-        </RecoilRoot>
+        <QueryClientProvider client={queryClient}>
+            <HashRouter>
+                <ScrollRestoration />
+                <Pullable
+                    spinnerColor="#fff"
+                    onRefresh={async () => {
+                        const newVersion = await checkVersion();
+                        if (newVersion) {
+                            setPendingUpdate(newVersion);
+                        }
+                        await precache(true);
+                        await queryClient.refetchQueries();
+                    }}
+                >
+                    <Routes />
+                </Pullable>
+            </HashRouter>
+            <ZoomControl />
+        </QueryClientProvider>
     );
 };

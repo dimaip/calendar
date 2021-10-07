@@ -9,6 +9,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
 import App from 'containers/App';
+import { RecoilRoot } from 'recoil';
 import TagManager from 'react-gtm-module';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
@@ -55,9 +56,11 @@ const rootElement = document.getElementById('react-root');
 
 const render = (Component) => {
     ReactDOM.render(
-        <AppContainer>
-            <Component />
-        </AppContainer>,
+        <RecoilRoot>
+            <AppContainer>
+                <Component />
+            </AppContainer>
+        </RecoilRoot>,
         rootElement
     );
 };
