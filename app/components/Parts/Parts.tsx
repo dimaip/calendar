@@ -29,9 +29,9 @@ const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShow
         .flatten();
 
     texts = partsProcessor(texts);
-    const hasExclusiveTexts = Boolean(texts.find((text) => text.includes?.('ЗАМЕНА')));
+    const hasExclusiveTexts = Boolean(texts.find((text) => text?.includes?.('ЗАМЕНА')));
     const exclusiveTextsAndPlain = texts
-        .filter((text) => text.includes?.('ЗАМЕНА') || text.includes?.('НЕТЗАМЕНЫ'))
+        .filter((text) => text?.includes?.('ЗАМЕНА') || text?.includes?.('НЕТЗАМЕНЫ'))
         .map((text) => text.replace('ЗАМЕНА', '').replace('НЕТЗАМЕНЫ', ''));
     texts = hasExclusiveTexts
         ? exclusiveTextsAndPlain
