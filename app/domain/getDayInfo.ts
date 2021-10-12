@@ -66,17 +66,17 @@ export const makeIsDate = (date) => (month, day) => {
     return new Date(y, month - 1, day).getTime() === date.getTime();
 };
 
-export const makeIsEasterOffsetRange = (date) => (offsetBegin, offsetEnd = undefined) => {
+export const makeIsEasterOffsetRange = (_date: string | Date) => (offsetBegin: number, offsetEnd?: number): boolean => {
     let d, m, y;
-    if (typeof date === 'string') {
-        const splitDateString = date.split('-');
-        [y, m, d] = [splitDateString[0], Number(splitDateString[1]) - 1, splitDateString[2]];
+    if (typeof _date === 'string') {
+        const splitDateString = _date.split('-');
+        [y, m, d] = [Number(splitDateString[0]), Number(splitDateString[1]) - 1, Number(splitDateString[2])];
     } else {
-        y = date.getFullYear();
-        m = date.getMonth();
-        d = date.getDate();
+        y = _date.getFullYear();
+        m = _date.getMonth();
+        d = _date.getDate();
     }
-    date = new Date(y, m, d);
+    const date = new Date(y, m, d);
     const begin = calculateEasterDate(y);
     begin.setDate(begin.getDate() + offsetBegin);
     if (!offsetEnd) {
@@ -719,3 +719,86 @@ export const getFeastInfo = memoize(
     },
     (date) => `${date.getFullYear()}${date.getMonth()}${date.getDate()}`
 );
+
+export const isAntifonVsednev = (dateObj: Date): boolean => {
+    if (dateObj.getDay() === 0 || dateObj.getDay() === 6) {
+        return false;
+    }
+    const isEasterOffsetRange = makeIsEasterOffsetRange(dateObj);
+    if (isEasterOffsetRange(0, 56)) {
+        return false;
+    }
+    const dateOld = new Date(dateObj.getFullYear(), dateObj.getMonth(), dateObj.getDate() - 13);
+    const isDate = makeIsDate(dateOld);
+    return Boolean(
+        [
+            [12, 2],
+            [12, 8],
+            [12, 11],
+            [12, 14],
+            [12, 16],
+            [12, 19],
+            [2, 10],
+            [2, 13],
+            [2, 14],
+            [2, 15],
+            [2, 16],
+            [2, 18],
+            [2, 19],
+            [2, 20],
+            [2, 21],
+            [2, 22],
+            [2, 23],
+            [2, 25],
+            [2, 26],
+            [2, 27],
+            [2, 28],
+            [3, 1],
+            [5, 18],
+            [5, 22],
+            [5, 26],
+            [5, 28],
+            [5, 29],
+            [5, 30],
+            [5, 31],
+            [6, 2],
+            [6, 5],
+            [6, 7],
+            [6, 13],
+            [6, 17],
+            [6, 20],
+            [6, 22],
+            [7, 9],
+            [7, 16],
+            [7, 18],
+            [7, 21],
+            [7, 29],
+            [8, 4],
+            [8, 25],
+            [8, 27],
+            [9, 22],
+            [10, 8],
+            [10, 11],
+            [10, 12],
+            [10, 14],
+            [10, 15],
+            [10, 16],
+            [10, 17],
+            [10, 19],
+            [10, 25],
+            [10, 27],
+            [10, 29],
+            [10, 30],
+            [10, 31],
+            [11, 2],
+            [11, 3],
+            [11, 4],
+            [11, 7],
+            [11, 10],
+            [11, 15],
+            [11, 18],
+            [11, 26],
+            [11, 29],
+        ].find((dateTuple) => isDate(dateTuple[0], dateTuple[1]))
+    );
+};

@@ -20,11 +20,7 @@ import Parts from 'components/Parts/Parts';
 <MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia" />
 
 <span id="antifon1" />
-## (2) Антифоны изобразительные
-<Tooltip>
-    То есть взятые из службы «Изобразительных» («Типика́»). Ан­тифоны ещё могут быть праздничные и вседневные
-    (будничные); последние даны ниже.
-</Tooltip>
+## (2) Антифоны
 
 ### Молитва перед пением первого антифона
 
@@ -55,12 +51,6 @@ import Parts from 'components/Parts/Parts';
 <MdxLoader src="Liturgies/Katekhumen/Molitva3" />
 
 {props.antifon3}
-
-{false && "@TODO hide during Sundays and feasts"}
-
-### <b>`[Антифоны вседневные`</b>
-
-{!props.brightOrOtdanie && <MdxLoader src="Liturgies/Katekhumen/AntifonVsednev" />}
 
 <span id="malyVhod" />
 
