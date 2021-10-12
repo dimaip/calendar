@@ -1,9 +1,9 @@
-import { makeIsEasterOffsetRange, makeIsDate } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, makeIsDate, isAntifonVsednev } from 'domain/getDayInfo';
 
 import React from 'react';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
-const Antifon2 = ({ date: dateString }) => {
+const Antifon2 = ({ date: dateString }: { date: string }): JSX.Element => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(dateString);
     const isDate = makeIsDate(dateString);
     if (isEasterOffsetRange(0, 6)) {
@@ -29,6 +29,9 @@ const Antifon2 = ({ date: dateString }) => {
     }
     if (isDate(1, 19)) {
         return <MdxLoader src="Liturgies/Katekhumen/Antifon2Epiphany" />;
+    }
+    if (isAntifonVsednev(new Date(dateString))) {
+        return <MdxLoader src="Liturgies/Katekhumen/AntifonVsednev2" />;
     }
 
     return <MdxLoader src="Liturgies/Katekhumen/Antifon2" />;
