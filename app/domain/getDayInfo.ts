@@ -707,6 +707,11 @@ export const getFeastInfo = memoize(
             icon = 'john.svg';
         }
 
+        if (new Date(y, 9, 30).getTime() <= date.getTime() && date.getTime() <= new Date(y, 10, 7).getTime()) {
+            icon = 'oct30.svg';
+            colour = violet;
+        }
+
         return {
             title,
             feastType,
