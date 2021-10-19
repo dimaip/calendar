@@ -44,7 +44,7 @@ const DateRoutes = () => {
                     body {
                         color: ${theme.colours.darkGray};
                         background-color: ${theme.colours.white};
-                        min-width: ${isParallel ? '454px' : 'auto'};
+                        min-width: ${isParallel ? '380px' : 'auto'};
                     }
                 `}
                 />
