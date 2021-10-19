@@ -157,6 +157,15 @@ const makeServices = (date, readings = {}) => {
             skipRedirect: true,
             group: 'Домашняя молитва',
         },
+        {
+            title: 'Молитвы перед и после еды',
+            id: 'molitvaTrapeza',
+            enabled: true,
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
+            group: 'Домашняя молитва',
+        },
     ];
 };
 export default makeServices;
