@@ -6,22 +6,25 @@ import Parts from 'components/Parts/Parts';
 
 <div id="trisvatoe" />
 
-### Молитва перед пением <br />Трисвятой песни<Tooltip>Если Трисвятое не поётся, то даётся только возглас.</Tooltip>
+<MdxLoader src="Liturgies/Katekhumen/Trisvatoe/GospoduPomolimsa" />
 
 <If condition={!props.vmestoTrisvatogoExists}>
+
     <MdxLoader src="Liturgies/Katekhumen/Trisvatoe/MolitvaPered" />
 
-    > **[Тихо:**
-
-    > **Д** Благослови, владыка, пение Трисвято́го! **]**
+    <MdxLoader src="Liturgies/Katekhumen/Trisvatoe/MolitvaPeredOk1" />
 
 </If>
 
-**После благословения выходит дьякон перед свя­ты­ми вра­тами и, поводя орарём, даёт тон сто­ящему народу, го­воря:**
+<MdxLoader src="Liturgies/Katekhumen/Trisvatoe/MolitvaPeredOk2" />
 
-**Д** и во веки веков.
+<If condition={!props.vmestoTrisvatogoExists}>
 
-**Н** Аминь.
+    <MdxLoader src="Liturgies/Katekhumen/Trisvatoe/MolitvaPeredOk3" />
+
+</If>
+
+<MdxLoader src="Liturgies/Katekhumen/Trisvatoe/PeredTrisvatoe" />
 
 <If condition={!props.vmestoTrisvatogoExists}>
     ### Трисвятое
@@ -30,16 +33,4 @@ import Parts from 'components/Parts/Parts';
 
 </If>
 
-<Parts
-    date={props.date}
-    partNames={['liturgy.Вместо Трисвятого']}
-    serviceType="Литургия"
-    Layout={({ children }) => (
-        <>
-            ### Вместо Трисвятого
-
-            {children}
-        </>
-    )}
-
-/>
+<Parts date={props.date} partNames={['liturgy.Вместо Трисвятого']} serviceType="Литургия" />
