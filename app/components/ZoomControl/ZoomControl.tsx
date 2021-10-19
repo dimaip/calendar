@@ -48,7 +48,7 @@ const ZoomControl = (): JSX.Element | null => {
                         ${buttonStyle}
                         font-size: 14px;
                     `}
-                    onClick={() => zoom > 0.8 && setZoom(zoom - 0.1)}
+                    onClick={() => zoom > 0.5 && setZoom(zoom - 0.1)}
                 >
                     A-
                 </Button>
@@ -58,7 +58,7 @@ const ZoomControl = (): JSX.Element | null => {
                         ${buttonStyle}
                         font-size: 18px;
                     `}
-                    onClick={() => zoom < 1.5 && setZoom(zoom + 0.1)}
+                    onClick={() => zoom < 3.0 && setZoom(zoom + 0.1)}
                 >
                     A+
                 </Button>
