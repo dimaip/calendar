@@ -10,6 +10,7 @@ import Loader from 'components/Loader/Loader';
 import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
+import { Note } from 'components/Note/Note';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
@@ -91,13 +92,15 @@ const Service = () => {
 
     const left = (
         <>
-            <CalendarToggle
-                date={date}
-                setNewDate={setNewDate}
-                className={css`
-                    margin-right: 8px;
-                `}
-            />
+            {service?.calendar && (
+                <CalendarToggle
+                    date={date}
+                    setNewDate={setNewDate}
+                    className={css`
+                        margin-right: 8px;
+                    `}
+                />
+            )}
             {service?.lang && <LanguageSwitcher />}
             <TOCSwitcher service={service} lang={langState.lang} />
         </>
@@ -119,38 +122,31 @@ const Service = () => {
                                 margin-bottom: 24px;
                             `}
                         >
-                            <div
-                                className={css`
-                                    position: relative;
-                                    background: ${theme.colours.bgGray};
-                                    margin: 0 -12px 24px -12px;
-                                    padding: 12px 12px 12px 12px;
-                                    font-size: 13px;
-                                    color: ${theme.colours.darkGray};
-                                `}
-                            >
-                                Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда ошибается.
-                                За наиболее точной информацией обращайтесь к{' '}
-                                <a
-                                    className={css`
-                                        text-decoration: underline;
-                                    `}
-                                    href={`http://www.patriarchia.ru/bu/${date}`}
-                                    target="_blank"
-                                >
-                                    богослужебным указаниям.
-                                </a>{' '}
-                                Если вы обнаружили ошибку, пожалуйста,{' '}
-                                <a
-                                    className={css`
-                                        text-decoration: underline;
-                                    `}
-                                    href="mailto:pb@psmb.ru"
-                                    target="_blank"
-                                >
-                                    напишите нам
-                                </a>
-                            </div>
+                            {service?.warn && (
+                                <Note>
+                                    Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда
+                                    ошибается. За наиболее точной информацией обращайтесь к{' '}
+                                    <a
+                                        className={css`
+                                            text-decoration: underline;
+                                        `}
+                                        href={`http://www.patriarchia.ru/bu/${date}`}
+                                        target="_blank"
+                                    >
+                                        богослужебным указаниям.
+                                    </a>{' '}
+                                    Если вы обнаружили ошибку, пожалуйста,{' '}
+                                    <a
+                                        className={css`
+                                            text-decoration: underline;
+                                        `}
+                                        href="mailto:pb@psmb.ru"
+                                        target="_blank"
+                                    >
+                                        напишите нам
+                                    </a>
+                                </Note>
+                            )}
 
                             <MDXProvider>
                                 <Suspense fallback={<Loader />}>

@@ -4,6 +4,7 @@ import forEach from 'lodash.foreach';
 import { css } from 'emotion';
 
 import ReadingsForService from './ReadingsForService';
+import Oct30Week from './Oct30Week';
 
 const ReadingList = ({ readings, brother = false }) => {
     const renderedReadings = [];
@@ -21,6 +22,7 @@ const ReadingList = ({ readings, brother = false }) => {
             `}
         >
             {renderedReadings}
+            {!brother && <Oct30Week />}
         </div>
     );
 };

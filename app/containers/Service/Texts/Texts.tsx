@@ -22,6 +22,7 @@ const makeServices = (date, readings = {}) => {
             skipRedirect: false,
             group: 'Литургия',
             TOC: liturgyTOC,
+            warn: true,
         },
         {
             title: 'Литургия Василия Великого',
@@ -32,6 +33,7 @@ const makeServices = (date, readings = {}) => {
             skipRedirect: false,
             group: 'Литургия',
             TOC: liturgyTOC,
+            warn: true,
         },
         {
             title: 'Литургия преждеосвященных даров',
@@ -42,6 +44,7 @@ const makeServices = (date, readings = {}) => {
             skipRedirect: false,
             group: 'Литургия',
             TOC: lpodTOC,
+            warn: true,
         },
 
         {
@@ -52,6 +55,7 @@ const makeServices = (date, readings = {}) => {
             lang: false,
             skipRedirect: true,
             group: 'Часослов',
+            warn: true,
         },
         {
             title: 'Третий час',
@@ -61,6 +65,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: true,
             group: 'Часослов',
+            warn: true,
         },
         {
             title: 'Шестой час',
@@ -70,6 +75,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: true,
             group: 'Часослов',
+            warn: true,
         },
         {
             title: 'Великая вечерня',
@@ -80,6 +86,7 @@ const makeServices = (date, readings = {}) => {
             skipRedirect: true,
             group: 'Часослов',
             TOC: vespersTOC,
+            warn: true,
         },
         {
             title: 'Полуночница',
@@ -89,6 +96,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: true,
             group: 'Часослов',
+            warn: true,
         },
 
         {
@@ -99,6 +107,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: true,
             group: 'Требы',
+            warn: true,
         },
         {
             title: 'Молитва о жертвах советских репрессий',
@@ -108,6 +117,7 @@ const makeServices = (date, readings = {}) => {
             lang: false,
             skipRedirect: true,
             group: 'Требы',
+            warn: false,
         },
 
         {
@@ -119,6 +129,7 @@ const makeServices = (date, readings = {}) => {
             skipRedirect: true,
             group: 'Домашняя молитва',
             TOC: matinsTOC,
+            warn: false,
         },
         {
             title: 'Вечерня братским чином',
@@ -129,6 +140,7 @@ const makeServices = (date, readings = {}) => {
             skipRedirect: true,
             group: 'Домашняя молитва',
             TOC: vespersTOC,
+            warn: false,
         },
         {
             title: 'Покаянный канон',
@@ -138,6 +150,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: true,
             group: 'Домашняя молитва',
+            warn: false,
         },
         {
             title: 'Чин приготовления',
@@ -147,6 +160,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: true,
             group: 'Домашняя молитва',
+            warn: false,
         },
         {
             title: 'Благодарственные молитвы',
@@ -156,6 +170,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: true,
             group: 'Домашняя молитва',
+            warn: false,
         },
         {
             title: 'Молитвы перед и после еды',
@@ -165,6 +180,7 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: true,
             group: 'Домашняя молитва',
+            warn: false,
         },
     ];
 };
