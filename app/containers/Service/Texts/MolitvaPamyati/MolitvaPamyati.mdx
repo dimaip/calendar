@@ -2,6 +2,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Oct30 from 'containers/Main/Oct30';
 import { Note } from 'components/Note/Note';
 import { css } from 'emotion';
+import TagManager from 'react-gtm-module';
 
 <Note>
     <div>
@@ -10,7 +11,18 @@ import { css } from 'emotion';
         пандемии невозможны публичные мероприятия или вы по другим причинам не можете прийти читать имена – помолитесь о
         жертвах советских репрессий дома.`}
     </div>
-    <a style={{ textDecoration: 'underline' }} href="https://molitvapamyaty.ru/" target="_blank">
+    <a
+        style={{ textDecoration: 'underline' }}
+        href="https://molitvapamyaty.ru/"
+        target="_blank"
+        onClick={() =>
+            TagManager.dataLayer({
+                dataLayer: {
+                    event: 'Oct30FromChinFollow',
+                },
+            })
+        }
+    >
         > Принять участие
     </a>
 </Note>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
 import { Link, useParams } from 'react-router-dom';
+import TagManager from 'react-gtm-module';
 
 const Oct30Week = (): JSX.Element => {
     const { date } = useParams();
@@ -11,6 +12,13 @@ const Oct30Week = (): JSX.Element => {
             className={css`
                 display: block;
             `}
+            onClick={() =>
+                TagManager.dataLayer({
+                    dataLayer: {
+                        event: 'Oct30WeekFollow',
+                    },
+                })
+            }
         >
             <img
                 src="/assets/Oct30Week.svg"
