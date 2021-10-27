@@ -4,16 +4,16 @@ import React from 'react';
 import Parts from 'components/Parts/Parts';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
-export const WeekdayTroparions = ({ day, date, serviceType }): JSX.Element => {
-    if (serviceType !== 'Литургия') {
-        return null;
-    }
+export const WeekdayTroparions = ({ day, date, serviceType, noTexts }): JSX.Element | null => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     if (dayOfWeek === 0) {
         return null;
     }
-    if (!isHymnsVsednev(dateObj)) {
+    if (
+        (serviceType === 'Литургия' && !isHymnsVsednev(dateObj)) ||
+        ((serviceType === 'Вечерня' || serviceType === 'Утреня') && !noTexts)
+    ) {
         return null;
     }
     return <MdxLoader src={`Shared/Troparions/Day${dayOfWeek}`} />;
@@ -37,12 +37,12 @@ const Troparions = ({ day, date, serviceType }) => (
         date={date}
         partNames={['shared.Тропари']}
         alwaysShowFallback
-        fallback={
+        fallback={(noTexts) => (
             <>
-                <WeekdayTroparions day={day} date={date} serviceType={serviceType} />
+                <WeekdayTroparions day={day} date={date} serviceType={serviceType} noTexts={noTexts} />
                 <SundayTroparions day={day} date={date} />
             </>
-        }
+        )}
         serviceType={serviceType}
     />
 );

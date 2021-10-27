@@ -20,6 +20,13 @@ const objAccess = (object, path, serviceType = null) => {
         .filter(Boolean);
 };
 
+const renderFallback = (fallback, noTexts = false) => {
+    if (typeof fallback === 'function') {
+        return fallback(noTexts);
+    }
+    return fallback;
+};
+
 const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShowFallback, Layout, partsProcessor }) => {
     const { data: parts } = useParts(date, lang);
     let texts = partNames
@@ -39,7 +46,7 @@ const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShow
     if (!texts?.length) {
         return fallback ? (
             <HeightUpdater>
-                <Layout>{fallback}</Layout>
+                <Layout>{renderFallback(fallback, true)}</Layout>
             </HeightUpdater>
         ) : null;
     }
@@ -48,7 +55,7 @@ const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShow
         <HeightUpdater>
             <Layout>
                 <div>
-                    {alwaysShowFallback && !hasExclusiveTexts && fallback}
+                    {alwaysShowFallback && !hasExclusiveTexts && renderFallback(fallback, false)}
                     {texts?.map?.((element, index) =>
                         typeof element === 'string' ? (
                             <RteText
