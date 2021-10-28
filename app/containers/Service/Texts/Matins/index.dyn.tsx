@@ -1,4 +1,4 @@
-import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, getFeastInfo, isNedelaSkorbi } from 'domain/getDayInfo';
 
 import React from 'react';
 import useDay from 'hooks/useDay';
@@ -96,7 +96,8 @@ const Matins = ({ date }) => {
             day?.fastName === 'Рождественский пост' ||
             greatLent ||
             vospominanijaUsopshih ||
-            sirnajaSedmitza);
+            sirnajaSedmitza ||
+            isNedelaSkorbi(dateObj));
 
     const props = {
         dayOfWeek,

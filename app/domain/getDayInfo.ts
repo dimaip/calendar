@@ -903,3 +903,14 @@ export const isHymnsVsednev = (dateObj: Date): boolean => {
         ].find((dateTuple) => isDate(dateTuple[0], dateTuple[1]))
     );
 };
+
+export const isNedelaSkorbi = (dateObj: Date): boolean => {
+    const isDate = makeIsDate(dateObj);
+    const y = dateObj.getFullYear();
+    return (
+        new Date(y, 9, 30).getTime() <= dateObj.getTime() &&
+        dateObj.getTime() <= new Date(y, 10, 7).getTime() &&
+        !isDate(11, 4) &&
+        !isDate(11, 5)
+    );
+};

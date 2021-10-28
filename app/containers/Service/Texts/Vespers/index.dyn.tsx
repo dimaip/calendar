@@ -1,4 +1,4 @@
-import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, getFeastInfo, isNedelaSkorbi } from 'domain/getDayInfo';
 
 import dateFormat from 'dateformat';
 import React from 'react';
@@ -94,8 +94,8 @@ const Vespers = ({ date }) => {
             tomorrowDay?.fastName === 'Рождественский пост' ||
             tomorrowDay?.fastName === 'Великий пост' ||
             vselenskayaRoditelskayaSubbota ||
-            sirnajaSedmitza);
-
+            sirnajaSedmitza ||
+            isNedelaSkorbi(tomorrowDateObj));
     const props = {
         dayOfWeek,
         troparions,
