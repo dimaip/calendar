@@ -21,6 +21,7 @@ import checkVersion from './checkVersion';
 import pendingUpdateState from 'state/pendingUpdateState';
 import UpdatePrompt from 'components/UpdatePrompt/UpdatePrompt';
 import isParallelState from 'state/isParallel';
+import { Promo } from 'components/Promo/Promo';
 
 const DateRoutes = () => {
     const { date } = useParams();
@@ -78,6 +79,7 @@ const DateRoutes = () => {
                     </Route>
                 </Switch>
                 <UpdatePrompt />
+                <Promo />
             </ThemeProvider>
         </LangContext.Provider>
     );

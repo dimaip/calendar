@@ -151,6 +151,7 @@ module.exports = {
         camelcase: [2, { allow: ['^UNSAFE_', '_UNSTABLE'] }],
         'eslint-comments/disable-enable-pair': 0,
         'node/no-exports-assign': 0,
+        'arrow-body-style': 0,
     },
 };
 /* eslint-enable @typescript-eslint/no-var-requires */
