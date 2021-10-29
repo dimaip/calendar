@@ -6,16 +6,14 @@ import promoDismissedState from 'state/promoDismissedState';
 import { useRecoilState } from 'recoil';
 import TagManager from 'react-gtm-module';
 
-export const Promo = (): JSX.Element | null => {
+export const Promo = ({ children }: { children: React.ReactNode }): JSX.Element | null => {
     const theme = useTheme();
 
-    if (new Date('2021-10-31') < new Date()) {
-        return null;
-    }
+    const isLarge = window.matchMedia('(min-width: 700px)').matches;
 
-    const [promoDismissed, setPrompoDismissed] = useRecoilState(promoDismissedState('30oct'));
-    if (promoDismissed) {
-        return null;
+    const [promoDismissed, setPrompoDismissed] = useRecoilState<boolean>(promoDismissedState('30oct'));
+    if (isLarge || new Date('2021-10-31') < new Date() || promoDismissed) {
+        return <>{children}</>;
     }
     return (
         <div
@@ -28,10 +26,6 @@ export const Promo = (): JSX.Element | null => {
                 bottom: 0;
                 background-color: black;
                 color: white;
-
-                @media (min-width: 720px) {
-                    display: none;
-                }
             `}
         >
             <div

@@ -49,37 +49,38 @@ const DateRoutes = () => {
                     }
                 `}
                 />
-                <Switch>
-                    <Route exact path="/date/:date">
-                        <Main />
-                    </Route>
-                    <Route exact path="/date/:date/services">
-                        <Main services />
-                    </Route>
-                    <Route exact path="/date/:date/readings/:service">
-                        <Readings />
-                    </Route>
-                    <Route exact path="/date/:date/bReadings/:service">
-                        <Readings brother />
-                    </Route>
-                    <Route exact path="/date/:date/sermon/:sermonId">
-                        <Sermon />
-                    </Route>
-                    <Route exact path="/date/:date/saint/:saintId">
-                        <Saint />
-                    </Route>
-                    <Route exact path="/date/:date/thisday/:thisDayId">
-                        <ThisDay />
-                    </Route>
-                    <Route exact path="/date/:date/service/:serviceId">
-                        <Service />
-                    </Route>
-                    <Route>
-                        <NotFound />
-                    </Route>
-                </Switch>
-                <UpdatePrompt />
-                <Promo />
+                <Promo>
+                    <Switch>
+                        <Route exact path="/date/:date">
+                            <Main />
+                        </Route>
+                        <Route exact path="/date/:date/services">
+                            <Main services />
+                        </Route>
+                        <Route exact path="/date/:date/readings/:service">
+                            <Readings />
+                        </Route>
+                        <Route exact path="/date/:date/bReadings/:service">
+                            <Readings brother />
+                        </Route>
+                        <Route exact path="/date/:date/sermon/:sermonId">
+                            <Sermon />
+                        </Route>
+                        <Route exact path="/date/:date/saint/:saintId">
+                            <Saint />
+                        </Route>
+                        <Route exact path="/date/:date/thisday/:thisDayId">
+                            <ThisDay />
+                        </Route>
+                        <Route exact path="/date/:date/service/:serviceId">
+                            <Service />
+                        </Route>
+                        <Route>
+                            <NotFound />
+                        </Route>
+                    </Switch>
+                    <UpdatePrompt />
+                </Promo>
             </ThemeProvider>
         </LangContext.Provider>
     );
