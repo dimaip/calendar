@@ -33,8 +33,8 @@ export const Promo = ({ children }: { children: React.ReactNode }): JSX.Element 
                     display: flex;
                     flex-direction: column;
                     padding: 36px 24px;
-                    height: 100vh;
-                    padding-bottom: calc(36px + env(safe-area-inset-top));
+                    padding-bottom: calc(36px + env(safe-area-inset-bottom));
+                    height: 100%;
                 `}
             >
                 <h1
