@@ -40,6 +40,7 @@ export const Promo = (): JSX.Element | null => {
                     flex-direction: column;
                     padding: 36px 24px;
                     height: 100vh;
+                    padding-bottom: calc(36px + env(safe-area-inset-top));
                 `}
             >
                 <h1
