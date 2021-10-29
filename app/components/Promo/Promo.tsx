@@ -21,7 +21,7 @@ export const Promo = (): JSX.Element | null => {
         <div
             className={css`
                 z-index: 12;
-                position: absolute;
+                position: fixed;
                 top: 0;
                 left: 0;
                 right: 0;
