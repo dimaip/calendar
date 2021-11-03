@@ -5,14 +5,24 @@ import { useTheme } from 'emotion-theming';
 import promoDismissedState from 'state/promoDismissedState';
 import { useRecoilState } from 'recoil';
 import TagManager from 'react-gtm-module';
+import useApp from 'hooks/useApp';
 
 export const Promo = ({ children }: { children: React.ReactNode }): JSX.Element | null => {
     const theme = useTheme();
+    const { data } = useApp();
+    const notification = data?.notification;
 
     const isLarge = window.matchMedia('(min-width: 700px)').matches;
 
-    const [promoDismissed, setPrompoDismissed] = useRecoilState<boolean>(promoDismissedState('30oct'));
-    if (isLarge || new Date('2021-10-31') < new Date() || promoDismissed) {
+    const [promoDismissed, setPrompoDismissed] = useRecoilState<boolean>(promoDismissedState(notification?.id));
+
+    if (
+        !notification ||
+        isLarge ||
+        (notification.activeSince && new Date() < new Date(notification.activeSince)) ||
+        (notification.activeTill && new Date() > new Date(notification.activeTill)) ||
+        promoDismissed
+    ) {
         return <>{children}</>;
     }
     return (
@@ -24,7 +34,7 @@ export const Promo = ({ children }: { children: React.ReactNode }): JSX.Element 
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background-color: black;
+                background-color: ${notification.backgroundColour || 'black'};
                 color: white;
             `}
         >
@@ -43,7 +53,7 @@ export const Promo = ({ children }: { children: React.ReactNode }): JSX.Element 
                         margin-bottom: 24px;
                     `}
                 >
-                    В стране ковидные ограничения
+                    {notification.title}
                 </h1>
                 <div
                     className={css`
@@ -52,22 +62,25 @@ export const Promo = ({ children }: { children: React.ReactNode }): JSX.Element 
                         flex-grow: 1;
                     `}
                 >
-                    Чтобы вы смогли участвовать в Молитве памяти из дома, мы выложили последование молитвы о жертвах
-                    советских репрессий
+                    {notification.subtitle}
                 </div>
                 <Button
                     onClick={() => {
                         TagManager.dataLayer({
                             dataLayer: {
-                                event: 'Oct30Dismissed',
+                                event: `${notification.id}Dismissed`,
                             },
                         });
                         setPrompoDismissed(true);
                     }}
                     size="large"
-                    style={{ color: 'white', backgroundColor: theme.colours.red, width: '100%' }}
+                    style={{
+                        color: 'white',
+                        backgroundColor: notification.buttonColour || theme.colours.red,
+                        width: '100%',
+                    }}
                 >
-                    Слава Богу!
+                    {notification.buttonText}
                 </Button>
             </div>
         </div>
