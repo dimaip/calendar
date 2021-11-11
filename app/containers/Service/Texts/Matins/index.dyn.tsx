@@ -1,4 +1,4 @@
-import { makeIsEasterOffsetRange, getFeastInfo, isNedelaSkorbi } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, getFeastInfo, isNedelaSkorbi, makeIsDate } from 'domain/getDayInfo';
 
 import React from 'react';
 import useDay from 'hooks/useDay';
@@ -37,6 +37,7 @@ const Matins = ({ date }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
+    const isDate = makeIsDate(dateObj);
 
     const troparions = (
         <SectionLayout>
@@ -75,7 +76,8 @@ const Matins = ({ date }) => {
 
     const { feastType } = getFeastInfo(dateObj);
 
-    const isHoliday = dayOfWeek === 0 || feastType === 'great' || feastType === '12';
+    const philaret = isDate(12, 2);
+    const isHoliday = dayOfWeek === 0 || feastType === 'great' || feastType === '12' || philaret;
 
     const sirnajaSedmitza = isEasterOffsetRange(-8 * 7 + 1, -8 * 7 + 5);
     const vselenskayaRoditelskayaSubbota = isEasterOffsetRange(-8 * 7 - 1);
