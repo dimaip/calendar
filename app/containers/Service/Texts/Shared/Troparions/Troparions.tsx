@@ -32,14 +32,14 @@ export const SundayTroparions = ({ day, date }) => {
     return null;
 };
 
-const Troparions = ({ day, date, serviceType }) => (
+const Troparions = ({ day, date, serviceType, isMain = false }) => (
     <Parts
         date={date}
         partNames={['shared.Тропари']}
         alwaysShowFallback
         fallback={(noTexts) => (
             <>
-                <WeekdayTroparions day={day} date={date} serviceType={serviceType} noTexts={noTexts} />
+                {!isMain && <WeekdayTroparions day={day} date={date} serviceType={serviceType} noTexts={noTexts} />}
                 <SundayTroparions day={day} date={date} />
             </>
         )}
