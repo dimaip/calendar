@@ -10,6 +10,7 @@ import { useSetRecoilState } from 'recoil';
 import pendingUpdateState from 'state/pendingUpdateState';
 import checkVersion from 'checkVersion';
 import precache from 'precache';
+import isDarkMode from 'utils/isDarkMode';
 
 import Routes from '../Routes';
 
@@ -34,12 +35,13 @@ export default () => {
         }
         Plugins.SplashScreen.hide();
     }, []);
+    const dark = isDarkMode();
     return (
         <QueryClientProvider client={queryClient}>
             <HashRouter>
                 <ScrollRestoration />
                 <Pullable
-                    spinnerColor="#fff"
+                    spinnerColor={dark ? '#fff' : '#000'}
                     onRefresh={async () => {
                         const newVersion = await checkVersion();
                         if (newVersion) {

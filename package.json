@@ -68,7 +68,6 @@
         "react-query": "^3.13.4",
         "react-router-dom": "^5.1.2",
         "react-scroll-restoration": "^1.0.6",
-        "react-simple-pull-to-refresh": "^1.2.3",
         "react-swipeable-views": "^0.13.9",
         "react-tippy": "^1.4.0",
         "recoil": "^0.4.1",
