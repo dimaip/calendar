@@ -105,7 +105,15 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                                 </div>
                                                             </div>
                                                             <MDXProvider>
-                                                                <div className="mainHymns">
+                                                                <div
+                                                                    className={
+                                                                        'mainHymns ' +
+                                                                        css`
+                                                                            margin-top: -16px;
+                                                                            margin-bottom: 28px;
+                                                                        `
+                                                                    }
+                                                                >
                                                                     <Suspense fallback={<Loader />}>
                                                                         <Troparions date={date} day={day} />
                                                                         <Kondacs date={date} day={day} />

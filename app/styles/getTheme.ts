@@ -3,7 +3,7 @@ import isDarkMode from 'utils/isDarkMode';
 const gray1a = '#201f24';
 const gray1b = '#2c2b32';
 const gray1c = '#38373f';
-const gray2a = '#8e8e93';
+const gray2a = '#717175';
 const gray2b = '#acacb0';
 const gray3 = '#CECED2';
 const gray4 = '#EFEFF4';
