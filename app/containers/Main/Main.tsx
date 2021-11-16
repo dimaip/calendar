@@ -116,7 +116,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                                 >
                                                                     <Suspense fallback={<Loader />}>
                                                                         <Troparions date={date} day={day} isMain />
-                                                                        <Kondacs date={date} day={day} />
+                                                                        <Kondacs date={date} day={day} isMain />
                                                                         <Parts
                                                                             date={date}
                                                                             partNames={['shared.Величания']}
