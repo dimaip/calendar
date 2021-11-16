@@ -37,6 +37,12 @@ const Saints = ({ saints, date }) => {
                     margin-right: 8px;
                     margin-left: -22px;
                 }
+
+                @media (prefers-color-scheme: dark) {
+                    .invert {
+                        filter: invert(100%);
+                    }
+                }
             `}
         />
     );
