@@ -16,6 +16,7 @@ const SolidSection = ({
         <div
             className={`${className} ${css`
                 position: relative;
+                display: flow-root;
                 border-bottom: 0.5px solid ${theme.colours.lineGray};
                 background: ${theme.colours.bgGray};
                 margin: ${marginTop}px ${marginHorizontal}px ${marginBottom}px ${marginHorizontal}px;
