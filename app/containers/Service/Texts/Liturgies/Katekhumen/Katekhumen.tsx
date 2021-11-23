@@ -1,5 +1,5 @@
 import isGospel from 'domain/isGospel';
-import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
 
 import React from 'react';
 import { css } from 'emotion';
@@ -101,6 +101,8 @@ const Katekhumen = ({ date, day, serviceType }) => {
     const brightWeek = isEasterOffsetRange(0, 6);
     const easterSeason = isEasterOffsetRange(0, 38);
     const easterOtdanie = isEasterOffsetRange(38);
+    const { feastType } = getFeastInfo(new Date(date));
+    const isTwelve = feastType === '12';
     const brightOrOtdanie = brightWeek || easterOtdanie;
     const katekhumenProps = {
         date,
@@ -110,6 +112,7 @@ const Katekhumen = ({ date, day, serviceType }) => {
         easterOtdanie,
         brightOrOtdanie,
         isEasterOffsetRange,
+        isTwelve,
         antifon1,
         antifon2,
         antifon3,
