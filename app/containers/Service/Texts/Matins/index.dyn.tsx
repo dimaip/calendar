@@ -53,6 +53,14 @@ const Matins = ({ date }) => {
     );
 
     const readingsForService = day?.bReadings?.['Утром'] || day?.readings?.['Утреня'];
+
+    const containsGospel = Object.values(readingsForService || {})
+        .flat()
+        .some(
+            (reading) =>
+                reading.includes('Мф.') || reading.includes('Мк.') || reading.includes('Лк.') || reading.includes('Ин.')
+        );
+
     const readings = (
         <>
             <Readings readingsForService={readingsForService} day={day} />
@@ -106,6 +114,7 @@ const Matins = ({ date }) => {
         troparions,
         endHymns,
         readings,
+        containsGospel,
         saints,
         easterSeason,
         brightOrOtdanie,

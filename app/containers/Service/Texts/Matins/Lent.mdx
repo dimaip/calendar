@@ -104,6 +104,8 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
     ## Чтения
 
+    <If condition={props.containsGospel}>
+
     **П** Премудрость! Станем благоговейно! Услышим святое евангелие!
 
     **П** От **(имя)** святого благовестия чтение.
@@ -112,11 +114,17 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
     **П** Будем внимательны!
 
+    </If>
+
     <br />
 
     <>{props.readings}</>
 
+    <If condition={props.containsGospel}>
+
     **Н** Слава Тебе, Господи, слава Тебе!
+
+    </If>
 
     ### Проповедь
 
