@@ -34,6 +34,7 @@
         "@sentry/react": "^6.2.5",
         "@sentry/tracing": "^6.2.5",
         "@types/lodash.memoize": "^4.1.6",
+        "array-flat-polyfill": "^1.0.1",
         "autoprefixer": "^7.1.6",
         "babel-polyfill": "^6.26.0",
         "capacitor-data-storage-sqlite": "^2.4.2",

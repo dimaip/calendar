@@ -2036,6 +2036,11 @@ array-find@^1.0.0:
   resolved "https://registry.yarnpkg.com/array-find/-/array-find-1.0.0.tgz#6c8e286d11ed768327f8e62ecee87353ca3e78b8"
   integrity sha1-bI4obRHtdoMn+OYuzuhzU8o+eLg=
 
+array-flat-polyfill@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/array-flat-polyfill/-/array-flat-polyfill-1.0.1.tgz#1e3a4255be619dfbffbfd1d635c1cf357cd034e7"
+  integrity sha512-hfJmKupmQN0lwi0xG6FQ5U8Rd97RnIERplymOv/qpq8AoNKPPAnxJadjFA23FNWm88wykh9HmpLJUUwUtNU/iw==
+
 array-flatten@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/array-flatten/-/array-flatten-1.1.1.tgz#9a5f699051b1e7073328f2a008968b64ea2955d2"
@@ -7448,11 +7453,6 @@ react-router@5.1.2:
 react-scroll-restoration@^1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-scroll-restoration/-/react-scroll-restoration-1.0.6.tgz#23ed4f247b13a46168b6fe7fe3845ae529e2dceb"
-
-react-simple-pull-to-refresh@^1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/react-simple-pull-to-refresh/-/react-simple-pull-to-refresh-1.2.3.tgz#e2fc67ba25e688c9866670e08c455ebc464f497f"
-  integrity sha512-GH4dJn3954IavyOg6rkF00LPqr2lG0DzLNGMhTYXDaOP5mjAduW3TCThexExS/sDWrRpN37IU8gzaimCvUse+w==
 
 react-swipeable-views-core@^0.13.7:
   version "0.13.7"

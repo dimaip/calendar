@@ -1,6 +1,7 @@
 // Signals to script in index.html that the app assets have been loaded
 // import './wdyr';
 import './forEachPolyfill';
+import 'array-flat-polyfill';
 import 'unfetch/polyfill/index.js';
 import 'element-closest-polyfill';
 import 'regenerator-runtime/runtime';
