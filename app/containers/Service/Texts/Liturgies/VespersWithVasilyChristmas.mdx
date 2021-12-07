@@ -1,0 +1,229 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Tooltip from 'components/Tooltip/Tooltip';
+import If from 'components/If/If';
+import Parts from 'components/Parts/Parts';
+import { css } from 'emotion';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
+
+import Html from 'components/Html/Html';
+import StihiriNaGV from '../Vespers/StihiriNaGV/StihiriNaGV';
+import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+import Trisvatoe from './Katekhumen/Trisvatoe/Trisvatoe';
+import Reading from './Katekhumen/Reading/Reading';
+
+<span id="nachalo" />
+
+# Вечерня в соединении с Литургией Василия Великого
+
+# I. <br /> Вечерня
+
+**Перед началом Литургии иерей с диаконом молятся в алтаре перед престолом:**
+
+<MdxLoader src="Shared/Paraklit" />
+
+<MdxLoader src="Shared/SlavavVyshnih" />
+
+**Затем диакон, выйдя на амвон, произносит:**
+
+<MdxLoader src="Liturgies/Katekhumen/Vozglas" />
+
+<MdxLoader src="Shared/SlavaTebe" />
+
+<MdxLoader src="Shared/ParaklitChit" />
+
+<MdxLoader src="Shared/ObichnoeNachalo" />
+
+### Псалом 103, предначинательный
+
+<MdxLoader src="Shared/Psalm103" />
+
+**Священник во время предначинательного псалма по обычаю читает светильничные молитвы перед царскими вратами.**
+
+<MdxLoader src="Vespers/Prayer1" />
+
+<MdxLoader src="Vespers/Prayer2" />
+
+<MdxLoader src="Vespers/Prayer3" />
+
+<MdxLoader src="Vespers/Prayer4" />
+
+<MdxLoader src="Vespers/Prayer5" />
+
+<MdxLoader src="Vespers/Prayer6" />
+
+<MdxLoader src="Vespers/Prayer7" />
+
+<MdxLoader src="Vespers/Prayer8" />
+
+### Великая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia" />
+
+<MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
+
+### Стихиры на «Господи, взываю»
+
+<StihiriNaGV day={props.day} date={props.date} />
+<span id="vhod" />
+
+## Вход
+
+<MdxLoader src="Vespers/PremudrostVhod" />
+
+### Вечерняя (входная) песнь «при возжжении светильника»
+
+<MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
+
+## Чтения
+
+<Prokimens date={props.date} />
+
+<span id="reading" />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Быт. I, 1-13.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Числ. XXIV, 2-3, 5-9, 17-18.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Мих. IV, 6-7; V, 2-4.'] }} />
+</div>
+
+**После 3-й паримии, по обычаю, отверзаются царские врата.**
+
+### Тропари со стихами после чтения 3-й паремии (Пс 86:2-3, 4-5, 6-7)
+
+<MdxLoader src="Vespers/TropsWithStihi3Christmas" />
+
+**Затворяются царские врата.**
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Ис. XI, 1-10.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Вар. III, 36-38; IV, 1-4.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Дан. II, 31-36, 44-45.'] }} />
+</div>
+
+**После 6-й паримии отверзаются царские врата.**
+
+### Тропари со стихами после чтения 6-й паремии (Пс 92:1-5)
+
+<MdxLoader src="Vespers/TropsWithStihi6Christmas" />
+
+**Затворяются царские врата.**
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Ис. IX, 6-7.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Ис. VII, 10-16; VIII, 1-4, 8-10.'] }} />
+</div>
+
+### Проповедь
+
+**По окончании 8-й паримии отверзаются царские врата.**
+
+### Малая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+
+{props.trisvatoe}
+
+## Чтения и прошения верных
+
+{props.reading}
+
+### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div
+    className={props.css`
+        margin: 0 5px;
+    `}
+>
+    {props.apostol}
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
+
+### Проповедь
+
+> **[Д** Господу помолимся!**]**
+
+<span id="gospel" />
+
+### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+
+<MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+
+<MdxLoader src="Liturgies/Katekhumen/BlessBeforeGosp" />
+
+{props.aliluja}
+
+<MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
+
+### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div
+    className={props.css`
+        margin: 0 5px;
+    `}
+>
+    {props.gospel}
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+
+### Проповедь
+
+{props.sermons}
+
+<MdxLoader src="Liturgies/Katekhumen/SugubajaEktenia" />
+
+### Молитва при усердном (сугубом) молении
+
+<MdxLoader src="Liturgies/Katekhumen/Userdnaya" />
+
+## (5) Отпуст оглашаемых<br/>(если есть)
+
+<MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
+
+### Молитва об оглашаемых
+
+<MdxLoader src="Liturgies/Katekhumen/OglashaemieVasiliy" />
+
+<MdxLoader src="Liturgies/Katekhumen/Izydite" />
+
+**[Все непричащающиеся с благоговением покидают церковь.]**
+
+**По отпусте Литургии на середине храма поставляется горящий светильник, и около него изшедшие из алтаря священнослужители поют:**
+
+тропарь праздника Рождества Христова, глас 4-й: «Рождество Твое, Христе Боже наш…»,
+
+**Слава, и ныне**
+
+кондак праздника, глас 3-й: «Дева днесь Пресущественнаго раждает…». (Величание не поется.) Затем поются многолетны:\*\*
