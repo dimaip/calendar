@@ -1,5 +1,5 @@
 import isGospel from 'domain/isGospel';
-import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, getFeastInfo, makeIsDate } from 'domain/getDayInfo';
 
 import React from 'react';
 import { css } from 'emotion';
@@ -62,6 +62,7 @@ export const getKatekhumenReadings = (day) => {
 const Katekhumen = ({ date, day, serviceType }) => {
     const externalDayQuery = useExternalDay(date);
     const { apostol, gospel } = getKatekhumenReadings(day);
+    const isDate = makeIsDate(date);
 
     const antifon1 = <Antifon1 date={date} />;
     const antifon2 = <Antifon2 date={date} />;
@@ -113,6 +114,7 @@ const Katekhumen = ({ date, day, serviceType }) => {
         brightOrOtdanie,
         isEasterOffsetRange,
         isTwelve,
+        isDate,
         antifon1,
         antifon2,
         antifon3,

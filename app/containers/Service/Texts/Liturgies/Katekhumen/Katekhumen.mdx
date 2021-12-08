@@ -145,7 +145,7 @@ import Parts from 'components/Parts/Parts';
 
 {false && "@TODO: спрятать всегда, когда поется 'Все вы во Христа крестившиеся', см. по табличке"}
 
-<If condition={!props.brightWeek}>
+<If condition={!props.brightWeek && !props.isDate(1, 7) && !props.isDate(1, 19) && !props.isEasterOffsetRange(49)}>
 
     <span id="oglashaemie" />
 
