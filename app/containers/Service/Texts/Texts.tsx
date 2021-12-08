@@ -1,4 +1,4 @@
-import { getFeastInfo, makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import { getFeastInfo, makeIsDate, makeIsEasterOffsetRange } from 'domain/getDayInfo';
 
 import liturgyTOC from './Liturgies/TOC';
 import lpodTOC from './Lpod/TOC';
@@ -11,6 +11,7 @@ const makeServices = (date, readings = {}) => {
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
+    const isDate = makeIsDate(date);
 
     return [
         {
@@ -60,7 +61,7 @@ const makeServices = (date, readings = {}) => {
         {
             title: 'Третий час',
             id: 'thirdHour',
-            enabled: !isEasterOffsetRange(0, 6),
+            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6),
             calendar: true,
             lang: true,
             skipRedirect: true,
@@ -70,7 +71,7 @@ const makeServices = (date, readings = {}) => {
         {
             title: 'Шестой час',
             id: 'sixthHour',
-            enabled: !isEasterOffsetRange(0, 6),
+            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6),
             calendar: true,
             lang: true,
             skipRedirect: true,
