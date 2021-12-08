@@ -1,4 +1,4 @@
-import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import { makeIsDate, makeIsEasterOffsetRange } from 'domain/getDayInfo';
 
 import React from 'react';
 import useDay from 'hooks/useDay';
@@ -11,6 +11,7 @@ import useLiturgy from './Vernie/useLiturgy';
 import VasiliyMdx from './Vasiliy.mdx';
 import VespersWithVasilyPassionThursdayMdx from './VespersWithVasilyPassionThursday.mdx';
 import VespersWithVasilyPassionSaturdayMdx from './VespersWithVasilyPassionSaturday.mdx';
+import VespersWithVasilyChristmasMdx from './VespersWithVasilyChristmas.mdx';
 import 'containers/Service/Texts/Shared.css';
 import { getKatekhumenReadings } from './Katekhumen/Katekhumen';
 
@@ -20,6 +21,7 @@ const Vasiliy = ({ lang, date }) => {
     const dayOfWeek = dateObj.getDay();
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const { data: day } = useDay(date);
+    const isDate = makeIsDate(date);
 
     const { apostol, gospel } = getKatekhumenReadings(day);
     const tomorrowDateObj = new Date(date);
@@ -54,6 +56,7 @@ const Vasiliy = ({ lang, date }) => {
         apostol,
         gospel,
         isEasterOffsetRange,
+        css,
     };
     if (isEasterOffsetRange(-3)) {
         return (
@@ -67,6 +70,14 @@ const Vasiliy = ({ lang, date }) => {
         return (
             <>
                 <VespersWithVasilyPassionSaturdayMdx {...props} readings={vespersReadings} />
+                <VasiliyMdx {...props} onlyVernie />
+            </>
+        );
+    }
+    if (isDate(1, 6)) {
+        return (
+            <>
+                <VespersWithVasilyChristmasMdx {...props} readings={vespersReadings} />
                 <VasiliyMdx {...props} onlyVernie />
             </>
         );
