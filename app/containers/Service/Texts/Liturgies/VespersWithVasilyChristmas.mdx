@@ -4,6 +4,8 @@ import If from 'components/If/If';
 import Parts from 'components/Parts/Parts';
 import { css } from 'emotion';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
+import Aliluja from 'containers/Service/Texts/Liturgies/Katekhumen/Aliluja/Aliluja';
+import VariableSection from 'containers/Service/Texts/VariableSection';
 
 import Html from 'components/Html/Html';
 import StihiriNaGV from '../Vespers/StihiriNaGV/StihiriNaGV';
@@ -152,20 +154,16 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
 
-{props.trisvatoe}
+<Trisvatoe date={props.date} />
 
 ## Чтения и прошения верных
 
-{props.reading}
+<Reading day={props.day} date={props.date} />
 
 ### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
-<div
-    className={props.css`
-        margin: 0 5px;
-    `}
->
-    {props.apostol}
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Евр., 303 зач., I, 1-12.'] }} />
 </div>
 
 <MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
@@ -182,25 +180,21 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/BlessBeforeGosp" />
 
-{props.aliluja}
+<VariableSection date={props.date}>
+    <Aliluja day={props.day} date={props.date} />
+</VariableSection>
 
 <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
 
 ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
-<div
-    className={props.css`
-        margin: 0 5px;
-    `}
->
-    {props.gospel}
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Лк., 5 зач., II, 1-20.'] }} />
 </div>
 
 <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
 
 ### Проповедь
-
-{props.sermons}
 
 <MdxLoader src="Liturgies/Katekhumen/SugubajaEktenia" />
 
