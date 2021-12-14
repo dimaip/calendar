@@ -4,6 +4,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Tooltip from 'components/Tooltip/Tooltip';
 import If from 'components/If/If';
 import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
+import VespersWithVasilyChristmasEndingMdx from './VespersWithVasilyChristmasEnding.mdx';
 
 <If condition={!props.onlyVernie}>
     <div className={css`margin-bottom: 24px;`} id="nachalo" />
@@ -11,6 +12,7 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
     # Божественная литургия Василия Великого
 
     {props.katekhumen}
+
 </If>
 
 <div id="vernie" />
@@ -89,37 +91,37 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
 <MdxLoader src="Liturgies/Vernie/MolitvaBeforeVosnVV" />
 
-<div id="tselovanie"/>
+<div id="tselovanie" />
 
 ## (3) Целование мира <br />и исповедание единой веры
 
 <MdxLoader src="Liturgies/Vernie/TselovanieMira" />
 
-<div id="simvol"/>
+<div id="simvol" />
 
 ### Символ веры
 
 <MdxLoader src="Liturgies/Vernie/SimvolVery" />
 
-<div id="anafora"/>
+<div id="anafora" />
 
 ## (4) Св. возношение (ана́фора) <Tooltip><>Раздел (4) — Евхаристический кано́н. Он состоит из вступления и четырех основных частей: префа́цио (вводная часть), ана́мнесис (воспоминание), эпиклесис (призывание) и интерце́ссио (хода́тайство).</></Tooltip>
 
 <MdxLoader src="Liturgies/Vernie/AnaforaVstup" />
 
-<div id="prefacio"/>
+<div id="prefacio" />
 
 ### Вводная часть (префа́цио)
 
 <MdxLoader src="Liturgies/Vernie/AnaforaPrefacVV" />
 
-<div id="anamnesis"/>
+<div id="anamnesis" />
 
 ### Воспоминание (ана́мнесис)
 
 <MdxLoader src="Liturgies/Vernie/AnaforaAnamnesVV" />
 
-<div id="epiclisis"/>
+<div id="epiclisis" />
 
 ### Призывание (эпи́клесис)
 
@@ -137,7 +139,7 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
 <MdxLoader src="Liturgies/Vernie/Prositelnaya2" />
 
-<div id="ourfather"/>
+<div id="ourfather" />
 
 ### Молитва перед причащением
 
@@ -145,7 +147,7 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 <MdxLoader src="Liturgies/Vernie/Otche" />
 <MdxLoader src="Liturgies/Vernie/MirVsem2" />
 
-<div id="glavopriklon"/>
+<div id="glavopriklon" />
 
 ### Молитва главопреклонная
 
@@ -155,7 +157,7 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
 <MdxLoader src="Liturgies/Vernie/MolitvaBeforeVosn" />
 
-<div id="prichashenie"/>
+<div id="prichashenie" />
 
 ## (6) Св. причащение
 
@@ -218,7 +220,7 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
     isEasterOffsetRange={props.isEasterOffsetRange}
 />
 
-<div id="otpust"/>
+<div id="otpust" />
 
 ## Отпуст
 
@@ -226,6 +228,10 @@ import Blagodarenie from './Vernie/Blagodarenie/index.mdx';
 
 {props.otpust}
 {props.saints}
+
+<If condition={props.isDate(1, 6)}>
+    <VespersWithVasilyChristmasEndingMdx {...props} />
+</If>
 
 ### Многолетие<br />(при закрытии завесы)
 
