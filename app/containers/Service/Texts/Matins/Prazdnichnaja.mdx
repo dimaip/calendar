@@ -93,6 +93,10 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
     )}
 </>
 
+<If condition={props.isHoliday}>
+    <MdxLoader src="Shared/SnovaSnova" lang={props.lang} />
+</If>
+
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 
 <>{props.dayOfWeek === 0 && !props.isEasterOffsetRange(49) && <MdxLoader src="Matins/Sviat" lang={props.lang} />}</>
