@@ -111,6 +111,16 @@ const makeServices = (date, readings = {}) => {
             warn: true,
         },
         {
+            title: 'Отпевание',
+            id: 'otpevanie',
+            enabled: true,
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
+            group: 'Требы',
+            warn: true,
+        },
+        {
             title: 'Молитва о жертвах советских репрессий',
             id: 'molitvaPamyati',
             enabled: true,
