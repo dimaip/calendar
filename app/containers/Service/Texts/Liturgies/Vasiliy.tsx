@@ -46,6 +46,7 @@ const Vasiliy = ({ lang, date }) => {
     const props = {
         lang,
         date,
+        isDate,
         tomorrowDate,
         katekhumen,
         otpust,
