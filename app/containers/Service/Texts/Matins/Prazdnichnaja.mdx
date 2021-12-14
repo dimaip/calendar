@@ -46,6 +46,11 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
         <MdxLoader src="Matins/Prayer4" lang={props.lang} />
     )}
 </>
+
+<If condition={props.isHoliday}>
+    <MdxLoader src="Shared/SnovaSnova" lang={props.lang} />
+</If>
+
 <>
     {!props.brightWeek && (props.isHoliday || props.dayOfWeek === 5) && (
         <MdxLoader src="Matins/Prayer7" lang={props.lang} />
@@ -71,11 +76,18 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
     )}
 </>
 
+<If condition={props.isHoliday}>
+    <MdxLoader src="Shared/SnovaSnova" lang={props.lang} />
+</If>
+
 <>{(props.isHoliday || props.dayOfWeek === 6) && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
 
 <>{props.isHoliday && <MdxLoader src="Matins/Prayer10" lang={props.lang} />}</>
 <>{props.isHoliday && <Psalm50 lang={props.lang} />}</>
 <>
+
+### Стихиры после 50 псалма
+
     {props.dayOfWeek === 0 && !props.isEasterOffsetRange(49) && (
         <MdxLoader src="Matins/PesnBogoroditsy" lang={props.lang} />
     )}
