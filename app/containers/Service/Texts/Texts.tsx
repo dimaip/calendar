@@ -61,7 +61,7 @@ const makeServices = (date, readings = {}) => {
         {
             title: 'Третий час',
             id: 'thirdHour',
-            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6),
+            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6) && !isDate(1, 19),
             calendar: true,
             lang: true,
             skipRedirect: true,
@@ -71,7 +71,7 @@ const makeServices = (date, readings = {}) => {
         {
             title: 'Шестой час',
             id: 'sixthHour',
-            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6),
+            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6) && !isDate(1, 19),
             calendar: true,
             lang: true,
             skipRedirect: true,
