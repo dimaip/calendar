@@ -92,7 +92,7 @@ const makeServices = (date, readings = {}) => {
         {
             title: 'Полуночница',
             id: 'polunochnica',
-            enabled: true,
+            enabled: !isDate(1, 6),
             calendar: true,
             lang: true,
             skipRedirect: true,
