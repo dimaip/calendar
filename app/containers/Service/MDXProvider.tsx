@@ -1,27 +1,23 @@
 import React, { useRef } from 'react';
 import { MDXProvider as OriginalMDXProvider } from '@mdx-js/react';
-import ScriptEditorInput from 'components/ScriptEditor/ScriptEditorInput';
 import If, { Then, Else } from 'components/If/If';
 import Tooltip from 'components/Tooltip/Tooltip';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Parts from 'components/Parts/Parts';
 import './mdx.css';
 import useAudio from 'hooks/useAudio';
+import { H1, H2, H3, H4, P, Petit, PetitInline, Red, Super } from 'components/Typography/Typography';
 
 const mapping = {
-    h1: ({ children }) => <h1 className="H1">{children}</h1>,
-    h2: ({ children }) => <h2 className="H2">{children}</h2>,
-    h3: ({ children }) => (
-        <h3 className="H3">
-            {children} <ScriptEditorInput id={window.location.href + children} />
-        </h3>
-    ),
-    h4: ({ children }) => <h4 className="H4">{children}</h4>,
-    p: ({ children }) => <p className="P">{children}</p>,
-    strong: ({ children }) => <span className="Red">{children}</span>,
-    blockquote: ({ children }) => <div className="Petit">{children}</div>,
-    inlineCode: ({ children }) => <span className="PetitInline">{children}</span>,
-    del: ({ children }) => <span className="Super">{children}</span>,
+    h1: H1,
+    h2: H2,
+    h3: H3,
+    h4: H4,
+    p: P,
+    strong: Red,
+    blockquote: Petit,
+    inlineCode: PetitInline,
+    del: Super,
 
     If,
     Then,
