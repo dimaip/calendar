@@ -12,6 +12,7 @@ import VasiliyMdx from './Vasiliy.mdx';
 import VespersWithVasilyPassionThursdayMdx from './VespersWithVasilyPassionThursday.mdx';
 import VespersWithVasilyPassionSaturdayMdx from './VespersWithVasilyPassionSaturday.mdx';
 import VespersWithVasilyChristmasMdx from './VespersWithVasilyChristmas.mdx';
+import VespersWithVasilyEpiphanyMdx from './VespersWithVasilyEpiphany.mdx';
 import 'containers/Service/Texts/Shared.css';
 import { getKatekhumenReadings } from './Katekhumen/Katekhumen';
 
@@ -79,6 +80,14 @@ const Vasiliy = ({ lang, date }) => {
         return (
             <>
                 <VespersWithVasilyChristmasMdx {...props} readings={vespersReadings} />
+                <VasiliyMdx {...props} onlyVernie />
+            </>
+        );
+    }
+    if (isDate(1, 18)) {
+        return (
+            <>
+                <VespersWithVasilyEpiphanyMdx {...props} readings={vespersReadings} />
                 <VasiliyMdx {...props} onlyVernie />
             </>
         );
