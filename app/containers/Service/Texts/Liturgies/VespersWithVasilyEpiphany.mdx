@@ -1,0 +1,245 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Tooltip from 'components/Tooltip/Tooltip';
+import If from 'components/If/If';
+import Parts from 'components/Parts/Parts';
+import { css } from 'emotion';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
+import Aliluja from 'containers/Service/Texts/Liturgies/Katekhumen/Aliluja/Aliluja';
+import VariableSection from 'containers/Service/Texts/VariableSection';
+
+import Html from 'components/Html/Html';
+import StihiriNaGV from '../Vespers/StihiriNaGV/StihiriNaGV';
+import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+import Trisvatoe from './Katekhumen/Trisvatoe/Trisvatoe';
+import Reading from './Katekhumen/Reading/Reading';
+
+<span id="nachalo" />
+
+# Вечерня в соединении с Литургией Василия Великого
+
+# I. <br /> Вечерня
+
+**Перед началом Литургии иерей с диаконом молятся в алтаре перед престолом:**
+
+<MdxLoader src="Shared/Paraklit" />
+
+<MdxLoader src="Shared/SlavavVyshnih" />
+
+**Затем диакон, выйдя на амвон, произносит:**
+
+<MdxLoader src="Liturgies/Katekhumen/Vozglas" />
+
+<MdxLoader src="Shared/SlavaTebe" />
+
+<MdxLoader src="Shared/ParaklitChit" />
+
+<MdxLoader src="Shared/ObichnoeNachalo" />
+
+### Псалом 103, предначинательный
+
+<MdxLoader src="Shared/Psalm103" />
+
+**Священник во время предначинательного псалма по обычаю читает светильничные молитвы перед царскими вратами.**
+
+<MdxLoader src="Vespers/Prayer1" />
+
+<MdxLoader src="Vespers/Prayer2" />
+
+<MdxLoader src="Vespers/Prayer3" />
+
+<MdxLoader src="Vespers/Prayer4" />
+
+<MdxLoader src="Vespers/Prayer6" />
+
+<MdxLoader src="Vespers/Prayer7" />
+
+<MdxLoader src="Vespers/Prayer9" />
+
+<MdxLoader src="Vespers/Prayer8" />
+
+### Великая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia" />
+
+<MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
+
+### Стихиры на «Господи, взываю»
+
+<StihiriNaGV day={props.day} date={props.tomorrowDate} />
+<span id="vhod" />
+
+## Вход
+
+<MdxLoader src="Vespers/PremudrostVhod" />
+
+### Вечерняя (входная) песнь «при возжжении светильника»
+
+<MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
+
+## Чтения
+
+<Prokimens date={props.tomorrowDate} />
+
+<span id="reading" />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Быт. I, 1-13.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Исх. XIV, 15-18, 21-23, 27-29.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Исх. XV, 22-27; XVI, 1.'] }} />
+</div>
+
+**После 3-й паримии, по обычаю, отверзаются царские врата.**
+
+### Тропари со стихами после чтения 3-Й паремии (Пс 66:2-8) 
+
+<MdxLoader src="Vespers/TropsWithStihi3Epiphany" />
+
+**Затворяются царские врата.**
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Нав. III, 7-8, 14-17.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['4 Цар. II, 6-14.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['4 Цар. V, 9-14.'] }} />
+</div>
+
+**После 6-й паримии отверзаются царские врата.**
+
+### Тропари со стихами после чтения 6-й паремии (Пс 92:1-5)
+
+<MdxLoader src="Vespers/TropsWithStihi6Epiphany" />
+
+**Затворяются царские врата.**
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Ис. I, 16-20.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Быт. XXXII, 1-10.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Исх. II, 5-10.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Суд. VI, 36-40.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['3 Цар. XVIII, 30-39.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['4 Цар. II, 19-22.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Ис. XLIX, 8-15.'] }} />
+</div>
+
+### Проповедь
+
+**По окончании паримий отверзаются царские врата.**
+
+### Малая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+
+<Trisvatoe date={props.date} />
+
+## Чтения и прошения верных
+
+<Reading day={props.day} date={props.date} />
+
+### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['1 Кор., 143 зач., IX, 19-27.'] }} />
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
+
+### Проповедь
+
+> **[Д** Господу помолимся!**]**
+
+<span id="gospel" />
+
+### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+
+<MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+
+<MdxLoader src="Liturgies/Katekhumen/BlessBeforeGosp" />
+
+<VariableSection date={props.date}>
+    <Aliluja day={props.day} date={props.date} />
+</VariableSection>
+
+<MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
+
+### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Лк., 9 зач., III, 1-18.'] }} />
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+
+### Проповедь
+
+<MdxLoader src="Liturgies/Katekhumen/SugubajaEktenia" />
+
+### Молитва при усердном (сугубом) молении
+
+<MdxLoader src="Liturgies/Katekhumen/Userdnaya" />
+
+## (5) Отпуст оглашаемых<br/>(если есть)
+
+<MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
+
+### Молитва об оглашаемых
+
+<MdxLoader src="Liturgies/Katekhumen/OglashaemieVasiliy" />
+
+<MdxLoader src="Liturgies/Katekhumen/Izydite" />
+
+**[Все непричащающиеся с благоговением покидают церковь.]**
