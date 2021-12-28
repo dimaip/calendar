@@ -6,6 +6,8 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
+import Reading from 'containers/Service/Texts/Liturgies/Katekhumen/Reading/Reading';
+import Aliluja from 'containers/Service/Texts/Liturgies/Katekhumen/Aliluja/Aliluja';
 
 <span id="nachalo" />
 
@@ -15,8 +17,15 @@ import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
 
 **П** Благословен Бог наш ныне и всегда и во веки веков!
 
+<MdxLoader src="Shared/SlavaTebe" />
+
+<MdxLoader src="Shared/ParaklitChit" />
+
 <MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
-<MdxLoader src="Vespers/Psalm103" chitaetsa lang={props.lang} />
+
+### Псалом 103, предначинательный
+
+<MdxLoader src="Shared/Psalm103" />
 
 <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
 
@@ -36,6 +45,8 @@ import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
     )}
 </>
 
+**Д** **[**Снова и снова**]** в мире Господу помолимся!
+
 <MdxLoader src="Vespers/Prayer8" lang={props.lang} />
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
 
@@ -52,114 +63,141 @@ import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
 
 <MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
 
-## Чтения
+## Паремии
 
 <Prokimens date={props.date} />
 
 <span id="reading" />
 
-**П** Премудрость!
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
-**Ч** Из книги… чтение.
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Быт. I, 1-13.'] }} />
+</div>
 
-**П** Будем внимательны!
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
-<br />
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Исх. XIV, 15-18, 21-23, 27-29.'] }} />
+</div>
 
-<>{props.readings}</>
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
-### Проповедь
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Исх. XV, 22-27; XVI, 1.'] }} />
+</div>
 
 ### Тропари со стихами после чтения 3-й паремии (Пс 66:2-8)
 
-**Чтец читает тропарь, глас 5**  
-Явился Ты в мире, Сотворивший мир, дабы просветить пребывающих во тьме. // О Человеколюбивый, слава Тебе! **(Окончание поёт хор).**
+<MdxLoader src="Vespers/TropsWithStihi3Epiphany" />
 
-**Стих 1** Боже, смилуйся к нам и благослови нас,  
-просияй на нас Лицом Твоим и помилуй нас!  
-Да позна́ем мы на земле путь Твой,  
-во всех народах — спасение Твоё.
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
-Дабы просветить пребывающих во тьме. // О Человеколюбивый, слава Тебе! **(Окончание поёт хор).**
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Нав. III, 7-8, 14-17.'] }} />
+</div>
 
-**Стих 2** Да восхва́лят, народы, Боже, Тебя,  
-да восхва́лят Тебя народы все,  
-да веселя́тся и ликуют племена́!  
-Ибо Ты по правде рассудишь всех,  
-и племена́ми земли правишь Ты!
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
-Дабы просветить пребывающих во тьме. // О Человеколюбивый, слава Тебе! **(Окончание поёт хор).**
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['4 Цар. II, 6-14.'] }} />
+</div>
 
-**Стих 3** Да восхва́лят, народы, Боже, Тебя,  
-да восхва́лят Тебя народы все!  
-Земля принесла плод свой;  
-да благослови́т нас Бог, Бог наш;  
-да благослови́т нас Бог;  
-да вострепе́щут пред Ним все концы земли!
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
-Дабы просветить пребывающих во тьме. // О Человеколюбивый, слава Тебе! **(Окончание поёт хор).**
-
-**Слава, и ныне.**
-
-Явился Ты в мире, Сотворивший мир, дабы просветить пребывающих во тьме. // О Человеколюбивый, слава Тебе! **(Окончание поёт хор).**
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['4 Цар. V, 9-14.'] }} />
+</div>
 
 ### Тропари со стихами после чтения 6-й паремии (Пс 92:1-5)
 
-**Чтец читает тропарь, глас 6**  
-Ты грешникам и мы́тарям / по обилию милости Твоей / явил Себя, о Спаситель наш. / Ведь где до́лжно было Твоему свету воссиять, / как не среди пребывающих во тьме? // Слава Тебе! **(Окончание поёт хор).**
+<MdxLoader src="Vespers/TropsWithStihi6Epiphany" />
 
-**Стих 1** Господь — Царь.  
-Его одеяние — слава,  
-пояс Его облачения — мощь!  
-Стоит мир − и не дрогнет,  
-и вечный престол Твой незыблем,  
-Ты — от начала времён!
-
-Ведь где до́лжно было Твоему свету воссиять, / как не среди пребывающих во тьме? // Слава Тебе! **(Окончание поёт хор).**
-
-**Стих 2** Шумят потоки, Господи,  
-шумят потоки, ревут,  
-потоки ревут, словно гром!
-
-Ведь где до́лжно было Твоему свету воссиять, / как не среди пребывающих во тьме? // Слава Тебе! **(Окончание поёт хор).**
-
-**Стих 3** Не так стра́шен пучины рёв,  
-не так страшны морские валы́,  
-как **[**страшен**]** могучий Господь в вышине!  
-Наставления Твои незыблемы,  
-храм Твой, Господи, навеки укра́сила святость!
-
-Ведь где до́лжно было Твоему свету воссиять, / как не среди пребывающих во тьме? // Слава Тебе! **(Окончание поёт хор).**
-
-**Слава, и ныне.**
-
-Ты грешникам и мы́тарям / по обилию милости Твоей / явил Себя, о Спаситель наш. / Ведь где до́лжно было Твоему свету воссиять, / как не среди пребывающих во тьме? // Слава Тебе! **(Окончание поёт хор).**
-
-**Ч** Прокимен, глас 3 **(Пс 26:1)**
-
-Господь мне свет и спасение, /  
-так кого мне бояться?
-
-**Стих** Господь — оплот жизни моей,  
-так кого мне страшиться?
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
 <div>
-    <ReadingsForService readingsForService={{ Богоявления: ['1 Кор., 143 зач., IX, 19–27.'] }} />
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Ис. I, 16-20.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Быт. XXXII, 1-10.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Исх. II, 5-10.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Суд. VI, 36-40.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['3 Цар. XVIII, 30-39.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['4 Цар. II, 19-22.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Ис. XLIX, 8-15.'] }} />
 </div>
 
 ### Проповедь
 
-**Ч** Аллилуия, аллилуия, аллилуия, глас 6 **(Пс 44:2, 3)**
+### Малая ектения
 
-**Народ припевает** Аллилуия **трижды — здесь и после каждого стиха.**
+<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
 
-Из сердца моего речь благая звучит, я возглашаю о царе стих мой.
+<Trisvatoe date={props.date} />
 
-**Стих** Меж Адамовых сыно́в ты прекраснее всех.
+## Чтения и прошения верных
+
+<Reading day={props.day} date={props.previousDate} />
+
+### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
 <div>
-    <ReadingsForService readingsForService={{ Богоявления: ['Лк., III, 1-18.'] }} />
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['1 Кор., 143 зач., IX, 19-27.'] }} />
 </div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
+
+### Проповедь
+
+> **[Д** Господу помолимся!**]**
+
+<span id="gospel" />
+
+### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+
+<MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+
+<VariableSection date={props.date}>
+    <Aliluja day={props.day} date={props.previousDate} />
+</VariableSection>
+
+<MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
+
+### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Богоявлению': ['Лк., 9 зач., III, 1-18.'] }} />
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
 
 ### Проповедь
 
