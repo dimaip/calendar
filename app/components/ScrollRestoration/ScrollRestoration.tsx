@@ -25,7 +25,7 @@ function ScrollRestoration({ history, visitedUrl }: RouteComponentProps & Props)
             const { pathname } = location;
             const existingRecord = visitedUrl.get(pathname);
             scrollTo(existingRecord || 0);
-        }, 10);
+        }, 100);
     };
 
     useEffect(() => {
