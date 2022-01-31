@@ -4,7 +4,7 @@ import React from 'react';
 import Parts from 'components/Parts/Parts';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
-const DefatulExapostilari = ({ date }) => {
+const DefatulExapostilari = ({ date }): JSX.Element | null => {
     const dateObj = new Date(date);
 
     const day = dateObj.getDay();
@@ -14,7 +14,10 @@ const DefatulExapostilari = ({ date }) => {
 
     const y = dateObj.getFullYear();
 
-    const easterDate = calculateEasterDate(y);
+    let easterDate = calculateEasterDate(y);
+    if (easterDate > dateObj) {
+        easterDate = calculateEasterDate(y - 1);
+    }
     const weeksSinceEaster = Math.floor((dateObj.getTime() - easterDate.getTime()) / (3600 * 1000 * 24 * 7)) + 1;
 
     let matinsKey = null;
