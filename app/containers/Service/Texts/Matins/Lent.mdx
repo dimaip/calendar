@@ -68,12 +68,32 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
 </If>
 
-<If condition={!props.isEasterOffsetRange(-3, -2)}>
+<If condition={!props.isEasterOffsetRange(-3, -2) && !props.vselenskayaRoditelskayaSubbota}>
     <>{props.dayOfWeek === 0 || (props.dayOfWeek === 2 && <MdxLoader src="Matins/Prayer2" lang={props.lang} />)}</>
     <>{props.dayOfWeek === 0 || (props.dayOfWeek === 3 && <MdxLoader src="Matins/Prayer3" lang={props.lang} />)}</>
     <>{props.dayOfWeek === 0 || (props.dayOfWeek === 4 && <MdxLoader src="Matins/Prayer4" lang={props.lang} />)}</>
     <>{props.dayOfWeek === 0 || (props.dayOfWeek === 5 && <MdxLoader src="Matins/Prayer7" lang={props.lang} />)}</>
     <>{props.dayOfWeek === 0 || (props.dayOfWeek === 6 && <MdxLoader src="Matins/Prayer8" lang={props.lang} />)}</>
+</If>
+
+<If condition={props.vselenskayaRoditelskayaSubbota}>
+    ### Кафизма 17
+    <MdxLoader src="Shared/Psalm118VselSubSt1" lang={props.lang} />
+
+    #### Малая заупокойная ектения
+    <MdxLoader src="Shared/MalayaZaupokEktenya" lang={props.lang} />
+
+    #### Молитва об усопших
+    <MdxLoader src="Shared/MolitvaObUsopshihVsel" lang={props.lang} />
+
+    <MdxLoader src="Shared/Psalm118VselSubSt2" lang={props.lang} />
+
+    #### Малая заупокойная ектения
+    <MdxLoader src="Shared/MalayaZaupokEktenya" lang={props.lang} />
+
+    #### Молитва об усопших
+    <MdxLoader src="Shared/MolitvaObUsopshihVsel" lang={props.lang} />
+
 </If>
 
 <MdxLoader src="Matins/Prayer10" lang={props.lang} />
