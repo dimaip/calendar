@@ -134,10 +134,31 @@ import Tooltip from 'components/Tooltip/Tooltip';
 <StihiriNaGV day={props.day} date={props.date} />
 <span id="vhod" />
 
-## Вход
+## (3) Вход
 
-**П** Премудрость! Станем благоговейно!
+<MdxLoader src="Vespers/PremudrostVhod" />
 
 ### Вечерняя (входная) песнь «при возжжении светильника»
 
 <MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
+
+## (4) Чтения
+
+<MdxLoader src="Vespers/MirVsem" />
+
+<Parts date={props.date} partNames={['vespers.Прокимен триоди 1']} serviceType="Вечерня" />
+
+<span id="reading" />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<br />
+
+<>{props.readings}</>
+
+**[В это время свеча с жертвенника ставится на престол – на Евангелие.]**
+
+<Parts date={props.date} partNames={['vespers.Прокимен триоди 2']} serviceType="Вечерня" />
+
+<MdxLoader src="Lpod/Povelite" />
+
