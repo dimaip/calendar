@@ -39,7 +39,7 @@ const Kondacs = ({ day, date, serviceType, isMain = false }) => (
         alwaysShowFallback
         fallback={(noTexts) => (
             <>
-                {!isMain && <WeekdayKondacs day={day} date={date} serviceType={serviceType} noTexts={noTexts} />}
+                {!isMain && day?.fastName !== 'Великий пост' && <WeekdayKondacs day={day} date={date} serviceType={serviceType} noTexts={noTexts} />}
                 <SundayKondacs day={day} date={date} />
             </>
         )}

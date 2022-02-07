@@ -39,7 +39,7 @@ const Troparions = ({ day, date, serviceType, isMain = false }) => (
         alwaysShowFallback
         fallback={(noTexts) => (
             <>
-                {!isMain && <WeekdayTroparions day={day} date={date} serviceType={serviceType} noTexts={noTexts} />}
+                {!isMain && day?.fastName !== 'Великий пост' && <WeekdayTroparions day={day} date={date} serviceType={serviceType} noTexts={noTexts} />}
                 <SundayTroparions day={day} date={date} />
             </>
         )}
