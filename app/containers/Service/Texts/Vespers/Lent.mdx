@@ -138,73 +138,77 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
 <If condition={!((props.greatLent && props.dayOfWeek !== 5) || props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
 
-### Тропари
+    ### Тропари
 
-<>{props.troparions}</>
+    <>{props.troparions}</>
 
-<Parts date={props.date} partNames={['shared.Богородичен']} serviceType="Вечерня" />
+    <Parts date={props.date} partNames={['shared.Богородичен']} serviceType="Вечерня" />
 
-<MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+    <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
 
-<>{props.otpust}</>
+    <>{props.otpust}</>
 
 </If>
 
 <If condition={(props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
 
-<MdxLoader src="Vespers/LentEnding1" lang={props.lang} />
+    <MdxLoader src="Vespers/LentEnding1" lang={props.lang} />
 
-### Отпуст
+    ### Отпуст
 
-<Parts
-    date={props.date}
-    partNames={['shared.Отпуст Синаксарный']}
-    fallback={
-        props.isSunday || props.easterSeason ? (
-            <MdxLoader src="Shared/Ending/EasterOtpust" />
-        ) : (
-            <MdxLoader src="Shared/Ending/Otpust" />
-        )
-    }
-    serviceType="Вечерня"
-/>
+    <Parts
+        date={props.date}
+        partNames={['shared.Отпуст Синаксарный']}
+        fallback={
+            props.isSunday || props.easterSeason ? (
+                <MdxLoader src="Shared/Ending/EasterOtpust" />
+            ) : (
+                <MdxLoader src="Shared/Ending/Otpust" />
+            )
+        }
+        serviceType="Вечерня"
+    />
 
-<>{props.saints}</>
+    <>{props.saints}</>
 
-<MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} />
+    <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} greatLent={props.greatLent} />
 
 </If>
 
 <If condition={(props.greatLent && props.dayOfWeek !== 5)}>
 
-<If condition={!props.isEasterOffsetRange(-5, -3) && props.dayOfWeek === 0}>
-    <MdxLoader src="Vespers/LentEnding2" lang={props.lang} />
-</If>
-<If condition={!props.isEasterOffsetRange(-5, -3) && props.dayOfWeek !== 0}>
-    <MdxLoader src="Vespers/LentEnding3" lang={props.lang} />
-</If>
-<If condition={props.isEasterOffsetRange(-5, -3)}>
-    <MdxLoader src="Shared/TroparionPassion" lang={props.lang} />
-    <MdxLoader src="Vespers/LentEnding5" lang={props.lang} />
-</If>
+    <If condition={!props.isEasterOffsetRange(-5, -3) && props.dayOfWeek === 0}>
+        <MdxLoader src="Vespers/LentEnding2" lang={props.lang} />
+    </If>
+    <If condition={!props.isEasterOffsetRange(-5, -3) && props.dayOfWeek !== 0}>
+        <MdxLoader src="Vespers/LentEnding3" lang={props.lang} />
+    </If>
+    <If condition={props.isEasterOffsetRange(-5, -3)}>
+        <MdxLoader src="Shared/TroparionPassion" lang={props.lang} />
+        <MdxLoader src="Vespers/LentEnding5" lang={props.lang} />
+    </If>
 
-### Отпуст
+    ### Отпуст
 
-<Parts
-    date={props.isEasterOffsetRange(-3, -2) ? props.previousDate : props.date}
-    partNames={['shared.Отпуст Синаксарный']}
-    fallback={<MdxLoader src="Shared/Ending/Otpust" />}
-    serviceType="Вечерня"
-/>
+    <Parts
+        date={props.isEasterOffsetRange(-3, -2) ? props.previousDate : props.date}
+        partNames={['shared.Отпуст Синаксарный']}
+        fallback={<MdxLoader src="Shared/Ending/Otpust" />}
+        serviceType="Вечерня"
+    />
 
-<>{props.saints}</>
+    <>{props.saints}</>
 
-  <If condition={props.isEasterOffsetRange(-7 * 7 + 1)}>
-    ### Чин прощения с пением 136 псалма
+    <If condition={props.isEasterOffsetRange(-7 * 7 + 1)}>
+        <Then>
+            ### Чин прощения с пением 136 псалма
 
-    <MdxLoader src="Matins/Psalm136" lang={props.lang} />
-
-  </If>
+            <MdxLoader src="Matins/Psalm136" lang={props.lang} />
+        </Then>
+        <Else>
+            <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} greatLent={props.greatLent} />
+        </Else>
+    </If>
 
 </If>
 

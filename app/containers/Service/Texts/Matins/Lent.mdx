@@ -227,9 +227,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
     <>{props.saints}</>
 
-    <If condition={!props.greatLent}>
-        <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} />
-    </If>
+    <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} greatLent={props.greatLent} />
 
 </If>
 

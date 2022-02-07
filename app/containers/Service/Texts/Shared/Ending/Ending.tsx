@@ -1,4 +1,4 @@
-import { makeIsEasterOffsetRange, getFeastInfo } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, getFeastInfo, getLentInfo } from 'domain/getDayInfo';
 
 import React from 'react';
 import Parts from 'components/Parts/Parts';
@@ -12,6 +12,9 @@ const Ending = ({ date, saints, annunciation }) => {
     const isSunday = dateObject.getDay() === 0;
 
     const { title } = getFeastInfo(dateObject);
+    const { fastName } = getLentInfo(dateObject);
+
+    const greatLent = fastName === 'Великий пост';
 
     const otpust = (
         <Parts
@@ -37,7 +40,8 @@ const Ending = ({ date, saints, annunciation }) => {
             saints={saints}
             hidePreotpust={annunciation}
             isEasterOffsetRange={isEasterOffsetRange}
-            hideTverdina={isEasterOffsetRange(-49, 49) || title === 'Рождество Христово'}
+            hideTverdina={isEasterOffsetRange(0, 49) || title === 'Рождество Христово'}
+            greatLent={greatLent}
         />
     );
 };
