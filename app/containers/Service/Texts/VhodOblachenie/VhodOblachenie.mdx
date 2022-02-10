@@ -1,0 +1,73 @@
+import { Link } from 'react-router-dom';
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Tooltip from 'components/Tooltip/Tooltip';
+import If from 'components/If/If';
+import Parts from 'components/Parts/Parts';
+import { Note } from 'components/Note/Note';
+
+**Готовясь совершать божественное таинстводействие, пресвитер должен прежде примириться со всеми, и сам ни на кого ничего не иметь, и сердце своё, насколько возможно, блюсти от злых помышлений, воздерживаться с вечера и трезвиться вплоть до времени священнодействия.**
+
+**Когда же настаёт время, входит он в храм и, встретившись с дьяконом, вместе с ним совершает пред святыми дверями три поклона на восток.**
+
+## Входные молитвы
+
+<MdxLoader src="VhodOblachenie/Vozglas" />
+
+<If condition={props.isEasterOffsetRange(0, 38)}>
+    <Then>
+        <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
+    </Then>
+    <Else>
+        <If condition={!props.isEasterOffsetRange(39, 48)}>
+            <MdxLoader src="Shared/ParaklitChit" name="Д" />
+        </If>
+    </Else>
+</If>
+
+<MdxLoader src="Shared/STrisvatogo" name="Д" />
+
+<MdxLoader src="Shared/PokaiannyeTrops" />
+
+**Целуя икону Xpиста:**
+
+<MdxLoader src="Shared/TropNerukObr" />
+
+**Целуя икону Богоpодицы:**
+
+<MdxLoader src="Shared/BlagoserdiyaIstochnik" />
+
+**Затем, приклонив главу, пресвитер говорит:**
+
+<If condition={props.lpod}>
+    <Then>
+        <MdxLoader src="VhodOblachenie/MolitvaPredsLpod" />
+
+        **Далее священнослужители облачаются в священные одежды, делая знамение Креста, целуя их и произнося над каждой:**
+        Господу помолимся.
+    </Then>
+    <Else>
+        <MdxLoader src="VhodOblachenie/MolitvaPreds" />
+
+        **И кланяются [друг другу,] клиросам [и народу, испрашивая прощения]. И входят в алтарь, читая [псалом]:**
+
+        <MdxLoader src="VhodOblachenie/Psalm5sokr" />
+
+        ## Облачение
+
+        **Подxодят к пpестолу, кланяются тpижды, целуют св. Евангелие и св. пpестол. Беpут стиxаpи и ещё pаз тpижды кланяются на восток, говоpя:**
+
+        <MdxLoader src="VhodOblachenie/OblacheniePt1" />
+
+        <MdxLoader src="VhodOblachenie/OblacheniePt2" />
+
+        <MdxLoader src="VhodOblachenie/OblacheniePt3" />
+    </Else>
+
+</If>
+
+<Note>
+    Далее совершается{' '}
+    <Link style={{ textDecoration: 'underline' }} to={`/date/${props.date}/service/Литургия`}>
+        Божественная Литургия.
+    </Link>
+</Note>

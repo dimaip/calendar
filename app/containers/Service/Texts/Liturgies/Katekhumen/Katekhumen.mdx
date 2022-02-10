@@ -1,7 +1,13 @@
-import MdxLoader from 'containers/Service/Texts/MdxLoader';
-import Tooltip from 'components/Tooltip/Tooltip';
-import If from 'components/If/If';
-import Parts from 'components/Parts/Parts';
+import { Link } from 'react-router-dom';
+import { Note } from 'components/Note/Note';
+
+<br />
+<Note>
+    Перед началом Литургии совершаются{' '}
+    <Link style={{ textDecoration: 'underline' }} to={`/date/${props.date}/service/vhodOblachenie`}>
+        входные молитвы.
+    </Link>
+</Note>
 
 # I. <br/> Литургия оглашаемых
 
@@ -154,9 +160,9 @@ import Parts from 'components/Parts/Parts';
     ## (5) Отпуст оглашаемых<br/>(если есть)
 
     <MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
-  
+
     ### Ектения об оглашаемых
-  
+
     <MdxLoader src="Liturgies/Katekhumen/EktenyaOglashaemie" />
 
     ### Молитва об оглашаемых
