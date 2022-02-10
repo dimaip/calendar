@@ -1,17 +1,18 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Html from 'components/Html/Html';
 import Parts from 'components/Parts/Parts';
-import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
-import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
+import StihiriNaGV from 'containers/Service/Texts/Vespers/StihiriNaGV/StihiriNaGV';
+import StihiriNaStihah from 'containers/Service/Texts/Vespers/StihiriNaStihah/StihiriNaStihah';
 import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 import If from 'components/If/If';
 import Tooltip from 'components/Tooltip/Tooltip';
+import Otpust from './Otpust/Otpust';
 
 # I. Великопостная вечерня
 
 ## (1) Приуготовление
 
-<MdxLoader src="Liturgies/Katekhumen/Vozglas" /> - Аминь говорит Ч
+<MdxLoader src="Liturgies/Katekhumen/Vozglas" name="Ч" />
 
 <MdxLoader src="Shared/Pridite3" />
 
@@ -51,7 +52,7 @@ import Tooltip from 'components/Tooltip/Tooltip';
 
 <MdxLoader src="Shared/Psalm123" />
 
-<MdxLoader src="Shared/Slava&Alliluia" />
+<MdxLoader src="Shared/SlavaAlliluia" />
 
 ### Малая ектения
 
@@ -83,7 +84,7 @@ import Tooltip from 'components/Tooltip/Tooltip';
 
 <MdxLoader src="Shared/Psalm128" />
 
-<MdxLoader src="Shared/Slava&Alliluia" />
+<MdxLoader src="Shared/SlavaAlliluia" />
 
 ### Малая ектения
 
@@ -115,7 +116,7 @@ import Tooltip from 'components/Tooltip/Tooltip';
 
 <MdxLoader src="Shared/Psalm133" />
 
-<MdxLoader src="Shared/Slava&Alliluia" />
+<MdxLoader src="Shared/SlavaAlliluia" />
 
 ### Малая ектения
 
@@ -123,7 +124,11 @@ import Tooltip from 'components/Tooltip/Tooltip';
 
 <MdxLoader src="Lpod/SvetilnRu" />
 
-<MdxLoader src="Shared/SnovaSnova" /> - оставить только по-русски
+{console.log(props,'xxx')}
+
+<If condition={props.lang === 'ru' || props.lang === 'parallel'}>
+    <MdxLoader src="Shared/SnovaSnova" langOverride="ru" />
+</If>
 
 <MdxLoader src="Vespers/Prayer8" />
 
@@ -154,7 +159,7 @@ import Tooltip from 'components/Tooltip/Tooltip';
 
 <br />
 
-<>{props.readings}</>
+<>{props.firstReading}</>
 
 **[В это время свеча с жертвенника ставится на престол – на Евангелие.]**
 
@@ -166,7 +171,7 @@ import Tooltip from 'components/Tooltip/Tooltip';
 
 <br />
 
-<>{props.readings}</>
+<>{props.secondReading}</>
 
 <MdxLoader src="Lpod/MirTebe" />
 
@@ -185,22 +190,21 @@ import Tooltip from 'components/Tooltip/Tooltip';
 ## (5) Отпуст оглашаемых<br/>(если есть)
 
 <MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
-  
 ### Ектения об оглашаемых
-  
 <MdxLoader src="Liturgies/Katekhumen/EktenyaOglashaemie" />
 
 ### Молитва об оглашаемых
 
 <MdxLoader src="Lpod/OglashaemieLpod" />
 
-До 4й седмицы Великого поста
-
-<MdxLoader src="Liturgies/Katekhumen/Izydite" />
-
-Со среды 4-й седмицы Великого поста
-
-<MdxLoader src="Lpod/ProsveshaemieLpod" />
+<If condition={props.isEasterOffsetRange(-7 * 7, -7 * (7 - 3))}>
+    <Then>
+        <MdxLoader src="Liturgies/Katekhumen/Izydite" />
+    </Then>
+    <Else>
+        <MdxLoader src="Lpod/ProsveshaemieLpod" />
+    </Else>
+</If>
 
 **[Все непричащающиеся с благоговением покидают церковь.]**
 
@@ -288,4 +292,6 @@ import Tooltip from 'components/Tooltip/Tooltip';
 
 ## Отпуст
 
-<MdxLoader src="Lpod/Otpust" />
+<Otpust date={props.date} />
+
+{props.saints}
