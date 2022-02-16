@@ -62,6 +62,11 @@ const Readings = ({ brother = false }) => {
             pathname: `/date/${date}/service/Вечерня`,
             state: { backLink: history.location.pathname },
         };
+    } else if (service === '6-й час') {
+        to = {
+            pathname: `/date/${date}/service/sixthHour`,
+            state: { backLink: history.location.pathname },
+        };
     }
 
     const left = (
