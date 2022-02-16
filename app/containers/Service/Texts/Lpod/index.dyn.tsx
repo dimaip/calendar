@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import dateFormat from 'dateformat';
 import forEach from 'lodash.foreach';
 import useDay from 'hooks/useDay';
 import ReadingItem from 'containers/Readings/ReadingItem';
@@ -21,7 +22,11 @@ const Readings = ({ readings }) => (
 );
 
 const Lpod = ({ lang }) => {
-    const { date } = useParams();
+    const { date: yesterdayDate } = useParams();
+    const dateObj = new Date(yesterdayDate);
+    dateObj.setDate(dateObj.getDate() + 1);
+    const date = dateFormat(dateObj, 'yyyy-mm-dd');
+
     const { data: day } = useDay(date);
 
     const saints = day?.saints && (
@@ -60,6 +65,7 @@ const Lpod = ({ lang }) => {
         gospelReading,
         lang,
         date,
+        day,
         isEasterOffsetRange,
         saints,
     };
