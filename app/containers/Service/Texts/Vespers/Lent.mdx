@@ -22,15 +22,23 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
 <If condition={!props.sirnajaSedmitza && !props.greatLent && !props.annunciation}>
 
-**Ч** Аминь. Слава Тебе, Боже наш, слава Тебе!
+    **Ч** Аминь. Слава Тебе, Боже наш, слава Тебе!
 
-<MdxLoader src="Shared/Paraklit" lang={props.lang} />
+    <MdxLoader src="Shared/Paraklit" lang={props.lang} />
 
 </If>
 
-<If condition={props.sirnajaSedmitza || props.greatLent}>**Н** Аминь.</If>
+<If condition={props.sirnajaSedmitza || props.greatLent}>**{props.chinProshenija ? 'Ч' : 'Н'}** Аминь.</If>
 
-<>{props.easterSeason && <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />}</>
+<If condition={props.chinProshenija}>
+    <MdxLoader src="Shared/Pridite3" lang={props.lang}  />
+
+    ### Псалом 103
+
+    <MdxLoader src="Shared/Psalm103" lang={props.lang}  />
+    <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
+
+</If>
 
 <>
     {!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 1) && (
@@ -199,7 +207,7 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
     <>{props.saints}</>
 
-    <If condition={props.isEasterOffsetRange(-7 * 7 + 1)}>
+    <If condition={props.chinProshenija}>
         <Then>
             ### Чин прощения с пением 136 псалма
 

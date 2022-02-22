@@ -99,6 +99,7 @@ const Vespers = ({ date }) => {
             vselenskayaRoditelskayaSubbota ||
             sirnajaSedmitza ||
             isNedelaSkorbi(tomorrowDateObj));
+    const chinProshenija = isEasterOffsetRange(-(7 * 7 - 1));
     const props = {
         dayOfWeek,
         troparions,
@@ -109,6 +110,7 @@ const Vespers = ({ date }) => {
         brightWeek,
         brightOrOtdanie,
         isAscension,
+        chinProshenija,
         otpust,
         day: tomorrowDay,
         date: tomorrowDate,

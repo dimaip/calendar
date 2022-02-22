@@ -15,6 +15,16 @@ const makeServices = (date, readings = {}) => {
 
     return [
         {
+            title: 'Входные молитвы и облачение',
+            id: 'vhodOblachenie',
+            enabled: Boolean(readings['Литургия'] || lpod),
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Литургия',
+            warn: true,
+        },
+        {
             title: 'Литургия Иоанна Златоуста',
             id: 'zlatoust',
             enabled: readings['Литургия'] && !vasiliy && !lpod,

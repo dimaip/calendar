@@ -30,12 +30,15 @@ const Polunochnica = ({ date }): JSX.Element => {
     const { feastType } = getFeastInfo(tomorrowDateObj);
     const isHoliday = feastType === 'great' || feastType === '12';
 
+    const chinProshenija = isEasterOffsetRange(-(7 * 7 - 1));
+
     const props = {
         date: tomorrowDate,
         isEasterOffsetRange,
         greatLent,
         dayOfWeek,
         isHoliday,
+        chinProshenija,
         day: tomorrowDay || {},
         afterOct5BeforeVerbnoe,
     };

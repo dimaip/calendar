@@ -146,9 +146,10 @@ import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolu
 </If>
 
 <If condition={props.greatLent && props.dayOfWeek !== 0 && props.dayOfWeek !== 6}>
-### Молитва Св. Ефрема Сирина
+    ### Молитва Св. Ефрема Сирина
 
-<MdxLoader src="Shared/EfremSirin" />
+    <MdxLoader src="Shared/EfremSirin" chinProshenija={props.chinProshenija} />
+
 </If>
 
 <If condition={props.dayOfWeek !== 0}>

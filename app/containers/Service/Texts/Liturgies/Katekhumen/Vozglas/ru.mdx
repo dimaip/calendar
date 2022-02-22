@@ -5,6 +5,4 @@ import If from 'components/If/If';
 **П**
 Благословенно Царство Отца и Сына и Святаго Духа ныне и всегда и во веки веков!
 
-<If condition={!props.noAmin}>
-  **Н** Аминь.
-</If>
+<If condition={!props.noAmin}>**{props.name || 'Н'}** Аминь.</If>

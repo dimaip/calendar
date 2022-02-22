@@ -13,7 +13,6 @@ import VespersWithVasilyPassionThursdayMdx from './VespersWithVasilyPassionThurs
 import VespersWithVasilyPassionSaturdayMdx from './VespersWithVasilyPassionSaturday.mdx';
 import VespersWithVasilyChristmasMdx from './VespersWithVasilyChristmas.mdx';
 import VespersWithVasilyEpiphanyMdx from './VespersWithVasilyEpiphany.mdx';
-import 'containers/Service/Texts/Shared.css';
 import { getKatekhumenReadings } from './Katekhumen/Katekhumen';
 
 const Vasiliy = ({ lang, date }) => {

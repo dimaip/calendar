@@ -1,0 +1,297 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Html from 'components/Html/Html';
+import Parts from 'components/Parts/Parts';
+import StihiriNaGV from 'containers/Service/Texts/Vespers/StihiriNaGV/StihiriNaGV';
+import StihiriNaStihah from 'containers/Service/Texts/Vespers/StihiriNaStihah/StihiriNaStihah';
+import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+import If from 'components/If/If';
+import Tooltip from 'components/Tooltip/Tooltip';
+import Otpust from './Otpust/Otpust';
+
+# I. Великопостная вечерня
+
+## (1) Приуготовление
+
+<MdxLoader src="Liturgies/Katekhumen/Vozglas" name="Ч" />
+
+<MdxLoader src="Shared/Pridite3" />
+
+### Псалом 103
+
+<MdxLoader src="Shared/Psalm103" />
+
+<MdxLoader src="Lpod/SvetilnCsj" />
+
+<MdxLoader src="Vespers/VelikajaEktenia" />
+
+## (2) Предвечерние антифоны
+
+<MdxLoader src="Vespers/Prayer1" />
+
+### Чтение первого антифона (первой славы, или статьи) 18-й кафизмы (Пс 119–123)
+
+**В это время `[раскрывается антиминс, приносится на престол дискос,]` совершается поклонение, агнец перекладывается на дискос и покрывается, далее следует его каждение и снова совершается поклонение.**
+
+#### Псалом 119
+
+<MdxLoader src="Shared/Psalm119" />
+
+#### Псалом 120
+
+<MdxLoader src="Shared/Psalm120" />
+
+#### Псалом 121
+
+<MdxLoader src="Shared/Psalm121" />
+
+#### Псалом 122
+
+<MdxLoader src="Shared/Psalm122" />
+
+#### Псалом 123
+
+<MdxLoader src="Shared/Psalm123" />
+
+<MdxLoader src="Shared/SlavaAlliluia" />
+
+### Малая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+
+<MdxLoader src="Vespers/Prayer2" />
+
+### Чтение второго антифона (Пс 124–128)
+
+**[При этом совершается поклонение, каждение со свечой трижды вокруг престола и снова — поклонение.]**
+
+#### Псалом 124
+
+<MdxLoader src="Shared/Psalm124" />
+
+#### Псалом 125
+
+<MdxLoader src="Shared/Psalm125" />
+
+#### Псалом 126
+
+<MdxLoader src="Shared/Psalm126" />
+
+#### Псалом 127
+
+<MdxLoader src="Shared/Psalm127" />
+
+#### Псалом 128
+
+<MdxLoader src="Shared/Psalm128" />
+
+<MdxLoader src="Shared/SlavaAlliluia" />
+
+### Малая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+
+<MdxLoader src="Vespers/Prayer3" />
+
+### Чтение третьего антифона (Пс 129–133)
+
+**В это время совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каж­дение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
+
+#### Псалом 129
+
+<MdxLoader src="Shared/Psalm129" />
+
+#### Псалом 130
+
+<MdxLoader src="Shared/Psalm130" />
+
+#### Псалом 131
+
+<MdxLoader src="Shared/Psalm131" />
+
+#### Псалом 132
+
+<MdxLoader src="Shared/Psalm132" />
+
+#### Псалом 133
+
+<MdxLoader src="Shared/Psalm133" />
+
+<MdxLoader src="Shared/SlavaAlliluia" />
+
+### Малая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+
+<MdxLoader src="Lpod/SvetilnRu" />
+
+{console.log(props,'xxx')}
+
+<If condition={props.lang === 'ru' || props.lang === 'parallel'}>
+    <MdxLoader src="Shared/SnovaSnova" langOverride="ru" />
+</If>
+
+<MdxLoader src="Vespers/Prayer8" />
+
+<MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
+
+### Стихиры на «Господи, взываю»
+
+<StihiriNaGV day={props.day} date={props.date} />
+<span id="vhod" />
+
+## (3) Вход
+
+<MdxLoader src="Vespers/PremudrostVhod" />
+
+### Вечерняя (входная) песнь «при возжжении светильника»
+
+<MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
+
+## (4) Чтения
+
+<MdxLoader src="Vespers/MirVsem" />
+
+<Parts date={props.date} partNames={['vespers.Прокимен триоди 1']} serviceType="Вечерня" />
+
+<span id="reading" />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<br />
+
+<>{props.firstReading}</>
+
+**[В это время свеча с жертвенника ставится на престол – на Евангелие.]**
+
+<Parts date={props.date} partNames={['vespers.Прокимен триоди 2']} serviceType="Вечерня" />
+
+<MdxLoader src="Lpod/Povelite" />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<br />
+
+<>{props.secondReading}</>
+
+<MdxLoader src="Lpod/MirTebe" />
+
+### Проповедь
+
+<MdxLoader src="Lpod/ProkimenVelikiy" />
+
+**Все лежат ниц, предстоятель, стоя у престола, кадит его, а потом жертвенник. `[Далее читается, по обычаю, молитва св. Ефрема Сирина с тремя поклонами.]`**
+
+<MdxLoader src="Shared/SugubajaPolnaja" lang={props.lang} />
+
+### Молитва при усердном (сугубом) молении
+
+<MdxLoader src="Liturgies/Katekhumen/Userdnaya" />
+
+## (5) Отпуст оглашаемых<br/>(если есть)
+
+<MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
+### Ектения об оглашаемых
+<MdxLoader src="Liturgies/Katekhumen/EktenyaOglashaemie" />
+
+### Молитва об оглашаемых
+
+<MdxLoader src="Lpod/OglashaemieLpod" />
+
+<If condition={props.isEasterOffsetRange(-7 * 7 + 1, -7 * (7 - 3) + 1)}>
+    <Then>
+        <MdxLoader src="Liturgies/Katekhumen/Izydite" />
+    </Then>
+    <Else>
+        <MdxLoader src="Lpod/ProsveshaemieLpod" />
+    </Else>
+</If>
+
+**[Все непричащающиеся с благоговением покидают церковь.]**
+
+# II. Таинство причащения
+
+## (1) Приуготовление
+
+<MdxLoader src="Liturgies/Vernie/Priugotovlenie" />
+
+### Молитва первая
+
+<MdxLoader src="Lpod/Molitva1" />
+
+### Великая ектения <br /> (сокращённая)
+
+<MdxLoader src="Liturgies/Vernie/SokrEktenia" />
+
+### Молитва вторая
+
+<MdxLoader src="Lpod/Molitva2" />
+
+**Дьякон (или предстоятель) совершает малое каждение алтаря.**
+
+## (2) Вход
+
+### Входная песнь
+
+<MdxLoader src="Lpod/Vhod" />
+
+## (3) Приготовление ко причащению
+
+### Просительная ектения
+
+<MdxLoader src="Lpod/Prositelnaya" />
+
+### Молитва по поставлении св. даров на престол и перед причащением
+
+<MdxLoader src="Lpod/MolitvaPoPostDarov" />
+
+<MdxLoader src="Liturgies/Vernie/Otche" />
+
+<MdxLoader src="Lpod/MirVsem" />
+
+### Молитва главопреклонная
+
+<MdxLoader src="Lpod/MolitvaGlav" />
+
+### Молитва (перед откровением св. хлеба)
+
+<MdxLoader src="Lpod/MolitvaPeredOtkr" />
+
+## (4) Св. причащение
+
+### Причащение в алтаре
+
+<MdxLoader src="Lpod/PrichAltar" />
+
+### Причащение народа в храме
+
+<MdxLoader src="Lpod/PrichPeople" />
+
+## (5) Благодарение после причащения
+
+<MdxLoader src="Lpod/BlagAfterPrich" />
+
+### Ектения
+
+<MdxLoader src="Lpod/EktenyaBlag" />
+
+### Молитва благодарственная (после причащения всех)
+
+<MdxLoader src="Lpod/MolitvaBlag" />
+
+<MdxLoader src="Lpod/DrevnOtpust" />
+
+### Молитва заамвонная
+
+<MdxLoader src="Lpod/MolitvaZaamvon" />
+
+## (6) Заключительные молитвы
+
+<MdxLoader src="Lpod/ZaklMolitvy" />
+
+<MdxLoader src="Lpod/OkBlag" />
+
+## Отпуст
+
+<Otpust date={props.date} />
+
+{props.saints}
