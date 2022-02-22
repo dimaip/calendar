@@ -1,10 +1,7 @@
-import MdxLoader from 'containers/Service/Texts/MdxLoader';
-import Html from 'components/Html/Html';
-import Parts from 'components/Parts/Parts';
-import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
-import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
-import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
-import If from 'components/If/If';
+import Den1 from '../KanonAndKrit/Den1.mdx';
+import Den2 from '../KanonAndKrit/Den2.mdx';
+import Den3 from '../KanonAndKrit/Den3.mdx';
+import Den4 from '../KanonAndKrit/Den4.mdx';
 
 # I. Молитва после ужина
 
@@ -26,157 +23,18 @@ import If from 'components/If/If';
 
 ### Великий покаянный канон св. Андрея Критского, глас 6
 
-В понедельник Великого поста
-
-#### Песнь 1
-
-<MdxLoader src="KanonAndKrit/Pesn1" lang={props.lang} />
-
-#### Песнь 2
-
-<MdxLoader src="KanonAndKrit/Pesn2" lang={props.lang} />
-
-#### Песнь 3
-
-<MdxLoader src="KanonAndKrit/Pesn3" lang={props.lang} />
-
-#### Песнь 4
-
-<MdxLoader src="KanonAndKrit/Pesn4" lang={props.lang} />
-
-#### Песнь 5
-
-<MdxLoader src="KanonAndKrit/Pesn5" lang={props.lang} />
-
-#### Песнь 6
-
-<MdxLoader src="KanonAndKrit/Pesn6" lang={props.lang} />
-
-#### Песнь 7
-
-<MdxLoader src="KanonAndKrit/Pesn7" lang={props.lang} />
-
-#### Песнь 8
-
-<MdxLoader src="KanonAndKrit/Pesn8" lang={props.lang} />
-
-#### Песнь 9
-
-<MdxLoader src="KanonAndKrit/Pesn9" lang={props.lang} />
-
-Во вторник Великого поста
-
-#### Песнь 1
-
-<MdxLoader src="KanonAndKrit/Pesn12" lang={props.lang} />
-
-#### Песнь 2
-
-<MdxLoader src="KanonAndKrit/Pesn22" lang={props.lang} />
-
-#### Песнь 3
-
-<MdxLoader src="KanonAndKrit/Pesn32" lang={props.lang} />
-
-#### Песнь 4
-
-<MdxLoader src="KanonAndKrit/Pesn42" lang={props.lang} />
-
-#### Песнь 5
-
-<MdxLoader src="KanonAndKrit/Pesn52" lang={props.lang} />
-
-#### Песнь 6
-
-<MdxLoader src="KanonAndKrit/Pesn62" lang={props.lang} />
-
-#### Песнь 7
-
-<MdxLoader src="KanonAndKrit/Pesn72" lang={props.lang} />
-
-#### Песнь 8
-
-<MdxLoader src="KanonAndKrit/Pesn82" lang={props.lang} />
-
-#### Песнь 9
-
-<MdxLoader src="KanonAndKrit/Pesn92" lang={props.lang} />
-
-В среду Великого поста
-
-#### Песнь 1
-
-<MdxLoader src="KanonAndKrit/Pesn13" lang={props.lang} />
-
-#### Песнь 2
-
-<MdxLoader src="KanonAndKrit/Pesn23" lang={props.lang} />
-
-#### Песнь 3
-
-<MdxLoader src="KanonAndKrit/Pesn33" lang={props.lang} />
-
-#### Песнь 4
-
-<MdxLoader src="KanonAndKrit/Pesn43" lang={props.lang} />
-
-#### Песнь 5
-
-<MdxLoader src="KanonAndKrit/Pesn53" lang={props.lang} />
-
-#### Песнь 6
-
-<MdxLoader src="KanonAndKrit/Pesn63" lang={props.lang} />
-
-#### Песнь 7
-
-<MdxLoader src="KanonAndKrit/Pesn73" lang={props.lang} />
-
-#### Песнь 8
-
-<MdxLoader src="KanonAndKrit/Pesn83" lang={props.lang} />
-
-#### Песнь 9
-
-<MdxLoader src="KanonAndKrit/Pesn93" lang={props.lang} />
-
-В четверг Великого поста
-
-#### Песнь 1
-
-<MdxLoader src="KanonAndKrit/Pesn14" lang={props.lang} />
-
-#### Песнь 2
-
-<MdxLoader src="KanonAndKrit/Pesn24" lang={props.lang} />
-
-#### Песнь 3
-
-<MdxLoader src="KanonAndKrit/Pesn34" lang={props.lang} />
-
-#### Песнь 4
-
-<MdxLoader src="KanonAndKrit/Pesn44" lang={props.lang} />
-
-#### Песнь 5
-
-<MdxLoader src="KanonAndKrit/Pesn54" lang={props.lang} />
-
-#### Песнь 6
-
-<MdxLoader src="KanonAndKrit/Pesn64" lang={props.lang} />
-
-#### Песнь 7
-
-<MdxLoader src="KanonAndKrit/Pesn74" lang={props.lang} />
-
-#### Песнь 8
-
-<MdxLoader src="KanonAndKrit/Pesn84" lang={props.lang} />
-
-#### Песнь 9
-
-<MdxLoader src="KanonAndKrit/Pesn94" lang={props.lang} />
+<If condition={props.isEasterOffsetRange(-7 * 7 + 1)}>
+    <Den1 {...props} />
+</If>
+<If condition={props.isEasterOffsetRange(-7 * 7 + 2)}>
+    <Den2 {...props} />
+</If>
+<If condition={props.isEasterOffsetRange(-7 * 7 + 3)}>
+    <Den3 {...props} />
+</If>
+<If condition={props.isEasterOffsetRange(-7 * 7 + 4)}>
+    <Den4 {...props} />
+</If>
 
 ### Первое трипсалмие
 
@@ -242,13 +100,13 @@ import If from 'components/If/If';
 
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-В понедельник и среду вечером
+<If condition={props.isEasterOffsetRange(-7 * 7 + 1) || props.isEasterOffsetRange(-7 * 7 + 3)}>
+    <MdxLoader src="VelikoePovecherie/TropsGlas2" lang={props.lang} />
+</If>
 
-<MdxLoader src="VelikoePovecherie/TropsGlas2" lang={props.lang} />
-
-Во вторник и четверг вечером
-
-<MdxLoader src="VelikoePovecherie/TropsGlas8" lang={props.lang} />
+<If condition={props.isEasterOffsetRange(-7 * 7 + 2) || props.isEasterOffsetRange(-7 * 7 + 4)}>
+    <MdxLoader src="VelikoePovecherie/TropsGlas8" lang={props.lang} />
+</If>
 
 <MdxLoader src="Shared/GospodiPomiluy40" lang={props.lang} />
 

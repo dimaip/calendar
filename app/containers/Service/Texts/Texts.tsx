@@ -100,6 +100,16 @@ const makeServices = (date, readings = {}) => {
             warn: true,
         },
         {
+            title: 'Великое повечерие с каноном св. Андрея Критского',
+            id: 'velikoePovecherie',
+            enabled: isEasterOffsetRange(-7 * 7 + 1, -7 * 7 + 4),
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Часослов',
+            warn: true,
+        },
+        {
             title: 'Полуночница',
             id: 'polunochnica',
             enabled: !isDate(1, 6) && !isDate(1, 18),
