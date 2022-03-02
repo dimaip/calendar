@@ -81,7 +81,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                 ) : (
                                                     <>
                                                         <SectionHeading>Богослужебные чтения</SectionHeading>
-                                                        <ReadingList readings={day.readings || {}} />
+                                                        <ReadingList readings={day.readings || {}} date={date} />
 
                                                         <BorderedSection>
                                                             <SectionHeading>Святые дня</SectionHeading>
@@ -135,7 +135,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                                 >
                                                                     Душеполезные чтения
                                                                 </SectionHeading>
-                                                                <ReadingList brother readings={day.bReadings} />
+                                                                <ReadingList date={date} brother readings={day.bReadings} />
                                                             </>
                                                         )}
                                                         <Sermons date={date} sermons={sermons} />

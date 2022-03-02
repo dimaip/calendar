@@ -1,13 +1,17 @@
+import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import forEach from 'lodash.foreach';
 import { css } from 'emotion';
 
 import ReadingsForService from './ReadingsForService';
-// import Oct30Week from './Oct30Week';
+import Peace from './Peace';
+import Canon from './canon';
 
-const ReadingList = ({ readings, brother = false }) => {
+const ReadingList = ({ readings, brother = false, date }) => {
     const renderedReadings = [];
+    const isEasterOffsetRange = makeIsEasterOffsetRange(date);
 
     forEach(readings, (value, key) => {
         renderedReadings.push(
@@ -22,7 +26,12 @@ const ReadingList = ({ readings, brother = false }) => {
             `}
         >
             {renderedReadings}
-            {/* {!brother && <Oct30Week />} */}
+            {!brother && <Peace />}
+            {!brother && isEasterOffsetRange(-7 * 7 + 1, -7 * 7 + 4) && (
+                <div style={{ marginTop: 8 }}>
+                    <Canon />
+                </div>
+            )}
         </div>
     );
 };
