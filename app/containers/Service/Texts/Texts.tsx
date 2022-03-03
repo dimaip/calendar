@@ -203,6 +203,16 @@ const makeServices = (date, readings = {}) => {
             group: 'Домашняя молитва',
             warn: false,
         },
+        {
+            title: 'Молитва о правде и мире',
+            id: 'bratMolitvoslov',
+            enabled: true,
+            calendar: false,
+            lang: false,
+            skipRedirect: true,
+            group: 'Домашняя молитва',
+            warn: false,
+        },
     ];
 };
 export default makeServices;

@@ -16,11 +16,14 @@ import useReadings from 'hooks/useReadings';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
-
 import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
 import Parts from 'components/Parts/Parts';
-import BorderedSection from './BorderedSection';
 import { HeightUpdater } from 'components/HeightUpdate/HeightUpdater';
+import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
+import MDXProvider from 'containers/Service/MDXProvider';
+import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+
+import BorderedSection from './BorderedSection';
 import IosPrompt from './IosPrompt';
 import BurgerMenu from './BurgerMenu';
 import Services from './Services';
@@ -32,9 +35,7 @@ import Saints from './Saints';
 import HeadingBar from './HeadingBar';
 import ReadingList from './ReadingList';
 import Banner from './Banner';
-import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
-import MDXProvider from 'containers/Service/MDXProvider';
-import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+import Peace from './Peace';
 // import Oct30 from './Oct30';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
@@ -81,14 +82,16 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                 ) : (
                                                     <>
                                                         <SectionHeading>Богослужебные чтения</SectionHeading>
-                                                        <ReadingList readings={day.readings || {}} />
+                                                        <ReadingList readings={day.readings || {}} date={date} />
 
                                                         <BorderedSection>
                                                             <SectionHeading>Святые дня</SectionHeading>
                                                             <Saints saints={day.saints} date={date} />
                                                         </BorderedSection>
-
                                                         <ThisDays thisDays={thisDays} date={date} />
+                                                        <div style={{ marginBottom: 18 }}>
+                                                            <Peace />
+                                                        </div>
 
                                                         <BorderedSection>
                                                             <div
@@ -106,13 +109,10 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                             </div>
                                                             <MDXProvider>
                                                                 <div
-                                                                    className={
-                                                                        'mainHymns ' +
-                                                                        css`
-                                                                            margin-top: -16px;
-                                                                            margin-bottom: 28px;
-                                                                        `
-                                                                    }
+                                                                    className={`mainHymns ${css`
+                                                                        margin-top: -16px;
+                                                                        margin-bottom: 28px;
+                                                                    `}`}
                                                                 >
                                                                     <Suspense fallback={<Loader />}>
                                                                         <Troparions date={date} day={day} isMain />
@@ -135,7 +135,11 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                                 >
                                                                     Душеполезные чтения
                                                                 </SectionHeading>
-                                                                <ReadingList brother readings={day.bReadings} />
+                                                                <ReadingList
+                                                                    date={date}
+                                                                    brother
+                                                                    readings={day.bReadings}
+                                                                />
                                                             </>
                                                         )}
                                                         <Sermons date={date} sermons={sermons} />
