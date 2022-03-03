@@ -6,7 +6,7 @@ import forEach from 'lodash.foreach';
 import { css } from 'emotion';
 
 import ReadingsForService from './ReadingsForService';
-import Canon from './canon';
+import Canon from './Canon';
 
 const ReadingList = ({ readings, brother = false, date }) => {
     const renderedReadings = [];
