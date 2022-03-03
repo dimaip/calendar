@@ -28,6 +28,7 @@ const Lpod = ({ lang }) => {
     const date = dateFormat(dateObj, 'yyyy-mm-dd');
 
     const { data: day } = useDay(date);
+    const { data: yesterdayDay } = useDay(yesterdayDate);
 
     const saints = day?.saints && (
         <SolidSection marginTop={24} marginHorizontal={-12}>
@@ -36,7 +37,7 @@ const Lpod = ({ lang }) => {
         </SolidSection>
     );
 
-    const readings = day?.readings;
+    const readings = yesterdayDay?.readings;
     const readingsForService = readings?.['Вечерня'];
 
     const readingVersesWithType = [];
