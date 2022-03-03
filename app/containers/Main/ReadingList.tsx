@@ -6,7 +6,6 @@ import forEach from 'lodash.foreach';
 import { css } from 'emotion';
 
 import ReadingsForService from './ReadingsForService';
-import Peace from './Peace';
 import Canon from './canon';
 
 const ReadingList = ({ readings, brother = false, date }) => {
@@ -26,7 +25,6 @@ const ReadingList = ({ readings, brother = false, date }) => {
             `}
         >
             {renderedReadings}
-            {!brother && <Peace />}
             {!brother && isEasterOffsetRange(-7 * 7 + 1, -7 * 7 + 4) && (
                 <div style={{ marginTop: 8 }}>
                     <Canon />
