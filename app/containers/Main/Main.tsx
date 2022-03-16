@@ -36,6 +36,7 @@ import HeadingBar from './HeadingBar';
 import ReadingList from './ReadingList';
 import Banner from './Banner';
 import Peace from './Peace';
+import Books from './Books';
 // import Oct30 from './Oct30';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
@@ -91,6 +92,9 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                         <ThisDays thisDays={thisDays} date={date} />
                                                         <div style={{ marginBottom: 18 }}>
                                                             <Peace />
+                                                        </div>
+                                                        <div style={{ marginBottom: 18 }}>
+                                                            <Books />
                                                         </div>
 
                                                         <BorderedSection>
