@@ -22,7 +22,6 @@ const Books = (): JSX.Element => {
             <img
                 src="/assets/books.svg"
                 className={css`
-                    background-color: white;
                     display: block;
                     border-radius: 8px;
                 `}

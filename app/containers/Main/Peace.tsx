@@ -23,7 +23,6 @@ const Peace = (): JSX.Element => {
             <img
                 src="/assets/peace.svg"
                 className={css`
-                    background-color: white;
                     display: block;
                     border-radius: 8px;
                 `}

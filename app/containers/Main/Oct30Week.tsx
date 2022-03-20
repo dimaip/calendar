@@ -23,7 +23,6 @@ const Oct30Week = (): JSX.Element => {
             <img
                 src="/assets/Oct30Week.svg"
                 className={css`
-                    background-color: white;
                     display: block;
                     border-radius: 8px;
                 `}

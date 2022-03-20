@@ -17,7 +17,6 @@ const Oct30 = (): JSX.Element => (
         <img
             src="/assets/Oct30.svg"
             className={css`
-                background-color: white;
                 display: block;
                 border-radius: 8px;
                 margin: 0 -10px 18px -10px;
