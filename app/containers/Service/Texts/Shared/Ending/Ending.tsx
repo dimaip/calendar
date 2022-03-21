@@ -5,7 +5,7 @@ import Parts from 'components/Parts/Parts';
 
 import MdxLoader from '../../MdxLoader';
 
-const Ending = ({ date, saints, annunciation }) => {
+const Ending = ({ date, saints, annunciation, isFast }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);
     const dateObject = new Date(date);
@@ -41,7 +41,7 @@ const Ending = ({ date, saints, annunciation }) => {
             hidePreotpust={annunciation}
             isEasterOffsetRange={isEasterOffsetRange}
             hideTverdina={isEasterOffsetRange(0, 49) || title === 'Рождество Христово'}
-            greatLent={greatLent}
+            isFast={isFast}
         />
     );
 };

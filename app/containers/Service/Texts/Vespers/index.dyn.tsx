@@ -75,7 +75,6 @@ const Vespers = ({ date }) => {
         </SolidSection>
     );
     const isAnnunciation = tomorrowDay?.title === 'Благовещение Всесвятой Богородицы';
-    const otpust = <Ending date={tomorrowDate} saints={saints} annunciation={isAnnunciation} />;
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDate);
     const easterSeason = isEasterOffsetRange(0, 38);
@@ -99,6 +98,9 @@ const Vespers = ({ date }) => {
             vselenskayaRoditelskayaSubbota ||
             sirnajaSedmitza ||
             isNedelaSkorbi(tomorrowDateObj));
+
+    const otpust = <Ending date={tomorrowDate} saints={saints} annunciation={isAnnunciation} isFast={isFast} />;
+
     const chinProshenija = isEasterOffsetRange(-(7 * 7 - 1));
     const props = {
         dayOfWeek,
@@ -116,6 +118,7 @@ const Vespers = ({ date }) => {
         date: tomorrowDate,
         previousDate: date,
         isHoliday,
+        isFast,
         isEasterOffsetRange,
     };
 
