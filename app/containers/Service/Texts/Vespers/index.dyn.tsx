@@ -112,6 +112,7 @@ const Vespers = ({ date }) => {
         brightWeek,
         brightOrOtdanie,
         isAscension,
+        isAnnunciation,
         chinProshenija,
         otpust,
         day: tomorrowDay,
