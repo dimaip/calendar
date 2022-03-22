@@ -626,7 +626,7 @@ export const getFeastInfo = memoize(
         }
 
         if (new Date(y, 3, 7).getTime() === date.getTime()) {
-            title = 'Благовещение Всесвятой Богородицы';
+            title = 'Благовещение всесвятой Богородицы';
             feastType = '12';
         }
         if (new Date(y, 3, 7).getTime() <= date.getTime() && date.getTime() <= new Date(y, 3, 8).getTime()) {

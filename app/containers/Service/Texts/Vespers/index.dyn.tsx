@@ -74,7 +74,7 @@ const Vespers = ({ date }) => {
             <Saints saints={tomorrowDay.saints} date={date} />
         </SolidSection>
     );
-    const isAnnunciation = tomorrowDay?.title === 'Благовещение Всесвятой Богородицы';
+    const isAnnunciation = tomorrowDay?.title === 'Благовещение всесвятой Богородицы';
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDate);
     const easterSeason = isEasterOffsetRange(0, 38);
