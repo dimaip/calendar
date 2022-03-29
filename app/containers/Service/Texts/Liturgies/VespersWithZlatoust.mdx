@@ -6,10 +6,12 @@ import { css } from 'emotion';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 import Html from 'components/Html/Html';
+import VariableSection from 'containers/Service/Texts/VariableSection';
 import StihiriNaGV from '../Vespers/StihiriNaGV/StihiriNaGV';
 import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 import Trisvatoe from './Katekhumen/Trisvatoe/Trisvatoe';
 import Reading from './Katekhumen/Reading/Reading';
+import Aliluja from './Katekhumen/Aliluja/Aliluja';
 
 <span id="nachalo" />
 
@@ -134,7 +136,9 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/BlessBeforeGosp" />
 
-{props.aliluja}
+<VariableSection date={props.date}>
+    <Aliluja day={props.day} date={props.date} />
+</VariableSection>
 
 <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
 
