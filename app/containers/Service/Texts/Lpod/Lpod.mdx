@@ -235,6 +235,30 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 **Все лежат ниц, предстоятель, стоя у престола, кадит его, а потом жертвенник. `[Далее читается, по обычаю, молитва св. Ефрема Сирина с тремя поклонами.]`**
 
+<If condition={props.isEasterOffsetRange(-5)}>
+   
+    **Диакон исходит с Евангелием через царские врата на амвон.**
+   
+   ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+   
+   <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+   
+   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" /> убрать слова о Аллилуии
+   
+   ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+   
+   <div>
+    <ReadingsForService readingsForService={{ Великого Понедельника: ['Мф. XXIV, 3 - 35.'] }} />
+   </div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+   
+   ### Проповедь
+   
+   {props.sermons}
+   
+</If>
+
 <MdxLoader src="Shared/SugubajaPolnaja" lang={props.lang} />
 
 ### Молитва при усердном (сугубом) молении
