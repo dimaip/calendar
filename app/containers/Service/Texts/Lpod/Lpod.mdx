@@ -11,7 +11,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 # I. Великопостная вечерня
 
-## (1) Приуготовление
+## Приуготовление
 
 <MdxLoader src="Liturgies/Katekhumen/Vozglas" name="Ч" />
 
@@ -52,7 +52,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <MdxLoader src="Vespers/VelikajaEktenia" />
 
 <If condition={!props.isDate(4,7)}>
-    ## (2) Предвечерние антифоны
+    ## Предвечерние антифоны
 
     <MdxLoader src="Vespers/Prayer1" />
 
@@ -159,14 +159,15 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     <MdxLoader src="Vespers/Prayer8" />
       
 </If>
-   
-<MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
 
 <If condition={props.isDate(4,7)}>
 
-    **В это время совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каждение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
+    **С началом пения «Господи, взываю» совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каждение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
     
 </If>
+
+<MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
+
 ### Стихиры на «Господи, взываю»
 
 <StihiriNaGV day={props.day} date={props.date} />
@@ -180,7 +181,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
 
-## (4) Чтения
+## Чтения
 
 <MdxLoader src="Vespers/MirVsem" />
 
@@ -240,7 +241,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Liturgies/Katekhumen/Userdnaya" />
 
-## (5) Отпуст оглашаемых<br/>(если есть)
+## Отпуст оглашаемых<br/>(если есть)
 
 <MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
 ### Ектения об оглашаемых
@@ -263,7 +264,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 # II. Таинство причащения
 
-## (1) Приуготовление
+## Приуготовление
 
 <MdxLoader src="Liturgies/Vernie/Priugotovlenie" />
 
@@ -281,13 +282,13 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 **Дьякон (или предстоятель) совершает малое каждение алтаря.**
 
-## (2) Вход
+## Вход
 
 ### Входная песнь
 
 <MdxLoader src="Lpod/Vhod" />
 
-## (3) Приготовление ко причащению
+## Приготовление ко причащению
 
 ### Просительная ектения
 
@@ -309,7 +310,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Lpod/MolitvaPeredOtkr" />
 
-## (4) Св. причащение
+## Св. причащение
 
 ### Причащение в алтаре
 
@@ -319,7 +320,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Lpod/PrichPeople" />
 
-## (5) Благодарение после причащения
+## Благодарение после причащения
 
 <MdxLoader src="Lpod/BlagAfterPrich" />
 
@@ -337,7 +338,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Lpod/MolitvaZaamvon" />
 
-## (6) Заключительные молитвы
+## Заключительные молитвы
 
 <MdxLoader src="Lpod/ZaklMolitvy" />
 
