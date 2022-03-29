@@ -7,6 +7,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 import If from 'components/If/If';
 import Tooltip from 'components/Tooltip/Tooltip';
 import Otpust from './Otpust/Otpust';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 # I. Великопостная вечерня
 
@@ -124,8 +125,6 @@ import Otpust from './Otpust/Otpust';
 
 <MdxLoader src="Lpod/SvetilnRu" />
 
-{console.log(props,'xxx')}
-
 <If condition={props.lang === 'ru' || props.lang === 'parallel'}>
     <MdxLoader src="Shared/SnovaSnova" langOverride="ru" />
 </If>
@@ -159,7 +158,7 @@ import Otpust from './Otpust/Otpust';
 
 <br />
 
-<>{props.firstReading}</>
+<div>{props.firstReading}</div>
 
 **[В это время свеча с жертвенника ставится на престол – на Евангелие.]**
 
@@ -171,7 +170,27 @@ import Otpust from './Otpust/Otpust';
 
 <br />
 
-<>{props.secondReading}</>
+<div>{props.secondReading}</div>
+
+<If condition={props.isDate(4,7)}>
+
+    <br />
+
+    <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+    <div>
+        <ReadingsForService readingsForService={{ Благовещению: ['Исх. III, 1-8.'] }} />
+    </div>
+
+    <br />
+
+    <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+    <div>
+        <ReadingsForService readingsForService={{ Благовещению: ['Притч. VIII, 22-30.'] }} />
+    </div>
+
+</If>
 
 <MdxLoader src="Lpod/MirTebe" />
 

@@ -8,7 +8,7 @@ import { css } from 'emotion';
 import SolidSection from 'components/SolidSection/SolidSection';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';
-import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import { makeIsDate, makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import LpodMdx from './Lpod.mdx';
 
 const Readings = ({ readings }) => (
@@ -26,6 +26,7 @@ const Lpod = ({ lang }) => {
     const dateObj = new Date(yesterdayDate);
     dateObj.setDate(dateObj.getDate() + 1);
     const date = dateFormat(dateObj, 'yyyy-mm-dd');
+    const isDate = makeIsDate(dateObj);
 
     const { data: day } = useDay(date);
     const { data: yesterdayDay } = useDay(yesterdayDate);
@@ -66,6 +67,7 @@ const Lpod = ({ lang }) => {
         gospelReading,
         lang,
         date,
+        isDate,
         day,
         isEasterOffsetRange,
         saints,
