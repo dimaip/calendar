@@ -21,7 +21,33 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Shared/Psalm103" />
 
-<MdxLoader src="Lpod/SvetilnCsj" />
+<If condition={props.isDate(4,7)}>
+
+    **Священник во время предначинательного псалма по обычаю читает светильничные молитвы перед царскими вратами.**
+    
+    <MdxLoader src="Vespers/Prayer1" />
+    
+    <MdxLoader src="Vespers/Prayer2" />
+    
+    <MdxLoader src="Vespers/Prayer3" />
+    
+    <MdxLoader src="Vespers/Prayer4" />
+    
+    <MdxLoader src="Vespers/Prayer6" />
+    
+    <MdxLoader src="Vespers/Prayer7" />
+    
+    <MdxLoader src="Vespers/Prayer9" />
+    
+    <MdxLoader src="Vespers/Prayer8" />
+    
+</If>
+
+<If condition={!props.isDate(4,7)}>
+    
+    <MdxLoader src="Lpod/SvetilnCsj" />
+    
+</If>
 
 <MdxLoader src="Vespers/VelikajaEktenia" />
 
@@ -96,7 +122,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
     ### Чтение третьего антифона (Пс 129–133)
 
-    **В это время совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каж­дение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
+    **В это время совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каждение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
 
     #### Псалом 129
 
@@ -129,13 +155,18 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     <If condition={props.lang === 'ru' || props.lang === 'parallel'}>
         <MdxLoader src="Shared/SnovaSnova" langOverride="ru" />
     </If>
-
+    
+    <MdxLoader src="Vespers/Prayer8" />
+      
 </If>
-
-<MdxLoader src="Vespers/Prayer8" />
-
+   
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
 
+<If condition={props.isDate(4,7)}>
+
+    **В это время совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каждение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
+    
+</If>
 ### Стихиры на «Господи, взываю»
 
 <StihiriNaGV day={props.day} date={props.date} />
