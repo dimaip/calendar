@@ -43,10 +43,8 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     
 </If>
 
-<If condition={!props.isDate(4,7)}>
-    
+<If condition={!props.isDate(4, 7)}>
     <MdxLoader src="Lpod/SvetilnCsj" />
-    
 </If>
 
 <MdxLoader src="Vespers/VelikajaEktenia" />
@@ -243,12 +241,12 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
    
    <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
    
-   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" /> убрать слова о Аллилуии
+   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
    
    ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
    
    <div>
-    <ReadingsForService readingsForService={{ Великого Понедельника: ['Мф. XXIV, 3 - 35.'] }} />
+    <ReadingsForService readingsForService={{ 'Великого Понедельника': ['Мф. XXIV, 3 - 35.'] }} />
    </div>
    
    <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
@@ -267,12 +265,12 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
    
    <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
    
-   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" /> убрать слова о Аллилуии
+   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
    
    ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
    
    <div>
-    <ReadingsForService readingsForService={{ Великого Вторника: ['Мф. XXIV, 36 - XXVI, 2.'] }} />
+    <ReadingsForService readingsForService={{ 'Великого Вторника': ['Мф. XXIV, 36 - XXVI, 2.'] }} />
    </div>
    
    <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
@@ -291,12 +289,12 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
    
    <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
    
-   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" /> убрать слова о Аллилуии
+   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
    
    ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
    
    <div>
-    <ReadingsForService readingsForService={{ Великой Среды: ['Мф. XXVI, 6 - 16.'] }} />
+    <ReadingsForService readingsForService={{ 'Великой Среды': ['Мф. XXVI, 6 - 16.'] }} />
    </div>
    
    <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
@@ -318,8 +316,6 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
 ### Ектения об оглашаемых
 <MdxLoader src="Liturgies/Katekhumen/EktenyaOglashaemie" />
-
-### Молитва об оглашаемых
 
 <MdxLoader src="Lpod/OglashaemieLpod" />
 
