@@ -11,7 +11,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 # I. Великопостная вечерня
 
-## (1) Приуготовление
+## Приуготовление
 
 <MdxLoader src="Liturgies/Katekhumen/Vozglas" name="Ч" />
 
@@ -21,12 +21,36 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Shared/Psalm103" />
 
-<MdxLoader src="Lpod/SvetilnCsj" />
+<If condition={props.isDate(4,7)}>
+
+    **Священник во время предначинательного псалма по обычаю читает светильничные молитвы перед царскими вратами.**
+    
+    <MdxLoader src="Vespers/Prayer1" />
+    
+    <MdxLoader src="Vespers/Prayer2" />
+    
+    <MdxLoader src="Vespers/Prayer3" />
+    
+    <MdxLoader src="Vespers/Prayer4" />
+    
+    <MdxLoader src="Vespers/Prayer6" />
+    
+    <MdxLoader src="Vespers/Prayer7" />
+    
+    <MdxLoader src="Vespers/Prayer9" />
+    
+    <MdxLoader src="Vespers/Prayer8" />
+    
+</If>
+
+<If condition={!props.isDate(4, 7)}>
+    <MdxLoader src="Lpod/SvetilnCsj" />
+</If>
 
 <MdxLoader src="Vespers/VelikajaEktenia" />
 
 <If condition={!props.isDate(4,7)}>
-    ## (2) Предвечерние антифоны
+    ## Предвечерние антифоны
 
     <MdxLoader src="Vespers/Prayer1" />
 
@@ -96,7 +120,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
     ### Чтение третьего антифона (Пс 129–133)
 
-    **В это время совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каж­дение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
+    **В это время совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каждение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
 
     #### Псалом 129
 
@@ -129,10 +153,16 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     <If condition={props.lang === 'ru' || props.lang === 'parallel'}>
         <MdxLoader src="Shared/SnovaSnova" langOverride="ru" />
     </If>
-
+    
+    <MdxLoader src="Vespers/Prayer8" />
+      
 </If>
 
-<MdxLoader src="Vespers/Prayer8" />
+<If condition={props.isDate(4,7)}>
+
+    **С началом пения «Господи, взываю» совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каждение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
+    
+</If>
 
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
 
@@ -149,7 +179,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
 
-## (4) Чтения
+## Чтения
 
 <MdxLoader src="Vespers/MirVsem" />
 
@@ -203,19 +233,89 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 **Все лежат ниц, предстоятель, стоя у престола, кадит его, а потом жертвенник. `[Далее читается, по обычаю, молитва св. Ефрема Сирина с тремя поклонами.]`**
 
+<If condition={props.isEasterOffsetRange(-5)}>
+   
+    **Диакон исходит с Евангелием через царские врата на амвон.**
+   
+   ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+   
+   <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+   
+   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
+   
+   ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+   
+   <div>
+    <ReadingsForService readingsForService={{ 'Великого Понедельника': ['Мф. XXIV, 3 - 35.'] }} />
+   </div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+   
+   ### Проповедь
+   
+   {props.sermons}
+   
+</If>
+
+<If condition={props.isEasterOffsetRange(-4)}>
+   
+    **Диакон исходит с Евангелием через царские врата на амвон.**
+   
+   ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+   
+   <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+   
+   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
+   
+   ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+   
+   <div>
+    <ReadingsForService readingsForService={{ 'Великого Вторника': ['Мф. XXIV, 36 - XXVI, 2.'] }} />
+   </div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+   
+   ### Проповедь
+   
+   {props.sermons}
+   
+</If>
+
+<If condition={props.isEasterOffsetRange(-3)}>
+   
+    **Диакон исходит с Евангелием через царские врата на амвон.**
+   
+   ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+   
+   <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+   
+   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
+   
+   ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+   
+   <div>
+    <ReadingsForService readingsForService={{ 'Великой Среды': ['Мф. XXVI, 6 - 16.'] }} />
+   </div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+   
+   ### Проповедь
+   
+   {props.sermons}
+   
+</If>
+
 <MdxLoader src="Shared/SugubajaPolnaja" lang={props.lang} />
 
 ### Молитва при усердном (сугубом) молении
 
 <MdxLoader src="Liturgies/Katekhumen/Userdnaya" />
 
-## (5) Отпуст оглашаемых<br/>(если есть)
+## Отпуст оглашаемых<br/>(если есть)
 
 <MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
 ### Ектения об оглашаемых
 <MdxLoader src="Liturgies/Katekhumen/EktenyaOglashaemie" />
-
-### Молитва об оглашаемых
 
 <MdxLoader src="Lpod/OglashaemieLpod" />
 
@@ -232,7 +332,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 # II. Таинство причащения
 
-## (1) Приуготовление
+## Приуготовление
 
 <MdxLoader src="Liturgies/Vernie/Priugotovlenie" />
 
@@ -250,13 +350,13 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 **Дьякон (или предстоятель) совершает малое каждение алтаря.**
 
-## (2) Вход
+## Вход
 
 ### Входная песнь
 
 <MdxLoader src="Lpod/Vhod" />
 
-## (3) Приготовление ко причащению
+## Приготовление ко причащению
 
 ### Просительная ектения
 
@@ -278,7 +378,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Lpod/MolitvaPeredOtkr" />
 
-## (4) Св. причащение
+## Св. причащение
 
 ### Причащение в алтаре
 
@@ -288,7 +388,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Lpod/PrichPeople" />
 
-## (5) Благодарение после причащения
+## Благодарение после причащения
 
 <MdxLoader src="Lpod/BlagAfterPrich" />
 
@@ -306,7 +406,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Lpod/MolitvaZaamvon" />
 
-## (6) Заключительные молитвы
+## Заключительные молитвы
 
 <MdxLoader src="Lpod/ZaklMolitvy" />
 
