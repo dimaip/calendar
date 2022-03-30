@@ -73,11 +73,11 @@ const Service = () => {
     // If service not found, redirect
     if (!serviceId) {
         if (day?.readings) {
-            if (day?.readings?.['Литургия']) {
-                return <Redirect to={{ pathname: `/date/${date}/service/Литургия`, state: history.location.state }} />;
-            }
             if (day?.readings?.['Вечерня'] && lpod) {
                 return <Redirect to={{ pathname: `/date/${date}/service/Вечерня`, state: history.location.state }} />;
+            }
+            if (day?.readings?.['Литургия']) {
+                return <Redirect to={{ pathname: `/date/${date}/service/Литургия`, state: history.location.state }} />;
             }
             return <Redirect to={`/date/${date}`} />;
         }
