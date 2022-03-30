@@ -48,6 +48,8 @@ import Aliluja from './Katekhumen/Aliluja/Aliluja';
 <MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia" />
 
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
+    
+**Во время пения стихир на «Господи, взываю» заканчивается проскомидия. На проскомидии заготовляется один Агнец — для пятницы.**
 
 ### Стихиры на «Господи, взываю»
 
@@ -70,9 +72,9 @@ import Aliluja from './Katekhumen/Aliluja/Aliluja';
 
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
-<div>
-    <ReadingsForService readingsForService={{ Рядовое: ['Быт. IX, 18 - X, 1.'] }} />
-</div>
+<br />
+
+<div>{props.firstReading}</div>
 
 <br />
 
@@ -80,9 +82,9 @@ import Aliluja from './Katekhumen/Aliluja/Aliluja';
 
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
-<div>
-    <ReadingsForService readingsForService={{ Рядовое: ['Притч. XII, 23 - XIII, 9.'] }} />
-</div>
+<br />
+
+<div>{props.secondReading}</div>
 
 <br />
 
@@ -108,11 +110,11 @@ import Aliluja from './Katekhumen/Aliluja/Aliluja';
 
 <Trisvatoe date={props.date} />
 
-## (4) Чтения и прошения верных
+## Чтения и прошения верных
 
 <Reading day={props.day} date={props.date} />
 
-## Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
 <div
     className={css`
@@ -124,7 +126,7 @@ import Aliluja from './Katekhumen/Aliluja/Aliluja';
 
 <MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
 
-## Проповедь
+### Проповедь
 
 > **[Д** Господу помолимся!**]**
 
@@ -142,7 +144,7 @@ import Aliluja from './Katekhumen/Aliluja/Aliluja';
 
 <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
 
-## Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
 <div
     className={css`
@@ -154,7 +156,7 @@ import Aliluja from './Katekhumen/Aliluja/Aliluja';
 
 <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
 
-## Проповедь
+### Проповедь
 
 {props.sermons}
 
