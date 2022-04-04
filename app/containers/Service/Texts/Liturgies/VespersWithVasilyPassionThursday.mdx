@@ -135,12 +135,24 @@ import Reading from './Katekhumen/Reading/Reading';
 
 ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
-<div
-    className={css`
-        margin: 0 5px;
-    `}
->
-    {props.gospel}
+<div>
+    <ReadingsForService readingsForService={{ 'Евангелие составное': ['Мф., 107 зач., XXVI, 1-20.'] }} />
+</div>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Евангелие составное': ['Ин., 44 зач., XIII, 3-17.'] }} />
+</div>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Евангелие составное': ['Мф., 108 зач. (от полу́), XXVI, 21-39.'] }} />
+</div>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Евангелие составное': ['Лк., 109 зач., XXII, 43-45.'] }} />
+</div>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Евангелие составное': ['Мф., 108 зач., XXVI, 40 - XXVII, 2.'] }} />
 </div>
 
 <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
