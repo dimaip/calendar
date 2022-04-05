@@ -19,19 +19,42 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/Vozglas" noAmin />
 
+<MdxLoader src="Shared/SlavaTebe" lang={props.lang} />
+<MdxLoader src="Shared/ParaklitChit" lang={props.lang} />
 <MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
 
-<MdxLoader src="Vespers/Psalm103" lang={props.lang} chitaetsa />
+### Псалом 103
+
+<MdxLoader src="Shared/Psalm103" chitaetsa lang={props.lang} />
+
+**Священник во время предначинательного псалма по обычаю читает светильничные молитвы перед царскими вратами.**
+
+<MdxLoader src="Vespers/Prayer1" />
+
+<MdxLoader src="Vespers/Prayer2" />
+
+<MdxLoader src="Vespers/Prayer3" />
+
+<MdxLoader src="Vespers/Prayer4" />
+
+<MdxLoader src="Vespers/Prayer6" />
+
+<MdxLoader src="Vespers/Prayer7" />
+
+<MdxLoader src="Vespers/Prayer9" />
+
+<MdxLoader src="Vespers/Prayer8" />
 
 <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
-
-<MdxLoader src="Vespers/Prayer8" lang={props.lang} />
 
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
 
 ### Стихиры на «Господи, взываю»
 
 <StihiriNaGV day={props.tomorrowDay} date={props.tomorrowDate} />
+
+**В это время заканчивается чин проскомидии, на котором приготовляются два Агнца: один для данной Литургии, а другой – для приготовления запасных Святых Даров на весь год.**
+
 <span id="vhod" />
 
 ## Вход
@@ -42,7 +65,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
 
-## Чтения
+## Чтения и прошения верных
 
 <Parts date={props.tomorrowDate} partNames={['vespers.Прокимен триоди 1']} serviceType="Вечерня" />
 
@@ -80,11 +103,9 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <Trisvatoe date={props.date} />
 
-## (4) Чтения и прошения верных
-
 <Reading day={props.day} date={props.date} />
 
-## Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
 <div
     className={css`
@@ -96,7 +117,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
 
-## Проповедь
+### Проповедь
 
 > **[Д** Господу помолимся!**]**
 
@@ -112,19 +133,31 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
 
-## Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
-<div
-    className={css`
-        margin: 0 5px;
-    `}
->
-    {props.gospel}
+<div>
+    <ReadingsForService readingsForService={{ 'Евангелие составное': ['Мф., 107 зач., XXVI, 1-20.'] }} />
+</div>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Евангелие составное': ['Ин., 44 зач., XIII, 3-17.'] }} />
+</div>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Евангелие составное': ['Мф., 108 зач. (от полу́), XXVI, 21-39.'] }} />
+</div>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Евангелие составное': ['Лк., 109 зач., XXII, 43-45.'] }} />
+</div>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Евангелие составное': ['Мф., 108 зач., XXVI, 40 - XXVII, 2.'] }} />
 </div>
 
 <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
 
-## Проповедь
+### Проповедь
 
 {props.sermons}
 
@@ -155,7 +188,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
     ## \*\*\*
 
-    ## (5) Отпуст оглашаемых<br/>(если есть)
+    ## Отпуст оглашаемых<br/>(если есть)
 
     <MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
 
