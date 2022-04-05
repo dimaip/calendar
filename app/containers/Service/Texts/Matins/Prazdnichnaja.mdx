@@ -7,6 +7,7 @@ import If from 'components/If/If';
 import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 import StihiriAfterPsalm50 from './StihiriAfterPsalm50/StihiriAfterPsalm50';
 import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
+import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohvala.mdx';
 
 <span id="nachalo" />
 
@@ -20,13 +21,25 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
 {props.easterSeason && (props.brightOrOtdanie ? <MdxLoader src="Shared/DaVosstanetBog" /> : <MdxLoader src="Shared/EasterTroparion3x" />)}
 
-<>{(props.isHoliday || props.brightWeek) && <MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />}</>
+<>
+    {(props.isHoliday || props.brightWeek || props.isEasterOffsetRange(-7 * 2 - 1)) && (
+        <MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />
+    )}
+</>
 
-<>{(props.isHoliday || props.dayOfWeek === 1) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
+<>
+    {(props.isHoliday || props.dayOfWeek === 1 || props.isEasterOffsetRange(-7 * 2 - 1)) && (
+        <MdxLoader src="Matins/Prayer1" lang={props.lang} />
+    )}
+</>
 
-<>{props.isHoliday && <MdxLoader src="Matins/BogGospod" lang={props.lang} />}</>
+<>
+    {(props.isHoliday || props.isEasterOffsetRange(-7 * 2 - 1)) && (
+        <MdxLoader src="Matins/BogGospod" lang={props.lang} />
+    )}
+</>
 
-<If condition={props.isHoliday}>
+<If condition={props.isHoliday || props.isEasterOffsetRange(-7 * 2 - 1)}>
     {props.troparions}
     <Parts date={props.date} partNames={['shared.Богородичен']} serviceType="Утреня" />
     <MdxLoader src="Shared/SnovaSnova" lang={props.lang} />
@@ -83,15 +96,18 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
 <>{(props.isHoliday || props.dayOfWeek === 6) && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
 
+<If condition={props.isEasterOffsetRange(-7 * 2 - 1)}>
+    <AkafistPohvala {...props} />
+</If>
+
 <>{props.isHoliday && <MdxLoader src="Matins/Prayer10" lang={props.lang} />}</>
 <>{props.isHoliday && <Psalm50 lang={props.lang} />}</>
 
 <StihiriAfterPsalm50 date={props.date} />
 
-{props.dayOfWeek === 0 && !props.isEasterOffsetRange(49) && (
-
-<MdxLoader src="Matins/PesnBogoroditsy" lang={props.lang} />
-)}
+<If condition={props.isEasterOffsetRange(-7 * 2 - 1) || (props.dayOfWeek === 0 && !props.isEasterOffsetRange(49))}>
+    <MdxLoader src="Matins/PesnBogoroditsy" lang={props.lang} />
+</If>
 
 <If condition={props.isHoliday}>
     <MdxLoader src="Shared/SnovaSnova" lang={props.lang} />
