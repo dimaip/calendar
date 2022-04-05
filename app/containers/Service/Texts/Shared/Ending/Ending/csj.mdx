@@ -30,4 +30,13 @@ import If from 'components/If/If';
 
 <br />
 
-<>{!props.hideTverdina && <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} greatLent={props.greatLent} />}</>
+<>
+    {!props.hideTverdina && (
+        <MdxLoader
+            src="Shared/Ending/Tverdina"
+            isEasterOffsetRange={props.isEasterOffsetRange}
+            lang={props.lang}
+            isFast={props.isFast}
+        />
+    )}
+</>

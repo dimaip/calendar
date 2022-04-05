@@ -41,40 +41,35 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 </If>
 
 <>
-    {!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 1) && (
+    {(props.isAnnunciation || props.dayOfWeek === 6 || props.dayOfWeek === 1) && (
         <MdxLoader src="Vespers/Prayer1" lang={props.lang} />
     )}
 </>
 <>
-    {!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 2) && (
+    {!props.isAnnunciation && (props.dayOfWeek === 6 || props.dayOfWeek === 2) && (
         <MdxLoader src="Vespers/Prayer2" lang={props.lang} />
     )}
 </>
 <>
-    {!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 3) && (
+    {!props.isAnnunciation && (props.dayOfWeek === 6 || props.dayOfWeek === 3) && (
         <MdxLoader src="Vespers/Prayer3" lang={props.lang} />
     )}
 </>
 <>
-    {!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 4) && (
+    {!props.isAnnunciation && (props.dayOfWeek === 6 || props.dayOfWeek === 4) && (
         <MdxLoader src="Vespers/Prayer4" lang={props.lang} />
     )}
 </>
 <>
-    {!props.annunciation && !props.isAscension && (props.dayOfWeek === 6 || props.dayOfWeek === 5) && (
+    {!props.isAnnunciation && (props.dayOfWeek === 6 || props.dayOfWeek === 5) && (
         <MdxLoader src="Vespers/Prayer5" lang={props.lang} />
     )}
 </>
+<>{!props.isAnnunciation && props.dayOfWeek === 6 && <MdxLoader src="Vespers/Prayer6" lang={props.lang} />}</>
 <>
-    {!props.annunciation && !props.isAscension && props.dayOfWeek === 6 && (
-        <MdxLoader src="Vespers/Prayer6" lang={props.lang} />
+    {!props.isAnnunciation && !props.greatLent && (props.dayOfWeek === 6 || props.dayOfWeek === 0) && (
+        <MdxLoader src="Vespers/Prayer7" lang={props.lang} />
     )}
-</>
-<>
-    {!props.annunciation &&
-        !props.isAscension &&
-        !props.greatLent &&
-        (props.dayOfWeek === 6 || props.dayOfWeek === 0) && <MdxLoader src="Vespers/Prayer7" lang={props.lang} />}
 </>
 
 <MdxLoader src="Vespers/Prayer8" lang={props.lang} />
@@ -179,7 +174,7 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
     <>{props.saints}</>
 
-    <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} greatLent={props.greatLent} />
+    <MdxLoader src="Shared/Ending/Tverdina" isEasterOffsetRange={props.isEasterOffsetRange} lang={props.lang} isFast={props.isFast} />
 
 </If>
 
@@ -214,7 +209,7 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
             <MdxLoader src="Matins/Psalm136" lang={props.lang} />
         </Then>
         <Else>
-            <MdxLoader src="Shared/Ending/Tverdina" lang={props.lang} greatLent={props.greatLent} />
+            <MdxLoader src="Shared/Ending/Tverdina" isEasterOffsetRange={props.isEasterOffsetRange} lang={props.lang} isFast={props.isFast} />
         </Else>
     </If>
 

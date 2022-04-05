@@ -6,10 +6,12 @@ import { css } from 'emotion';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 import Html from 'components/Html/Html';
+import VariableSection from 'containers/Service/Texts/VariableSection';
 import StihiriNaGV from '../Vespers/StihiriNaGV/StihiriNaGV';
 import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 import Trisvatoe from './Katekhumen/Trisvatoe/Trisvatoe';
 import Reading from './Katekhumen/Reading/Reading';
+import Aliluja from './Katekhumen/Aliluja/Aliluja';
 
 <span id="nachalo" />
 
@@ -21,13 +23,33 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Vespers/Priidite" lang={props.lang} hideLast />
 
-<MdxLoader src="Vespers/Psalm103" lang={props.lang} chitaetsa />
+<MdxLoader src="Shared/Psalm103" />
 
-<MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
+**Священник во время предначинательного псалма по обычаю читает светильничные молитвы перед царскими вратами.**
 
-<MdxLoader src="Vespers/Prayer8" lang={props.lang} />
+<MdxLoader src="Vespers/Prayer1" />
+
+<MdxLoader src="Vespers/Prayer2" />
+
+<MdxLoader src="Vespers/Prayer3" />
+
+<MdxLoader src="Vespers/Prayer4" />
+
+<MdxLoader src="Vespers/Prayer6" />
+
+<MdxLoader src="Vespers/Prayer7" />
+
+<MdxLoader src="Vespers/Prayer9" />
+
+<MdxLoader src="Vespers/Prayer8" />
+
+### Великая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia" />
 
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
+    
+**Во время пения стихир на «Господи, взываю» заканчивается проскомидия. На проскомидии заготовляется один Агнец — для пятницы.**
 
 ### Стихиры на «Господи, взываю»
 
@@ -44,25 +66,25 @@ import Reading from './Katekhumen/Reading/Reading';
 
 ## Чтения
 
-<Parts date={props.date} partNames={['vespers.Прокимен триоди 1']} serviceType="Вечерня" />
+<Parts date={props.tomorrowDate} partNames={['vespers.Прокимен триоди 1']} serviceType="Вечерня" />
 
 <span id="reading" />
 
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
-<div>
-    <ReadingsForService readingsForService={{ Рядовое: ['Быт. IX, 18 - X, 1.'] }} />
-</div>
+<br />
+
+<div>{props.firstReading}</div>
 
 <br />
 
-<Parts date={props.date} partNames={['vespers.Прокимен триоди 2']} serviceType="Вечерня" />
+<Parts date={props.tomorrowDate} partNames={['vespers.Прокимен триоди 2']} serviceType="Вечерня" />
 
 <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
-<div>
-    <ReadingsForService readingsForService={{ Рядовое: ['Притч. XII, 23 - XIII, 9.'] }} />
-</div>
+<br />
+
+<div>{props.secondReading}</div>
 
 <br />
 
@@ -88,11 +110,11 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <Trisvatoe date={props.date} />
 
-## (4) Чтения и прошения верных
+## Чтения и прошения верных
 
 <Reading day={props.day} date={props.date} />
 
-## Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
 <div
     className={css`
@@ -104,7 +126,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
 
-## Проповедь
+### Проповедь
 
 > **[Д** Господу помолимся!**]**
 
@@ -116,11 +138,13 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/BlessBeforeGosp" />
 
-{props.aliluja}
+<VariableSection date={props.date}>
+    <Aliluja day={props.day} date={props.date} />
+</VariableSection>
 
 <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
 
-## Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
 <div
     className={css`
@@ -132,7 +156,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
 
-## Проповедь
+### Проповедь
 
 {props.sermons}
 

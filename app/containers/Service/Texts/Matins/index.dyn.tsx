@@ -74,8 +74,6 @@ const Matins = ({ date }) => {
         </SolidSection>
     );
 
-    const otpust = <Ending date={date} saints={saints} />;
-
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const easterSeason = isEasterOffsetRange(0, 38);
     const brightWeek = isEasterOffsetRange(0, 6);
@@ -109,6 +107,8 @@ const Matins = ({ date }) => {
             sirnajaSedmitza ||
             isNedelaSkorbi(dateObj));
 
+    const otpust = <Ending date={date} saints={saints} isFast={isFast} />;
+
     const props = {
         dayOfWeek,
         troparions,
@@ -122,6 +122,7 @@ const Matins = ({ date }) => {
         otpust,
         day,
         date,
+        isFast,
         isEasterOffsetRange,
         SectionLayout,
         isHoliday,

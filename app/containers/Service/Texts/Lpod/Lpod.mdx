@@ -7,6 +7,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 import If from 'components/If/If';
 import Tooltip from 'components/Tooltip/Tooltip';
 import Otpust from './Otpust/Otpust';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 # I. Великопостная вечерня
 
@@ -24,110 +25,111 @@ import Otpust from './Otpust/Otpust';
 
 <MdxLoader src="Vespers/VelikajaEktenia" />
 
-## (2) Предвечерние антифоны
+<If condition={!props.isDate(4,7)}>
+    ## (2) Предвечерние антифоны
 
-<MdxLoader src="Vespers/Prayer1" />
+    <MdxLoader src="Vespers/Prayer1" />
 
-### Чтение первого антифона (первой славы, или статьи) 18-й кафизмы (Пс 119–123)
+    ### Чтение первого антифона (первой славы, или статьи) 18-й кафизмы (Пс 119–123)
 
-**В это время `[раскрывается антиминс, приносится на престол дискос,]` совершается поклонение, агнец перекладывается на дискос и покрывается, далее следует его каждение и снова совершается поклонение.**
+    **В это время `[раскрывается антиминс, приносится на престол дискос,]` совершается поклонение, агнец перекладывается на дискос и покрывается, далее следует его каждение и снова совершается поклонение.**
 
-#### Псалом 119
+    #### Псалом 119
 
-<MdxLoader src="Shared/Psalm119" />
+    <MdxLoader src="Shared/Psalm119" />
 
-#### Псалом 120
+    #### Псалом 120
 
-<MdxLoader src="Shared/Psalm120" />
+    <MdxLoader src="Shared/Psalm120" />
 
-#### Псалом 121
+    #### Псалом 121
 
-<MdxLoader src="Shared/Psalm121" />
+    <MdxLoader src="Shared/Psalm121" />
 
-#### Псалом 122
+    #### Псалом 122
 
-<MdxLoader src="Shared/Psalm122" />
+    <MdxLoader src="Shared/Psalm122" />
 
-#### Псалом 123
+    #### Псалом 123
 
-<MdxLoader src="Shared/Psalm123" />
+    <MdxLoader src="Shared/Psalm123" />
 
-<MdxLoader src="Shared/SlavaAlliluia" />
+    <MdxLoader src="Shared/SlavaAlliluia" />
 
-### Малая ектения
+    ### Малая ектения
 
-<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+    <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
 
-<MdxLoader src="Vespers/Prayer2" />
+    <MdxLoader src="Vespers/Prayer2" />
 
-### Чтение второго антифона (Пс 124–128)
+    ### Чтение второго антифона (Пс 124–128)
 
-**[При этом совершается поклонение, каждение со свечой трижды вокруг престола и снова — поклонение.]**
+    **[При этом совершается поклонение, каждение со свечой трижды вокруг престола и снова — поклонение.]**
 
-#### Псалом 124
+    #### Псалом 124
 
-<MdxLoader src="Shared/Psalm124" />
+    <MdxLoader src="Shared/Psalm124" />
 
-#### Псалом 125
+    #### Псалом 125
 
-<MdxLoader src="Shared/Psalm125" />
+    <MdxLoader src="Shared/Psalm125" />
 
-#### Псалом 126
+    #### Псалом 126
 
-<MdxLoader src="Shared/Psalm126" />
+    <MdxLoader src="Shared/Psalm126" />
 
-#### Псалом 127
+    #### Псалом 127
 
-<MdxLoader src="Shared/Psalm127" />
+    <MdxLoader src="Shared/Psalm127" />
 
-#### Псалом 128
+    #### Псалом 128
 
-<MdxLoader src="Shared/Psalm128" />
+    <MdxLoader src="Shared/Psalm128" />
 
-<MdxLoader src="Shared/SlavaAlliluia" />
+    <MdxLoader src="Shared/SlavaAlliluia" />
 
-### Малая ектения
+    ### Малая ектения
 
-<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+    <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
 
-<MdxLoader src="Vespers/Prayer3" />
+    <MdxLoader src="Vespers/Prayer3" />
 
-### Чтение третьего антифона (Пс 129–133)
+    ### Чтение третьего антифона (Пс 129–133)
 
-**В это время совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каж­дение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
+    **В это время совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каж­дение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
 
-#### Псалом 129
+    #### Псалом 129
 
-<MdxLoader src="Shared/Psalm129" />
+    <MdxLoader src="Shared/Psalm129" />
 
-#### Псалом 130
+    #### Псалом 130
 
-<MdxLoader src="Shared/Psalm130" />
+    <MdxLoader src="Shared/Psalm130" />
 
-#### Псалом 131
+    #### Псалом 131
 
-<MdxLoader src="Shared/Psalm131" />
+    <MdxLoader src="Shared/Psalm131" />
 
-#### Псалом 132
+    #### Псалом 132
 
-<MdxLoader src="Shared/Psalm132" />
+    <MdxLoader src="Shared/Psalm132" />
 
-#### Псалом 133
+    #### Псалом 133
 
-<MdxLoader src="Shared/Psalm133" />
+    <MdxLoader src="Shared/Psalm133" />
 
-<MdxLoader src="Shared/SlavaAlliluia" />
+    <MdxLoader src="Shared/SlavaAlliluia" />
 
-### Малая ектения
+    ### Малая ектения
 
-<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+    <MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
 
-<MdxLoader src="Lpod/SvetilnRu" />
+    <MdxLoader src="Lpod/SvetilnRu" />
 
-{console.log(props,'xxx')}
+    <If condition={props.lang === 'ru' || props.lang === 'parallel'}>
+        <MdxLoader src="Shared/SnovaSnova" langOverride="ru" />
+    </If>
 
-<If condition={props.lang === 'ru' || props.lang === 'parallel'}>
-    <MdxLoader src="Shared/SnovaSnova" langOverride="ru" />
 </If>
 
 <MdxLoader src="Vespers/Prayer8" />
@@ -159,7 +161,7 @@ import Otpust from './Otpust/Otpust';
 
 <br />
 
-<>{props.firstReading}</>
+<div>{props.firstReading}</div>
 
 **[В это время свеча с жертвенника ставится на престол – на Евангелие.]**
 
@@ -171,7 +173,27 @@ import Otpust from './Otpust/Otpust';
 
 <br />
 
-<>{props.secondReading}</>
+<div>{props.secondReading}</div>
+
+<If condition={props.isDate(4,7)}>
+
+    <br />
+
+    <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+    <div>
+        <ReadingsForService readingsForService={{ Благовещению: ['Исх. III, 1-8.'] }} />
+    </div>
+
+    <br />
+
+    <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+    <div>
+        <ReadingsForService readingsForService={{ Благовещению: ['Притч. VIII, 22-30.'] }} />
+    </div>
+
+</If>
 
 <MdxLoader src="Lpod/MirTebe" />
 

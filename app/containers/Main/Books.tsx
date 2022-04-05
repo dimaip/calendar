@@ -1,13 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
-import { Link, useParams } from 'react-router-dom';
 import TagManager from 'react-gtm-module';
 
-const Canon = (): JSX.Element => {
-    const { date } = useParams();
+const Books = (): JSX.Element => {
     return (
-        <Link
-            to={`/date/${date}/service/velikoePovecherie`}
+        <a
+            href="https://books.sfi.ru/"
+            target="_blank"
             title="На службу"
             className={css`
                 display: block;
@@ -15,19 +14,19 @@ const Canon = (): JSX.Element => {
             onClick={() =>
                 TagManager.dataLayer({
                     dataLayer: {
-                        event: 'CanonFollow',
+                        event: 'BooksFollow',
                     },
                 })
             }
         >
             <img
-                src="/assets/canon.svg"
+                src="/assets/books.svg"
                 className={css`
                     display: block;
                     border-radius: 8px;
                 `}
             />
-        </Link>
+        </a>
     );
 };
-export default Canon;
+export default Books;
