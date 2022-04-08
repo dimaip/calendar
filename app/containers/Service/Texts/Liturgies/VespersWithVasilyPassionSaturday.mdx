@@ -17,24 +17,45 @@ import Reading from './Katekhumen/Reading/Reading';
 
 # I. <br /> Вечерня
 
-<MdxLoader src="Liturgies/Katekhumen/Vozglas" /> без Аминь
+<MdxLoader src="Liturgies/Katekhumen/Vozglas" noAmin />
 
+<MdxLoader src="Shared/SlavaTebe" lang={props.lang} />
+<MdxLoader src="Shared/ParaklitChit" lang={props.lang} />
 <MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
 
-<MdxLoader src="Vespers/Psalm103" lang={props.lang} chitaetsa />
+### Псалом 103
+
+<MdxLoader src="Shared/Psalm103" chitaetsa lang={props.lang} />
+
+**Священник во время предначинательного псалма по обычаю читает светильничные молитвы перед царскими вратами.**
+
+<MdxLoader src="Vespers/Prayer1" />
+
+<MdxLoader src="Vespers/Prayer2" />
+
+<MdxLoader src="Vespers/Prayer3" />
+
+<MdxLoader src="Vespers/Prayer4" />
+
+<MdxLoader src="Vespers/Prayer6" />
+
+<MdxLoader src="Vespers/Prayer7" />
+
+<MdxLoader src="Vespers/Prayer9" />
+
+<MdxLoader src="Vespers/Prayer8" />
 
 <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
 
-<MdxLoader src="Vespers/Prayer8" lang={props.lang} />
+**Во время пения «Господи, взываю» заканчивается проскомидия, и совершается каждение всего храма.**
 
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
 
 ### Стихиры на «Господи, взываю»
 
 <StihiriNaGV day={props.tomorrowDay} date={props.tomorrowDate} />
-<span id="vhod" />
 
-## Вход
+## Вход с Евангелием (перед Плащаницей)
 
 <MdxLoader src="Vespers/PremudrostVhod" lang={props.lang} />
 
@@ -43,8 +64,6 @@ import Reading from './Katekhumen/Reading/Reading';
 <MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
 
 ## Чтения
-
-**Д** Премудрость!
 
 <span id="reading" />
 
@@ -62,7 +81,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <Trisvatoe date={props.date} />
 
-## (4) Чтения и прошения верных
+## Чтения и прошения верных
 
 <Reading day={props.day} date={props.date} />
 
@@ -106,9 +125,11 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
 
-## Проповедь
+### Проповедь
 
 {props.sermons}
+
+### Сугубая ектения
 
 <MdxLoader src="Liturgies/Katekhumen/SugubajaEktenia" />
 
@@ -137,7 +158,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
     ## \*\*\*
 
-    ## (5) Отпуст оглашаемых<br/>(если есть)
+    ## Отпуст оглашаемых<br/>(если есть)
 
 
 
