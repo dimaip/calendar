@@ -15,8 +15,13 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 **П** Благословен Бог наш ныне и всегда и во веки веков!
 
+<MdxLoader src="Shared/SlavaTebe" lang={props.lang} />
+<MdxLoader src="Shared/ParaklitChit" lang={props.lang} />
 <MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
-<MdxLoader src="Vespers/Psalm103" chitaetsa lang={props.lang} />
+
+### Псалом 103
+
+<MdxLoader src="Shared/Psalm103" chitaetsa lang={props.lang} />
 
 <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
 
@@ -79,11 +84,11 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <Parts date={props.previousDate} partNames={['liturgy.Аллилуарий']} serviceType="Вечерня" />
 
 <div>
-    <ReadingsForService
-        readingsForService={{
-            'Великой Пятницы': ['Мф. XXVII, 1-38~Лк. XXIII, 39-43~Мф. XXVII, 39-54~Ин. XIX, 31-37~Мф. XXVII,55-61.'],
-        }}
-    />
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Мф. XXVII, 1–38.'] }} />
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Лк. XXIII, 39–43.'] }} />
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Мф. XXVII, 39-54.'] }} />
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Ин. XIX, 31-37.'] }} />
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Мф. XXVII, 55-61.'] }} />
 </div>
 
 ### Проповедь
@@ -111,24 +116,6 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <span id="otpust" />
 <br />
-
-**П** Премудрость!
-
-**Н** Благослови!
-
-**П** Благословен Христос Бог наш ныне и всегда и во веки веков!
-
-**Н** Аминь. Утверди́, Боже, святую православную веру православных христиан во век века.
-
-**П** Всесвятая Богородица, помогай нам **(или:** спаси нас**)**!
-
-**Н** Чествуемую превыше херувимов, и славную несравненно более серафимов, девственно Бога-Слово родившую, поистине Богородицу – тебя величаем.
-
-**П** Слава Тебе, Христе Боже, Надежда наша, слава Тебе!
-
-**Н Слава, и ныне.** Господи, помилуй **(трижды)**. Благослови!
-
-### Отпуст
 
 <>{props.otpust}</>
 
