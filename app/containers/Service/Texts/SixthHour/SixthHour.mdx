@@ -3,6 +3,7 @@ import Tropar6Chasa from 'containers/Service/Texts/SixthHour/Tropar6Chasa/index.
 import SlavaLayout from 'containers/Service/Texts/SixthHour/SlavaLayout.mdx';
 import { SundayTroparions } from 'containers/Service/Texts/Shared/Troparions/Troparions';
 import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 # Шестой час
 
@@ -17,13 +18,38 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 
 ## (2) Трипсалмие
 
+<If condition={!props.isEasterOffsetRange(-2)}>
+    
+    ### Псалом 16
+    
+    <MdxLoader src="Shared/Psalm16" />
+    
+    ### Псалом 24
+    
+    <MdxLoader src="Shared/Psalm24" />
+
+</If>
+
 ### Псалом 53
 
 <MdxLoader src="Shared/Psalm53" />
 
-### Псалом 54
+<If condition={!props.isEasterOffsetRange(-2)}>
+    
+    ### Псалом 54
+    
+    <MdxLoader src="Shared/Psalm54" />
+    
+</If>
 
-<MdxLoader src="Shared/Psalm54" />
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    ### Псалом 139
+    
+    <MdxLoader src="Shared/Psalm139" />
+    
+</If>
+
 
 ### Псалом 90
 
