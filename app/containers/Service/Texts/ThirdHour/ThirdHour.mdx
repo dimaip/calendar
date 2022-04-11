@@ -26,14 +26,30 @@ import Parts from 'components/Parts/Parts';
 
 ## (2) Трипсалмие
 
-### Псалом 16
+<If condition={!props.isEasterOffsetRange(-2)}>
+    
+    ### Псалом 16
+    
+    <MdxLoader src="Shared/Psalm16" />
+    
+    ### Псалом 24
+    
+    <MdxLoader src="Shared/Psalm24" />
 
-<MdxLoader src="Shared/Psalm16" />
+</If>
 
-### Псалом 24
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    ### Псалом 34
+    
+    <MdxLoader src="Shared/Psalm34" />
+    
+    ### Псалом 108
+    
+    <MdxLoader src="Shared/Psalm108" />
 
-<MdxLoader src="Shared/Psalm24" />
-
+</If>
+    
 ### Псалом 50
 
 <MdxLoader src="Shared/Psalm50" />
