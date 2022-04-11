@@ -4,6 +4,7 @@ import If from 'components/If/If';
 import { SundayTroparions } from 'containers/Service/Texts/Shared/Troparions/Troparions';
 import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 import Parts from 'components/Parts/Parts';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 # Третий час
 
@@ -123,6 +124,8 @@ import Parts from 'components/Parts/Parts';
     <div>
     <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Мк. XV, 1-41.'] }} />
     </div>
+    
+    <MdxLoader src="Shared/SlavaDolgoterp" />
 
 </If>    
 
