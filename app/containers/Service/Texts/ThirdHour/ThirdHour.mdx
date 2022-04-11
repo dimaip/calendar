@@ -95,6 +95,18 @@ import Parts from 'components/Parts/Parts';
 **И ныне. Богородичен, глас 6:**
 
 <MdxLoader src="ThirdHour/Bogorodichen" />
+    
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    <MdxLoader src="ThirdHour/TropsVelPiat" />
+    
+    <MdxLoader src="ThirdHour/ProkVelPiat" />
+    
+    ### Псалом 108
+    
+    <MdxLoader src="Shared/Psalm108" />
+
+</If>    
 
 <MdxLoader src="ThirdHour/Tropar3Chasa2" />
 
