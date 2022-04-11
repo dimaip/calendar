@@ -97,7 +97,37 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="SixthHour/Bogorodichen" />
 
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    <MdxLoader src="SixthHour/TropsVelPiat" />
+    
+    <MdxLoader src="SixthHour/ProkVelPiat" />
+    
+</If>
+    
 {props.readings}
+
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    <MdxLoader src="Vespers/PremudrostParemiya" />
+    
+    <div>
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Евр., II, 11-18.'] }} />
+    </div>
+
+    <MdxLoader src="Shared/MirTebeApostol" />
+    
+    <MdxLoader src="Shared/BeforeGospel" />
+    
+    <br />
+    
+    <div>
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Лк. XXIII, 32-49.'] }} />
+    </div>
+    
+    <MdxLoader src="Shared/SlavaDolgoterp" />
+
+</If>
 
 <MdxLoader src="SixthHour/Tropar6Chasa2" />
 
