@@ -6,7 +6,7 @@
 
 Именем Господним благослови, отче!
 
-<If condition={props.polunochnitsa}>
+<If condition={props.polunochnitsa || props.isEasterOffsetRange(-2)}>
     <Then>**П** Боже, смилуйся к нам и благослови нас, просияй на нас лицом Твоим и помилуй нас!</Then>
     <Else>**П** По молитвам святых отцов наших, Господи Иисусе Христе, Боже наш, помилуй нас!</Else>
 </If>
