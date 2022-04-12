@@ -3,6 +3,7 @@ import Tropar6Chasa from 'containers/Service/Texts/SixthHour/Tropar6Chasa/index.
 import SlavaLayout from 'containers/Service/Texts/SixthHour/SlavaLayout.mdx';
 import { SundayTroparions } from 'containers/Service/Texts/Shared/Troparions/Troparions';
 import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 # Шестой час
 
@@ -21,9 +22,22 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 
 <MdxLoader src="Shared/Psalm53" />
 
-### Псалом 54
+<If condition={!props.isEasterOffsetRange(-2)}>
+    
+    ### Псалом 54
+    
+    <MdxLoader src="Shared/Psalm54" />
+    
+</If>
 
-<MdxLoader src="Shared/Psalm54" />
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    ### Псалом 139
+    
+    <MdxLoader src="Shared/Psalm139" />
+    
+</If>
+
 
 ### Псалом 90
 
@@ -71,7 +85,39 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 
 <MdxLoader src="SixthHour/Bogorodichen" />
 
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    <MdxLoader src="SixthHour/TropsVelPiat" />
+    
+    <MdxLoader src="SixthHour/ProkVelPiat" />
+    
+    <MdxLoader src="Vespers/PremudrostParemiya" />
+    
+</If>
+    
 {props.readings}
+
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    <MdxLoader src="Vespers/PremudrostParemiya" />
+    
+    <div>
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Евр., II, 11-18.'] }} />
+    </div>
+
+    <MdxLoader src="Shared/MirTebeApostol" />
+    
+    <MdxLoader src="Shared/BeforeGospel" />
+    
+    <br />
+    
+    <div>
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Лк. XXIII, 32-49.'] }} />
+    </div>
+    
+    <MdxLoader src="Shared/SlavaDolgoterp" />
+
+</If>
 
 <MdxLoader src="SixthHour/Tropar6Chasa2" />
 
@@ -106,9 +152,6 @@ import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
     ### Молитва Св. Ефрема Сирина
 
     <MdxLoader src="Shared/EfremSirin" />
-
-    <MdxLoader src="Shared/STrisvatogo" />
-    <MdxLoader src="Shared/GospodiPomiluy12" />
 
 </If>
 

@@ -4,6 +4,7 @@ import If from 'components/If/If';
 import { SundayTroparions } from 'containers/Service/Texts/Shared/Troparions/Troparions';
 import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 import Parts from 'components/Parts/Parts';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 # Третий час
 
@@ -26,14 +27,30 @@ import Parts from 'components/Parts/Parts';
 
 ## (2) Трипсалмие
 
-### Псалом 16
+<If condition={!props.isEasterOffsetRange(-2)}>
+    
+    ### Псалом 16
+    
+    <MdxLoader src="Shared/Psalm16" />
+    
+    ### Псалом 24
+    
+    <MdxLoader src="Shared/Psalm24" />
 
-<MdxLoader src="Shared/Psalm16" />
+</If>
 
-### Псалом 24
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    ### Псалом 34
+    
+    <MdxLoader src="Shared/Psalm34" />
+    
+    ### Псалом 108
+    
+    <MdxLoader src="Shared/Psalm108" />
 
-<MdxLoader src="Shared/Psalm24" />
-
+</If>
+    
 ### Псалом 50
 
 <MdxLoader src="Shared/Psalm50" />
@@ -79,6 +96,38 @@ import Parts from 'components/Parts/Parts';
 **И ныне. Богородичен, глас 6:**
 
 <MdxLoader src="ThirdHour/Bogorodichen" />
+    
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    <MdxLoader src="ThirdHour/TropsVelPiat" />
+    
+    <MdxLoader src="ThirdHour/ProkVelPiat" />
+    
+    <MdxLoader src="Vespers/PremudrostParemiya" />
+    
+    <div>
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Ис. L, 4-11.'] }} />
+    </div>
+    
+    <MdxLoader src="Vespers/PremudrostParemiya" />
+    
+    <div>
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Рим. V, 6-10.'] }} />
+    </div>
+
+    <MdxLoader src="Shared/MirTebeApostol" />
+    
+    <MdxLoader src="Shared/BeforeGospel" />
+    
+    <br />
+    
+    <div>
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Мк. XV, 1-41.'] }} />
+    </div>
+    
+    <MdxLoader src="Shared/SlavaDolgoterp" />
+
+</If>    
 
 <MdxLoader src="ThirdHour/Tropar3Chasa2" />
 
@@ -113,10 +162,6 @@ import Parts from 'components/Parts/Parts';
     ### Молитва Св. Ефрема Сирина
 
     <MdxLoader src="Shared/EfremSirin" />
-
-    <MdxLoader src="Shared/STrisvatogo" />
-
-    <MdxLoader src="Shared/GospodiPomiluy12" />
 
 </If>
 
