@@ -145,7 +145,7 @@ import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolu
 <MdxLoader src="Shared/ZakluchEkteniya" />
 </If>
 
-<If condition={props.greatLent && props.dayOfWeek !== 0 && props.dayOfWeek !== 6}>
+<If condition={props.greatLent && props.dayOfWeek !== 0 && props.dayOfWeek !== 6 && !props.isEasterOffsetRange(-2, -1)}>
     ### Молитва Св. Ефрема Сирина
 
     <MdxLoader src="Shared/EfremSirin" chinProshenija={props.chinProshenija} />

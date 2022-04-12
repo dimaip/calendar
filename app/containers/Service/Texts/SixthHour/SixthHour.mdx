@@ -148,7 +148,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Shared/ZakluchenieChasov" />
 
-<If condition={props.greatLent && props.dayOfWeek !== 6 && props.dayOfWeek !== 0 }>
+<If condition={props.greatLent && props.dayOfWeek !== 6 && props.dayOfWeek !== 0 && !props.isEasterOffsetRange(-3, -1) }>
     ### Молитва Св. Ефрема Сирина
 
     <MdxLoader src="Shared/EfremSirin" />
