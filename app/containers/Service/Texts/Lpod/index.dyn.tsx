@@ -67,6 +67,7 @@ const Lpod = ({ lang }) => {
         gospelReading,
         lang,
         date,
+        yesterdayDate,
         isDate,
         day,
         isEasterOffsetRange,
