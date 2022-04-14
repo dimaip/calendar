@@ -10,7 +10,7 @@ import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolu
 
 <MdxLoader src="Shared/Vozglas" />
 
-<If condition={props.isEasterOffsetRange(0, 38)}>
+<If condition={props.isEasterOffsetRange(1, 38)}>
     <Then>
         <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
     </Then>
@@ -69,7 +69,7 @@ import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolu
 
 </If>
 
-<If condition={props.dayOfWeek === 0}>
+<If condition={props.dayOfWeek === 0 && !props.isEasterOffsetRange(0)}>
 ### Канон животворящей Троице текущего гласа (из Октоиха)
 
 ### Припевы (троичные величания) прп. Григория Синаита на глас Недели
@@ -78,6 +78,14 @@ import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolu
 
 <MdxLoader src="Polunochnica/Pripevy" />
 </If>
+
+<If condition={props.isEasterOffsetRange(0)}>
+    
+    ### Канон Великой Субботы, глас 6
+    
+    **Канон,	по	традиции,	читает	один	из	священнослужителей	перед	Плащаницей.**
+    
+    <MdxLoader src="Matins/PassionSaturdayCanon" lang={props.lang} />
 
 <If condition={props.dayOfWeek !== 0}>
 ### Символ веры
