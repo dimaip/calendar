@@ -86,6 +86,27 @@ import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolu
     **Канон,	по	традиции,	читает	один	из	священнослужителей	перед	Плащаницей.**
     
     <MdxLoader src="Matins/PassionSaturdayCanon" lang={props.lang} />
+    
+    <MdxLoader src="Shared/STrisvatogo" />
+    
+    <Parts
+    date={props.date}
+    partNames={['shared.Тропари']}
+    serviceType="Полуночница"
+    lang={props.lang}
+    fallback={<TroparPolunochnica dayOfWeek={props.dayOfWeek} />}
+/>
+
+    ###  Малая сугубая ектения
+    
+    <MdxLoader src="Shared/MalayaSugubaya" />
+    
+    ## Отпуст
+    
+    как на литургии Вел. Суб.
+    
+    всё что ниже опустить
+</If>
 
 <If condition={props.dayOfWeek !== 0}>
 ### Символ веры
