@@ -57,6 +57,12 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 <MdxLoader src="Shared/DaVosstanetBog" lang={props.lang} />
 
+**Открываются двери храма. Все входят в храм и поют праздничный тропарь:**
+
+<MdxLoader src="Shared/EasterTroparion" lang={props.lang} />
+
+**И поют, пока диакон не выйдет на великую ектению. Духовенство входит в алтарь.**
+
 <MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />
 
 ## Канон Пасхи, глас 1
@@ -75,9 +81,19 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 <StihiriNaHvalite date={props.date} day={props.day} />
 
+**Во время пения стихир Пасхи священнослужители начинают христосоваться между собою в алтаре.**
+
+**Священнослужители, похристосовавшись между собой в алтаре, исходят на солею.**
+
+**Предстоятель выходит с Крестом и трисвещником, произносит от себя краткое общее приветствие предстоящим и заканчивает его троекратным осенением Крестом и трисвещником на три стороны возглашая:**
+
+<MdxLoader src="Shared/ChristIsRisen" lang={props.lang} />
+
 <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />
 
-## Огласительное	слово	свт.	Иоанна	Златоуста
+**Предстоятель относит Крест с трисвечником в алтарь и выходит на амвон для чтения Огласительного слова свт. Иоанна Златоустого.**
+
+## Огласительное слово свт. Иоанна Златоуста
 
 <MdxLoader src="Shared/OglasitSlovo" lang={props.lang} />
 
@@ -89,10 +105,12 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 ## Заключение
 
-**П** Завершим нашу утреннюю молитву Господу!
+### Просительная ектения
 
-<MdxLoader src="Matins/Prayer12" lang={props.lang} />
+<MdxLoader src="Vespers/PrositelnayaEktenia" lang={props.lang} />
+<MdxLoader src="Matins/AfterPrositelnaya" lang={props.lang} />
 <br />
+<MdxLoader src="Shared/MirVsem" lang={props.lang} />
 <MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
 
 <>{props.otpust}</>
