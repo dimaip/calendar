@@ -5,6 +5,7 @@ import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostil
 import Parts from 'components/Parts/Parts';
 import If from 'components/If/If';
 import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
+import EasterKanon from 'containers/Service/Texts/EasterKanon/EasterKanon.mdx';
 
 <span id="nachalo" />
 
@@ -26,13 +27,13 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 ## Канон Пасхи, глас 1
 
-<MdxLoader src="EasterKanon" lang={props.lang} />
+<EasterKanon {...props} />
 
 ## Хвалитные псалмы и стихиры Пасхи
 
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 
-<Exapostilari date={props.date}/>
+<Exapostilari date={props.date} />
 
 <MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
 
@@ -42,7 +43,7 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 <MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />
 
-## Огласительное	слово	свт.	Иоанна	Златоуста
+## Огласительное слово свт. Иоанна Златоуста
 
 <MdxLoader src="Shared/OglasitSlovo" lang={props.lang} />
 
