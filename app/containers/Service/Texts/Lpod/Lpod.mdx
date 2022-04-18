@@ -4,7 +4,7 @@ import Parts from 'components/Parts/Parts';
 import StihiriNaGV from 'containers/Service/Texts/Vespers/StihiriNaGV/StihiriNaGV';
 import StihiriNaStihah from 'containers/Service/Texts/Vespers/StihiriNaStihah/StihiriNaStihah';
 import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
-import If from 'components/If/If';
+
 import Tooltip from 'components/Tooltip/Tooltip';
 import Otpust from './Otpust/Otpust';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
@@ -24,23 +24,23 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <If condition={props.isDate(4,7)}>
 
     **Священник во время предначинательного псалма по обычаю читает светильничные молитвы перед царскими вратами.**
-    
+
     <MdxLoader src="Vespers/Prayer1" />
-    
+
     <MdxLoader src="Vespers/Prayer2" />
-    
+
     <MdxLoader src="Vespers/Prayer3" />
-    
+
     <MdxLoader src="Vespers/Prayer4" />
-    
+
     <MdxLoader src="Vespers/Prayer6" />
-    
+
     <MdxLoader src="Vespers/Prayer7" />
-    
+
     <MdxLoader src="Vespers/Prayer9" />
-    
+
     <MdxLoader src="Vespers/Prayer8" />
-    
+
 </If>
 
 <If condition={!props.isDate(4, 7)}>
@@ -153,15 +153,16 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     <If condition={props.lang === 'ru' || props.lang === 'parallel'}>
         <MdxLoader src="Shared/SnovaSnova" langOverride="ru" />
     </If>
-    
+
     <MdxLoader src="Vespers/Prayer8" />
-      
+
+
 </If>
 
 <If condition={props.isDate(4,7)}>
 
     **С началом пения «Господи, взываю» совершается три поклона, `[весь народ простирается ниц, агнец переносится на жертвенник,]` далее следует приготовление чаши, покрытие, каждение, свеча ставится перед дарами, снова совершается поклонение, `[складывается антиминс]`.**
-    
+
 </If>
 
 <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
@@ -234,75 +235,54 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 **Все лежат ниц, предстоятель, стоя у престола, кадит его, а потом жертвенник. `[Далее читается, по обычаю, молитва св. Ефрема Сирина с тремя поклонами.]`**
 
 <If condition={props.isEasterOffsetRange(-5)}>
-   
-    **Диакон исходит с Евангелием через царские врата на амвон.**
-   
-   ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
-   
-   <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
-   
-   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
-   
-   ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
-   
-   <div>
-    <ReadingsForService readingsForService={{ 'Великого Понедельника': ['Мф. XXIV, 3 - 35.'] }} />
-   </div>
-   
-   <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
-   
-   ### Проповедь
-   
-   {props.sermons}
-   
+    **Диакон исходит с Евангелием через царские врата на амвон.** ### Молитва <br />
+    перед чтением Евангелия <Tooltip>
+        Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).
+    </Tooltip>
+    <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+    <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
+    ### Чтение Евангелия{' '}
+    <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+    <div>
+        <ReadingsForService readingsForService={{ 'Великого Понедельника': ['Мф. XXIV, 3 - 35.'] }} />
+    </div>
+    <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+    ### Проповедь
+    {props.sermons}
 </If>
 
 <If condition={props.isEasterOffsetRange(-4)}>
-   
-    **Диакон исходит с Евангелием через царские врата на амвон.**
-   
-   ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
-   
-   <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
-   
-   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
-   
-   ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
-   
-   <div>
-    <ReadingsForService readingsForService={{ 'Великого Вторника': ['Мф. XXIV, 36 - XXVI, 2.'] }} />
-   </div>
-   
-   <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
-   
-   ### Проповедь
-   
-   {props.sermons}
-   
+    **Диакон исходит с Евангелием через царские врата на амвон.** ### Молитва <br />
+    перед чтением Евангелия <Tooltip>
+        Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).
+    </Tooltip>
+    <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+    <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
+    ### Чтение Евангелия{' '}
+    <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+    <div>
+        <ReadingsForService readingsForService={{ 'Великого Вторника': ['Мф. XXIV, 36 - XXVI, 2.'] }} />
+    </div>
+    <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+    ### Проповедь
+    {props.sermons}
 </If>
 
 <If condition={props.isEasterOffsetRange(-3)}>
-   
-    **Диакон исходит с Евангелием через царские врата на амвон.**
-   
-   ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
-   
-   <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
-   
-   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
-   
-   ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
-   
-   <div>
-    <ReadingsForService readingsForService={{ 'Великой Среды': ['Мф. XXVI, 6 - 16.'] }} />
-   </div>
-   
-   <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
-   
-   ### Проповедь
-   
-   {props.sermons}
-   
+    **Диакон исходит с Евангелием через царские врата на амвон.** ### Молитва <br />
+    перед чтением Евангелия <Tooltip>
+        Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).
+    </Tooltip>
+    <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+    <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" lpod />
+    ### Чтение Евангелия{' '}
+    <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+    <div>
+        <ReadingsForService readingsForService={{ 'Великой Среды': ['Мф. XXVI, 6 - 16.'] }} />
+    </div>
+    <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+    ### Проповедь
+    {props.sermons}
 </If>
 
 <MdxLoader src="Shared/SugubajaPolnaja" lang={props.lang} />
