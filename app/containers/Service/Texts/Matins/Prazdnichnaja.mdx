@@ -116,7 +116,9 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 
 <>{props.dayOfWeek === 0 && !props.isEasterOffsetRange(49) && <MdxLoader src="Matins/Sviat" lang={props.lang} />}</>
-<Exapostilari date={props.date} />
+<If condition={!props.isEasterOffsetRange(-7)}>
+    <Exapostilari date={props.date} />
+</If>
 
 <MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
 
