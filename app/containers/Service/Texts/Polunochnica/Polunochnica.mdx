@@ -83,7 +83,7 @@ import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolu
     
     ### Канон Великой Субботы, глас 6
     
-    **Канон,	по	традиции,	читает	один	из	священнослужителей	перед	Плащаницей.**
+    **Канон, по традиции, читает один из священнослужителей перед Плащаницей.**
     
     <MdxLoader src="Matins/PassionSaturdayCanon" lang={props.lang} />
     
@@ -98,16 +98,17 @@ import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolu
 />
 
     ###  Малая сугубая ектения
-    
+
     <MdxLoader src="Shared/MalayaSugubaya" />
-    
+
     <MdxLoader src="Shared/PreOtpust" />
-    
+
     ## Отпуст
-    
+
     как на литургии Вел. Суб.
-    
+
     всё что ниже опустить
+
 </If>
 
 <If condition={props.dayOfWeek !== 0}>
@@ -158,7 +159,12 @@ import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolu
 </Else>
 </If>
 
-<MdxLoader src="Shared/ZakluchenieChasov" polunochnitsa dayOfWeek={props.dayOfWeek} isEasterOffsetRange={props.isEasterOffsetRange} />
+<MdxLoader
+    src="Shared/ZakluchenieChasov"
+    polunochnitsa
+    dayOfWeek={props.dayOfWeek}
+    isEasterOffsetRange={props.isEasterOffsetRange}
+/>
 
 <If condition={props.dayOfWeek === 0}>
 ### Покаянная молитва ко Всесвятой Троице, творение Марка-монаха
