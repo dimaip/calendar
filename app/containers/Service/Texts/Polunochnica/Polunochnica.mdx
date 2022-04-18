@@ -1,6 +1,7 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import IpakoyiVoskr from 'containers/Service/Texts/Shared/IpakoyiVoskr/IpakoyiVoskr';
 import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolunochnica/index.mdx';
+import PassionSaturdayCanon from 'containers/Service/Texts/Matins/PassionSaturdayCanon/PassionSaturdayCanon.mdx';
 
 # Полуночница
 
@@ -85,17 +86,16 @@ import TroparPolunochnica from 'containers/Service/Texts/Polunochnica/TroparPolu
     
     **Канон, по традиции, читает один из священнослужителей перед Плащаницей.**
     
-    <MdxLoader src="Matins/PassionSaturdayCanon" lang={props.lang} />
-    
+    <PassionSaturdayCanon {...props} />
+
     <MdxLoader src="Shared/STrisvatogo" />
-    
+
     <Parts
     date={props.date}
     partNames={['shared.Тропари']}
     serviceType="Полуночница"
     lang={props.lang}
-    fallback={<TroparPolunochnica dayOfWeek={props.dayOfWeek} />}
-/>
+    fallback={<TroparPolunochnica dayOfWeek={props.dayOfWeek} />}/>
 
     ###  Малая сугубая ектения
 

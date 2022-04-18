@@ -7,6 +7,7 @@ import If from 'components/If/If';
 import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
+import PassionSaturdayCanon from 'containers/Service/Texts/Matins/PassionSaturdayCanon/PassionSaturdayCanon.mdx';
 
 <span id="nachalo" />
 
@@ -45,7 +46,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
 ### Канон, глас 6
 
-<MdxLoader src="Matins/PassionSaturdayCanon" lang={props.lang} />
+<PassionSaturdayCanon {...props} matins />
 
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 

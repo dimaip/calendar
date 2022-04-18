@@ -6,7 +6,9 @@
 
 <MdxLoader src="Matins/PassionSaturdayCanon/Pesn3" lang={props.lang} />
 
-<MdxLoader src="Matins/Prayer5" lang={props.lang} />
+<If condition={props.matins}>
+    <MdxLoader src="Matins/Prayer5" lang={props.lang} />
+</If>
 
 <MdxLoader src="Matins/PassionSaturdayCanon/Sedalen" lang={props.lang} />
 
@@ -22,7 +24,9 @@
 
 <MdxLoader src="Matins/PassionSaturdayCanon/Pesn6" lang={props.lang} />
 
-<MdxLoader src="Matins/Prayer6" lang={props.lang} />
+<If condition={props.matins}>
+    <MdxLoader src="Matins/Prayer6" lang={props.lang} />
+</If>
 
 <MdxLoader src="Matins/PassionSaturdayCanon/Kondak" lang={props.lang} />
 
