@@ -2,6 +2,7 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Prokimens from 'containers/Service/Texts/Matins/Prokimens/Prokimens';
 import Stepenny from 'containers/Service/Texts/Matins/Stepenny/Stepenny';
 import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostilari';
+import EasterKanon from 'containers/Service/Texts/EasterKanon/EasterKanon.mdx';
 import Parts from 'components/Parts/Parts';
 import If from 'components/If/If';
 import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
@@ -17,7 +18,7 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 **Предстоятель принимает в левую руку Крест с пасхальным трисвещником, в правую — кадило.**
 
 **Ровно в 12 часов (по местному времени) при закрытых царских вратах и завесе cвященнослужители поют первый раз стихиру:**
-		
+
 <MdxLoader src="Matins/StihiraBeforeEastZautr" lang={props.lang} />
 
 **При каждом пении стихиры предстоятель в предшествии диакона со свечой совершает каждение вокруг престола.**
@@ -34,13 +35,13 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 ### Крестный ход
 
-**Духовенство	выходит	из	алтаря. Начинается	крестный	ход,	во	время	которого	все	непрерывно	поют	стихиру:**
+**Духовенство выходит из алтаря. Начинается крестный ход, во время которого все непрерывно поют стихиру:**
 
 <MdxLoader src="Matins/StihiraBeforeEastZautr" lang={props.lang} />
 
 **В крестном ходе впереди несут фонарь, за ним несут парой запрестольный Крест и запрестольный образ Божией Матери (таким образом, чтобы тот, кто смотрит на приближающийся крестный ход, видел их расположенными также, как в алтаре (запрестольный Крест – справа, образ Божией Матери – слева)). Далее идут двумя рядами, попарно, хоругвеносцы, певцы, свещеносцы со свечами, диаконы со своими свечами и кадильницами и за ними священники, младшие впереди. В последней паре священников идущий справа несет Евангелие, идущий слева – икону Воскресения. Завершает шествие предстоятель с трисвещником и Крестом. Там, где один священник, допускается мирянам нести на пелена́х иконы Воскресения Христова и Евангелие. (Артос на этом крестном ходе не носят, поскольку он еще не освящен.)**
 
-**Крестный ход в обычном порядке идет вокруг храма при непрерывном трезвоне.** 
+**Крестный ход в обычном порядке идет вокруг храма при непрерывном трезвоне.**
 
 **Обойдя храм, крестный ход останавливается пред закрытыми западными дверями храма. Носящие святыни останавливаются около дверей лицом к западу в следующем порядке: фонарь (по центру, непосредственно перед дверями), затем (от южной стороны к северной) запрестольный Крест, Евангелие, икона Воскресения, запрестольный образ Божией Матери, по сторонам становятся хоругвеносцы и свещеносцы. Предстоятель и сослужа́щие священники становятся пред святынями по чину.
 **
@@ -67,13 +68,13 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 ## Канон Пасхи, глас 1
 
-<MdxLoader src="EasterKanon" lang={props.lang} />
+<EasterKanon {...props} />
 
 ## Хвалитные псалмы и стихиры Пасхи
 
 <MdxLoader src="Matins/MalayaEkteniaBeforeHvalit" lang={props.lang} />
 
-<Exapostilari date={props.date}/>
+<Exapostilari date={props.date} />
 
 <MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
 

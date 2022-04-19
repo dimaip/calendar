@@ -50,7 +50,11 @@
 
 <MdxLoader src="EasterKanon/Ikos" lang={props.lang} />
 
-<MdxLoader src="Matins/VoskresnajaPesn" lang={props.lang} />
+<MdxLoader
+    src="Matins/VoskresnajaPesn"
+    lang={props.lang}
+    x3={props.brightWeek || (props.easterSeason && props.dayOfWeek === 0)}
+/>
 
 <MdxLoader src="EasterKanon/VoskresOtGroba" lang={props.lang} />
 
