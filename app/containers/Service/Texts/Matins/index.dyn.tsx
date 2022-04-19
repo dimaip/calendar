@@ -19,6 +19,7 @@ import PassionSaturday from './PassionSaturday.mdx';
 import Lent from './Lent.mdx';
 import Kondacs from '../Shared/Kondacs/Kondacs';
 import Troparions from '../Shared/Troparions/Troparions';
+import EasterZautrenia from './EasterZautrenia.mdx'
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -132,6 +133,9 @@ const Matins = ({ date }) => {
     }
     if (isEasterOffsetRange(-1)) {
         return <PassionSaturday {...props} />;
+    }
+    if (isEasterOffsetRange(0)) {
+        return <EasterZautrenia {...props} />;
     }
     if (isFast) {
         return (

@@ -1,5 +1,4 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
-import If from 'components/If/If';
 
 # Благодарственные молитвы
 
@@ -34,11 +33,12 @@ import If from 'components/If/If';
 <If condition={!props.vasiliy && !props.lpod}>
   ### Отпустительный тропарь св. Иоанна Златоуста, глас 8
 
-  <MdxLoader src="Blagodarstvennie/TropIZ" />
+{' '}
+<MdxLoader src="Blagodarstvennie/TropIZ" />
 
-  **Слава.**
+**Слава.**
 
-  ### Кондак, его же, глас 6
+### Кондак, его же, глас 6
 
   <MdxLoader src="Blagodarstvennie/KondIZ" />
 </If>
@@ -46,11 +46,12 @@ import If from 'components/If/If';
 <If condition={props.vasiliy}>
   ### Отпустительный тропарь св. Василия Великого, глас 1
 
-  <MdxLoader src="Blagodarstvennie/TropVV" />
+{' '}
+<MdxLoader src="Blagodarstvennie/TropVV" />
 
-  **Слава.**
+**Слава.**
 
-  ### Кондак, его же, глас 4
+### Кондак, его же, глас 4
 
   <MdxLoader src="Blagodarstvennie/KondVV" />
 </If>
@@ -58,11 +59,12 @@ import If from 'components/If/If';
 <If condition={props.lpod}>
   ### Отпустительный тропарь св. Григория Двоеслова, глас 4
 
-  <MdxLoader src="Blagodarstvennie/TropGD" />
+{' '}
+<MdxLoader src="Blagodarstvennie/TropGD" />
 
-  **Слава.**
+**Слава.**
 
-  ### Кондак, его же, глас 3
+### Кондак, его же, глас 3
 
   <MdxLoader src="Blagodarstvennie/KondGD" />
 </If>
