@@ -1,5 +1,9 @@
-<If condition={!(props.polunochnitsa && props.dayOfWeek === 0)}>
+<If condition={!props.easterHours && !(props.polunochnitsa && props.dayOfWeek === 0)}>
     **Ч** Господи, помилуй **(трижды)**. **Слава, и ныне.**
+</If>
+
+<If condition={props.easterHours}>
+    **Н Слава, и ныне.**
 </If>
 
 Че́ствуемую превыше херувимов и славную несравне́нно более серафимов, девственно Бога-Слово родившую, поистине Богородицу – тебя величаем.

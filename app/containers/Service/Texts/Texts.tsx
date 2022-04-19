@@ -122,7 +122,7 @@ const makeServices = (date, readings = {}) => {
         {
             title: 'Полуночница',
             id: 'polunochnica',
-            enabled: !isDate(1, 6) && !isDate(1, 18),
+            enabled: !isEasterOffsetRange(0, 5) && !isDate(1, 6) && !isDate(1, 18),
             calendar: true,
             lang: true,
             skipRedirect: true,
