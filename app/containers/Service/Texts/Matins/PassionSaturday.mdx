@@ -3,10 +3,11 @@ import Prokimens from 'containers/Service/Texts/Matins/Prokimens/Prokimens';
 import Stepenny from 'containers/Service/Texts/Matins/Stepenny/Stepenny';
 import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostilari';
 import Parts from 'components/Parts/Parts';
-import If from 'components/If/If';
+
 import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
+import PassionSaturdayCanon from 'containers/Service/Texts/Matins/PassionSaturdayCanon/PassionSaturdayCanon.mdx';
 
 <span id="nachalo" />
 
@@ -43,7 +44,9 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 <>{props.isHoliday && <MdxLoader src="Matins/Prayer10" lang={props.lang} />}</>
 <>{props.isHoliday && <Psalm50 lang={props.lang} />}</>
 
-<MdxLoader src="Matins/PassionSaturdayCanon" lang={props.lang} />
+### Канон, глас 6
+
+<PassionSaturdayCanon {...props} matins />
 
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 
