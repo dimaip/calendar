@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
+import { useRecoilValue } from 'recoil';
+import TOCState from 'state/TOCState';
 
 import SelectBox from '../../components/SelectBox/SelectBox';
+import { makeId } from 'hooks/useUpdateTOC';
 
-const TOCSwitcher = ({ service, lang }) => {
-    const data = service?.TOC;
-    if (!data) {
-        return null;
-    }
-    const items = Object.keys(data).map((item) => ({
-        value: item,
-        label: data[item],
+const TOCSwitcher = ({ lang }) => {
+    const TOC = useRecoilValue(TOCState);
+    const items = TOC.map((item) => ({
+        value: makeId(item),
+        label: item,
     }));
     const [activeItem, setActiveItem] = useState('');
     if ('IntersectionObserver' in window) {
         useEffect(() => {
             let observer = null;
-            if (data) {
+            if (TOC.length) {
                 observer = new IntersectionObserver(
                     (entries) => {
                         entries.forEach((entry) => {
@@ -39,7 +39,7 @@ const TOCSwitcher = ({ service, lang }) => {
                     if (!observer) {
                         return;
                     }
-                    const node = document.getElementById(nodeId);
+                    const node = document.getElementById(makeId(nodeId));
                     if (node) {
                         observer.observe(node);
                     } else {
@@ -49,7 +49,7 @@ const TOCSwitcher = ({ service, lang }) => {
                     }
                 };
 
-                Object.keys(data).map((nodeId) => {
+                TOC.map((nodeId) => {
                     observeOrCue(nodeId);
                 });
                 setTimeout(() => {}, 0);

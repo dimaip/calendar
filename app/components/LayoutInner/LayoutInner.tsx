@@ -4,10 +4,12 @@ import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
+import { useUpdateTOC } from 'hooks/useUpdateTOC';
 
 const LayoutInner = ({ children, left = null, right = null, paddedContent = true }) => {
     const { date } = useParams();
     const history = useHistory();
+    useUpdateTOC();
     const backLink = history.location.state?.backLink;
     return (
         <div
