@@ -1,8 +1,8 @@
-<If condition={!(props.polunochnitsa && props.dayOfWeek === 0)}>
+<If condition={!props.easterHours && !(props.polunochnitsa && props.dayOfWeek === 0)}>
     **Ч** Господи, помилуй **(трижды)**. **Слава, и ныне.**
 </If>
 
-<If condition={props.EasterHours}>
+<If condition={props.easterHours}>
     **Н Слава, и ныне.**
 </If>
 
