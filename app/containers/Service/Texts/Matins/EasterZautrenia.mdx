@@ -3,8 +3,9 @@ import Prokimens from 'containers/Service/Texts/Matins/Prokimens/Prokimens';
 import Stepenny from 'containers/Service/Texts/Matins/Stepenny/Stepenny';
 import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostilari';
 import Parts from 'components/Parts/Parts';
-import If from 'components/If/If';
+
 import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
+import EasterKanon from 'containers/Service/Texts/EasterKanon/EasterKanon.mdx';
 
 <span id="nachalo" />
 
@@ -12,34 +13,41 @@ import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
 
 <br />
 
-<MdxLoader src="Matins/StihiraBeforeEastZautr" lang={props.lang} />
+## Начало
 
-<MdxLoader src="Shared/EasterTroparion2" lang={props.lang} />
+<MdxLoader src="Matins/StihiraBeforeEastZautr" lang={props.lang} />
 
 **П** Слава святой, и единосущной, и животворящей, и нераздельной Троице ныне и всегда и во веки веков!
 
 **Н** Аминь.
 
-<MdxLoader src="Shared/EasterBeginning" lang={props.lang} />
+<MdxLoader src="Shared/DaVosstanetBog" lang={props.lang} />
 
 <MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />
 
-### Канон Пасхи
+## Канон Пасхи, глас 1
 
-<MdxLoader src="Matins/EasterKanon2" lang={props.lang} />
+<EasterKanon {...props} />
+
+## Хвалитные псалмы и стихиры Пасхи
 
 <MdxLoader src="Matins/Prayer11" lang={props.lang} />
 
-<Exapostilari date={props.date}/>
+<Exapostilari date={props.date} />
 
 <MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
 
 ### Стихиры на «Хвалите»
 
 <StihiriNaHvalite date={props.date} day={props.day} />
-<MdxLoader src="Shared/ChristIsRisen" lang={props.lang} />
+
+<MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />
+
+## Огласительное слово свт. Иоанна Златоуста
 
 <MdxLoader src="Shared/OglasitSlovo" lang={props.lang} />
+
+### Тропарь свт. Иоанна Златоуста, глас 8
 
 <MdxLoader src="Shared/TropIoannZlatoust" lang={props.lang} />
 

@@ -34,6 +34,7 @@ const Polunochnica = ({ date }): JSX.Element => {
 
     const props = {
         date: tomorrowDate,
+        yesterdayDate: date,
         isEasterOffsetRange,
         greatLent,
         dayOfWeek,
