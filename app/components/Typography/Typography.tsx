@@ -8,19 +8,20 @@ const addToTOC = (title: unknown): void => {
     }
     const domId = String(title).replace(/\[object Object\]/g, '');
     window.TOC[domId] = domId;
+    return makeId(domId)
 };
 
 export const H1 = ({ children }): JSX.Element => <h1 className="H1">{children}</h1>;
 
 export const H2 = ({ children }): JSX.Element => {
-    addToTOC(children);
-    return <h2 className="H2" id={makeId(domId)}>{children}</h2>;
+    const domId = addToTOC(children);
+    return <h2 className="H2" id={domId}>{children}</h2>;
 };
 
 export const H3 = ({ children }): JSX.Element => {
-    addToTOC(children);
+    const domId = addToTOC(children);
     return (
-        <h3 className="H3" id={makeId(domId)}>
+        <h3 className="H3" id={domId}>
             {children} <ScriptEditorInput id={window.location.href + children} />
         </h3>
     );
