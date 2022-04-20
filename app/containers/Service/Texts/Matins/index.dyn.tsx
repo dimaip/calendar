@@ -20,6 +20,7 @@ import Lent from './Lent.mdx';
 import Kondacs from '../Shared/Kondacs/Kondacs';
 import Troparions from '../Shared/Troparions/Troparions';
 import EasterZautrenia from './EasterZautrenia.mdx'
+import EasterZautreniaObihod from './EasterZautreniaObihod.mdx'
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -34,7 +35,7 @@ const Readings = ({ readingsForService, day }) =>
         <Loader />
     );
 
-const Matins = ({ date }) => {
+const Matins = ({ date, obihod }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
@@ -128,6 +129,9 @@ const Matins = ({ date }) => {
         SectionLayout,
         isHoliday,
     };
+    if (obihod) {
+        return <EasterZautreniaObihod {...props} />;
+    }
     if (isEasterOffsetRange(-2)) {
         return <PassionFriday {...props} />;
     }

@@ -69,6 +69,16 @@ const makeServices = (date, readings = {}) => {
             warn: true,
         },
         {
+            title: 'Утреня',
+            id: 'matinsObihod',
+            enabled: isEasterOffsetRange(0),
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Часослов',
+            warn: true,
+        },
+        {
             title: 'Третий час',
             id: 'thirdHour',
             enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6) && !isDate(1, 18),
@@ -112,7 +122,7 @@ const makeServices = (date, readings = {}) => {
         {
             title: 'Полуночница',
             id: 'polunochnica',
-            enabled: !isDate(1, 6) && !isDate(1, 18),
+            enabled: !isEasterOffsetRange(0, 5) && !isDate(1, 6) && !isDate(1, 18),
             calendar: true,
             lang: true,
             skipRedirect: true,

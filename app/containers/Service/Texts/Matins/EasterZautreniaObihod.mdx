@@ -1,0 +1,119 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Prokimens from 'containers/Service/Texts/Matins/Prokimens/Prokimens';
+import Stepenny from 'containers/Service/Texts/Matins/Stepenny/Stepenny';
+import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostilari';
+import EasterKanon from 'containers/Service/Texts/EasterKanon/EasterKanon.mdx';
+import Parts from 'components/Parts/Parts';
+import If from 'components/If/If';
+import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
+
+<span id="nachalo" />
+
+# Пасхальная заутреня
+
+<br />
+
+## Начало
+
+**Предстоятель принимает в левую руку Крест с пасхальным трисвещником, в правую — кадило.**
+
+**Ровно в 12 часов (по местному времени) при закрытых царских вратах и завесе cвященнослужители поют первый раз стихиру:**
+
+<MdxLoader src="Matins/StihiraBeforeEastZautr" lang={props.lang} />
+
+**При каждом пении стихиры предстоятель в предшествии диакона со свечой совершает каждение вокруг престола.**
+
+**Открывается завеса. Во второй раз стихиру поют немного громче:**
+
+<MdxLoader src="Matins/StihiraBeforeEastZautr" lang={props.lang} />
+
+**Открываются царские врата, и остаются открыты до конца Светлой Седмицы.**
+
+**В третий раз стихира поется громко и до второго колена включительно. Остальное завершает хор:**
+
+<MdxLoader src="Matins/StihiraBeforeEastZautr" lang={props.lang} />
+
+### Крестный ход
+
+**Духовенство выходит из алтаря. Начинается крестный ход, во время которого все непрерывно поют стихиру:**
+
+<MdxLoader src="Matins/StihiraBeforeEastZautr" lang={props.lang} />
+
+**В крестном ходе впереди несут фонарь, за ним несут парой запрестольный Крест и запрестольный образ Божией Матери (таким образом, чтобы тот, кто смотрит на приближающийся крестный ход, видел их расположенными также, как в алтаре (запрестольный Крест – справа, образ Божией Матери – слева)). Далее идут двумя рядами, попарно, хоругвеносцы, певцы, свещеносцы со свечами, диаконы со своими свечами и кадильницами и за ними священники, младшие впереди. В последней паре священников идущий справа несет Евангелие, идущий слева – икону Воскресения. Завершает шествие предстоятель с трисвещником и Крестом. Там, где один священник, допускается мирянам нести на пелена́х иконы Воскресения Христова и Евангелие. (Артос на этом крестном ходе не носят, поскольку он еще не освящен.)**
+
+**Крестный ход в обычном порядке идет вокруг храма при непрерывном трезвоне.**
+
+**Обойдя храм, крестный ход останавливается пред закрытыми западными дверями храма. Носящие святыни останавливаются около дверей лицом к западу в следующем порядке: фонарь (по центру, непосредственно перед дверями), затем (от южной стороны к северной) запрестольный Крест, Евангелие, икона Воскресения, запрестольный образ Божией Матери, по сторонам становятся хоругвеносцы и свещеносцы. Предстоятель и сослужа́щие священники становятся пред святынями по чину.
+**
+
+**Трезвон прекращается.**
+
+**Настоятель, приняв от диакона кадило, при полной тишине совершает каждение святынь, духовенства, певцов и предстоящих и, в заключение, диакона.**
+
+**Диакон принимает кадило, кадит предстоятеля и возвращает ему кадильницу.**
+
+**Предстоятель, трижды (а не один раз) крестообразно назна́меновав кадилом затворенные церковные двери, возглашает велегласно:**
+
+<MdxLoader src="Matins/Vozglas" lang={props.lang} />
+
+<MdxLoader src="Shared/DaVosstanetBog" lang={props.lang} />
+
+**Открываются двери храма. Все входят в храм и поют праздничный тропарь:**
+
+<MdxLoader src="Shared/EasterTroparion" lang={props.lang} />
+
+**И поют, пока диакон не выйдет на великую ектению. Духовенство входит в алтарь.**
+
+<MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />
+
+## Канон Пасхи, глас 1
+
+<EasterKanon {...props} />
+
+## Хвалитные псалмы и стихиры Пасхи
+
+<MdxLoader src="Matins/MalayaEkteniaBeforeHvalit" lang={props.lang} />
+
+<Exapostilari date={props.date} />
+
+<MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
+
+### Стихиры на «Хвалите»
+
+<StihiriNaHvalite date={props.date} day={props.day} />
+
+**Во время пения стихир Пасхи священнослужители начинают христосоваться между собою в алтаре.**
+
+**Священнослужители, похристосовавшись между собой в алтаре, исходят на солею.**
+
+**Предстоятель выходит с Крестом и трисвещником, произносит от себя краткое общее приветствие предстоящим и заканчивает его троекратным осенением Крестом и трисвещником на три стороны возглашая:**
+
+<MdxLoader src="Shared/ChristIsRisen" lang={props.lang} />
+
+<MdxLoader src="Shared/EasterTroparion3x" lang={props.lang} />
+
+**Предстоятель относит Крест с трисвечником в алтарь и выходит на амвон для чтения Огласительного слова свт. Иоанна Златоустого.**
+
+## Огласительное слово свт. Иоанна Златоуста
+
+<MdxLoader src="Shared/OglasitSlovo" lang={props.lang} />
+
+### Тропарь свт. Иоанна Златоуста, глас 8
+
+<MdxLoader src="Shared/TropIoannZlatoust" lang={props.lang} />
+
+<MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+
+## Заключение
+
+### Просительная ектения
+
+<MdxLoader src="Vespers/PrositelnayaEktenia" lang={props.lang} />
+<MdxLoader src="Matins/AfterPrositelnaya" lang={props.lang} />
+<br />
+<MdxLoader src="Shared/MirVsem" lang={props.lang} />
+<MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
+
+<>{props.otpust}</>
+
+<>{props.endHymns}</>
