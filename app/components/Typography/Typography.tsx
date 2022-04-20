@@ -2,16 +2,23 @@ import ScriptEditorInput from 'components/ScriptEditor/ScriptEditorInput';
 import { makeId } from 'hooks/useUpdateTOC';
 import React from 'react';
 
-export const H1 = ({ children }): JSX.Element => <h1 className="H1">{children}</h1>;
-
-export const H2 = ({ children }): JSX.Element => <h2 className="H2">{children}</h2>;
-
-export const H3 = ({ children }): JSX.Element => {
+const addToTOC = (title: unknown): void => {
     if (!window.TOC) {
         window.TOC = {};
     }
     const domId = String(children).replace(/\[object Object\]/g, '');
     window.TOC[domId] = domId;
+};
+
+export const H1 = ({ children }): JSX.Element => <h1 className="H1">{children}</h1>;
+
+export const H2 = ({ children }): JSX.Element => {
+    addToTOC(children);
+    return <h2 className="H2">{children}</h2>;
+};
+
+export const H3 = ({ children }): JSX.Element => {
+    addToTOC(children);
     return (
         <h3 className="H3" id={makeId(domId)}>
             {children} <ScriptEditorInput id={window.location.href + children} />
