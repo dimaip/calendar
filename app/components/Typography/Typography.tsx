@@ -14,7 +14,7 @@ export const H1 = ({ children }): JSX.Element => <h1 className="H1">{children}</
 
 export const H2 = ({ children }): JSX.Element => {
     addToTOC(children);
-    return <h2 className="H2">{children}</h2>;
+    return <h2 className="H2" id={makeId(domId)}>{children}</h2>;
 };
 
 export const H3 = ({ children }): JSX.Element => {
