@@ -6,7 +6,7 @@ const addToTOC = (title: unknown): void => {
     if (!window.TOC) {
         window.TOC = {};
     }
-    const domId = String(children).replace(/\[object Object\]/g, '');
+    const domId = String(title).replace(/\[object Object\]/g, '');
     window.TOC[domId] = domId;
 };
 
