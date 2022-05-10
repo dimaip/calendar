@@ -60,7 +60,7 @@ const TOCSwitcher = ({ lang }) => {
                     observer = null;
                 }
             };
-        }, [lang]);
+        }, [lang, TOC]);
     }
     return (
         <SelectBox
