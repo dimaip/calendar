@@ -65,6 +65,10 @@ const Service = () => {
             setTextComponent(Component);
         }
     }, [serviceId]);
+    useEffect(() => {
+        // Reset TOC on service change
+        window.TOC = {};
+    }, [serviceId]);
 
     if (!day) {
         return <Loader />;
