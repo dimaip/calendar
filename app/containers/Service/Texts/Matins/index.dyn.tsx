@@ -89,13 +89,14 @@ const Matins = ({ date, obihod }) => {
 
     const sirnajaSedmitza = isEasterOffsetRange(-8 * 7 + 1, -8 * 7 + 5);
     const vselenskayaRoditelskayaSubbota = isEasterOffsetRange(-8 * 7 - 1);
+    const troitskayaRoditelskayaSubbota = isEasterOffsetRange(7 * 7 - 1);
     const lentSubbota2 = isEasterOffsetRange(-5 * 7 - 1);
     const lentSubbota3 = isEasterOffsetRange(-4 * 7 - 1);
     const lentSubbota4 = isEasterOffsetRange(-3 * 7 - 1);
     const lentSubbotas = lentSubbota2 || lentSubbota3 || lentSubbota4;
     const lentSubbota5 = isEasterOffsetRange(-2 * 7 - 1);
     const lazarevaSubbota = isEasterOffsetRange(-1 * 7 - 1);
-    const vospominanijaUsopshih = vselenskayaRoditelskayaSubbota || lentSubbotas;
+    const vospominanijaUsopshih = vselenskayaRoditelskayaSubbota || lentSubbotas || troitskayaRoditelskayaSubbota;
     const greatLent = day?.fastName === 'Великий пост';
     const isFast =
         !lazarevaSubbota &&
@@ -150,6 +151,7 @@ const Matins = ({ date, obihod }) => {
                 vselenskayaRoditelskayaSubbota={vselenskayaRoditelskayaSubbota}
                 lentSubbotas={lentSubbotas}
                 sirnajaSedmitza={sirnajaSedmitza}
+                troitskayaRoditelskayaSubbota={troitskayaRoditelskayaSubbota}
             />
         );
     }

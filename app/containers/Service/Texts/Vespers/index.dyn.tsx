@@ -84,6 +84,7 @@ const Vespers = ({ date }) => {
     const isAscension = isEasterOffsetRange(39);
     const sirnajaSedmitza = isEasterOffsetRange(-8 * 7 + 1, -8 * 7 + 6);
     const vselenskayaRoditelskayaSubbota = isEasterOffsetRange(-8 * 7 - 1);
+    const troitskayaRoditelskayaSubbota = isEasterOffsetRange(7 * 7 - 1);
     const { feastType, title } = getFeastInfo(tomorrowDateObj);
 
     const philaret = isDate(12, 2);
@@ -96,6 +97,7 @@ const Vespers = ({ date }) => {
             tomorrowDay?.fastName === 'Рождественский пост' ||
             tomorrowDay?.fastName === 'Великий пост' ||
             vselenskayaRoditelskayaSubbota ||
+            troitskayaRoditelskayaSubbota ||
             sirnajaSedmitza ||
             isNedelaSkorbi(tomorrowDateObj));
 
@@ -121,6 +123,7 @@ const Vespers = ({ date }) => {
         isHoliday,
         isFast,
         isEasterOffsetRange,
+        
     };
 
     if (isEasterOffsetRange(50)) {
@@ -148,6 +151,7 @@ const Vespers = ({ date }) => {
                 {...props}
                 annunciation={isAnnunciation}
                 sirnajaSedmitza={sirnajaSedmitza}
+                troitskayaRoditelskayaSubbota={troitskayaRoditelskayaSubbota}
                 greatLent={greatLent && !isAnnunciation}
             />
         );

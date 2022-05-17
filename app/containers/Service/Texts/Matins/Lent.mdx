@@ -19,7 +19,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 <If condition={!props.isEasterOffsetRange(-(7*6+1))}>
     <>{(props.dayOfWeek === 0 || props.dayOfWeek === 1 || props.vospominanijaUsopshih || props.greatLent) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
 
-    <>{props.vselenskayaRoditelskayaSubbota && <MdxLoader src="Matins/Aliluja1" lang={props.lang} />}</>
+    <>{(props.vselenskayaRoditelskayaSubbota || props.troitskayaRoditelskayaSubbota) && <MdxLoader src="Matins/Aliluja1" lang={props.lang} />}</>
     <>{props.lentSubbotas && <MdxLoader src="Matins/Aliluja2" lang={props.lang} />}</>
     <>{!props.lentSubbotas && props.greatLent && <MdxLoader src="Matins/Aliluja3" lang={props.lang} />}</>
 
@@ -72,7 +72,12 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
 </If>
 
-<If condition={!props.isEasterOffsetRange(-3, -2) && !props.vselenskayaRoditelskayaSubbota}>
+<If
+    condition={
+        !props.isEasterOffsetRange(-3, -2) &&
+        !(props.vselenskayaRoditelskayaSubbota || props.troitskayaRoditelskayaSubbota)
+    }
+>
     <>{props.dayOfWeek === 0 || (props.dayOfWeek === 2 && <MdxLoader src="Matins/Prayer2" lang={props.lang} />)}</>
     <>{props.dayOfWeek === 0 || (props.dayOfWeek === 3 && <MdxLoader src="Matins/Prayer3" lang={props.lang} />)}</>
     <>{props.dayOfWeek === 0 || (props.dayOfWeek === 4 && <MdxLoader src="Matins/Prayer4" lang={props.lang} />)}</>
@@ -80,7 +85,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
     <>{props.dayOfWeek === 0 || (props.dayOfWeek === 6 && <MdxLoader src="Matins/Prayer8" lang={props.lang} />)}</>
 </If>
 
-<If condition={props.vselenskayaRoditelskayaSubbota}>
+<If condition={(props.vselenskayaRoditelskayaSubbota || props.troitskayaRoditelskayaSubbota)}>
     ## Кафизма 17
     <MdxLoader src="Shared/Psalm118VselSubSt1" lang={props.lang} />
 
