@@ -1,0 +1,108 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Html from 'components/Html/Html';
+import Parts from 'components/Parts/Parts';
+import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
+import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
+import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+
+import ReadingsForService from 'containers/Readings/ReadingsForService';
+
+# Великая Вечерня в День Пятидесятницы
+
+<MdxLoader src="Shared/Vosglas" />
+
+<MdxLoader src="Shared/ParaklitChit" />
+
+### Псалом 103, предначинательный
+
+<MdxLoader src="Vespers/Psalm103Chit" />
+
+**Иерей читает светильничные молитвы на солее перед царскими вратами. **
+
+<MdxLoader src="Vespers/Prayer1" lang={props.lang} />
+
+<MdxLoader src="Vespers/Prayer2" lang={props.lang} />
+<MdxLoader src="Vespers/Prayer3" lang={props.lang} />
+<MdxLoader src="Vespers/Prayer4" lang={props.lang} />
+<MdxLoader src="Vespers/Prayer5" lang={props.lang} />
+<MdxLoader src="Vespers/Prayer6" lang={props.lang} />
+<MdxLoader src="Vespers/Prayer7" lang={props.lang} />
+
+### Великая ектения
+
+<MdxLoader src="Vespers/VelikajaEkteniaPentecost" />
+
+<MdxLoader src="Vespers/Prayer8" />
+
+<MdxLoader src="Vespers/VecherniePsalmi" />
+
+### Стихиры на «Господи, взываю»
+
+<StihiriNaGV day={props.day} date={props.date} />
+<span id="vhod" />
+
+## Вход
+
+<MdxLoader src="Vespers/PremudrostVhod" />
+
+### Вечерняя (входная) песнь «при возжжении светильника»
+
+<MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
+
+<MdxLoader src="Vespers/MirVsem" />
+
+<Prokimens date={props.date} />
+
+### Малая ектения
+
+<MdxLoader src="Vespers/MalayaEkteniaKolenopr" />
+
+**Когда мы, преклонив колена, стоим с непокрытой головой, священник от царских врат, смотря на народ, произносит громко молитвы, чтобы слышали все.**
+
+<MdxLoader src="Vespers/MolitvaKolenopr1" />
+
+<MdxLoader src="Vespers/MolitvaPentecost1" />
+
+<MdxLoader src="Shared/SugubajaPolnaja" lang={props.lang} />
+
+### Малая ектения
+
+<MdxLoader src="Vespers/MalayaEkteniaKolenopr" />
+
+<MdxLoader src="Vespers/MolitvaKolenopr2" />
+
+<MdxLoader src="Vespers/MolitvaPentecost2" />
+
+<MdxLoader src="Vespers/Udostoi" lang={props.lang} />
+
+### Малая ектения
+
+<MdxLoader src="Vespers/MalayaEkteniaKolenopr" />
+
+<MdxLoader src="Vespers/MolitvaKolenopr3" />
+
+<MdxLoader src="Vespers/MolitvaPentecost3" />
+
+### Просительная ектения
+
+<MdxLoader src="Vespers/PrositelnayaEktenia" />
+
+<MdxLoader src="Vespers/MirVsemGlav" />
+
+### Молитва главопреклонная
+
+<MdxLoader src="Vespers/PrayerGlavopriklonnaja2" />
+
+### Стихира «на стихах»
+
+<StihiriNaStihah day={props.day} date={props.date} />
+
+<MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} />
+
+<MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
+
+### Тропарь, глас 8
+
+<MdxLoader src="Shared/TropPentecost" lang={props.lang} />
+
+<>{props.otpust}</>
