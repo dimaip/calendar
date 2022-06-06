@@ -165,7 +165,7 @@ const makeServices = (date, readings = {}) => {
         {
             title: 'Вечерня братским чином',
             id: 'vespers',
-            enabled: !isEasterOffsetRange(49),
+            enabled: true,
             calendar: true,
             lang: false,
             skipRedirect: true,
