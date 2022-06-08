@@ -63,7 +63,7 @@ const makeServices = (date, readings = {}) => {
             id: 'easterHours',
             enabled: isEasterOffsetRange(0, 6),
             calendar: false,
-            lang: false,
+            lang: true,
             skipRedirect: true,
             group: 'Часослов',
             warn: true,
