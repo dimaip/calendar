@@ -24,6 +24,7 @@ import PassionThursday from './PassionThursday.mdx';
 import PassionFriday from './PassionFriday.mdx';
 import PassionSaturday from './PassionSaturday.mdx';
 import Pentecost from './Pentecost.mdx';
+import PentecostObihod from './PentecostObihod.mdx';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -38,7 +39,7 @@ const Readings = ({ readingsForService, day }) =>
         <Loader />
     );
 
-const Vespers = ({ date }) => {
+const Vespers = ({ date, obihod }) => {
     const dateObj = new Date(date);
     const tomorrowDateObj = new Date(date);
     tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
@@ -123,9 +124,11 @@ const Vespers = ({ date }) => {
         isHoliday,
         isFast,
         isEasterOffsetRange,
-        
     };
 
+    if (obihod && isEasterOffsetRange(50)) {
+        return <PentecostObihod {...props} />;
+    }
     if (isEasterOffsetRange(50)) {
         return <Pentecost {...props} />;
     }

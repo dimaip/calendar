@@ -17,6 +17,17 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Vespers/Psalm103Chit" />
 
+**Иерей читает светильничные молитвы на солее перед царскими вратами. **
+
+<MdxLoader src="Vespers/Prayer1" lang={props.lang} />
+
+<MdxLoader src="Vespers/Prayer2" lang={props.lang} />
+<MdxLoader src="Vespers/Prayer3" lang={props.lang} />
+<MdxLoader src="Vespers/Prayer4" lang={props.lang} />
+<MdxLoader src="Vespers/Prayer5" lang={props.lang} />
+<MdxLoader src="Vespers/Prayer6" lang={props.lang} />
+<MdxLoader src="Vespers/Prayer7" lang={props.lang} />
+
 ### Великая ектения
 
 <MdxLoader src="Vespers/VelikajaEkteniaPentecost" />
@@ -38,30 +49,9 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
 
-## Чтение Писания и проповедь (возможны)
-
 <MdxLoader src="Vespers/MirVsem" />
 
 <Prokimens date={props.date} />
-<span id="reading" />
-
-<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
-
-<div>
-    <ReadingsForService readingsForService={{ Пятидесятнице: ['Числ. XI, 16-17; 24-29.'] }} />
-</div>
-
-<div>
-    <ReadingsForService readingsForService={{ Пятидесятнице: ['Иоил. II, 23-32.'] }} />
-</div>
-
-<div>
-    <ReadingsForService readingsForService={{ Пятидесятнице: ['Иез. XXXVI, 24-28.'] }} />
-</div>
-
-<MdxLoader src="Vespers/MirTebeParemiya" />
-
-### Проповедь
 
 ### Малая ектения
 
@@ -97,14 +87,6 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Vespers/PrositelnayaEktenia" />
 
-<MdxLoader src="Vespers/MalayaEkteniaKolenopr2" />
-
-<MdxLoader src="Vespers/MolitvaKolenopr4" />
-
-<MdxLoader src="Vespers/Prayer9Kolenopr" />
-
-<MdxLoader src="Vespers/MalayaEkteniaKolenopr3" />
-
 <MdxLoader src="Vespers/MirVsemGlav" />
 
 ### Молитва главопреклонная
@@ -124,7 +106,3 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <MdxLoader src="Shared/TropPentecost" lang={props.lang} />
 
 <MdxLoader src="Vespers/OtpustPentecost" lang={props.lang} />
-
-### Кондак, глас 8
-
-<MdxLoader src="Shared/KondPentecost" lang={props.lang} />
