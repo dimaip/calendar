@@ -28,7 +28,7 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
 </If>
 
-<If condition={props.sirnajaSedmitza || props.greatLent}>**{props.chinProshenija ? 'Ч' : 'Н'}** Аминь.</If>
+<If condition={props.sirnajaSedmitza || props.greatLent || props.troitskayaRoditelskayaSubbota}>**{props.chinProshenija ? 'Ч' : 'Н'}** Аминь.</If>
 
 <If condition={props.chinProshenija}>
     <MdxLoader src="Shared/Pridite3" lang={props.lang}  />
