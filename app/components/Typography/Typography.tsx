@@ -1,8 +1,8 @@
+import React, { useRef } from 'react';
 import ScriptEditorInput from 'components/ScriptEditor/ScriptEditorInput';
-import { makeId } from 'hooks/useUpdateTOC';
-import React from 'react';
 
-const addToTOC = (title: unknown): string => {
+const useAddToTOC = (title: unknown): string => {
+    const randomNumberRef = useRef(Math.floor(Math.random() * 100));
     if (!window.TOC) {
         window.TOC = {};
     }
@@ -15,14 +15,18 @@ const addToTOC = (title: unknown): string => {
     if (!domId) {
         return '';
     }
-    window.TOC[domId] = domId;
-    return makeId(domId);
+    const processedDomId = `r-${domId}-${randomNumberRef.current}`;
+    window.TOC[processedDomId] = {
+        value: processedDomId,
+        label: domId,
+    };
+    return processedDomId;
 };
 
 export const H1 = ({ children }): JSX.Element => <h1 className="H1">{children}</h1>;
 
 export const H2 = ({ children }): JSX.Element => {
-    const domId = addToTOC(children);
+    const domId = useAddToTOC(children);
     return (
         <h2 className="H2" id={domId}>
             {children}
@@ -31,7 +35,7 @@ export const H2 = ({ children }): JSX.Element => {
 };
 
 export const H3 = ({ children }): JSX.Element => {
-    const domId = addToTOC(children);
+    const domId = useAddToTOC(children);
     return (
         <h3 className="H3" id={domId}>
             {children} <ScriptEditorInput id={window.location.href + children} />

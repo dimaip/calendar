@@ -2,8 +2,6 @@ import { useEffect, useRef } from 'react';
 import { useSetRecoilState } from 'recoil';
 import TOCState from 'state/TOCState';
 
-export const makeId = (id: string): string => `r-${id}`;
-
 export const useUpdateTOC = () => {
     const setTOC = useSetRecoilState(TOCState);
 
@@ -14,7 +12,7 @@ export const useUpdateTOC = () => {
         const values = Object.values(window.TOC);
         if (values.length !== TOClength.current) {
             const sortedTOC = values
-                .map((item) => ({ item, offsetTop: document.getElementById(makeId(item))?.offsetTop }))
+                .map((item) => ({ item, offsetTop: document.getElementById(item.value)?.offsetTop }))
                 .sort((a, b) => a.offsetTop - b.offsetTop)
                 .map((i) => i.item);
             setTOC(sortedTOC);

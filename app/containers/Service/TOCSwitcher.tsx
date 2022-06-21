@@ -4,14 +4,9 @@ import { useRecoilValue } from 'recoil';
 import TOCState from 'state/TOCState';
 
 import SelectBox from '../../components/SelectBox/SelectBox';
-import { makeId } from 'hooks/useUpdateTOC';
 
 const TOCSwitcher = ({ lang }) => {
     const TOC = useRecoilValue(TOCState);
-    const items = TOC.map((item) => ({
-        value: makeId(item),
-        label: item,
-    }));
     const [activeItem, setActiveItem] = useState('');
     if ('IntersectionObserver' in window) {
         useEffect(() => {
@@ -39,7 +34,7 @@ const TOCSwitcher = ({ lang }) => {
                     if (!observer) {
                         return;
                     }
-                    const node = document.getElementById(makeId(nodeId));
+                    const node = document.getElementById(nodeId);
                     if (node) {
                         observer.observe(node);
                     } else {
@@ -50,7 +45,7 @@ const TOCSwitcher = ({ lang }) => {
                 };
 
                 TOC.map((nodeId) => {
-                    observeOrCue(nodeId);
+                    observeOrCue(nodeId.value);
                 });
                 setTimeout(() => {}, 0);
             }
@@ -80,7 +75,7 @@ const TOCSwitcher = ({ lang }) => {
                     max-width: 140px;
                 }
             `}
-            items={items}
+            items={TOC}
             value={activeItem}
             onChange={(anchorID) => {
                 const domNode = document.getElementById(anchorID);
