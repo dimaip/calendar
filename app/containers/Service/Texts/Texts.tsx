@@ -204,7 +204,7 @@ const makeServices = (date, readings = {}) => {
             warn: false,
         },
         {
-            title: 'Молитвы перед и после еды',
+            title: 'Молитвы до и после трапезы',
             id: 'molitvaTrapeza',
             enabled: true,
             calendar: false,
