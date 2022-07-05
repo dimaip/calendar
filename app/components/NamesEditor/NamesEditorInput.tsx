@@ -9,7 +9,13 @@ import { useRecoilState } from 'recoil';
 import namesState from 'state/namesState';
 import TagManager from 'react-gtm-module';
 
-const NamesEditorInput = ({ type }: { type: string }): JSX.Element => {
+const NamesEditorInput = ({
+    type,
+    placeholder = 'Введите имена',
+}: {
+    type: string;
+    placeholder: string;
+}): JSX.Element => {
     const theme = useTheme();
     const [inputReaderName, setInputReaderName] = useState<string | null>(null);
 
@@ -59,7 +65,7 @@ const NamesEditorInput = ({ type }: { type: string }): JSX.Element => {
                         white-space: pre-line;
                     `}
                 >
-                    {names ? `[${names}]` : '[введите имена]'}
+                    {names ? `[${names}]` : `[${placeholder.toLocaleLowerCase()}]`}
                 </span>
                 <Pencil colour={theme.colours.darkGray} />
             </Button>
@@ -81,7 +87,7 @@ const NamesEditorInput = ({ type }: { type: string }): JSX.Element => {
                             <Textarea
                                 onChange={changeInputHandler}
                                 value={inputReaderName}
-                                placeholder="Введите имена…"
+                                placeholder={`${placeholder}…`}
                                 autoFocus
                             />
                         </div>
