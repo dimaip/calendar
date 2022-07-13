@@ -91,7 +91,13 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                         >
                             <Cross />
                         </Button>
-                        {prayer.text}
+                        <div
+                            className={css`
+                                white-space: break-spaces;
+                            `}
+                        >
+                            {prayer.text}
+                        </div>
                     </Section>
                 );
             })}
@@ -101,6 +107,10 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                 `}
                 items={[
                     { value: '', label: 'Добавить молитву' },
+                    {
+                        value: 'PravdaMir',
+                        label: 'Молитва о правде и мире',
+                    },
                     {
                         value: 'BratEdinstvo',
                         label: 'Молитва о братском единстве еп. Макария (Опоцкого)',
