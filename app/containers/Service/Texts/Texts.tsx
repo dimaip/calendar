@@ -1,9 +1,35 @@
 import { getFeastInfo, makeIsDate, makeIsEasterOffsetRange } from 'domain/getDayInfo';
 
-import liturgyTOC from './Liturgies/TOC';
-import lpodTOC from './Lpod/TOC';
-import matinsTOC from './Matins/TOC';
-import vespersTOC from './Vespers/TOC';
+export const bratMolitvoslovPrayers = [
+    {
+        value: 'PravdaMir',
+        label: 'Молитва о правде и мире',
+    },
+    {
+        value: 'BratEdinstvo',
+        label: 'Молитва о братском единстве еп. Макария (Опоцкого)',
+    },
+    {
+        value: 'ChurchCountry',
+        label: 'Молитва Господу о церкви и стране',
+    },
+    {
+        value: 'Neplyuev',
+        label: 'Молитва Н. Н. Неплюева о братстве',
+    },
+    {
+        value: 'Opotsky1',
+        label: 'Молитва о созидании Тела Церкви Христовой, об исполнении Нового Завета в Крови Его',
+    },
+    {
+        value: 'Opotsky2',
+        label: 'Молитва пред вкушением святого Хлеба и Чаши благословения',
+    },
+    {
+        value: 'Opotsky3',
+        label: 'Молитва перед Причастием (с особыми прошениями)',
+    },
+];
 
 // New texts must be put into `Texts/ServiceIdUppercase/index.dyn.tsx` and then added here
 
@@ -32,7 +58,6 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: false,
             group: 'Литургия',
-            TOC: liturgyTOC,
             warn: true,
         },
         {
@@ -43,7 +68,6 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: false,
             group: 'Литургия',
-            TOC: liturgyTOC,
             warn: true,
         },
         {
@@ -54,7 +78,6 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: false,
             group: 'Литургия',
-            TOC: lpodTOC,
             warn: true,
         },
 
@@ -106,7 +129,6 @@ const makeServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: true,
             group: 'Часослов',
-            TOC: vespersTOC,
             warn: true,
         },
         // {
@@ -159,7 +181,6 @@ const makeServices = (date, readings = {}) => {
             lang: false,
             skipRedirect: true,
             group: 'Домашняя молитва',
-            TOC: matinsTOC,
             warn: false,
         },
         {
@@ -170,7 +191,6 @@ const makeServices = (date, readings = {}) => {
             lang: false,
             skipRedirect: true,
             group: 'Домашняя молитва',
-            TOC: vespersTOC,
             warn: false,
         },
         {
@@ -213,16 +233,17 @@ const makeServices = (date, readings = {}) => {
             group: 'Домашняя молитва',
             warn: false,
         },
-        {
-            title: 'Молитва о правде и мире',
-            id: 'bratMolitvoslov',
+        ...bratMolitvoslovPrayers.map((i) => ({
+            title: i.label,
+            id: `bratMolitvoslov/${i.value}`,
             enabled: true,
             calendar: false,
             lang: false,
             skipRedirect: true,
-            group: 'Домашняя молитва',
+            group: 'Братский молитвослов',
             warn: false,
-        },
+            hideTOC: true,
+        })),
     ];
 };
 export default makeServices;

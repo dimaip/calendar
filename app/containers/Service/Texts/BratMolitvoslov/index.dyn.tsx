@@ -1,8 +1,9 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
-import PravdaMirMdx from './PravdaMir/ru.mdx';
-
+import MdxLoader from '../MdxLoader';
 const PravdaMir = (): JSX.Element => {
-    return <PravdaMirMdx />;
+    const { prayerId } = useParams();
+    return <MdxLoader src={`BratMolitvoslov/${prayerId}`} />;
 };
 export default PravdaMir;

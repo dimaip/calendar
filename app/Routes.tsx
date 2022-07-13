@@ -72,7 +72,7 @@ const DateRoutes = () => {
                         <Route exact path="/date/:date/thisday/:thisDayId">
                             <ThisDay />
                         </Route>
-                        <Route exact path="/date/:date/service/:serviceId">
+                        <Route exact path="/date/:date/service/:serviceId/:prayerId?">
                             <Service />
                         </Route>
                         <Route>

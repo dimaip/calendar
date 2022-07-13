@@ -12,6 +12,7 @@ import SelectBox from 'components/SelectBox/SelectBox';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Loader from 'components/Loader/Loader';
 import Cross from 'components/svgs/Cross';
+import { bratMolitvoslovPrayers } from 'containers/Service/Texts/Texts';
 
 const Section = ({ children }: ReactNode): JSX.Element => {
     const theme = useTheme();
@@ -107,34 +108,7 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                 `}
                 items={[
                     { value: '', label: 'Добавить молитву' },
-                    {
-                        value: 'PravdaMir',
-                        label: 'Молитва о правде и мире',
-                    },
-                    {
-                        value: 'BratEdinstvo',
-                        label: 'Молитва о братском единстве еп. Макария (Опоцкого)',
-                    },
-                    {
-                        value: 'ChurchCountry',
-                        label: 'Молитва Господу о церкви и стране',
-                    },
-                    {
-                        value: 'Neplyuev',
-                        label: 'Молитва Н. Н. Неплюева о братстве',
-                    },
-                    {
-                        value: 'Opotsky1',
-                        label: 'Молитва о созидании Тела Церкви Христовой, об исполнении Нового Завета в Крови Его',
-                    },
-                    {
-                        value: 'Opotsky2',
-                        label: 'Молитва пред вкушением святого Хлеба и Чаши благословения',
-                    },
-                    {
-                        value: 'Opotsky3',
-                        label: 'Молитва перед Причастием (с особыми прошениями)',
-                    },
+                    ...bratMolitvoslovPrayers,
                     {
                         value: 'addCustom',
                         label: 'Добавить свою молитву',

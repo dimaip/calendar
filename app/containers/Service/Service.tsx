@@ -2,12 +2,10 @@ import { getFeastInfo } from 'domain/getDayInfo';
 
 import React, { Suspense, useState, useEffect, useContext } from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
-
 import { css } from 'emotion';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import Loader from 'components/Loader/Loader';
-import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import { Note } from 'components/Note/Note';
@@ -29,7 +27,6 @@ const toUpperCase = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 const Service = () => {
     const { serviceId: originalServiceId, date } = useParams();
     const { data: day } = useDay(date);
-    const theme = useTheme();
 
     const history = useHistory();
 
@@ -49,17 +46,19 @@ const Service = () => {
     }
 
     const services = makeServices(date, day?.readings);
-    const service = services.find((service) => service.id === (serviceId || originalServiceId));
+    const service = services.find(
+        (service) => service.id.split('/')[0] === (serviceId || originalServiceId?.split?.('/')?.[0])
+    );
 
     if (service?.skipRedirect) {
-        serviceId = originalServiceId;
+        serviceId = originalServiceId.split('/')[0];
     }
 
     const [TextComponent, setTextComponent] = useState();
     useEffect(() => {
         if (serviceId) {
             const serviceIdUpper = toUpperCase(serviceId);
-            const Component = React.lazy(() =>
+            const Component = React.lazy(async () =>
                 import(`./Texts/${serviceIdUpper}/index.dyn.tsx`).catch(reloadOnFailedImport)
             );
             setTextComponent(Component);
@@ -106,7 +105,7 @@ const Service = () => {
                 />
             )}
             {service?.lang && <LanguageSwitcher />}
-            <TOCSwitcher service={service} lang={langState.lang} />
+            {!service?.hideTOC && <TOCSwitcher service={service} lang={langState.lang} />}
         </>
     );
 
