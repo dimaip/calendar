@@ -96,7 +96,9 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                 );
             })}
             <SelectBox
-                style={{ width: '100%' }}
+                className={css`
+                    width: 100%;
+                `}
                 items={[
                     { value: '', label: 'Добавить молитву' },
                     {
