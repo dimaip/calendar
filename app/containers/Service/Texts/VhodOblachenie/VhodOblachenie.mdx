@@ -72,7 +72,7 @@ import { Note } from 'components/Note/Note';
         
         <MdxLoader src="VhodOblachenie/Prosfor2nd" />
         
-        <MdxLoader src="VhodOblachenie/Prosfor3rd" />
+        <MdxLoader src="VhodOblachenie/Prosfor3rd" {...props} />
         
         <MdxLoader src="VhodOblachenie/Prosfor4th" />
         
@@ -84,14 +84,14 @@ import { Note } from 'components/Note/Note';
         
         ## Отпуст
         
-        *Если служится ИЗЛ
-        
-        <MdxLoader src="VhodOblachenie/OtpustZlatoust" />
-        
-        *Если служится ВВ
-        
-        <MdxLoader src="VhodOblachenie/OtpustVasiliy" />
-        
+        <If condition={props.vasiliy}>
+            <Then>
+                <MdxLoader src="VhodOblachenie/OtpustVasiliy" {...props} />
+            </Then>
+            <Else>
+                <MdxLoader src="VhodOblachenie/OtpustZlatoust" {...props} />
+            </Else>
+        </If>
     </Else>
 
 </If>
