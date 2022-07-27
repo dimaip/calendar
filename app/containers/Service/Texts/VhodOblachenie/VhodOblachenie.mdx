@@ -61,6 +61,37 @@ import { Note } from 'components/Note/Note';
         <MdxLoader src="VhodOblachenie/OblacheniePt2" />
 
         <MdxLoader src="VhodOblachenie/OblacheniePt3" />
+        
+        ## Проскомидия
+        
+        <MdxLoader src="VhodOblachenie/Psalm25" />
+        
+        <MdxLoader src="VhodOblachenie/PreProsfor" />
+        
+        <MdxLoader src="VhodOblachenie/Prosfor1St" />
+        
+        <MdxLoader src="VhodOblachenie/Prosfor2nd" />
+        
+        <MdxLoader src="VhodOblachenie/Prosfor3rd" {...props} />
+        
+        <MdxLoader src="VhodOblachenie/Prosfor4th" />
+        
+        <MdxLoader src="VhodOblachenie/Prosfor5th" />
+        
+        <MdxLoader src="VhodOblachenie/PokrDarov" />
+        
+        <MdxLoader src="VhodOblachenie/MolitvaPrinosh" />
+        
+        ## Отпуст
+        
+        <If condition={props.vasiliy}>
+            <Then>
+                <MdxLoader src="VhodOblachenie/OtpustVasiliy" {...props} />
+            </Then>
+            <Else>
+                <MdxLoader src="VhodOblachenie/OtpustZlatoust" {...props} />
+            </Else>
+        </If>
     </Else>
 
 </If>

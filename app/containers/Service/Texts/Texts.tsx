@@ -41,7 +41,7 @@ const makeServices = (date, readings = {}) => {
 
     return [
         {
-            title: 'Входные молитвы и облачение',
+            title: 'Входные молитвы и облачение. Проскомидия',
             id: 'vhodOblachenie',
             enabled: Boolean(readings['Литургия'] || lpod),
             calendar: true,
