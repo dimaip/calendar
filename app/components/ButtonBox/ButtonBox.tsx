@@ -20,6 +20,7 @@ const ButtonBox = (props) => {
                     background-color: ${theme.colours.bgGrayLight};
                 }
             `} ${props.className}`}
+            onClick={props.onClick}
         >
             {props.children}
         </div>

@@ -9,7 +9,7 @@ export const useUpdateTOC = () => {
     const TOCupdatesCount = useRef(0);
 
     const updateTOC = () => {
-        const values = Object.values(window.TOC);
+        const values = Object.values(window.TOC || {});
         if (values.length !== TOClength.current) {
             const sortedTOC = values
                 .map((item) => ({ item, offsetTop: document.getElementById(item.value)?.offsetTop }))

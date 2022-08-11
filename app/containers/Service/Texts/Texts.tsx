@@ -1,4 +1,6 @@
 import { getFeastInfo, makeIsDate, makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import { useRecoilState } from 'recoil';
+import customPrayersState from 'state/customPrayersState';
 
 export const bratMolitvoslovPrayers = [
     {
@@ -33,8 +35,10 @@ export const bratMolitvoslovPrayers = [
 
 // New texts must be put into `Texts/ServiceIdUppercase/index.dyn.tsx` and then added here
 
-const makeServices = (date, readings = {}) => {
+const useServices = (date, readings = {}) => {
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
+
+    const [customPrayers] = useRecoilState(customPrayersState('Sugubaja'));
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const isDate = makeIsDate(date);
@@ -244,6 +248,18 @@ const makeServices = (date, readings = {}) => {
             warn: false,
             hideTOC: true,
         })),
+        ...customPrayers.map((i) => ({
+            title: i.text.split('\n')[0],
+            id: `customPrayer/${i.id}`,
+            enabled: true,
+            calendar: false,
+            lang: false,
+            skipRedirect: true,
+            group: 'Братский молитвослов',
+            warn: false,
+            hideTOC: true,
+            customPrayerId: i.id,
+        })),
     ];
 };
-export default makeServices;
+export default useServices;

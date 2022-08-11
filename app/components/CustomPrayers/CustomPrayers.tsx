@@ -1,10 +1,8 @@
-import React, { ReactNode, Suspense, useState } from 'react';
+import React, { ReactNode, Suspense } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import TagManager from 'react-gtm-module';
 import Button from 'components/Button/Button';
-import Drawer from 'components/Drawer/Drawer';
-import Textarea from 'components/Textarea/Textarea';
 import { useRecoilState } from 'recoil';
 import customPrayersState from 'state/customPrayersState';
 import extraPrayersState from 'state/extraPrayers';
@@ -13,6 +11,9 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Loader from 'components/Loader/Loader';
 import Cross from 'components/svgs/Cross';
 import { bratMolitvoslovPrayers } from 'containers/Service/Texts/Texts';
+import customPrayerInputState from 'state/customPrayerInputState';
+
+import CustomPrayerInput from './CustomPrayerInput';
 
 const Section = ({ children }: ReactNode): JSX.Element => {
     const theme = useTheme();
@@ -33,72 +34,42 @@ const Section = ({ children }: ReactNode): JSX.Element => {
 };
 
 const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
-    const [inputText, setInputText] = useState<string | null>(null);
+    const [_inputText, setInputText] = useRecoilState(customPrayerInputState);
     const [extraPrayers, setExtraPrayers] = useRecoilState(extraPrayersState(type));
-    const [customPrayers, setCustomPrayers] = useRecoilState(customPrayersState(type));
-
-    const changeInputHandler = (e: { target: { value: string } }): void => {
-        setInputText(e.target.value);
-    };
-
-    const savePrayerHandler = (): void => {
-        setCustomPrayers([
-            ...customPrayers,
-            {
-                id: Date.now(),
-                text: inputText,
-            },
-        ]);
-        setInputText(null);
-        TagManager.dataLayer({
-            dataLayer: {
-                event: 'customPrayerAdded',
-                namesType: type,
-            },
-        });
-    };
-
-    const placeholder = 'Введите текст молитвы';
+    const [customPrayers] = useRecoilState(customPrayersState('Sugubaja'));
 
     return (
-        <span>
-            {extraPrayers.map((prayerId) => (
-                <Section key={prayerId}>
-                    <Button
-                        className={css`
-                            position: absolute;
-                            top: 0;
-                            right: 0;
-                        `}
-                        onClick={() => setExtraPrayers(extraPrayers.filter((i) => i !== prayerId))}
-                    >
-                        <Cross />
-                    </Button>
-                    <Suspense fallback={<Loader />}>
-                        <MdxLoader src={`BratMolitvoslov/${prayerId}`} lang="ru" />
-                    </Suspense>
-                </Section>
-            ))}
-            {customPrayers.map((prayer) => {
+        <div style={{ marginTop: 12, marginBottom: 12 }}>
+            {extraPrayers.map((prayerId) => {
+                const customPrayer = customPrayers?.find((i) => String(i.id) === String(prayerId));
+                if (!customPrayer) {
+                    return null;
+                }
                 return (
-                    <Section key={prayer.id}>
+                    <Section key={prayerId}>
                         <Button
                             className={css`
                                 position: absolute;
                                 top: 0;
                                 right: 0;
                             `}
-                            onClick={() => setCustomPrayers(customPrayers.filter((i) => i.id !== prayer.id))}
+                            onClick={() => setExtraPrayers(extraPrayers.filter((i) => i !== prayerId))}
                         >
                             <Cross />
                         </Button>
-                        <div
-                            className={css`
-                                white-space: break-spaces;
-                            `}
-                        >
-                            {prayer.text}
-                        </div>
+                        <Suspense fallback={<Loader />}>
+                            {/^\d+$/.test(prayerId) ? (
+                                <div
+                                    className={css`
+                                        white-space: break-spaces;
+                                    `}
+                                >
+                                    {customPrayer.text}
+                                </div>
+                            ) : (
+                                <MdxLoader src={`BratMolitvoslov/${prayerId}`} lang="ru" />
+                            )}
+                        </Suspense>
                     </Section>
                 );
             })}
@@ -109,11 +80,15 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                 items={[
                     { value: '', label: 'Добавить молитву' },
                     ...bratMolitvoslovPrayers,
+                    ...customPrayers.map((p) => ({
+                        value: p.id,
+                        label: p.text?.split?.('\n')?.[0],
+                    })),
                     {
                         value: 'addCustom',
                         label: 'Добавить свою молитву',
                     },
-                ].filter((i) => !extraPrayers.includes(i.value))}
+                ].filter((i) => !extraPrayers.includes(String(i.value)))}
                 value=""
                 onChange={(prayerId) => {
                     if (prayerId === 'addCustom') {
@@ -129,33 +104,8 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                     }
                 }}
             />
-
-            {inputText !== null && (
-                <Drawer onClose={savePrayerHandler}>
-                    <label>
-                        <p
-                            className={css`
-                                margin-bottom: 8px;
-                            `}
-                        >
-                            Добавить молитву
-                        </p>
-                        <div
-                            className={css`
-                                position: relative;
-                            `}
-                        >
-                            <Textarea
-                                onChange={changeInputHandler}
-                                value={inputText}
-                                placeholder={`${placeholder}…`}
-                                autoFocus
-                            />
-                        </div>
-                    </label>
-                </Drawer>
-            )}
-        </span>
+            <CustomPrayerInput onSave={(newPrayer) => setExtraPrayers([...extraPrayers, newPrayer.id])} />
+        </div>
     );
 };
 

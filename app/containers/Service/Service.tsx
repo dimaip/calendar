@@ -12,7 +12,7 @@ import { Note } from 'components/Note/Note';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
-import makeServices from './Texts/Texts';
+import useServices from './Texts/Texts';
 import MDXProvider from './MDXProvider';
 import ParallelLanguageBar from './ParallelLanguageBar';
 import { LangContext } from './LangContext';
@@ -45,7 +45,7 @@ const Service = () => {
         }
     }
 
-    const services = makeServices(date, day?.readings);
+    const services = useServices(date, day?.readings);
     const service = services.find(
         (service) => service.id.split('/')[0] === (serviceId || originalServiceId?.split?.('/')?.[0])
     );

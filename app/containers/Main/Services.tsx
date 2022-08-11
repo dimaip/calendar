@@ -3,15 +3,21 @@ import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
 import { Link, useLocation } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
+import TrashIcon from 'components/svgs/TrashIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
-import makeServices from 'containers/Service/Texts/Texts';
+import useServices from 'containers/Service/Texts/Texts';
 import groupBy from 'lodash.groupby';
+import customPrayersState from 'state/customPrayersState';
+import { useRecoilState } from 'recoil';
+import PlusIcon from 'components/svgs/PlusIcon';
+import CustomPrayerInput from 'components/CustomPrayers/CustomPrayerInput';
+import customPrayerInputState from 'state/customPrayerInputState';
 
 import SectionHeading from './SectionHeading';
 
 const OptionalLink = ({ enabled, ...rest }) =>
     enabled ? (
-        // @ts-ignore
+        // @ts-expect-error
         <Link {...rest} />
     ) : (
         <span title="Данная служба в этот день не совершается" className={rest.className}>
@@ -24,7 +30,10 @@ const Services = ({ date, readings }) => {
 
     const location = useLocation();
 
-    const services = makeServices(date, readings);
+    const services = useServices(date, readings);
+
+    const [_inputText, setInputText] = useRecoilState(customPrayerInputState);
+    const [customPrayers, setCustomPrayers] = useRecoilState(customPrayersState('Sugubaja'));
 
     const groupedServices = groupBy(services, (service) => service.group);
 
@@ -105,23 +114,76 @@ const Services = ({ date, readings }) => {
                                                         {service.title}
                                                     </p>
                                                 </div>
-                                                <div
-                                                    className={css`
-                                                        flex-grow: 0;
-                                                        flex-shrink: 0;
-                                                    `}
-                                                >
-                                                    <RightIcon />
-                                                </div>
+                                                {service.customPrayerId ? (
+                                                    <div
+                                                        className={css`
+                                                            flex-grow: 0;
+                                                            flex-shrink: 0;
+                                                        `}
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            e.stopPropagation();
+                                                            setCustomPrayers(customPrayers.filter(i => i.id !== service.customPrayerId));
+                                                        }}
+                                                    >
+                                                        <TrashIcon />
+                                                    </div>
+                                                ) : (
+                                                    <div
+                                                        className={css`
+                                                            flex-grow: 0;
+                                                            flex-shrink: 0;
+                                                        `}
+                                                    >
+                                                        <RightIcon />
+                                                    </div>
+                                                )}
                                             </div>
                                         </ButtonBox>
                                     </OptionalLink>
                                 ))}
+
+                                {groupTitle === 'Братский молитвослов' && (
+                                    <ButtonBox onClick={() => setInputText('')}>
+                                        <div
+                                            className={css`
+                                                display: flex;
+                                                cursor: pointer;
+                                            `}
+                                        >
+                                            <div
+                                                className={css`
+                                                    flex-grow: 1;
+                                                    flex-shrink: 1;
+                                                `}
+                                            >
+                                                <p
+                                                    className={css`
+                                                        margin-bottom: -4px;
+                                                    `}
+                                                >
+                                                    Добавить свою молитву
+                                                </p>
+                                            </div>
+                                            <div
+                                                className={css`
+                                                    flex-grow: 0;
+                                                    flex-shrink: 0;
+                                                    display: flex;
+                                                    align-items: center;
+                                                `}
+                                            >
+                                                <PlusIcon />
+                                            </div>
+                                        </div>
+                                    </ButtonBox>
+                                )}
                             </div>
                         </div>
                     </div>
                 );
             })}
+            <CustomPrayerInput />
         </div>
     );
 };
