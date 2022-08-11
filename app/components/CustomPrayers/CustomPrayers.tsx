@@ -41,8 +41,9 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
     return (
         <div style={{ marginTop: 12, marginBottom: 12 }}>
             {extraPrayers.map((prayerId) => {
-                const customPrayer = customPrayers?.find((i) => String(i.id) === String(prayerId));
-                if (!customPrayer) {
+                const isCustomPrayer = /^\d+$/.test(prayerId)
+                const customPrayer = isCustomPrayer && customPrayers?.find((i) => String(i.id) === String(prayerId));
+                if (isCustomPrayer && !customPrayer) {
                     return null;
                 }
                 return (
@@ -58,7 +59,7 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                             <Cross />
                         </Button>
                         <Suspense fallback={<Loader />}>
-                            {/^\d+$/.test(prayerId) ? (
+                            {isCustomPrayer ? (
                                 <div
                                     className={css`
                                         white-space: break-spaces;
