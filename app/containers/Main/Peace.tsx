@@ -7,7 +7,7 @@ const Peace = (): JSX.Element => {
     const { date } = useParams();
     return (
         <Link
-            to={`/date/${date}/service/bratMolitvoslov`}
+            to={`/date/${date}/service/bratMolitvoslov/PravdaMir`}
             title="На службу"
             className={css`
                 display: block;
