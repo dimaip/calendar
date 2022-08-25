@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 
 import SectionHeading from './SectionHeading';
 
-const Sermons = ({ sermons, date, hideTitle = false }) => {
+const Sermons = React.memo(({ sermons, date, hideTitle = false }) => {
     const theme = useTheme();
     const location = useLocation();
 
@@ -104,5 +104,5 @@ const Sermons = ({ sermons, date, hideTitle = false }) => {
             </div>
         </>
     ) : null;
-};
+});
 export default Sermons;
