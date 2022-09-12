@@ -37,11 +37,13 @@ const SelectBox = ({ className = '', items, value, onChange }) => {
             value={value}
             onChange={(e) => onChange(e.target.value)}
         >
-            {items.map((item) => (
-                <option key={item.value} value={item.value}>
-                    {item.label}
-                </option>
-            ))}
+            <optgroup>
+                {items.map((item) => (
+                    <option key={item.value} value={item.value}>
+                        {item.label}
+                    </option>
+                ))}
+            </optgroup>
         </select>
     );
 };
