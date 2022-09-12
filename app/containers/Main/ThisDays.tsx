@@ -44,7 +44,7 @@ const ThisDays = ({ thisDays, date }) => {
                 <SwipeableViews
                     enableMouseEvents
                     className={css`
-                        padding: 0 64px 0 4px !important;
+                        padding: 0 ${thisDays.length > 1 ? 64 : 4}px 0 4px !important;
                     `}
                     slideClassName={css`
                         padding: 0 4px !important;
