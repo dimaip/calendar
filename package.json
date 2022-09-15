@@ -42,6 +42,7 @@
         "create-file-webpack": "^1.0.2",
         "date-fns": "^2.9.0",
         "dateformat": "^3.0.2",
+        "downshift": "^6.1.9",
         "element-closest-polyfill": "^1.0.0",
         "emotion": "^10.0.27",
         "emotion-theming": "^10.0.27",

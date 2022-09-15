@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import ScriptEditorInput from 'components/ScriptEditor/ScriptEditorInput';
 
-const useAddToTOC = (title: unknown): string => {
+const useAddToTOC = (title: unknown, level?: number): string => {
     const randomNumberRef = useRef(Math.floor(Math.random() * 100));
     if (!window.TOC) {
         window.TOC = {};
@@ -19,6 +19,7 @@ const useAddToTOC = (title: unknown): string => {
     window.TOC[processedDomId] = {
         value: processedDomId,
         label: domId,
+        level,
     };
     return processedDomId;
 };
@@ -26,7 +27,7 @@ const useAddToTOC = (title: unknown): string => {
 export const H1 = ({ children }): JSX.Element => <h1 className="H1">{children}</h1>;
 
 export const H2 = ({ children }): JSX.Element => {
-    const domId = useAddToTOC(children);
+    const domId = useAddToTOC(children, 2);
     return (
         <h2 className="H2" id={domId}>
             {children}
@@ -35,7 +36,7 @@ export const H2 = ({ children }): JSX.Element => {
 };
 
 export const H3 = ({ children }): JSX.Element => {
-    const domId = useAddToTOC(children);
+    const domId = useAddToTOC(children, 3);
     return (
         <h3 className="H3" id={domId}>
             {children} <ScriptEditorInput id={window.location.href + children} />
