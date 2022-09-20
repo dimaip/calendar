@@ -115,8 +115,7 @@ const ReadingItemSingle = ({
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    overflow: hidden;
-                    /* box-shadow: 0px 0px 3px #bbb; */
+                    /* overflow: hidden; */
                 `}
             >
                 {reading.translationList?.length ? (
