@@ -176,6 +176,16 @@ const useServices = (date, readings = {}) => {
             group: 'Требы',
             warn: false,
         },
+        {
+            title: 'Молебен о болящих',
+            id: 'molebenBoliaschih',
+            enabled: true,
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
+            group: 'Требы',
+            warn: false,
+        },
 
         {
             title: 'Утреня братским чином',
