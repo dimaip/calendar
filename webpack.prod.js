@@ -33,6 +33,10 @@ module.exports = merge(common, {
                     revision: hash,
                 },
                 {
+                    url: '/?utm_source=homescreen&from_twa',
+                    revision: hash,
+                },
+                {
                     url: '/manifest.json',
                     revision: '1',
                 },
