@@ -4,6 +4,10 @@ import customPrayersState from 'state/customPrayersState';
 
 export const bratMolitvoslovPrayers = [
     {
+        value: 'RealRussia',
+        label: 'Молитва об обретении настоящей России, её возрождении и спасении',
+    },
+    {
         value: 'PravdaMir',
         label: 'Молитва о правде и мире',
     },
