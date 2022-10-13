@@ -5,7 +5,16 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Shared/Vosglas" />
 
-<MdxLoader src="Shared/ParaklitChit" />
+<If condition={props.isEasterOffsetRange(0, 38)}>
+    <Then>
+        <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
+    </Then>
+    <Else>
+        <If condition={!props.isEasterOffsetRange(39, 48)}>
+            <MdxLoader src="Shared/ParaklitChit" />
+        </If>
+    </Else>
+</If>
 
 <MdxLoader src="Shared/ObichnoeNachalo" />
 
