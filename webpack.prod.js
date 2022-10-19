@@ -1,4 +1,4 @@
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const common = require('./webpack.base.js');
 const { InjectManifest } = require('workbox-webpack-plugin');
 
@@ -44,8 +44,6 @@ module.exports = merge(common, {
         }),
     ],
     optimization: {
-        namedModules: true,
-        namedChunks: true,
         usedExports: true,
         runtimeChunk: 'single',
         splitChunks: {
