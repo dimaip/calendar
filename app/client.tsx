@@ -4,7 +4,7 @@ import './forEachPolyfill';
 import 'array-flat-polyfill';
 import 'unfetch/polyfill/index.js';
 import 'element-closest-polyfill';
-import 'regenerator-runtime/runtime';
+import 'regenerator-runtime/runtime.js';
 import './sharePolyfill';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
@@ -20,7 +20,7 @@ import Worker from './precache.worker.js';
 
 import './redirectToHome';
 import { isCapacitor } from 'utils/deviceInfo';
-import precache from 'precache';
+import precache from 'precache.ts';
 
 window.APP_LOADED = true;
 const isProd = process.env.NODE_ENV === 'production';

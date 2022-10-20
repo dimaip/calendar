@@ -1,17 +1,23 @@
-const path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CreateFileWebpack = require('create-file-webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+import remarkGfm from 'remark-gfm';
+import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CreateFileWebpack from 'create-file-webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+
+const __filename = fileURLToPath(import.meta.url);
 
 const sha = process.env.VERCEL_GITHUB_COMMIT_SHA || process.env.AWS_COMMIT_ID;
 
 const version = sha ? sha.substr(0, 4) : 'dev';
 
-module.exports = {
+const __dirname = path.dirname(__filename);
+
+export default {
     name: 'client',
 
     context: path.resolve(__dirname, './app'),
@@ -22,6 +28,10 @@ module.exports = {
     },
 
     target: 'web',
+
+    stats: {
+        children: true,
+    },
 
     devServer: {
         historyApiFallback: {
@@ -123,6 +133,7 @@ module.exports = {
                         /** @type {import('@mdx-js/loader').Options} */
                         options: {
                             providerImportSource: '@mdx-js/react',
+                            remarkPlugins: [remarkGfm],
                         },
                     },
                     {

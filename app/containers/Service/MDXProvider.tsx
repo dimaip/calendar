@@ -17,6 +17,7 @@ const mapping = {
     strong: Red,
     blockquote: Petit,
     inlineCode: PetitInline,
+    code: PetitInline,
     del: Super,
 
     If,

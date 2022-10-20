@@ -1,8 +1,9 @@
-const webpack = require('webpack');
-const { merge } = require('webpack-merge');
-const common = require('./webpack.base.js');
+import webpack from 'webpack';
+import { merge } from 'webpack-merge';
 
-module.exports = merge(common, {
+import common from './webpack.base.js';
+
+export default merge(common, {
     entry: ['babel-polyfill', 'webpack-hot-middleware/client', 'react-hot-loader/patch', 'client.tsx'],
     mode: 'development',
     devtool: 'eval-source-map',

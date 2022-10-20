@@ -4,6 +4,7 @@
     "description": "Orthodox calendar",
     "main": "index.js",
     "private": true,
+    "type": "module",
     "scripts": {
         "start": "cross-env PUBLIC_URL=http://localhost:3000 API_HOST=https://api.c.psmb.ru node server.js",
         "start-local": "cross-env PUBLIC_URL=http://localhost:3000 API_HOST=http://localhost:9999 node server.js",
@@ -77,10 +78,10 @@
         "sass-loader": "^13.1.0",
         "typescript": "^4.8.4",
         "unfetch": "^4.1.0",
-        "workbox-google-analytics": "^5.1.3",
-        "workbox-precaching": "^5.1.3",
-        "workbox-routing": "^5.1.3",
-        "workbox-strategies": "^5.1.3"
+        "workbox-google-analytics": "^6.5.4",
+        "workbox-precaching": "^6.5.4",
+        "workbox-routing": "^6.5.4",
+        "workbox-strategies": "^6.5.4"
     },
     "devDependencies": {
         "@babel/core": "^7.8.3",
