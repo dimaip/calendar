@@ -14,6 +14,7 @@ const mapping = {
     h3: H3,
     h4: H4,
     p: P,
+    R: Red,
     strong: Red,
     blockquote: Petit,
     inlineCode: PetitInline,
