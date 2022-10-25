@@ -50,6 +50,7 @@ export default () => {
                         await precache(true);
                         await queryClient.refetchQueries();
                     }}
+                    shouldPullToRefresh={() => window.scrollY <= 0 && !window.pullDownDisabled}
                 >
                     <Routes />
                 </Pullable>
