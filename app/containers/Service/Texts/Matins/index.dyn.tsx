@@ -107,8 +107,7 @@ const Matins = ({ date, obihod }) => {
             day?.fastName === 'Рождественский пост' ||
             greatLent ||
             vospominanijaUsopshih ||
-            sirnajaSedmitza ||
-            isNedelaSkorbi(dateObj));
+            sirnajaSedmitza);
 
     const otpust = <Ending date={date} saints={saints} isFast={isFast} />;
 
