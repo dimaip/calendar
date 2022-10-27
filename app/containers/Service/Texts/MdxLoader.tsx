@@ -8,16 +8,22 @@ const catchFailedImport = (e) => {
     Sentry.captureException?.(e);
 };
 
-const LazyComponent = (props) => {
-    const [Component, setComponent] = useState(null);
-    useEffect(() => {
-        const Component = React.lazy(async () =>
-            import(`containers/Service/Texts/${props.src}/${props.lang || 'ru'}.mdx`).catch(catchFailedImport)
-        );
-        setComponent(Component);
-    }, [props.lang, props.src]);
+/**
+ * The world is not without good people: https://twitter.com/JLarky/status/1585448425813725184
+ */
+const componentCache = new Map();
 
-    return Component && <Component {...props} />;
+const LazyComponent = (props) => {
+    const key = `${props.src}${props.lang || 'ru'}`
+    const Component = componentCache.get(key);
+    if (Component) {
+        return <Component {...props} />;
+    }
+    throw import(`containers/Service/Texts/${props.src}/${props.lang || 'ru'}.mdx`)
+        .then((x) => {
+            componentCache.set(key, x.default);
+        })
+        .catch(catchFailedImport);
 };
 
 const MdxLoader = (props) => {
