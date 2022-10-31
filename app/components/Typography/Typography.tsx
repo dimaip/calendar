@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import ScriptEditorInput from 'components/ScriptEditor/ScriptEditorInput';
 
 const useAddToTOC = (title: unknown, level?: number): string => {
@@ -12,15 +12,23 @@ const useAddToTOC = (title: unknown, level?: number): string => {
             : Array.isArray(title)
             ? title.filter((i) => typeof i === 'string').join(' ')
             : null;
+    
+    const processedDomId = domId ? `r-${domId}-${randomNumberRef.current}` : '';
+    useEffect(() => {
+        if (processedDomId) {
+            window.TOC[processedDomId] = {
+                value: processedDomId,
+                label: domId,
+                level,
+            };
+            return () => {
+                delete window.TOC[processedDomId];
+            }
+        }
+    })
     if (!domId) {
         return '';
     }
-    const processedDomId = `r-${domId}-${randomNumberRef.current}`;
-    window.TOC[processedDomId] = {
-        value: processedDomId,
-        label: domId,
-        level,
-    };
     return processedDomId;
 };
 
