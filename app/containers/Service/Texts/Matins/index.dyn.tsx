@@ -1,4 +1,4 @@
-import { makeIsEasterOffsetRange, getFeastInfo, isNedelaSkorbi, makeIsDate } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, getFeastInfo, makeIsDate } from 'domain/getDayInfo';
 
 import React from 'react';
 import useDay from 'hooks/useDay';
@@ -131,6 +131,7 @@ const Matins = ({ date, obihod }) => {
         isEasterOffsetRange,
         SectionLayout,
         isHoliday,
+        dmitrievskajaSubbota,
     };
     if (obihod) {
         return <EasterZautreniaObihod {...props} />;
