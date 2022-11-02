@@ -40,6 +40,7 @@ const Matins = ({ date, obihod }) => {
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
     const isDate = makeIsDate(dateObj);
+    const y = dateObj.getFullYear();
 
     const troparions = (
         <SectionLayout>
@@ -97,6 +98,7 @@ const Matins = ({ date, obihod }) => {
     const lentSubbota5 = isEasterOffsetRange(-2 * 7 - 1);
     const lazarevaSubbota = isEasterOffsetRange(-1 * 7 - 1);
     const vospominanijaUsopshih = vselenskayaRoditelskayaSubbota || lentSubbotas || troitskayaRoditelskayaSubbota;
+    const dmitrievskajaSubbota = dayOfWeek === 6 && new Date(y, 10, 1).getTime() <= dateObj.getTime() && dateObj.getTime() <= new Date(y, 10, 8).getTime()
     const greatLent = day?.fastName === 'Великий пост';
     const isFast =
         !lazarevaSubbota &&
@@ -107,6 +109,7 @@ const Matins = ({ date, obihod }) => {
             day?.fastName === 'Рождественский пост' ||
             greatLent ||
             vospominanijaUsopshih ||
+            dmitrievskajaSubbota ||
             sirnajaSedmitza);
 
     const otpust = <Ending date={date} saints={saints} isFast={isFast} />;
