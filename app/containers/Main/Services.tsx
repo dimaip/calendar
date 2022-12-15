@@ -188,42 +188,73 @@ const Services = ({ date, readings }) => {
                     </div>
                 );
             })}
-            <OptionalLink
-                enabled={truncate}
+            <div
                 className={css`
-                    cursor: ${'pointer'};
-                    user-select: none;
+                    padding: 0 18px 0 18px;
                 `}
-                to={{
-                    pathname: `/hymns`,
-                    state: {
-                        backLink: location.pathname,
-                    },
-                }}
             >
-                <ButtonBox>
+                <SectionHeading>Песнопения</SectionHeading>
+                <div
+                    className={css`
+                        margin-top: 6px;
+                        background: ${theme.colours.bgGray};
+                        margin: 6px -18px 0 -18px;
+                        padding: 0 18px 1px 18px;
+                    `}
+                >
                     <div
                         className={css`
-                            display: flex;
+                            margin: 0 -10px 18px -10px;
                         `}
                     >
-                        <div
+                        <OptionalLink
+                            enabled={truncate}
                             className={css`
-                                flex-grow: 1;
-                                flex-shrink: 1;
+                                cursor: ${'pointer'};
+                                user-select: none;
                             `}
+                            to={{
+                                pathname: `/hymns`,
+                                state: {
+                                    backLink: location.pathname,
+                                },
+                            }}
                         >
-                            <p
-                                className={css`
-                                    margin-bottom: -4px;
-                                `}
-                            >
-                                Тропарион
-                            </p>
-                        </div>
+                            <ButtonBox>
+                                <div
+                                    className={css`
+                                        display: flex;
+                                    `}
+                                >
+                                    <div
+                                        className={css`
+                                            flex-grow: 1;
+                                            flex-shrink: 1;
+                                        `}
+                                    >
+                                        <p
+                                            className={css`
+                                                margin-bottom: -4px;
+                                            `}
+                                        >
+                                            Тропарион
+                                        </p>
+                                    </div>
+                                    <div
+                                        className={css`
+                                            flex-grow: 0;
+                                            flex-shrink: 0;
+                                        `}
+                                    >
+                                        <RightIcon />
+                                    </div>
+                                </div>
+                            </ButtonBox>
+                        </OptionalLink>
                     </div>
-                </ButtonBox>
-            </OptionalLink>
+                </div>
+            </div>
+
             <CustomPrayerInput />
         </div>
     );
