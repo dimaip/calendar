@@ -6,11 +6,11 @@ import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import { useUpdateTOC } from 'hooks/useUpdateTOC';
 
-const LayoutInner = ({ children, left = null, right = null, paddedContent = true }) => {
+const LayoutInner = ({ children, backLink = null, left = null, right = null, paddedContent = true }) => {
     const { date } = useParams();
     const history = useHistory();
     useUpdateTOC();
-    const backLink = history.location.state?.backLink;
+    const backLinkEffective = backLink || history.location.state?.backLink;
     return (
         <div
             className={css`
@@ -25,7 +25,7 @@ const LayoutInner = ({ children, left = null, right = null, paddedContent = true
                         align-items: center;
                     `}
                 >
-                    <Link to={backLink || `/date/${date}`} title="Назад">
+                    <Link to={backLinkEffective || `/date/${date}`} title="Назад">
                         <div
                             className={css`
                                 padding: 18px;

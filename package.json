@@ -48,6 +48,7 @@
         "emotion": "^10.0.27",
         "emotion-theming": "^10.0.27",
         "express": "^4.15.2",
+        "fuse.js": "^6.6.2",
         "html-webpack-plugin": "^5.5.0",
         "idb-keyval": "^3.2.0",
         "isomorphic-fetch": "^2.2.1",

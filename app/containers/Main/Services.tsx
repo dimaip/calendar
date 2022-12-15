@@ -12,6 +12,7 @@ import { useRecoilState } from 'recoil';
 import PlusIcon from 'components/svgs/PlusIcon';
 import CustomPrayerInput from 'components/CustomPrayers/CustomPrayerInput';
 import customPrayerInputState from 'state/customPrayerInputState';
+import { truncate } from 'lodash';
 
 import SectionHeading from './SectionHeading';
 
@@ -123,7 +124,11 @@ const Services = ({ date, readings }) => {
                                                         onClick={(e) => {
                                                             e.preventDefault();
                                                             e.stopPropagation();
-                                                            setCustomPrayers(customPrayers.filter(i => i.id !== service.customPrayerId));
+                                                            setCustomPrayers(
+                                                                customPrayers.filter(
+                                                                    (i) => i.id !== service.customPrayerId
+                                                                )
+                                                            );
                                                         }}
                                                     >
                                                         <TrashIcon />
@@ -183,6 +188,42 @@ const Services = ({ date, readings }) => {
                     </div>
                 );
             })}
+            <OptionalLink
+                enabled={truncate}
+                className={css`
+                    cursor: ${'pointer'};
+                    user-select: none;
+                `}
+                to={{
+                    pathname: `/hymns`,
+                    state: {
+                        backLink: location.pathname,
+                    },
+                }}
+            >
+                <ButtonBox>
+                    <div
+                        className={css`
+                            display: flex;
+                        `}
+                    >
+                        <div
+                            className={css`
+                                flex-grow: 1;
+                                flex-shrink: 1;
+                            `}
+                        >
+                            <p
+                                className={css`
+                                    margin-bottom: -4px;
+                                `}
+                            >
+                                Тропарион
+                            </p>
+                        </div>
+                    </div>
+                </ButtonBox>
+            </OptionalLink>
             <CustomPrayerInput />
         </div>
     );

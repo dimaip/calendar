@@ -16,12 +16,14 @@ import { css } from 'emotion';
 import langState from 'state/langState';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { LangContext } from 'containers/Service/LangContext';
-
-import checkVersion from './checkVersion';
 import pendingUpdateState from 'state/pendingUpdateState';
 import UpdatePrompt from 'components/UpdatePrompt/UpdatePrompt';
 import isParallelState from 'state/isParallel';
 import { Promo } from 'components/Promo/Promo';
+import { Hymns } from 'containers/Hymns/Hymns';
+import { Hymn } from 'containers/Hymns/Hymn';
+
+import checkVersion from './checkVersion';
 
 const DateRoutes = () => {
     const { date } = useParams();
@@ -33,10 +35,57 @@ const DateRoutes = () => {
     const isVespers = document.location.href.includes('vespers');
     const { data: day } = useDay(isVespers ? tomorrowDate : date);
     const theme = getTheme(day?.colour);
+
+    return (
+        <ThemeProvider theme={theme}>
+            <Promo>
+                <Switch>
+                    <Route exact path="/date/:date">
+                        <Main />
+                    </Route>
+                    <Route exact path="/date/:date/services">
+                        <Main services />
+                    </Route>
+                    <Route exact path="/date/:date/readings/:service">
+                        <Readings />
+                    </Route>
+                    <Route exact path="/date/:date/bReadings/:service">
+                        <Readings brother />
+                    </Route>
+                    <Route exact path="/date/:date/sermon/:sermonId">
+                        <Sermon />
+                    </Route>
+                    <Route exact path="/date/:date/saint/:saintId">
+                        <Saint />
+                    </Route>
+                    <Route exact path="/date/:date/thisday/:thisDayId">
+                        <ThisDay />
+                    </Route>
+                    <Route exact path="/date/:date/service/:serviceId/:prayerId?">
+                        <Service />
+                    </Route>
+                    <Route>
+                        <NotFound />
+                    </Route>
+                </Switch>
+                <UpdatePrompt />
+            </Promo>
+        </ThemeProvider>
+    );
+};
+
+export default () => {
     const langStateValue = useRecoilValue(langState);
-
+    const history = useHistory();
+    const setPendingUpdate = useSetRecoilState(pendingUpdateState);
+    history.listen(async () => {
+        const newVersion = await checkVersion();
+        if (newVersion) {
+            setPendingUpdate(newVersion);
+        }
+    });
     const isParallel = useRecoilValue(isParallelState);
-
+    const theme = getTheme();
     return (
         <LangContext.Provider value={langStateValue}>
             <ThemeProvider theme={theme}>
@@ -49,72 +98,33 @@ const DateRoutes = () => {
                     }
                 `}
                 />
-                <Promo>
+                <div
+                    className={css`
+                        max-width: 640px;
+                        margin: 0 auto;
+                    `}
+                >
                     <Switch>
-                        <Route exact path="/date/:date">
-                            <Main />
+                        <Route
+                            exact
+                            path="/"
+                            render={() => {
+                                const date = dateFormat(new Date(), 'yyyy-mm-dd');
+                                return <Redirect to={`/date/${date}`} />;
+                            }}
+                        />
+                        <Route exact path="/hymns/:hymnId">
+                            <Hymn />
                         </Route>
-                        <Route exact path="/date/:date/services">
-                            <Main services />
+                        <Route exact path="/hymns">
+                            <Hymns />
                         </Route>
-                        <Route exact path="/date/:date/readings/:service">
-                            <Readings />
-                        </Route>
-                        <Route exact path="/date/:date/bReadings/:service">
-                            <Readings brother />
-                        </Route>
-                        <Route exact path="/date/:date/sermon/:sermonId">
-                            <Sermon />
-                        </Route>
-                        <Route exact path="/date/:date/saint/:saintId">
-                            <Saint />
-                        </Route>
-                        <Route exact path="/date/:date/thisday/:thisDayId">
-                            <ThisDay />
-                        </Route>
-                        <Route exact path="/date/:date/service/:serviceId/:prayerId?">
-                            <Service />
-                        </Route>
-                        <Route>
-                            <NotFound />
+                        <Route path="/date/:date">
+                            <DateRoutes />
                         </Route>
                     </Switch>
-                    <UpdatePrompt />
-                </Promo>
+                </div>
             </ThemeProvider>
         </LangContext.Provider>
-    );
-};
-
-export default () => {
-    const history = useHistory();
-    const setPendingUpdate = useSetRecoilState(pendingUpdateState);
-    history.listen(async () => {
-        const newVersion = await checkVersion();
-        if (newVersion) {
-            setPendingUpdate(newVersion);
-        }
-    });
-    return (
-        <div
-            className={css`
-                max-width: 640px;
-                margin: 0 auto;
-            `}
-        >
-            <Switch>
-                <Route
-                    exact
-                    path="/"
-                    render={() => {
-                        const date = dateFormat(new Date(), 'yyyy-mm-dd');
-                        return <Redirect to={`/date/${date}`} />;
-                    }}
-                />
-                <Route path="/date/:date">
-                    <DateRoutes />
-                </Route>
-            </Switch>
-        </div>
     );
 };
