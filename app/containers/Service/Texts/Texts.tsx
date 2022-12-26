@@ -161,6 +161,16 @@ const useServices = (date, readings = {}) => {
         },
 
         {
+            title: 'Погребение',
+            id: 'pogrebenie',
+            enabled: true,
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Требы',
+            warn: true,
+        },
+        {
             title: 'Лития',
             id: 'litiya',
             enabled: true,
