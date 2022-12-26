@@ -1,16 +1,23 @@
-const webpack = require('webpack');
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CreateFileWebpack = require('create-file-webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+import remarkGfm from 'remark-gfm';
+import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CreateFileWebpack from 'create-file-webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+
+const __filename = fileURLToPath(import.meta.url);
 
 const sha = process.env.VERCEL_GITHUB_COMMIT_SHA || process.env.AWS_COMMIT_ID;
 
 const version = sha ? sha.substr(0, 4) : 'dev';
 
-module.exports = {
+const __dirname = path.dirname(__filename);
+
+export default {
     name: 'client',
 
     context: path.resolve(__dirname, './app'),
@@ -21,6 +28,10 @@ module.exports = {
     },
 
     target: 'web',
+
+    stats: {
+        children: true,
+    },
 
     devServer: {
         historyApiFallback: {
@@ -71,7 +82,7 @@ module.exports = {
                 test: /\.worker\.js$/,
                 use: {
                     loader: 'worker-loader',
-                    options: {publicPath: '/built/'},
+                    options: { publicPath: '/built/' },
                 },
             },
             {
@@ -81,39 +92,56 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: [['@babel/preset-env', {targets: {browsers: ['ie >= 11', 'safari > 9']}}]],
+                            presets: [['@babel/preset-env', { targets: { browsers: ['ie >= 11', 'safari > 9'] } }]],
                         },
                     },
                 ],
             },
             {
-                test: /\.css$/, //global - without modules
+                test: /\.woff2?$/i,
+                type: 'asset/resource',
+                dependency: { not: ['url'] },
+            },
+            {
+                test: /\.(eot|svg|ttf|woff)$/,
+                use: 'file-loader',
+            },
+            {
+                test: /\.css$/, // global - without modules
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
             {
-                test: /\.global\.scss$/, //global - without modules
+                test: /\.global\.scss$/, // global - without modules
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
             },
             {
                 test: /^((?!\.global).)*scss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
             },
-            {
-                test: /\.(eot|svg|ttf|woff|woff2)$/,
-                use: 'file-loader',
-            },
 
             {
                 test: /\.mdx?$/,
                 use: [
-                    'babel-loader',
-                    '@mdx-js/loader',
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env'],
+                        },
+                    },
+                    {
+                        loader: '@mdx-js/loader',
+                        /** @type {import('@mdx-js/loader').Options} */
+                        options: {
+                            providerImportSource: '@mdx-js/react',
+                            remarkPlugins: [remarkGfm],
+                        },
+                    },
                     {
                         loader: 'pattern-replace-loader',
                         options: {
                             multiple: [
-                                {search: '(\\s)\\/\\/(\\s)', replace: '$1**//**$2', flags: 'gi'},
-                                {search: '(\\s)\\/(\\s)', replace: '$1**/**$2', flags: 'gi'},
+                                { search: '(\\s)\\/\\/(\\s)', replace: '$1**//**$2', flags: 'gi' },
+                                { search: '(\\s)\\/(\\s)', replace: '$1**/**$2', flags: 'gi' },
                             ],
                         },
                     },

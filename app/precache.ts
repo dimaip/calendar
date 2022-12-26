@@ -1,4 +1,4 @@
-import 'regenerator-runtime/runtime';
+import 'regenerator-runtime/runtime.js';
 import cachedFetch from 'utils/cachedFetch';
 
 const PRECACHE_DAYS = 10;

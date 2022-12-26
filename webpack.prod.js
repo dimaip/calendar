@@ -1,13 +1,14 @@
-const merge = require('webpack-merge');
-const common = require('./webpack.base.js');
-const { InjectManifest } = require('workbox-webpack-plugin');
+import { merge } from 'webpack-merge';
+import { InjectManifest } from 'workbox-webpack-plugin';
+
+import common from './webpack.base.js';
 
 const hash = Array(1)
     .fill(null)
     .map(() => Math.random().toString(36).substr(2))
     .join('');
 
-module.exports = merge(common, {
+export default merge(common, {
     entry: ['babel-polyfill', 'client.tsx'],
     mode: 'production',
     output: {
@@ -44,8 +45,6 @@ module.exports = merge(common, {
         }),
     ],
     optimization: {
-        namedModules: true,
-        namedChunks: true,
         usedExports: true,
         runtimeChunk: 'single',
         splitChunks: {

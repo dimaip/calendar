@@ -12,6 +12,9 @@ const SelectBox = ({ className = '', items, value, onChange }) => {
         selectedItem,
         items,
         onSelectedItemChange: (i) => onChange(i.selectedItem.value),
+        onIsOpenChange: (e) => {
+            window.pullDownDisabled = e.isOpen;
+        }
     });
 
     return (

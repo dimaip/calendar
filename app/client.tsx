@@ -4,10 +4,10 @@ import './forEachPolyfill';
 import 'array-flat-polyfill';
 import 'unfetch/polyfill/index.js';
 import 'element-closest-polyfill';
-import 'regenerator-runtime/runtime';
+import 'regenerator-runtime/runtime.js';
 import './sharePolyfill';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { AppContainer } from 'react-hot-loader';
 import App from 'containers/App';
 import { RecoilRoot } from 'recoil';
@@ -20,7 +20,7 @@ import Worker from './precache.worker.js';
 
 import './redirectToHome';
 import { isCapacitor } from 'utils/deviceInfo';
-import precache from 'precache';
+import precache from 'precache.ts';
 
 window.APP_LOADED = true;
 const isProd = process.env.NODE_ENV === 'production';
@@ -54,15 +54,14 @@ try {
 }
 
 const rootElement = document.getElementById('react-root');
-
+const root = createRoot(rootElement);
 const render = (Component) => {
-    ReactDOM.render(
+    return root.render(
         <RecoilRoot>
             <AppContainer>
                 <Component />
             </AppContainer>
-        </RecoilRoot>,
-        rootElement
+        </RecoilRoot>
     );
 };
 

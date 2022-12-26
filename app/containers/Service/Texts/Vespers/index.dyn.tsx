@@ -42,6 +42,8 @@ const Readings = ({ readingsForService, day }) =>
 const Vespers = ({ date, obihod }) => {
     const dateObj = new Date(date);
     const tomorrowDateObj = new Date(date);
+    const y = dateObj.getFullYear();
+
     tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
     const tomorrowDate = dateFormat(tomorrowDateObj, 'yyyy-mm-dd');
     const dayOfWeek = dateObj.getDay();
@@ -91,6 +93,7 @@ const Vespers = ({ date, obihod }) => {
     const philaret = isDate(12, 2);
     const isHoliday = dayOfWeek === 6 || feastType === 'great' || feastType === '12' || philaret;
     const greatLent = tomorrowDay?.fastName === 'Великий пост';
+    const dmitrievskajaSubbota = dayOfWeek === 5 && new Date(y, 10, 1).getTime() <= dateObj.getTime() && dateObj.getTime() <= new Date(y, 10, 8).getTime()
     const isFast =
         !isHoliday &&
         (tomorrowDay?.fastName === 'Петров пост' ||
@@ -100,7 +103,8 @@ const Vespers = ({ date, obihod }) => {
             vselenskayaRoditelskayaSubbota ||
             troitskayaRoditelskayaSubbota ||
             sirnajaSedmitza ||
-            isNedelaSkorbi(tomorrowDateObj));
+            dmitrievskajaSubbota
+            );
 
     const otpust = <Ending date={tomorrowDate} saints={saints} annunciation={isAnnunciation} isFast={isFast} />;
 

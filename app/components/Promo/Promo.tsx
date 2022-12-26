@@ -8,6 +8,7 @@ import TagManager from 'react-gtm-module';
 import useApp from 'hooks/useApp';
 
 export const Promo = ({ children }: { children: React.ReactNode }): JSX.Element | null => {
+    return <>{children}</>;
     const theme = useTheme();
     const { data } = useApp();
     const notification = data?.notification;

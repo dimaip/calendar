@@ -19,7 +19,7 @@ const NamesEditorInput = ({
     const theme = useTheme();
     const [inputReaderName, setInputReaderName] = useState<string | null>(null);
 
-    const [names, setNames] = useRecoilState(namesState<string>(type));
+    const [names, setNames] = useRecoilState(namesState(type));
 
     const changeInputHandler = (e: { target: { value: string } }): void => {
         setInputReaderName(e.target.value);

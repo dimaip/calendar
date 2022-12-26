@@ -1,14 +1,18 @@
 import React from 'react';
 
-export const Then = ({ children }) => children;
-export const Else = ({ children }) => children;
+export const Then = ({ children }) => <>{children}</>;
+export const Else = ({ children }) => <>{children}</>;
 
 const If = ({ condition, children }) => {
-    if (React.Children.count(children) === 2 && React.Children.toArray(children)[0]?.props?.mdxType === 'Then') {
+    const childrenArray = React.Children.toArray(children)
+    const thenEl = childrenArray.find(el => el?.type === Then)
+    const elseEl = childrenArray.find(el => el?.type === Else)
+
+    if (thenEl || elseEl) {
         if (condition) {
-            return <Then>{children[0]}</Then>;
+            return <Then>{thenEl}</Then>;
         }
-        return <Else>{children[1]}</Else>;
+        return <Else>{elseEl}</Else>;
     }
     return <>{condition ? children : null}</>;
 };

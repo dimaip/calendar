@@ -1,5 +1,5 @@
-import 'regenerator-runtime/runtime';
-import precache from './precache';
+import 'regenerator-runtime/runtime.js';
+import precache from './precache.ts';
 
 onmessage = () => {
     precache();

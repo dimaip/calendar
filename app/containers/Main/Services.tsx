@@ -12,6 +12,7 @@ import { useRecoilState } from 'recoil';
 import PlusIcon from 'components/svgs/PlusIcon';
 import CustomPrayerInput from 'components/CustomPrayers/CustomPrayerInput';
 import customPrayerInputState from 'state/customPrayerInputState';
+import { truncate } from 'lodash';
 
 import SectionHeading from './SectionHeading';
 
@@ -123,7 +124,11 @@ const Services = ({ date, readings }) => {
                                                         onClick={(e) => {
                                                             e.preventDefault();
                                                             e.stopPropagation();
-                                                            setCustomPrayers(customPrayers.filter(i => i.id !== service.customPrayerId));
+                                                            setCustomPrayers(
+                                                                customPrayers.filter(
+                                                                    (i) => i.id !== service.customPrayerId
+                                                                )
+                                                            );
                                                         }}
                                                     >
                                                         <TrashIcon />
@@ -183,6 +188,73 @@ const Services = ({ date, readings }) => {
                     </div>
                 );
             })}
+            <div
+                className={css`
+                    padding: 0 18px 0 18px;
+                `}
+            >
+                <SectionHeading>Песнопения</SectionHeading>
+                <div
+                    className={css`
+                        margin-top: 6px;
+                        background: ${theme.colours.bgGray};
+                        margin: 6px -18px 0 -18px;
+                        padding: 0 18px 1px 18px;
+                    `}
+                >
+                    <div
+                        className={css`
+                            margin: 0 -10px 18px -10px;
+                        `}
+                    >
+                        <OptionalLink
+                            enabled={truncate}
+                            className={css`
+                                cursor: ${'pointer'};
+                                user-select: none;
+                            `}
+                            to={{
+                                pathname: `/hymns`,
+                                state: {
+                                    backLink: location.pathname,
+                                },
+                            }}
+                        >
+                            <ButtonBox>
+                                <div
+                                    className={css`
+                                        display: flex;
+                                    `}
+                                >
+                                    <div
+                                        className={css`
+                                            flex-grow: 1;
+                                            flex-shrink: 1;
+                                        `}
+                                    >
+                                        <p
+                                            className={css`
+                                                margin-bottom: -4px;
+                                            `}
+                                        >
+                                            Тропарион
+                                        </p>
+                                    </div>
+                                    <div
+                                        className={css`
+                                            flex-grow: 0;
+                                            flex-shrink: 0;
+                                        `}
+                                    >
+                                        <RightIcon />
+                                    </div>
+                                </div>
+                            </ButtonBox>
+                        </OptionalLink>
+                    </div>
+                </div>
+            </div>
+
             <CustomPrayerInput />
         </div>
     );

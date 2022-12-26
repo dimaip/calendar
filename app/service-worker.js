@@ -14,7 +14,7 @@ self.addEventListener('activate', function (event) {
     event.waitUntil(self.clients.claim());
 });
 
-console.log('Precaching routes:', self.__WB_MANIFEST);
+console.log('Precaching routes');
 // Pre-cache main JS assets
 precacheAndRoute(self.__WB_MANIFEST);
 

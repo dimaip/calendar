@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'PTRootUI';
-    src: url('/assets/fonts/PTRootUI_Regular.woff2') format('woff2');
+    src: url('assets/fonts/PTRootUI_Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'PTRootUI';
-    src: url('/assets/fonts/PTRootUI_Bold.woff2') format('woff2');
+    src: url('assets/fonts/PTRootUI_Bold.woff2') format('woff2');
     font-weight: bold;
     font-style: normal;
     font-display: swap;

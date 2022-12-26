@@ -17,12 +17,11 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 <>{props.isEasterOffsetRange(-3, -2) && <MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />}</>
 
 <If condition={!props.isEasterOffsetRange(-(7*6+1))}>
-    <>{(props.dayOfWeek === 0 || props.dayOfWeek === 1 || props.vospominanijaUsopshih || props.greatLent) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
+    <>{(props.dayOfWeek === 0 || props.dayOfWeek === 1 || props.vospominanijaUsopshih || props.greatLent || props.dmitrievskajaSubbota) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
 
     <>{(props.vselenskayaRoditelskayaSubbota || props.troitskayaRoditelskayaSubbota) && <MdxLoader src="Matins/Aliluja1" lang={props.lang} />}</>
-    <>{props.lentSubbotas && <MdxLoader src="Matins/Aliluja2" lang={props.lang} />}</>
+    <>{(props.lentSubbotas || props.dmitrievskajaSubbota) && <MdxLoader src="Matins/Aliluja2" lang={props.lang} />}</>
     <>{!props.lentSubbotas && props.greatLent && <MdxLoader src="Matins/Aliluja3" lang={props.lang} />}</>
-
 </If>
 
 <If condition={props.isEasterOffsetRange(-6, -4)}>
@@ -31,17 +30,17 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 <If condition={props.isEasterOffsetRange(-3, -2)}>
     <MdxLoader src="Shared/TroparionPassion2" lang={props.lang} />
 </If>
-<If condition={props.vospominanijaUsopshih}>
+<If condition={props.vospominanijaUsopshih || props.dmitrievskajaSubbota}>
 
 ### Тропари
 
-{props.troparions}
+    {props.troparions}
 
-  <Parts
-      date={props.date}
-      partNames={['shared.Богородичен']}
-      serviceType="Утреня"
-  />
+    <Parts
+        date={props.date}
+        partNames={['shared.Богородичен']}
+        serviceType="Утреня"
+    />
 </If>
 
 <If condition={props.isEasterOffsetRange(-3)}>
@@ -85,7 +84,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
     <>{props.dayOfWeek === 0 || (props.dayOfWeek === 6 && <MdxLoader src="Matins/Prayer8" lang={props.lang} />)}</>
 </If>
 
-<If condition={(props.vselenskayaRoditelskayaSubbota || props.troitskayaRoditelskayaSubbota)}>
+<If condition={(props.vselenskayaRoditelskayaSubbota || props.troitskayaRoditelskayaSubbota || props.dmitrievskajaSubbota)}>
     ## Кафизма 17
     <MdxLoader src="Shared/Psalm118VselSubSt1" lang={props.lang} />
 
@@ -124,7 +123,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 <MdxLoader
     src="Matins/SlavoslovieLent"
     lang={props.lang}
-    short={props.isEasterOffsetRange(-6, -2) || props.vospominanijaUsopshih || props.isEasterOffsetRange(-(7 * 6 + 1))}
+    short={props.isEasterOffsetRange(-6, -2) || props.vospominanijaUsopshih || props.dmitrievskajaSubbota || props.isEasterOffsetRange(-(7 * 6 + 1))}
 />
 
 <If condition={props.isEasterOffsetRange(-6, -4) || !props.greatLent || props.dayOfWeek === 6}>
