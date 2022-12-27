@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import useAudio from 'hooks/useAudio';
 
-const RteText = React.forwardRef(({ html, className = '' }, ref) => {
+const RteText = React.forwardRef(({ html = '', className = '' }, ref) => {
     const localRef = useRef();
     const effectiveRef = ref || localRef;
     const theme = useTheme();

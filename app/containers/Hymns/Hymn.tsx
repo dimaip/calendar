@@ -55,7 +55,12 @@ const HymnInner = () => {
             </div>
         );
     }
-    return <RteText html={hymn.bodytext[lang]} />;
+    const html = hymn.bodytext[lang];
+    return html ? (
+        <RteText html={hymn.bodytext[lang]} />
+    ) : (
+        <>Данное песнопение отстутствует в {lang === 'ru' ? 'русском' : 'церковно-славянском'} переводе</>
+    );
 };
 
 export const Hymn = () => {
