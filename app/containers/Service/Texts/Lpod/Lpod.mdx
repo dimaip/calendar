@@ -270,6 +270,56 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 **Все лежат ниц, предстоятель, стоя у престола, кадит его, а потом жертвенник. `[Далее читается, по обычаю, молитва св. Ефрема Сирина с тремя поклонами.]`**
 
+<If condition={props.isDate(3,9)}>
+
+   {props.reading}
+   
+   ### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div
+    className={props.css`
+        margin: 0 5px;
+    `}
+>
+    {props.apostol}
+</div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
+   
+   ### Проповедь
+   
+   > **[Д** Господу помолимся!<R>]</R>
+   
+   <span id="gospel" />
+   
+   ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+   
+   <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+   
+   <MdxLoader src="Liturgies/Katekhumen/BlessBeforeGosp" />
+   
+   {props.aliluja}
+   
+   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
+   
+   ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div
+    className={props.css`
+        margin: 0 5px;
+    `}
+>
+    {props.gospel}
+</div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+   
+   ### Проповедь
+   
+   {props.sermons}
+   
+</If>
+
 <If condition={props.isEasterOffsetRange(-5)}>
     **Диакон исходит с Евангелием через царские врата на амвон.** ### Молитва <br />
     перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
