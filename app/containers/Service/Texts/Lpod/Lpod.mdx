@@ -213,7 +213,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
     <div>
-        <ReadingsForService readingsForService={{ Благовещению: ['Исх. III, 1-8.'] }} />
+        <ReadingsForService readingsForService={{ Благовещению: ['Быт. XXVIII, 1–17.'] }} />
     </div>
 
     <br />
@@ -221,11 +221,47 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
 
     <div>
-        <ReadingsForService readingsForService={{ Благовещению: ['Притч. VIII, 22-30.'] }} />
+        <ReadingsForService readingsForService={{ Благовещению: ['Иез. XLIII, 27; XLIV, 1–4.'] }} />
+    </div>
+   
+       <br />
+
+    <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+    <div>
+        <ReadingsForService readingsForService={{ Благовещению: ['Притч. IX, 1–11.'] }} />
     </div>
 
 </If>
 
+<If condition={props.isDate(3,9)}>
+
+    <br />
+
+    <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+    <div>
+        <ReadingsForService readingsForService={{ Предтече: ['Ис. XL, 1 – 3; 9; XLI, 17 – 18; XLV, 8; XLVIII, 20–21; LIV, 1.'] }} />
+    </div>
+   
+    <br />
+
+    <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+    <div>
+        <ReadingsForService readingsForService={{ Предтече: ['Мал. III, 1 – 3; 5 – 7; 12; 18; 17; IV, 4 – 6.'] }} />
+    </div>
+   
+   <br />
+
+    <MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+    <div>
+        <ReadingsForService readingsForService={{ Предтече: ['Прем. IV, 7; 16; 17; 19–20; V, 1 – 7.'] }} />
+    </div>
+
+</If>
+   
 <MdxLoader src="Lpod/MirTebe" />
 
 ### Проповедь
