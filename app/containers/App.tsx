@@ -11,8 +11,24 @@ import pendingUpdateState from 'state/pendingUpdateState';
 import checkVersion from 'checkVersion';
 import precache from 'precache';
 import isDarkMode from 'utils/isDarkMode';
+import { AuthProvider } from 'oidc-react';
 
 import Routes from '../Routes';
+
+const oidcConfig = {
+    onSignIn: async (response: any) => {
+        console.log(response);
+        alert(`You logged in :${response.profile.given_name} ${response.profile.family_name}`);
+        window.location.hash = '';
+    },
+    authority: 'http://localhost:8080',
+    clientId: '201235497572433922@пб',
+    responseType: 'code',
+    redirectUri: 'http://localhost:3000',
+    scope: 'openid profile email',
+    autoSignIn: true,
+    automaticSilentRenew: true,
+};
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -38,23 +54,28 @@ export default () => {
     const dark = isDarkMode();
     return (
         <QueryClientProvider client={queryClient}>
-            <HashRouter>
-                <ScrollRestoration />
-                <Pullable
-                    spinnerColor={dark ? '#fff' : '#000'}
-                    onRefresh={async () => {
-                        const newVersion = await checkVersion();
-                        if (newVersion) {
-                            setPendingUpdate(newVersion);
-                        }
-                        await precache(true);
-                        await queryClient.refetchQueries();
-                    }}
-                    shouldPullToRefresh={() => window.scrollY <= 0 && !window.pullDownDisabled}
-                >
-                    <Routes />
-                </Pullable>
-            </HashRouter>
+            <AuthProvider
+                {...oidcConfig}
+                scope="openid profile email urn:zitadel:iam:user:metadata urn:zitadel:iam:org:id:201235384292605954"
+            >
+                <HashRouter>
+                    <ScrollRestoration />
+                    <Pullable
+                        spinnerColor={dark ? '#fff' : '#000'}
+                        onRefresh={async () => {
+                            const newVersion = await checkVersion();
+                            if (newVersion) {
+                                setPendingUpdate(newVersion);
+                            }
+                            await precache(true);
+                            await queryClient.refetchQueries();
+                        }}
+                        shouldPullToRefresh={() => window.scrollY <= 0 && !window.pullDownDisabled}
+                    >
+                        <Routes />
+                    </Pullable>
+                </HashRouter>
+            </AuthProvider>
             <ZoomControl />
         </QueryClientProvider>
     );
