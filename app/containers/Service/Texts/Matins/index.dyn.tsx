@@ -10,6 +10,7 @@ import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';
 import Parts from 'components/Parts/Parts';
 import { SectionLayout } from 'components/SectionLayout/SectionLayout';
+import { TroparionFavs } from 'containers/Main/TroparionFavs';
 
 import Ending from '../Shared/Ending/Ending';
 
@@ -45,6 +46,7 @@ const Matins = ({ date, obihod }) => {
     const troparions = (
         <SectionLayout>
             <Troparions date={date} day={day} serviceType="Утреня" />
+            <TroparionFavs />
         </SectionLayout>
     );
 

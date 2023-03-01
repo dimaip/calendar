@@ -11,6 +11,7 @@ import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';
 import Parts from 'components/Parts/Parts';
 import { SectionLayout } from 'components/SectionLayout/SectionLayout';
+import { TroparionFavs } from 'containers/Main/TroparionFavs';
 
 import Ending from '../Shared/Ending/Ending';
 import Kondacs from '../Shared/Kondacs/Kondacs';
@@ -54,6 +55,7 @@ const Vespers = ({ date, obihod }) => {
     const troparions = (
         <SectionLayout>
             <Troparions date={tomorrowDate} day={tomorrowDay} serviceType="Вечерня" />
+            <TroparionFavs />
         </SectionLayout>
     );
 
