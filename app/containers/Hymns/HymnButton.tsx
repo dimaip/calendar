@@ -2,11 +2,12 @@ import ButtonBox from 'components/ButtonBox/ButtonBox';
 import { css } from 'emotion';
 import { Hymn } from 'hooks/useHymns';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { FavButton } from './FavButton';
 
 export const HymnButton = ({ hymn }: { hymn: Hymn }) => {
+    const location = useLocation();
     return (
         <Link
             className={css`
