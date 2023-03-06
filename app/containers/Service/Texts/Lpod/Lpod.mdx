@@ -270,6 +270,48 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 **Все лежат ниц, предстоятель, стоя у престола, кадит его, а потом жертвенник. `[Далее читается, по обычаю, молитва св. Ефрема Сирина с тремя поклонами.]`**
 
+<If condition={props.isDate(3,10)}>
+
+    <br />
+   
+   <Reading day={props.day} date={props.previousDate} />
+   
+   ### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+   
+   <div>
+    <ReadingsForService readingsForService={{ 'Предтече': ['2 Кор., 176 зач., IV, 6–15.'] }} />
+   </div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
+   
+   ### Проповедь
+   
+   > **[Д** Господу помолимся!<R>]</R>
+   
+   <span id="gospel" />
+   
+   ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+   
+   <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+   
+   <VariableSection date={props.date}>
+      <Aliluja day={props.day} date={props.previousDate} />
+   </VariableSection>
+   
+   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
+   
+   ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+   
+   <div>
+      <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Мф., 40 зач., XI, 2–15.'] }} />
+   </div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+   
+   ### Проповедь
+
+</If>
+
 <If condition={props.isEasterOffsetRange(-5)}>
     **Диакон исходит с Евангелием через царские врата на амвон.** ### Молитва <br />
     перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
