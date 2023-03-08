@@ -11,6 +11,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 import Reading from 'containers/Service/Texts/Liturgies/Katekhumen/Reading/Reading';
 import Aliluja from 'containers/Service/Texts/Liturgies/Katekhumen/Aliluja/Aliluja';
 import VariableSection from 'containers/Service/Texts/VariableSection';
+import Prichasten from 'containers/Service/Texts/Lpod/Prichasten/Prichasten'
 
 # I. Великопостная вечерня
 
@@ -436,7 +437,9 @@ import VariableSection from 'containers/Service/Texts/VariableSection';
 
 <MdxLoader src="Lpod/PrichAltarBefore" />
 
-{props.prichasten}
+<VariableSection date={props.yesterdayDate}>
+    <Prichasten date={props.yesterdayDate} />
+</VariableSection>
 
 <MdxLoader src="Lpod/PrichAltar" />
 
