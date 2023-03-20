@@ -316,6 +316,90 @@ import Prichasten from 'containers/Service/Texts/Lpod/Prichasten/Prichasten'
 
 </If>
 
+<If condition={props.isDate(3,16)}>
+
+    <br />
+   
+   <Reading day={props.day} date={props.yesterdayDate} />
+   
+   ### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+   
+   <div>
+    <ReadingsForService readingsForService={{ 'Богородице': ['Флп., 240 зач., II, 5–11.'] }} />
+   </div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
+   
+   ### Проповедь
+   
+   > **[Д** Господу помолимся!<R>]</R>
+   
+   <span id="gospel" />
+   
+   ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+   
+   <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+   
+   <VariableSection date={props.date}>
+      <Aliluja day={props.day} date={props.yesterdayDate} />
+   </VariableSection>
+   
+   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
+   
+   ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+   
+   <div>
+      <ReadingsForService readingsForService={{ 'Богородице': ['Лк., 54 зач., X, 38–42; XI, 27–28.'] }} />
+   </div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+   
+   ### Проповедь
+
+</If>
+
+<If condition={props.isDate(3,22)}>
+
+    <br />
+   
+   <Reading day={props.day} date={props.yesterdayDate} />
+   
+   ### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+   
+   <div>
+    <ReadingsForService readingsForService={{ 'Мученикам': ['Евр., 331 зач., XII, 1–10.'] }} />
+   </div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
+   
+   ### Проповедь
+   
+   > **[Д** Господу помолимся!<R>]</R>
+   
+   <span id="gospel" />
+   
+   ### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+   
+   <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+   
+   <VariableSection date={props.date}>
+      <Aliluja day={props.day} date={props.yesterdayDate} />
+   </VariableSection>
+   
+   <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
+   
+   ### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+   
+   <div>
+      <ReadingsForService readingsForService={{ 'Мученикам': ['Мф., 80 зач., XX, 1–16.'] }} />
+   </div>
+   
+   <MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+   
+   ### Проповедь
+
+</If>
+
 <If condition={props.isEasterOffsetRange(-5)}>
     **Диакон исходит с Евангелием через царские врата на амвон.**
     ### Молитва перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
