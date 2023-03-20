@@ -125,7 +125,12 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 ### Стихиры на «Хвалите»
 
 <StihiriNaHvalite date={props.date} day={props.day} />
-{!props.brightWeek && <MdxLoader src="Matins/Slavoslovie" lang={props.lang} />}
+{!props.brightWeek && !props.isAnnunciation && <MdxLoader src="Matins/Slavoslovie" lang={props.lang} />}
+{props.isAnnunciation && <MdxLoader
+    src="Matins/SlavoslovieLent"
+    lang={props.lang}
+    short={true}
+/>}
 
 <If condition={!props.brightWeek && props.dayOfWeek !== 0 || props.isEasterOffsetRange(-7)}>
   ### Тропари
