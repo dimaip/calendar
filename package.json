@@ -128,7 +128,7 @@
         "remark-gfm": "^3.0.1",
         "standard": "^9.0.1",
         "style-loader": "^3.3.1",
-        "webpack": "^5.74",
+        "webpack": "^5.76",
         "webpack-cli": "^4.10.0",
         "webpack-dev-middleware": "^5.3.3",
         "webpack-hot-middleware": "^2.25.2",
