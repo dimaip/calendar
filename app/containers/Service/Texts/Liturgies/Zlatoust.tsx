@@ -28,7 +28,7 @@ const Zlatoust = ({ lang, date }) => {
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
 
-    const isAnnunciation = day?.title === 'Благовещение всесвятой Богородицы';
+    const isAnnunciation = day?.title === 'Благовещение Богородицы';
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const brightWeek = isEasterOffsetRange(0, 6);
