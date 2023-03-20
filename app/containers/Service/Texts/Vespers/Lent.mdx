@@ -15,6 +15,8 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 **П** Благословен Бог наш ныне и всегда и во веки веков!
 
 <If condition={props.annunciation}>
+    **Ч** Аминь. Слава Тебе, Боже наш, слава Тебе!
+    <MdxLoader src="Shared/Paraklit" lang={props.lang} />
     <MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
     <MdxLoader src="Vespers/Psalm103" lang={props.lang} chitaetsa />
     <MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
@@ -41,7 +43,7 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 </If>
 
 <>
-    {(props.isAnnunciation || props.dayOfWeek === 6 || props.dayOfWeek === 1) && (
+    {(props.dayOfWeek === 6 || props.dayOfWeek === 1) && (
         <MdxLoader src="Vespers/Prayer1" lang={props.lang} />
     )}
 </>
