@@ -132,7 +132,7 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
     short={true}
 />}
 
-<If condition={!props.brightWeek && props.dayOfWeek !== 0 || props.isEasterOffsetRange(-7)}>
+<If condition={!props.brightWeek && !props.isAnnunciation && props.dayOfWeek !== 0 || props.isEasterOffsetRange(-7)}>
   ### Тропари
 
 {props.troparions}
@@ -199,7 +199,11 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 
 **П** Оглашаемые, отступи́те!
 
-<MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+<If condition={!props.isAnnunciation}>
+    
+    <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+
+</If>
 
 ## Заключение
 
@@ -208,6 +212,20 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 <MdxLoader src="Matins/Prayer12" lang={props.lang} />
 <br />
 <MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
+
+<If condition={props.isAnnunciation}>
+    
+    **Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́.
+    
+    <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
+    
+    ### Тропари
+    
+    {props.troparions}
+    
+    <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+
+</If>
 
 <>{props.otpust}</>
 
