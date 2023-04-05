@@ -7,8 +7,11 @@ import EasterKanon from 'containers/Service/Texts/EasterKanon/EasterKanon.mdx';
 import Parts from 'components/Parts/Parts';
 import If from 'components/If/If';
 import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
+import Html from 'components/Html/Html';
 
 # Полуночница
+
+**Полуночницу нужно начинать не позднее 23 часов, чтобы не спеша совершить ее. Так как Литургия, по традиции, совершается непосредственно после утрени и часов, то входные молитвы читаются перед Плащаницей до полуночницы по обычному чину, начиная Трисвятым. Полуночница, согласно Уставу, должна начинаться после чтения Деяний, которое завершается около «часа 4-го нощи», т. е. по-нашему – около 10-ти часов вечера.**
 
 # I. Молитва полуночного часа
 
@@ -166,3 +169,54 @@ serviceType="Литургия"
 <>{props.otpust}</>
 
 <>{props.endHymns}</>
+
+**По отпусте утрени, согласно указанию Типикона, «целуем Честный Крест, держимый в руку настоятеля». Но если непосредственно за окончанием утрени следуют часы и Литургия, то целование Креста можно отнести к окончанию Литургии.**
+
+# Пасхальные часы
+
+## (1) Вступление
+
+<MdxLoader src="Shared/Vosglas" />
+
+<MdxLoader src="Shared/Amin" />
+
+### Тропарь Пасхи
+
+<MdxLoader src="Shared/EasterTroparion3x" />
+
+## (2) Вместо Трипсалмия
+
+<MdxLoader src="Matins/VoskresnajaPesn" x3 />
+
+## (3) Тропари, кондак праздника и его ипакои́
+
+### Ипакои́, глас 8
+
+<MdxLoader src="EasterKanon/Ipakoyi" />
+
+### Кондак, глас 8
+
+<MdxLoader src="EasterKanon/Kondak" />
+
+### Тропари, глас 8
+
+<MdxLoader src="EasterHours/Trops" />
+
+## (4) Заключение
+
+<MdxLoader src="Shared/GospodiPomiluy40" narod />
+
+<MdxLoader src="Shared/ZakluchenieChasov" easterHours isEasterOffsetRange={props.isEasterOffsetRange} />
+
+<MdxLoader src="Shared/EasterTroparion3x" />
+
+<MdxLoader src="Shared/PreOtpust2" />
+
+## Отпуст
+
+<MdxLoader src="EasterHours/Otpust" />
+
+**Во время часов перед Литургией (по окончании проскомидии) диакон со свечой совершает обычное каждение алтаря и всего храма.**
+
+Далее совершается Божественная Литургия.
+
