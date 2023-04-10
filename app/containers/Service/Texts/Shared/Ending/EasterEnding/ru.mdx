@@ -18,10 +18,15 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader'
 ### Отпуст
 
 <>{props.otpust}</>
-<>{props.saints}</>
 
+<If condition={!props.isEasterOffsetRange(0)}>
+  <>{props.saints}</>
+</If>
+  
 <br />
-
+  
 <MdxLoader src="Shared/Ending/EasterEndingGreeting" />
 
-### Кондак и/или величание (если есть)
+<If condition={!props.isEasterOffsetRange(0)}>
+  ### Кондак и/или величание (если есть)
+</If>
