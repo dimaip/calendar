@@ -49,6 +49,16 @@ const useServices = (date, readings = {}) => {
 
     return [
         {
+            title: 'Пасхальное богослужение',
+            id: 'easterChin',
+            enabled: isEasterOffsetRange(0),
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
+            group: 'Часослов',
+            warn: true,
+        },
+        {
             title: 'Входные молитвы и облачение. Проскомидия',
             id: 'vhodOblachenie',
             enabled: Boolean(readings['Литургия'] || lpod),
