@@ -1,0 +1,21 @@
+
+import Matins from 'containers/Service/Texts/Matins/index.dyn'
+import Polunochnica from 'containers/Service/Texts/Polunochnica/index.dyn'
+import EasterHours from 'containers/Service/Texts/EasterHours/index.dyn'
+import { Note } from 'components/Note/Note'
+import { Link } from 'react-router-dom'
+
+**Полуночницу нужно начинать не позднее 23 часов, чтобы не спеша совершить ее. Так как Литургия, по традиции, совершается непосредственно после утрени и часов, то входные молитвы читаются перед Плащаницей до полуночницы по обычному чину, начиная Трисвятым. Полуночница, согласно Уставу, должна начинаться после чтения Деяний, которое завершается около «часа 4-го нощи», т. е. по-нашему – около 10-ти часов вечера.**
+<Polunochnica date={props.yesterdayDate} />
+
+<Matins date={props.date} obihod />
+
+<EasterHours date={props.date} />
+
+
+**Во время часов перед Литургией (по окончании проскомидии) диакон со свечой совершает обычное каждение алтаря и всего храма.**
+
+
+<Note>
+    Далее совершается{' '}<Link style={{ textDecoration: 'underline' }} to={`/date/${props.date}/service/Литургия`}>Божественная Литургия.</Link>
+</Note>
