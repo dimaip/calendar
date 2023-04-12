@@ -49,16 +49,6 @@ const useServices = (date, readings = {}) => {
 
     return [
         {
-            title: 'Пасхальное богослужение',
-            id: 'easterChin',
-            enabled: isEasterOffsetRange(0),
-            calendar: false,
-            lang: true,
-            skipRedirect: true,
-            group: 'Часослов',
-            warn: true,
-        },
-        {
             title: 'Входные молитвы и облачение. Проскомидия',
             id: 'vhodOblachenie',
             enabled: Boolean(readings['Литургия'] || lpod),
@@ -99,6 +89,16 @@ const useServices = (date, readings = {}) => {
             warn: true,
         },
 
+        {
+            title: 'Пасхальное богослужение',
+            id: 'easterChin',
+            enabled: isEasterOffsetRange(0),
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
+            group: 'Часослов',
+            warn: true,
+        },
         {
             title: 'Пасхальные часы',
             id: 'easterHours',
@@ -269,6 +269,15 @@ const useServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: true,
             group: 'Домашняя молитва',
+            warn: false,
+        },
+        {
+            title: 'Псалмы и духовные песнопения',
+            id: 'psalmsSpiritualCants',
+            enabled: true,
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
             warn: false,
         },
         ...bratMolitvoslovPrayers.map((i) => ({
