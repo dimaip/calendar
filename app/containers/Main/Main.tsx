@@ -35,6 +35,7 @@ import Saints from './Saints';
 import HeadingBar from './HeadingBar';
 import ReadingList from './ReadingList';
 import Banner from './Banner';
+import EasterService from './EasterService';
 import Peace from './Peace';
 import Books from './Books';
 import { TroparionFavsHome } from './TroparionFavsHome';
@@ -91,6 +92,9 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                             <Saints saints={day.saints} date={date} />
                                                         </BorderedSection>
                                                         <ThisDays thisDays={thisDays} date={date} />
+                                                        <div style={{ marginBottom: 18 }}>
+                                                            <EasterService />
+                                                        </div>
                                                         <div style={{ marginBottom: 18 }}>
                                                             <Peace />
                                                         </div>
