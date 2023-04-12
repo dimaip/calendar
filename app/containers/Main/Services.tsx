@@ -58,6 +58,9 @@ const Services = ({ date, readings }) => {
             </div>
             {Object.keys(groupedServices).map((groupTitle) => {
                 const servicesForGroup = groupedServices[groupTitle];
+                if (!groupTitle) {
+                    return null;
+                }
                 return (
                     <div
                         key={groupTitle}
