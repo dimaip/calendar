@@ -254,6 +254,50 @@ const Services = ({ date, readings }) => {
                                 </div>
                             </ButtonBox>
                         </OptionalLink>
+                        <OptionalLink
+                            enabled={truncate}
+                            className={css`
+                                cursor: ${'pointer'};
+                                user-select: none;
+                            `}
+                            to={{
+                                pathname: `/date/${date}/service/psalmsSpiritualCants`,
+                                state: {
+                                    backLink: location.pathname,
+                                },
+                            }}
+                        >
+                            <ButtonBox>
+                                <div
+                                    className={css`
+                                        display: flex;
+                                    `}
+                                >
+                                    <div
+                                        className={css`
+                                            flex-grow: 1;
+                                            flex-shrink: 1;
+                                        `}
+                                    >
+                                        <p
+                                            className={css`
+                                                margin-bottom: -4px;
+                                            `}
+                                        >
+                                            Псалмы и духовные песнопения
+                                        </p>
+                                    </div>
+                                    <div
+                                        className={css`
+                                            flex-grow: 0;
+                                            flex-shrink: 0;
+                                        `}
+                                    >
+                                        <RightIcon />
+                                    </div>
+                                </div>
+                            </ButtonBox>
+                        </OptionalLink>
                     </div>
                 </div>
             </div>
