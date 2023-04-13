@@ -279,6 +279,7 @@ const useServices = (date, readings = {}) => {
             lang: true,
             skipRedirect: true,
             warn: false,
+            group: '',
         },
         ...bratMolitvoslovPrayers.map((i) => ({
             title: i.label,
