@@ -92,9 +92,9 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                             <Saints saints={day.saints} date={date} />
                                                         </BorderedSection>
                                                         <ThisDays thisDays={thisDays} date={date} />
-                                                        <div style={{ marginBottom: 18 }}>
+                                                        {/* <div style={{ marginBottom: 18 }}>
                                                             <EasterService />
-                                                        </div>
+                                                        </div> */}
                                                         <div style={{ marginBottom: 18 }}>
                                                             <Peace />
                                                         </div>
