@@ -132,7 +132,7 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
     short={true}
 />}
 
-<If condition={!props.brightWeek && !props.isAnnunciation && props.dayOfWeek !== 0 || props.isEasterOffsetRange(-7)}>
+<If condition={!props.brightWeek && !props.isAnnunciation && props.dayOfWeek !== 0 || props.isEasterOffsetRange(7)}>
   ### Тропари
 
 {props.troparions}
@@ -152,6 +152,13 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
     )}
 </>
 
+<If condition={props.isEasterOffsetRange(-7)}>
+  ### Тропари
+    
+  <MdxLoader src="Shared/TropVhodGospoden" />
+    
+</If>    
+    
 <span id="reading" />
 
 ## Чтения
