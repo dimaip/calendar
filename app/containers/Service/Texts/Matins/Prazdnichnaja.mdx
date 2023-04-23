@@ -147,7 +147,7 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 {props.brightWeek && <MdxLoader src="Shared/EasterTroparion3x" />}
 
 <>
-    {props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(-28) && (
+    {props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(-28) && !props.isEasterOffsetRange(7) && (
         <MdxLoader src="Matins/TropsOtp" lang={props.lang} glas={props.day.glas} />
     )}
 </>
