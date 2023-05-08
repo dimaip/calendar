@@ -60,6 +60,7 @@ const ReadingItem = ({ type, readingVerse }) => {
                     <div
                         className={css`
                             width: 50%;
+                            height: 100%;
                             padding: 0 12px;
                         `}
                     >
@@ -74,6 +75,7 @@ const ReadingItem = ({ type, readingVerse }) => {
                     <div
                         className={css`
                             width: 50%;
+                            height: 100%;
                             padding: 0 12px;
                         `}
                     >
