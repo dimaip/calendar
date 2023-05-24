@@ -157,7 +157,14 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
     
   <MdxLoader src="Shared/TropVhodGospoden" />
     
-</If>    
+</If>
+
+<If condition={props.isEasterOffsetRange(49)}>
+  ### Тропари
+    
+  <MdxLoader src="Shared/TropPentecost" />
+    
+</If>
     
 <span id="reading" />
 
