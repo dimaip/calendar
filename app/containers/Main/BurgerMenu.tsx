@@ -93,6 +93,8 @@ const BurgerMenu = ({ menuShown, setMenuShown }) => {
                         <br />
                         • Deutsche Bibelgesellschaft, Stuttgart
                         <br />
+                        • Haile Selassie Amharic Bible
+                        <br />
                         <br />
                         Некоторые жития святых взяты с сайта holytrinityorthodox.com
                         <br />
