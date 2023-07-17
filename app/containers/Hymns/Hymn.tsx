@@ -70,7 +70,7 @@ export const Hymn = () => {
     const hymn = hymns?.find((h) => h.id === hymnId);
 
     return (
-        <LayoutInner backLink="/hymns" left={<LanguageSwitcher />}>
+        <LayoutInner left={<LanguageSwitcher />}>
             {status === 'loading' ? (
                 <Loader />
             ) : status === 'error' ? (

@@ -35,9 +35,10 @@ import Saints from './Saints';
 import HeadingBar from './HeadingBar';
 import ReadingList from './ReadingList';
 import Banner from './Banner';
+import EasterService from './EasterService';
 import Peace from './Peace';
 import Books from './Books';
-import { TroparionFavs } from './TroparionFavs';
+import { TroparionFavsHome } from './TroparionFavsHome';
 // import Oct30 from './Oct30';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
@@ -91,6 +92,9 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                             <Saints saints={day.saints} date={date} />
                                                         </BorderedSection>
                                                         <ThisDays thisDays={thisDays} date={date} />
+                                                        {/* <div style={{ marginBottom: 18 }}>
+                                                            <EasterService />
+                                                        </div> */}
                                                         <div style={{ marginBottom: 18 }}>
                                                             <Peace />
                                                         </div>
@@ -130,7 +134,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                                 </div>
                                                             </MDXProvider>
                                                         </BorderedSection>
-                                                        <TroparionFavs />
+                                                        <TroparionFavsHome />
 
                                                         {day.bReadings && Object.keys(day.bReadings).length > 0 && (
                                                             <>

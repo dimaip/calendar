@@ -10,6 +10,7 @@ import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';
 import Parts from 'components/Parts/Parts';
 import { SectionLayout } from 'components/SectionLayout/SectionLayout';
+import { TroparionFavs } from 'containers/Main/TroparionFavs';
 
 import Ending from '../Shared/Ending/Ending';
 
@@ -45,6 +46,7 @@ const Matins = ({ date, obihod }) => {
     const troparions = (
         <SectionLayout>
             <Troparions date={date} day={day} serviceType="Утреня" />
+            <TroparionFavs />
         </SectionLayout>
     );
 
@@ -87,6 +89,8 @@ const Matins = ({ date, obihod }) => {
 
     const philaret = isDate(12, 2);
     const isHoliday = dayOfWeek === 0 || feastType === 'great' || feastType === '12' || philaret;
+
+    const isAnnunciation = day?.title === 'Благовещение Богородицы';
 
     const sirnajaSedmitza = isEasterOffsetRange(-8 * 7 + 1, -8 * 7 + 5);
     const vselenskayaRoditelskayaSubbota = isEasterOffsetRange(-8 * 7 - 1);
@@ -132,6 +136,7 @@ const Matins = ({ date, obihod }) => {
         SectionLayout,
         isHoliday,
         dmitrievskajaSubbota,
+        isAnnunciation,
     };
     if (obihod) {
         return <EasterZautreniaObihod {...props} />;

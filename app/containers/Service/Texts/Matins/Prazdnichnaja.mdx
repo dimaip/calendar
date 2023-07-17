@@ -105,7 +105,7 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 
 <StihiriAfterPsalm50 date={props.date} />
 
-<If condition={props.isEasterOffsetRange(-7 * 2 - 1) || (props.dayOfWeek === 0 && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(7) && !props.isEasterOffsetRange(14) && !props.isEasterOffsetRange(21) && !props.isEasterOffsetRange(28) && !props.isEasterOffsetRange(35) && !props.isEasterOffsetRange(42))}>
+<If condition={props.isEasterOffsetRange(-7 * 2 - 1) || (props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(7) && !props.isEasterOffsetRange(14) && !props.isEasterOffsetRange(21) && !props.isEasterOffsetRange(28) && !props.isEasterOffsetRange(35) && !props.isEasterOffsetRange(42))}>
     <MdxLoader src="Matins/PesnBogoroditsy" lang={props.lang} />
 </If>
 
@@ -125,9 +125,14 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 ### Стихиры на «Хвалите»
 
 <StihiriNaHvalite date={props.date} day={props.day} />
-{!props.brightWeek && <MdxLoader src="Matins/Slavoslovie" lang={props.lang} />}
+{!props.brightWeek && !props.isAnnunciation && <MdxLoader src="Matins/Slavoslovie" lang={props.lang} />}
+{props.isAnnunciation && <MdxLoader
+    src="Matins/SlavoslovieLent"
+    lang={props.lang}
+    short={true}
+/>}
 
-<If condition={!props.brightWeek && props.dayOfWeek !== 0 || props.isEasterOffsetRange(-7)}>
+<If condition={!props.brightWeek && !props.isAnnunciation && props.dayOfWeek !== 0 || props.isEasterOffsetRange(7)}>
   ### Тропари
 
 {props.troparions}
@@ -142,11 +147,25 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 {props.brightWeek && <MdxLoader src="Shared/EasterTroparion3x" />}
 
 <>
-    {props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && (
+    {props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(-28) && !props.isEasterOffsetRange(7) && (
         <MdxLoader src="Matins/TropsOtp" lang={props.lang} glas={props.day.glas} />
     )}
 </>
 
+<If condition={props.isEasterOffsetRange(-7)}>
+  ### Тропари
+    
+  <MdxLoader src="Shared/TropVhodGospoden" />
+    
+</If>
+
+<If condition={props.isEasterOffsetRange(49)}>
+  ### Тропари
+    
+  <MdxLoader src="Shared/TropPentecost" />
+    
+</If>
+    
 <span id="reading" />
 
 ## Чтения
@@ -194,7 +213,11 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 
 **П** Оглашаемые, отступи́те!
 
-<MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+<If condition={!props.isAnnunciation}>
+    
+    <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+
+</If>
 
 ## Заключение
 
@@ -203,6 +226,20 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 <MdxLoader src="Matins/Prayer12" lang={props.lang} />
 <br />
 <MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
+
+<If condition={props.isAnnunciation}>
+    
+    **Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́.
+    
+    <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
+    
+    ### Тропари
+    
+    {props.troparions}
+    
+    <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+
+</If>
 
 <>{props.otpust}</>
 

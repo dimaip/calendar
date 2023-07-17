@@ -438,61 +438,59 @@ export const getFeastInfo = memoize(
 
         const isEasterOffsetRange = makeIsEasterOffsetRange(date);
 
-        {
-            // В какие дни служится Литургия Преждеосвященных Даров?
-            // По средам и пятницам Великого поста, в праздник Первого и Второго обретения главы Иоанна Предтечи (9 марта по новому стилю), в четверг пятой седмицы Великого поста (14 апреля в 2016 году), в день памяти 40 мучеников Севастийских, а также в первые три дня Страстной седмицы.
-            // Исключения:
-            // В праздник Благовещения Пресвятой Богородицы всегда служится литургия св. Иоанна Златоуста, вне зависимости от дня недели.
-            // Если обретение главы Иоанна Предтечи и день памяти 40 мучеников Севастийских приходятся на выходные дни — служится литургия или Иоанна Златоуста (в субботу) или Василия Великого (в воскресенье).
-            if (
-                isEasterOffsetRange(-7 * 6 - 4) ||
-                isEasterOffsetRange(-7 * 6 - 2) ||
-                isEasterOffsetRange(-7 * 5 - 4) ||
-                isEasterOffsetRange(-7 * 5 - 2) ||
-                isEasterOffsetRange(-7 * 4 - 4) ||
-                isEasterOffsetRange(-7 * 4 - 2) ||
-                isEasterOffsetRange(-7 * 3 - 4) ||
-                isEasterOffsetRange(-7 * 3 - 2) ||
-                isEasterOffsetRange(-7 * 2 - 4) ||
-                isEasterOffsetRange(-7 * 2 - 3) ||
-                isEasterOffsetRange(-7 * 2 - 2) ||
-                isEasterOffsetRange(-7 * 1 - 4) ||
-                isEasterOffsetRange(-7 * 1 - 2) ||
-                isEasterOffsetRange(-6) ||
-                isEasterOffsetRange(-5) ||
-                isEasterOffsetRange(-4) ||
-                (date.getDay() !== 0 && // not weekend
-                    date.getDay() !== 6 &&
-                    isEasterOffsetRange(-48, -1) && // During lent
-                    (new Date(y, 2, 9).getTime() === date.getTime() || new Date(y, 2, 22).getTime() === date.getTime())) // glava Ioanna // 40 sev much
-            ) {
-                lpod = true;
-            }
-            // Blagoveshenie overrides lpod
-            if (new Date(y, 3, 7).getTime() === date.getTime()) {
-                lpod = false;
-            }
+        // В какие дни служится Литургия Преждеосвященных Даров?
+        // По средам и пятницам Великого поста, в праздник Первого и Второго обретения главы Иоанна Предтечи (9 марта по новому стилю), в четверг пятой седмицы Великого поста (14 апреля в 2016 году), в день памяти 40 мучеников Севастийских, а также в первые три дня Страстной седмицы.
+        // Исключения:
+        // В праздник Благовещения Пресвятой Богородицы всегда служится литургия св. Иоанна Златоуста, вне зависимости от дня недели.
+        // Если обретение главы Иоанна Предтечи и день памяти 40 мучеников Севастийских приходятся на выходные дни — служится литургия или Иоанна Златоуста (в субботу) или Василия Великого (в воскресенье).
+        if (
+            isEasterOffsetRange(-7 * 6 - 4) ||
+            isEasterOffsetRange(-7 * 6 - 2) ||
+            isEasterOffsetRange(-7 * 5 - 4) ||
+            isEasterOffsetRange(-7 * 5 - 2) ||
+            isEasterOffsetRange(-7 * 4 - 4) ||
+            isEasterOffsetRange(-7 * 4 - 2) ||
+            isEasterOffsetRange(-7 * 3 - 4) ||
+            isEasterOffsetRange(-7 * 3 - 2) ||
+            isEasterOffsetRange(-7 * 2 - 4) ||
+            isEasterOffsetRange(-7 * 2 - 3) ||
+            isEasterOffsetRange(-7 * 2 - 2) ||
+            isEasterOffsetRange(-7 * 1 - 4) ||
+            isEasterOffsetRange(-7 * 1 - 2) ||
+            isEasterOffsetRange(-6) ||
+            isEasterOffsetRange(-5) ||
+            isEasterOffsetRange(-4) ||
+            (date.getDay() !== 0 &&
+                date.getDay() !== 6 && // not weekend
+                isEasterOffsetRange(-48, -1) && // During lent
+                (new Date(y, 2, 9).getTime() === date.getTime() || // glava Ioanna
+                    (y !== 2023 && new Date(y, 2, 22).getTime() === date.getTime()) || // 40 sev much
+                    new Date(2023, 2, 21).getTime() === date.getTime())) // in 2023 40 sev much has been shifted one day prior
+        ) {
+            lpod = true;
+        }
+        // Blagoveshenie overrides lpod
+        if (new Date(y, 3, 7).getTime() === date.getTime()) {
+            lpod = false;
         }
 
-        {
-            if (
-                isEasterOffsetRange(-7 * 6) ||
-                isEasterOffsetRange(-7 * 5) ||
-                isEasterOffsetRange(-7 * 4) ||
-                isEasterOffsetRange(-7 * 3) ||
-                isEasterOffsetRange(-7 * 2) ||
-                isEasterOffsetRange(-3) ||
-                isEasterOffsetRange(-1) ||
-                new Date(y, 0, 6).getTime() === date.getTime() ||
-                new Date(y, 0, 14).getTime() === date.getTime() ||
-                new Date(y, 0, 18).getTime() === date.getTime()
-            ) {
-                vasiliy = true;
-            }
-            // Blagoveshenie overrides vasiliy
-            if (new Date(y, 3, 7).getTime() === date.getTime()) {
-                vasiliy = false;
-            }
+        if (
+            isEasterOffsetRange(-7 * 6) ||
+            isEasterOffsetRange(-7 * 5) ||
+            isEasterOffsetRange(-7 * 4) ||
+            isEasterOffsetRange(-7 * 3) ||
+            isEasterOffsetRange(-7 * 2) ||
+            isEasterOffsetRange(-3) ||
+            isEasterOffsetRange(-1) ||
+            new Date(y, 0, 6).getTime() === date.getTime() ||
+            new Date(y, 0, 14).getTime() === date.getTime() ||
+            new Date(y, 0, 18).getTime() === date.getTime()
+        ) {
+            vasiliy = true;
+        }
+        // Blagoveshenie overrides vasiliy
+        if (new Date(y, 3, 7).getTime() === date.getTime()) {
+            vasiliy = false;
         }
 
         // в навечерия Рождества Христова и Богоявления, и в день праздника святого Василия.
@@ -626,7 +624,7 @@ export const getFeastInfo = memoize(
         }
 
         if (new Date(y, 3, 7).getTime() === date.getTime()) {
-            title = 'Благовещение всесвятой Богородицы';
+            title = 'Благовещение Богородицы';
             feastType = '12';
         }
         if (new Date(y, 3, 7).getTime() <= date.getTime() && date.getTime() <= new Date(y, 3, 8).getTime()) {

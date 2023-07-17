@@ -7,6 +7,7 @@ import { css } from 'emotion';
 
 import ReadingsForService from './ReadingsForService';
 import Canon from './Canon';
+// import EasterService from './EasterService';
 
 const ReadingList = ({ readings, brother = false, date }) => {
     const renderedReadings = [];
@@ -25,6 +26,9 @@ const ReadingList = ({ readings, brother = false, date }) => {
             `}
         >
             {renderedReadings}
+            {/* <div style={{ marginBottom: 8 }}>
+                <EasterService />
+            </div> */}
             {!brother && isEasterOffsetRange(-7 * 7 + 1, -7 * 7 + 4) && (
                 <div style={{ marginTop: 8 }}>
                     <Canon />

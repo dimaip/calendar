@@ -90,6 +90,16 @@ const useServices = (date, readings = {}) => {
         },
 
         {
+            title: 'Пасхальное богослужение',
+            id: 'easterChin',
+            enabled: isEasterOffsetRange(0),
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
+            group: 'Часослов',
+            warn: true,
+        },
+        {
             title: 'Пасхальные часы',
             id: 'easterHours',
             enabled: isEasterOffsetRange(0, 6),
@@ -260,6 +270,16 @@ const useServices = (date, readings = {}) => {
             skipRedirect: true,
             group: 'Домашняя молитва',
             warn: false,
+        },
+        {
+            title: 'Псалмы и духовные песнопения',
+            id: 'psalmsSpiritualCants',
+            enabled: true,
+            calendar: false,
+            lang: true,
+            skipRedirect: true,
+            warn: false,
+            group: '',
         },
         ...bratMolitvoslovPrayers.map((i) => ({
             title: i.label,
