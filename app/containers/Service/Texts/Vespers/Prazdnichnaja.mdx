@@ -28,7 +28,7 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
         <MdxLoader src="Vespers/Prayer1" lang={props.lang} />
     )}
 </>
-<>{props.isHoliday && <MdxLoader src="Vespers/Kafisma" lang={props.lang} />}</>
+<>{props.isHoliday && !props.isAscension && <MdxLoader src="Vespers/Kafisma" lang={props.lang} />}</>
 <>
     {!props.brightWeek && !props.isAscension && (props.isHoliday || props.dayOfWeek === 2) && (
         <MdxLoader src="Vespers/Prayer2" lang={props.lang} />
