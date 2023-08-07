@@ -74,6 +74,14 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
                     <SundayTroparions date={props.date} day={props.day} />,
                 ];
             } else {
+                const [firstPart, ...restParts] = parts
+                if (firstPart.includes('ЗАМЕНА')) {
+                    return [
+                        firstPart,
+                        'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>',
+                        ...restParts,
+                    ];
+                }
                 return [
                     <SundayTroparions date={props.date} day={props.day} />,
                     'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>',

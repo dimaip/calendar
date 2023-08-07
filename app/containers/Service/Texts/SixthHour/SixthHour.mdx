@@ -62,20 +62,28 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
                     <SundayTroparions date={props.date} day={props.day} />,
                 ];
             } else {
+                const [firstPart, ...restParts] = parts
+                if (firstPart.includes('ЗАМЕНА')) {
+                    return [
+                        firstPart,
+                        'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>',
+                        ...restParts,
+                    ];
+                }
                 return [
                     <SundayTroparions date={props.date} day={props.day} />,
-                    'НЕТЗАМЕНЫ<p><strong>Слава</strong></p>',
+                    'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>',
                     ...parts,
                 ];
             }
         } else {
             if (parts.length === 0) {
-                return [<Tropar6Chasa />, 'НЕТЗАМЕНЫ<p><strong>Слава</strong></p>'];
+                return [<Tropar6Chasa />, 'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>'];
             } else if (parts.length === 1) {
-                return ['НЕТЗАМЕНЫ<p><strong>Слава</strong></p>', parts[0]];
+                return ['НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>', parts[0]];
             } else {
                 const [firstPart, ...restParts] = parts;
-                return [firstPart, 'НЕТЗАМЕНЫ<p><strong>Слава</strong></p>', ...restParts];
+                return [firstPart, 'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>', ...restParts];
             }
         }
     }}
