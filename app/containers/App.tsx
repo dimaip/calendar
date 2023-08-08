@@ -25,9 +25,9 @@ const oidcConfig = {
     clientId: '201235497572433922@пб',
     responseType: 'code',
     redirectUri: 'http://localhost:3000',
-    scope: 'openid profile email',
     autoSignIn: true,
     automaticSilentRenew: true,
+    scope: 'openid profile email urn:zitadel:iam:user:metadata urn:zitadel:iam:org:id:201235384292605954',
 };
 
 const queryClient = new QueryClient({
@@ -54,10 +54,7 @@ export default () => {
     const dark = isDarkMode();
     return (
         <QueryClientProvider client={queryClient}>
-            <AuthProvider
-                {...oidcConfig}
-                scope="openid profile email urn:zitadel:iam:user:metadata urn:zitadel:iam:org:id:201235384292605954"
-            >
+            <AuthProvider {...oidcConfig}>
                 <HashRouter>
                     <ScrollRestoration />
                     <Pullable
