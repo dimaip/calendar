@@ -21,10 +21,10 @@ const oidcConfig = {
         alert(`You logged in :${response.profile.given_name} ${response.profile.family_name}`);
         window.location.hash = '';
     },
-    authority: 'http://localhost:8080',
+    authority: process.env.Z_URL,
     clientId: '201235497572433922@пб',
     responseType: 'code',
-    redirectUri: 'http://localhost:3000',
+    redirectUri: process.env.PUBLIC_URL,
     autoSignIn: true,
     automaticSilentRenew: true,
     scope: 'openid profile email urn:zitadel:iam:user:metadata urn:zitadel:iam:org:id:201235384292605954',
