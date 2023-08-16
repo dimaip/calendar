@@ -6,6 +6,7 @@ import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import { useTheme } from 'emotion-theming';
+import { useAuth } from 'oidc-react';
 
 const Today = ({ date, setNewDate }) => {
     const theme = useTheme();
@@ -38,49 +39,69 @@ const Today = ({ date, setNewDate }) => {
     );
 };
 
-const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => (
-    <Header>
-        <div
-            className={css`
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-            `}
-        >
-            <div>
-                {setMenuShown && (
+const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => {
+    const auth = useAuth();
+    return (
+        <Header>
+            <div
+                className={css`
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                `}
+            >
+                <div>
+                    {setMenuShown && (
+                        <Button
+                            title="Меню"
+                            onClick={() => setMenuShown(!menuShown)}
+                            className={css`
+                                display: block;
+                                padding: 10px 18px;
+                                z-index: 1;
+                            `}
+                        >
+                            <Burger />
+                        </Button>
+                    )}
+                </div>
+                <div
+                    className={css`
+                        z-index: 1;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100%;
+                    `}
+                >
                     <Button
-                        title="Меню"
-                        onClick={() => setMenuShown(!menuShown)}
+                        title="Войти"
+                        onClick={() => {
+                            if (auth.userData?.profile) {
+                                void auth.signOut();
+                            } else {
+                                void auth.signIn();
+                            }
+                        }}
                         className={css`
                             display: block;
                             padding: 10px 18px;
                             z-index: 1;
                         `}
                     >
-                        <Burger />
+                        {auth.userData?.profile ? 'Выйти' : 'Войти'}
                     </Button>
-                )}
+                    {setNewDate && (
+                        <>
+                            <Today date={date} setNewDate={setNewDate} />
+                            <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
+                        </>
+                    )}
+                    <DotsMenu />
+                </div>
             </div>
-            <div
-                className={css`
-                    z-index: 1;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    height: 100%;
-                `}
-            >
-                {setNewDate && (
-                    <>
-                        <Today date={date} setNewDate={setNewDate} />
-                        <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
-                    </>
-                )}
-                <DotsMenu />
-            </div>
-        </div>
-    </Header>
-);
+        </Header>
+    );
+};
 export default HeaderMain;

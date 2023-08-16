@@ -12,22 +12,24 @@ import checkVersion from 'checkVersion';
 import precache from 'precache';
 import isDarkMode from 'utils/isDarkMode';
 import { AuthProvider } from 'oidc-react';
+import { WebStorageStateStore } from 'oidc-client-ts';
 
 import Routes from '../Routes';
 
 const oidcConfig = {
-    onSignIn: async (response: any) => {
-        console.log(response);
-        alert(`You logged in :${response.profile.given_name} ${response.profile.family_name}`);
-        window.location.hash = '';
+    onSignIn: () => {
+        window.history.replaceState({}, document.title, window.location.pathname);
     },
     authority: process.env.Z_URL,
     clientId: '201235497572433922@пб',
     responseType: 'code',
     redirectUri: process.env.PUBLIC_URL,
-    autoSignIn: true,
+    autoSignIn: false,
     automaticSilentRenew: true,
     scope: 'openid profile email urn:zitadel:iam:user:metadata urn:zitadel:iam:org:id:201235384292605954',
+    userStore: new WebStorageStateStore({
+        store: window.localStorage,
+    }),
 };
 
 const queryClient = new QueryClient({

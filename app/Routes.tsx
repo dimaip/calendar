@@ -24,7 +24,6 @@ import { Hymns } from 'containers/Hymns/Hymns';
 import { Hymn } from 'containers/Hymns/Hymn';
 
 import checkVersion from './checkVersion';
-import { useAuth } from 'oidc-react';
 
 const DateRoutes = () => {
     const { date } = useParams();
@@ -76,8 +75,6 @@ const DateRoutes = () => {
 };
 
 export default () => {
-    const auth = useAuth()
-    console.log(auth)
     const langStateValue = useRecoilValue(langState);
     const history = useHistory();
     const setPendingUpdate = useSetRecoilState(pendingUpdateState);
