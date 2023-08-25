@@ -1,0 +1,193 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Html from 'components/Html/Html';
+import Parts from 'components/Parts/Parts';
+import StihiriNaGV from './StihiriNaGV/StihiriNaGV';
+import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
+import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
+import Reading from 'containers/Service/Texts/Liturgies/Katekhumen/Reading/Reading';
+import Aliluja from 'containers/Service/Texts/Liturgies/Katekhumen/Aliluja/Aliluja';
+import Trisvatoe from 'containers/Service/Texts/Liturgies/Katekhumen/Trisvatoe/Trisvatoe';
+import VariableSection from 'containers/Service/Texts/VariableSection';
+
+<span id="nachalo" />
+
+# Вечерня
+
+<br />
+
+**П** Благословен Бог наш ныне и всегда и во веки веков!
+
+<MdxLoader src="Shared/SlavaTebe" />
+
+<MdxLoader src="Shared/ParaklitChit" />
+
+<MdxLoader src="Shared/ObichnoeNachalo" lang={props.lang} />
+
+### Псалом 103, предначинательный
+
+<MdxLoader src="Shared/Psalm103" />
+
+<MdxLoader src="Vespers/VelikajaEktenia" lang={props.lang} />
+
+<MdxLoader src="Vespers/Prayer1" lang={props.lang} />
+
+<>
+    {(props.dayOfWeek === 6 || props.dayOfWeek === 0) && (
+        <>
+            <MdxLoader src="Vespers/Kafisma" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer2" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer3" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer4" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer5" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer6" lang={props.lang} />
+            <MdxLoader src="Vespers/Prayer7" lang={props.lang} />
+        </>
+    )}
+</>
+
+**Д** <R>[</R>Снова и снова<R>]</R> в мире Господу помолимся!
+
+<MdxLoader src="Vespers/Prayer8" lang={props.lang} />
+<MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
+
+### Стихиры на «Господи, взываю»
+
+<StihiriNaGV day={props.day} date={props.date} />
+<span id="vhod" />
+
+## Вход
+
+**П** Премудрость! Станем благоговейно!
+
+### Вечерняя (входная) песнь «при возжжении светильника»
+
+<MdxLoader src="Vespers/JasniSvet" lang={props.lang} />
+
+## Паремии
+
+<Prokimens date={props.date} />
+
+<span id="reading" />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Быт. I, 1-13.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Числ. XXIV, 2-3, 5-9, 17-18.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Мих. IV, 6-7; V, 2-4.'] }} />
+</div>
+
+### Тропари со стихами после чтения 3-й паремии (Пс 86:2-3, 4-5, 6-7)
+
+<MdxLoader src="Vespers/TropsWithStihi3Christmas" />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Ис. XI, 1-10.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Вар. III, 36-38; IV, 1-4.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Дан. II, 31-36, 44-45.'] }} />
+</div>
+
+### Тропари со стихами после чтения 6-й паремии (Пс 92:1-5)
+
+<MdxLoader src="Vespers/TropsWithStihi6Christmas" />
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Ис. IX, 6-7.'] }} />
+</div>
+
+<MdxLoader src="Vespers/PremudrostParemiya" lang={props.lang} />
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Ис. VII, 10-16; VIII, 1-4, 8-10.'] }} />
+</div>
+
+### Проповедь
+
+### Малая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+
+<Trisvatoe date={props.date} />
+
+## Чтения и прошения верных
+
+<Reading day={props.day} date={props.previousDate} />
+
+### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Евр., 303 зач., I, 1-12.'] }} />
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
+
+### Проповедь
+
+> **[Д** Господу помолимся!<R>]</R>
+
+<span id="gospel" />
+
+### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+
+<MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+
+<VariableSection date={props.date}>
+    <Aliluja day={props.day} date={props.previousDate} />
+</VariableSection>
+
+<MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
+
+### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div>
+    <ReadingsForService readingsForService={{ 'Рождеству Христову': ['Лк., 5 зач., II, 1-20.'] }} />
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+
+### Проповедь
+
+<MdxLoader src="Shared/SugubajaPolnaja" lang={props.lang} />
+<MdxLoader src="Vespers/Udostoi" lang={props.lang} />
+
+## Заключение
+
+**П** Завершим нашу вечернюю молитву Господу!
+
+<MdxLoader src="Vespers/Prayer9" lang={props.lang} />
+<br />
+<MdxLoader src="Vespers/PrayerGlavopriklonnaja" lang={props.lang} />
+
+<>{props.otpust}</>
+
+<Troparions date={props.date} day={props.day} serviceType="Вечерня" />
+
+**Слава, и ныне.**
+
+<Kondacs date={props.date} day={props.day} serviceType="Вечерня" />

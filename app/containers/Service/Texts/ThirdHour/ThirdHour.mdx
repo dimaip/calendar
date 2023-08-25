@@ -1,0 +1,180 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Tropar3Chasa from 'containers/Service/Texts/ThirdHour/Tropar3Chasa/index.mdx';
+
+import { SundayTroparions } from 'containers/Service/Texts/Shared/Troparions/Troparions';
+import { SundayKondacs } from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+import Parts from 'components/Parts/Parts';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
+
+# Третий час
+
+## (1) Вступление
+
+<MdxLoader src="Shared/Vozglas" />
+
+<MdxLoader src="Shared/SlavaTebe" />
+
+<If condition={!props.isEasterOffsetRange(0, 49)}>
+    <MdxLoader src="Shared/ParaklitChit" />
+</If>
+<If condition={props.isEasterOffsetRange(0, 39)}>
+    <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
+</If>
+
+### Обычное начало
+
+<MdxLoader src="Shared/ObichnoeNachalo" />
+
+## (2) Трипсалмие
+
+<If condition={!props.isEasterOffsetRange(-2)}>
+    
+    ### Псалом 16
+    
+    <MdxLoader src="Shared/Psalm16" />
+    
+    ### Псалом 24
+    
+    <MdxLoader src="Shared/Psalm24" />
+
+</If>
+
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    ### Псалом 34
+    
+    <MdxLoader src="Shared/Psalm34" />
+    
+    ### Псалом 108
+    
+    <MdxLoader src="Shared/Psalm108" />
+
+</If>
+    
+### Псалом 50
+
+<MdxLoader src="Shared/Psalm50" />
+
+<MdxLoader src="Shared/AfterTripsalm" />
+
+<MdxLoader src="Shared/GospodiPomiluy3" />
+
+## (3) Тропарь часа и другие тропари и кондаки
+
+<Parts
+    date={props.date}
+    partNames={['shared.Тропари']}
+    serviceType="3-й час"
+    lang={props.lang}
+    partsProcessor={(parts) => {
+        if (props.dayOfWeek === 0) {
+            if (parts.length === 0) {
+                return [
+                    'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>',
+                    <SundayTroparions date={props.date} day={props.day} />,
+                ];
+            } else {
+                const [firstPart, ...restParts] = parts
+                if (firstPart.includes('ЗАМЕНА')) {
+                    return [
+                        firstPart,
+                        'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>',
+                        ...restParts,
+                    ];
+                }
+                return [
+                    <SundayTroparions date={props.date} day={props.day} />,
+                    'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>',
+                    ...parts,
+                ];
+            }
+        } else {
+            if (parts.length === 0) {
+                return [<Tropar3Chasa />, 'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>'];
+            } else if (parts.length === 1) {
+                return ['НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>', parts[0]];
+            } else {
+                const [firstPart, ...restParts] = parts;
+                return [firstPart, 'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>', ...restParts];
+            }
+        }
+    }}
+/>
+
+**И ныне. Богородичен, глас 6:**
+
+<MdxLoader src="ThirdHour/Bogorodichen" />
+    
+<If condition={props.isEasterOffsetRange(-2)}>
+    
+    <MdxLoader src="ThirdHour/TropsVelPiat" />
+    
+    <MdxLoader src="ThirdHour/ProkVelPiat" />
+    
+    <MdxLoader src="Vespers/PremudrostParemiya" />
+    
+    <div>
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Ис. L, 4-11.'] }} />
+    </div>
+    
+    <MdxLoader src="Vespers/PremudrostParemiya" />
+    
+    <div>
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Рим. V, 6-10.'] }} />
+    </div>
+
+    <MdxLoader src="Shared/MirTebeApostol" />
+
+    <MdxLoader src="Shared/BeforeGospel" />
+
+    <br />
+
+    <div>
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Мк. XV, 1-41.'] }} />
+    </div>
+
+    <MdxLoader src="Shared/SlavaDolgoterp" />
+
+</If>
+
+<MdxLoader src="ThirdHour/Tropar3Chasa2" />
+
+<MdxLoader src="Shared/STrisvatogo" />
+
+<Parts
+    date={props.date}
+    partNames={['shared.Кондаки']}
+    serviceType="3-й час"
+    fallback={props.dayOfWeek !== 0 && <MdxLoader src="ThirdHour/Tropar3Chasa3" />}
+    lang={props.lang}
+    partsProcessor={(parts) => {
+        if (props.dayOfWeek === 0) {
+            return [<SundayKondacs date={props.date} day={props.day} />, ...parts];
+        } else {
+            return parts;
+        }
+    }}
+/>
+
+<MdxLoader src="Shared/GospodiPomiluy40" />
+
+## (4) Общая молитва часов
+
+<MdxLoader src="Shared/MolitvaChasov" />
+
+## (5) Заключение
+
+<MdxLoader src="Shared/ZakluchenieChasov" isEasterOffsetRange={props.isEasterOffsetRange} />
+
+<If condition={props.greatLent && props.dayOfWeek !== 6 && props.dayOfWeek !== 0 && !props.isEasterOffsetRange(-3, -1) }>
+    ### Молитва Св. Ефрема Сирина
+
+    <MdxLoader src="Shared/EfremSirin" />
+
+</If>
+
+### Молитва третьего часа, св. Мардария
+
+<MdxLoader src="Shared/MolitvaChasaMardariya" />
+
+<MdxLoader src="ThirdHour/OtpustMaliy" />

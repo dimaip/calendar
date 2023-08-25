@@ -1,0 +1,36 @@
+import Tooltip from 'components/Tooltip/Tooltip';
+import Html from 'components/Html/Html';
+
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Parts from 'components/Parts/Parts';
+
+<div id="trisvatoe" />
+
+<MdxLoader src="Liturgies/Katekhumen/Trisvatoe/GospoduPomolimsa" />
+
+<If condition={!props.vmestoTrisvatogoExists}>
+
+    <MdxLoader src="Liturgies/Katekhumen/Trisvatoe/MolitvaPered" />
+
+    <MdxLoader src="Liturgies/Katekhumen/Trisvatoe/MolitvaPeredOk1" />
+
+</If>
+
+<MdxLoader src="Liturgies/Katekhumen/Trisvatoe/MolitvaPeredOk2" />
+
+<If condition={!props.vmestoTrisvatogoExists}>
+
+    <MdxLoader src="Liturgies/Katekhumen/Trisvatoe/MolitvaPeredOk3" />
+
+</If>
+
+<MdxLoader src="Liturgies/Katekhumen/Trisvatoe/PeredTrisvatoe" />
+
+<If condition={!props.vmestoTrisvatogoExists}>
+    ### Трисвятое
+
+    <MdxLoader src="Liturgies/Katekhumen/Trisvatoe/Trisvatoe" />
+
+</If>
+
+<Parts date={props.date} partNames={['liturgy.Вместо Трисвятого']} serviceType="Литургия" />

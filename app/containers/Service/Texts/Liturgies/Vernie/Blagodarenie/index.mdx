@@ -1,0 +1,34 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+
+## (7) Благодарение после причащения
+
+**Благословляя народ, в заключение:**
+
+<MdxLoader src="Liturgies/Vernie/Blagodarenie/SpasiBozhe" />
+
+{props.easterSeason && (
+  <MdxLoader src="Shared/EasterTroparion" />
+)}
+
+{!props.easterSeason && !props.isEasterOffsetRange(39, 47) && !props.isEasterOffsetRange(48) && (
+  <MdxLoader src="Liturgies/Vernie/Blagodarenie/MiUzreli" />
+)}
+
+{props.isEasterOffsetRange(39, 47) && (
+  <MdxLoader src="Shared/AscensionTroparion" />
+)}
+
+{props.isEasterOffsetRange(48) && <MdxLoader src="Shared/RoditelskayaTroparion" />}
+
+<MdxLoader src="Liturgies/Vernie/Blagodarenie/Okonchanie" />
+
+{props.brightWeek && (
+  <MdxLoader src="Shared/EasterTroparion" />
+)}
+
+{!props.brightWeek && !props.isEasterOffsetRange(-3) && (
+  <MdxLoader src="Liturgies/Vernie/Blagodarenie/DaIspolnatsa" />
+)}
+{props.isEasterOffsetRange(-3) && (
+  <MdxLoader src="Shared/TrapeziTainstvennoi" />
+)}

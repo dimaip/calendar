@@ -1,0 +1,13 @@
+import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
+import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+import { SectionLayout } from 'components/SectionLayout/SectionLayout';
+
+<br />
+**По отпусте Литургии на середине храма поставляется горящий светильник, и около него изшедшие из алтаря священнослужители
+поют:**
+
+<Troparions date={props.date} day={props.day} serviceType="Литургия" />
+
+**Слава, и ныне.**
+
+<Kondacs date={props.date} day={props.day} serviceType="Литургия" />

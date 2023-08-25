@@ -1,0 +1,177 @@
+import { Link } from 'react-router-dom';
+import { Note } from 'components/Note/Note';
+
+<br />
+<Note>
+    Перед началом Литургии совершаются{' '}
+    <Link style={{ textDecoration: 'underline' }} to={`/date/${props.date}/service/vhodOblachenie`}>
+        входные молитвы.
+    </Link>
+</Note>
+
+# I. <br/> Литургия оглашаемых
+
+<If condition={!props.easterSeason}>
+  ## (1) Приуготовление
+
+  <MdxLoader src="Liturgies/Katekhumen/Priugotovl" isEasterOffsetRange={props.isEasterOffsetRange} />
+</If>
+
+<MdxLoader src="Liturgies/Katekhumen/Vozglas" />
+
+{props.easterSeason && (props.brightOrOtdanie ? <MdxLoader src="Shared/DaVosstanetBog" /> : <MdxLoader src="Shared/EasterTroparion3x" />)}
+
+### Великая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/VelikajaEktenia" />
+
+<span id="antifon1" />
+## (2) Антифоны
+
+### Молитва перед пением первого антифона
+
+<MdxLoader src="Liturgies/Katekhumen/Molitva1" />
+
+{props.antifon1}
+
+### Малая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+
+<span id="antifon2" />
+
+### Молитва перед пением второго антифона
+
+<MdxLoader src="Liturgies/Katekhumen/Molitva2" />
+
+{props.antifon2}
+
+### Малая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/MalajaEktenia" />
+
+<span id="antifon3" />
+
+### Молитва перед пением третьего антифона
+
+<MdxLoader src="Liturgies/Katekhumen/Molitva3" />
+
+{props.antifon3}
+
+<span id="malyVhod" />
+
+## (3) Малый вход с Евангелием
+
+<MdxLoader src="Liturgies/Katekhumen/PredMalijVhod" />
+
+### Молитва перед входом
+
+<MdxLoader src="Liturgies/Katekhumen/MalijVhod" />
+
+### Входная песнь литургии оглашаемых
+
+{props.vhodnoiStih}
+
+**Далее следуют тропари и кондаки праздника и храма.**
+
+{props.hymns}
+
+<Parts date={props.date} partNames={['shared.Богородичен']} serviceType="Литургия" />
+
+{props.trisvatoe}
+
+## (4) Чтения и прошения верных
+
+{props.reading}
+
+### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div
+    className={props.css`
+        margin: 0 5px;
+    `}
+>
+    {props.apostol}
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeApostol" />
+
+### Проповедь
+
+> **[Д** Господу помолимся!<R>]</R>
+
+<span id="gospel" />
+
+### Молитва <br />перед чтением Евангелия <Tooltip>Изначально могла быть обращена к Богу-Отцу (ср.: ПБ Кн.&nbsp;3. 2-е изд. М., 2010. С.&nbsp;125).</Tooltip>
+
+<MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
+
+<MdxLoader src="Liturgies/Katekhumen/BlessBeforeGosp" />
+
+{props.aliluja}
+
+<MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
+
+### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div
+    className={props.css`
+        margin: 0 5px;
+    `}
+>
+    {props.gospel}
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+
+### Проповедь
+
+{props.sermons}
+
+### Сугубая ектения
+
+<MdxLoader src="Liturgies/Katekhumen/SugubajaEktenia" />
+
+### Молитва при усердном (сугубом) молении
+
+<MdxLoader src="Liturgies/Katekhumen/Userdnaya" />
+
+<If condition={!(props.brightOrOtdanie || props.isTwelve)}>
+  <>
+    ### Cугубая заупокойная ектения <Tooltip>Не читается в храмовые (престольные) и двунадесятые праздники и, как правило, в воскресные дни, дни Святок и всей св. Пятидесятницы.</Tooltip>
+
+<MdxLoader src="Liturgies/Katekhumen/Zaupokoynaya" />
+
+    ### Молитва об усопших
+
+<MdxLoader src="Liturgies/Katekhumen/Usopshiye" />  </>
+</If>
+
+{false && "@TODO: спрятать всегда, когда поется 'Все вы во Христа крестившиеся', см. по табличке"}
+
+<If condition={!props.brightWeek && !props.isDate(1, 7) && !props.isDate(1, 19) && !props.isEasterOffsetRange(49)}>
+
+    <span id="oglashaemie" />
+
+    ## (5) Отпуст оглашаемых<br/>(если есть)
+
+    <MdxLoader src="Liturgies/Katekhumen/OtpustOglashaemie" />
+
+    ### Ектения об оглашаемых
+
+    <MdxLoader src="Liturgies/Katekhumen/EktenyaOglashaemie" />
+
+    ### Молитва об оглашаемых
+
+    <If condition={props.serviceType === 'zlatoust'}>
+        <MdxLoader src="Liturgies/Katekhumen/Oglashaemie" />
+    </If>
+    <If condition={props.serviceType === 'vasiliy'}>
+        <MdxLoader src="Liturgies/Katekhumen/OglashaemieVasiliy" />
+    </If>
+
+    <MdxLoader src="Liturgies/Katekhumen/Izydite" />
+
+    **[Все непричащающиеся с благоговением покидают цер­ковь.]**
+
+</If>

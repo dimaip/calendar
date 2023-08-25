@@ -1,0 +1,11 @@
+<If condition={props.isEasterOffsetRange(-7 * 4, -3 * 7 - 1)}>
+    <Then>
+        <Parts date="2022-03-27" partNames={['liturgy.Вместо Трисвятого']} serviceType="Литургия" />
+    </Then>
+    <Else>
+        <If condition={!props.isEasterOffsetRange(-8, -1)}>
+            **{props.isFast ? 'Ч' : 'Н'}** Господи, твердыня на Тебя надеющихся, утверди Церковь, которую Ты приобрёл
+            драгоценной Кровью Своей!
+        </If>
+    </Else>
+</If>

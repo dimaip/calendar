@@ -1,0 +1,49 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Html from 'components/Html/Html';
+import Parts from 'components/Parts/Parts';
+
+# Пасхальные часы
+
+**Пасхальные часы служатся в Светлую седмицу вместо Часов, Повечерия и Полуночницы.**
+
+## (1) Вступление
+
+<MdxLoader src="Shared/Vosglas" />
+
+<MdxLoader src="Shared/Amin" />
+
+### Тропарь Пасхи
+
+<MdxLoader src="Shared/EasterTroparion3x" />
+
+## (2) Вместо Трипсалмия
+
+<MdxLoader src="Matins/VoskresnajaPesn" x3 />
+
+## (3) Тропари, кондак праздника и его ипакои́
+
+### Ипакои́, глас 8
+
+<MdxLoader src="EasterKanon/Ipakoyi" />
+
+### Кондак, глас 8
+
+<MdxLoader src="EasterKanon/Kondak" />
+
+### Тропари, глас 8
+
+<MdxLoader src="EasterHours/Trops" />
+
+## (4) Заключение
+
+<MdxLoader src="Shared/GospodiPomiluy40" narod />
+
+<MdxLoader src="Shared/ZakluchenieChasov" easterHours isEasterOffsetRange={props.isEasterOffsetRange} />
+
+<MdxLoader src="Shared/EasterTroparion3x" />
+
+<MdxLoader src="Shared/PreOtpust2" />
+
+## Отпуст
+
+<MdxLoader src="EasterHours/Otpust" />

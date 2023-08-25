@@ -1,0 +1,248 @@
+import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import Prokimens from 'containers/Service/Texts/Matins/Prokimens/Prokimens';
+import Stepenny from 'containers/Service/Texts/Matins/Stepenny/Stepenny';
+import Exapostilari from 'containers/Service/Texts/Matins/Exapostilari/Exapostilari';
+import Parts from 'components/Parts/Parts';
+
+import StihiriNaHvalite from './StihiriNaHvalite/StihiriNaHvalite';
+import StihiriAfterPsalm50 from './StihiriAfterPsalm50/StihiriAfterPsalm50';
+import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
+import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohvala.mdx';
+
+<span id="nachalo" />
+
+# Утреня
+
+<br />
+
+## Начало
+
+**П** Слава святой, и единосущной, и животворящей, и нераздельной Троице ныне и всегда и во веки веков!
+
+**Н** Аминь.
+
+{props.easterSeason && (props.brightOrOtdanie ? <MdxLoader src="Shared/DaVosstanetBog" /> : <MdxLoader src="Shared/EasterTroparion3x" />)}
+
+<>
+    {(props.isHoliday || props.brightWeek || props.isEasterOffsetRange(-7 * 2 - 1)) && (
+        <MdxLoader src="Matins/VelikayaEktenia" lang={props.lang} />
+    )}
+</>
+
+<>
+    {(props.isHoliday || props.dayOfWeek === 1 || props.isEasterOffsetRange(-7 * 2 - 1)) && (
+        <MdxLoader src="Matins/Prayer1" lang={props.lang} />
+    )}
+</>
+
+<>
+    {(props.isHoliday || props.isEasterOffsetRange(-7 * 2 - 1)) && (
+        <MdxLoader src="Matins/BogGospod" lang={props.lang} />
+    )}
+</>
+
+<If condition={props.isHoliday || props.isEasterOffsetRange(-7 * 2 - 1)}>
+    {props.troparions}
+    <Parts date={props.date} partNames={['shared.Богородичен']} serviceType="Утреня" />
+    <MdxLoader src="Shared/SnovaSnova" lang={props.lang} />
+</If>
+
+<>
+    {!props.brightWeek && (props.isHoliday || props.dayOfWeek === 2) && (
+        <MdxLoader src="Matins/Prayer2" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.brightWeek && (props.isHoliday || props.dayOfWeek === 3) && (
+        <MdxLoader src="Matins/Prayer3" lang={props.lang} />
+    )}
+</>
+<>
+    {!props.brightWeek && (props.isHoliday || props.dayOfWeek === 4) && (
+        <MdxLoader src="Matins/Prayer4" lang={props.lang} />
+    )}
+</>
+
+<If condition={props.isHoliday}>
+    <MdxLoader src="Shared/SnovaSnova" lang={props.lang} />
+</If>
+
+<>
+    {!props.brightWeek && (props.isHoliday || props.dayOfWeek === 5) && (
+        <MdxLoader src="Matins/Prayer7" lang={props.lang} />
+    )}
+</>
+
+<>{props.isHoliday && <MdxLoader src="Matins/Polijeley" lang={props.lang} />}</>
+<>
+    {(props.isEasterOffsetRange(-9 * 7) || props.isEasterOffsetRange(-8 * 7) || props.isEasterOffsetRange(-7 * 7)) && (
+        <MdxLoader src="Matins/Psalm136" lang={props.lang} />
+    )}
+</>
+
+<>
+    {props.isHoliday && (
+        <Parts date={props.date} partNames={['shared.Величания']} Layout={props.SectionLayout} serviceType="Утреня" />
+    )}
+</>
+
+<>
+    {props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(7) && (
+        <MdxLoader src="Matins/TropsVoskr" lang={props.lang} />
+    )}
+</>
+
+<If condition={props.isHoliday}>
+    <MdxLoader src="Shared/SnovaSnova" lang={props.lang} />
+</If>
+
+<>{(props.isHoliday || props.dayOfWeek === 6) && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
+
+<If condition={props.isEasterOffsetRange(-7 * 2 - 1)}>
+    <AkafistPohvala {...props} />
+</If>
+
+<>{props.isHoliday && <MdxLoader src="Matins/Prayer10" lang={props.lang} />}</>
+<>{props.isHoliday && <Psalm50 lang={props.lang} />}</>
+
+<StihiriAfterPsalm50 date={props.date} />
+
+<If condition={props.isEasterOffsetRange(-7 * 2 - 1) || (props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(7) && !props.isEasterOffsetRange(14) && !props.isEasterOffsetRange(21) && !props.isEasterOffsetRange(28) && !props.isEasterOffsetRange(35) && !props.isEasterOffsetRange(42))}>
+    <MdxLoader src="Matins/PesnBogoroditsy" lang={props.lang} />
+</If>
+
+<If condition={props.isHoliday}>
+    <MdxLoader src="Shared/SnovaSnova" lang={props.lang} />
+</If>
+
+<MdxLoader src="Matins/Prayer11" lang={props.lang} />
+
+<>{props.dayOfWeek === 0 && !props.isEasterOffsetRange(49) && <MdxLoader src="Matins/Sviat" lang={props.lang} />}</>
+<If condition={!props.isEasterOffsetRange(-7)}>
+    <Exapostilari date={props.date} />
+</If>
+
+<MdxLoader src="Matins/HvalitniePsalmi" lang={props.lang} />
+
+### Стихиры на «Хвалите»
+
+<StihiriNaHvalite date={props.date} day={props.day} />
+{!props.brightWeek && !props.isAnnunciation && <MdxLoader src="Matins/Slavoslovie" lang={props.lang} />}
+{props.isAnnunciation && <MdxLoader
+    src="Matins/SlavoslovieLent"
+    lang={props.lang}
+    short={true}
+/>}
+
+<If condition={!props.brightWeek && !props.isAnnunciation && props.dayOfWeek !== 0 || props.isEasterOffsetRange(7)}>
+  ### Тропари
+
+{props.troparions}
+
+  <Parts
+    date={props.date}
+    partNames={['shared.Богородичен']}
+    serviceType="Утреня"
+  />
+</If>
+
+{props.brightWeek && <MdxLoader src="Shared/EasterTroparion3x" />}
+
+<>
+    {props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(-28) && !props.isEasterOffsetRange(7) && (
+        <MdxLoader src="Matins/TropsOtp" lang={props.lang} glas={props.day.glas} />
+    )}
+</>
+
+<If condition={props.isEasterOffsetRange(-7)}>
+  ### Тропари
+    
+  <MdxLoader src="Shared/TropVhodGospoden" />
+    
+</If>
+
+<If condition={props.isEasterOffsetRange(49)}>
+  ### Тропари
+    
+  <MdxLoader src="Shared/TropPentecost" />
+    
+</If>
+    
+<span id="reading" />
+
+## Чтения
+
+<Stepenny day={props.day} date={props.date} />
+
+<Prokimens day={props.day} date={props.date} />
+
+<>{props.isHoliday && <MdxLoader src="Matins/Prayer9" lang={props.lang} />}</>
+
+<>{props.isHoliday && !props.isEasterOffsetRange(49) && <MdxLoader src="Matins/Prokimen2" lang={props.lang} />}</>
+
+<>{props.isHoliday && <MdxLoader src="Matins/Vstavka" lang={props.lang} />}</>
+
+**П** Премудрость! Станем благоговейно! Услышим святое Евангелие!
+
+**П** От **(имя)** святого Благовестия чтение.
+
+**Н** Слава Тебе, Господи, слава Тебе!
+
+**П** Будем внимательны!
+
+<br />
+
+<>{props.readings}</>
+
+**Н** Слава Тебе, Господи, слава Тебе!
+
+### Проповедь
+
+<>
+    {!props.isEasterOffsetRange(-7) &&
+        !props.isEasterOffsetRange(49) &&
+        (props.isEasterOffsetRange(-1 * 7 - 1) || props.isEasterOffsetRange(0, 39) || props.dayOfWeek === 0) && (
+            <MdxLoader
+                src="Matins/VoskresnajaPesn"
+                lang={props.lang}
+                x3={props.brightWeek || (props.easterSeason && props.dayOfWeek === 0)}
+            />
+        )}
+</>
+
+<MdxLoader src="Shared/EkteniaOglash" lang={props.lang} />
+<MdxLoader src="Matins/PrayerKatekhumens" lang={props.lang} />
+
+**П** Оглашаемые, отступи́те!
+
+<If condition={!props.isAnnunciation}>
+    
+    <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+
+</If>
+
+## Заключение
+
+**П** Завершим нашу утреннюю молитву Господу!
+
+<MdxLoader src="Matins/Prayer12" lang={props.lang} />
+<br />
+<MdxLoader src="Matins/PrayerGlavopriklonnaja" lang={props.lang} />
+
+<If condition={props.isAnnunciation}>
+    
+    **Ч** Сладко Господа благодарить, имени Твоему, о Вышний, бряца́ть; возвещать поутру́ милость Твою, и верность Твою – в ночи́.
+    
+    <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
+    
+    ### Тропари
+    
+    {props.troparions}
+    
+    <MdxLoader src="Shared/SugubajaKratkaja" lang={props.lang} />
+
+</If>
+
+<>{props.otpust}</>
+
+<>{props.endHymns}</>

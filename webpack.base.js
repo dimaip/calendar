@@ -1,14 +1,23 @@
-const webpack = require('webpack');
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CreateFileWebpack = require('create-file-webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const version = process.env.VERCEL_GITHUB_COMMIT_SHA ? process.env.VERCEL_GITHUB_COMMIT_SHA.substr(0, 4) : 'dev';
+import remarkGfm from 'remark-gfm';
+import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import CreateFileWebpack from 'create-file-webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import HtmlWebpackHarddiskPlugin from 'html-webpack-harddisk-plugin';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+
+const sha = process.env.VERCEL_GITHUB_COMMIT_SHA || process.env.AWS_COMMIT_ID;
+
+const version = sha ? sha.substr(0, 4) : 'dev';
+
+const __dirname = path.dirname(__filename);
+
+export default {
     name: 'client',
 
     context: path.resolve(__dirname, './app'),
@@ -19,6 +28,10 @@ module.exports = {
     },
 
     target: 'web',
+
+    stats: {
+        children: true,
+    },
 
     devServer: {
         historyApiFallback: {
@@ -53,6 +66,11 @@ module.exports = {
             content: `"${version}"`,
         }),
         new CreateFileWebpack({
+            path: './www/built',
+            fileName: 'version.json',
+            content: `"${version}"`,
+        }),
+        new CreateFileWebpack({
             path: './www',
             fileName: 'version',
             content: `${version}`,
@@ -68,32 +86,56 @@ module.exports = {
                 },
             },
             {
-                test: /\.js$/,
-                use: 'babel-loader',
-                exclude: /node_modules/,
+                test: /\.(js|ts|tsx)$/,
+                exclude: /node_modules\/(?!capacitor-data-storage-sqlite)(?!recoil)(?!unfetch).*$/,
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [['@babel/preset-env', { targets: { browsers: ['ie >= 11', 'safari > 9'] } }]],
+                        },
+                    },
+                ],
             },
             {
-                test: /\.css$/, //global - without modules
+                test: /\.woff2?$/i,
+                type: 'asset/resource',
+                dependency: { not: ['url'] },
+            },
+            {
+                test: /\.(eot|svg|ttf|woff)$/,
+                use: 'file-loader',
+            },
+            {
+                test: /\.css$/, // global - without modules
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
             {
-                test: /\.global\.scss$/, //global - without modules
+                test: /\.global\.scss$/, // global - without modules
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
             },
             {
                 test: /^((?!\.global).)*scss$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader'],
             },
-            {
-                test: /\.(eot|svg|ttf|woff|woff2)$/,
-                use: 'file-loader',
-            },
 
             {
                 test: /\.mdx?$/,
                 use: [
-                    'babel-loader',
-                    '@mdx-js/loader',
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['@babel/preset-env'],
+                        },
+                    },
+                    {
+                        loader: '@mdx-js/loader',
+                        /** @type {import('@mdx-js/loader').Options} */
+                        options: {
+                            providerImportSource: '@mdx-js/react',
+                            remarkPlugins: [remarkGfm],
+                        },
+                    },
                     {
                         loader: 'pattern-replace-loader',
                         options: {
@@ -110,6 +152,6 @@ module.exports = {
     resolve: {
         modules: ['node_modules', path.resolve(__dirname, './app')],
 
-        extensions: ['.js', '.json', '.jsx', '.css'],
+        extensions: ['.js', '.json', '.jsx', '.ts', '.tsx', '.css'],
     },
 };

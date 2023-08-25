@@ -8,7 +8,7 @@ https://github.com/dimaip/calendar-backend
 Then:
 
 ```
-git clone https://github.com/psmb/calendar
+git clone https://github.com/dimaip/calendar
 cd calendar
 yarn
 yarn start
