@@ -16,6 +16,8 @@ import { WebStorageStateStore } from 'oidc-client-ts';
 
 import Routes from '../Routes';
 
+import { SyncWithDB } from './RecoilSync';
+
 const oidcConfig = {
     onSignIn: () => {
         window.history.replaceState({}, document.title, window.location.pathname);
@@ -57,23 +59,25 @@ export default () => {
     return (
         <QueryClientProvider client={queryClient}>
             <AuthProvider {...oidcConfig}>
-                <HashRouter>
-                    <ScrollRestoration />
-                    <Pullable
-                        spinnerColor={dark ? '#fff' : '#000'}
-                        onRefresh={async () => {
-                            const newVersion = await checkVersion();
-                            if (newVersion) {
-                                setPendingUpdate(newVersion);
-                            }
-                            await precache(true);
-                            await queryClient.refetchQueries();
-                        }}
-                        shouldPullToRefresh={() => window.scrollY <= 0 && !window.pullDownDisabled}
-                    >
-                        <Routes />
-                    </Pullable>
-                </HashRouter>
+                <SyncWithDB>
+                    <HashRouter>
+                        <ScrollRestoration />
+                        <Pullable
+                            spinnerColor={dark ? '#fff' : '#000'}
+                            onRefresh={async () => {
+                                const newVersion = await checkVersion();
+                                if (newVersion) {
+                                    setPendingUpdate(newVersion);
+                                }
+                                await precache(true);
+                                await queryClient.refetchQueries();
+                            }}
+                            shouldPullToRefresh={() => window.scrollY <= 0 && !window.pullDownDisabled}
+                        >
+                            <Routes />
+                        </Pullable>
+                    </HashRouter>
+                </SyncWithDB>
             </AuthProvider>
             <ZoomControl />
         </QueryClientProvider>

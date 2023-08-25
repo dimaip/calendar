@@ -6,6 +6,7 @@ import troparionFavsState from 'state/troparionFavsState';
 
 export const FavButton = ({ hymnId }: { hymnId: string }) => {
     const [troparionFavs, setTroparionFavs] = useRecoilState(troparionFavsState);
+    console.log(troparionFavs);
     const isFaved = troparionFavs.includes(hymnId);
     return (
         <Button
