@@ -80,6 +80,8 @@ const Vespers = ({ date, obihod }) => {
         </SolidSection>
     );
     const isAnnunciation = tomorrowDay?.title === 'Благовещение Богородицы';
+    const isTransfiguration = isDate(8, 19);
+    const isCross = isDate(9, 27);
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(tomorrowDate);
     const easterSeason = isEasterOffsetRange(0, 38);
@@ -130,6 +132,8 @@ const Vespers = ({ date, obihod }) => {
         isHoliday,
         isFast,
         isEasterOffsetRange,
+        isTransfiguration,
+        isCross,
     };
 
     if (obihod && isEasterOffsetRange(50)) {
