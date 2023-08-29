@@ -7,6 +7,7 @@ import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import { useTheme } from 'emotion-theming';
 import { useAuth } from 'oidc-react';
+import QuestionIcon from 'components/svgs/QuestionIcon';
 
 const Today = ({ date, setNewDate }) => {
     const theme = useTheme();
@@ -75,8 +76,14 @@ const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) 
                         height: 100%;
                     `}
                 >
+                    {setNewDate && (
+                        <>
+                            <Today date={date} setNewDate={setNewDate} />
+                            <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
+                        </>
+                    )}
                     <Button
-                        title="Войти"
+                        title={auth.userData?.profile ? 'Выйти' : 'Войти'}
                         onClick={() => {
                             if (auth.userData?.profile) {
                                 void auth.signOut();
@@ -86,18 +93,13 @@ const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) 
                         }}
                         className={css`
                             display: block;
-                            padding: 10px 18px;
+                            padding: 8px !important;
                             z-index: 1;
+                            margin-top: 4px;
                         `}
                     >
-                        {auth.userData?.profile ? 'Выйти' : 'Войти'}
+                        {auth.userData?.profile ? 'Выйти' : <QuestionIcon />}
                     </Button>
-                    {setNewDate && (
-                        <>
-                            <Today date={date} setNewDate={setNewDate} />
-                            <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
-                        </>
-                    )}
                     <DotsMenu />
                 </div>
             </div>
