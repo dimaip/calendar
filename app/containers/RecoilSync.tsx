@@ -46,7 +46,7 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
                 diff.forEach((value, key) => {
                     setState(key, value);
                     if (token) {
-                        void fetch(`http://localhost:9999/setSetting`, {
+                        void fetch(`${process.env.API_HOST}/setSetting`, {
                             headers: { Authorization: `Bearer ${token}` },
                             method: 'POST',
                             body: JSON.stringify({ key, value }),
@@ -57,7 +57,7 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
             }}
             listen={({ updateItem }) => {
                 if (token) {
-                    void fetch(`http://localhost:9999/getSettings`, {
+                    void fetch(`${process.env.API_HOST}/getSettings`, {
                         headers: { Authorization: `Bearer ${token}` },
                     })
                         .then(async (res) => res.json())
@@ -70,7 +70,7 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
                                 .forEach((key) => {
                                     const value = localKeys[key];
                                     console.debug('Uploading settings to the server', key, value)
-                                    void fetch(`http://localhost:9999/setSetting`, {
+                                    void fetch(`${process.env.API_HOST}/setSetting`, {
                                         headers: { Authorization: `Bearer ${token}` },
                                         method: 'POST',
                                         body: JSON.stringify({ key, value }),
