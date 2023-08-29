@@ -1,13 +1,69 @@
 import React from 'react';
 import { css } from 'emotion';
+import { useAuth } from 'oidc-react';
+import { useTheme } from 'emotion-theming';
 import Button from 'components/Button/Button';
 import Burger from 'components/svgs/Burger';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
-import { useTheme } from 'emotion-theming';
-import { useAuth } from 'oidc-react';
 import QuestionIcon from 'components/svgs/QuestionIcon';
+
+const UserIcon = () => {
+    const { userData } = useAuth();
+    const theme = useTheme();
+    const initials = userData?.profile.given_name
+        ? `${userData?.profile.given_name?.[0]}${userData?.profile?.family_name?.[0]}`
+        : 'U';
+
+    return (
+        <div
+            className={css`
+                padding: 5px;
+                font-size: 10px;
+                background-color: ${theme.colours.blue};
+                color: white;
+                border-radius: 50%;
+            `}
+        >
+            {initials}
+        </div>
+    );
+};
+
+const ProfileIcon = () => {
+    const auth = useAuth();
+    const loggedIn = auth.userData?.profile;
+    return (
+        <Button
+            title={loggedIn ? 'Выйти' : 'Войти'}
+            onClick={() => {
+                if (loggedIn) {
+                    void auth.signOut();
+                } else {
+                    void auth.signIn();
+                }
+            }}
+            className={css`
+                display: block;
+                padding: 8px !important;
+                z-index: 1;
+            `}
+        >
+            {loggedIn ? (
+                <UserIcon />
+            ) : (
+                <div
+                    className={css`
+                        margin-top: 4px;
+                    `}
+                >
+                    <QuestionIcon />
+                </div>
+            )}
+        </Button>
+    );
+};
 
 const Today = ({ date, setNewDate }) => {
     const theme = useTheme();
@@ -41,7 +97,6 @@ const Today = ({ date, setNewDate }) => {
 };
 
 const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => {
-    const auth = useAuth();
     return (
         <Header>
             <div
@@ -82,24 +137,7 @@ const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) 
                             <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
                         </>
                     )}
-                    <Button
-                        title={auth.userData?.profile ? 'Выйти' : 'Войти'}
-                        onClick={() => {
-                            if (auth.userData?.profile) {
-                                void auth.signOut();
-                            } else {
-                                void auth.signIn();
-                            }
-                        }}
-                        className={css`
-                            display: block;
-                            padding: 8px !important;
-                            z-index: 1;
-                            margin-top: 4px;
-                        `}
-                    >
-                        {auth.userData?.profile ? 'Выйти' : <QuestionIcon />}
-                    </Button>
+                    <ProfileIcon />
                     <DotsMenu />
                 </div>
             </div>
