@@ -5,7 +5,7 @@ import { persistAtom } from './persistAtom';
 const namesState = atomFamily<string, SerializableParam>({
     key: 'names',
     default: '',
-    effects_UNSTABLE: [persistAtom],
+    effects: [persistAtom('')],
 });
 
 export default namesState;

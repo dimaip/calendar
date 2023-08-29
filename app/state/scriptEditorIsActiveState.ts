@@ -5,7 +5,7 @@ import { persistAtom } from './persistAtom';
 const scriptEditorIsActiveState = atom({
     key: 'scriptEditorIsActive',
     default: false,
-    effects_UNSTABLE: [persistAtom],
+    effects: [persistAtom(false)],
 });
 
 export default scriptEditorIsActiveState;

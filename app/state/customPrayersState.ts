@@ -5,7 +5,7 @@ import { persistAtom } from './persistAtom';
 const customPrayersState = atomFamily({
     key: 'customPrayers',
     default: [],
-    effects_UNSTABLE: [persistAtom],
+    effects: [persistAtom([])],
 });
 
 export default customPrayersState;

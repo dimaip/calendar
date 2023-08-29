@@ -11,14 +11,14 @@ import pendingUpdateState from 'state/pendingUpdateState';
 import checkVersion from 'checkVersion';
 import precache from 'precache';
 import isDarkMode from 'utils/isDarkMode';
-import { AuthProvider } from 'oidc-react';
+import { AuthProvider, AuthProviderProps } from 'oidc-react';
 import { WebStorageStateStore } from 'oidc-client-ts';
 
 import Routes from '../Routes';
 
 import { SyncWithDB } from './RecoilSync';
 
-const oidcConfig = {
+const oidcConfig: AuthProviderProps = {
     onSignIn: () => {
         window.history.replaceState({}, document.title, window.location.pathname);
     },

@@ -2,33 +2,57 @@ import { useAuth } from 'oidc-react';
 import React from 'react';
 import { RecoilSync } from 'recoil-sync';
 
+const parseState = (state: string): Record<string, unknown> => {
+    if (state === undefined) {
+        return {};
+    }
+    try {
+        return JSON.parse(state) as Record<string, unknown>;
+    } catch (e) {
+        console.error(e);
+        return {};
+    }
+};
+
+const getState = (): Record<string, unknown> => {
+    const toParse = window.localStorage.getItem('recoil-persist');
+    if (toParse === null || toParse === undefined) {
+        return {};
+    }
+    if (typeof toParse === 'string') {
+        return parseState(toParse);
+    }
+
+    return {};
+};
+
+const setState = (key: string, value: unknown): void => {
+    const state = getState();
+    state[key] = value;
+    window.localStorage.setItem('recoil-persist', JSON.stringify(state));
+};
+
 export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Element => {
     const auth = useAuth();
     const token = auth?.userData?.id_token;
-    // const connection = useMyDB();
     return (
         <RecoilSync
             storeKey="pb"
             read={(itemKey) => {
-                return [];
-                if (token) {
-                    return fetch(`http://localhost:9999/getSetting/${itemKey}`, {
-                        headers: { Authorization: `Bearer ${token}` },
-                    });
-                }
-                return undefined;
+                const state = getState();
+                return state[itemKey];
             }}
             write={({ diff }) => {
-                console.log(diff);
-                if (token) {
-                    diff.forEach((value, key) => {
+                diff.forEach((value, key) => {
+                    setState(key, value);
+                    if (token) {
                         void fetch(`http://localhost:9999/setSetting`, {
                             headers: { Authorization: `Bearer ${token}` },
                             method: 'POST',
                             body: JSON.stringify({ key, value }),
                         });
-                    });
-                }
+                    }
+                });
                 return undefined;
             }}
             listen={({ updateItem }) => {
@@ -38,7 +62,25 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
                     })
                         .then(async (res) => res.json())
                         .then((settings) => {
-                            Object.keys(settings).forEach((key) => updateItem(key, settings[key]));
+                            const localState = getState();
+                            const localKeys = Object.keys(localState);
+                            const serverKeys = Object.keys(settings);
+                            localKeys
+                                .filter((key) => !serverKeys.includes(key))
+                                .forEach((key) => {
+                                    const value = localKeys[key];
+                                    console.debug('Uploading settings to the server', key, value)
+                                    void fetch(`http://localhost:9999/setSetting`, {
+                                        headers: { Authorization: `Bearer ${token}` },
+                                        method: 'POST',
+                                        body: JSON.stringify({ key, value }),
+                                    });
+                                });
+                            Object.keys(settings).forEach((key) => {
+                                console.debug('Downloading a setting from the server', key, settings[key]);
+                                setState(key, settings[key]);
+                                updateItem(key, settings[key]);
+                            });
                         });
                 }
             }}

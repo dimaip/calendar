@@ -5,7 +5,7 @@ import { persistAtom } from './persistAtom';
 const promoDismissedState = atomFamily({
     key: 'promoDismissed',
     default: null,
-    effects_UNSTABLE: [persistAtom],
+    effects: [persistAtom(null)],
 });
 
 export default promoDismissedState;
