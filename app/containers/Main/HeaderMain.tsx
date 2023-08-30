@@ -8,6 +8,7 @@ import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import QuestionIcon from 'components/svgs/QuestionIcon';
+import { useHistory } from 'react-router-dom';
 
 const UserIcon = () => {
     const { userData } = useAuth();
@@ -32,17 +33,14 @@ const UserIcon = () => {
 };
 
 const ProfileIcon = () => {
+    const history = useHistory();
     const auth = useAuth();
     const loggedIn = auth.userData?.profile;
     return (
         <Button
             title={loggedIn ? 'Выйти' : 'Войти'}
             onClick={() => {
-                if (loggedIn) {
-                    void auth.signOut();
-                } else {
-                    void auth.signIn();
-                }
+                history.push('/profile');
             }}
             className={css`
                 display: block;

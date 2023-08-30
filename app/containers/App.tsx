@@ -11,28 +11,11 @@ import pendingUpdateState from 'state/pendingUpdateState';
 import checkVersion from 'checkVersion';
 import precache from 'precache';
 import isDarkMode from 'utils/isDarkMode';
-import { AuthProvider, AuthProviderProps } from 'oidc-react';
-import { WebStorageStateStore } from 'oidc-client-ts';
 
 import Routes from '../Routes';
 
 import { SyncWithDB } from './RecoilSync';
-
-const oidcConfig: AuthProviderProps = {
-    onSignIn: () => {
-        window.history.replaceState({}, document.title, window.location.pathname);
-    },
-    authority: process.env.Z_URL,
-    clientId: '201235497572433922@пб',
-    responseType: 'code',
-    redirectUri: process.env.PUBLIC_URL,
-    autoSignIn: false,
-    automaticSilentRenew: true,
-    scope: 'openid profile email urn:zitadel:iam:user:metadata urn:zitadel:iam:org:id:201235384292605954',
-    userStore: new WebStorageStateStore({
-        store: window.localStorage,
-    }),
-};
+import { AuthProvider } from './AuthProvider';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -58,9 +41,9 @@ export default () => {
     const dark = isDarkMode();
     return (
         <QueryClientProvider client={queryClient}>
-            <AuthProvider {...oidcConfig}>
-                <SyncWithDB>
-                    <HashRouter>
+            <HashRouter>
+                <AuthProvider>
+                    <SyncWithDB>
                         <ScrollRestoration />
                         <Pullable
                             spinnerColor={dark ? '#fff' : '#000'}
@@ -76,9 +59,9 @@ export default () => {
                         >
                             <Routes />
                         </Pullable>
-                    </HashRouter>
-                </SyncWithDB>
-            </AuthProvider>
+                    </SyncWithDB>
+                </AuthProvider>
+            </HashRouter>
             <ZoomControl />
         </QueryClientProvider>
     );

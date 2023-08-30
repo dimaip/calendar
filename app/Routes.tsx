@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Route, Switch, Redirect, useHistory, useParams } from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory, useParams, useLocation } from 'react-router-dom';
 import Main from 'containers/Main/Main';
 import NotFound from 'components/NotFound/NotFound';
 import Readings from 'containers/Readings/Readings';
@@ -22,6 +22,8 @@ import isParallelState from 'state/isParallel';
 import { Promo } from 'components/Promo/Promo';
 import { Hymns } from 'containers/Hymns/Hymns';
 import { Hymn } from 'containers/Hymns/Hymn';
+import Profile from 'containers/Profile/Profile';
+import Loader from 'components/Loader/Loader';
 
 import checkVersion from './checkVersion';
 
@@ -86,6 +88,14 @@ export default () => {
     });
     const isParallel = useRecoilValue(isParallelState);
     const theme = getTheme();
+
+    const query = new URLSearchParams(window.location.search);
+    const code = query.get('code');
+
+    if (code) {
+        return <Loader />;
+    }
+
     return (
         <LangContext.Provider value={langStateValue}>
             <ThemeProvider theme={theme}>
@@ -118,6 +128,9 @@ export default () => {
                         </Route>
                         <Route exact path="/hymns">
                             <Hymns />
+                        </Route>
+                        <Route exact path="/profile">
+                            <Profile />
                         </Route>
                         <Route path="/date/:date">
                             <DateRoutes />
