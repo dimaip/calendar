@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         redirectUri: process.env.PUBLIC_URL,
         autoSignIn: false,
         automaticSilentRenew: true,
-        scope: 'openid profile email urn:zitadel:iam:user:metadata urn:zitadel:iam:org:id:201235384292605954',
+        scope: 'openid profile email urn:zitadel:iam:user:metadata urn:zitadel:iam:org:id:229787051975770138',
         userStore: new WebStorageStateStore({
             store: window.localStorage,
         }),
