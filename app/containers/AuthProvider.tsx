@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             history.replace('/profile');
         },
         authority: process.env.Z_URL,
-        clientId: '229788176636510234@pb',
+        clientId: '229793417436135450@pb',
         responseType: 'code',
         redirectUri: process.env.PUBLIC_URL,
         autoSignIn: false,
