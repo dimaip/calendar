@@ -13,15 +13,15 @@ import { SectionLayout } from 'components/SectionLayout/SectionLayout';
 import { TroparionFavs } from 'containers/Main/TroparionFavs';
 
 import Ending from '../Shared/Ending/Ending';
+import Kondacs from '../Shared/Kondacs/Kondacs';
+import Troparions from '../Shared/Troparions/Troparions';
 
 import Prazdnichnaja from './Prazdnichnaja.mdx';
 import PassionFriday from './PassionFriday.mdx';
 import PassionSaturday from './PassionSaturday.mdx';
 import Lent from './Lent.mdx';
-import Kondacs from '../Shared/Kondacs/Kondacs';
-import Troparions from '../Shared/Troparions/Troparions';
-import EasterZautrenia from './EasterZautrenia.mdx'
-import EasterZautreniaObihod from './EasterZautreniaObihod.mdx'
+import EasterZautrenia from './EasterZautrenia.mdx';
+import EasterZautreniaObihod from './EasterZautreniaObihod.mdx';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -88,7 +88,12 @@ const Matins = ({ date, obihod }) => {
     const { feastType } = getFeastInfo(dateObj);
 
     const philaret = isDate(12, 2);
-    const isHoliday = dayOfWeek === 0 || feastType === 'great' || feastType === '12' || philaret;
+    const isHoliday =
+        (dayOfWeek === 6 && day?.fastName !== 'Великий пост') ||
+        dayOfWeek === 0 ||
+        feastType === 'great' ||
+        feastType === '12' ||
+        philaret;
 
     const isAnnunciation = day?.title === 'Благовещение Богородицы';
 
@@ -102,9 +107,13 @@ const Matins = ({ date, obihod }) => {
     const lentSubbota5 = isEasterOffsetRange(-2 * 7 - 1);
     const lazarevaSubbota = isEasterOffsetRange(-1 * 7 - 1);
     const vospominanijaUsopshih = vselenskayaRoditelskayaSubbota || lentSubbotas || troitskayaRoditelskayaSubbota;
-    const dmitrievskajaSubbota = dayOfWeek === 6 && new Date(y, 10, 1).getTime() <= dateObj.getTime() && dateObj.getTime() <= new Date(y, 10, 8).getTime()
+    const dmitrievskajaSubbota =
+        dayOfWeek === 6 &&
+        new Date(y, 10, 1).getTime() <= dateObj.getTime() &&
+        dateObj.getTime() <= new Date(y, 10, 8).getTime();
     const greatLent = day?.fastName === 'Великий пост';
     const isFast =
+        !(!greatLent && dayOfWeek === 6) &&
         !lazarevaSubbota &&
         !lentSubbota5 &&
         !isHoliday &&
