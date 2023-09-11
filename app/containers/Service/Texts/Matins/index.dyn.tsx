@@ -88,12 +88,7 @@ const Matins = ({ date, obihod }) => {
     const { feastType } = getFeastInfo(dateObj);
 
     const philaret = isDate(12, 2);
-    const isHoliday =
-        (dayOfWeek === 6 && day?.fastName !== 'Великий пост') ||
-        dayOfWeek === 0 ||
-        feastType === 'great' ||
-        feastType === '12' ||
-        philaret;
+    const isHoliday = dayOfWeek === 0 || feastType === 'great' || feastType === '12' || philaret;
 
     const isAnnunciation = day?.title === 'Благовещение Богородицы';
 
