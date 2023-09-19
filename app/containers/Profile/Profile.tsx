@@ -12,7 +12,7 @@ import { useHistory } from 'react-router-dom';
 const Inner = () => {
     const auth = useAuth();
     const profile = auth.userData?.profile;
-    const history = useHistory()
+    const history = useHistory();
     if (auth.isLoading) {
         return <Loader />;
     }
@@ -28,20 +28,22 @@ const Inner = () => {
                 height: calc(100vh - 110px);
             `}
         >
-            <SectionHeading>Здравствуйте, {profile.given_name}!</SectionHeading>
+            <SectionHeading>Привет, {profile.given_name}!</SectionHeading>
             <div
                 className={css`
                     flex-grow: 1;
                 `}
             >
-                Если вы смените устройство, вы всегда можете сохранить ваши личные (и соборные!) настройки, если зайдете
-                в аккаунт: избранные песнопения, молитвенные списки и др.
+                Если вы смените устройство, вы всегда сможете сохранить ваши личные (и соборные!) настройки. Например,
+                избранные песнопения, молитвенные списки и др. Для этого нужно будет просто войти в аккаунт на новом
+                устройстве!
             </div>
             <ButtonBox
                 title="Выйти"
                 onClick={() => {
                     void auth.signOut();
-                    history.replace('/')
+                    window.location.href =
+                        'https://z.molitva.app/oidc/v1/end_session?post_logout_redirect_uri=https%3A%2F%2Fmolitva.app';
                 }}
                 className={css`
                     border-radius: 6px;
