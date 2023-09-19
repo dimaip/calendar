@@ -11,9 +11,9 @@ import { useHistory } from 'react-router-dom';
 
 const Inner = () => {
     const auth = useAuth();
+    const [signingOut, setSigningOut] = useState(false);
     const profile = auth.userData?.profile;
-    const history = useHistory();
-    if (auth.isLoading) {
+    if (signingOut || auth.isLoading) {
         return <Loader />;
     }
     if (!profile) {
@@ -41,6 +41,7 @@ const Inner = () => {
             <ButtonBox
                 title="Выйти"
                 onClick={() => {
+                    setSigningOut(true);
                     void auth.signOut();
                     window.location.href =
                         'https://z.molitva.app/oidc/v1/end_session?post_logout_redirect_uri=https%3A%2F%2Fmolitva.app';
