@@ -7,7 +7,6 @@ import { useAuth } from 'oidc-react';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import BurgerMenu from 'containers/Main/BurgerMenu';
 import SectionHeading from 'containers/Main/SectionHeading';
-import { useHistory } from 'react-router-dom';
 
 const Inner = () => {
     const auth = useAuth();
@@ -44,7 +43,7 @@ const Inner = () => {
                     setSigningOut(true);
                     void auth.signOut();
                     window.location.href =
-                        'https://z.molitva.app/oidc/v1/end_session?post_logout_redirect_uri=https%3A%2F%2Fmolitva.app';
+                        'https://z.molitva.app/oidc/v1/end_session?post_logout_redirect_uri=https%3A%2F%2Fcalendar-git-auth-dimaip.vercel.app%2F';
                 }}
                 className={css`
                     border-radius: 6px;
