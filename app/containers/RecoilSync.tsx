@@ -68,7 +68,7 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
                             localKeys
                                 .filter((key) => !serverKeys.includes(key))
                                 .forEach((key) => {
-                                    const value = localKeys[key];
+                                    const value = localState[key];
                                     console.debug('Uploading settings to the server', key, value)
                                     void fetch(`${process.env.API_HOST}/setSetting`, {
                                         headers: { Authorization: `Bearer ${token}` },
