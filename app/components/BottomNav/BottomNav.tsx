@@ -7,7 +7,7 @@ import Bible from 'components/svgs/Bible';
 import Prayer from 'components/svgs/Prayer';
 
 const BottomNav = ({ active }) => {
-    const { date } = useParams();
+    const { date = new Date().toISOString().slice(0, 10) } = useParams();
     const theme = useTheme();
 
     const itemClass = css`

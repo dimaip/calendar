@@ -5,7 +5,7 @@ import { persistAtom } from './persistAtom';
 const zoomState = atom({
     key: 'zoomState',
     default: 1,
-    effects_UNSTABLE: [persistAtom],
+    effects: [persistAtom(1)],
 });
 
 export default zoomState;

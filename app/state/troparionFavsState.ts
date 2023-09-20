@@ -5,7 +5,7 @@ import { persistAtom } from './persistAtom';
 const troparionFavsState = atom<string[]>({
     key: 'troparionFavs',
     default: [],
-    effects_UNSTABLE: [persistAtom],
+    effects: [persistAtom([])],
 });
 
 export default troparionFavsState;

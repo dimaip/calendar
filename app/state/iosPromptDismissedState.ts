@@ -5,7 +5,7 @@ import { persistAtom } from './persistAtom';
 const iosPromptDismissedState = atom({
     key: 'iosPromptDismissed',
     default: null,
-    effects_UNSTABLE: [persistAtom],
+    effects: [persistAtom(null)],
 });
 
 export default iosPromptDismissedState;

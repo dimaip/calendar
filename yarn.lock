@@ -2504,6 +2504,11 @@
     "@nodelib/fs.scandir" "2.1.4"
     fastq "^1.6.0"
 
+"@recoiljs/refine@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@recoiljs/refine/-/refine-0.1.1.tgz#282a1cc603bac7db08eea571bbee757f9cf7b55c"
+  integrity sha512-ry02rHswJePYkH1o8K99qL4O6TBntF9/g7W5wXVwaOUrIJEZUGfl/I3+btPXbUgyyEZvNs5xcwvOw13AufmFQw==
+
 "@resvg/resvg-js-android-arm-eabi@2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@resvg/resvg-js-android-arm-eabi/-/resvg-js-android-arm-eabi-2.4.1.tgz#49dc9722f95096f8aff70186deae8e148d60dce5"
@@ -4536,6 +4541,11 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
+
+crypto-js@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.1.1.tgz#9e485bcf03521041bd85844786b83fb7619736cf"
+  integrity sha512-o2JlM7ydqd3Qk9CA0L4NL6mTzU2sdx96a+oOfPu8Mkl/PK51vSyoi8/rQ8NknZtk44vq15lmhAj9CIAGwgeWKw==
 
 crypto-random-string@^2.0.0:
   version "2.0.0"
@@ -7172,6 +7182,11 @@ jws@^4.0.0:
     jwa "^2.0.0"
     safe-buffer "^5.0.1"
 
+jwt-decode@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
+  integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
+
 keycode@^2.1.7:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.2.0.tgz#3d0af56dc7b8b8e5cba8d0a97f107204eec22b04"
@@ -8377,6 +8392,21 @@ object.values@^1.1.1:
     es-abstract "^1.18.0-next.1"
     has "^1.0.3"
 
+oidc-client-ts@^2.0.5:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/oidc-client-ts/-/oidc-client-ts-2.2.1.tgz#aa397119db54952acd08efe04bac4eff9a9169db"
+  integrity sha512-g/W+DsUVeHZ8A7xUSTeK4bI6BNs9ROtMiiOOo+0M6IiTHxueJ757GD8e/8nPBL+k/o6bkfM5mWg4cZcSI8Iosw==
+  dependencies:
+    crypto-js "^4.1.1"
+    jwt-decode "^3.1.2"
+
+oidc-react@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/oidc-react/-/oidc-react-2.1.0.tgz#5348509e461dbf088e2dbb7b05435dfa1cc5927f"
+  integrity sha512-o0/pk7eNYGzNJI8+eUSP8wJjA0wfWXzZSt4PdWx9BVmcAmQY/ptVwz8ZKwaY2zztpzRqNaGF1GcJmP7kbKmdKQ==
+  dependencies:
+    oidc-client-ts "^2.0.5"
+
 omggif@^1.0.10, omggif@^1.0.9:
   version "1.0.10"
   resolved "https://registry.yarnpkg.com/omggif/-/omggif-1.0.10.tgz#ddaaf90d4a42f532e9e7cb3a95ecdd47f17c7b19"
@@ -9318,15 +9348,23 @@ rechoir@^0.7.0:
   dependencies:
     resolve "^1.9.0"
 
-recoil-persist@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/recoil-persist/-/recoil-persist-3.0.0.tgz#30f8fb5d62a4a0e3d660b07dcb75cbb4a0bcab24"
-  integrity sha512-ZQB/U26uLdm2bDPh9HR44WamHz30XUD0cqAUnqSDuIKRTHsyjqccJ3ThXfoFYnG9QpOUcPSve6ElHseVll2g+w==
+recoil-persist@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/recoil-persist/-/recoil-persist-5.1.0.tgz#c4232fe04f2e4b6afcc815baff56f2521f6dcde1"
+  integrity sha512-sew4k3uBVJjRWKCSFuBw07Y1p1pBOb0UxLJPxn4G2bX/9xNj+r2xlqYy/BRfyofR/ANfqBU04MIvulppU4ZC0w==
 
-recoil@^0.4.1:
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.4.1.tgz#1cb2171bc98d41361507131a059d7c3525d8c4fe"
-  integrity sha512-vp6KPwlHOjJ4bJofmdDchmgI9ilMTCoUisK8/WYLl8dThH7e7KmtZttiLgvDb2Em99dUfTEsk8vT8L1nUMgqXQ==
+recoil-sync@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/recoil-sync/-/recoil-sync-0.2.0.tgz#915c219ae6e73ca6b973ce73c6c773d5a4273210"
+  integrity sha512-ZYZM1C4LAhGr3EeMMI5MwT4eaEqsr+ddjB4EwdgN8HXXLmE7P5FVCdFHV3HJtMzxR3Y8sOmJDfN1IPrezwKoRg==
+  dependencies:
+    "@recoiljs/refine" "^0.1.1"
+    transit-js "^0.8.874"
+
+recoil@^0.7.7:
+  version "0.7.7"
+  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.7.7.tgz#c5f2c843224384c9c09e4a62c060fb4c1454dc8e"
+  integrity sha512-8Og5KPQW9LwC577Vc7Ug2P0vQshkv1y3zG3tSSkWMqkWSwHmE+by06L8JtnGocjW6gcCvfwB3YtrJG6/tWivNQ==
   dependencies:
     hamt_plus "1.0.2"
 
@@ -10501,6 +10539,11 @@ tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
   integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
+
+transit-js@^0.8.874:
+  version "0.8.874"
+  resolved "https://registry.yarnpkg.com/transit-js/-/transit-js-0.8.874.tgz#37b27d6632bd796567c359220297c862e3988bbb"
+  integrity sha512-IDJJGKRzUbJHmN0P15HBBa05nbKor3r2MmG6aSt0UxXIlJZZKcddTk67/U7WyAeW9Hv/VYI02IqLzolsC4sbPA==
 
 trim-lines@^3.0.0:
   version "3.0.1"

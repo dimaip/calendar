@@ -21,6 +21,7 @@ import Worker from './precache.worker.js';
 import './redirectToHome';
 import { isCapacitor } from 'utils/deviceInfo';
 import precache from 'precache.ts';
+import { SyncWithDB } from 'containers/RecoilSync';
 
 window.APP_LOADED = true;
 const isProd = process.env.NODE_ENV === 'production';

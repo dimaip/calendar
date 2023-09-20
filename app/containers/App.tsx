@@ -14,6 +14,9 @@ import isDarkMode from 'utils/isDarkMode';
 
 import Routes from '../Routes';
 
+import { SyncWithDB } from './RecoilSync';
+import { AuthProvider } from './AuthProvider';
+
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
@@ -39,21 +42,25 @@ export default () => {
     return (
         <QueryClientProvider client={queryClient}>
             <HashRouter>
-                <ScrollRestoration />
-                <Pullable
-                    spinnerColor={dark ? '#fff' : '#000'}
-                    onRefresh={async () => {
-                        const newVersion = await checkVersion();
-                        if (newVersion) {
-                            setPendingUpdate(newVersion);
-                        }
-                        await precache(true);
-                        await queryClient.refetchQueries();
-                    }}
-                    shouldPullToRefresh={() => window.scrollY <= 0 && !window.pullDownDisabled}
-                >
-                    <Routes />
-                </Pullable>
+                <AuthProvider>
+                    <SyncWithDB>
+                        <ScrollRestoration />
+                        <Pullable
+                            spinnerColor={dark ? '#fff' : '#000'}
+                            onRefresh={async () => {
+                                const newVersion = await checkVersion();
+                                if (newVersion) {
+                                    setPendingUpdate(newVersion);
+                                }
+                                await precache(true);
+                                await queryClient.refetchQueries();
+                            }}
+                            shouldPullToRefresh={() => window.scrollY <= 0 && !window.pullDownDisabled}
+                        >
+                            <Routes />
+                        </Pullable>
+                    </SyncWithDB>
+                </AuthProvider>
             </HashRouter>
             <ZoomControl />
         </QueryClientProvider>

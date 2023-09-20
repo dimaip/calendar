@@ -1,11 +1,67 @@
 import React from 'react';
 import { css } from 'emotion';
+import { useAuth } from 'oidc-react';
+import { useTheme } from 'emotion-theming';
 import Button from 'components/Button/Button';
 import Burger from 'components/svgs/Burger';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
-import { useTheme } from 'emotion-theming';
+import QuestionIcon from 'components/svgs/QuestionIcon';
+import { useHistory } from 'react-router-dom';
+
+const UserIcon = () => {
+    const { userData } = useAuth();
+    const theme = useTheme();
+    const initials = userData?.profile.given_name
+        ? `${userData?.profile.given_name?.[0]}${userData?.profile?.family_name?.[0]}`
+        : 'U';
+
+    return (
+        <div
+            className={css`
+                padding: 5px;
+                font-size: 10px;
+                background-color: ${theme.colours.blue};
+                color: white;
+                border-radius: 50%;
+            `}
+        >
+            {initials}
+        </div>
+    );
+};
+
+const ProfileIcon = () => {
+    const history = useHistory();
+    const auth = useAuth();
+    const loggedIn = auth.userData?.profile;
+    return (
+        <Button
+            title={loggedIn ? 'Выйти' : 'Войти'}
+            onClick={() => {
+                history.push('/profile');
+            }}
+            className={css`
+                display: block;
+                padding: 8px !important;
+                z-index: 1;
+            `}
+        >
+            {loggedIn ? (
+                <UserIcon />
+            ) : (
+                <div
+                    className={css`
+                        margin-top: 4px;
+                    `}
+                >
+                    <QuestionIcon />
+                </div>
+            )}
+        </Button>
+    );
+};
 
 const Today = ({ date, setNewDate }) => {
     const theme = useTheme();
@@ -38,49 +94,52 @@ const Today = ({ date, setNewDate }) => {
     );
 };
 
-const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => (
-    <Header>
-        <div
-            className={css`
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-            `}
-        >
-            <div>
-                {setMenuShown && (
-                    <Button
-                        title="Меню"
-                        onClick={() => setMenuShown(!menuShown)}
-                        className={css`
-                            display: block;
-                            padding: 10px 18px;
-                            z-index: 1;
-                        `}
-                    >
-                        <Burger />
-                    </Button>
-                )}
-            </div>
+const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => {
+    return (
+        <Header>
             <div
                 className={css`
-                    z-index: 1;
                     display: flex;
+                    justify-content: space-between;
                     align-items: center;
-                    justify-content: center;
-                    height: 100%;
+                    width: 100%;
                 `}
             >
-                {setNewDate && (
-                    <>
-                        <Today date={date} setNewDate={setNewDate} />
-                        <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
-                    </>
-                )}
-                <DotsMenu />
+                <div>
+                    {setMenuShown && (
+                        <Button
+                            title="Меню"
+                            onClick={() => setMenuShown(!menuShown)}
+                            className={css`
+                                display: block;
+                                padding: 10px 18px;
+                                z-index: 1;
+                            `}
+                        >
+                            <Burger />
+                        </Button>
+                    )}
+                </div>
+                <div
+                    className={css`
+                        z-index: 1;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        height: 100%;
+                    `}
+                >
+                    {setNewDate && (
+                        <>
+                            <Today date={date} setNewDate={setNewDate} />
+                            <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
+                        </>
+                    )}
+                    <ProfileIcon />
+                    <DotsMenu />
+                </div>
             </div>
-        </div>
-    </Header>
-);
+        </Header>
+    );
+};
 export default HeaderMain;

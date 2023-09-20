@@ -47,6 +47,7 @@ export default {
             NODE_ENV: 'development',
             PUBLIC_URL: 'http://localhost:3000',
             API_HOST: 'http://localhost:9999',
+            Z_URL: 'https://z.molitva.app',
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
