@@ -42,8 +42,7 @@ const Inner = () => {
                 onClick={() => {
                     setSigningOut(true);
                     void auth.signOut();
-                    window.location.href =
-                        'https://z.molitva.app/oidc/v1/end_session?post_logout_redirect_uri=https%3A%2F%2Fcalendar-git-auth-dimaip.vercel.app%2F';
+                    window.location.href = `https://z.molitva.app/oidc/v1/end_session?id_token_hint=${auth.userData?.id_token}&post_logout_redirect_uri=https://molitva.app`;
                 }}
                 className={css`
                     border-radius: 6px;
