@@ -36,7 +36,6 @@ const ProfileIcon = () => {
     const history = useHistory();
     const auth = useAuth();
     const loggedIn = auth.userData?.profile;
-    return null;
     return (
         <Button
             title={loggedIn ? 'Выйти' : 'Войти'}
