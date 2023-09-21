@@ -25,6 +25,7 @@ const Inner = () => {
                 display: flex;
                 flex-direction: column;
                 height: calc(100vh - 110px);
+                padding: 0 12px;
             `}
         >
             <SectionHeading>Привет, {profile.given_name}!</SectionHeading>
