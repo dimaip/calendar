@@ -46,6 +46,7 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
                 diff.forEach((value, key) => {
                     setState(key, value);
                     if (token) {
+                        console.debug('Uploading a setting to the server', key, value);
                         void fetch(`${process.env.API_HOST}/setSetting`, {
                             headers: { Authorization: `Bearer ${token}` },
                             method: 'POST',
