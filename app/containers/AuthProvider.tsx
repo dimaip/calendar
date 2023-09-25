@@ -1,7 +1,22 @@
-import { AuthProvider as AuthProviderOriginal, AuthProviderProps } from 'oidc-react';
+import { AuthProvider as AuthProviderOriginal, AuthProviderProps, UserManager } from 'oidc-react';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { WebStorageStateStore } from 'oidc-client-ts';
+
+const clientId = '229793417436135450@pb';
+
+const userManager = new UserManager({
+    userStore: new WebStorageStateStore({ store: window.localStorage }),
+    authority: `${process.env.REACT_APP_KEYCLOAK_SERVER_URL}/realms/${process.env.REACT_APP_KEYCLOAK_REALM}`,
+    client_id: clientId,
+    redirect_uri: process.env.PUBLIC_URL || '',
+    silent_redirect_uri: process.env.PUBLIC_URL,
+    post_logout_redirect_uri: process.env.PUBLIC_URL,
+    response_type: 'code',
+    scope: 'openid',
+    loadUserInfo: true,
+    automaticSilentRenew: true,
+});
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const history = useHistory();
@@ -11,15 +26,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             history.replace('/profile');
         },
         authority: process.env.Z_URL,
-        clientId: '229793417436135450@pb',
+        clientId: clientId,
         responseType: 'code',
         redirectUri: process.env.PUBLIC_URL,
         autoSignIn: false,
         automaticSilentRenew: true,
         scope: 'openid profile email urn:zitadel:iam:user:metadata urn:zitadel:iam:org:id:229787051975770138',
-        userStore: new WebStorageStateStore({
-            store: window.localStorage,
-        }),
+        userManager,
     };
     return <AuthProviderOriginal {...oidcConfig}>{children}</AuthProviderOriginal>;
 };
