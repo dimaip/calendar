@@ -528,6 +528,17 @@ export const getFeastInfo = memoize(
             calendarColour = 'red';
         }
 
+        const palamaBegin = calculateEasterDate(y);
+        palamaBegin.setDate(6 * pascha.getDate() - 6);
+
+        if (isEasterOffsetRange(-7 * 6)) {
+            icon = 'triumph.svg';
+        }
+
+        if (isEasterOffsetRange(-7 * 5)) {
+            icon = 'palama.svg';
+        }
+
         const strastnayaBegin = calculateEasterDate(y);
         strastnayaBegin.setDate(pascha.getDate() - 6);
 
