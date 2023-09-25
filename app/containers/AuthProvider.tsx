@@ -7,7 +7,7 @@ const clientId = '229793417436135450@pb';
 
 const userManager = new UserManager({
     userStore: new WebStorageStateStore({ store: window.localStorage }),
-    authority: `${process.env.REACT_APP_KEYCLOAK_SERVER_URL}/realms/${process.env.REACT_APP_KEYCLOAK_REALM}`,
+    authority: process.env.Z_URL || '',
     client_id: clientId,
     redirect_uri: process.env.PUBLIC_URL || '',
     silent_redirect_uri: process.env.PUBLIC_URL,
