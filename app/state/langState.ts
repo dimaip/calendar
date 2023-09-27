@@ -12,11 +12,11 @@ const langState = atom({
     },
     effects_UNSTABLE: [
         persistAtom,
-        ({ onSet }) => {
-            onSet(() => {
-                restoreScroll();
-            });
-        },
+        // ({ onSet }) => {
+        //     onSet(() => {
+        //         restoreScroll();
+        //     });
+        // },
     ],
 });
 
