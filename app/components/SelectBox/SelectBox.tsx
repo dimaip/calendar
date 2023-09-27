@@ -4,7 +4,7 @@ import { useTheme } from 'emotion-theming';
 import { useSelect } from 'downshift';
 import Loader from 'components/Loader/Loader';
 
-const SelectBox = ({ className = '', items, value, onChange }) => {
+const SelectBox = React.memo(({ className = '', items, value, onChange }) => {
     const theme = useTheme();
     const selectedItem = items.find((i) => i.value === value) || items[0];
 
@@ -109,5 +109,5 @@ const SelectBox = ({ className = '', items, value, onChange }) => {
             </div>
         </div>
     );
-};
+});
 export default SelectBox;
