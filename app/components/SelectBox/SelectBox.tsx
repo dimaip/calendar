@@ -11,10 +11,12 @@ const SelectBox = React.memo(({ className = '', items, value, onChange }) => {
     const { isOpen, getToggleButtonProps, getMenuProps, highlightedIndex, getItemProps } = useSelect({
         selectedItem,
         items,
-        onSelectedItemChange: (i) => onChange(i.selectedItem.value),
+        onSelectedItemChange: (i) => {
+            setTimeout(() => onChange(i.selectedItem.value), 0);
+        },
         onIsOpenChange: (e) => {
             window.pullDownDisabled = e.isOpen;
-        }
+        },
     });
 
     return (
