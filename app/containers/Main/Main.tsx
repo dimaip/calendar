@@ -39,7 +39,7 @@ import EasterService from './EasterService';
 import Peace from './Peace';
 import Books from './Books';
 import { TroparionFavsHome } from './TroparionFavsHome';
-// import Oct30 from './Oct30';
+import Oct30 from './Oct30';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -159,7 +159,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                         <Sermons date={date} sermons={sermons} />
                                                     </>
                                                 )}
-                                                {/* <Oct30 /> */}
+                                                <Oct30 />
                                                 <Banner />
                                             </SolidSection>
                                         </div>

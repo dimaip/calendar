@@ -4,7 +4,7 @@ import TagManager from 'react-gtm-module';
 
 const Oct30 = (): JSX.Element => (
     <a
-        href="https://molitvapamyaty.ru/"
+        href="https://youtube.com/playlist?list=PLGAQ8REn_6HC3m0y-G8HZ1yP97rb0eWta&si=_pq6sHaO0R0tFhew"
         target="_blank"
         onClick={() =>
             TagManager.dataLayer({
