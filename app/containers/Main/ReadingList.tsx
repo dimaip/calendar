@@ -7,6 +7,7 @@ import { css } from 'emotion';
 
 import ReadingsForService from './ReadingsForService';
 import Canon from './Canon';
+import Oct30 from './Oct30';
 // import EasterService from './EasterService';
 
 const ReadingList = ({ readings, brother = false, date }) => {
@@ -34,6 +35,9 @@ const ReadingList = ({ readings, brother = false, date }) => {
                     <Canon />
                 </div>
             )}
+            <div style={{ marginLeft: 8, marginRight: 8, marginTop: 8 }}>
+                <Oct30 />
+            </div>
         </div>
     );
 };
