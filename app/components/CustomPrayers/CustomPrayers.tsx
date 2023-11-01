@@ -68,7 +68,7 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                                     {customPrayer.text}
                                 </div>
                             ) : (
-                                <MdxLoader src={`BratMolitvoslov/${prayerId}`} lang="ru" />
+                                <MdxLoader src={`BratMolitvoslov/${prayerId}`} lang="ru" isCustomPrayer />
                             )}
                         </Suspense>
                     </Section>

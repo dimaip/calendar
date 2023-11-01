@@ -2,15 +2,13 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { css } from 'emotion';
 import Button from 'components/Button/Button';
 import SolidSection from 'components/SolidSection/SolidSection';
-import Cross from 'components/svgs/Cross';
 import { useTheme } from 'emotion-theming';
 import { useRecoilState } from 'recoil';
 import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
 import disabledPrayersState from 'state/disabledPrayersState';
-import { Hidden } from '@material-ui/core';
 import Visibility from 'components/svgs/Visibility';
 import VisibilityOff from 'components/svgs/VisibilityOff';
-import PlusIcon from 'components/svgs/PlusIcon';
+import CustomPrayers from 'components/CustomPrayers/CustomPrayers';
 
 import { LangContext } from '../LangContext';
 
@@ -46,7 +44,7 @@ const MdxLoader = (props) => {
     const { lang, langA, langB } = useContext(LangContext);
     const nestingLevel = useContext(MdxLoaderContext);
     const langEffective = props.langOverride || lang;
-    const { src } = props;
+    const { src, isCustomPrayer } = props;
     const prayerId = `service-id-${src}`;
     const isDisabled = disabledPrayers.includes(prayerId);
     if (langEffective === 'parallel') {
@@ -83,7 +81,7 @@ const MdxLoader = (props) => {
         );
     }
 
-    if (nestingLevel === 0 && scriptEditorIsActive) {
+    if (nestingLevel === 0 && scriptEditorIsActive && !isCustomPrayer) {
         return (
             <>
                 <SolidSection
@@ -112,6 +110,7 @@ const MdxLoader = (props) => {
                             right: 0px;
                             font-size: 14px;
                             margin-left: 0px;
+                            z-index: 1;
                         `}
                     >
                         {isDisabled ? <Visibility /> : <VisibilityOff />}
@@ -132,11 +131,7 @@ const MdxLoader = (props) => {
                         </MdxLoaderContext.Provider>
                     </div>
                 </SolidSection>
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button onClick={() => {}}>
-                        <PlusIcon />
-                    </Button>
-                </div>
+                <CustomPrayers type={prayerId} />
             </>
         );
     }

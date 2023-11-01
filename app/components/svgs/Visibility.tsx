@@ -42,7 +42,7 @@ const Visibility = () => {
                 strokeWidth={0}
             />
             <path
-                fill="#ae841a"
+                fill={theme.colours.primary}
                 fill-rule="evenodd"
                 stroke-width="0"
                 d="M14.39 7.85a2.923 2.923 0 0 1-2.78 3.82c-1.61 0-2.92-1.31-2.92-2.92S10 5.83 11.61 5.83c.21 0 .42.02.62.07a1.451 1.451 0 1 0 2.15 1.95Z"

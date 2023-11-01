@@ -73,6 +73,7 @@ const SelectBox = React.memo(({ className = '', items, value, onChange }) => {
                             @media (max-width: 450px) {
                                 left: 0;
                             }
+                            z-index: 2;
                         `}
                     >
                         {items.map((item, index) => (
