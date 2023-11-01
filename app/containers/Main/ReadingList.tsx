@@ -35,9 +35,11 @@ const ReadingList = ({ readings, brother = false, date }) => {
                     <Canon />
                 </div>
             )}
-            <div style={{ marginLeft: 8, marginRight: 8, marginTop: 8 }}>
-                <Oct30 />
-            </div>
+            {!brother && (
+                <div style={{ marginLeft: 8, marginRight: 8, marginTop: 8 }}>
+                    <Oct30 />
+                </div>
+            )}
         </div>
     );
 };
