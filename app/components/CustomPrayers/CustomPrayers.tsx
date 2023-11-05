@@ -14,6 +14,7 @@ import { bratMolitvoslovPrayers } from 'containers/Service/Texts/Texts';
 import customPrayerInputState from 'state/customPrayerInputState';
 
 import CustomPrayerInput from './CustomPrayerInput';
+import PlusIcon from 'components/svgs/PlusIcon';
 
 const Section = ({ children }: ReactNode): JSX.Element => {
     const theme = useTheme();
@@ -41,7 +42,7 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
     return (
         <div style={{ marginTop: 12, marginBottom: 12 }}>
             {extraPrayers.map((prayerId) => {
-                const isCustomPrayer = /^\d+$/.test(prayerId)
+                const isCustomPrayer = /^\d+$/.test(prayerId);
                 const customPrayer = isCustomPrayer && customPrayers?.find((i) => String(i.id) === String(prayerId));
                 if (isCustomPrayer && !customPrayer) {
                     return null;
@@ -79,7 +80,20 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                     width: 100%;
                 `}
                 items={[
-                    { value: '', label: 'Добавить молитву' },
+                    {
+                        value: '',
+                        label: (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <div style={{ marginRight: 6 }}>Добавить молитву</div> <PlusIcon width={16} />
+                            </div>
+                        ),
+                    },
                     ...bratMolitvoslovPrayers,
                     ...customPrayers.map((p) => ({
                         value: p.id,
