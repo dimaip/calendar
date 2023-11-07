@@ -35,11 +35,10 @@ import Saints from './Saints';
 import HeadingBar from './HeadingBar';
 import ReadingList from './ReadingList';
 import Banner from './Banner';
-import EasterService from './EasterService';
+// import EasterService from './EasterService';
 import Peace from './Peace';
 import Books from './Books';
 import { TroparionFavsHome } from './TroparionFavsHome';
-// import Oct30 from './Oct30';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
