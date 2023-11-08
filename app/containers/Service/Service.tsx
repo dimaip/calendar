@@ -9,6 +9,7 @@ import Loader from 'components/Loader/Loader';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import { Note } from 'components/Note/Note';
+import ScriptVersionSelector from 'components/ScriptVersionSelector/ScriptVersionSelector';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
@@ -16,6 +17,7 @@ import useServices from './Texts/Texts';
 import MDXProvider from './MDXProvider';
 import ParallelLanguageBar from './ParallelLanguageBar';
 import { LangContext } from './LangContext';
+import { ServiceContext } from './ServiceContext';
 const reloadOnFailedImport = (e) => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
     Sentry.captureException?.(e);
@@ -106,6 +108,7 @@ const Service = () => {
             )}
             {service?.lang && <LanguageSwitcher />}
             {!service?.hideTOC && <TOCSwitcher service={service} lang={langState.lang} />}
+            {service?.scriptEditor && <ScriptVersionSelector serviceId={serviceId} />}
         </>
     );
 
@@ -113,54 +116,56 @@ const Service = () => {
     const effectiveLangState = service?.lang ? langState : { ...langState, lang: 'ru' };
 
     return (
-        <LangContext.Provider value={effectiveLangState}>
-            <LayoutInner left={left} paddedContent={false}>
-                <ParallelLanguageBar />
-                <Zoom>
-                    <>
-                        <div
-                            className={css`
-                                margin-left: 12px;
-                                margin-right: 12px;
-                                margin-bottom: 24px;
-                            `}
-                        >
-                            {service?.warn && (
-                                <Note>
-                                    Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда
-                                    ошибается. За наиболее точной информацией обращайтесь к{' '}
-                                    <a
-                                        className={css`
-                                            text-decoration: underline;
-                                        `}
-                                        href={`http://www.patriarchia.ru/bu/${date}`}
-                                        target="_blank"
-                                    >
-                                        богослужебным указаниям.
-                                    </a>{' '}
-                                    Если вы обнаружили ошибку, пожалуйста,{' '}
-                                    <a
-                                        className={css`
-                                            text-decoration: underline;
-                                        `}
-                                        href="mailto:pb@psmb.ru"
-                                        target="_blank"
-                                    >
-                                        напишите нам
-                                    </a>
-                                </Note>
-                            )}
+        <ServiceContext.Provider value={{ serviceId }}>
+            <LangContext.Provider value={effectiveLangState}>
+                <LayoutInner left={left} paddedContent={false}>
+                    <ParallelLanguageBar />
+                    <Zoom>
+                        <>
+                            <div
+                                className={css`
+                                    margin-left: 12px;
+                                    margin-right: 12px;
+                                    margin-bottom: 24px;
+                                `}
+                            >
+                                {service?.warn && (
+                                    <Note>
+                                        Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда
+                                        ошибается. За наиболее точной информацией обращайтесь к{' '}
+                                        <a
+                                            className={css`
+                                                text-decoration: underline;
+                                            `}
+                                            href={`http://www.patriarchia.ru/bu/${date}`}
+                                            target="_blank"
+                                        >
+                                            богослужебным указаниям.
+                                        </a>{' '}
+                                        Если вы обнаружили ошибку, пожалуйста,{' '}
+                                        <a
+                                            className={css`
+                                                text-decoration: underline;
+                                            `}
+                                            href="mailto:pb@psmb.ru"
+                                            target="_blank"
+                                        >
+                                            напишите нам
+                                        </a>
+                                    </Note>
+                                )}
 
-                            <MDXProvider>
-                                <Suspense fallback={<Loader />}>
-                                    {TextComponent && <TextComponent date={date} lang={langState.lang} />}
-                                </Suspense>
-                            </MDXProvider>
-                        </div>
-                    </>
-                </Zoom>
-            </LayoutInner>
-        </LangContext.Provider>
+                                <MDXProvider>
+                                    <Suspense fallback={<Loader />}>
+                                        {TextComponent && <TextComponent date={date} lang={langState.lang} />}
+                                    </Suspense>
+                                </MDXProvider>
+                            </div>
+                        </>
+                    </Zoom>
+                </LayoutInner>
+            </LangContext.Provider>
+        </ServiceContext.Provider>
     );
 };
 export default Service;

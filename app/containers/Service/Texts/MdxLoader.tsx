@@ -3,7 +3,7 @@ import { css } from 'emotion';
 import Button from 'components/Button/Button';
 import SolidSection from 'components/SolidSection/SolidSection';
 import { useTheme } from 'emotion-theming';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
 import disabledPrayersState from 'state/disabledPrayersState';
 import Visibility from 'components/svgs/Visibility';
@@ -11,6 +11,8 @@ import VisibilityOff from 'components/svgs/VisibilityOff';
 import CustomPrayers from 'components/CustomPrayers/CustomPrayers';
 
 import { LangContext } from '../LangContext';
+import { ServiceContext } from '../ServiceContext';
+import currentScriptVersionState from 'state/currentScriptVersion';
 
 export const MdxLoaderContext = createContext(0);
 
@@ -39,14 +41,17 @@ const LazyComponent = (props) => {
 
 const MdxLoader = (props) => {
     const theme = useTheme();
+    const serviceContext = useContext(ServiceContext);
+    const serviceId = serviceContext?.serviceId;
+    const currentScriptVersion = useRecoilValue<string | null>(currentScriptVersionState(serviceId));
     const [scriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
     const [disabledPrayers, setDisabledPrayers] = useRecoilState(disabledPrayersState);
     const { lang, langA, langB } = useContext(LangContext);
     const nestingLevel = useContext(MdxLoaderContext);
     const langEffective = props.langOverride || lang;
     const { src, isCustomPrayer } = props;
-    const prayerId = `service-id-${src}`;
-    const isDisabled = disabledPrayers.includes(prayerId);
+    const prayerId = currentScriptVersion ? `${serviceId}-${currentScriptVersion}-${src}` : null;
+    const isDisabled = currentScriptVersion && disabledPrayers.includes(prayerId);
     if (langEffective === 'parallel') {
         const langStateA = { lang: langA, langA, langB };
         const langStateB = { lang: langB, langA, langB };
@@ -81,7 +86,7 @@ const MdxLoader = (props) => {
         );
     }
 
-    if (nestingLevel === 0 && scriptEditorIsActive && !isCustomPrayer) {
+    if (currentScriptVersion && nestingLevel === 0 && scriptEditorIsActive && !isCustomPrayer) {
         return (
             <>
                 <SolidSection

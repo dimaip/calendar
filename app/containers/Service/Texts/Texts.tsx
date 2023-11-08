@@ -220,6 +220,7 @@ const useServices = (date, readings = {}) => {
             skipRedirect: true,
             group: 'Домашняя молитва',
             warn: false,
+            scriptEditor: true,
         },
         {
             title: 'Вечерня братским чином',
@@ -230,6 +231,7 @@ const useServices = (date, readings = {}) => {
             skipRedirect: true,
             group: 'Домашняя молитва',
             warn: false,
+            scriptEditor: true,
         },
         {
             title: 'Покаянный канон',
