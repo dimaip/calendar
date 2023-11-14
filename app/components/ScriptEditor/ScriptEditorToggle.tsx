@@ -54,6 +54,8 @@ const ScriptEditorToggle = ({ serviceId }) => {
                         line-height: 0;
                         margin-top: -6px;
                         padding: 10px;
+                        position: absolute;
+                        right: 0;
                     `}
                     onClick={() => setScriptEditorIsActive(false)}
                 >
