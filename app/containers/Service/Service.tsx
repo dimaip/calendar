@@ -18,6 +18,7 @@ import MDXProvider from './MDXProvider';
 import ParallelLanguageBar from './ParallelLanguageBar';
 import { LangContext } from './LangContext';
 import { ServiceContext } from './ServiceContext';
+import ScriptEditorToggle from 'components/ScriptEditor/ScriptEditorToggle';
 const reloadOnFailedImport = (e) => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
     Sentry.captureException?.(e);
@@ -119,6 +120,7 @@ const Service = () => {
         <ServiceContext.Provider value={{ serviceId }}>
             <LangContext.Provider value={effectiveLangState}>
                 <LayoutInner left={left} paddedContent={false}>
+                    <ScriptEditorToggle serviceId={serviceId} />
                     <ParallelLanguageBar />
                     <Zoom>
                         <>

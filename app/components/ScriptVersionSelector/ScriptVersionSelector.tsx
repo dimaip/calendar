@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
-import Cross from 'components/svgs/Cross';
 import Button from 'components/Button/Button';
 import Drawer from 'components/Drawer/Drawer';
 import Input from 'components/Input/Input';
@@ -10,8 +9,11 @@ import { useRecoilState } from 'recoil';
 import scriptVersionsState from 'state/scriptVersionsState';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import currentScriptVersionState from 'state/currentScriptVersion';
-import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 import PlusIcon from 'components/svgs/PlusIcon';
+import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
+import TrashIcon from 'components/svgs/TrashIcon';
+import SectionHeading from 'containers/Main/SectionHeading';
+import Pencil from 'components/svgs/Pencil';
 
 const ScriptVersionSelector = ({ serviceId }) => {
     const theme = useTheme();
@@ -24,15 +26,16 @@ const ScriptVersionSelector = ({ serviceId }) => {
     );
     const currentScriptVersionName = scriptVersions.find((v) => v.id === currentScriptVersion)?.name || 'Исходный чин';
     const [newVersionName, setNewVersionName] = useState('');
-
-    const { toggleOpen } = useContext(DotsMenuContext);
+    const [_, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
 
     const addNewVersion = () => {
         if (newVersionName) {
             const version = `v${new Date().getTime()}`;
-            setScriptVersions([...(scriptVersions || []), { name: newVersionName, id: new Date().getTime() }]);
+            setScriptVersions([...(scriptVersions || []), { name: newVersionName, id: version }]);
             setCurrentScriptVersion(version);
             setNewVersionName('');
+            setScriptEditorIsActive(true);
+            setScriptVersionSelectorIsActive(false);
         } else {
             alert('Введите название чина');
         }
@@ -41,13 +44,25 @@ const ScriptVersionSelector = ({ serviceId }) => {
     return scriptVersionSelectorIsActive ? (
         <Drawer onClose={() => setScriptVersionSelectorIsActive(false)}>
             <>
+                <SectionHeading
+                    className={css`
+                        text-align: center;
+                        padding-top: 0px;
+                        padding-bottom: 24px;
+                    `}
+                >
+                    Чинопоследования
+                </SectionHeading>
                 <ButtonBox
                     onClick={() => {
                         setCurrentScriptVersion(null);
                         setScriptVersionSelectorIsActive(false);
                     }}
+                    className={css`
+                        border: ${null === currentScriptVersion ? `2px solid ${theme.colours.primary}` : undefined};
+                    `}
                 >
-                    Исходный чин
+                    Исходное чинопоследование
                 </ButtonBox>
                 {scriptVersions.map((version) => (
                     <ButtonBox
@@ -55,9 +70,63 @@ const ScriptVersionSelector = ({ serviceId }) => {
                         onClick={() => {
                             setCurrentScriptVersion(version.id);
                             setScriptVersionSelectorIsActive(false);
+                            setScriptEditorIsActive(false);
                         }}
+                        className={css`
+                            border: ${version.id === currentScriptVersion
+                                ? `2px solid ${theme.colours.primary}`
+                                : undefined};
+                        `}
                     >
-                        {version.name}
+                        <div
+                            className={css`
+                                display: flex;
+                            `}
+                        >
+                            <div
+                                className={css`
+                                    flex-grow: 1;
+                                `}
+                            >
+                                {version.name}
+                            </div>
+
+                            <div
+                                className={css`
+                                    flex-grow: 0;
+                                    flex-shrink: 0;
+                                    margin-right: 15px;
+                                `}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+
+                                    setCurrentScriptVersion(version.id);
+                                    setScriptVersionSelectorIsActive(false);
+                                    setScriptEditorIsActive(true);
+                                }}
+                            >
+                                <Pencil />
+                            </div>
+
+                            <div
+                                className={css`
+                                    flex-grow: 0;
+                                    flex-shrink: 0;
+                                `}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+
+                                    setScriptVersions(scriptVersions.filter((i) => i.id !== version.id));
+                                    if (version.id === currentScriptVersion) {
+                                        setCurrentScriptVersion(null);
+                                    }
+                                }}
+                            >
+                                <TrashIcon />
+                            </div>
+                        </div>
                     </ButtonBox>
                 ))}
                 <div
@@ -82,19 +151,6 @@ const ScriptVersionSelector = ({ serviceId }) => {
                             placeholder="Введите название чина…"
                             autoFocus
                         />
-                        <Button
-                            onClick={() => {
-                                setNewVersionName('');
-                            }}
-                            className={css`
-                                position: absolute;
-                                right: 0;
-                                font-size: 14px;
-                                margin-left: 0px;
-                            `}
-                        >
-                            <Cross />
-                        </Button>
                     </div>
                     <Button onClick={addNewVersion}>
                         <PlusIcon width={16} />
@@ -139,7 +195,6 @@ const ScriptVersionSelector = ({ serviceId }) => {
             type="button"
             onClick={() => {
                 setScriptVersionSelectorIsActive(!scriptVersionSelectorIsActive);
-                toggleOpen();
             }}
         >
             <span>{currentScriptVersionName}</span>
