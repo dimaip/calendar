@@ -9,11 +9,11 @@ import { useRecoilState } from 'recoil';
 import scriptVersionsState from 'state/scriptVersionsState';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import currentScriptVersionState from 'state/currentScriptVersion';
-import PlusIcon from 'components/svgs/PlusIcon';
 import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
 import TrashIcon from 'components/svgs/TrashIcon';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Pencil from 'components/svgs/Pencil';
+import Switch from 'components/svgs/Switch';
 
 const ScriptVersionSelector = ({ serviceId }) => {
     const theme = useTheme();
@@ -24,7 +24,6 @@ const ScriptVersionSelector = ({ serviceId }) => {
     const [currentScriptVersion, setCurrentScriptVersion] = useRecoilState<string | null>(
         currentScriptVersionState(serviceId)
     );
-    const currentScriptVersionName = scriptVersions.find((v) => v.id === currentScriptVersion)?.name || 'Исходный чин';
     const [newVersionName, setNewVersionName] = useState('');
     const [_, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
 
@@ -41,164 +40,183 @@ const ScriptVersionSelector = ({ serviceId }) => {
         }
     };
 
-    return scriptVersionSelectorIsActive ? (
-        <Drawer onClose={() => setScriptVersionSelectorIsActive(false)}>
-            <>
-                <SectionHeading
-                    className={css`
-                        text-align: center;
-                        padding-top: 0px;
-                        padding-bottom: 24px;
-                    `}
-                >
-                    Чинопоследования
-                </SectionHeading>
-                <ButtonBox
-                    onClick={() => {
-                        setCurrentScriptVersion(null);
-                        setScriptVersionSelectorIsActive(false);
-                    }}
-                    className={css`
-                        border: ${null === currentScriptVersion ? `2px solid ${theme.colours.primary}` : undefined};
-                    `}
-                >
-                    Исходное чинопоследование
-                </ButtonBox>
-                {scriptVersions.map((version) => (
-                    <ButtonBox
-                        id={version.id}
-                        onClick={() => {
-                            setCurrentScriptVersion(version.id);
-                            setScriptVersionSelectorIsActive(false);
-                            setScriptEditorIsActive(false);
-                        }}
-                        className={css`
-                            border: ${version.id === currentScriptVersion
-                                ? `2px solid ${theme.colours.primary}`
-                                : undefined};
-                        `}
-                    >
+    return (
+        <>
+            {scriptVersionSelectorIsActive && (
+                <Drawer onClose={() => setScriptVersionSelectorIsActive(false)}>
+                    <>
+                        <SectionHeading
+                            className={css`
+                                padding-top: 0px;
+                                padding-bottom: 24px;
+                            `}
+                        >
+                            Чинопоследования
+                        </SectionHeading>
+                        <ButtonBox
+                            onClick={() => {
+                                setCurrentScriptVersion(null);
+                                setScriptVersionSelectorIsActive(false);
+                            }}
+                            className={css`
+                                border: ${null === currentScriptVersion
+                                    ? `2px solid ${theme.colours.primary}`
+                                    : undefined};
+                            `}
+                        >
+                            Исходное чинопоследование
+                        </ButtonBox>
+                        {scriptVersions.map((version) => (
+                            <ButtonBox
+                                id={version.id}
+                                onClick={() => {
+                                    setCurrentScriptVersion(version.id);
+                                    setScriptVersionSelectorIsActive(false);
+                                    setScriptEditorIsActive(false);
+                                }}
+                                className={css`
+                                    border: ${version.id === currentScriptVersion
+                                        ? `2px solid ${theme.colours.primary}`
+                                        : undefined};
+                                `}
+                            >
+                                <div
+                                    className={css`
+                                        display: flex;
+                                    `}
+                                >
+                                    <div
+                                        className={css`
+                                            flex-grow: 1;
+                                        `}
+                                    >
+                                        {version.name}
+                                    </div>
+
+                                    <div
+                                        className={css`
+                                            flex-grow: 0;
+                                            flex-shrink: 0;
+                                            margin-right: 15px;
+                                            margin-top: 3px;
+                                        `}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+
+                                            setCurrentScriptVersion(version.id);
+                                            setScriptVersionSelectorIsActive(false);
+                                            setScriptEditorIsActive(true);
+                                        }}
+                                    >
+                                        <Pencil colour={theme.colours.primary} />
+                                    </div>
+
+                                    <div
+                                        className={css`
+                                            flex-grow: 0;
+                                            flex-shrink: 0;
+                                        `}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            e.stopPropagation();
+
+                                            setScriptVersions(scriptVersions.filter((i) => i.id !== version.id));
+                                            if (version.id === currentScriptVersion) {
+                                                setCurrentScriptVersion(null);
+                                            }
+                                        }}
+                                    >
+                                        <TrashIcon />
+                                    </div>
+                                </div>
+                            </ButtonBox>
+                        ))}
                         <div
                             className={css`
                                 display: flex;
+                                align-items: center;
+                                margin-top: 12px;
                             `}
                         >
                             <div
                                 className={css`
+                                    position: relative;
                                     flex-grow: 1;
                                 `}
                             >
-                                {version.name}
+                                <Input
+                                    onChange={(e) => {
+                                        setNewVersionName(e.target.value);
+                                    }}
+                                    onEnter={addNewVersion}
+                                    value={newVersionName}
+                                    placeholder="Введите название чина…"
+                                    autoFocus
+                                />
                             </div>
-
-                            <div
+                            <Button
+                                onClick={addNewVersion}
                                 className={css`
-                                    flex-grow: 0;
-                                    flex-shrink: 0;
-                                    margin-right: 15px;
+                                    border-radius: 5px;
+                                    padding: 12px 12px;
+                                    text-align: center;
+                                    background: ${theme.colours.primary};
+                                    margin-left: 8px;
+                                    font-size: 14px;
+                                    color: white;
                                 `}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-
-                                    setCurrentScriptVersion(version.id);
-                                    setScriptVersionSelectorIsActive(false);
-                                    setScriptEditorIsActive(true);
-                                }}
                             >
-                                <Pencil />
-                            </div>
-
-                            <div
-                                className={css`
-                                    flex-grow: 0;
-                                    flex-shrink: 0;
-                                `}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-
-                                    setScriptVersions(scriptVersions.filter((i) => i.id !== version.id));
-                                    if (version.id === currentScriptVersion) {
-                                        setCurrentScriptVersion(null);
-                                    }
-                                }}
-                            >
-                                <TrashIcon />
-                            </div>
+                                Добавить
+                            </Button>
                         </div>
-                    </ButtonBox>
-                ))}
-                <div
-                    className={css`
-                        display: flex;
-                        align-items: center;
-                        margin-top: 12px;
-                    `}
-                >
-                    <div
-                        className={css`
-                            position: relative;
-                            flex-grow: 1;
-                        `}
-                    >
-                        <Input
-                            onChange={(e) => {
-                                setNewVersionName(e.target.value);
-                            }}
-                            onEnter={addNewVersion}
-                            value={newVersionName}
-                            placeholder="Введите название чина…"
-                            autoFocus
-                        />
-                    </div>
-                    <Button onClick={addNewVersion}>
-                        <PlusIcon width={16} />
-                    </Button>
-                </div>
-            </>
-        </Drawer>
-    ) : (
-        <button
-            aria-label="меню"
-            className={`${css`
-                border-radius: 5px;
-                padding: 8px 6px;
-                text-align: center;
-                background: ${theme.colours.bgGray};
-                font-size: 14px;
-                line-height: 1.1;
-                color: ${theme.colours.darkGray};
-                margin-right: 6px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                    </>
+                </Drawer>
+            )}
+            <button
+                aria-label="меню"
+                className={`${css`
+                    border-radius: 5px;
+                    padding: 7px;
+                    padding-bottom: 3px;
+                    text-align: center;
+                    background: ${currentScriptVersion ? theme.colours.primary : theme.colours.bgGray};
+                    font-size: 14px;
+                    line-height: 1.1;
+                    color: ${theme.colours.darkGray};
+                    margin-right: 6px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
 
-                display: inline-block;
-                border: 0;
-                appearance: none;
-                &::-ms-expand {
-                    display: none;
-                }
-                &:hover {
-                    opacity: 0.8;
-                    cursor: pointer;
-                }
-                &:focus {
-                    outline: none;
-                    opacity: 0.8;
-                }
-                & option {
-                    font-weight: normal;
-                }
-            `}`}
-            type="button"
-            onClick={() => {
-                setScriptVersionSelectorIsActive(!scriptVersionSelectorIsActive);
-            }}
-        >
-            <span>{currentScriptVersionName}</span>
-        </button>
+                    display: inline-block;
+                    border: 0;
+                    appearance: none;
+                    &::-ms-expand {
+                        display: none;
+                    }
+                    &:hover {
+                        opacity: 0.8;
+                        cursor: pointer;
+                    }
+                    &:focus {
+                        outline: none;
+                        opacity: 0.8;
+                    }
+                    & option {
+                        font-weight: normal;
+                    }
+                `}`}
+                type="button"
+                onClick={() => {
+                    setScriptVersionSelectorIsActive(!scriptVersionSelectorIsActive);
+                }}
+            >
+                <span>
+                    <Switch colour={currentScriptVersion ? 'white' : undefined} />
+                </span>
+            </button>
+        </>
     );
 };
 
