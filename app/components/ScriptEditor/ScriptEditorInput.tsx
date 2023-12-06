@@ -58,7 +58,7 @@ const ScriptEditorInput = ({ id }) => {
                                     {storedReaderName}
                                 </span>
                             ) : null}
-                            <Pencil colour={theme.colours.darkGray} />
+                            <Pencil colour={theme.colours.primary} />
                         </Button>
                     </div>
                     {inputReaderName !== null && (

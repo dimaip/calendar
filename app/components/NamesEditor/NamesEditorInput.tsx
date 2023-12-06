@@ -67,7 +67,7 @@ const NamesEditorInput = ({
                 >
                     {names ? `[${names}]` : `[${placeholder.toLocaleLowerCase()}]`}
                 </span>
-                <Pencil colour={theme.colours.darkGray} />
+                <Pencil colour={theme.colours.primary} />
             </Button>
             {inputReaderName !== null && (
                 <Drawer onClose={saveNameHandler}>
