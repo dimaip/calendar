@@ -7,7 +7,6 @@ import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Share from 'components/Share/Share';
 import { useParams } from 'react-router-dom';
 import { useTheme } from 'emotion-theming';
-import ScriptEditorToggle from 'components/ScriptEditor/ScriptEditorToggle';
 
 export const DotsMenuContext = React.createContext({ toggleOpen: () => {}, isOpen: false, setIsOpen: () => {} });
 
@@ -68,7 +67,6 @@ const DotsMenu = () => {
                     <div>
                         <ZoomControlToggle />
                     </div>
-                    <ScriptEditorToggle />
                     <Share date={date} />
                 </DropDown>
             )}

@@ -2,13 +2,13 @@ import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
-export default () => {
+export default ({ width = 24 }: { width?: number }): JSX.Element => {
     const theme = useTheme();
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width={width}
+            height={width}
             viewBox="0 0 24 24"
             fill="none"
             className={css`

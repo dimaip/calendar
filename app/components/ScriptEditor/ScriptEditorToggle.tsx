@@ -1,51 +1,68 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Button from 'components/Button/Button';
 import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
-import Pencil from 'components/svgs/Pencil';
 import { useRecoilState } from 'recoil';
 import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
-import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
+import scriptVersionsState from 'state/scriptVersionsState';
+import currentScriptVersionState from 'state/currentScriptVersion';
+import Cross from 'components/svgs/Cross';
 
-const ScriptEditorToggle = () => {
-    const theme = useTheme();
-    const { toggleOpen } = useContext(DotsMenuContext);
+const ScriptEditorToggle = ({ serviceId }) => {
     const [scriptEditorIsActive, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
-    const label = scriptEditorIsActive ? 'Завершить редактирование' : 'Редактировать чин';
 
+    const [scriptVersions] = useRecoilState<boolean>(scriptVersionsState(serviceId));
+    const [currentScriptVersion] = useRecoilState<string | null>(currentScriptVersionState(serviceId));
+    const currentScriptVersionName = scriptVersions.find((v) => v.id === currentScriptVersion)?.name || 'Исходный чин';
+
+    if (!scriptEditorIsActive) {
+        return null;
+    }
     return (
-        <Button
-            title={label}
-            onClick={() => {
-                setScriptEditorIsActive(!scriptEditorIsActive);
-                toggleOpen();
-            }}
+        <div
             className={css`
-                margin-right: 6px;
-                font-size: 16px;
-                padding: 6px 6px !important;
-                width: 100%;
-                text-align: left;
-                border-bottom: 1px solid ${theme.colours.lineGray};
+                height: 36px;
             `}
         >
-            <span
+            <div
                 className={css`
-                    color: ${theme.colours.gray};
-                    display: inline-block;
-                    width: 20px;
-                `}
-            >
-                <Pencil />
-            </span>{' '}
-            <span
-                className={css`
+                    display: flex;
+                    align-items: center;
+                    background-color: #8e8e93;
+                    color: white;
                     font-size: 13px;
+                    position: fixed;
+                    z-index: 1;
+                    top: 50px;
+                    left: 0;
+                    right: 0;
                 `}
             >
-                {label}
-            </span>
-        </Button>
+                <div
+                    className={css`
+                        padding: 10px;
+                        text-align: center;
+                        flex-grow: 1;
+                    `}
+                >
+                    {currentScriptVersionName}
+                </div>
+
+                <Button
+                    className={css`
+                        flex-grow: 0;
+                        font-size: 24px;
+                        line-height: 0;
+                        margin-top: -6px;
+                        padding: 10px;
+                        position: absolute;
+                        right: 0;
+                    `}
+                    onClick={() => setScriptEditorIsActive(false)}
+                >
+                    <Cross white />
+                </Button>
+            </div>
+        </div>
     );
 };
 export default ScriptEditorToggle;
