@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 import { css } from 'emotion';
 import Button from 'components/Button/Button';
 import SolidSection from 'components/SolidSection/SolidSection';
@@ -99,6 +99,9 @@ const MdxLoader = (props) => {
                         border-radius: 5px;
                         border: 0.5px ${isDisabled ? 'dashed' : 'solid'} ${theme.colours.lineGray} !important;
                         position: relative;
+                        & .H3 {
+                            margin-top: 0;
+                        }
                     `}
                 >
                     <Button
