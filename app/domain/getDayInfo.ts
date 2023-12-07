@@ -634,9 +634,8 @@ export const getFeastInfo = memoize(
             icon = 'candlemas.svg';
         }
 
-        if (new Date(y, 3, 7).getTime() === date.getTime()) {
-            title = 'Благовещение Богородицы';
-            feastType = '12';
+        if (new Date(y, 10, 29).getTime() === date.getTime()) {
+            icon = 'mathew.svg';
         }
         if (new Date(y, 3, 7).getTime() <= date.getTime() && date.getTime() <= new Date(y, 3, 8).getTime()) {
             colour = blue;
