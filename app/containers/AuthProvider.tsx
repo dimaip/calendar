@@ -15,7 +15,7 @@ const userManager = new UserManager({
     post_logout_redirect_uri: process.env.PUBLIC_URL,
     response_type: 'code',
     scope,
-    loadUserInfo: true,
+    loadUserInfo: false,
     automaticSilentRenew: true,
 });
 
