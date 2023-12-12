@@ -72,7 +72,7 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
                             .forEach((key) => {
                                 const value = localState[key];
                                 console.debug('Uploading settings to the server', key, value);
-                                void authorisedFetch({ url: `/setSetting`, body: { key, value } });
+                                void authorisedFetch({ url: `/setSetting`, method: 'POST', body: { key, value } });
                             });
                         Object.keys(settings).forEach((key) => {
                             console.debug('Downloaded a setting from the server', key, settings[key]);

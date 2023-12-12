@@ -16,7 +16,11 @@ export const useAuthorisedFetch = () => {
             return fetch(`${process.env.API_HOST}${url}`, {
                 headers: { Authorization: `Bearer ${token}` },
                 method,
-                body: body ? JSON.stringify(body) : undefined,
+                ...(body
+                    ? {
+                          body: JSON.stringify(body),
+                      }
+                    : {}),
             }).then((resp) => {
                 if (!resp.ok && resp.status === 401) {
                     console.warn('Bad token, signing out');
