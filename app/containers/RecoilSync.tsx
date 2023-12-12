@@ -1,6 +1,7 @@
 import { useAuth } from 'oidc-react';
 import React from 'react';
 import { RecoilSync } from 'recoil-sync';
+import { useAuthorisedFetch } from 'utils/useAuthorisedFetch';
 
 const parseState = (state: string): Record<string, unknown> => {
     if (state === undefined) {
@@ -33,6 +34,7 @@ const setState = (key: string, value: unknown): void => {
 };
 
 export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Element => {
+    const authorisedFetch = useAuthorisedFetch();
     const auth = useAuth();
     const token = auth?.userData?.id_token;
     return (
@@ -47,10 +49,10 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
                     setState(key, value);
                     if (token) {
                         console.debug('Uploading a setting to the server', key, value);
-                        void fetch(`${process.env.API_HOST}/setSetting`, {
-                            headers: { Authorization: `Bearer ${token}` },
+                        void authorisedFetch({
+                            url: `${process.env.API_HOST}/setSetting`,
                             method: 'POST',
-                            body: JSON.stringify({ key, value }),
+                            body: { key, value },
                         });
                     }
                 });
@@ -58,31 +60,26 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
             }}
             listen={({ updateItem }) => {
                 if (token) {
-                    void fetch(`${process.env.API_HOST}/getSettings`, {
-                        headers: { Authorization: `Bearer ${token}` },
-                    })
-                        .then(async (res) => res.json())
-                        .then((settings) => {
-                            const localState = getState();
-                            const localKeys = Object.keys(localState);
-                            const serverKeys = Object.keys(settings);
-                            localKeys
-                                .filter((key) => !serverKeys.includes(key))
-                                .forEach((key) => {
-                                    const value = localState[key];
-                                    console.debug('Uploading settings to the server', key, value);
-                                    void fetch(`${process.env.API_HOST}/setSetting`, {
-                                        headers: { Authorization: `Bearer ${token}` },
-                                        method: 'POST',
-                                        body: JSON.stringify({ key, value }),
-                                    });
-                                });
-                            Object.keys(settings).forEach((key) => {
-                                console.debug('Downloaded a setting from the server', key, settings[key]);
-                                setState(key, settings[key]);
-                                updateItem(key, settings[key]);
+                    void authorisedFetch<Record<string, string>>({ url: `/getSettings` }).then((settings) => {
+                        if (!settings) {
+                            return;
+                        }
+                        const localState = getState();
+                        const localKeys = Object.keys(localState);
+                        const serverKeys = Object.keys(settings);
+                        localKeys
+                            .filter((key) => !serverKeys.includes(key))
+                            .forEach((key) => {
+                                const value = localState[key];
+                                console.debug('Uploading settings to the server', key, value);
+                                void authorisedFetch({ url: `/setSetting`, body: { key, value } });
                             });
+                        Object.keys(settings).forEach((key) => {
+                            console.debug('Downloaded a setting from the server', key, settings[key]);
+                            setState(key, settings[key]);
+                            updateItem(key, settings[key]);
                         });
+                    });
                 }
             }}
         >
