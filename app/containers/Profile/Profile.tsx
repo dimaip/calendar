@@ -6,7 +6,7 @@ import BottomNav from 'components/BottomNav/BottomNav';
 import { useAuth } from 'oidc-react';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import BurgerMenu from 'containers/Main/BurgerMenu';
-import SectionHeading from 'containers/Main/SectionHeading';
+// import SectionHeading from 'containers/Main/SectionHeading';
 
 const Inner = () => {
     const auth = useAuth();
@@ -28,7 +28,7 @@ const Inner = () => {
                 padding: 0 12px;
             `}
         >
-            <SectionHeading>Привет, {profile.given_name}!</SectionHeading>
+            {/* <SectionHeading>Привет, {profile.given_name}!</SectionHeading> */}
             <div
                 className={css`
                     flex-grow: 1;
