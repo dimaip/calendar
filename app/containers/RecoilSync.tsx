@@ -50,7 +50,7 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
                     if (token) {
                         console.debug('Uploading a setting to the server', key, value);
                         void authorisedFetch({
-                            url: `${process.env.API_HOST}/setSetting`,
+                            url: `/setSetting`,
                             method: 'POST',
                             body: { key, value },
                         });
