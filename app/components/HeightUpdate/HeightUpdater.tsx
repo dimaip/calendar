@@ -6,7 +6,7 @@ export const HeightUpdater = ({ children }: { children: React.ReactNode }): JSX.
     useEffect(() => {
         setTimeout(() => {
             context?.slideUpdateHeight?.();
-        });
+        }, 30);
     });
     return <>{children}</>;
 };
