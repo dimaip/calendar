@@ -184,6 +184,8 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 
 <>{props.isHoliday && <MdxLoader src="Matins/Vstavka" lang={props.lang} />}</>
 
+<If condition={props.containsGospel}>
+
 **П** Премудрость! Станем благоговейно! Услышим святое Евангелие!
 
 **П** От **(имя)** святого Благовестия чтение.
@@ -192,11 +194,17 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 
 **П** Будем внимательны!
 
+</If>
+
 <br />
 
 <>{props.readings}</>
 
+<If condition={props.containsGospel}>
+
 **Н** Слава Тебе, Господи, слава Тебе!
+
+</If>
 
 ### Проповедь
 
