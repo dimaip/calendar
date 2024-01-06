@@ -483,7 +483,7 @@ export const getFeastInfo = memoize(
             isEasterOffsetRange(-3) ||
             isEasterOffsetRange(-1) ||
             (date.getDay() !== 6 && new Date(y, 0, 6).getTime() === date.getTime()) ||
-            (date.getDay() === 6 && new Date(y, 0, 7).getTime() === date.getTime()) ||
+            (date.getDay() === 0 && new Date(y, 0, 7).getTime() === date.getTime()) ||
             new Date(y, 0, 14).getTime() === date.getTime() ||
             new Date(y, 0, 18).getTime() === date.getTime()
         ) {
