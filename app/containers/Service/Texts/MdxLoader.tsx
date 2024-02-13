@@ -112,14 +112,14 @@ const MdxLoader = (props) => {
                                     : [...disabledPrayers, prayerId]
                             );
                         }}
-                        className={css`
+                        className={`mdxLoader-hide ${css`
                             position: absolute;
                             top: 0px;
                             right: 0px;
                             font-size: 14px;
                             margin-left: 0px;
                             z-index: 1;
-                        `}
+                        `}`}
                     >
                         {isDisabled ? <Visibility /> : <VisibilityOff />}
                     </Button>

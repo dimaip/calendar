@@ -10,6 +10,8 @@ import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import { Note } from 'components/Note/Note';
 import ScriptVersionSelector from 'components/ScriptVersionSelector/ScriptVersionSelector';
+import ScriptEditorToggle from 'components/ScriptEditor/ScriptEditorToggle';
+import { Tour } from 'components/Tour/Tour';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
@@ -18,7 +20,6 @@ import MDXProvider from './MDXProvider';
 import ParallelLanguageBar from './ParallelLanguageBar';
 import { LangContext } from './LangContext';
 import { ServiceContext } from './ServiceContext';
-import ScriptEditorToggle from 'components/ScriptEditor/ScriptEditorToggle';
 const reloadOnFailedImport = (e) => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
     Sentry.captureException?.(e);
@@ -120,6 +121,7 @@ const Service = () => {
         <ServiceContext.Provider value={{ serviceId }}>
             <LangContext.Provider value={effectiveLangState}>
                 <LayoutInner left={left} paddedContent={false}>
+                    <Tour serviceId={serviceId} />
                     <ScriptEditorToggle serviceId={serviceId} />
                     <ParallelLanguageBar />
                     <Zoom>

@@ -14,6 +14,7 @@ import TrashIcon from 'components/svgs/TrashIcon';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Pencil from 'components/svgs/Pencil';
 import Switch from 'components/svgs/Switch';
+import { useAddNewVersion } from './useAddNewVersion';
 
 const ScriptVersionSelector = ({ serviceId }) => {
     const theme = useTheme();
@@ -27,17 +28,11 @@ const ScriptVersionSelector = ({ serviceId }) => {
     const [newVersionName, setNewVersionName] = useState('');
     const [_, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
 
+    const addNewVersionOriginal = useAddNewVersion(serviceId);
+
     const addNewVersion = () => {
-        if (newVersionName) {
-            const version = `v${new Date().getTime()}`;
-            setScriptVersions([...(scriptVersions || []), { name: newVersionName, id: version }]);
-            setCurrentScriptVersion(version);
-            setNewVersionName('');
-            setScriptEditorIsActive(true);
-            setScriptVersionSelectorIsActive(false);
-        } else {
-            alert('Введите название чина');
-        }
+        addNewVersionOriginal(newVersionName);
+        setNewVersionName('');
     };
 
     return (
@@ -153,6 +148,7 @@ const ScriptVersionSelector = ({ serviceId }) => {
                                     value={newVersionName}
                                     placeholder="Введите название чина…"
                                     autoFocus
+                                    className="scriptVersionSelector-input"
                                 />
                             </div>
                             <Button
@@ -175,7 +171,7 @@ const ScriptVersionSelector = ({ serviceId }) => {
             )}
             <button
                 aria-label="меню"
-                className={`${css`
+                className={`scriptVersionSelector ${css`
                     border-radius: 5px;
                     padding: 7px;
                     padding-bottom: 3px;
