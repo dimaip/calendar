@@ -7,7 +7,6 @@ import scriptVersionsState from 'state/scriptVersionsState';
 import currentScriptVersionState from 'state/currentScriptVersion';
 import Cross from 'components/svgs/Cross';
 import { useTheme } from 'emotion-theming';
-import { Tour } from 'components/Tour/Tour';
 
 const ScriptEditorToggle = ({ serviceId }) => {
     const [scriptEditorIsActive, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
@@ -50,7 +49,6 @@ const ScriptEditorToggle = ({ serviceId }) => {
                         `
                     }
                 >
-                    {false && <Tour steps={[]} />}
                     {currentScriptVersionName}
                 </div>
 

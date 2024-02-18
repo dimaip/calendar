@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { css } from 'emotion';
 
-const Button = (props) => (
+const Button = forwardRef((props, ref) => (
     <button
         {...props}
+        ref={ref}
         aria-label={props.title || undefined}
         type="button"
         className={`${css`
@@ -20,6 +21,6 @@ const Button = (props) => (
     >
         {props.children}
     </button>
-);
+));
 
 export default Button;

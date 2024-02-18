@@ -9,6 +9,9 @@ import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import QuestionIcon from 'components/svgs/QuestionIcon';
 import { useHistory } from 'react-router-dom';
+import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
+import Share from 'components/Share/Share';
+import useDay from 'hooks/useDay';
 
 const UserIcon = () => {
     const { userData } = useAuth();
@@ -95,6 +98,8 @@ const Today = ({ date, setNewDate }) => {
 };
 
 const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => {
+    const dayQuery = useDay(date);
+    const day = dayQuery.data;
     return (
         <Header>
             <div
@@ -136,7 +141,16 @@ const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) 
                         </>
                     )}
                     <ProfileIcon />
-                    <DotsMenu />
+                    <DotsMenu>
+                        <div>
+                            <ZoomControlToggle />
+                        </div>
+                        <Share
+                            title="Православное богослужение на русском языке"
+                            text={day?.title}
+                            url={window.location.href}
+                        />
+                    </DotsMenu>
                 </div>
             </div>
         </Header>

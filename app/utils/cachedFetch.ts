@@ -7,10 +7,10 @@ const wrapper = getWrapper();
  * @param {string} url
  * @param {boolean} prefetch just prefetch the data without returning
  */
-const cachedFetch = async (
+const cachedFetch = async <T>(
     url: string,
     source: 'PREFETCH_NORMAL' | 'PREFETCH_RELOAD' | 'NORMAL' = 'NORMAL'
-): Promise<unknown> =>
+): Promise<T> =>
     new Promise(function (resolve, reject) {
         wrapper.openStore({ database: 'pb', table: 'requestsCache' }, (res) => {
             if (!res) {

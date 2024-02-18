@@ -3,12 +3,9 @@ import { css } from 'emotion';
 import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 import Button from 'components/Button/Button';
 import ShareIcon from 'components/ShareIcon/ShareIcon';
-import useDay from 'hooks/useDay';
 
-const Share = ({ date }) => {
+const Share = ({ title, text, url }: { title: string; text: string; url: string }) => {
     const { toggleOpen } = useContext(DotsMenuContext);
-    const dayQuery = useDay(date);
-    const day = dayQuery.data;
     return (
         <Button
             onClick={() => {
@@ -16,9 +13,9 @@ const Share = ({ date }) => {
                 if (navigator.share) {
                     navigator
                         .share({
-                            title: 'Православное богослужение на русском языке',
-                            text: day?.title,
-                            url: window.location.href,
+                            title,
+                            text,
+                            url,
                         })
                         .catch((error) => console.log('Error sharing', error));
                 }

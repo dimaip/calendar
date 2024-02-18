@@ -5,9 +5,14 @@ import { css } from 'emotion';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import { useUpdateTOC } from 'hooks/useUpdateTOC';
+import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
+import Share from 'components/Share/Share';
+import useDay from 'hooks/useDay';
 
 const LayoutInner = ({ children, backLink = null, left = null, right = null, paddedContent = true }) => {
     const { date } = useParams();
+    const dayQuery = useDay(date);
+    const day = dayQuery.data;
     const history = useHistory();
     useUpdateTOC();
     const backLinkEffective = backLink || history.location.state?.backLink;
@@ -46,7 +51,16 @@ const LayoutInner = ({ children, backLink = null, left = null, right = null, pad
                     `}
                 >
                     {right}
-                    <DotsMenu />
+                    <DotsMenu>
+                        <div>
+                            <ZoomControlToggle />
+                        </div>
+                        <Share
+                            title="Православное богослужение на русском языке"
+                            text={day?.title}
+                            url={window.location.href}
+                        />
+                    </DotsMenu>
                 </div>
             </Header>
             <div

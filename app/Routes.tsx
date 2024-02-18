@@ -23,6 +23,8 @@ import { Promo } from 'components/Promo/Promo';
 import { Hymns } from 'containers/Hymns/Hymns';
 import { Hymn } from 'containers/Hymns/Hymn';
 import Profile from 'containers/Profile/Profile';
+import AddSharedVersion from 'containers/AddSharedVersion/AddSharedVersion';
+import { ScriptEditorPromo } from 'components/ScriptEditorPromo/ScriptEditorPromo';
 import Loader from 'components/Loader/Loader';
 
 import checkVersion from './checkVersion';
@@ -71,6 +73,7 @@ const DateRoutes = () => {
                     </Route>
                 </Switch>
                 <UpdatePrompt />
+                <ScriptEditorPromo />
             </Promo>
         </ThemeProvider>
     );
@@ -131,6 +134,9 @@ export default () => {
                         </Route>
                         <Route exact path="/profile">
                             <Profile />
+                        </Route>
+                        <Route exact path="/share/:versionData">
+                            <AddSharedVersion />
                         </Route>
                         <Route path="/date/:date">
                             <DateRoutes />
