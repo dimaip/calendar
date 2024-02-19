@@ -3,22 +3,17 @@ import { css } from 'emotion';
 import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 import Button from 'components/Button/Button';
 import ShareIcon from 'components/ShareIcon/ShareIcon';
+import { useHistory } from 'react-router-dom';
 
-const Share = ({ title, text, url, className }: { title: string; text: string; url: string; className?: string }) => {
+const ShareLogin = ({ className }: { className?: string }) => {
     const { toggleOpen } = useContext(DotsMenuContext);
+    const history = useHistory();
     return (
         <Button
             onClick={() => {
                 toggleOpen();
-                if (navigator.share) {
-                    navigator
-                        .share({
-                            title,
-                            text,
-                            url,
-                        })
-                        .catch((error) => console.log('Error sharing', error));
-                }
+                alert('Войдите в аккаунт, чтобы иметь возможность поделиться чинопоследованием');
+                history.replace('/profile');
             }}
             className={`${className} ${css`
                 padding: 6px 6px !important;
@@ -37,4 +32,4 @@ const Share = ({ title, text, url, className }: { title: string; text: string; u
         </Button>
     );
 };
-export default Share;
+export default ShareLogin;

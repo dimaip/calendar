@@ -15,10 +15,10 @@ const ScriptEditorToggle = ({ serviceId }) => {
     const [currentScriptVersion] = useRecoilState<string | null>(currentScriptVersionState(serviceId));
     const currentScriptVersionName = scriptVersions.find((v) => v.id === currentScriptVersion)?.name || 'Исходный чин';
 
+    const theme = useTheme();
     if (!scriptEditorIsActive) {
         return null;
     }
-    const theme = useTheme();
     return (
         <div
             className={css`

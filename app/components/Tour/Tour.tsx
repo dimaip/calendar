@@ -46,19 +46,20 @@ export const Tour = ({ serviceId }: { serviceId: string }): JSX.Element | null =
             locale={{ last: 'На этом всё!', next: 'Дальше', open: 'Редактор чинов', skip: 'Закрыть' }}
             callback={({ action, index, status, type }) => {
                 if ([EVENTS.STEP_AFTER, EVENTS.TARGET_NOT_FOUND].includes(type)) {
+                    setTimeout(() => {
+                        setStepIndex(index + 1);
+                    }, 0);
                     if (index === 0) {
                         setScriptVersionSelectorIsActive(true);
-                        setTimeout(() => {
-                            setStepIndex(1);
-                        }, 0);
-                    } else {
-                        setStepIndex(index + 1);
-                        if (index === 1) {
-                            addNewVersion('Личное правило');
-                        }
-                        if (index === 6) {
-                            setScriptVersionSelectorIsActive(true);
-                        }
+                    }
+                    if (index === 1) {
+                        addNewVersion('Личное правило');
+                    }
+                    if (index === 6) {
+                        setScriptVersionSelectorIsActive(true);
+                    }
+                    if (index === 7) {
+                        document.querySelector('.scriptVersionSelector-dotsMenu')?.click();
                     }
                 }
                 if (type === 'tour:end') {
@@ -120,6 +121,19 @@ export const Tour = ({ serviceId }: { serviceId: string }): JSX.Element | null =
                     target: '.scriptVersionSelector',
                     content:
                         'Чтобы поделиться созданным чином с братьями и сестрами, снова вернитесь в меню с чинопоследованиями',
+                    disableBeacon: true,
+                    offset: 0,
+                },
+                {
+                    target: '.scriptVersionSelector-dotsMenu',
+                    content: 'Нажмите на три точки, чтобы попасть в меню управления чином',
+                    disableBeacon: true,
+                    offset: 0,
+                },
+                {
+                    target: '.scriptVersionSelector-share',
+                    content:
+                        'Нажмите сюда, чтобы получить ссылку, которую вы можете послать вашему брату или сестре. Открыв эту ссылку, он увидит точно такой же вариант чинопоследования, как и у вас',
                     disableBeacon: true,
                     offset: 0,
                 },

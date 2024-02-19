@@ -17,6 +17,7 @@ import Pencil from 'components/svgs/Pencil';
 import Switch from 'components/svgs/Switch';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import Share from 'components/Share/Share';
+import ShareLogin from 'components/Share/ShareLogin';
 
 import { useAddNewVersion } from './useAddNewVersion';
 
@@ -114,7 +115,7 @@ const ScriptVersionSelector = ({ serviceId }) => {
                                     </div>
 
                                     <div style={{ marginTop: -12, marginBottom: -12 }}>
-                                        <DotsMenu key="scriptVersionSelector">
+                                        <DotsMenu className="scriptVersionSelector-dotsMenu">
                                             <Button
                                                 className={css`
                                                     padding: 6px 6px !important;
@@ -138,9 +139,10 @@ const ScriptVersionSelector = ({ serviceId }) => {
                                                     <TrashIcon size={20} colour={theme.colours.gray} /> Удалить
                                                 </span>
                                             </Button>
-                                            {userId && (
+                                            {userId ? (
                                                 <div>
                                                     <Share
+                                                        className="scriptVersionSelector-share"
                                                         title={version.name}
                                                         url={`${process.env.PUBLIC_URL}/share/${btoa(
                                                             JSON.stringify({
@@ -150,6 +152,10 @@ const ScriptVersionSelector = ({ serviceId }) => {
                                                             })
                                                         )}`}
                                                     />
+                                                </div>
+                                            ) : (
+                                                <div>
+                                                    <ShareLogin className="scriptVersionSelector-share" />
                                                 </div>
                                             )}
                                         </DotsMenu>

@@ -122,8 +122,13 @@ const Service = () => {
         <ServiceContext.Provider value={{ serviceId }}>
             <LangContext.Provider value={effectiveLangState}>
                 <LayoutInner left={left} paddedContent={false}>
-                    <Tour serviceId={serviceId} />
-                    <ScriptEditorToggle serviceId={serviceId} />
+                    {service?.scriptEditor && (
+                        <>
+                            <Tour serviceId={serviceId} />
+                            <ScriptEditorToggle serviceId={serviceId} />
+                        </>
+                    )}
+
                     <ParallelLanguageBar />
                     <Zoom>
                         <>

@@ -7,7 +7,7 @@ import Button from 'components/Button/Button';
 
 export const DotsMenuContext = React.createContext({ toggleOpen: () => {}, isOpen: false, setIsOpen: () => {} });
 
-const MENU_WIDTH = 140;
+const MENU_WIDTH = 160;
 
 const DropDown = ({ toggleOpen, children, top = 36, left = 0 }) => {
     const theme = useTheme();
@@ -25,7 +25,7 @@ const DropDown = ({ toggleOpen, children, top = 36, left = 0 }) => {
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    z-index: 9000;
+                    z-index: 1350;
                 `}
             ></div>
             <div
@@ -35,7 +35,7 @@ const DropDown = ({ toggleOpen, children, top = 36, left = 0 }) => {
                     top: ${top}px;
                     left: ${left}px;
                     border: 1px solid ${theme.colours.lineGray};
-                    z-index: 10000;
+                    z-index: 1351;
                     border-radius: 8px;
                     padding: 4px 8px;
                     width: ${MENU_WIDTH}px;
@@ -48,7 +48,7 @@ const DropDown = ({ toggleOpen, children, top = 36, left = 0 }) => {
     );
 };
 
-const DotsMenu = ({ children }: { children: ReactNode }) => {
+const DotsMenu = ({ children, className }: { children: ReactNode; className?: string }) => {
     const [isOpen, setIsOpen] = useState(false);
     const buttonRef = useRef();
     const toggleOpen = (e) => {
@@ -62,9 +62,9 @@ const DotsMenu = ({ children }: { children: ReactNode }) => {
             <Button
                 ref={buttonRef}
                 onClick={toggleOpen}
-                className={css`
+                className={`${className} ${css`
                     margin-top: 1px;
-                `}
+                `}`}
             >
                 <Dots />
             </Button>
