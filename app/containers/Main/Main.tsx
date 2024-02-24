@@ -40,6 +40,7 @@ import Peace from './Peace';
 import Books from './Books';
 import { TroparionFavsHome } from './TroparionFavsHome';
 import Award from './Award';
+import Sing from './Sing';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -48,6 +49,9 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
     const day = dayQuery.data;
     const externalDayQuery = useExternalDay(date);
     const { sermons, thisDays } = externalDayQuery.data || {};
+
+    const banners = [Sing, Peace, Books];
+    const TodaysBanner = banners[new Date(date).getDate() % banners.length];
 
     const themeColour = useRef();
     if (day) {
@@ -96,10 +100,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                             <EasterService />
                                                         </div> */}
                                                         <div style={{ marginBottom: 18 }}>
-                                                            <Peace />
-                                                        </div>
-                                                        <div style={{ marginBottom: 18 }}>
-                                                            <Books />
+                                                            <TodaysBanner />
                                                         </div>
 
                                                         <BorderedSection>
