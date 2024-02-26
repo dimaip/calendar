@@ -16,6 +16,8 @@ export const ScriptEditorPromo = (): JSX.Element | null => {
 
     const [promoDismissed, setPrompoDismissed] = useRecoilState(scriptEditorPromoDismissedState);
 
+    return null;
+
     if (promoDismissed || isLarge) {
         return null;
     }

@@ -22,6 +22,8 @@ export const Tour = ({ serviceId }: { serviceId: string }): JSX.Element | null =
     const addNewVersion = useAddNewVersion(serviceId);
 
     const [tourDismissed, setTourDismissed] = useRecoilState(tourDismissedState);
+
+    return null;
     if (tourDismissed) {
         return null;
     }
