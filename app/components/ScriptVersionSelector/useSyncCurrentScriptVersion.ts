@@ -12,7 +12,7 @@ export const useSyncCurrentScriptVersion = () => {
     const [currentScriptVersion] = useRecoilState(currentScriptVersionState(serviceId));
     const addSharedVersion = useAddSharedVersion(serviceId);
 
-    const currentScript = scriptVersions?.find(v.id === currentScriptVersion);
+    const currentScript = scriptVersions?.find((v) => v.id === currentScriptVersion);
     const sourceUserId = currentScript?.sourceUserId;
 
     useEffect(() => {
