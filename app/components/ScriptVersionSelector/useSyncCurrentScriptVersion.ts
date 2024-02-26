@@ -5,9 +5,7 @@ import { useRecoilState } from 'recoil';
 import currentScriptVersionState from 'state/currentScriptVersion';
 import scriptVersionsState from 'state/scriptVersionsState';
 
-export const useSyncCurrentScriptVersion = () => {
-    const serviceId = 'matins';
-
+export const useSyncCurrentScriptVersion = (serviceId: 'matins' | 'vespers') => {
     const [scriptVersions] = useRecoilState(scriptVersionsState(serviceId));
     const [currentScriptVersion] = useRecoilState(currentScriptVersionState(serviceId));
     const addSharedVersion = useAddSharedVersion(serviceId);

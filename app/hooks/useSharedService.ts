@@ -12,7 +12,12 @@ export interface SharedService {
 }
 
 export async function fetchSharedService(userId: string, serviceId: string, versionId: string) {
-    return cachedFetch<SharedService>(`${process.env.API_HOST}/service/${userId}/${serviceId}/${versionId}`);
+    return fetch(`${process.env.API_HOST}/service/${userId}/${serviceId}/${versionId}`).then(async (value) => {
+        if (!value.ok) {
+            throw new Error('Bad response');
+        }
+        return value.json();
+    });
 }
 
 export const useSharedServiceQuery = (userId: string, serviceId: string, versionId: string, enabled: boolean) =>

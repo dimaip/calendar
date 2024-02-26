@@ -40,7 +40,8 @@ const Service = () => {
 
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
 
-    useSyncCurrentScriptVersion();
+    useSyncCurrentScriptVersion('matins');
+    useSyncCurrentScriptVersion('vespers');
 
     // Expand serviceId
     let serviceId;
