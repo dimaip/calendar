@@ -49,7 +49,7 @@ const Inner = ({ sharedServiceData }: { sharedServiceData: SharedService }) => {
                     flex-grow: 1;
                 `}
             >
-                Добавьте этот чин себе трам-парам-пам-пам
+                Добавьте этот чин себе. Как только автор чина внесет в него изменения, они отобразятся у вас
             </div>
             <ButtonBox
                 title="Добавить"
