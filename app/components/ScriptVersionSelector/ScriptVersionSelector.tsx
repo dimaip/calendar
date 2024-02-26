@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
+import { useRecoilState } from 'recoil';
+import { useAuth } from 'oidc-react';
 import Button from 'components/Button/Button';
 import Drawer from 'components/Drawer/Drawer';
 import Input from 'components/Input/Input';
 import scriptVersionSelectorIsActiveState from 'state/scriptVersionSelectorIsActiveState';
-import { useRecoilState } from 'recoil';
 import scriptVersionsState from 'state/scriptVersionsState';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import currentScriptVersionState from 'state/currentScriptVersion';
@@ -14,6 +15,11 @@ import TrashIcon from 'components/svgs/TrashIcon';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Pencil from 'components/svgs/Pencil';
 import Switch from 'components/svgs/Switch';
+import DotsMenu from 'components/DotsMenu/DotsMenu';
+import Share from 'components/Share/Share';
+import ShareLogin from 'components/Share/ShareLogin';
+
+import { useAddNewVersion } from './useAddNewVersion';
 
 const ScriptVersionSelector = ({ serviceId }) => {
     const theme = useTheme();
@@ -26,18 +32,14 @@ const ScriptVersionSelector = ({ serviceId }) => {
     );
     const [newVersionName, setNewVersionName] = useState('');
     const [_, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
+    const auth = useAuth();
+    const userId = auth.userData?.profile?.sub;
+
+    const addNewVersionOriginal = useAddNewVersion(serviceId);
 
     const addNewVersion = () => {
-        if (newVersionName) {
-            const version = `v${new Date().getTime()}`;
-            setScriptVersions([...(scriptVersions || []), { name: newVersionName, id: version }]);
-            setCurrentScriptVersion(version);
-            setNewVersionName('');
-            setScriptEditorIsActive(true);
-            setScriptVersionSelectorIsActive(false);
-        } else {
-            alert('Введите название чина');
-        }
+        addNewVersionOriginal(newVersionName);
+        setNewVersionName('');
     };
 
     return (
@@ -59,7 +61,7 @@ const ScriptVersionSelector = ({ serviceId }) => {
                                 setScriptVersionSelectorIsActive(false);
                             }}
                             className={css`
-                                border: ${null === currentScriptVersion
+                                border: ${currentScriptVersion === null
                                     ? `2px solid ${theme.colours.primary}`
                                     : undefined};
                             `}
@@ -68,7 +70,7 @@ const ScriptVersionSelector = ({ serviceId }) => {
                         </ButtonBox>
                         {scriptVersions.map((version) => (
                             <ButtonBox
-                                id={version.id}
+                                key={version.id}
                                 onClick={() => {
                                     setCurrentScriptVersion(version.id);
                                     setScriptVersionSelectorIsActive(false);
@@ -112,22 +114,51 @@ const ScriptVersionSelector = ({ serviceId }) => {
                                         <Pencil colour={theme.colours.primary} />
                                     </div>
 
-                                    <div
-                                        className={css`
-                                            flex-grow: 0;
-                                            flex-shrink: 0;
-                                        `}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-
-                                            setScriptVersions(scriptVersions.filter((i) => i.id !== version.id));
-                                            if (version.id === currentScriptVersion) {
-                                                setCurrentScriptVersion(null);
-                                            }
-                                        }}
-                                    >
-                                        <TrashIcon />
+                                    <div style={{ marginTop: -12, marginBottom: -12 }}>
+                                        <DotsMenu className="scriptVersionSelector-dotsMenu">
+                                            <Button
+                                                className={css`
+                                                    padding: 6px 6px !important;
+                                                    width: 100%;
+                                                    text-align: left;
+                                                `}
+                                                onClick={() => {
+                                                    setScriptVersions(
+                                                        scriptVersions.filter((i) => i.id !== version.id)
+                                                    );
+                                                    if (version.id === currentScriptVersion) {
+                                                        setCurrentScriptVersion(null);
+                                                    }
+                                                }}
+                                            >
+                                                <span
+                                                    className={css`
+                                                        font-size: 13px;
+                                                    `}
+                                                >
+                                                    <TrashIcon size={20} colour={theme.colours.gray} /> Удалить
+                                                </span>
+                                            </Button>
+                                            {userId ? (
+                                                <div>
+                                                    <Share
+                                                        className="scriptVersionSelector-share"
+                                                        title={version.name}
+                                                        url={`${process.env.PUBLIC_URL}/share/${btoa(
+                                                            JSON.stringify({
+                                                                userId,
+                                                                serviceId,
+                                                                versionId: version.id,
+                                                            })
+                                                        )}`}
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <div>
+                                                    <ShareLogin className="scriptVersionSelector-share" />
+                                                </div>
+                                            )}
+                                        </DotsMenu>
                                     </div>
                                 </div>
                             </ButtonBox>
@@ -153,6 +184,7 @@ const ScriptVersionSelector = ({ serviceId }) => {
                                     value={newVersionName}
                                     placeholder="Введите название чина…"
                                     autoFocus
+                                    className="scriptVersionSelector-input"
                                 />
                             </div>
                             <Button
@@ -175,7 +207,7 @@ const ScriptVersionSelector = ({ serviceId }) => {
             )}
             <button
                 aria-label="меню"
-                className={`${css`
+                className={`scriptVersionSelector ${css`
                     border-radius: 5px;
                     padding: 7px;
                     padding-bottom: 3px;

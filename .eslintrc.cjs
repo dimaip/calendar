@@ -58,6 +58,7 @@ module.exports = {
                 '@typescript-eslint/prefer-nullish-coalescing': 0,
                 '@typescript-eslint/return-await': 0,
                 '@typescript-eslint/restrict-template-expressions': 0,
+                '@typescript-eslint/explicit-module-boundary-types': 0,
                 '@typescript-eslint/explicit-function-return-type': 0,
             },
             parserOptions: {

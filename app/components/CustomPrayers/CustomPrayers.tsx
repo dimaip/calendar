@@ -40,7 +40,7 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
     const [customPrayers] = useRecoilState(customPrayersState('Sugubaja'));
 
     return (
-        <div style={{ marginTop: 12, marginBottom: 12 }}>
+        <div style={{ marginTop: 12, marginBottom: 12 }} className="customPrayers">
             {extraPrayers.map((prayerId) => {
                 const isCustomPrayer = /^\d+$/.test(prayerId);
                 const customPrayer = isCustomPrayer && customPrayers?.find((i) => String(i.id) === String(prayerId));

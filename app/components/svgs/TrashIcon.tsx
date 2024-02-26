@@ -2,16 +2,16 @@ import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
-export default () => {
+export default ({ size = 24, colour }: { size: number; colour: string }): JSX.Element => {
     const theme = useTheme();
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width={size}
+            height={size}
             viewBox="0 0 55 69"
             className={css`
-                fill: ${theme.colours.primary};
+                fill: ${colour || theme.colours.primary};
             `}
         >
             <path

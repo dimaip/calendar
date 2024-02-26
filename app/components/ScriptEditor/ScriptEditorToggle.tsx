@@ -6,6 +6,7 @@ import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
 import scriptVersionsState from 'state/scriptVersionsState';
 import currentScriptVersionState from 'state/currentScriptVersion';
 import Cross from 'components/svgs/Cross';
+import { useTheme } from 'emotion-theming';
 
 const ScriptEditorToggle = ({ serviceId }) => {
     const [scriptEditorIsActive, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
@@ -14,6 +15,7 @@ const ScriptEditorToggle = ({ serviceId }) => {
     const [currentScriptVersion] = useRecoilState<string | null>(currentScriptVersionState(serviceId));
     const currentScriptVersionName = scriptVersions.find((v) => v.id === currentScriptVersion)?.name || 'Исходный чин';
 
+    const theme = useTheme();
     if (!scriptEditorIsActive) {
         return null;
     }
@@ -27,7 +29,7 @@ const ScriptEditorToggle = ({ serviceId }) => {
                 className={css`
                     display: flex;
                     align-items: center;
-                    background-color: #8e8e93;
+                    background-color: ${theme.colours.primary};
                     color: white;
                     font-size: 13px;
                     position: fixed;
@@ -38,25 +40,31 @@ const ScriptEditorToggle = ({ serviceId }) => {
                 `}
             >
                 <div
-                    className={css`
-                        padding: 10px;
-                        text-align: center;
-                        flex-grow: 1;
-                    `}
+                    className={
+                        'scriptEditorToggle ' +
+                        css`
+                            padding: 10px;
+                            text-align: center;
+                            flex-grow: 1;
+                        `
+                    }
                 >
                     {currentScriptVersionName}
                 </div>
 
                 <Button
-                    className={css`
-                        flex-grow: 0;
-                        font-size: 24px;
-                        line-height: 0;
-                        margin-top: -6px;
-                        padding: 10px;
-                        position: absolute;
-                        right: 0;
-                    `}
+                    className={
+                        'scriptEditorToggle-close ' +
+                        css`
+                            flex-grow: 0;
+                            font-size: 24px;
+                            line-height: 0;
+                            margin-top: -6px;
+                            padding: 10px;
+                            position: absolute;
+                            right: 0;
+                        `
+                    }
                     onClick={() => setScriptEditorIsActive(false)}
                 >
                     <Cross white />
