@@ -23,8 +23,19 @@ export const useAddSharedVersion = (serviceId: string) => {
         });
     });
     return (sharedServiceData: SharedService) => {
-        setCustomPrayers(unique([...(customPrayers || []), ...(sharedServiceData.customPrayers || [])]));
-        setDisabledPrayers(unique([...(disabledPrayers || []), ...(sharedServiceData.disabledPrayers || [])]));
+        const existingCustomPrayerIds = (customPrayers || []).map((c) => c.id);
+        setCustomPrayers([
+            ...(customPrayers || []),
+            ...(sharedServiceData.customPrayers || []).filter((c) => !existingCustomPrayerIds.includes(c.id)),
+        ]);
+        setDisabledPrayers(
+            unique([
+                ...(disabledPrayers || []).filter(
+                    (disabledPrayer) => !disabledPrayer.includes(sharedServiceData.scriptVersionId)
+                ),
+                ...(sharedServiceData.disabledPrayers || []),
+            ])
+        );
 
         setScriptVersions([
             ...(scriptVersions || []).filter((v) => v.id !== sharedServiceData.scriptVersionId),
