@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 import cachedFetch from 'utils/cachedFetch';
 
 export interface SharedService {
+    userId: string;
     scriptVersionId: number;
     scriptVersionName: string;
     service: string;
@@ -14,7 +15,7 @@ export async function fetchSharedService(userId: string, serviceId: string, vers
     return cachedFetch<SharedService>(`${process.env.API_HOST}/service/${userId}/${serviceId}/${versionId}`);
 }
 
-const useSharedServiceQuery = (userId: string, serviceId: string, versionId: string, enabled: boolean) =>
+export const useSharedServiceQuery = (userId: string, serviceId: string, versionId: string, enabled: boolean) =>
     useQuery(
         ['sharedService', { userId, serviceId, versionId }],
         async () => fetchSharedService(userId, serviceId, versionId),
