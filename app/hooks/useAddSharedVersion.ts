@@ -31,7 +31,7 @@ export const useAddSharedVersion = (serviceId: string) => {
         setDisabledPrayers(
             unique([
                 ...(disabledPrayers || []).filter(
-                    (disabledPrayer) => !disabledPrayer.includes(sharedServiceData.scriptVersionId)
+                    (disabledPrayer) => !disabledPrayer.includes(String(sharedServiceData.scriptVersionId))
                 ),
                 ...(sharedServiceData.disabledPrayers || []),
             ])
