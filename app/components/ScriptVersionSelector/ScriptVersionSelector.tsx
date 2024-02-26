@@ -144,7 +144,7 @@ const ScriptVersionSelector = ({ serviceId }) => {
                                                     <Share
                                                         className="scriptVersionSelector-share"
                                                         title={version.name}
-                                                        url={`${process.env.PUBLIC_URL}/share/${btoa(
+                                                        url={`${process.env.PUBLIC_URL}/#/share/${btoa(
                                                             JSON.stringify({
                                                                 userId,
                                                                 serviceId,
