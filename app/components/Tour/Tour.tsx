@@ -86,8 +86,7 @@ export const Tour = ({ serviceId }: { serviceId: string }): JSX.Element | null =
                 },
                 {
                     target: '.scriptVersionSelector-input',
-                    content:
-                        'Создайте свой вариант чинопоследования, добавьте свои молитвы, сократите молитвы, которые вас утомляют',
+                    content: 'Создайте свой вариант молитвенного правила',
                     placementBeacon: 'left',
                     placement: 'left',
                     disableBeacon: true,
@@ -102,12 +101,12 @@ export const Tour = ({ serviceId }: { serviceId: string }): JSX.Element | null =
                 },
                 {
                     target: '.mdxLoader-hide',
-                    content: 'Если эта молитва вам наскучила, ее можно скрыть',
+                    content: 'Если вы не используете эту молитву, ее можно скрыть',
                     disableBeacon: true,
                 },
                 {
                     target: '.customPrayers',
-                    content: 'А здесь можно добавить молитву из предоженного списка или вставьте свой текст молитвы',
+                    content: 'А здесь – добавить молитву из предложенного списка или вставить свой текст молитвы',
                     disableBeacon: true,
                     offset: 0,
                 },
@@ -120,7 +119,7 @@ export const Tour = ({ serviceId }: { serviceId: string }): JSX.Element | null =
                 {
                     target: '.scriptVersionSelector',
                     content:
-                        'Чтобы поделиться созданным чином с братьями и сестрами, снова вернитесь в меню с чинопоследованиями',
+                        'Чтобы поделиться своим молитвенным правилом, вернитесь в раздел меню с чинопоследованиями',
                     disableBeacon: true,
                     offset: 0,
                 },
@@ -133,7 +132,7 @@ export const Tour = ({ serviceId }: { serviceId: string }): JSX.Element | null =
                 {
                     target: '.scriptVersionSelector-share',
                     content:
-                        'Нажмите сюда, чтобы получить ссылку, которую вы можете послать вашему брату или сестре. Открыв эту ссылку, он увидит точно такой же вариант чинопоследования, как и у вас',
+                        'Нажмите сюда и получите ссылку на чин. Вы можете поделиться ей с другими, чтобы молиться вместе',
                     disableBeacon: true,
                     offset: 0,
                 },
