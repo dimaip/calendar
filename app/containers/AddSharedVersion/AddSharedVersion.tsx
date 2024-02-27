@@ -8,31 +8,12 @@ import BurgerMenu from 'containers/Main/BurgerMenu';
 import SectionHeading from 'containers/Main/SectionHeading';
 import useSharedService, { SharedService } from 'hooks/useSharedService';
 import { useHistory, useParams } from 'react-router-dom';
-import { useRecoilState, useRecoilTransaction_UNSTABLE, useSetRecoilState } from 'recoil';
-import customPrayersState from 'state/customPrayersState';
-import disabledPrayersState from 'state/disabledPrayersState';
-import scriptVersionsState from 'state/scriptVersionsState';
-import currentScriptVersionState from 'state/currentScriptVersion';
-import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
-import extraPrayersState from 'state/extraPrayers';
-
-const unique = (arr: string[]) => [...new Set(arr).values()];
+import { useAddSharedVersion } from 'hooks/useAddSharedVersion';
 
 const Inner = ({ sharedServiceData }: { sharedServiceData: SharedService }) => {
     const history = useHistory();
 
-    const [customPrayers, setCustomPrayers] = useRecoilState(customPrayersState('Sugubaja'));
-    const [disabledPrayers, setDisabledPrayers] = useRecoilState(disabledPrayersState);
-    const setScriptEditorIsActive = useSetRecoilState(scriptEditorIsActiveState);
-
-    const [scriptVersions, setScriptVersions] = useRecoilState(scriptVersionsState(sharedServiceData?.service));
-    const setCurrentScriptVersion = useSetRecoilState(currentScriptVersionState(sharedServiceData?.service));
-
-    const setExtraPrayers = useRecoilTransaction_UNSTABLE(({ set }) => (distance) => {
-        Object.entries(sharedServiceData.extraPrayers || {}).forEach(([key, value]) => {
-            set(extraPrayersState(key), value);
-        });
-    });
+    const addSharedVersion = useAddSharedVersion(sharedServiceData?.service);
 
     return (
         <div
@@ -54,20 +35,7 @@ const Inner = ({ sharedServiceData }: { sharedServiceData: SharedService }) => {
             <ButtonBox
                 title="Добавить"
                 onClick={() => {
-                    setCustomPrayers(unique([...(customPrayers || []), ...(sharedServiceData.customPrayers || [])]));
-                    setDisabledPrayers(
-                        unique([...(disabledPrayers || []), ...(sharedServiceData.disabledPrayers || [])])
-                    );
-
-                    setScriptVersions([
-                        ...(scriptVersions || []).filter((v) => v.id !== sharedServiceData.scriptVersionId),
-                        { name: sharedServiceData.scriptVersionName, id: sharedServiceData.scriptVersionId },
-                    ]);
-                    setCurrentScriptVersion(sharedServiceData.scriptVersionId);
-                    setScriptEditorIsActive(true);
-
-                    setExtraPrayers();
-
+                    addSharedVersion(sharedServiceData);
                     history.push(`/date/${new Date().toISOString().slice(0, 10)}/service/${sharedServiceData.service}`);
                 }}
                 className={css`

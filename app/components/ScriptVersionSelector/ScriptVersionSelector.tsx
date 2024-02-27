@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useAuth } from 'oidc-react';
 import Button from 'components/Button/Button';
 import Drawer from 'components/Drawer/Drawer';
@@ -18,6 +18,7 @@ import Switch from 'components/svgs/Switch';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import Share from 'components/Share/Share';
 import ShareLogin from 'components/Share/ShareLogin';
+import { currentScriptSelector } from 'state/currentScript';
 
 import { useAddNewVersion } from './useAddNewVersion';
 
@@ -26,10 +27,10 @@ const ScriptVersionSelector = ({ serviceId }) => {
     const [scriptVersionSelectorIsActive, setScriptVersionSelectorIsActive] = useRecoilState(
         scriptVersionSelectorIsActiveState
     );
-    const [scriptVersions, setScriptVersions] = useRecoilState<boolean>(scriptVersionsState(serviceId));
-    const [currentScriptVersion, setCurrentScriptVersion] = useRecoilState<string | null>(
-        currentScriptVersionState(serviceId)
-    );
+    const [scriptVersions, setScriptVersions] = useRecoilState(scriptVersionsState(serviceId));
+    const [currentScriptVersion, setCurrentScriptVersion] = useRecoilState(currentScriptVersionState(serviceId));
+    const currentScript = useRecoilValue(currentScriptSelector(serviceId));
+    const isScriptShared = Boolean(currentScript?.sourceUserId);
     const [newVersionName, setNewVersionName] = useState('');
     const [_, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
     const auth = useAuth();
@@ -95,24 +96,35 @@ const ScriptVersionSelector = ({ serviceId }) => {
                                         {version.name}
                                     </div>
 
-                                    <div
+                                    <Button
                                         className={css`
                                             flex-grow: 0;
                                             flex-shrink: 0;
                                             margin-right: 15px;
                                             margin-top: 3px;
+                                            padding: 0;
                                         `}
                                         onClick={(e) => {
                                             e.preventDefault();
                                             e.stopPropagation();
 
-                                            setCurrentScriptVersion(version.id);
-                                            setScriptVersionSelectorIsActive(false);
-                                            setScriptEditorIsActive(true);
+                                            if (version.sourceUserId) {
+                                                alert(
+                                                    'Этим чином с вами поделились. Скопируйте его чтобы иметь возможность редактировать.'
+                                                );
+                                            } else {
+                                                setCurrentScriptVersion(version.id);
+                                                setScriptVersionSelectorIsActive(false);
+                                                setScriptEditorIsActive(true);
+                                            }
                                         }}
                                     >
-                                        <Pencil colour={theme.colours.primary} />
-                                    </div>
+                                        <Pencil
+                                            colour={
+                                                version.sourceUserId ? theme.colours.lightGray : theme.colours.primary
+                                            }
+                                        />
+                                    </Button>
 
                                     <div style={{ marginTop: -12, marginBottom: -12 }}>
                                         <DotsMenu className="scriptVersionSelector-dotsMenu">

@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 import cachedFetch from 'utils/cachedFetch';
 
 export interface SharedService {
+    userId: string;
     scriptVersionId: number;
     scriptVersionName: string;
     service: string;
@@ -11,10 +12,15 @@ export interface SharedService {
 }
 
 export async function fetchSharedService(userId: string, serviceId: string, versionId: string) {
-    return cachedFetch<SharedService>(`${process.env.API_HOST}/service/${userId}/${serviceId}/${versionId}`);
+    return fetch(`${process.env.API_HOST}/service/${userId}/${serviceId}/${versionId}`).then(async (value) => {
+        if (!value.ok) {
+            throw new Error('Bad response');
+        }
+        return value.json();
+    });
 }
 
-const useSharedServiceQuery = (userId: string, serviceId: string, versionId: string, enabled: boolean) =>
+export const useSharedServiceQuery = (userId: string, serviceId: string, versionId: string, enabled: boolean) =>
     useQuery(
         ['sharedService', { userId, serviceId, versionId }],
         async () => fetchSharedService(userId, serviceId, versionId),

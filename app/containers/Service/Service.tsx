@@ -20,6 +20,7 @@ import MDXProvider from './MDXProvider';
 import ParallelLanguageBar from './ParallelLanguageBar';
 import { LangContext } from './LangContext';
 import { ServiceContext } from './ServiceContext';
+import { useSyncCurrentScriptVersion } from 'components/ScriptVersionSelector/useSyncCurrentScriptVersion';
 
 const reloadOnFailedImport = (e) => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
@@ -38,6 +39,9 @@ const Service = () => {
     const langState = useContext(LangContext);
 
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
+
+    useSyncCurrentScriptVersion('matins');
+    useSyncCurrentScriptVersion('vespers');
 
     // Expand serviceId
     let serviceId;
