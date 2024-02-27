@@ -7,16 +7,18 @@ import scriptVersionsState from 'state/scriptVersionsState';
 import currentScriptVersionState from 'state/currentScriptVersion';
 import Cross from 'components/svgs/Cross';
 import { useTheme } from 'emotion-theming';
+import Pencil from 'components/svgs/Pencil';
 
 const ScriptEditorToggle = ({ serviceId }) => {
     const [scriptEditorIsActive, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
 
     const [scriptVersions] = useRecoilState<boolean>(scriptVersionsState(serviceId));
     const [currentScriptVersion] = useRecoilState<string | null>(currentScriptVersionState(serviceId));
-    const currentScriptVersionName = scriptVersions.find((v) => v.id === currentScriptVersion)?.name || 'Исходный чин';
+    const scriptVersion = scriptVersions.find((v) => v.id === currentScriptVersion);
+    const currentScriptVersionName = scriptVersion?.name || 'Исходный чин';
 
     const theme = useTheme();
-    if (!scriptEditorIsActive) {
+    if (!scriptEditorIsActive && !scriptVersion) {
         return null;
     }
     return (
@@ -59,15 +61,15 @@ const ScriptEditorToggle = ({ serviceId }) => {
                             flex-grow: 0;
                             font-size: 24px;
                             line-height: 0;
-                            margin-top: -6px;
+                            margin-top: -4px;
                             padding: 10px;
                             position: absolute;
                             right: 0;
                         `
                     }
-                    onClick={() => setScriptEditorIsActive(false)}
+                    onClick={() => setScriptEditorIsActive(!scriptEditorIsActive)}
                 >
-                    <Cross white />
+                    {scriptEditorIsActive ? <Cross white /> : <Pencil colour={theme.colours.white} />}
                 </Button>
             </div>
         </div>
