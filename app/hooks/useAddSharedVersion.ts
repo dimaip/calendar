@@ -46,7 +46,7 @@ export const useAddSharedVersion = (serviceId: string) => {
             },
         ]);
         setCurrentScriptVersion(sharedServiceData.scriptVersionId);
-        setScriptEditorIsActive(true);
+        setScriptEditorIsActive(false);
 
         setExtraPrayers(sharedServiceData.extraPrayers);
     };
