@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { StyleHTMLAttributes } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
-export default ({ size = 24, colour }: { size: number; colour: string }): JSX.Element => {
+export default ({
+    size = 24,
+    colour,
+    style,
+}: {
+    size: number;
+    colour: string;
+    style: StyleHTMLAttributes<SVGElement>;
+}): JSX.Element => {
     const theme = useTheme();
     return (
         <svg
@@ -13,6 +21,7 @@ export default ({ size = 24, colour }: { size: number; colour: string }): JSX.El
             className={css`
                 fill: ${colour || theme.colours.primary};
             `}
+            style={style}
         >
             <path
                 d="m47 12.41-1.85 50.01c-.03.86-.79 1.59-1.65 1.59h-32c-.86 0-1.62-.73-1.65-1.59L8 12.41a2.503 2.503 0 0 0-5 .18L4.85 62.6c.13 3.54 3.1 6.4 6.65 6.4h32c3.55 0 6.51-2.85 6.65-6.4L52 12.59a2.503 2.503 0 0 0-5-.18Z"

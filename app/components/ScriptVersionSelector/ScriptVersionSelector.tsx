@@ -19,8 +19,10 @@ import DotsMenu from 'components/DotsMenu/DotsMenu';
 import Share from 'components/Share/Share';
 import ShareLogin from 'components/Share/ShareLogin';
 import { currentScriptSelector } from 'state/currentScript';
+import Duplicate from 'components/svgs/Duplicate';
 
 import { useAddNewVersion } from './useAddNewVersion';
+import { useDuplicateVersion } from './useDuplicateVersion';
 
 const ScriptVersionSelector = ({ serviceId }) => {
     const theme = useTheme();
@@ -29,14 +31,14 @@ const ScriptVersionSelector = ({ serviceId }) => {
     );
     const [scriptVersions, setScriptVersions] = useRecoilState(scriptVersionsState(serviceId));
     const [currentScriptVersion, setCurrentScriptVersion] = useRecoilState(currentScriptVersionState(serviceId));
-    const currentScript = useRecoilValue(currentScriptSelector(serviceId));
-    const isScriptShared = Boolean(currentScript?.sourceUserId);
     const [newVersionName, setNewVersionName] = useState('');
     const [_, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
     const auth = useAuth();
     const userId = auth.userData?.profile?.sub;
 
     const addNewVersionOriginal = useAddNewVersion(serviceId);
+
+    const duplicateVersion = useDuplicateVersion(serviceId);
 
     const addNewVersion = () => {
         addNewVersionOriginal(newVersionName);
@@ -128,6 +130,51 @@ const ScriptVersionSelector = ({ serviceId }) => {
 
                                     <div style={{ marginTop: -12, marginBottom: -12 }}>
                                         <DotsMenu className="scriptVersionSelector-dotsMenu">
+                                            {userId ? (
+                                                <div>
+                                                    <Share
+                                                        className="scriptVersionSelector-share"
+                                                        title={version.name}
+                                                        url={`${process.env.PUBLIC_URL}/#/share/${btoa(
+                                                            JSON.stringify({
+                                                                userId,
+                                                                serviceId,
+                                                                versionId: version.id,
+                                                            })
+                                                        )}`}
+                                                    />
+                                                </div>
+                                            ) : (
+                                                <div>
+                                                    <ShareLogin className="scriptVersionSelector-share" />
+                                                </div>
+                                            )}
+
+                                            <Button
+                                                className={css`
+                                                    padding: 6px 6px !important;
+                                                    width: 100%;
+                                                    text-align: left;
+                                                `}
+                                                onClick={() => {
+                                                    duplicateVersion(version);
+                                                }}
+                                            >
+                                                <span
+                                                    className={css`
+                                                        font-size: 13px;
+                                                        vertical-align: text-bottom;
+                                                    `}
+                                                >
+                                                    <Duplicate
+                                                        size={20}
+                                                        colour={theme.colours.gray}
+                                                        style={{ verticalAlign: 'text-bottom', marginRight: 3 }}
+                                                    />{' '}
+                                                    Дублировать
+                                                </span>
+                                            </Button>
+
                                             <Button
                                                 className={css`
                                                     padding: 6px 6px !important;
@@ -148,28 +195,14 @@ const ScriptVersionSelector = ({ serviceId }) => {
                                                         font-size: 13px;
                                                     `}
                                                 >
-                                                    <TrashIcon size={20} colour={theme.colours.gray} /> Удалить
+                                                    <TrashIcon
+                                                        size={20}
+                                                        colour={theme.colours.gray}
+                                                        style={{ verticalAlign: 'text-bottom', marginRight: 3 }}
+                                                    />{' '}
+                                                    Удалить
                                                 </span>
                                             </Button>
-                                            {userId ? (
-                                                <div>
-                                                    <Share
-                                                        className="scriptVersionSelector-share"
-                                                        title={version.name}
-                                                        url={`${process.env.PUBLIC_URL}/#/share/${btoa(
-                                                            JSON.stringify({
-                                                                userId,
-                                                                serviceId,
-                                                                versionId: version.id,
-                                                            })
-                                                        )}`}
-                                                    />
-                                                </div>
-                                            ) : (
-                                                <div>
-                                                    <ShareLogin className="scriptVersionSelector-share" />
-                                                </div>
-                                            )}
                                         </DotsMenu>
                                     </div>
                                 </div>
