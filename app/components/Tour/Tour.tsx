@@ -23,7 +23,6 @@ export const Tour = ({ serviceId }: { serviceId: string }): JSX.Element | null =
 
     const [tourDismissed, setTourDismissed] = useRecoilState(tourDismissedState);
 
-    return null;
     if (tourDismissed) {
         return null;
     }
