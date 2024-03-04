@@ -5,7 +5,11 @@ import { useTheme } from 'emotion-theming';
 import Dots from 'components/svgs/Dots';
 import Button from 'components/Button/Button';
 
-export const DotsMenuContext = React.createContext({ toggleOpen: () => {}, isOpen: false, setIsOpen: () => {} });
+export const DotsMenuContext = React.createContext({
+    toggleOpen: () => {},
+    isOpen: false,
+    setIsOpen: (val: boolean) => {},
+});
 
 const MENU_WIDTH = 160;
 

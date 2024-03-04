@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { useAuth } from 'oidc-react';
 import Button from 'components/Button/Button';
 import Drawer from 'components/Drawer/Drawer';
@@ -18,11 +18,10 @@ import Switch from 'components/svgs/Switch';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import Share from 'components/Share/Share';
 import ShareLogin from 'components/Share/ShareLogin';
-import { currentScriptSelector } from 'state/currentScript';
-import Duplicate from 'components/svgs/Duplicate';
 
 import { useAddNewVersion } from './useAddNewVersion';
 import { useDuplicateVersion } from './useDuplicateVersion';
+import { DuplicateButton } from './DuplicateButton';
 
 const ScriptVersionSelector = ({ serviceId }) => {
     const theme = useTheme();
@@ -150,30 +149,7 @@ const ScriptVersionSelector = ({ serviceId }) => {
                                                 </div>
                                             )}
 
-                                            <Button
-                                                className={css`
-                                                    padding: 6px 6px !important;
-                                                    width: 100%;
-                                                    text-align: left;
-                                                `}
-                                                onClick={() => {
-                                                    duplicateVersion(version);
-                                                }}
-                                            >
-                                                <span
-                                                    className={css`
-                                                        font-size: 13px;
-                                                        vertical-align: text-bottom;
-                                                    `}
-                                                >
-                                                    <Duplicate
-                                                        size={20}
-                                                        colour={theme.colours.gray}
-                                                        style={{ verticalAlign: 'text-bottom', marginRight: 3 }}
-                                                    />{' '}
-                                                    Дублировать
-                                                </span>
-                                            </Button>
+                                            <DuplicateButton serviceId={serviceId} version={version} />
 
                                             <Button
                                                 className={css`
