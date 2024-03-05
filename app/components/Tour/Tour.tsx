@@ -41,7 +41,7 @@ export const Tour = ({ serviceId }: { serviceId: string }): JSX.Element | null =
                     arrowColor: theme.colours.blue,
                     backgroundColor: theme.colours.blue,
                     primaryColor: theme.colours.blue,
-                    textColor: theme.colours.white,
+                    textColor: '#ffffff',
                 },
             }}
             locale={{ last: 'На этом всё!', next: 'Дальше', open: 'Редактор чинов', skip: 'Закрыть' }}
