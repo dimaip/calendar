@@ -69,7 +69,7 @@ const ScriptEditorToggle = ({ serviceId }) => {
                     }
                     onClick={() => setScriptEditorIsActive(!scriptEditorIsActive)}
                 >
-                    {scriptEditorIsActive ? <Cross white /> : <Pencil colour={theme.colours.white} />}
+                    {scriptEditorIsActive ? <Cross white /> : <Pencil colour="#fff" />}
                 </Button>
             </div>
         </div>

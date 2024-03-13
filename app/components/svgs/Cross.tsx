@@ -14,7 +14,7 @@ const Cross = ({ white = false }) => {
             <path
                 d="M17.29 1L1 18.89M1 1l16.29 17.89"
                 fill="none"
-                stroke={white ? theme.colours.white : theme.colours.darkGray}
+                stroke={white ? '#fff' : theme.colours.darkGray}
                 strokeLinecap="round"
                 strokeMiterlimit="10"
                 strokeWidth="2"
