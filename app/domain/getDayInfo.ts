@@ -532,6 +532,10 @@ export const getFeastInfo = memoize(
         const palamaBegin = calculateEasterDate(y);
         palamaBegin.setDate(6 * pascha.getDate() - 6);
 
+        if (isEasterOffsetRange(-7 * 7)) {
+            icon = 'exile.svg';
+        }
+
         if (isEasterOffsetRange(-7 * 6)) {
             icon = 'triumph.svg';
         }
