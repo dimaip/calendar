@@ -38,7 +38,7 @@ const Ending = ({ date, saints, annunciation, isFast }) => {
             isEasterOffsetRange={isEasterOffsetRange}
             hidePreotpust={annunciation}
             isEasterOffsetRange={isEasterOffsetRange}
-            hideTverdina={isEasterOffsetRange(0, 49) || title === 'Рождество Христово'}
+            hideTverdina={isEasterOffsetRange(-7 * 7 + 1, 49) || title === 'Рождество Христово'}
             isFast={isFast}
         />
     );

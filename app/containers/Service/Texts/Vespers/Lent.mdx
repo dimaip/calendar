@@ -176,8 +176,9 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
     <>{props.saints}</>
 
-    <MdxLoader src="Shared/Ending/Tverdina" isEasterOffsetRange={props.isEasterOffsetRange} lang={props.lang} isFast={props.isFast} />
-
+    <If condition={!props.isEasterOffsetRange(-7 * 7 + 1, 49)}>
+        <MdxLoader src="Shared/Ending/Tverdina" isEasterOffsetRange={props.isEasterOffsetRange} lang={props.lang} isFast={props.isFast} />
+    </If>
 </If>
 
 <If condition={(props.greatLent && props.dayOfWeek !== 5)}>
@@ -211,7 +212,9 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
             <MdxLoader src="Matins/Psalm136" lang={props.lang} />
         </Then>
         <Else>
-            <MdxLoader src="Shared/Ending/Tverdina" isEasterOffsetRange={props.isEasterOffsetRange} lang={props.lang} isFast={props.isFast} />
+            <If condition={!props.isEasterOffsetRange(-7 * 7 + 1, 49)}>
+                <MdxLoader src="Shared/Ending/Tverdina" isEasterOffsetRange={props.isEasterOffsetRange} lang={props.lang} isFast={props.isFast} />
+            </If>
         </Else>
     </If>
 

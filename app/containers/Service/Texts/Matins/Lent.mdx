@@ -20,10 +20,13 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
     <>{(props.dayOfWeek === 0 || props.dayOfWeek === 1 || props.vospominanijaUsopshih || props.greatLent || props.dmitrievskajaSubbota) && <MdxLoader src="Matins/Prayer1" lang={props.lang} />}</>
 
     <>{(props.vselenskayaRoditelskayaSubbota || props.troitskayaRoditelskayaSubbota) && <MdxLoader src="Matins/Aliluja1" lang={props.lang} />}</>
-    <>{(props.lentSubbotas || props.dmitrievskajaSubbota) && <MdxLoader src="Matins/Aliluja2" lang={props.lang} />}</>
+    <>{!props.isDate(4, 6) && (props.lentSubbotas || props.dmitrievskajaSubbota) && <MdxLoader src="Matins/Aliluja2" lang={props.lang} />}</>
     <>{!props.lentSubbotas && props.greatLent && <MdxLoader src="Matins/Aliluja3" lang={props.lang} />}</>
 </If>
 
+<If condition={props.isDate(4, 6)}>
+    <MdxLoader src="Matins/BogGospod" lang={props.lang} />
+</If>
 <If condition={props.isEasterOffsetRange(-6, -4)}>
     <MdxLoader src="Shared/TroparionPassion" lang={props.lang} />
 </If>
@@ -237,8 +240,9 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
     <>{props.saints}</>
 
-    <MdxLoader src="Shared/Ending/Tverdina" isEasterOffsetRange={props.isEasterOffsetRange} lang={props.lang} isFast={props.isFast} />
-
+    <If condition={!props.isEasterOffsetRange(-7 * 7 + 1, 49)}>
+        <MdxLoader src="Shared/Ending/Tverdina" isEasterOffsetRange={props.isEasterOffsetRange} lang={props.lang} isFast={props.isFast} />
+    </If>
 </If>
 
 <>{props.endHymns}</>

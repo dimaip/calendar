@@ -141,6 +141,7 @@ const Matins = ({ date, obihod }) => {
         isHoliday,
         dmitrievskajaSubbota,
         isAnnunciation,
+        isDate,
     };
     if (obihod) {
         return <EasterZautreniaObihod {...props} />;
