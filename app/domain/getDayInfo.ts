@@ -490,7 +490,16 @@ export const getFeastInfo = memoize(
             vasiliy = true;
         }
         // Blagoveshenie overrides vasiliy
-        if (new Date(y, 3, 7).getTime() === date.getTime()) {
+        if (
+            new Date(y, 3, 7).getTime() === date.getTime() &&
+            !(
+                isEasterOffsetRange(-7 * 6) ||
+                isEasterOffsetRange(-7 * 5) ||
+                isEasterOffsetRange(-7 * 4) ||
+                isEasterOffsetRange(-7 * 3) ||
+                isEasterOffsetRange(-7 * 2)
+            )
+        ) {
             vasiliy = false;
         }
 
