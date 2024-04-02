@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import { useRecoilState } from 'recoil';
-import { useAuth } from 'oidc-react';
 import Button from 'components/Button/Button';
 import Drawer from 'components/Drawer/Drawer';
 import Input from 'components/Input/Input';
@@ -10,34 +9,22 @@ import scriptVersionSelectorIsActiveState from 'state/scriptVersionSelectorIsAct
 import scriptVersionsState from 'state/scriptVersionsState';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import currentScriptVersionState from 'state/currentScriptVersion';
-import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
-import TrashIcon from 'components/svgs/TrashIcon';
 import SectionHeading from 'containers/Main/SectionHeading';
-import Pencil from 'components/svgs/Pencil';
 import Switch from 'components/svgs/Switch';
-import DotsMenu from 'components/DotsMenu/DotsMenu';
-import Share from 'components/Share/Share';
-import ShareLogin from 'components/Share/ShareLogin';
 
 import { useAddNewVersion } from './useAddNewVersion';
-import { useDuplicateVersion } from './useDuplicateVersion';
-import { DuplicateButton } from './DuplicateButton';
+import { ScriptVersion } from './ScriptVersion';
 
-const ScriptVersionSelector = ({ serviceId }) => {
+const ScriptVersionSelector = ({ serviceId }: { serviceId: string }) => {
     const theme = useTheme();
     const [scriptVersionSelectorIsActive, setScriptVersionSelectorIsActive] = useRecoilState(
         scriptVersionSelectorIsActiveState
     );
-    const [scriptVersions, setScriptVersions] = useRecoilState(scriptVersionsState(serviceId));
+    const [scriptVersions] = useRecoilState(scriptVersionsState(serviceId));
     const [currentScriptVersion, setCurrentScriptVersion] = useRecoilState(currentScriptVersionState(serviceId));
     const [newVersionName, setNewVersionName] = useState('');
-    const [_, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
-    const auth = useAuth();
-    const userId = auth.userData?.profile?.sub;
 
     const addNewVersionOriginal = useAddNewVersion(serviceId);
-
-    const duplicateVersion = useDuplicateVersion(serviceId);
 
     const addNewVersion = () => {
         addNewVersionOriginal(newVersionName);
@@ -71,118 +58,7 @@ const ScriptVersionSelector = ({ serviceId }) => {
                             Исходное чинопоследование
                         </ButtonBox>
                         {scriptVersions.map((version) => (
-                            <ButtonBox
-                                key={version.id}
-                                onClick={() => {
-                                    setCurrentScriptVersion(version.id);
-                                    setScriptVersionSelectorIsActive(false);
-                                    setScriptEditorIsActive(false);
-                                }}
-                                className={css`
-                                    border: ${version.id === currentScriptVersion
-                                        ? `2px solid ${theme.colours.primary}`
-                                        : undefined};
-                                `}
-                            >
-                                <div
-                                    className={css`
-                                        display: flex;
-                                    `}
-                                >
-                                    <div
-                                        className={css`
-                                            flex-grow: 1;
-                                        `}
-                                    >
-                                        {version.name}
-                                    </div>
-
-                                    <Button
-                                        className={css`
-                                            flex-grow: 0;
-                                            flex-shrink: 0;
-                                            margin-right: 15px;
-                                            margin-top: 3px;
-                                            padding: 0;
-                                        `}
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-
-                                            if (version.sourceUserId) {
-                                                alert(
-                                                    'Этим чином с вами поделились. Скопируйте его чтобы иметь возможность редактировать.'
-                                                );
-                                            } else {
-                                                setCurrentScriptVersion(version.id);
-                                                setScriptVersionSelectorIsActive(false);
-                                                setScriptEditorIsActive(true);
-                                            }
-                                        }}
-                                    >
-                                        <Pencil
-                                            colour={
-                                                version.sourceUserId ? theme.colours.lightGray : theme.colours.primary
-                                            }
-                                        />
-                                    </Button>
-
-                                    <div style={{ marginTop: -12, marginBottom: -12 }}>
-                                        <DotsMenu className="scriptVersionSelector-dotsMenu">
-                                            {userId ? (
-                                                <div>
-                                                    <Share
-                                                        className="scriptVersionSelector-share"
-                                                        title={version.name}
-                                                        url={`${process.env.PUBLIC_URL}/#/share/${btoa(
-                                                            JSON.stringify({
-                                                                userId,
-                                                                serviceId,
-                                                                versionId: version.id,
-                                                            })
-                                                        )}`}
-                                                    />
-                                                </div>
-                                            ) : (
-                                                <div>
-                                                    <ShareLogin className="scriptVersionSelector-share" />
-                                                </div>
-                                            )}
-
-                                            <DuplicateButton serviceId={serviceId} version={version} />
-
-                                            <Button
-                                                className={css`
-                                                    padding: 6px 6px !important;
-                                                    width: 100%;
-                                                    text-align: left;
-                                                `}
-                                                onClick={() => {
-                                                    setScriptVersions(
-                                                        scriptVersions.filter((i) => i.id !== version.id)
-                                                    );
-                                                    if (version.id === currentScriptVersion) {
-                                                        setCurrentScriptVersion(null);
-                                                    }
-                                                }}
-                                            >
-                                                <span
-                                                    className={css`
-                                                        font-size: 13px;
-                                                    `}
-                                                >
-                                                    <TrashIcon
-                                                        size={20}
-                                                        colour={theme.colours.gray}
-                                                        style={{ verticalAlign: 'text-bottom', marginRight: 3 }}
-                                                    />{' '}
-                                                    Удалить
-                                                </span>
-                                            </Button>
-                                        </DotsMenu>
-                                    </div>
-                                </div>
-                            </ButtonBox>
+                            <ScriptVersion key={version.id} version={version} serviceId={serviceId} />
                         ))}
                         <div
                             className={css`
