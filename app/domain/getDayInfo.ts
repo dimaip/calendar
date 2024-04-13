@@ -557,11 +557,11 @@ export const getFeastInfo = memoize(
             icon = 'palama.svg';
         }
 
-        if (isEasterOffsetRange(-7 * 4)) {
+        if (isEasterOffsetRange(-7 * 3)) {
             icon = 'lestvichnik.svg';
         }
 
-        if (isEasterOffsetRange(-7 * 3)) {
+        if (isEasterOffsetRange(-7 * 2)) {
             icon = 'egypt.svg';
         }
 
