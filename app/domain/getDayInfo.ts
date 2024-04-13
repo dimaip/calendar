@@ -525,6 +525,10 @@ export const getFeastInfo = memoize(
             icon = 'ascension.svg';
         }
 
+        if (isEasterOffsetRange(-8)) {
+            icon = 'lazar.svg';
+        }
+
         const holy_Ascension = calculateEasterDate(y);
         holy_Ascension.setDate(pascha.getDate() + 39);
 
@@ -551,6 +555,14 @@ export const getFeastInfo = memoize(
 
         if (isEasterOffsetRange(-7 * 5)) {
             icon = 'palama.svg';
+        }
+
+        if (isEasterOffsetRange(-7 * 4)) {
+            icon = 'lestvichnik.svg';
+        }
+
+        if (isEasterOffsetRange(-7 * 3)) {
+            icon = 'egypt.svg';
         }
 
         const strastnayaBegin = calculateEasterDate(y);
