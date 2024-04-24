@@ -572,6 +572,13 @@ export const getFeastInfo = memoize(
             icon = 'passion.svg';
         }
 
+        if (isEasterOffsetRange(-6)) {
+            icon = 'passionMonday.svg';
+        }
+        if (isEasterOffsetRange(-2)) {
+            icon = 'passionMonday.svg';
+        }
+
         if (date >= pascha && date < fomina) {
             colour = red;
             icon = 'easter.svg';
