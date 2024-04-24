@@ -576,7 +576,7 @@ export const getFeastInfo = memoize(
             icon = 'passionMonday.svg';
         }
         if (isEasterOffsetRange(-2)) {
-            icon = 'passionMonday.svg';
+            icon = 'passionFriday.svg';
         }
 
         if (date >= pascha && date < fomina) {
