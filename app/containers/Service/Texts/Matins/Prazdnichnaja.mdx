@@ -136,6 +136,8 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
     short={true}
 />}
 
+{props.brightWeek && <MdxLoader src="Shared/EasterTroparion3x" />}
+
 <If condition={!props.isAnnunciation && props.dayOfWeek !== 0 || props.isEasterOffsetRange(7)}>
   ### Тропари
 
@@ -147,8 +149,6 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
     serviceType="Утреня"
   />
 </If>
-
-{props.brightWeek && <MdxLoader src="Shared/EasterTroparion3x" />}
 
 <>
     {props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(-28) && !props.isEasterOffsetRange(7) && (
