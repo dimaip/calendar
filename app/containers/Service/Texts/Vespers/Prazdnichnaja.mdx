@@ -123,6 +123,10 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
     ### Тропари
 
+<If condition={props.brightWeek}>
+    <MdxLoader src="Shared/EasterTroparion3x" />
+</If>
+
     <>{props.troparions}</>
     <Parts
         date={props.date}
