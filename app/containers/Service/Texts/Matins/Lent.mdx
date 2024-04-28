@@ -46,7 +46,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
     />
 </If>
 
-<If condition={props.isEasterOffsetRange(-3)}>
+<If condition={props.isEasterOffsetRange(-6, -3)}>
 
     <span id="reading" />
 
@@ -131,7 +131,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
     short={props.isEasterOffsetRange(-6, -2) || props.vospominanijaUsopshih || props.dmitrievskajaSubbota || props.isEasterOffsetRange(-(7 * 6 + 1))}
 />
 
-<If condition={props.isEasterOffsetRange(-6, -4) || !props.greatLent || props.dayOfWeek === 6}>
+<If condition={!props.greatLent || props.dayOfWeek === 6}>
 
     <span id="reading" />
 
