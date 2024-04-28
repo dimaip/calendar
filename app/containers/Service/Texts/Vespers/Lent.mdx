@@ -76,14 +76,7 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
 <MdxLoader src="Vespers/Prayer8" lang={props.lang} />
 
-<If condition={props.greatLent && props.dayOfWeek !== 5 && !props.isEasterOffsetRange(-(7 * 7 - 1))}>
-    <Then>
-        <MdxLoader src="Vespers/VecherniePsalmiLent" lang={props.lang} />
-    </Then>
-    <Else>
-        <MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
-    </Else>
-</If>
+<MdxLoader src="Vespers/VecherniePsalmi" lang={props.lang} />
 
 ### Стихиры на «Господи, взываю»
 
@@ -108,11 +101,15 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
 <span id="reading" />
 
+<If condition={!props.isEasterOffsetRange(-6)}>
+
 **П** Премудрость!
 
 **Ч** Из книги… чтение.
 
 **П** Будем внимательны!
+
+</If>
 
 <br />
 
