@@ -575,6 +575,12 @@ export const getFeastInfo = memoize(
         if (isEasterOffsetRange(-6)) {
             icon = 'passionMonday.svg';
         }
+        if (isEasterOffsetRange(-5)) {
+            icon = 'passionTuesday.svg';
+        }
+        if (isEasterOffsetRange(-4)) {
+            icon = 'passionWednesday.svg';
+        }
         if (isEasterOffsetRange(-2)) {
             icon = 'passionFriday.svg';
         }
