@@ -591,7 +591,10 @@ export const getFeastInfo = memoize(
         }
         if (date >= fomina && date < holy_Ascension) {
             colour = red;
-            icon = 'easter2.svg';
+            icon = 'easter2new.svg';
+        }
+        if (isEasterOffsetRange(7)) {
+            icon = 'fomina.svg';
         }
 
         const pentecost = calculateEasterDate(y);
