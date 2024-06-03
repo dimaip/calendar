@@ -39,7 +39,6 @@ import Banner from './Banner';
 import Peace from './Peace';
 import Books from './Books';
 import { TroparionFavsHome } from './TroparionFavsHome';
-import Award from './Award';
 import Sing from './Sing';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
@@ -160,7 +159,6 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                         <Sermons date={date} sermons={sermons} />
                                                     </>
                                                 )}
-                                                <Award />
                                                 <Banner />
                                             </SolidSection>
                                         </div>
