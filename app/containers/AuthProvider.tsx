@@ -4,8 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { WebStorageStateStore } from 'oidc-client-ts';
 
 const clientId = '229793417436135450@pb';
-const scope =
-    'offline_access openid profile email urn:zitadel:iam:user:metadata urn:zitadel:iam:org:id:229787051975770138';
+const scope = 'offline_access openid profile email urn:zitadel:iam:org:id:229787051975770138';
 
 const userManager = new UserManager({
     userStore: new WebStorageStateStore({ store: window.localStorage }),
