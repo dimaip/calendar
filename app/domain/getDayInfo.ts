@@ -596,6 +596,12 @@ export const getFeastInfo = memoize(
         if (isEasterOffsetRange(7)) {
             icon = 'fomina.svg';
         }
+        if (isEasterOffsetRange(7 * 2)) {
+            icon = 'myrr.svg';
+        }
+        if (isEasterOffsetRange(7 * 4)) {
+            icon = 'samar.svg';
+        }
 
         const pentecost = calculateEasterDate(y);
         pentecost.setDate(pascha.getDate() + 49);
