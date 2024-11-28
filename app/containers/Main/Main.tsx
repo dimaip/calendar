@@ -22,6 +22,7 @@ import { HeightUpdater } from 'components/HeightUpdate/HeightUpdater';
 import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
 import MDXProvider from 'containers/Service/MDXProvider';
 import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
+import { useDocumentTitle } from 'utils/useDocumentTitle';
 
 import BorderedSection from './BorderedSection';
 import IosPrompt from './IosPrompt';
@@ -182,6 +183,8 @@ const Main = React.memo(({ services = false }) => {
     const [menuShown, setMenuShown] = useState(false);
 
     const calendarRef = useRef();
+
+    useDocumentTitle(`${date} - Православное богослужение на русском языке`);
 
     const history = useHistory();
     const setNewDate = (dateString) => {

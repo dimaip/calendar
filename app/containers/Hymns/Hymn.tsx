@@ -11,6 +11,7 @@ import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
 import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
 import { LangContext } from 'containers/Service/LangContext';
+import { useDocumentTitle } from 'utils/useDocumentTitle';
 
 import { FavButton } from './FavButton';
 
@@ -68,6 +69,8 @@ export const Hymn = () => {
     const { data: hymns, status } = useHymns();
     const { hymnId } = useParams<{ hymnId: string }>();
     const hymn = hymns?.find((h) => h.id === hymnId);
+
+    useDocumentTitle(`${hymn?.title} - Православное богослужение на русском языке`);
 
     return (
         <LayoutInner left={<LanguageSwitcher />}>

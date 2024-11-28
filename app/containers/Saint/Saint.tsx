@@ -8,6 +8,7 @@ import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import RteText from 'components/RteText/RteText';
 import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
+import { useDocumentTitle } from 'utils/useDocumentTitle';
 
 import useSaint from '../../hooks/useSaint';
 
@@ -15,6 +16,8 @@ const Saint = () => {
     const { saintId } = useParams();
     const { data: saint, status } = useSaint(saintId);
     const theme = useTheme();
+
+    useDocumentTitle(`${date} - ${saint?.title} - Святые дни`);
 
     return (
         <LayoutInner>

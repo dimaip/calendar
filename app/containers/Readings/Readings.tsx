@@ -9,6 +9,7 @@ import Prayer from 'components/svgs/Prayer';
 import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
+import { useDocumentTitle } from 'utils/useDocumentTitle';
 
 import ServiceSelector from './ServiceSelector';
 import ReadingsForService from './ReadingsForService';
@@ -21,6 +22,8 @@ const Readings = ({ brother = false }) => {
     const readingsForService = readings?.[service];
     const services = Object.keys(readings || {});
     const theme = useTheme();
+
+    useDocumentTitle(`${date} - Чтения - Православное богослужение на русском языке`);
 
     useEffect(() => {
         // Redirect to first available service, if current one doesn't exist

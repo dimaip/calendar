@@ -9,6 +9,7 @@ import ErrorMessage404 from 'components/ErrorMessage404/ErrorMessage404';
 import RteText from 'components/RteText/RteText';
 import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
+import { useDocumentTitle } from 'utils/useDocumentTitle';
 
 const InnerContent = ({ theme, thisDay, externalDayStatus }) => {
     if (externalDayStatus === 'loading') {
@@ -62,6 +63,8 @@ const ThisDay = () => {
 
     const thisDay = (thisDays || []).find((thisDay) => thisDay.id === thisDayId);
     const theme = useTheme();
+
+    useDocumentTitle(`${date} - ${thisDay?.title} - В этот день`);
 
     return (
         <LayoutInner>

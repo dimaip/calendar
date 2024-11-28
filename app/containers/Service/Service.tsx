@@ -12,6 +12,8 @@ import { Note } from 'components/Note/Note';
 import ScriptVersionSelector from 'components/ScriptVersionSelector/ScriptVersionSelector';
 import ScriptEditorToggle from 'components/ScriptEditor/ScriptEditorToggle';
 import { Tour } from 'components/Tour/Tour';
+import { useSyncCurrentScriptVersion } from 'components/ScriptVersionSelector/useSyncCurrentScriptVersion';
+import { useDocumentTitle } from 'utils/useDocumentTitle';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
@@ -20,7 +22,6 @@ import MDXProvider from './MDXProvider';
 import ParallelLanguageBar from './ParallelLanguageBar';
 import { LangContext } from './LangContext';
 import { ServiceContext } from './ServiceContext';
-import { useSyncCurrentScriptVersion } from 'components/ScriptVersionSelector/useSyncCurrentScriptVersion';
 
 const reloadOnFailedImport = (e) => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
@@ -77,6 +78,8 @@ const Service = () => {
         // Reset TOC on service change
         window.TOC = {};
     }, [serviceId]);
+
+    useDocumentTitle(`${date} - ${service?.title} - Православное богослужение на русском языке`);
 
     if (!day) {
         return <Loader />;

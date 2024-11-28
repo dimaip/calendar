@@ -9,6 +9,7 @@ import Fuse from 'fuse.js';
 import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
+import { useDocumentTitle } from 'utils/useDocumentTitle';
 
 import { HymnButton } from './HymnButton';
 
@@ -19,6 +20,8 @@ export const Hymns = () => {
     const fuse = new Fuse(hymns || [], {
         keys: ['title', 'text'],
     });
+
+    useDocumentTitle('Тропарион - Православное богослужение на русском языке');
 
     const searchResults = searchTerm.length > 0 ? fuse.search(searchTerm) : hymns || [];
     return (

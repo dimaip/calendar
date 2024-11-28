@@ -37,9 +37,20 @@ export const bratMolitvoslovPrayers = [
     },
 ];
 
+interface ServiceInfo {
+    title: string;
+    id: string;
+    enabled: boolean;
+    calendar: boolean;
+    lang: boolean;
+    skipRedirect: boolean;
+    group: string;
+    warn: boolean;
+}
+
 // New texts must be put into `Texts/ServiceIdUppercase/index.dyn.tsx` and then added here
 
-const useServices = (date, readings = {}) => {
+const useServices = (date, readings = {}): ServiceInfo[] => {
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
 
     const [customPrayers] = useRecoilState(customPrayersState('Sugubaja'));

@@ -9,6 +9,7 @@ import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import RteText from 'components/RteText/RteText';
 import { useTheme } from 'emotion-theming';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
+import { useDocumentTitle } from 'utils/useDocumentTitle';
 
 const Sermon = () => {
     const { sermonId, date } = useParams();
@@ -17,6 +18,8 @@ const Sermon = () => {
     const sermon = sermons?.find((sermon) => sermon.id === sermonId);
 
     const theme = useTheme();
+
+    useDocumentTitle(`${date} - ${sermon?.title} - ${sermon?.authorName}`);
 
     return (
         <LayoutInner>

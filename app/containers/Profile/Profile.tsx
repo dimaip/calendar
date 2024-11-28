@@ -7,6 +7,7 @@ import { useAuth } from 'oidc-react';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import BurgerMenu from 'containers/Main/BurgerMenu';
 import SectionHeading from 'containers/Main/SectionHeading';
+import { useDocumentTitle } from 'utils/useDocumentTitle';
 
 const Inner = () => {
     const auth = useAuth();
@@ -62,6 +63,8 @@ const Inner = () => {
 
 const Profile = React.memo(() => {
     const [menuShown, setMenuShown] = useState(false);
+
+    useDocumentTitle('Профиль пользователя - Православное богослужение на русском языке');
 
     return (
         <div>
