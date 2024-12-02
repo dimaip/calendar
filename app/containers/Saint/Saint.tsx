@@ -17,7 +17,7 @@ const Saint = () => {
     const { data: saint, status } = useSaint(saintId);
     const theme = useTheme();
 
-    useDocumentTitle(`${date} - ${saint?.title} - Святые дни`);
+    useDocumentTitle(`${saint?.title} - Святые дни`);
 
     return (
         <LayoutInner>
