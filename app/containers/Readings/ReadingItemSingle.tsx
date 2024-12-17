@@ -9,6 +9,8 @@ import SelectBox from 'components/SelectBox/SelectBox';
 import Button from 'components/Button/Button';
 import Swap from 'components/svgs/Swap';
 import Cross from 'components/svgs/Cross';
+import { useRecoilState } from 'recoil';
+import translationPriorityState from 'state/translationPriorityState';
 
 import useReading from '../../hooks/useReading';
 
@@ -20,11 +22,22 @@ const ReadingItemSingle = ({
     toggleParallel = null,
 }): JSX.Element => {
     const zoom = useContext(ZoomContext);
-    const [translation, setTranslation] = useState(null);
+    const [translation, _setTranslation] = useState(null);
     const { date } = useParams();
-    // @ts-ignore
-    const { data: reading, status } = useReading(readingVerse, translation || defaultTranslation, date);
+    const [translationPriority, setTranslationPriority] = useRecoilState<string[]>(translationPriorityState);
+    // @ts-expect-error
+    const { data: reading, status } = useReading(
+        readingVerse,
+        translation || defaultTranslation,
+        date,
+        translationPriority
+    );
     const theme = useTheme();
+
+    const setTranslation = (value) => {
+        _setTranslation(value);
+        setTranslationPriority([value, ...(translationPriority || []).filter((i) => i !== value)]);
+    };
 
     if (status === 'loading') {
         return <Loader />;
