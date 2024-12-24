@@ -10,8 +10,12 @@ const langState = atom({
         langA: 'ru',
         langB: 'csj',
     },
-    effects_UNSTABLE: [
-        persistAtom,
+    effects: [
+        persistAtom({
+            lang: 'ru',
+            langA: 'ru',
+            langB: 'csj',
+        }),
         ({ onSet }) => {
             onSet(() => {
                 restoreScroll();
