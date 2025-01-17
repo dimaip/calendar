@@ -151,7 +151,7 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 </If>
 
 <>
-    {props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(-28) && !props.isEasterOffsetRange(7) && (
+    {props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(-28) && !props.isEasterOffsetRange(7) && !props.new Date(y, 0, 19).getTime() === date.getTime() (
         <MdxLoader src="Matins/TropsOtp" lang={props.lang} glas={props.day.glas} />
     )}
 </>
