@@ -726,7 +726,7 @@ export const getFeastInfo = memoize(
             title = 'Обрезание Господне';
             feastType = 'great';
             colour = red;
-            calendarColour = 'blue';
+            calendarColour = 'red';
             icon = 'circumcision.svg';
         }
 
