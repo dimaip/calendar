@@ -23,6 +23,8 @@ import Troparions from 'containers/Service/Texts/Shared/Troparions/Troparions';
 import MDXProvider from 'containers/Service/MDXProvider';
 import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
+import { useRecoilValue } from 'recoil';
+import themeState from 'state/themeState';
 
 import BorderedSection from './BorderedSection';
 import IosPrompt from './IosPrompt';
@@ -49,6 +51,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
     const day = dayQuery.data;
     const externalDayQuery = useExternalDay(date);
     const { sermons, thisDays } = externalDayQuery.data || {};
+    const themeStateValue = useRecoilValue(themeState);
 
     const banners = [Sing, Peace, Books];
     const TodaysBanner = banners[new Date(date).getDate() % banners.length];
@@ -58,7 +61,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
         themeColour.current = day.colour;
     }
 
-    const theme = getTheme(themeColour.current);
+    const theme = getTheme(themeColour.current, themeStateValue);
     return (
         <HeightUpdater>
             <ThemeProvider theme={theme}>

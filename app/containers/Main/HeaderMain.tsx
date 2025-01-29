@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Share from 'components/Share/Share';
 import useDay from 'hooks/useDay';
+import ChangeThemeButton from 'components/ChangeThemeButton/ChangeThemeButton';
 
 const UserIcon = () => {
     const { userData } = useAuth();
@@ -144,6 +145,7 @@ const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) 
                     <DotsMenu>
                         <div>
                             <ZoomControlToggle />
+                            <ChangeThemeButton />
                         </div>
                         <Share
                             title="Православное богослужение на русском языке"

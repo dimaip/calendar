@@ -26,11 +26,13 @@ import Profile from 'containers/Profile/Profile';
 import AddSharedVersion from 'containers/AddSharedVersion/AddSharedVersion';
 import { ScriptEditorPromo } from 'components/ScriptEditorPromo/ScriptEditorPromo';
 import Loader from 'components/Loader/Loader';
+import themeState from 'state/themeState';
 
 import checkVersion from './checkVersion';
 
 const DateRoutes = () => {
     const { date } = useParams();
+    const themeStateValue = useRecoilValue(themeState);
 
     const tomorrowDateObj = new Date(date);
     tomorrowDateObj.setDate(tomorrowDateObj.getDate() + 1);
@@ -38,7 +40,7 @@ const DateRoutes = () => {
 
     const isVespers = document.location.href.includes('vespers');
     const { data: day } = useDay(isVespers ? tomorrowDate : date);
-    const theme = getTheme(day?.colour);
+    const theme = getTheme(day?.colour, themeStateValue);
 
     return (
         <ThemeProvider theme={theme}>
@@ -90,7 +92,8 @@ export default () => {
         }
     });
     const isParallel = useRecoilValue(isParallelState);
-    const theme = getTheme();
+    const themeStateValue = useRecoilValue(themeState);
+    const theme = getTheme(undefined, themeStateValue);
 
     const query = new URLSearchParams(window.location.search);
     const code = query.get('code');
