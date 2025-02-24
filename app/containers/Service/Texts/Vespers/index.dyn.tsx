@@ -102,7 +102,7 @@ const Vespers = ({ date, obihod }) => {
         new Date(y, 10, 1).getTime() <= dateObj.getTime() &&
         dateObj.getTime() <= new Date(y, 10, 8).getTime();
     const isFast =
-        !(!greatLent && dayOfWeek === 5) &&
+        !(!(greatLent || vselenskayaRoditelskayaSubbota || troitskayaRoditelskayaSubbota) && dayOfWeek === 5) &&
         !isHoliday &&
         (tomorrowDay?.fastName === 'Петров пост' ||
             tomorrowDay?.fastName === 'Успенский пост' ||

@@ -108,7 +108,7 @@ const Matins = ({ date, obihod }) => {
         dateObj.getTime() <= new Date(y, 10, 8).getTime();
     const greatLent = day?.fastName === 'Великий пост';
     const isFast =
-        !(!greatLent && dayOfWeek === 6) &&
+        !(!(greatLent || vospominanijaUsopshih || dmitrievskajaSubbota) && dayOfWeek === 6) &&
         !lazarevaSubbota &&
         !lentSubbota5 &&
         !isHoliday &&
