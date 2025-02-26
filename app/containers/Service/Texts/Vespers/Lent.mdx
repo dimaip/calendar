@@ -138,7 +138,7 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 <MdxLoader src="Vespers/PrayerSimeona" lang={props.lang} lent />
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-<If condition={!((props.greatLent && props.dayOfWeek !== 5) || props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
+<If condition={!(props.greatLent && props.dayOfWeek !== 5) }>
 
     ### Тропари
 
@@ -150,32 +150,6 @@ import StihiriNaStihah from './StihiriNaStihah/StihiriNaStihah';
 
     <>{props.otpust}</>
 
-</If>
-
-<If condition={(props.sirnajaSedmitza && (props.dayOfWeek === 2 || props.dayOfWeek === 4))}>
-
-    <MdxLoader src="Vespers/LentEnding1" lang={props.lang} />
-
-    ### Отпуст
-
-    <Parts
-        date={props.date}
-        partNames={['shared.Отпуст Синаксарный']}
-        fallback={
-            props.isSunday || props.easterSeason ? (
-                <MdxLoader src="Shared/Ending/EasterOtpust" />
-            ) : (
-                <MdxLoader src="Shared/Ending/Otpust" />
-            )
-        }
-        serviceType="Вечерня"
-    />
-
-    <>{props.saints}</>
-
-    <If condition={!props.isEasterOffsetRange(-7 * 7 + 1, 49)}>
-        <MdxLoader src="Shared/Ending/Tverdina" isEasterOffsetRange={props.isEasterOffsetRange} lang={props.lang} isFast={props.isFast} />
-    </If>
 </If>
 
 <If condition={(props.greatLent && props.dayOfWeek !== 5)}>
