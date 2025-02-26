@@ -194,7 +194,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
 <MdxLoader src="Shared/STrisvatogo" lang={props.lang} />
 
-<If condition={props.isEasterOffsetRange(-3) || !((props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5)) || (props.greatLent && props.dayOfWeek !== 6))}>
+<If condition={props.isEasterOffsetRange(-3) || (props.greatLent && props.dayOfWeek !== 6)}>
 
     <If condition={!props.isEasterOffsetRange(-3)}>
         ### Тропари
@@ -217,7 +217,7 @@ import Psalm50 from 'containers/Service/Texts/Shared/Psalm50/index.mdx';
 
 </If>
 
-<If condition={!props.isEasterOffsetRange(-3) && ((props.sirnajaSedmitza && (props.dayOfWeek === 3 || props.dayOfWeek === 5)) || (props.greatLent && props.dayOfWeek !== 6))}>
+<If condition={!props.isEasterOffsetRange(-3) && props.greatLent && props.dayOfWeek !== 6 }>
 
     <If condition={!props.greatLent}>
         <MdxLoader src="Matins/LentEnding1" lang={props.lang} />
