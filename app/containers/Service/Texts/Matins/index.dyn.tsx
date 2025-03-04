@@ -118,7 +118,8 @@ const Matins = ({ date, obihod }) => {
             greatLent ||
             vospominanijaUsopshih ||
             dmitrievskajaSubbota ||
-            sirnajaSedmitza);
+            sirnajaSedmitza) &&
+        !(dayOfWeek === 6 && isDate(3, 22));
 
     const otpust = <Ending date={date} saints={saints} isFast={isFast} />;
 
