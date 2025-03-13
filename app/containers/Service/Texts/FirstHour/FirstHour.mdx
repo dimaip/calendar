@@ -72,7 +72,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <Parts
     date={props.date}
     partNames={['shared.Тропари']}
-    serviceType="6-й час"
+    serviceType="1-й час"
     lang={props.lang}
     partsProcessor={(parts) => {
         if (props.dayOfWeek === 0) {
@@ -98,7 +98,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
             }
         } else {
             if (parts.length === 0) {
-                return [<Tropar6Chasa />, 'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>'];
+                return [<Tropar1Chasa />, 'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>'];
             } else if (parts.length === 1) {
                 return ['НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>', parts[0]];
             } else {
