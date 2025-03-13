@@ -12,12 +12,23 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <If condition={props.isEasterOffsetRange(-2)}>
     
     <MdxLoader src="FirstHour/VstupCarHour" />
+
+    <MdxLoader src="Shared/Vozglas" />
+
+    <MdxLoader src="Shared/SlavaTebe" />
+
+    <MdxLoader src="Shared/ParaklitChit" />
+
+    ### Обычное начало
+
+    <MdxLoader src="Shared/ObichnoeNachalo" />
     
 </If>
 
-<If condition={!props.isEasterOffsetRange(0, 39)}>
+<If condition={!props.isEasterOffsetRange(0, 39) && !props.isEasterOffsetRange(-2)}>
     <MdxLoader src="Shared/Pridite3" />
 </If>
+
 <If condition={props.isEasterOffsetRange(0, 39)}>
     <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
 </If>
