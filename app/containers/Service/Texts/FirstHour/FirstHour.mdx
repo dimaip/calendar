@@ -113,12 +113,6 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="FirstHour/Bogorodichen" />
 
-<If condition={!props.isEasterOffsetRange(-2)}>
-
-    <MdxLoader src="FirstHour/Bogorodichen2" />
-
-</If>
-
 <If condition={props.isEasterOffsetRange(-2)}>
     
     <MdxLoader src="FirstHour/TropsVelPiat" />
@@ -136,7 +130,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     <MdxLoader src="Vespers/PremudrostParemiya" />
     
     <div>
-    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Евр., II, 11-18.'] }} />
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Гал., VI, 14-18.'] }} />
     </div>
 
     <MdxLoader src="Shared/MirTebeApostol" />
@@ -146,14 +140,14 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     <br />
     
     <div>
-    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Лк. XXIII, 32-49.'] }} />
+    <ReadingsForService readingsForService={{ 'Великой Пятницы': ['Мф. XXVII, 1-56.'] }} />
     </div>
     
     <MdxLoader src="Shared/SlavaDolgoterp" />
 
 </If>
 
-<MdxLoader src="SixthHour/Tropar6Chasa2" />
+<MdxLoader src="FirstHour/Tropar1Chasa2" />
 
 <MdxLoader src="Shared/STrisvatogo" />
 
