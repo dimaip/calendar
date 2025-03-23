@@ -53,7 +53,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     
 ### Псалом 85
 
-<MdxLoader src="Shared/Psalm85" />
+<MdxLoader src="Shared/Psalom85" />
 
 <MdxLoader src="Shared/AfterTripsalm" />
 
@@ -64,7 +64,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 <Parts
     date={props.date}
     partNames={['shared.Тропари']}
-    serviceType="3-й час"
+    serviceType="9-й час"
     lang={props.lang}
     partsProcessor={(parts) => {
         if (props.dayOfWeek === 0) {
@@ -90,7 +90,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
             }
         } else {
             if (parts.length === 0) {
-                return [<Tropar3Chasa />, 'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>'];
+                return [<Tropar9Chasa />, 'НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>'];
             } else if (parts.length === 1) {
                 return ['НЕТЗАМЕНЫ<p><strong>Слава.</strong></p>', parts[0]];
             } else {
