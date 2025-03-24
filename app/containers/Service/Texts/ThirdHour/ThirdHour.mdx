@@ -192,4 +192,8 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Shared/MolitvaChasaMardariya" />
 
-<MdxLoader src="ThirdHour/OtpustMaliy" />
+<If condition={!props.isEasterOffsetRange(-2)}>
+
+    <MdxLoader src="ThirdHour/OtpustMaliy" />
+
+</If>
