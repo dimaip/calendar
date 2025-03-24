@@ -34,6 +34,12 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 </If>
 
+<If condition={props.isEasterOffsetRange(-2)}>
+
+    <MdxLoader src="Shared/Pridite3" />
+
+</If>
+
 ## (2) Трипсалмие
 
 <If condition={!props.isEasterOffsetRange(-2)}>
