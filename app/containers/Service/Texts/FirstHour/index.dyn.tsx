@@ -6,7 +6,7 @@ import useDay from 'hooks/useDay';
 import Loader from 'components/Loader/Loader';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 
-import SixthHourMdx from './FirstHour.mdx';
+import FirstHourMdx from './FirstHour.mdx';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -21,7 +21,7 @@ const Readings = ({ readingsForService, day }) =>
         <Loader />
     );
 
-const SixthHour = ({ date }): JSX.Element => {
+const FirstHour = ({ date }): JSX.Element => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const { data: day } = useDay(date);
     const dateObj = new Date(date);
