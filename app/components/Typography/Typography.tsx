@@ -12,7 +12,7 @@ const useAddToTOC = (title: unknown, level?: number): string => {
             : Array.isArray(title)
             ? title.filter((i) => typeof i === 'string').join(' ')
             : null;
-    
+
     const processedDomId = domId ? `r-${domId}-${randomNumberRef.current}` : '';
     useEffect(() => {
         if (processedDomId) {
@@ -23,9 +23,9 @@ const useAddToTOC = (title: unknown, level?: number): string => {
             };
             return () => {
                 delete window.TOC[processedDomId];
-            }
+            };
         }
-    })
+    });
     if (!domId) {
         return '';
     }

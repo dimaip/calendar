@@ -30,7 +30,7 @@ const LayoutInner = ({ children, backLink = null, left = null, right = null, pad
                         align-items: center;
                     `}
                 >
-                    <Link to={backLinkEffective || `/date/${date}`} title="Назад">
+                    <Link to={backLinkEffective || date ? `/date/${date}` : '/'} title="Назад">
                         <div
                             className={css`
                                 padding: 18px;
