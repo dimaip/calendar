@@ -111,7 +111,8 @@ const Vespers = ({ date, obihod }) => {
             vselenskayaRoditelskayaSubbota ||
             troitskayaRoditelskayaSubbota ||
             sirnajaSedmitza ||
-            dmitrievskajaSubbota);
+            dmitrievskajaSubbota) &&
+        !(dayOfWeek === 6 && isDate(3, 22));
 
     const otpust = <Ending date={tomorrowDate} saints={saints} annunciation={isAnnunciation} isFast={isFast} />;
 
