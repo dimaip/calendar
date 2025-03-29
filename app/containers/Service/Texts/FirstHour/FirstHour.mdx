@@ -157,7 +157,7 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
     date={props.date}
     partNames={['shared.Кондаки']}
     serviceType="1-й час"
-    fallback={props.dayOfWeek !== 0 && <MdxLoader src="SixthHour/Kondaks" dayOfWeek={props.dayOfWeek} />}
+    fallback={props.dayOfWeek !== 0 && <MdxLoader src="FirstHour/Kondaks" dayOfWeek={props.dayOfWeek} />}
     lang={props.lang}
     partsProcessor={(parts) => {
         if (props.dayOfWeek === 0) {
