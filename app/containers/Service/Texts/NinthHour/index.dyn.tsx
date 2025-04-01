@@ -3,9 +3,9 @@ import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import React from 'react';
 import useDay from 'hooks/useDay';
 
-import ThirdHourMdx from './NinthHour.mdx';
+import NinthHourMdx from './NinthHour.mdx';
 
-const ThirdHour = ({ date }): JSX.Element => {
+const NinthHour = ({ date }): JSX.Element => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const { data: day } = useDay(date);
     const dateObj = new Date(date);
