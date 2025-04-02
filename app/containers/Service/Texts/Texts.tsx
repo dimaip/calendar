@@ -161,6 +161,16 @@ const useServices = (date, readings = {}): ServiceInfo[] => {
             warn: true,
         },
         {
+            title: 'Девятый час',
+            id: 'ninthHour',
+            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6) && !isDate(1, 18),
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Часослов',
+            warn: true,
+        },
+        {
             title: 'Великая вечерня',
             id: 'vespersChurch',
             enabled: isEasterOffsetRange(49),
