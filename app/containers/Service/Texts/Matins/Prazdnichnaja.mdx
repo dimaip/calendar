@@ -107,7 +107,7 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
 
 <StihiriAfterPsalm50 date={props.date} />
 
-<If condition={props.isEasterOffsetRange(-7 * 2 - 1) || (props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(7) && !props.isEasterOffsetRange(14) && !props.isEasterOffsetRange(21) && !props.isEasterOffsetRange(28) && !props.isEasterOffsetRange(35) && !props.isEasterOffsetRange(42))}>
+<If condition={props.isEasterOffsetRange(-7 * 2 - 1) || (props.dayOfWeek === 0 && !props.isEasterOffsetRange(-7) && !props.isEasterOffsetRange(49) && !props.isEasterOffsetRange(7) && !props.isEasterOffsetRange(14) && !props.isEasterOffsetRange(21) && !props.isEasterOffsetRange(28) && !props.isEasterOffsetRange(35) && !props.isEasterOffsetRange(42) && !props.isDate(1,19))}>
     <MdxLoader src="Matins/PesnBogoroditsy" lang={props.lang} />
 </If>
 
