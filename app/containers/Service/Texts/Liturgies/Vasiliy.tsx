@@ -7,6 +7,8 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 import dateFormat from 'dateformat';
 import { css } from 'emotion';
 
+import VariableSection from '../VariableSection';
+
 import useLiturgy from './Vernie/useLiturgy';
 import VasiliyMdx from './Vasiliy.mdx';
 import VespersWithVasilyPassionThursdayMdx from './VespersWithVasilyPassionThursday.mdx';
@@ -14,6 +16,7 @@ import VespersWithVasilyPassionSaturdayMdx from './VespersWithVasilyPassionSatur
 import VespersWithVasilyChristmasMdx from './VespersWithVasilyChristmas.mdx';
 import VespersWithVasilyEpiphanyMdx from './VespersWithVasilyEpiphany.mdx';
 import { getKatekhumenReadings } from './Katekhumen/Katekhumen';
+import Aliluja from './Katekhumen/Aliluja/Aliluja';
 
 const Vasiliy = ({ lang, date }) => {
     const { katekhumen, saints, prichasten, otpust, zadastoinik } = useLiturgy(lang, 'vasiliy');
@@ -43,7 +46,14 @@ const Vasiliy = ({ lang, date }) => {
         )
     ) : null;
 
+    const aliluja = (
+        <VariableSection date={date}>
+            <Aliluja day={day} date={date} />
+        </VariableSection>
+    );
+
     const props = {
+        aliluja,
         lang,
         date,
         isDate,
