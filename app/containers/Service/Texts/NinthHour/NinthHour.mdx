@@ -10,20 +10,28 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 ## (1) Вступление
 
-<MdxLoader src="Shared/Vozglas" />
+<If condition={!props.isEasterOffsetRange(-2)}>
+    <MdxLoader src="Shared/Vozglas" />
 
-<MdxLoader src="Shared/SlavaTebe" />
+    <MdxLoader src="Shared/SlavaTebe" />
 
-<If condition={!props.isEasterOffsetRange(0, 49)}>
+</If>
+
+<If condition={!props.isEasterOffsetRange(0, 49) && !props.isEasterOffsetRange(-2)}>
     <MdxLoader src="Shared/ParaklitChit" />
 </If>
+
 <If condition={props.isEasterOffsetRange(0, 39)}>
     <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
 </If>
 
-### Обычное начало
+<If condition={!props.isEasterOffsetRange(-2)}>
 
-<MdxLoader src="Shared/ObichnoeNachalo" />
+    ### Обычное начало
+
+    <MdxLoader src="Shared/ObichnoeNachalo" />
+
+</If>
 
 ## (2) Трипсалмие
 
