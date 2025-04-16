@@ -693,6 +693,7 @@ export const getFeastInfo = memoize(
         if (new Date(y, 3, 7).getTime() <= date.getTime() && date.getTime() <= new Date(y, 3, 8).getTime()) {
             colour = blue;
             calendarColour = 'blue';
+            feastType = '12';
             icon = 'annunciation.svg';
         }
 
