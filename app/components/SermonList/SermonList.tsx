@@ -16,7 +16,7 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
     const isError = sermonsStatus === 'error';
 
     return (
-        <SolidSection paddingTop={18}>
+        <SolidSection paddingTop={18} marginHorizontal={0}>
             {isLoading ? (
                 <Loader />
             ) : isError ? (

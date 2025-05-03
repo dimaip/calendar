@@ -11,6 +11,7 @@ import Zoom from 'components/Zoom/Zoom';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
 import useSermon from 'hooks/useSermon';
 import { SermonList } from 'components/SermonList/SermonList';
+import SolidSection from 'components/SolidSection/SolidSection';
 
 const SermonDetail = () => {
     const { sermonId } = useParams();
@@ -20,7 +21,7 @@ const SermonDetail = () => {
     useDocumentTitle(sermon ? `${sermon.title} - ${sermon.authorName} - Проповеди` : 'Проповедь');
 
     return (
-        <LayoutInner>
+        <LayoutInner backLink="/sermons">
             {status === 'loading' ? (
                 <Loader />
             ) : status === 'error' ? (
@@ -64,6 +65,9 @@ const SermonDetail = () => {
                             margin-top: 32px;
                         `}
                     >
+                        <SolidSection paddingTop={18} marginHorizontal={0} noBorder>
+                            <h3 style={{ fontWeight: 'bold' }}>Другие проповеди этого автора</h3>
+                        </SolidSection>
                         <SermonList authorId={sermon.authorId} limit={5} />
                     </div>
                 </>

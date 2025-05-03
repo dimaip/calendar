@@ -7,6 +7,7 @@ import { useDocumentTitle } from 'utils/useDocumentTitle';
 import useSermonFacets from 'hooks/useSermonFacets';
 import SelectBox from 'components/SelectBox/SelectBox';
 import { SermonList } from 'components/SermonList/SermonList';
+import SolidSection from 'components/SolidSection/SolidSection';
 
 const SermonListContainer = () => {
     const theme = useTheme();
@@ -15,7 +16,11 @@ const SermonListContainer = () => {
     const [themeId, setThemeId] = useState<string | undefined>();
 
     const setAuthorId = (authorId: string) => {
-        history.push(`/sermons/${authorId}`);
+        if (authorId) {
+            history.push(`/sermons/${authorId}`);
+        } else {
+            history.push('/sermons');
+        }
     };
 
     const { data: facets } = useSermonFacets();
@@ -23,50 +28,64 @@ const SermonListContainer = () => {
     useDocumentTitle('Проповеди - Православное богослужение на русском языке');
 
     return (
-        <LayoutInner backLink="/">
-            <div
-                className={css`
-                    position: stickey;
-                    top: 50px;
-                `}
-            >
+        <LayoutInner
+            paddedContent={false}
+            // backLink="/"
+            left={
                 <h3
                     className={css`
                         color: ${theme.colours.primary};
-                        margin-bottom: 12px;
-                        font-size: 30px;
+                        font-size: 20px;
                     `}
                 >
                     Проповеди
                 </h3>
-
+            }
+        >
+            <SolidSection paddingTop={18} noBorder marginHorizontal={0}>
                 <div
                     className={css`
-                        display: flex;
-                        gap: 12px;
-                        margin-bottom: 18px;
-                        justify-content: flex-start;
+                        position: stickey;
+                        top: 50px;
                     `}
                 >
-                    <SelectBox
-                        items={[{ title: 'Все авторы', id: undefined }, ...(facets?.authors || [])].map((author) => ({
-                            label: `${author.title} ${typeof author.count === 'number' ? `(${author.count})` : ''}`,
-                            value: author.id,
-                        }))}
-                        value={authorId}
-                        onChange={setAuthorId}
-                    />
+                    <div
+                        className={css`
+                            display: flex;
+                            gap: 12px;
+                            justify-content: flex-start;
+                        `}
+                    >
+                        <SelectBox
+                            items={[{ title: 'Все авторы', id: undefined }, ...(facets?.authors || [])].map(
+                                (author) => ({
+                                    label: `${author.title} ${
+                                        typeof author.count === 'number' ? `(${author.count})` : ''
+                                    }`,
+                                    value: author.id,
+                                })
+                            )}
+                            value={authorId}
+                            onChange={setAuthorId}
+                            inverse
+                            showChevron
+                            heighlightActive
+                        />
 
-                    <SelectBox
-                        items={[{ title: 'Все темы', id: undefined }, ...(facets?.themes || [])].map((theme) => ({
-                            label: `${theme.title} ${typeof theme.count === 'number' ? `(${theme.count})` : ''}`,
-                            value: theme.id,
-                        }))}
-                        value={themeId}
-                        onChange={setThemeId}
-                    />
+                        <SelectBox
+                            items={[{ title: 'Все темы', id: undefined }, ...(facets?.themes || [])].map((theme) => ({
+                                label: `${theme.title} ${typeof theme.count === 'number' ? `(${theme.count})` : ''}`,
+                                value: theme.id,
+                            }))}
+                            value={themeId}
+                            onChange={setThemeId}
+                            inverse
+                            showChevron
+                            heighlightActive
+                        />
+                    </div>
                 </div>
-            </div>
+            </SolidSection>
 
             <SermonList authorId={authorId} themeId={themeId} />
         </LayoutInner>

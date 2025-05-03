@@ -42,7 +42,6 @@ export const SermonSmall = ({ sermon }: { sermon: Sermon }) => {
                     >
                         <p
                             className={css`
-                                font-weight: bold;
                                 margin-bottom: 8px;
                             `}
                         >
