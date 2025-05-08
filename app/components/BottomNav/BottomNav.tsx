@@ -5,6 +5,7 @@ import { useTheme } from 'emotion-theming';
 import CrossIcon from 'components/svgs/CrossIcon';
 import Bible from 'components/svgs/Bible';
 import Prayer from 'components/svgs/Prayer';
+import Sermons from 'components/svgs/Sermons';
 
 const BottomNav = ({ active }) => {
     const { date = new Date().toISOString().slice(0, 10) } = useParams();
@@ -60,7 +61,7 @@ const BottomNav = ({ active }) => {
                     Богослужение
                 </Link>
                 <Link className={`${itemClass} ${active === 'services' ? activeClass : ''}`} to="/sermons">
-                    <Prayer colour={active === 'services' ? theme.colours.blue : theme.colours.gray} />
+                    <Sermons colour={active === 'services' ? theme.colours.blue : theme.colours.gray} />
                     Проповеди
                 </Link>
                 <a
