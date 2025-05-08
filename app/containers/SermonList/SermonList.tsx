@@ -30,7 +30,6 @@ const SermonListContainer = () => {
     return (
         <LayoutInner
             paddedContent={false}
-            // backLink="/"
             left={
                 <h3
                     className={css`
@@ -58,12 +57,13 @@ const SermonListContainer = () => {
                     >
                         <SelectBox
                             items={[{ title: 'Все авторы', id: undefined }, ...(facets?.authors || [])].map(
-                                (author) => ({
-                                    label: `${author.title} ${
-                                        typeof author.count === 'number' ? `(${author.count})` : ''
-                                    }`,
-                                    value: author.id,
-                                })
+                                (author) =>
+                                    author.title !== 'null' && {
+                                        label: `${author.title} ${
+                                            typeof author.count === 'number' ? `(${author.count})` : ''
+                                        }`,
+                                        value: author.id,
+                                    }
                             )}
                             value={authorId}
                             onChange={setAuthorId}

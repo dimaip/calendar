@@ -6,6 +6,8 @@ import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import useFilteredSermons from 'hooks/useFilteredSermons';
 import SolidSection from 'components/SolidSection/SolidSection';
 import { SermonSmall } from 'components/SermonSmall/SermonSmall';
+import Button from 'components/Button/Button';
+import { Link } from 'react-router-dom';
 
 export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; themeId?: string; limit?: number }) => {
     const theme = useTheme();
@@ -36,6 +38,22 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
                 >
                     Проповеди не найдены
                 </p>
+            )}
+            {limit && (
+                <Link to={`/sermons/${authorId}`}>
+                    <Button
+                        className={css`
+                            background-color: ${theme.colours.primary};
+                            color: white;
+                            width: 100%;
+                            border-radius: 8px;
+                            margin-top: 12px;
+                            margin-bottom: 18px;
+                        `}
+                    >
+                        Все проповеди автора
+                    </Button>
+                </Link>
             )}
         </SolidSection>
     );
