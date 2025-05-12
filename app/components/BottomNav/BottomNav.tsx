@@ -19,7 +19,7 @@ const BottomNav = ({ active }) => {
         text-align: center;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
     `;
     const activeClass = css`

@@ -107,7 +107,7 @@ const SelectBox = React.memo(
                                 border: 1px solid ${theme.colours.lineGray};
                                 border-radius: 8px;
                                 @media (max-width: 450px) {
-                                    left: 0;
+                                    left: 16px;
                                 }
                                 z-index: 2;
                             `}

@@ -33,7 +33,7 @@ const SermonListContainer = () => {
             left={
                 <h3
                     className={css`
-                        color: ${theme.colours.primary};
+                        color: ${theme.colours.black};
                         font-size: 20px;
                     `}
                 >
@@ -41,7 +41,7 @@ const SermonListContainer = () => {
                 </h3>
             }
         >
-            <SolidSection paddingTop={18} noBorder marginHorizontal={0}>
+            <SolidSection paddingTop={18} noBorder marginHorizontal={-10}>
                 <div
                     className={css`
                         position: stickey;
@@ -51,7 +51,7 @@ const SermonListContainer = () => {
                     <div
                         className={css`
                             display: flex;
-                            gap: 12px;
+                            gap: 6px;
                             justify-content: flex-start;
                         `}
                     >
