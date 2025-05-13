@@ -24,7 +24,6 @@ import { Hymns } from 'containers/Hymns/Hymns';
 import { Hymn } from 'containers/Hymns/Hymn';
 import Profile from 'containers/Profile/Profile';
 import AddSharedVersion from 'containers/AddSharedVersion/AddSharedVersion';
-import { ScriptEditorPromo } from 'components/ScriptEditorPromo/ScriptEditorPromo';
 import Loader from 'components/Loader/Loader';
 import themeState from 'state/themeState';
 
@@ -75,7 +74,7 @@ const DateRoutes = () => {
                     </Route>
                 </Switch>
                 <UpdatePrompt />
-                <ScriptEditorPromo />
+                {/* <ScriptEditorPromo /> */}
             </Promo>
         </ThemeProvider>
     );
