@@ -62,6 +62,17 @@ const SermonListContainer = () => {
                                         label: `${author.title} ${
                                             typeof author.count === 'number' ? `(${author.count})` : ''
                                         }`,
+                                        shortLabel: author.title
+                                            .replace('Митрополит ', '')
+                                            .replace('Священник ', '')
+                                            .replace('Архимандрит ', '')
+                                            .replace('Протопресвитер ', '')
+                                            .replace('Протоиерей ', '')
+                                            .replace('Игумен ', '')
+                                            .replace('Священномученик ', '')
+                                            .replace('Святой праведный ', '')
+                                            .replace('Святитель ', '')
+                                            .replace('Архиепископ ', ''),
                                         value: author.id,
                                     }
                             )}
@@ -75,6 +86,7 @@ const SermonListContainer = () => {
                         <SelectBox
                             items={[{ title: 'Все темы', id: undefined }, ...(facets?.themes || [])].map((theme) => ({
                                 label: `${theme.title} ${typeof theme.count === 'number' ? `(${theme.count})` : ''}`,
+                                shortLabel: theme.title,
                                 value: theme.id,
                             }))}
                             value={themeId}

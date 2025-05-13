@@ -17,7 +17,7 @@ const SelectBox = React.memo(
         heighlightActive = false,
     }: {
         className?: string;
-        items: Array<{ label: string; value: string; level?: number }>;
+        items: Array<{ label: string; shortLabel: string; value: string; level?: number }>;
         value: string;
         onChange: (value: string) => void;
         inverse?: boolean;
@@ -82,7 +82,7 @@ const SelectBox = React.memo(
                     <span>
                         {items?.length ? (
                             <div style={{ display: 'flex', alignItems: 'center' }}>
-                                {selectedItem?.label}{' '}
+                                {selectedItem?.shortLabel || selectedItem?.label}{' '}
                                 {showChevron &&
                                     (isOpen ? (
                                         <ExpandLess style={{ fontSize: '1rem', marginLeft: 3 }} />
