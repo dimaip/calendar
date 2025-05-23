@@ -8,6 +8,7 @@ import useSermonFacets from 'hooks/useSermonFacets';
 import SelectBox from 'components/SelectBox/SelectBox';
 import { SermonList } from 'components/SermonList/SermonList';
 import SolidSection from 'components/SolidSection/SolidSection';
+import { truthy } from 'utils/truthy';
 
 const SermonListContainer = () => {
     const theme = useTheme();
@@ -81,6 +82,7 @@ const SermonListContainer = () => {
                             inverse
                             showChevron
                             heighlightActive
+                            activeOnTop
                         />
 
                         <SelectBox
@@ -94,6 +96,7 @@ const SermonListContainer = () => {
                             inverse
                             showChevron
                             heighlightActive
+                            activeOnTop
                         />
                     </div>
                 </div>

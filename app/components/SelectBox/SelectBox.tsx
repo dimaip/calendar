@@ -6,6 +6,7 @@ import Loader from 'components/Loader/Loader';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { truncateText } from 'utils/truncateText';
+import { truthy } from 'utils/truthy';
 
 const SelectBox = React.memo(
     ({
@@ -16,6 +17,7 @@ const SelectBox = React.memo(
         inverse = false,
         showChevron = false,
         heighlightActive = false,
+        activeOnTop = false,
     }: {
         className?: string;
         items: Array<{ label: string; shortLabel: string; value: string; level?: number }>;
@@ -24,12 +26,16 @@ const SelectBox = React.memo(
         inverse?: boolean;
         showChevron?: boolean;
         heighlightActive?: boolean;
+        activeOnTop?: boolean;
     }) => {
         const theme = useTheme();
         const selectedItem = items.find((i) => i.value === value) || items[0];
+        const processedItems = activeOnTop
+            ? [selectedItem, ...items.filter((i) => i.value !== value)].filter(truthy)
+            : items;
         const { isOpen, getToggleButtonProps, getMenuProps, highlightedIndex, getItemProps } = useSelect({
             selectedItem,
-            items,
+            items: processedItems,
             onSelectedItemChange: (i) => {
                 setTimeout(() => onChange(i.selectedItem.value), 0);
             },
@@ -120,7 +126,7 @@ const SelectBox = React.memo(
                                 z-index: 10000;
                             `}
                         >
-                            {items.map((item, index) => (
+                            {processedItems.map((item, index) => (
                                 <div
                                     className={css`
                                         padding: ${item.level === 2
