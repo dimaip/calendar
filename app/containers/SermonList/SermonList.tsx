@@ -63,16 +63,16 @@ const SermonListContainer = () => {
                                             typeof author.count === 'number' ? `(${author.count})` : ''
                                         }`,
                                         shortLabel: author.title
-                                            .replace('Митрополит ', '')
-                                            .replace('Священник ', '')
-                                            .replace('Архимандрит ', '')
-                                            .replace('Протопресвитер ', '')
-                                            .replace('Протоиерей ', '')
-                                            .replace('Игумен ', '')
-                                            .replace('Священномученик ', '')
-                                            .replace('Святой праведный ', '')
-                                            .replace('Святитель ', '')
-                                            .replace('Архиепископ ', ''),
+                                            .replace('Митрополит ', 'митр. ')
+                                            .replace('Священник ', 'свящ. ')
+                                            .replace('Архимандрит ', 'архим. ')
+                                            .replace('Протопресвитер ', 'протопресв. ')
+                                            .replace('Протоиерей ', 'прот. ')
+                                            .replace('Игумен ', 'игум. ')
+                                            .replace('Священномученик ', 'сщмч. ')
+                                            .replace('Святой праведный ', 'свт. ')
+                                            .replace('Святитель ', 'свт. ')
+                                            .replace('Архиепископ ', 'архиеп. '),
                                         value: author.id,
                                     }
                             )}
