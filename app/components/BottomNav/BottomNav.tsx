@@ -60,8 +60,8 @@ const BottomNav = ({ active }) => {
                     <Prayer colour={active === 'services' ? theme.colours.blue : theme.colours.gray} />
                     Богослужение
                 </Link>
-                <Link className={`${itemClass} ${active === 'services' ? activeClass : ''}`} to="/sermons">
-                    <Sermons colour={active === 'services' ? theme.colours.blue : theme.colours.gray} />
+                <Link className={`${itemClass} ${active === 'sermons' ? activeClass : ''}`} to="/sermons">
+                    <Sermons colour={active === 'sermons' ? theme.colours.blue : theme.colours.gray} />
                     Проповеди
                 </Link>
                 <a
