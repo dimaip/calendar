@@ -26,6 +26,7 @@ const getTheme = (primary, isDark) => {
             lineGray: dark ? gray2a : gray3,
             red: '#ff4e4e',
             white: dark ? gray1a : gray6,
+            black: dark ? gray6 : gray1a,
             blue,
         },
     };

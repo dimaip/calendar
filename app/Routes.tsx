@@ -26,6 +26,8 @@ import Profile from 'containers/Profile/Profile';
 import AddSharedVersion from 'containers/AddSharedVersion/AddSharedVersion';
 import Loader from 'components/Loader/Loader';
 import themeState from 'state/themeState';
+import SermonListContainer from 'containers/SermonList/SermonList';
+import SermonDetail from 'containers/SermonDetail/SermonDetail';
 
 import checkVersion from './checkVersion';
 
@@ -142,6 +144,15 @@ export default () => {
                         </Route>
                         <Route path="/date/:date">
                             <DateRoutes />
+                        </Route>
+                        <Route exact path="/sermons">
+                            <SermonListContainer />
+                        </Route>
+                        <Route exact path="/sermons/:authorId">
+                            <SermonListContainer />
+                        </Route>
+                        <Route exact path="/sermon/:sermonId">
+                            <SermonDetail />
                         </Route>
                     </Switch>
                 </div>

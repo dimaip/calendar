@@ -9,7 +9,19 @@ import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Share from 'components/Share/Share';
 import useDay from 'hooks/useDay';
 
-const LayoutInner = ({ children, backLink = null, left = null, right = null, paddedContent = true }) => {
+const LayoutInner = ({
+    children,
+    backLink = null,
+    left = null,
+    right = null,
+    paddedContent = true,
+}: {
+    children: React.ReactNode;
+    backLink?: string | null;
+    left?: React.ReactNode | null;
+    right?: React.ReactNode | null;
+    paddedContent?: boolean;
+}) => {
     const { date } = useParams();
     const dayQuery = useDay(date);
     const day = dayQuery.data;
@@ -30,7 +42,7 @@ const LayoutInner = ({ children, backLink = null, left = null, right = null, pad
                         align-items: center;
                     `}
                 >
-                    <Link to={backLinkEffective || `/date/${date}`} title="Назад">
+                    <Link to={backLinkEffective || (date ? `/date/${date}` : '/')} title="Назад">
                         <div
                             className={css`
                                 padding: 18px;

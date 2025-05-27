@@ -1,18 +1,11 @@
 import React from 'react';
-import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
-import SwipeableLink from 'components/SwipeableLink/SwipeableLink';
-import RightIcon from 'components/svgs/RightIcon';
-import ButtonBox from 'components/ButtonBox/ButtonBox';
 import SwipeableViews from 'react-swipeable-views';
-import { useLocation } from 'react-router-dom';
 
 import SectionHeading from './SectionHeading';
+import { SermonSmall } from 'components/SermonSmall/SermonSmall';
 
-const Sermons = React.memo(({ sermons, date, hideTitle = false }) => {
-    const theme = useTheme();
-    const location = useLocation();
-
+const Sermons = React.memo(({ sermons, hideTitle = false }) => {
     return sermons?.length ? (
         <>
             {!hideTitle && (
@@ -39,66 +32,7 @@ const Sermons = React.memo(({ sermons, date, hideTitle = false }) => {
                     `}
                 >
                     {sermons.map((sermon) => (
-                        <SwipeableLink
-                            to={{
-                                pathname: `/date/${date}/sermon/${sermon.id}`,
-                                state: { backLink: location.pathname },
-                            }}
-                            key={sermon.id}
-                        >
-                            <ButtonBox
-                                className={css`
-                                    height: calc(100% - 1px);
-                                    margin: 0 !important;
-                                `}
-                            >
-                                <div
-                                    className={css`
-                                        display: flex;
-                                    `}
-                                >
-                                    <div
-                                        className={css`
-                                            flex-grow: 1;
-                                            flex-shrink: 1;
-                                        `}
-                                    >
-                                        <p
-                                            className={css`
-                                                font-weight: bold;
-                                                margin-bottom: 8px;
-                                            `}
-                                        >
-                                            {sermon.authorName}
-                                        </p>
-                                        <h3
-                                            className={css`
-                                                color: ${theme.colours.primary};
-                                                margin-bottom: 8px;
-                                            `}
-                                        >
-                                            {sermon.title}
-                                        </h3>
-                                        <p
-                                            className={css`
-                                                font-size: 16px;
-                                                color: ${theme.colours.gray};
-                                            `}
-                                        >
-                                            {sermon.teaser}
-                                        </p>
-                                    </div>
-                                    <div
-                                        className={css`
-                                            flex-grow: 0;
-                                            flex-shrink: 0;
-                                        `}
-                                    >
-                                        <RightIcon />
-                                    </div>
-                                </div>
-                            </ButtonBox>
-                        </SwipeableLink>
+                        <SermonSmall key={sermon.id} sermon={sermon} />
                     ))}
                 </SwipeableViews>
             </div>

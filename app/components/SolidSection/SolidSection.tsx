@@ -10,6 +10,7 @@ const SolidSection = ({
     paddingBottom = 1,
     marginHorizontal = -18,
     className = '',
+    noBorder = false,
 }) => {
     const theme = useTheme();
     return (
@@ -17,7 +18,7 @@ const SolidSection = ({
             className={`${className} ${css`
                 position: relative;
                 display: flow-root;
-                border-bottom: 0.5px solid ${theme.colours.lineGray};
+                border-bottom: ${noBorder ? 'none' : `0.5px solid ${theme.colours.lineGray}`};
                 background: ${theme.colours.bgGray};
                 margin: ${marginTop}px ${marginHorizontal}px ${marginBottom}px ${marginHorizontal}px;
                 padding: ${paddingTop}px 18px ${paddingBottom}px 18px;

@@ -5,6 +5,7 @@ import { useTheme } from 'emotion-theming';
 import CrossIcon from 'components/svgs/CrossIcon';
 import Bible from 'components/svgs/Bible';
 import Prayer from 'components/svgs/Prayer';
+import Sermons from 'components/svgs/Sermons';
 
 const BottomNav = ({ active }) => {
     const { date = new Date().toISOString().slice(0, 10) } = useParams();
@@ -18,7 +19,7 @@ const BottomNav = ({ active }) => {
         text-align: center;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
     `;
     const activeClass = css`
@@ -58,6 +59,10 @@ const BottomNav = ({ active }) => {
                 >
                     <Prayer colour={active === 'services' ? theme.colours.blue : theme.colours.gray} />
                     Богослужение
+                </Link>
+                <Link className={`${itemClass} ${active === 'sermons' ? activeClass : ''}`} to="/sermons">
+                    <Sermons colour={active === 'sermons' ? theme.colours.blue : theme.colours.gray} />
+                    Проповеди
                 </Link>
                 <a
                     className={`${itemClass} ${active === 'bible' ? activeClass : ''}`}
