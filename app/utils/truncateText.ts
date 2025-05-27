@@ -1,5 +1,5 @@
 export const truncateText = (text: string, maxLength: number) => {
-    if (!text) {
+    if (!text || typeof text !== 'string') {
         return '';
     }
     if (text.length <= maxLength) {
