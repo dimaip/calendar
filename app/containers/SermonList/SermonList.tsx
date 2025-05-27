@@ -8,7 +8,7 @@ import useSermonFacets from 'hooks/useSermonFacets';
 import SelectBox from 'components/SelectBox/SelectBox';
 import { SermonList } from 'components/SermonList/SermonList';
 import SolidSection from 'components/SolidSection/SolidSection';
-import { truthy } from 'utils/truthy';
+import BottomNav from 'components/BottomNav/BottomNav';
 
 const SermonListContainer = () => {
     const theme = useTheme();
@@ -42,67 +42,74 @@ const SermonListContainer = () => {
                 </h3>
             }
         >
-            <SolidSection paddingTop={18} noBorder marginHorizontal={-10}>
-                <div
-                    className={css`
-                        position: stickey;
-                        top: 50px;
-                    `}
-                >
+            <div style={{ flexGrow: 1 }}>
+                <SolidSection paddingTop={18} noBorder marginHorizontal={-10}>
                     <div
                         className={css`
-                            display: flex;
-                            gap: 6px;
-                            justify-content: flex-start;
+                            position: stickey;
+                            top: 50px;
                         `}
                     >
-                        <SelectBox
-                            items={[{ title: 'Все авторы', id: undefined }, ...(facets?.authors || [])].map(
-                                (author) =>
-                                    author.title !== 'null' && {
-                                        label: `${author.title} ${
-                                            typeof author.count === 'number' ? `(${author.count})` : ''
+                        <div
+                            className={css`
+                                display: flex;
+                                gap: 6px;
+                                justify-content: flex-start;
+                            `}
+                        >
+                            <SelectBox
+                                items={[{ title: 'Все авторы', id: undefined }, ...(facets?.authors || [])].map(
+                                    (author) =>
+                                        author.title !== 'null' && {
+                                            label: `${author.title} ${
+                                                typeof author.count === 'number' ? `(${author.count})` : ''
+                                            }`,
+                                            shortLabel: author.title
+                                                .replace('Митрополит ', 'митр. ')
+                                                .replace('Священник ', 'свящ. ')
+                                                .replace('Архимандрит ', 'архим. ')
+                                                .replace('Протопресвитер ', 'протопресв. ')
+                                                .replace('Протоиерей ', 'прот. ')
+                                                .replace('Игумен ', 'игум. ')
+                                                .replace('Священномученик ', 'сщмч. ')
+                                                .replace('Святой праведный ', 'свт. ')
+                                                .replace('Святитель ', 'свт. ')
+                                                .replace('Архиепископ ', 'архиеп. '),
+                                            value: author.id,
+                                        }
+                                )}
+                                value={authorId}
+                                onChange={setAuthorId}
+                                inverse
+                                showChevron
+                                heighlightActive
+                                activeOnTop
+                            />
+
+                            <SelectBox
+                                items={[{ title: 'Все темы', id: undefined }, ...(facets?.themes || [])].map(
+                                    (theme) => ({
+                                        label: `${theme.title} ${
+                                            typeof theme.count === 'number' ? `(${theme.count})` : ''
                                         }`,
-                                        shortLabel: author.title
-                                            .replace('Митрополит ', 'митр. ')
-                                            .replace('Священник ', 'свящ. ')
-                                            .replace('Архимандрит ', 'архим. ')
-                                            .replace('Протопресвитер ', 'протопресв. ')
-                                            .replace('Протоиерей ', 'прот. ')
-                                            .replace('Игумен ', 'игум. ')
-                                            .replace('Священномученик ', 'сщмч. ')
-                                            .replace('Святой праведный ', 'свт. ')
-                                            .replace('Святитель ', 'свт. ')
-                                            .replace('Архиепископ ', 'архиеп. '),
-                                        value: author.id,
-                                    }
-                            )}
-                            value={authorId}
-                            onChange={setAuthorId}
-                            inverse
-                            showChevron
-                            heighlightActive
-                            activeOnTop
-                        />
-
-                        <SelectBox
-                            items={[{ title: 'Все темы', id: undefined }, ...(facets?.themes || [])].map((theme) => ({
-                                label: `${theme.title} ${typeof theme.count === 'number' ? `(${theme.count})` : ''}`,
-                                shortLabel: theme.title,
-                                value: theme.id,
-                            }))}
-                            value={themeId}
-                            onChange={setThemeId}
-                            inverse
-                            showChevron
-                            heighlightActive
-                            activeOnTop
-                        />
+                                        shortLabel: theme.title,
+                                        value: theme.id,
+                                    })
+                                )}
+                                value={themeId}
+                                onChange={setThemeId}
+                                inverse
+                                showChevron
+                                heighlightActive
+                                activeOnTop
+                            />
+                        </div>
                     </div>
-                </div>
-            </SolidSection>
+                </SolidSection>
 
-            <SermonList authorId={authorId} themeId={themeId} />
+                <SermonList authorId={authorId} themeId={themeId} />
+            </div>
+            <BottomNav active="sermons" />
         </LayoutInner>
     );
 };
