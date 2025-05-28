@@ -84,6 +84,7 @@ const SermonListContainer = () => {
                                 showChevron
                                 heighlightActive
                                 activeOnTop
+                                title="Авторы"
                             />
 
                             <SelectBox
@@ -102,6 +103,7 @@ const SermonListContainer = () => {
                                 showChevron
                                 heighlightActive
                                 activeOnTop
+                                title="Темы"
                             />
                         </div>
                     </div>

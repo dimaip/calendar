@@ -7,6 +7,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { truncateText } from 'utils/truncateText';
 import { truthy } from 'utils/truthy';
+import Cross from 'components/svgs/Cross';
 
 const SelectBox = React.memo(
     ({
@@ -18,6 +19,7 @@ const SelectBox = React.memo(
         showChevron = false,
         heighlightActive = false,
         activeOnTop = false,
+        title = '',
     }: {
         className?: string;
         items: Array<{ label: string; shortLabel: string; value: string; level?: number }>;
@@ -27,13 +29,14 @@ const SelectBox = React.memo(
         showChevron?: boolean;
         heighlightActive?: boolean;
         activeOnTop?: boolean;
+        title?: string;
     }) => {
         const theme = useTheme();
         const selectedItem = items.find((i) => i.value === value) || items[0];
         const processedItems = activeOnTop
             ? [selectedItem, ...items.filter((i) => i.value !== value)].filter(truthy)
             : items;
-        const { isOpen, getToggleButtonProps, getMenuProps, highlightedIndex, getItemProps } = useSelect({
+        const { isOpen, getToggleButtonProps, getMenuProps, highlightedIndex, getItemProps, reset } = useSelect({
             selectedItem,
             items: processedItems,
             onSelectedItemChange: (i) => {
@@ -126,6 +129,28 @@ const SelectBox = React.memo(
                                 z-index: 10000;
                             `}
                         >
+                            {title && (
+                                <div
+                                    className={css`
+                                        display: flex;
+                                        justify-content: space-between;
+                                        align-items: center;
+
+                                        padding: 12px;
+                                        background-color: ${theme.colours.bgGray};
+                                        font-weight: 600;
+
+                                        @media (min-width: 451px) {
+                                            display: none;
+                                        }
+                                    `}
+                                >
+                                    <div>{title}</div>
+                                    <div onClick={() => reset()}>
+                                        <Cross />
+                                    </div>
+                                </div>
+                            )}
                             {processedItems.map((item, index) => (
                                 <div
                                     className={css`
@@ -135,10 +160,7 @@ const SelectBox = React.memo(
                                             ? '12px'
                                             : '6px 12px'};
                                         padding-left: ${item.level === 3 ? 24 : 12}px;
-                                        font-weight: ${selectedItem === item ? 'bold' : 'normal'};
-                                        background-color: ${highlightedIndex === index
-                                            ? theme.colours.bgGray
-                                            : 'transparent'};
+                                        color: ${highlightedIndex === index ? theme.colours.primary : 'inherit'};
                                         border-top: ${item.level === 2 || !item.level
                                             ? `1px solid ${theme.colours.lineGray}`
                                             : ''};
