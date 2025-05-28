@@ -14,7 +14,7 @@ const BottomNav = ({ active }) => {
     const itemClass = css`
         height: 60px;
         font-size: 13px;
-        padding: 9px 12px;
+        padding: 9px;
         color: ${theme.colours.gray};
         text-align: center;
         display: flex;
@@ -43,7 +43,6 @@ const BottomNav = ({ active }) => {
                     right: 0;
                     bottom: 0;
                     background-color: ${theme.colours.bgGrayLight};
-                    padding: 0 12px;
                     padding-bottom: env(safe-area-inset-bottom);
                     border-top: 1px solid ${theme.colours.lightGray};
                     user-select: none;
