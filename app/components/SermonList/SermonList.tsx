@@ -50,7 +50,6 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
                             margin-top: 12px;
                             margin-bottom: 18px;
                             font-size: 15px;
-                            text-transform: uppercase;
                             font-weight: 600;
                         `}
                     >
