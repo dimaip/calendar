@@ -32,7 +32,7 @@ const Sermons = React.memo(({ sermons, hideTitle = false }) => {
                     `}
                 >
                     {sermons.map((sermon) => (
-                        <SermonSmall key={sermon.id} sermon={sermon} />
+                        <SermonSmall key={sermon.id} sermon={sermon} horizontal />
                     ))}
                 </SwipeableViews>
             </div>

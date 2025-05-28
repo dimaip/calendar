@@ -21,7 +21,7 @@ const SermonDetail = () => {
     useDocumentTitle(sermon ? `${sermon.title} - ${sermon.authorName} - Проповеди` : 'Проповедь');
 
     return (
-        <LayoutInner backLink="/sermons">
+        <LayoutInner backLinkFallback="/sermons">
             {status === 'loading' ? (
                 <Loader />
             ) : status === 'error' ? (

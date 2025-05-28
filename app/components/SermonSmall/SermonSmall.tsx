@@ -4,6 +4,7 @@ import RightIcon from 'components/svgs/RightIcon';
 import SwipeableLink from 'components/SwipeableLink/SwipeableLink';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
+import { useLocation } from 'react-router-dom';
 
 export interface Sermon {
     id: string;
@@ -13,8 +14,9 @@ export interface Sermon {
     date: string;
 }
 
-export const SermonSmall = ({ sermon }: { sermon: Sermon }) => {
+export const SermonSmall = ({ sermon, horizontal }: { sermon: Sermon; horizontal?: boolean }) => {
     const theme = useTheme();
+    const location = useLocation();
     return (
         <SwipeableLink
             to={{
@@ -26,7 +28,7 @@ export const SermonSmall = ({ sermon }: { sermon: Sermon }) => {
             <ButtonBox
                 className={css`
                     height: calc(100% - 1px);
-                    margin: 0 0 8px 0 !important;
+                    margin: 0 0 ${horizontal ? 0 : 8}px 0 !important;
                 `}
             >
                 <div

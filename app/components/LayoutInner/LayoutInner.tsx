@@ -12,12 +12,14 @@ import useDay from 'hooks/useDay';
 const LayoutInner = ({
     children,
     backLink = null,
+    backLinkFallback = null,
     left = null,
     right = null,
     paddedContent = true,
 }: {
     children: React.ReactNode;
     backLink?: string | null;
+    backLinkFallback?: string | null;
     left?: React.ReactNode | null;
     right?: React.ReactNode | null;
     paddedContent?: boolean;
@@ -27,7 +29,7 @@ const LayoutInner = ({
     const day = dayQuery.data;
     const history = useHistory();
     useUpdateTOC();
-    const backLinkEffective = backLink || history.location.state?.backLink;
+    const backLinkEffective = backLink || history.location.state?.backLink || backLinkFallback;
     return (
         <div
             className={css`
