@@ -18,7 +18,7 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
     const isError = sermonsStatus === 'error';
 
     return (
-        <SolidSection paddingTop={18} marginHorizontal={-10}>
+        <SolidSection paddingTop={18} marginHorizontal={0} paddingHorizontal={8}>
             {isLoading ? (
                 <Loader />
             ) : isError ? (
@@ -49,6 +49,9 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
                             border-radius: 8px;
                             margin-top: 12px;
                             margin-bottom: 18px;
+                            font-size: 15px;
+                            text-transform: uppercase;
+                            font-weight: 600;
                         `}
                     >
                         Все проповеди автора

@@ -63,11 +63,11 @@ const SermonDetail = () => {
                     <div
                         className={css`
                             margin-top: 32px;
-                            margin-left: -18px;
-                            margin-right: -18px;
+                            margin-left: -16px;
+                            margin-right: -16px;
                         `}
                     >
-                        <SolidSection paddingTop={18} marginHorizontal={0} noBorder>
+                        <SolidSection paddingTop={18} marginHorizontal={0} paddingHorizontal={18} noBorder>
                             <h3 style={{ fontWeight: 'bold', fontSize: 20 }}>Другие проповеди этого автора</h3>
                         </SolidSection>
                         <SermonList authorId={sermon.authorId} limit={5} />

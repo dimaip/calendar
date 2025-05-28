@@ -43,7 +43,7 @@ const SermonListContainer = () => {
             }
         >
             <div style={{ flexGrow: 1 }}>
-                <SolidSection paddingTop={18} noBorder marginHorizontal={-10}>
+                <SolidSection paddingTop={18} noBorder paddingHorizontal={8} marginHorizontal={0}>
                     <div
                         className={css`
                             position: stickey;

@@ -8,6 +8,7 @@ const SolidSection = ({
     marginBottom = 0,
     paddingTop = 0,
     paddingBottom = 1,
+    paddingHorizontal = 18,
     marginHorizontal = -18,
     className = '',
     noBorder = false,
@@ -21,7 +22,7 @@ const SolidSection = ({
                 border-bottom: ${noBorder ? 'none' : `0.5px solid ${theme.colours.lineGray}`};
                 background: ${theme.colours.bgGray};
                 margin: ${marginTop}px ${marginHorizontal}px ${marginBottom}px ${marginHorizontal}px;
-                padding: ${paddingTop}px 18px ${paddingBottom}px 18px;
+                padding: ${paddingTop}px ${paddingHorizontal}px ${paddingBottom}px ${paddingHorizontal}px;
             `}`}
         >
             {children}
