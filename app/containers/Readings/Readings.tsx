@@ -100,7 +100,8 @@ const Readings = ({ brother = false }) => {
                     title="На службу"
                     className={css`
                         margin-left: 10px;
-                        margin-top: 5px;
+                        margin-top: 8px;
+                        width: 20px;
                     `}
                 >
                     <Prayer colour={theme.colours.darkGray} />
