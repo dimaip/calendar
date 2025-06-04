@@ -135,17 +135,25 @@ const SelectBox = React.memo(
                                         display: flex;
                                         justify-content: space-between;
                                         align-items: center;
+                                        height: 48px;
+                                        overflow: hidden;
 
                                         padding: 12px;
                                         background-color: ${theme.colours.bgGray};
-                                        font-weight: 600;
 
                                         @media (min-width: 451px) {
                                             display: none;
                                         }
                                     `}
                                 >
-                                    <div>{title}</div>
+                                    <h3
+                                        className={css`
+                                            color: ${theme.colours.black};
+                                            font-size: 20px;
+                                        `}
+                                    >
+                                        {title}
+                                    </h3>
                                     <div onClick={() => reset()}>
                                         <Cross />
                                     </div>
