@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import { useSelect } from 'downshift';
@@ -106,104 +107,98 @@ const SelectBox = React.memo(
                     </span>
                 </button>
                 <div {...getMenuProps()}>
-                    {isOpen && (
-                        <div
-                            className={css`
-                                overflow: scroll;
-                                background: ${theme.colours.bgGrayLight};
-                                border: 1px solid ${theme.colours.lineGray};
+                    {isOpen &&
+                        ReactDOM.createPortal(
+                            <div
+                                className={css`
+                                    overflow: scroll;
+                                    background: ${theme.colours.bgGrayLight};
+                                    border: 1px solid ${theme.colours.lineGray};
 
-                                @media (max-width: 450px) {
                                     position: fixed;
                                     top: 0;
                                     left: 0;
                                     width: 100vw;
                                     height: 100vh;
-                                }
-                                @media (min-width: 451px) {
-                                    max-height: 90vh;
-                                    max-width: 450px;
-                                    position: absolute;
-                                    border-radius: 8px;
-                                }
-                                z-index: 10000;
-                            `}
-                        >
-                            {title && (
-                                <div
-                                    className={css`
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-                                        height: 48px;
-                                        overflow: hidden;
-
-                                        padding: 12px;
-                                        background-color: ${theme.colours.bgGray};
-
-                                        @media (min-width: 451px) {
-                                            display: none;
-                                        }
-                                    `}
-                                >
-                                    <h3
+                                    z-index: 10000;
+                                `}
+                            >
+                                {title && (
+                                    <div
                                         className={css`
-                                            color: ${theme.colours.black};
-                                            font-size: 20px;
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                            height: 48px;
+                                            overflow: hidden;
+
+                                            padding: 12px;
+                                            background-color: ${theme.colours.bgGray};
+
+                                            @media (min-width: 451px) {
+                                                display: none;
+                                            }
                                         `}
                                     >
-                                        {title}
-                                    </h3>
-                                    <div onClick={() => reset()}>
-                                        <Cross />
+                                        <h3
+                                            className={css`
+                                                color: ${theme.colours.black};
+                                                font-size: 20px;
+                                            `}
+                                        >
+                                            {title}
+                                        </h3>
+                                        <div onClick={() => reset()}>
+                                            <Cross />
+                                        </div>
                                     </div>
-                                </div>
-                            )}
-                            {processedItems.map((item, index) => (
-                                <div
-                                    className={css`
-                                        padding: ${item.level === 2
-                                            ? '12px 12px 0 12px'
-                                            : !item.level
-                                            ? '12px'
-                                            : '6px 12px'};
-                                        padding-left: ${item.level === 3 ? 24 : 12}px;
-                                        color: ${highlightedIndex === index ? theme.colours.primary : 'inherit'};
-                                        border-top: ${item.level === 2 || !item.level
-                                            ? `1px solid ${theme.colours.lineGray}`
-                                            : ''};
-                                        margin-bottom: ${item.level === 3 && items[index + 1]?.level === 2
-                                            ? '8px'
-                                            : '0px'};
-                                    `}
-                                    key={`${item.value}${index}`}
-                                    {...getItemProps({ item, index })}
-                                >
+                                )}
+                                {processedItems.map((item, index) => (
                                     <div
-                                        className={`${
-                                            item.level === 2
-                                                ? css`
-                                                      text-transform: uppercase;
-                                                      font-size: 14px;
-                                                      font-weight: bold;
-                                                      color: ${theme.colours.primary};
-                                                      margin-top: 4px;
-                                                      margin-bottom: 4px;
-                                                  `
-                                                : ''
-                                        } ${css`
-                                            display: block;
-                                            white-space: nowrap;
-                                            text-overflow: ellipsis;
-                                            overflow: hidden;
-                                        `}`}
+                                        className={css`
+                                            padding: ${item.level === 2
+                                                ? '12px 12px 0 12px'
+                                                : !item.level
+                                                ? '12px'
+                                                : '6px 12px'};
+                                            padding-left: ${item.level === 3 ? 24 : 12}px;
+                                            color: ${highlightedIndex === index ? theme.colours.primary : 'inherit'};
+                                            border-top: ${item.level === 2 || !item.level
+                                                ? `1px solid ${theme.colours.lineGray}`
+                                                : ''};
+                                            margin-bottom: ${item.level === 3 && items[index + 1]?.level === 2
+                                                ? '8px'
+                                                : '0px'};
+                                        `}
+                                        key={`${item.value}${index}`}
+                                        {...getItemProps({ item, index })}
                                     >
-                                        {item.label}
+                                        <div
+                                            className={`${
+                                                item.level === 2
+                                                    ? css`
+                                                          text-transform: uppercase;
+                                                          font-size: 14px;
+                                                          font-weight: bold;
+                                                          color: ${theme.colours.primary};
+                                                          margin-top: 4px;
+                                                          margin-bottom: 4px;
+                                                      `
+                                                    : ''
+                                            } ${css`
+                                                display: block;
+                                                white-space: nowrap;
+                                                text-overflow: ellipsis;
+                                                overflow: hidden;
+                                            `}`}
+                                        >
+                                            {item.label}
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                                ))}
+                            </div>,
+                            document.getElementById('react-portal')
+                        )}
                 </div>
             </div>
         );
