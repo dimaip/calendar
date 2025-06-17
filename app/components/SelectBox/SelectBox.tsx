@@ -106,9 +106,9 @@ const SelectBox = React.memo(
                         )}
                     </span>
                 </button>
-                <div {...getMenuProps()}>
-                    {isOpen &&
-                        ReactDOM.createPortal(
+                {ReactDOM.createPortal(
+                    <div {...getMenuProps()}>
+                        {isOpen && (
                             <div
                                 className={css`
                                     overflow: scroll;
@@ -196,10 +196,11 @@ const SelectBox = React.memo(
                                         </div>
                                     </div>
                                 ))}
-                            </div>,
-                            document.getElementById('react-portal')
+                            </div>
                         )}
-                </div>
+                    </div>,
+                    document.getElementById('react-portal')
+                )}
             </div>
         );
     }
