@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Route, Switch, Redirect, useHistory, useParams, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Route, Switch, Redirect, useHistory, useParams } from 'react-router-dom';
 import Main from 'containers/Main/Main';
 import NotFound from 'components/NotFound/NotFound';
 import Readings from 'containers/Readings/Readings';
@@ -28,6 +28,7 @@ import Loader from 'components/Loader/Loader';
 import themeState from 'state/themeState';
 import SermonListContainer from 'containers/SermonList/SermonList';
 import SermonDetail from 'containers/SermonDetail/SermonDetail';
+import SettingsMenu from 'containers/Main/SettingsMenu';
 
 import checkVersion from './checkVersion';
 
@@ -121,6 +122,7 @@ export default () => {
                         margin: 0 auto;
                     `}
                 >
+                    <SettingsMenu />
                     <Switch>
                         <Route
                             exact

@@ -1,8 +1,6 @@
 import React from 'react';
 import Button from 'components/Button/Button';
 import { css } from 'emotion';
-import Drawer from 'components/Drawer/Drawer';
-import zoomControlShownState from 'state/zoomControlShownState';
 import zoomState from 'state/zoomState';
 import { useRecoilState } from 'recoil';
 
@@ -18,15 +16,10 @@ const buttonStyle = css`
     padding: 0 !important;
 `;
 const ZoomControl = (): JSX.Element | null => {
-    const [zoomControlShown, setZoomControlShown] = useRecoilState(zoomControlShownState);
     const [zoom, setZoom] = useRecoilState(zoomState);
 
-    return zoomControlShown ? (
-        <Drawer
-            onClose={() => {
-                setZoomControlShown(false);
-            }}
-        >
+    return (
+        <div>
             <div
                 className={css`
                     text-align: center;
@@ -63,7 +56,7 @@ const ZoomControl = (): JSX.Element | null => {
                     A+
                 </Button>
             </div>
-        </Drawer>
-    ) : null;
+        </div>
+    );
 };
 export default ZoomControl;

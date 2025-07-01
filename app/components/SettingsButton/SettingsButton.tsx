@@ -2,39 +2,35 @@ import React, { useContext } from 'react';
 import { css } from 'emotion';
 import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 import Button from 'components/Button/Button';
-import ShareIcon from 'components/ShareIcon/ShareIcon';
+import Gear from 'components/svgs/Gear';
+import { useRecoilState } from 'recoil';
+import menuShownState from 'state/menuShownState';
 
-const Share = ({ title, text, url, className }: { title: string; text: string; url: string; className?: string }) => {
+const Share = () => {
     const { toggleOpen } = useContext(DotsMenuContext);
+    const [menuShown, setMenuShown] = useRecoilState(menuShownState);
     return (
         <Button
+            title="Меню"
             onClick={() => {
                 toggleOpen();
-                if (navigator.share) {
-                    navigator
-                        .share({
-                            title,
-                            text,
-                            url,
-                        })
-                        .catch((error) => console.log('Error sharing', error));
-                }
+                setMenuShown(!menuShown);
             }}
-            className={`${className} ${css`
+            className={css`
                 padding: 6px 6px !important;
                 width: 100%;
                 text-align: left;
-            `}`}
+            `}
         >
-            <ShareIcon />{' '}
+            <Gear />{' '}
             <span
                 className={css`
                     font-size: 13px;
-                    line-height: 21px;
+                    line-height: 18px;
                     vertical-align: text-top;
                 `}
             >
-                Поделиться
+                Настройки
             </span>
         </Button>
     );

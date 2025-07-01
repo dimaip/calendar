@@ -5,9 +5,12 @@ import { css } from 'emotion';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import { useUpdateTOC } from 'hooks/useUpdateTOC';
-import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Share from 'components/Share/Share';
 import useDay from 'hooks/useDay';
+import Button from 'components/Button/Button';
+import { useRecoilState } from 'recoil';
+import menuShownState from 'state/menuShownState';
+import SettingsButton from 'components/SettingsButton/SettingsButton';
 
 const LayoutInner = ({
     children,
@@ -16,6 +19,7 @@ const LayoutInner = ({
     left = null,
     right = null,
     paddedContent = true,
+    onBackClick = null,
 }: {
     children: React.ReactNode;
     backLink?: string | null;
@@ -23,6 +27,7 @@ const LayoutInner = ({
     left?: React.ReactNode | null;
     right?: React.ReactNode | null;
     paddedContent?: boolean;
+    onBackClick?: () => void;
 }) => {
     const { date } = useParams();
     const dayQuery = useDay(date);
@@ -30,6 +35,29 @@ const LayoutInner = ({
     const history = useHistory();
     useUpdateTOC();
     const backLinkEffective = backLink || history.location.state?.backLink || backLinkFallback;
+
+    const [menuShown, setMenuShown] = useRecoilState(menuShownState);
+
+    const backElement = (
+        <div
+            className={css`
+                padding: 18px;
+                &:hover {
+                    opacity: 0.8;
+                }
+            `}
+        >
+            <LeftIcon />
+        </div>
+    );
+
+    const backButton = onBackClick ? (
+        <Button onClick={onBackClick}>{backElement}</Button>
+    ) : (
+        <Link to={backLinkEffective || (date ? `/date/${date}` : '/')} title="Назад">
+            {backElement}
+        </Link>
+    );
     return (
         <div
             className={css`
@@ -44,18 +72,7 @@ const LayoutInner = ({
                         align-items: center;
                     `}
                 >
-                    <Link to={backLinkEffective || (date ? `/date/${date}` : '/')} title="Назад">
-                        <div
-                            className={css`
-                                padding: 18px;
-                                &:hover {
-                                    opacity: 0.8;
-                                }
-                            `}
-                        >
-                            <LeftIcon />
-                        </div>
-                    </Link>
+                    {backButton}
                     {left}
                 </div>
                 <div
@@ -66,9 +83,8 @@ const LayoutInner = ({
                 >
                     {right}
                     <DotsMenu>
-                        <div>
-                            <ZoomControlToggle />
-                        </div>
+                        <SettingsButton />
+
                         <Share
                             title="Православное богослужение на русском языке"
                             text={day?.title}

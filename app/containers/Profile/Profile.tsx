@@ -5,7 +5,6 @@ import Loader from 'components/Loader/Loader';
 import BottomNav from 'components/BottomNav/BottomNav';
 import { useAuth } from 'oidc-react';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
-import BurgerMenu from 'containers/Main/BurgerMenu';
 import SectionHeading from 'containers/Main/SectionHeading';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
 
@@ -62,13 +61,11 @@ const Inner = () => {
 };
 
 const Profile = React.memo(() => {
-    const [menuShown, setMenuShown] = useState(false);
-
     useDocumentTitle('Профиль пользователя - Православное богослужение на русском языке');
 
     return (
         <div>
-            <HeaderMain menuShown={menuShown} setMenuShown={setMenuShown} />
+            <HeaderMain />
             <div
                 className={css`
                     flex-grow: 1;
@@ -77,7 +74,6 @@ const Profile = React.memo(() => {
                 <Inner />
             </div>
 
-            <BurgerMenu menuShown={menuShown} setMenuShown={setMenuShown} />
             <BottomNav active={undefined} />
         </div>
     );

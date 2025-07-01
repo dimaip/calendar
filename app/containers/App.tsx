@@ -3,7 +3,6 @@ import { HashRouter } from 'react-router-dom';
 import Pullable from 'react-pullable';
 import ScrollRestoration from 'components/ScrollRestoration/ScrollRestoration';
 import 'styles/reset.css';
-import ZoomControl from 'components/ZoomControl/ZoomControl';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Plugins } from '@capacitor/core';
 import { useSetRecoilState } from 'recoil';
@@ -62,7 +61,6 @@ export default () => {
                     </SyncWithDB>
                 </AuthProvider>
             </HashRouter>
-            <ZoomControl />
         </QueryClientProvider>
     );
 };

@@ -4,7 +4,6 @@ import HeaderMain from 'containers/Main/HeaderMain';
 import Loader from 'components/Loader/Loader';
 import BottomNav from 'components/BottomNav/BottomNav';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
-import BurgerMenu from 'containers/Main/BurgerMenu';
 import SectionHeading from 'containers/Main/SectionHeading';
 import useSharedService, { SharedService } from 'hooks/useSharedService';
 import { useHistory, useParams } from 'react-router-dom';
@@ -54,14 +53,12 @@ const Inner = ({ sharedServiceData }: { sharedServiceData: SharedService }) => {
 };
 
 const AddSharedVersion = React.memo(() => {
-    const [menuShown, setMenuShown] = useState(false);
-
     const { versionData } = useParams();
     const { data: sharedServiceData } = useSharedService(versionData);
 
     return (
         <div>
-            <HeaderMain menuShown={menuShown} setMenuShown={setMenuShown} />
+            <HeaderMain />
             <div
                 className={css`
                     flex-grow: 1;
@@ -70,7 +67,6 @@ const AddSharedVersion = React.memo(() => {
                 {sharedServiceData ? <Inner sharedServiceData={sharedServiceData} /> : <Loader />}
             </div>
 
-            <BurgerMenu menuShown={menuShown} setMenuShown={setMenuShown} />
             <BottomNav active={undefined} />
         </div>
     );

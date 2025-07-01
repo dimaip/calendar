@@ -11,8 +11,8 @@ const gray5 = '#fafafc';
 const gray6 = '#ffffff';
 const blue = '#4169E1';
 
-const getTheme = (primary, isDark) => {
-    const dark = typeof isDark === 'boolean' ? isDark : isDarkMode();
+const getTheme = (primary, theme) => {
+    const dark = theme === 'system' ? isDarkMode() : theme === 'dark' || theme === true;
 
     return {
         colours: {

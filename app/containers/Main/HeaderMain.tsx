@@ -3,16 +3,14 @@ import { css } from 'emotion';
 import { useAuth } from 'oidc-react';
 import { useTheme } from 'emotion-theming';
 import Button from 'components/Button/Button';
-import Burger from 'components/svgs/Burger';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import QuestionIcon from 'components/svgs/QuestionIcon';
 import { useHistory } from 'react-router-dom';
-import ZoomControlToggle from 'components/ZoomControlToggle/ZoomControlToggle';
 import Share from 'components/Share/Share';
 import useDay from 'hooks/useDay';
-import ChangeThemeButton from 'components/ChangeThemeButton/ChangeThemeButton';
+import SettingsButton from 'components/SettingsButton/SettingsButton';
 
 const UserIcon = () => {
     const { userData } = useAuth();
@@ -48,7 +46,7 @@ const ProfileIcon = () => {
             }}
             className={css`
                 display: block;
-                padding: 8px !important;
+                padding: 8px 12px !important;
                 z-index: 1;
             `}
         >
@@ -98,7 +96,7 @@ const Today = ({ date, setNewDate }) => {
     );
 };
 
-const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) => {
+const HeaderMain = ({ setNewDate, date, calendarRef }) => {
     const dayQuery = useDay(date);
     const day = dayQuery.data;
     return (
@@ -112,19 +110,7 @@ const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) 
                 `}
             >
                 <div>
-                    {setMenuShown && (
-                        <Button
-                            title="Меню"
-                            onClick={() => setMenuShown(!menuShown)}
-                            className={css`
-                                display: block;
-                                padding: 10px 18px;
-                                z-index: 1;
-                            `}
-                        >
-                            <Burger />
-                        </Button>
-                    )}
+                    <ProfileIcon />
                 </div>
                 <div
                     className={css`
@@ -141,12 +127,9 @@ const HeaderMain = ({ menuShown, setMenuShown, setNewDate, date, calendarRef }) 
                             <CalendarToggle calendarRef={calendarRef} date={date} setNewDate={setNewDate} iconOnly />
                         </>
                     )}
-                    <ProfileIcon />
+
                     <DotsMenu>
-                        <div>
-                            <ZoomControlToggle />
-                            <ChangeThemeButton />
-                        </div>
+                        <SettingsButton />
                         <Share
                             title="Православное богослужение на русском языке"
                             text={day?.title}

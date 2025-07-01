@@ -28,7 +28,6 @@ import themeState from 'state/themeState';
 
 import BorderedSection from './BorderedSection';
 import IosPrompt from './IosPrompt';
-import BurgerMenu from './BurgerMenu';
 import Services from './Services';
 import ThisDays from './ThisDays';
 import Sermons from './Sermons';
@@ -183,7 +182,6 @@ const Main = React.memo(({ services = false }) => {
     const { date } = useParams();
     // pre-fetch readings
     useReadings(date);
-    const [menuShown, setMenuShown] = useState(false);
 
     const calendarRef = useRef();
 
@@ -243,15 +241,10 @@ const Main = React.memo(({ services = false }) => {
         },
         [goLeft, goRight]
     );
+
     return (
         <div>
-            <HeaderMain
-                calendarRef={calendarRef}
-                menuShown={menuShown}
-                setMenuShown={setMenuShown}
-                setNewDate={setNewDate}
-                date={date}
-            />
+            <HeaderMain calendarRef={calendarRef} setNewDate={setNewDate} date={date} />
             <div
                 className={css`
                     flex-grow: 1;
@@ -267,7 +260,6 @@ const Main = React.memo(({ services = false }) => {
                 />
             </div>
 
-            <BurgerMenu menuShown={menuShown} setMenuShown={setMenuShown} />
             <BottomNav active={services ? 'services' : 'calendar'} />
             <IosPrompt />
         </div>
