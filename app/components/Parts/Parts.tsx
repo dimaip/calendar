@@ -20,14 +20,24 @@ const objAccess = (object, path, serviceType = null) => {
         .filter(Boolean);
 };
 
-const renderFallback = (fallback, noTexts = false) => {
+const renderFallback = (fallback, noTexts = false, externalTexts = null) => {
     if (typeof fallback === 'function') {
-        return fallback(noTexts);
+        return fallback(noTexts, externalTexts);
     }
     return fallback;
 };
 
-const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShowFallback, Layout, partsProcessor }) => {
+const PartRenderer = ({
+    date,
+    lang,
+    partNames,
+    serviceType,
+    fallback,
+    fallbackRendersExternalTexts,
+    alwaysShowFallback,
+    Layout,
+    partsProcessor,
+}) => {
     const { data: parts } = useParts(date, lang);
     let texts = partNames
         .map((partName) => {
@@ -51,30 +61,30 @@ const PartRenderer = ({ date, lang, partNames, serviceType, fallback, alwaysShow
         ) : null;
     }
 
+    const externalTexts = texts?.map?.((element, index) =>
+        typeof element === 'string' ? (
+            <RteText
+                key={index}
+                html={element}
+                className={css`
+                    margin-bottom: 12px;
+
+                    & ._-ОСНОВНОЙ_Основной-отст1-5 {
+                        text-indent: 0;
+                        margin-left: 0;
+                    }
+                `}
+            />
+        ) : (
+            element
+        )
+    );
+
     return (
         <HeightUpdater>
             <Layout>
-                <div>
-                    {alwaysShowFallback && !hasExclusiveTexts && renderFallback(fallback, false)}
-                    {texts?.map?.((element, index) =>
-                        typeof element === 'string' ? (
-                            <RteText
-                                key={index}
-                                html={element}
-                                className={css`
-                                    margin-bottom: 12px;
-
-                                    & ._-ОСНОВНОЙ_Основной-отст1-5 {
-                                        text-indent: 0;
-                                        margin-left: 0;
-                                    }
-                                `}
-                            />
-                        ) : (
-                            element
-                        )
-                    )}
-                </div>
+                <div>{alwaysShowFallback && !hasExclusiveTexts && renderFallback(fallback, false, externalTexts)}</div>
+                {!fallbackRendersExternalTexts && externalTexts}
             </Layout>
         </HeightUpdater>
     );
@@ -88,6 +98,7 @@ const Parts = ({
     alwaysShowFallback = false,
     Layout = ({ children }) => children,
     partsProcessor = (parts) => parts,
+    fallbackRendersExternalTexts = false,
 }) => {
     const { lang, langA, langB } = useContext(LangContext);
     if (lang === 'parallel') {
@@ -116,6 +127,7 @@ const Parts = ({
                             Layout={Layout}
                             lang={langA}
                             partsProcessor={partsProcessor}
+                            fallbackRendersExternalTexts={fallbackRendersExternalTexts}
                         />
                     </LangContext.Provider>
                 </div>
@@ -135,6 +147,7 @@ const Parts = ({
                             Layout={Layout}
                             lang={langB}
                             partsProcessor={partsProcessor}
+                            fallbackRendersExternalTexts={fallbackRendersExternalTexts}
                         />
                     </LangContext.Provider>
                 </div>
@@ -152,6 +165,7 @@ const Parts = ({
             Layout={Layout}
             lang={lang}
             partsProcessor={partsProcessor}
+            fallbackRendersExternalTexts={fallbackRendersExternalTexts}
         />
     );
 };
