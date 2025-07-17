@@ -84,7 +84,7 @@ const PartRenderer = ({
         <HeightUpdater>
             <Layout>
                 <div>{alwaysShowFallback && !hasExclusiveTexts && renderFallback(fallback, false, externalTexts)}</div>
-                {!fallbackRendersExternalTexts && externalTexts}
+                {(!fallbackRendersExternalTexts || hasExclusiveTexts) && externalTexts}
             </Layout>
         </HeightUpdater>
     );
