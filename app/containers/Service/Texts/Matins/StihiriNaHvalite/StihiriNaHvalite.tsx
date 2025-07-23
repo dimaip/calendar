@@ -10,7 +10,19 @@ const DefatulStihiriNaHvalite = ({ day, date, externalTexts }) => {
         if (!glas) {
             return null;
         }
-        return <MdxLoader src={`Matins/StihiriNaHvalite/Glas${glas}`} externalTexts={externalTexts} />;
+        return (
+            <MdxLoader
+                src={`Matins/StihiriNaHvalite/Glas${glas}`}
+                externalTexts={
+                    <>
+                        {externalTexts}
+                        {Boolean(day?.matinsGospelKey) && (
+                            <MdxLoader src={`Matins/StihiriNaHvalite/Gospel/${day?.matinsGospelKey}`} />
+                        )}
+                    </>
+                }
+            />
+        );
     }
     return null;
 };
