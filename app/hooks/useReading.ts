@@ -37,7 +37,7 @@ const useReading = (link, translation, date, translationPriority = []) => {
             retry: false,
         }
     );
-    if (readings?.[link] && translation === 'default' && !translationPriority?.length) {
+    if (readings?.[link] && translation === 'default') {
         return {
             data: readings[link],
             status: 'success',
