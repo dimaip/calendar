@@ -55,7 +55,9 @@ const PartRenderer = ({
         .map((text) => text.replace('ЗАМЕНА', '').replace('НЕТЗАМЕНЫ', '').replace('УБРАТЬИНЫНЕ', ''));
     texts = hasExclusiveTexts
         ? exclusiveTextsAndPlain
-        : texts.map((text) => (typeof text === 'string' ? text.replace('НЕТЗАМЕНЫ', '') : text));
+        : texts.map((text) =>
+              typeof text === 'string' ? text.replace('НЕТЗАМЕНЫ', '').replace('УБРАТЬИНЫНЕ', '') : text
+          );
 
     if (!texts?.length) {
         return fallback ? (
