@@ -47,13 +47,16 @@ const PartRenderer = ({
 
     texts = partsProcessor(texts);
     const hasExclusiveTexts = Boolean(texts.find((text) => text?.includes?.('ЗАМЕНА')));
-    const hasExclusiveEnding = Boolean(texts.find((text) => text?.includes?.('ЗАМЕНАИНЫНЕ')));
+    const hasExclusiveEnding = Boolean(texts.find((text) => text?.includes?.('УБРАТЬИНЫНЕ')));
     const exclusiveTextsAndPlain = texts
-        .filter((text) => text?.includes?.('ЗАМЕНА') || text?.includes?.('НЕТЗАМЕНЫ'))
-        .map((text) => text.replace('ЗАМЕНА', '').replace('НЕТЗАМЕНЫ', ''));
+        .filter(
+            (text) => text?.includes?.('ЗАМЕНА') || text?.includes?.('НЕТЗАМЕНЫ') || text?.includes?.('УБРАТЬИНЫНЕ')
+        )
+        .map((text) => text.replace('ЗАМЕНА', '').replace('НЕТЗАМЕНЫ', '').replace('УБРАТЬИНЫНЕ', ''));
     texts = hasExclusiveTexts
         ? exclusiveTextsAndPlain
         : texts.map((text) => (typeof text === 'string' ? text.replace('НЕТЗАМЕНЫ', '') : text));
+
     if (!texts?.length) {
         return fallback ? (
             <HeightUpdater>
