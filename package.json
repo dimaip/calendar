@@ -13,7 +13,7 @@
         "build": "cross-env Z_URL=https://z.molitva.app PUBLIC_URL=https://molitva.app API_HOST=https://api.c.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
         "build-aws": "cross-env Z_URL=https://z.molitva.app PUBLIC_URL=https://molitva.app API_HOST=https://api.c.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
         "build-local": "cross-env Z_URL=http://localhost:8080 PUBLIC_URL=http://localhost API_HOST=https://api.c.psmb.ru NODE_ENV=production webpack --config webpack.prod.js",
-        "twa-build": "cd TWA && bubblewrap build",
+        "twa-build": "cd TWA && bubblewrap update && bubblewrap build",
         "cap-build": "yarn build-aws && yarn cap sync",
         "cap-open": "yarn cap open ios",
         "lint": "yarn lint:eslint && yarn lint:tsc",
