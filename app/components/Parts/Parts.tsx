@@ -20,9 +20,19 @@ const objAccess = (object, path, serviceType = null) => {
         .filter(Boolean);
 };
 
-const renderFallback = (fallback, noTexts = false, externalTexts = null, hasExclusiveEnding = null) => {
+interface Flags {
+    hasExclusiveEnding: boolean;
+    hasExclusiveBeginning: boolean;
+}
+
+const renderFallback = (
+    fallback: JSX.Element | ((noTexts: boolean, externalTexts: JSX.Element | null, flags: Flags | null) => JSX.Element),
+    noTexts = false,
+    externalTexts = null,
+    flags: Flags | null = null
+): JSX.Element => {
     if (typeof fallback === 'function') {
-        return fallback(noTexts, externalTexts, hasExclusiveEnding);
+        return fallback(noTexts, externalTexts, flags);
     }
     return fallback;
 };
@@ -47,16 +57,25 @@ const PartRenderer = ({
 
     texts = partsProcessor(texts);
     const hasExclusiveTexts = Boolean(texts.find((text) => text?.includes?.('ЗАМЕНА')));
+    const hasExclusiveBeginning = Boolean(texts.find((text) => text?.includes?.('УБРАТЬСЛАВА')));
     const hasExclusiveEnding = Boolean(texts.find((text) => text?.includes?.('УБРАТЬИНЫНЕ')));
     const exclusiveTextsAndPlain = texts
         .filter(
-            (text) => text?.includes?.('ЗАМЕНА') || text?.includes?.('НЕТЗАМЕНЫ') || text?.includes?.('УБРАТЬИНЫНЕ')
+            (text) =>
+                text?.includes?.('ЗАМЕНА') ||
+                text?.includes?.('НЕТЗАМЕНЫ') ||
+                text?.includes?.('УБРАТЬИНЫНЕ') ||
+                text?.includes?.('УБРАТЬСЛАВА')
         )
-        .map((text) => text.replace('ЗАМЕНА', '').replace('НЕТЗАМЕНЫ', '').replace('УБРАТЬИНЫНЕ', ''));
+        .map((text) =>
+            text.replace('ЗАМЕНА', '').replace('НЕТЗАМЕНЫ', '').replace('УБРАТЬИНЫНЕ', '').replace('УБРАТЬСЛАВА', '')
+        );
     texts = hasExclusiveTexts
         ? exclusiveTextsAndPlain
         : texts.map((text) =>
-              typeof text === 'string' ? text.replace('НЕТЗАМЕНЫ', '').replace('УБРАТЬИНЫНЕ', '') : text
+              typeof text === 'string'
+                  ? text.replace('НЕТЗАМЕНЫ', '').replace('УБРАТЬИНЫНЕ', '').replace('УБРАТЬСЛАВА', '')
+                  : text
           );
 
     if (!texts?.length) {
@@ -92,7 +111,7 @@ const PartRenderer = ({
                 <div>
                     {alwaysShowFallback &&
                         !hasExclusiveTexts &&
-                        renderFallback(fallback, false, externalTexts, hasExclusiveEnding)}
+                        renderFallback(fallback, false, externalTexts, { hasExclusiveEnding, hasExclusiveBeginning })}
                 </div>
                 {(!fallbackRendersExternalTexts || hasExclusiveTexts) && externalTexts}
             </Layout>

@@ -2,7 +2,7 @@ import React from 'react';
 import Parts from 'components/Parts/Parts';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
-const DefatulStihiriNaHvalite = ({ day, date, externalTexts }) => {
+const DefaultStihiriNaHvalite = ({ day, date, externalTexts, hasExclusiveBeginning }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const glas = day?.glas;
@@ -16,7 +16,7 @@ const DefatulStihiriNaHvalite = ({ day, date, externalTexts }) => {
                 externalTexts={
                     <>
                         {externalTexts}
-                        {Boolean(day?.matinsGospelKey) && (
+                        {!hasExclusiveBeginning && Boolean(day?.matinsGospelKey) && (
                             <MdxLoader src={`Matins/StihiriNaHvalite/Gospel/${day?.matinsGospelKey}`} />
                         )}
                     </>
@@ -33,8 +33,14 @@ const StihiriNaHvalite = ({ day, date }) => (
             date={date}
             partNames={['matins.Cтихиры на хвалите']}
             alwaysShowFallback
-            fallback={(noTexts, externalTexts) => (
-                <DefatulStihiriNaHvalite day={day} date={date} noTexts={noTexts} externalTexts={externalTexts} />
+            fallback={(noTexts, externalTexts, flags) => (
+                <DefaultStihiriNaHvalite
+                    day={day}
+                    date={date}
+                    noTexts={noTexts}
+                    externalTexts={externalTexts}
+                    hasExclusiveBeginning={flags?.hasExclusiveBeginning}
+                />
             )}
             fallbackRendersExternalTexts
             serviceType="Утреня"

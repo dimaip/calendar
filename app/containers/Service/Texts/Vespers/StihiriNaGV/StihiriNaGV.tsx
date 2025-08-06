@@ -28,12 +28,12 @@ const StihiriNaGV = ({ day, date }) => (
             partNames={['vespers.Cтихиры на Господи взываю']}
             alwaysShowFallback
             serviceType="Вечерня"
-            fallback={(_noTexts, externalTexts, hasExclusiveEnding) => (
+            fallback={(_noTexts, externalTexts, flags) => (
                 <DefatulStihiriNaGV
                     day={day}
                     date={date}
                     externalTexts={externalTexts}
-                    hasExclusiveEnding={hasExclusiveEnding}
+                    hasExclusiveEnding={flags?.hasExclusiveEnding}
                 />
             )}
             fallbackRendersExternalTexts
