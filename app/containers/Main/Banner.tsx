@@ -16,7 +16,7 @@ const Banner = () => (
             color: white;
             border-radius: 8px;
             padding: 14px 12px;
-            margin: 0 -10px 18px -10px;
+            margin: 0 -10px 0 -10px;
         `}
     >
         <div className={css``}>

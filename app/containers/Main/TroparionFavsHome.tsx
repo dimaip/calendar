@@ -29,17 +29,13 @@ export const TroparionFavsHome = () => {
                 <>
                     <SectionHeading
                         className={css`
-                            padding-top: 12px;
+                            padding-top: 24px;
                         `}
                     >
                         Избранные песнопения
                     </SectionHeading>
 
-                    <div
-                        className={css`
-                            margin: 0 -10px;
-                        `}
-                    >
+                    <div>
                         {favedHymns.length > 0 ? (
                             <>
                                 {favedHymns.map((hymn) => (
@@ -52,7 +48,7 @@ export const TroparionFavsHome = () => {
                                     className={css`
                                         font-size: 14px;
                                         color: ${theme.colours.gray};
-                                        margin: 0 10px 12px 10px;
+                                        margin: 0 0 12px 0;
                                     `}
                                 >
                                     Добавьте ваш любимый тропарь в избранное, и он всегда будет отображаться здесь
@@ -68,7 +64,11 @@ export const TroparionFavsHome = () => {
                                 pathname: `/hymns`,
                             }}
                         >
-                            <ButtonBox>
+                            <ButtonBox
+                                className={css`
+                                    margin: 0 -10px 8px -10px;
+                                `}
+                            >
                                 <div
                                     className={css`
                                         display: flex;

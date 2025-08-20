@@ -93,19 +93,19 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                         <SectionHeading>Богослужебные чтения</SectionHeading>
                                                         <ReadingList readings={day.readings || {}} date={date} />
 
-                                                        <BorderedSection>
+                                                        <div style={{ marginTop: -18 }}>
                                                             <SectionHeading>Святые дня</SectionHeading>
                                                             <Saints saints={day.saints} date={date} />
-                                                        </BorderedSection>
+                                                        </div>
                                                         <ThisDays thisDays={thisDays} date={date} />
                                                         {/* <div style={{ marginBottom: 18 }}>
                                                             <EasterService />
                                                         </div> */}
-                                                        <div style={{ marginBottom: 18 }}>
+                                                        <div style={{ margin: '0 -10px 0 -10px' }}>
                                                             <TodaysBanner />
                                                         </div>
 
-                                                        <BorderedSection>
+                                                        <div>
                                                             <div
                                                                 className={css`
                                                                     overflow: auto;
@@ -123,7 +123,6 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                                 <div
                                                                     className={`mainHymns ${css`
                                                                         margin-top: -16px;
-                                                                        margin-bottom: 28px;
                                                                     `}`}
                                                                 >
                                                                     <Suspense fallback={<Loader />}>
@@ -146,7 +145,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                                     </Suspense>
                                                                 </div>
                                                             </MDXProvider>
-                                                        </BorderedSection>
+                                                        </div>
                                                         <TroparionFavsHome />
 
                                                         {day.bReadings && Object.keys(day.bReadings).length > 0 && (
@@ -162,7 +161,9 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                         <Sermons date={date} sermons={sermons} />
                                                     </>
                                                 )}
-                                                <Banner />
+                                                <div style={{ marginBottom: 8 }}>
+                                                    <Banner />
+                                                </div>
                                             </SolidSection>
                                         </div>
                                     </Zoom>

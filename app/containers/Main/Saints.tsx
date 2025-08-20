@@ -32,7 +32,7 @@ const Saints = ({ saints, date }) => {
             ref={ref}
             className={css`
                 margin-left: 22px;
-                margin-bottom: 24px;
+                margin-bottom: 32px;
                 & img {
                     margin-right: 8px;
                     margin-left: -22px;

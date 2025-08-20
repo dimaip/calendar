@@ -11,7 +11,7 @@ const SectionHeading = ({ children, className = '' }) => {
                 line-height: 1;
                 font-weight: bold;
                 color: ${theme.colours.darkGray};
-                padding-top: 24px;
+                padding-top: 32px;
                 padding-bottom: 18px;
             `} ${className}`}
         >
