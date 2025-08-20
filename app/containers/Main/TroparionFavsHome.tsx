@@ -37,11 +37,11 @@ export const TroparionFavsHome = () => {
 
                     <div>
                         {favedHymns.length > 0 ? (
-                            <>
+                            <div style={{ margin: '0 -10px 0 -10px' }}>
                                 {favedHymns.map((hymn) => (
                                     <HymnButton hymn={hymn} key={hymn.id} />
                                 ))}
-                            </>
+                            </div>
                         ) : (
                             <>
                                 <p
