@@ -5,6 +5,7 @@
   "launcherName": "ПБ",
   "display": "standalone",
   "themeColor": "#AE841A",
+  "themeColorDark": "#000000",
   "navigationColor": "#000000",
   "navigationColorDark": "#000000",
   "navigationDividerColor": "#000000",
@@ -18,8 +19,8 @@
     "path": "/Users/dimaip/psmb/android.keystore",
     "alias": "android"
   },
-  "appVersionName": "11",
-  "appVersionCode": 11,
+  "appVersionName": "21",
+  "appVersionCode": 21,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://molitva.app/manifest.json",
@@ -36,5 +37,5 @@
   "fingerprints": [],
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
-  "appVersion": "11"
+  "appVersion": "21"
 }
