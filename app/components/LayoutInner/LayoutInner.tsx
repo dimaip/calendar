@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from 'emotion';
@@ -11,6 +11,8 @@ import Button from 'components/Button/Button';
 import { useRecoilState } from 'recoil';
 import menuShownState from 'state/menuShownState';
 import SettingsButton from 'components/SettingsButton/SettingsButton';
+import { FindInPageButton } from 'components/FindInPageButton/FindInPageButton';
+import InPageSearch from 'components/InPageSearch/InPageSearch';
 
 const LayoutInner = ({
     children,
@@ -58,6 +60,8 @@ const LayoutInner = ({
             {backElement}
         </Link>
     );
+    const contentRef = useRef<HTMLDivElement | null>(null);
+    const [isFindOpen, setIsFindOpen] = useState(false);
     return (
         <div
             className={css`
@@ -84,6 +88,7 @@ const LayoutInner = ({
                     {right}
                     <DotsMenu>
                         <SettingsButton />
+                        <FindInPageButton onOpen={() => setIsFindOpen(true)} />
 
                         <Share
                             title="Православное богослужение на русском языке"
@@ -94,6 +99,7 @@ const LayoutInner = ({
                 </div>
             </Header>
             <div
+                ref={contentRef}
                 className={
                     paddedContent
                         ? css`
@@ -105,6 +111,7 @@ const LayoutInner = ({
             >
                 {children}
             </div>
+            {isFindOpen && <InPageSearch containerRef={contentRef} onClose={() => setIsFindOpen(false)} />}
         </div>
     );
 };
