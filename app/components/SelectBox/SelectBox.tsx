@@ -115,6 +115,11 @@ const SelectBox = React.memo(
                                     background: ${theme.colours.bgGrayLight};
                                     border: 1px solid ${theme.colours.lineGray};
 
+                                    padding-top: env(safe-area-inset-top);
+                                    padding-bottom: env(safe-area-inset-bottom);
+                                    padding-left: env(safe-area-inset-left);
+                                    padding-right: env(safe-area-inset-right);
+
                                     position: fixed;
                                     top: 0;
                                     left: 0;
