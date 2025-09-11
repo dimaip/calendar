@@ -13,7 +13,7 @@ const Links = () => {
             `}
         >
             <a
-                href={`http://www.patriarchia.ru/bu/${date}`}
+                href={`http://old.patriarchia.ru/bu/${date}`}
                 target="_blank"
                 rel="noopener"
                 className={css`

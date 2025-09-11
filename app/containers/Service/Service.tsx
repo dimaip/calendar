@@ -154,7 +154,7 @@ const Service = () => {
                                             className={css`
                                                 text-decoration: underline;
                                             `}
-                                            href={`http://www.patriarchia.ru/bu/${date}`}
+                                            href={`http://old.patriarchia.ru/bu/${date}`}
                                             target="_blank"
                                         >
                                             богослужебным указаниям.
