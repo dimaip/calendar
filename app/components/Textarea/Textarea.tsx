@@ -27,6 +27,7 @@ const Textarea = ({ className = '', onEnter = null, ...rest }) => {
                 min-height: 200px;
                 color: inherit;
                 font-family: inherit;
+                font-size: 16px;
             `} ${className}`}
         />
     );
