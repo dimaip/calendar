@@ -66,7 +66,7 @@ const CustomPrayerInput = ({
                         placeholder={`${placeholder}…`}
                         autoFocus
                         className={css`
-                            min-height: 70vh;
+                            min-height: 70vh !important;
                         `}
                     />
                 </div>
