@@ -127,11 +127,13 @@ const Services = ({ date, readings }) => {
                                                         onClick={(e) => {
                                                             e.preventDefault();
                                                             e.stopPropagation();
-                                                            setCustomPrayers(
-                                                                customPrayers.filter(
-                                                                    (i) => i.id !== service.customPrayerId
-                                                                )
-                                                            );
+                                                            if (confirm('Уверены, что хотите удалить молитву?')) {
+                                                                setCustomPrayers(
+                                                                    customPrayers.filter(
+                                                                        (i) => i.id !== service.customPrayerId
+                                                                    )
+                                                                );
+                                                            }
                                                         }}
                                                     >
                                                         <TrashIcon />

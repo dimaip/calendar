@@ -1,22 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { css } from 'emotion';
 import TagManager from 'react-gtm-module';
-import Drawer from 'components/Drawer/Drawer';
 import Textarea from 'components/Textarea/Textarea';
 import { useRecoilState } from 'recoil';
 import customPrayersState from 'state/customPrayersState';
 import customPrayerInputState from 'state/customPrayerInputState';
+import DrawerWithHeader from 'components/Drawer/DrawerWithHeader';
+import Button from 'components/Button/Button';
+import { useTheme } from 'emotion-theming';
 
 const CustomPrayerInput = ({
     onSave,
 }: {
     onSave?: (newPrayer: { id: number; text: string }) => void;
 }): JSX.Element | null => {
+    const [isDirty, setIsDirty] = useState(false);
     const [inputText, setInputText] = useRecoilState(customPrayerInputState);
     const [customPrayers, setCustomPrayers] = useRecoilState(customPrayersState('Sugubaja'));
+    const theme = useTheme();
 
     const changeInputHandler = (e: { target: { value: string } }): void => {
+        setIsDirty(true);
         setInputText(e.target.value);
+    };
+
+    const cancelPrayerHandler = (): void => {
+        if (!isDirty || confirm('Выйти без сохранения?')) {
+            setInputText(null);
+            setIsDirty(false);
+        }
     };
 
     const savePrayerHandler = (): void => {
@@ -35,20 +47,14 @@ const CustomPrayerInput = ({
             onSave?.(newPrayer);
         }
         setInputText(null);
+        setIsDirty(false);
     };
 
     const placeholder = 'Введите текст молитвы';
 
     return inputText !== null ? (
-        <Drawer onClose={savePrayerHandler}>
+        <DrawerWithHeader onClose={cancelPrayerHandler} header={<div>Добавить молитву</div>}>
             <label>
-                <p
-                    className={css`
-                        margin-bottom: 8px;
-                    `}
-                >
-                    Добавить молитву
-                </p>
                 <div
                     className={css`
                         position: relative;
@@ -62,7 +68,18 @@ const CustomPrayerInput = ({
                     />
                 </div>
             </label>
-        </Drawer>
+            <Button
+                className={css`
+                    background-color: ${theme.colours.primary};
+                    color: ${theme.colours.white} !important;
+                    border-radius: 8px;
+                    margin-top: 12px;
+                `}
+                onClick={savePrayerHandler}
+            >
+                Сохранить
+            </Button>
+        </DrawerWithHeader>
     ) : null;
 };
 
