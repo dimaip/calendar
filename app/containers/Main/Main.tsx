@@ -251,14 +251,18 @@ const Main = React.memo(({ services = false }) => {
                     flex-grow: 1;
                 `}
             >
-                <VirtualizeSwipeableViews
-                    index={activeIndex}
-                    slideRenderer={slideRenderer}
-                    overscanSlideAfter={1}
-                    overscanSlideBefore={1}
-                    animateHeight
-                    onChangeIndex={onChangeIndex}
-                />
+                {services ? (
+                    slideRenderer({ key: 'services', index: 0 })
+                ) : (
+                    <VirtualizeSwipeableViews
+                        index={activeIndex}
+                        slideRenderer={slideRenderer}
+                        overscanSlideAfter={1}
+                        overscanSlideBefore={1}
+                        animateHeight
+                        onChangeIndex={onChangeIndex}
+                    />
+                )}
             </div>
 
             <BottomNav active={services ? 'services' : 'calendar'} />
