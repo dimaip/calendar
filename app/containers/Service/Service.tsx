@@ -149,6 +149,9 @@ const Service = () => {
                 }
             }}
             title="Редактировать молитву"
+            className={css`
+                margin-top: 3px;
+            `}
         >
             <Pencil />
         </Button>
