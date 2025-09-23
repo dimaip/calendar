@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-const customPrayerInputState = atom({
+const customPrayerInputState = atom<string | null>({
     key: 'customPrayerInputState',
     default: null,
 });

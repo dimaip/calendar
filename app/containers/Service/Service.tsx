@@ -14,6 +14,13 @@ import ScriptEditorToggle from 'components/ScriptEditor/ScriptEditorToggle';
 import { Tour } from 'components/Tour/Tour';
 import { useSyncCurrentScriptVersion } from 'components/ScriptVersionSelector/useSyncCurrentScriptVersion';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
+import { useRecoilState } from 'recoil';
+import customPrayersState from 'state/customPrayersState';
+import customPrayerInputState from 'state/customPrayerInputState';
+import customPrayerEditIdState from 'state/customPrayerEditIdState';
+import Button from 'components/Button/Button';
+import Pencil from 'components/svgs/Pencil';
+import CustomPrayerInput from 'components/CustomPrayers/CustomPrayerInput';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
@@ -32,12 +39,16 @@ const reloadOnFailedImport = (e) => {
 const toUpperCase = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 
 const Service = () => {
-    const { serviceId: originalServiceId, date } = useParams();
+    const { serviceId: originalServiceId, date, prayerId } = useParams();
     const { data: day } = useDay(date);
 
     const history = useHistory();
 
     const langState = useContext(LangContext);
+
+    const [customPrayers] = useRecoilState<Array<{ id: number; text: string }>>(customPrayersState('Sugubaja') as any);
+    const [, setInputText] = useRecoilState<string | null>(customPrayerInputState);
+    const [, setEditId] = useRecoilState<number | null>(customPrayerEditIdState);
 
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
 
@@ -56,9 +67,12 @@ const Service = () => {
     }
 
     const services = useServices(date, day?.readings);
-    const service = services.find(
-        (service) => service.id.split('/')[0] === (serviceId || originalServiceId?.split?.('/')?.[0])
-    );
+    const service = services.find((service) => {
+        if (originalServiceId === 'customPrayer') {
+            return String(service.customPrayerId) === prayerId;
+        }
+        return service.id.split('/')[0] === (serviceId || originalServiceId?.split?.('/')?.[0]);
+    });
 
     if (service?.skipRedirect) {
         serviceId = originalServiceId.split('/')[0];
@@ -125,10 +139,25 @@ const Service = () => {
     // If service has no lang support, force it to 'ru'
     const effectiveLangState = service?.lang ? langState : { ...langState, lang: 'ru' };
 
+    const right = service?.customPrayerId ? (
+        <Button
+            onClick={() => {
+                const prayer = customPrayers.find((p) => p.id === service?.customPrayerId);
+                if (prayer) {
+                    setEditId(prayer.id);
+                    setInputText(prayer.text || '');
+                }
+            }}
+            title="Редактировать молитву"
+        >
+            <Pencil />
+        </Button>
+    ) : null;
+
     return (
         <ServiceContext.Provider value={{ serviceId }}>
             <LangContext.Provider value={effectiveLangState}>
-                <LayoutInner left={left} paddedContent={false}>
+                <LayoutInner left={left} right={right} paddedContent={false}>
                     {service?.scriptEditor && (
                         <>
                             <Tour serviceId={serviceId} />
@@ -180,6 +209,7 @@ const Service = () => {
                             </div>
                         </>
                     </Zoom>
+                    <CustomPrayerInput />
                 </LayoutInner>
             </LangContext.Provider>
         </ServiceContext.Provider>

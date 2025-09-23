@@ -5,6 +5,7 @@ import Textarea from 'components/Textarea/Textarea';
 import { useRecoilState } from 'recoil';
 import customPrayersState from 'state/customPrayersState';
 import customPrayerInputState from 'state/customPrayerInputState';
+import customPrayerEditIdState from 'state/customPrayerEditIdState';
 import DrawerWithHeader from 'components/Drawer/DrawerWithHeader';
 import Button from 'components/Button/Button';
 import { useTheme } from 'emotion-theming';
@@ -15,8 +16,11 @@ const CustomPrayerInput = ({
     onSave?: (newPrayer: { id: number; text: string }) => void;
 }): JSX.Element | null => {
     const [isDirty, setIsDirty] = useState(false);
-    const [inputText, setInputText] = useRecoilState(customPrayerInputState);
-    const [customPrayers, setCustomPrayers] = useRecoilState(customPrayersState('Sugubaja'));
+    const [inputText, setInputText] = useRecoilState<string | null>(customPrayerInputState);
+    const [customPrayers, setCustomPrayers] = useRecoilState<{ id: number; text: string }[]>(
+        customPrayersState('Sugubaja') as any
+    );
+    const [editId, setEditId] = useRecoilState<number | null>(customPrayerEditIdState);
     const theme = useTheme();
 
     const changeInputHandler = (e: { target: { value: string } }): void => {
@@ -28,32 +32,49 @@ const CustomPrayerInput = ({
         if (!isDirty || confirm('Выйти без сохранения?')) {
             setInputText(null);
             setIsDirty(false);
+            setEditId(null);
         }
     };
 
     const savePrayerHandler = (): void => {
         if (inputText) {
-            const id = Date.now();
-            const newPrayer = {
-                id,
-                text: inputText,
-            };
-            setCustomPrayers([...customPrayers, newPrayer]);
-            TagManager.dataLayer({
-                dataLayer: {
-                    event: 'customPrayerAdded',
-                },
-            });
-            onSave?.(newPrayer);
+            if (editId) {
+                const updated = customPrayers.map((p: { id: number; text: string }) =>
+                    p.id === editId ? { ...p, text: inputText } : p
+                );
+                setCustomPrayers(updated);
+                TagManager.dataLayer({
+                    dataLayer: {
+                        event: 'customPrayerEdited',
+                    },
+                });
+            } else {
+                const id = Date.now();
+                const newPrayer = {
+                    id,
+                    text: inputText,
+                };
+                setCustomPrayers([...customPrayers, newPrayer]);
+                TagManager.dataLayer({
+                    dataLayer: {
+                        event: 'customPrayerAdded',
+                    },
+                });
+                onSave?.(newPrayer);
+            }
         }
         setInputText(null);
         setIsDirty(false);
+        setEditId(null);
     };
 
     const placeholder = 'Введите текст молитвы';
 
     return inputText !== null ? (
-        <DrawerWithHeader onClose={cancelPrayerHandler} header={<div>Добавить молитву</div>}>
+        <DrawerWithHeader
+            onClose={cancelPrayerHandler}
+            header={<div>{editId ? 'Редактирование молитвы' : 'Добавить молитву'}</div>}
+        >
             <label>
                 <div
                     className={css`

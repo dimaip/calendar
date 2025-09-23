@@ -10,13 +10,15 @@ import SelectBox from 'components/SelectBox/SelectBox';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import Loader from 'components/Loader/Loader';
 import Cross from 'components/svgs/Cross';
+import Pencil from 'components/svgs/Pencil';
 import { bratMolitvoslovPrayers } from 'containers/Service/Texts/Texts';
 import customPrayerInputState from 'state/customPrayerInputState';
+import customPrayerEditIdState from 'state/customPrayerEditIdState';
 
 import CustomPrayerInput from './CustomPrayerInput';
 import PlusIcon from 'components/svgs/PlusIcon';
 
-const Section = ({ children }: ReactNode): JSX.Element => {
+const Section = ({ children }: { children: ReactNode }): JSX.Element => {
     const theme = useTheme();
     return (
         <div
@@ -36,6 +38,7 @@ const Section = ({ children }: ReactNode): JSX.Element => {
 
 const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
     const [_inputText, setInputText] = useRecoilState(customPrayerInputState);
+    const [, setEditId] = useRecoilState(customPrayerEditIdState);
     const [extraPrayers, setExtraPrayers] = useRecoilState(extraPrayersState(type));
     const [customPrayers] = useRecoilState(customPrayersState('Sugubaja'));
 
@@ -49,6 +52,24 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                 }
                 return (
                     <Section key={prayerId}>
+                        {isCustomPrayer && (
+                            <Button
+                                className={css`
+                                    position: absolute;
+                                    top: 0;
+                                    right: 36px;
+                                `}
+                                onClick={() => {
+                                    if (customPrayer) {
+                                        setEditId(customPrayer.id);
+                                        setInputText(customPrayer.text || '');
+                                    }
+                                }}
+                                title="Редактировать молитву"
+                            >
+                                <Pencil />
+                            </Button>
+                        )}
                         <Button
                             className={css`
                                 position: absolute;
