@@ -12,8 +12,10 @@ import { useTheme } from 'emotion-theming';
 
 const CustomPrayerInput = ({
     onSave,
+    onClose,
 }: {
     onSave?: (newPrayer: { id: number; text: string }) => void;
+    onClose?: () => void;
 }): JSX.Element | null => {
     const [isDirty, setIsDirty] = useState(false);
     const [inputText, setInputText] = useRecoilState<string | null>(customPrayerInputState);
@@ -30,9 +32,10 @@ const CustomPrayerInput = ({
 
     const cancelPrayerHandler = (): void => {
         if (!isDirty || confirm('Выйти без сохранения?')) {
-            setInputText(null);
+            setInputText('');
             setIsDirty(false);
             setEditId(null);
+            onClose?.();
         }
     };
 
@@ -63,14 +66,15 @@ const CustomPrayerInput = ({
                 onSave?.(newPrayer);
             }
         }
-        setInputText(null);
+        setInputText('');
         setIsDirty(false);
         setEditId(null);
+        onClose?.();
     };
 
     const placeholder = 'Введите текст молитвы';
 
-    return inputText !== null ? (
+    return (
         <DrawerWithHeader
             onClose={cancelPrayerHandler}
             header={<div>{editId ? 'Редактирование молитвы' : 'Добавить молитву'}</div>}
@@ -104,7 +108,7 @@ const CustomPrayerInput = ({
                 Сохранить
             </Button>
         </DrawerWithHeader>
-    ) : null;
+    );
 };
 
 export default CustomPrayerInput;

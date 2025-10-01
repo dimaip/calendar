@@ -1,4 +1,4 @@
-import React, { ReactNode, Suspense } from 'react';
+import React, { ReactNode, Suspense, useState } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import TagManager from 'react-gtm-module';
@@ -38,6 +38,7 @@ const Section = ({ children }: { children: ReactNode }): JSX.Element => {
 
 const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
     const [_inputText, setInputText] = useRecoilState(customPrayerInputState);
+    const [customPrayerInputShown, setCustomPrayerInputShown] = useState(false);
     const [, setEditId] = useRecoilState(customPrayerEditIdState);
     const [extraPrayers, setExtraPrayers] = useRecoilState(extraPrayersState(type));
     const [customPrayers] = useRecoilState(customPrayersState('Sugubaja'));
@@ -122,13 +123,24 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                     })),
                     {
                         value: 'addCustom',
-                        label: 'Добавить свою молитву',
+                        label: (
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'flex-start',
+                                }}
+                            >
+                                <div style={{ marginRight: 6 }}>Добавить молитву</div> <PlusIcon width={16} />
+                            </div>
+                        ),
                     },
                 ].filter((i) => !extraPrayers.includes(String(i.value)))}
+                skipFirstItem
                 value=""
                 onChange={(prayerId) => {
                     if (prayerId === 'addCustom') {
-                        setInputText('');
+                        setCustomPrayerInputShown(true);
                     } else if (prayerId) {
                         setExtraPrayers([...extraPrayers, prayerId]);
                         TagManager.dataLayer({
@@ -140,7 +152,16 @@ const CustomPrayers = ({ type }: { type: string }): JSX.Element => {
                     }
                 }}
             />
-            <CustomPrayerInput onSave={(newPrayer) => setExtraPrayers([...extraPrayers, newPrayer.id])} />
+            {customPrayerInputShown && (
+                <CustomPrayerInput
+                    onSave={(newPrayer) => {
+                        return setExtraPrayers([...extraPrayers, newPrayer.id]);
+                    }}
+                    onClose={() => {
+                        setCustomPrayerInputShown(false);
+                    }}
+                />
+            )}
         </div>
     );
 };

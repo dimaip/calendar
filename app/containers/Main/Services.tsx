@@ -33,6 +33,8 @@ const Services = ({ date, readings }) => {
 
     const services = useServices(date, readings);
 
+    const [customPrayerInputShown, setCustomPrayerInputShown] = useState(false);
+
     const [_inputText, setInputText] = useRecoilState(customPrayerInputState);
     const [customPrayers, setCustomPrayers] = useRecoilState(customPrayersState('Sugubaja'));
 
@@ -154,7 +156,7 @@ const Services = ({ date, readings }) => {
                                 ))}
 
                                 {groupTitle === 'Братский молитвослов' && (
-                                    <ButtonBox onClick={() => setInputText('')}>
+                                    <ButtonBox onClick={() => setCustomPrayerInputShown(true)}>
                                         <div
                                             className={css`
                                                 display: flex;
@@ -304,7 +306,13 @@ const Services = ({ date, readings }) => {
                 </div>
             </div>
 
-            <CustomPrayerInput />
+            {customPrayerInputShown && (
+                <CustomPrayerInput
+                    onClose={() => {
+                        setCustomPrayerInputShown(false);
+                    }}
+                />
+            )}
         </div>
     );
 };

@@ -46,6 +46,8 @@ const Service = () => {
 
     const langState = useContext(LangContext);
 
+    const [customPrayerInputShown, setCustomPrayerInputShown] = useState(false);
+
     const [customPrayers] = useRecoilState<Array<{ id: number; text: string }>>(customPrayersState('Sugubaja') as any);
     const [, setInputText] = useRecoilState<string | null>(customPrayerInputState);
     const [, setEditId] = useRecoilState<number | null>(customPrayerEditIdState);
@@ -146,6 +148,7 @@ const Service = () => {
                 if (prayer) {
                     setEditId(prayer.id);
                     setInputText(prayer.text || '');
+                    setCustomPrayerInputShown(true);
                 }
             }}
             title="Редактировать молитву"
@@ -212,7 +215,13 @@ const Service = () => {
                             </div>
                         </>
                     </Zoom>
-                    <CustomPrayerInput />
+                    {customPrayerInputShown && (
+                        <CustomPrayerInput
+                            onClose={() => {
+                                setCustomPrayerInputShown(false);
+                            }}
+                        />
+                    )}
                 </LayoutInner>
             </LangContext.Provider>
         </ServiceContext.Provider>

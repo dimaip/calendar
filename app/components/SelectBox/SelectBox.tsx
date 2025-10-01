@@ -20,6 +20,7 @@ const SelectBox = React.memo(
         showChevron = false,
         heighlightActive = false,
         activeOnTop = false,
+        skipFirstItem = false,
         title = '',
     }: {
         className?: string;
@@ -30,6 +31,7 @@ const SelectBox = React.memo(
         showChevron?: boolean;
         heighlightActive?: boolean;
         activeOnTop?: boolean;
+        skipFirstItem?: boolean;
         title?: string;
     }) => {
         const theme = useTheme();
@@ -158,49 +160,54 @@ const SelectBox = React.memo(
                                         </div>
                                     </div>
                                 )}
-                                {processedItems.map((item, index) => (
-                                    <div
-                                        className={css`
-                                            padding: ${item.level === 2
-                                                ? '12px 12px 0 12px'
-                                                : !item.level
-                                                ? '12px'
-                                                : '6px 12px'};
-                                            padding-left: ${item.level === 3 ? 24 : 12}px;
-                                            color: ${highlightedIndex === index ? theme.colours.primary : 'inherit'};
-                                            border-top: ${item.level === 2 || !item.level
-                                                ? `1px solid ${theme.colours.lineGray}`
-                                                : ''};
-                                            margin-bottom: ${item.level === 3 && items[index + 1]?.level === 2
-                                                ? '8px'
-                                                : '0px'};
-                                        `}
-                                        key={`${item.value}${index}`}
-                                        {...getItemProps({ item, index })}
-                                    >
+                                {(skipFirstItem ? processedItems.slice(1) : processedItems).map((item, _index) => {
+                                    const index = _index + (skipFirstItem ? 1 : 0);
+                                    return (
                                         <div
-                                            className={`${
-                                                item.level === 2
-                                                    ? css`
-                                                          text-transform: uppercase;
-                                                          font-size: 14px;
-                                                          font-weight: bold;
-                                                          color: ${theme.colours.primary};
-                                                          margin-top: 4px;
-                                                          margin-bottom: 4px;
-                                                      `
-                                                    : ''
-                                            } ${css`
-                                                display: block;
-                                                white-space: nowrap;
-                                                text-overflow: ellipsis;
-                                                overflow: hidden;
-                                            `}`}
+                                            className={css`
+                                                padding: ${item.level === 2
+                                                    ? '12px 12px 0 12px'
+                                                    : !item.level
+                                                    ? '12px'
+                                                    : '6px 12px'};
+                                                padding-left: ${item.level === 3 ? 24 : 12}px;
+                                                color: ${highlightedIndex === index
+                                                    ? theme.colours.primary
+                                                    : 'inherit'};
+                                                border-top: ${item.level === 2 || !item.level
+                                                    ? `1px solid ${theme.colours.lineGray}`
+                                                    : ''};
+                                                margin-bottom: ${item.level === 3 && items[index + 1]?.level === 2
+                                                    ? '8px'
+                                                    : '0px'};
+                                            `}
+                                            key={`${item.value}${index}`}
+                                            {...getItemProps({ item, index })}
                                         >
-                                            {item.label}
+                                            <div
+                                                className={`${
+                                                    item.level === 2
+                                                        ? css`
+                                                              text-transform: uppercase;
+                                                              font-size: 14px;
+                                                              font-weight: bold;
+                                                              color: ${theme.colours.primary};
+                                                              margin-top: 4px;
+                                                              margin-bottom: 4px;
+                                                          `
+                                                        : ''
+                                                } ${css`
+                                                    display: block;
+                                                    white-space: nowrap;
+                                                    text-overflow: ellipsis;
+                                                    overflow: hidden;
+                                                `}`}
+                                            >
+                                                {item.label}
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
+                                    );
+                                })}
                             </div>
                         )}
                     </div>,
