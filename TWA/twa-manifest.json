@@ -19,8 +19,8 @@
     "path": "/Users/dimaip/psmb/android.keystore",
     "alias": "android"
   },
-  "appVersionName": "21",
-  "appVersionCode": 21,
+  "appVersionName": "23",
+  "appVersionCode": 23,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://molitva.app/manifest.json",
@@ -32,10 +32,10 @@
   "enableSiteSettingsShortcut": true,
   "isChromeOSOnly": false,
   "isMetaQuest": false,
-  "minSdkVersion": 35,
+  "minSdkVersion": 23,
   "orientation": "default",
   "fingerprints": [],
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
-  "appVersion": "21"
+  "appVersion": "23"
 }

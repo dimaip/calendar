@@ -20,6 +20,10 @@ export const bratMolitvoslovPrayers = [
         label: 'Молитва Господу о церкви и стране',
     },
     {
+        value: 'MolitvaRodNarod',
+        label: 'Личная покаянная молитва за род и народ',
+    },
+    {
         value: 'Neplyuev',
         label: 'Молитва Н. Н. Неплюева о братстве',
     },
