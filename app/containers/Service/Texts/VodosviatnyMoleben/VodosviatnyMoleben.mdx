@@ -1,6 +1,49 @@
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
+import ReadingsForService from 'containers/Readings/ReadingsForService';
+import BogGospod from 'containers/Service/Texts/Matins/BogGospod/BogGospod';
+import Tooltip from 'components/Tooltip/Tooltip';
 
 # Последование малого освящения воды
 
+## Начало
+
 <MdxLoader src="VodosviatnyMoleben/Nachalo" />
+
+<MdxLoader src="Shared/Vozglas" />
+
+<MdxLoader src="Shared/SlavaTebe" />
+
+<If condition={props.isEasterOffsetRange(0, 38)}>
+    <Then>
+        <MdxLoader src="Shared/EasterTroparion3x" chitaetsa />
+    </Then>
+    <Else>
+        <If condition={!props.isEasterOffsetRange(39, 48)}>
+            <MdxLoader src="Shared/ParaklitChit" />
+        </If>
+    </Else>
+</If>
+
+<MdxLoader src="Shared/ObichnoeNachalo" />
+
+### Псалом 142
+
+<MdxLoader src="Shared/Psalm142" />
+
+<MdxLoader src="Shared/SlavaAlliluia" />
+
+<MdxLoader src="Matins/BogGospod" />
+
+### Тропари богородичные, глас 4
+
+<MdxLoader src="VodosviatnyMoleben/TropsBogorod" />
+
+### Псалом 50
+
+<MdxLoader src="Shared/Psalm50" />
+
+### Тропари богородичные, глас 6<Tooltip><>**Число тропарей сокращено в соответствии с общепринятой приходской практикой.**</></Tooltip>
+
+<MdxLoader src="VodosviatnyMoleben/TropsBogorod2" />
+
