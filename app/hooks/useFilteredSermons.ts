@@ -11,7 +11,7 @@ export interface Sermon {
     date?: string;
 }
 
-const fetchFilteredSermons = async (authorId?: string, themeId?: string, limit?: number): Promise<Sermon[]> => {
+const fetchFilteredSermons = async (authorId?: string, themeId?: string, limit?: number, offset?: number): Promise<Sermon[]> => {
     const url = new URL('https://psmb.ru/?listSermons=1');
 
     if (authorId) {
@@ -26,13 +26,17 @@ const fetchFilteredSermons = async (authorId?: string, themeId?: string, limit?:
         url.searchParams.append('limit', limit.toString());
     }
 
+    if (offset) {
+        url.searchParams.append('offset', offset.toString());
+    }
+
     return cachedFetch(url.toString());
 };
 
-const useFilteredSermons = (authorId?: string, themeId?: string, limit?: number) =>
+const useFilteredSermons = (authorId?: string, themeId?: string, limit?: number, offset?: number) =>
     useQuery(
-        ['filtered-sermons', { authorId, themeId, limit }],
-        async () => fetchFilteredSermons(authorId, themeId, limit),
+        ['filtered-sermons', { authorId, themeId, limit, offset }],
+        async () => fetchFilteredSermons(authorId, themeId, limit, offset),
         {
             retry: false,
         }
