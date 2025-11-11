@@ -1,5 +1,6 @@
 import { getFeastInfo } from 'domain/getDayInfo';
 
+import * as Sentry from '@sentry/react';
 import React, { Suspense, useState, useEffect, useContext } from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { css } from 'emotion';
@@ -33,7 +34,6 @@ import { ServiceContext } from './ServiceContext';
 const reloadOnFailedImport = (e) => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
     Sentry.captureException?.(e);
-    location.reload();
 };
 
 const toUpperCase = (name) => name.charAt(0).toUpperCase() + name.slice(1);
