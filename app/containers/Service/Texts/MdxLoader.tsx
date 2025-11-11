@@ -1,4 +1,5 @@
 import React, { createContext, useContext } from 'react';
+import * as Sentry from '@sentry/react';
 import { css } from 'emotion';
 import Button from 'components/Button/Button';
 import SolidSection from 'components/SolidSection/SolidSection';

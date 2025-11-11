@@ -245,6 +245,16 @@ const useServices = (date, readings = {}): ServiceInfo[] => {
             group: 'Требы',
             warn: false,
         },
+        {
+            title: 'Водосвятный молебен',
+            id: 'vodosviatnyMoleben',
+            enabled: true,
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Требы',
+            warn: false,
+        },
 
         {
             title: 'Утреня братским чином',
