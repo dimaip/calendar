@@ -6,49 +6,47 @@ import Tooltip from 'components/Tooltip/Tooltip';
 
 <MdxLoader src="Jacob/_start" />
 
-# I. <br /> ЛИТУРГИЯ ОГЛАШАЕМЫХ
+# I. <br /> Литургия оглашаемых
 
 ## (1) Приуготовление
 
 <MdxLoader src="Jacob/010_Priugotovlenie" />
 
-### МОЛИТВА ПРЕДСТОЯТЕЛЯ О СЕБЕ
+### Молитва предстоятеля о себе
 
 <MdxLoader src="Jacob/020_MolitvaPredstoiateliaOSebe" />
 
 ## (2) Малый вход
 
-### НАЧАЛЬНЫЙ ВОЗГЛАС
+### Начальный возглас
 
 <MdxLoader src="Jacob/040_NachalnyiVozglas" />
 
-### МОЛИТВА ВХОДА (1)
+### Молитва входа (1)
 
 <MdxLoader src="Jacob/050_MolitvaVkhoda-1" />
 
-### МОЛИТВА ФИМИАМА
+### Молитва фимиама
 
 <MdxLoader src="Jacob/060_MolitvaFimiama" />
 
-### МОЛИТВА ВХОДА (2)
+### Молитва входа (2)
 
 <MdxLoader src="Jacob/070_MolitvaVkhoda-2" />
 
-### ВХОДНАЯ ПЕСНЬ
-
-### ЛИТУРГИИ ОГЛАШАЕМЫХ
+### Входная песнь литургии оглашаемых
 
 <MdxLoader src="Jacob/090_LiturgiiOglashaemykh" />
 
-### ВЕЛИКАЯ ЕКТЕНИЯ
+### Великая ектения
 
 <MdxLoader src="Jacob/100_VelikaiaEkteniia" />
 
-### МОЛИТВА ПЕРЕД ПЕНИЕМ ТРИСВЯТОЙ ПЕСНИ
+### Молитва перед пением Трисвятой песни
 
 <MdxLoader src="Jacob/110_MolitvaPeredPeniemTrisviatoiPesni" />
 
-### ТРИСВЯТОЕ
+### Трисвятое
 
 <MdxLoader src="Jacob/120_Trisviatoe" />
 
@@ -56,19 +54,49 @@ import Tooltip from 'components/Tooltip/Tooltip';
 
 <MdxLoader src="Jacob/130_Chteniia" />
 
-### МОЛИТВА ФИМИАМА ПЕРЕД ЧТЕНИЕМ ЕВАНГЕЛИЯ
+{props.reading}
+
+### Чтение Апостола <Tooltip>**Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала.**</Tooltip>
+
+<div
+    className={props.css`
+        margin: 0 5px;
+    `}
+>
+    {props.apostol}
+</div>
+
+### Проповедь
+
+### Молитва фимиама перед чтением Евангелия
 
 <MdxLoader src="Jacob/140_MolitvaFimiamaPeredChteniemEvangeliia" />
 
-### [МОЛИТВА ПЕРЕД ЧТЕНИЕМ ЕВАНГЕЛИЯ
+### <b>[</b>Молитва перед чтением Евангелия
 
 <MdxLoader src="Jacob/150_MolitvaPeredChteniemEvangeliia" />
 
-### [ ДРУГАЯ МОЛИТВА ПЕРЕД ЧТЕНИЕМ ЕВАНГЕЛИЯ
+### <b>[</b>`Другая молитва перед чтением Евангелия`
 
 <MdxLoader src="Jacob/160_DrugaiaMolitvaPeredChteniemEvangeliia" />
 
-### МОЛИТВА  ПОСЛЕ ЧТЕНИЯ ЕВАНГЕЛИЯ
+### Чтение Евангелия <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
+
+<div
+    className={props.css`
+        margin: 0 5px;
+    `}
+>
+    {props.gospel}
+</div>
+
+<MdxLoader src="Liturgies/Katekhumen/MirTebeBlag" />
+
+### Проповедь
+
+{props.sermons}
+
+### Молитва после чтения Евангелия
 
 <MdxLoader src="Jacob/170_MolitvaPosleChteniiaEvangeliia" />
 
@@ -78,45 +106,45 @@ import Tooltip from 'components/Tooltip/Tooltip';
 
 ## (5) Заключительные моления верных
 
-### СУГУБАЯ ЕКТЕНИЯ
+### Сугубая ектения
 
 <MdxLoader src="Jacob/200_SugubaiaEkteniia" />
 
-### ВЕЛИКАЯ И ПРОСИТЕЛЬНАЯ ЕКТЕНИЯ
+### Великая и просительная ектения
 
 <MdxLoader src="Jacob/210_VelikaiaIPrositelnaiaEkteniia" />
 
-### МОЛИТВА ГЛАВОПРЕКЛОННАЯ
+### Молитва главопреклонная
 
 <MdxLoader src="Jacob/220_MolitvaGlavopreklonnaia" />
 
-# II. <br /> ЛИТУРГИЯ ВЕРНЫХ
+# II. <br /> Литургия верных
 
-## (6) Приуготовление
+## (1) Приуготовление
 
 <MdxLoader src="Jacob/240_Priugotovlenie" />
 
-### МОЛИТВА ПЕРЕД ВХОДОМ
+### Молитва перед входом
 
 <MdxLoader src="Jacob/250_MolitvaPeredVkhodom" />
 
-## (7) Великий вход
+## (2) Великий вход
 
 <MdxLoader src="Jacob/260_VelikiiVkhod" />
 
-### ВХОДНАЯ ПЕСНЬ ЛИТУРГИИ ВЕРНЫХ
+### Входная песнь литургии верных
 
 <MdxLoader src="Jacob/270_VkhodnaiaPesnLiturgiiVernykh" />
 
-### МОЛИТВА ПРИНОШЕНИЯ
+### Молитва приношения
 
 <MdxLoader src="Jacob/280_MolitvaPrinosheniia" />
 
-### МОЛИТВА ФИМИАМА
+### Молитва фимиама
 
 <MdxLoader src="Jacob/290_MolitvaFimiama" />
 
-## (8) Исповедание веры и целование мира
+## (3) Исповедание веры и целование мира
 
 <MdxLoader src="Jacob/300_IspovedanieVeryITselovanieMira" />
 
