@@ -25,7 +25,7 @@ const StihiriNaGV = ({ day, date }) => (
     <>
         <Parts
             date={date}
-            partNames={['vespers.Cтихиры на Господи взываю']}
+            partNames={['vespers.Стихиры на Господи взываю']}
             alwaysShowFallback
             serviceType="Вечерня"
             fallback={(_noTexts, externalTexts, flags) => (

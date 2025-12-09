@@ -31,7 +31,7 @@ const StihiriNaHvalite = ({ day, date }) => (
     <>
         <Parts
             date={date}
-            partNames={['matins.Cтихиры на хвалите']}
+            partNames={['matins.Стихиры на хвалите']}
             alwaysShowFallback
             fallback={(noTexts, externalTexts, flags) => (
                 <DefaultStihiriNaHvalite
