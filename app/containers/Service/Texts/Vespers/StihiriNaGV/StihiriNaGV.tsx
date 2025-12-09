@@ -21,24 +21,28 @@ const DefatulStihiriNaGV = ({ day, date, externalTexts, hasExclusiveEnding }) =>
     return null;
 };
 
-const StihiriNaGV = ({ day, date }) => (
-    <>
-        <Parts
-            date={date}
-            partNames={['vespers.Стихиры на Господи взываю']}
-            alwaysShowFallback
-            serviceType="Вечерня"
-            fallback={(_noTexts, externalTexts, flags) => (
-                <DefatulStihiriNaGV
-                    day={day}
-                    date={date}
-                    externalTexts={externalTexts}
-                    hasExclusiveEnding={flags?.hasExclusiveEnding}
-                />
-            )}
-            fallbackRendersExternalTexts
-        />
-    </>
-);
+const StihiriNaGV = ({ day, date }) => {
+    const dateObj = new Date(date);
+    const dayOfWeek = dateObj.getDay();
+    return (
+        <>
+            <Parts
+                date={date}
+                partNames={['vespers.Стихиры на Господи взываю']}
+                alwaysShowFallback
+                serviceType="Вечерня"
+                fallback={(_noTexts, externalTexts, flags) => (
+                    <DefatulStihiriNaGV
+                        day={day}
+                        date={date}
+                        externalTexts={externalTexts}
+                        hasExclusiveEnding={flags?.hasExclusiveEnding}
+                    />
+                )}
+                fallbackRendersExternalTexts={dayOfWeek === 0 && Boolean(day?.glas)}
+            />
+        </>
+    );
+};
 
 export default StihiriNaGV;
