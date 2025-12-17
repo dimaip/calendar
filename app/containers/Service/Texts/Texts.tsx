@@ -103,6 +103,16 @@ const useServices = (date, readings = {}): ServiceInfo[] => {
             group: 'Литургия',
             warn: true,
         },
+        {
+            title: 'Литургия апостола Иакова',
+            id: 'jacob',
+            enabled: true,
+            calendar: true,
+            lang: true,
+            skipRedirect: true,
+            group: 'Литургия',
+            warn: true,
+        },
 
         {
             title: 'Пасхальное богослужение',
