@@ -188,7 +188,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
 ## Чтения и прошения верных
 
-<Reading day={props.day} date={props.date} />
+<MdxLoader src="Shared/ProkimenEpiphany" />
 
 ### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
@@ -210,9 +210,7 @@ import Reading from './Katekhumen/Reading/Reading';
 
 <MdxLoader src="Liturgies/Katekhumen/BlessBeforeGosp" />
 
-<VariableSection date={props.date}>
-    <Aliluja day={props.day} date={props.date} />
-</VariableSection>
+<MdxLoader src="Shared/AlliluiaEpiphany" />
 
 <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
 
