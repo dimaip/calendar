@@ -147,7 +147,7 @@ const useServices = (date, readings = {}): ServiceInfo[] => {
         {
             title: 'Первый час',
             id: 'firstHour',
-            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6) && !isDate(1, 18),
+            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6),
             calendar: true,
             lang: true,
             skipRedirect: true,
@@ -157,7 +157,7 @@ const useServices = (date, readings = {}): ServiceInfo[] => {
         {
             title: 'Третий час',
             id: 'thirdHour',
-            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6) && !isDate(1, 18),
+            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6),
             calendar: true,
             lang: true,
             skipRedirect: true,
@@ -167,7 +167,7 @@ const useServices = (date, readings = {}): ServiceInfo[] => {
         {
             title: 'Шестой час',
             id: 'sixthHour',
-            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6) && !isDate(1, 18),
+            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6),
             calendar: true,
             lang: true,
             skipRedirect: true,
@@ -177,7 +177,7 @@ const useServices = (date, readings = {}): ServiceInfo[] => {
         {
             title: 'Девятый час',
             id: 'ninthHour',
-            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6) && !isDate(1, 18),
+            enabled: !isEasterOffsetRange(0, 6) && !isDate(1, 6),
             calendar: true,
             lang: true,
             skipRedirect: true,
