@@ -167,7 +167,7 @@ import VariableSection from 'containers/Service/Texts/VariableSection';
 
 ## Чтения и прошения верных
 
-<Reading day={props.day} date={props.previousDate} />
+<MdxLoader src="Shared/ProkimenEpiphany" />
 
 ### Чтение Апостола <Tooltip>Чтение приведено по библейскому тексту, чтец должен сам выбрать храмовый вариант прочтения зачала</Tooltip>
 
@@ -187,9 +187,7 @@ import VariableSection from 'containers/Service/Texts/VariableSection';
 
 <MdxLoader src="Liturgies/Katekhumen/BeforeGospel" />
 
-<VariableSection date={props.date}>
-    <Aliluja day={props.day} date={props.previousDate} />
-</VariableSection>
+<MdxLoader src="Shared/AlliluiaEpiphany" />
 
 <MdxLoader src="Liturgies/Katekhumen/PremBeforeGospel" />
 
