@@ -2,7 +2,11 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 
 # Псалмы и духовные песнопения
 
-{props.brightWeek &&
+{props.hymns}
+
+<Parts date={props.date} partNames={['shared.Величания']} Layout={props.SectionLayout} serviceType="Утреня" />
+
+<If condition={props.isEasterOffsetRange(0, 39)}>
 
 ### Воскресная стихира, глас 6
 
@@ -31,6 +35,8 @@ import MdxLoader from 'containers/Service/Texts/MdxLoader';
 ### Воскресная песнь, глас 6
 
 <MdxLoader src="Shared/VoskresnayaPesn" />}
+
+</If>
 
 ### Псалом 8, глас 8, стихирный
 
