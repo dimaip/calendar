@@ -19,3 +19,6 @@ TWA/local.properties
 android.keystore
 app-release-*
 .idea
+.auto-claude
+.DS_Store
+.claude_settings.json
