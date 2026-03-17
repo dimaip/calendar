@@ -3,7 +3,7 @@ import { css } from 'emotion';
 
 const Banner = () => (
     <a
-        href="https://www.youtube.com/c/RusOrthodoxPrayer"
+        href="https://vkvideo.ru/@rus_molitva"
         target="_blank"
         className={css`
             display: block;
