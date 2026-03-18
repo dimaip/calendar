@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import Share from 'components/Share/Share';
 import useDay from 'hooks/useDay';
 import SettingsButton from 'components/SettingsButton/SettingsButton';
+import StreakBadge from 'containers/HabitTracker/StreakBadge';
 
 const UserIcon = () => {
     const { userData } = useAuth();
@@ -51,7 +52,14 @@ const ProfileIcon = () => {
             `}
         >
             {loggedIn ? (
-                <UserIcon />
+                <div
+                    className={css`
+                        position: relative;
+                    `}
+                >
+                    <UserIcon />
+                    <StreakBadge />
+                </div>
             ) : (
                 <div
                     className={css`
@@ -109,7 +117,12 @@ const HeaderMain = ({ setNewDate, date, calendarRef }) => {
                     width: 100%;
                 `}
             >
-                <div>
+                <div
+                    className={css`
+                        display: flex;
+                        align-items: center;
+                    `}
+                >
                     <ProfileIcon />
                 </div>
                 <div

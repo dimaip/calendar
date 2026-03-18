@@ -22,3 +22,5 @@ app-release-*
 .auto-claude
 .DS_Store
 .claude_settings.json
+
+.env.local
