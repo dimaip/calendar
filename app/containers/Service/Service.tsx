@@ -30,6 +30,7 @@ import MDXProvider from './MDXProvider';
 import ParallelLanguageBar from './ParallelLanguageBar';
 import { LangContext } from './LangContext';
 import { ServiceContext } from './ServiceContext';
+import { usePrayerTimer } from 'containers/HabitTracker/usePrayerTimer';
 
 const reloadOnFailedImport = (e) => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
@@ -94,6 +95,8 @@ const Service = () => {
         // Reset TOC on service change
         window.TOC = {};
     }, [serviceId]);
+
+    usePrayerTimer({ date, serviceId: serviceId || originalServiceId });
 
     useDocumentTitle(`${date} - ${service?.title} - Православное богослужение на русском языке`);
 

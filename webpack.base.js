@@ -48,6 +48,7 @@ export default {
             PUBLIC_URL: 'http://localhost:3000',
             API_HOST: 'http://localhost:9999',
             Z_URL: 'https://z.molitva.app',
+            CONVEX_URL: '',
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
