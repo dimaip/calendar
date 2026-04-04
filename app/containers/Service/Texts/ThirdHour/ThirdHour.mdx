@@ -192,8 +192,6 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="Shared/MolitvaChasaMardariya" />
 
-<If condition={!props.isEasterOffsetRange(-2)}>
+**`Далее сразу может совершаться Шестой час, а в ином случае Третий час завершается как и Первый:`**
 
-    <MdxLoader src="ThirdHour/OtpustMaliy" />
-
-</If>
+<MdxLoader src="Shared/OtpustMaliy" />

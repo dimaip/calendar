@@ -168,3 +168,9 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 ### Молитва шестого часа, св. Василия Великого
 
 <MdxLoader src="SixthHour/Molitva6Chasa" />
+
+<If condition={props.isEasterOffsetRange(-2)}>
+
+    <MdxLoader src="Shared/OtpustMaliy" />
+
+</If>
