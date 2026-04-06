@@ -90,7 +90,7 @@ const Matins = ({ date, obihod }) => {
     const philaret = isDate(12, 2);
     const isHoliday = dayOfWeek === 0 || feastType === 'great' || feastType === '12' || philaret;
 
-    const isAnnunciation = day?.title === 'Благовещение Богородицы';
+    const isAnnunciation = isDate(4, 7);
 
     const sirnajaSedmitza = isEasterOffsetRange(-8 * 7 + 1, -8 * 7 + 5);
     const vselenskayaRoditelskayaSubbota = isEasterOffsetRange(-8 * 7 - 1);
