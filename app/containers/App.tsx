@@ -15,6 +15,7 @@ import Routes from '../Routes';
 
 import { SyncWithDB } from './RecoilSync';
 import { AuthProvider } from './AuthProvider';
+import { ConvexClientProvider } from './HabitTracker/ConvexClientProvider';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -42,6 +43,7 @@ export default () => {
         <QueryClientProvider client={queryClient}>
             <HashRouter>
                 <AuthProvider>
+                    <ConvexClientProvider>
                     <SyncWithDB>
                         <ScrollRestoration />
                         <Pullable
@@ -59,6 +61,7 @@ export default () => {
                             <Routes />
                         </Pullable>
                     </SyncWithDB>
+                    </ConvexClientProvider>
                 </AuthProvider>
             </HashRouter>
         </QueryClientProvider>
