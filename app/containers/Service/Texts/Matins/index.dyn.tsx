@@ -91,6 +91,7 @@ const Matins = ({ date, obihod }) => {
     const isHoliday = dayOfWeek === 0 || feastType === 'great' || feastType === '12' || philaret;
 
     const isAnnunciation = isDate(4, 7);
+    const annunciationAfterfeastInHolyWeek = isDate(4, 8) && isEasterOffsetRange(-6, -1);
 
     const sirnajaSedmitza = isEasterOffsetRange(-8 * 7 + 1, -8 * 7 + 5);
     const vselenskayaRoditelskayaSubbota = isEasterOffsetRange(-8 * 7 - 1);
@@ -111,7 +112,7 @@ const Matins = ({ date, obihod }) => {
         !(!(greatLent || vospominanijaUsopshih || dmitrievskajaSubbota) && dayOfWeek === 6) &&
         !lazarevaSubbota &&
         !lentSubbota5 &&
-        !isHoliday &&
+        (!isHoliday || annunciationAfterfeastInHolyWeek) &&
         (day?.fastName === 'Петров пост' ||
             day?.fastName === 'Успенский пост' ||
             day?.fastName === 'Рождественский пост' ||
