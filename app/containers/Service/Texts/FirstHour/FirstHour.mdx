@@ -191,6 +191,16 @@ import ReadingsForService from 'containers/Readings/ReadingsForService';
 
 <MdxLoader src="FirstHour/Molitva1Chasa" />
 
-<MdxLoader src="Shared/KondakBogorodice" lang={props.lang} />
+<If condition={!props.isEasterOffsetRange(-2)}>
 
-<MdxLoader src="FirstHour/OtpustMaliy" />
+    <MdxLoader src="Shared/KondakBogorodice" lang={props.lang} />
+
+</If>
+
+<If condition={!props.isEasterOffsetRange(-2)}>
+
+    <MdxLoader src="Shared/SlavaTebeOtpust" lang={props.lang} />
+
+</If>
+
+<MdxLoader src="Shared/OtpustMaliy" />
