@@ -130,7 +130,11 @@ import { Note } from 'components/Note/Note';
 
 {props.sermons}
 
-{props.easterSeason **Царские врата закрываются:**}
+<If condition={!props.easterSeason}>
+
+    **Царские врата закрываются:**
+
+</If>
 
 ### Сугубая ектенья
 
