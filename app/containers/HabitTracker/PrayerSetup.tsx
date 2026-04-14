@@ -1,14 +1,19 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useMutation, useQuery } from 'convex/react';
+
 import { api } from '../../../convex/_generated/api';
-import ButtonBox from 'components/ButtonBox/ButtonBox';
 
 interface PrayerSetupProps {
     onComplete: () => void;
+    className?: string;
 }
 
-const PrayerSetup = ({ onComplete }: PrayerSetupProps) => {
+const GOLD = '#ae831a';
+const DARK = '#201f24';
+const TEXT = '#fffffd';
+
+const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
     const settings = useQuery(api.habitTracker.getSettings);
     const saveSettings = useMutation(api.habitTracker.saveSettings);
 
@@ -26,27 +31,44 @@ const PrayerSetup = ({ onComplete }: PrayerSetupProps) => {
         }
     };
 
+    const disabled = saving || (!trackMorning && !trackEvening);
+
     return (
         <div
-            className={css`
-                padding: 16px 0;
-            `}
+            className={`${css`
+                display: flex;
+                min-height: 100%;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 28px 12px;
+                color: ${TEXT};
+            `} ${className}`}
         >
-            <p
+            <h2
                 className={css`
-                    margin-bottom: 16px;
-                    opacity: 0.7;
-                    font-size: 14px;
+                    max-width: 287px;
+                    margin-bottom: 20px;
+                    font-size: 25px;
+                    font-weight: bold;
+                    line-height: 1.2;
+                    text-align: center;
                 `}
             >
-                По какому правилу вы хотите молиться каждый день?
-            </p>
+                В какое время
+                <br />
+                вы хотели бы молиться?
+            </h2>
 
             <label
                 className={css`
                     display: flex;
                     align-items: center;
-                    padding: 12px 0;
+                    gap: 9px;
+                    min-width: 165px;
+                    padding: 3px 0;
+                    font-size: 16px;
+                    line-height: 1.2;
                     cursor: pointer;
                     user-select: none;
                 `}
@@ -56,19 +78,39 @@ const PrayerSetup = ({ onComplete }: PrayerSetupProps) => {
                     checked={trackMorning}
                     onChange={(e) => setTrackMorning(e.target.checked)}
                     className={css`
-                        width: 20px;
-                        height: 20px;
-                        margin-right: 12px;
+                        width: 14px;
+                        height: 14px;
+                        flex-shrink: 0;
+                        margin: 0;
+                        appearance: none;
+                        border: 1px solid ${GOLD};
+                        border-radius: 1px;
+                        background: transparent;
+                        color: ${GOLD};
+                        cursor: pointer;
+
+                        &:checked::after {
+                            content: '✓';
+                            display: block;
+                            margin-top: -4px;
+                            font-size: 15px;
+                            line-height: 14px;
+                            text-align: center;
+                        }
                     `}
                 />
-                Утреннее правило
+                Утренняя молитва
             </label>
 
             <label
                 className={css`
                     display: flex;
                     align-items: center;
-                    padding: 12px 0;
+                    gap: 9px;
+                    min-width: 165px;
+                    padding: 3px 0;
+                    font-size: 16px;
+                    line-height: 1.2;
                     cursor: pointer;
                     user-select: none;
                 `}
@@ -78,29 +120,55 @@ const PrayerSetup = ({ onComplete }: PrayerSetupProps) => {
                     checked={trackEvening}
                     onChange={(e) => setTrackEvening(e.target.checked)}
                     className={css`
-                        width: 20px;
-                        height: 20px;
-                        margin-right: 12px;
+                        width: 14px;
+                        height: 14px;
+                        flex-shrink: 0;
+                        margin: 0;
+                        appearance: none;
+                        border: 1px solid ${GOLD};
+                        border-radius: 1px;
+                        background: transparent;
+                        color: ${GOLD};
+                        cursor: pointer;
+
+                        &:checked::after {
+                            content: '✓';
+                            display: block;
+                            margin-top: -4px;
+                            font-size: 15px;
+                            line-height: 14px;
+                            text-align: center;
+                        }
                     `}
                 />
-                Вечернее правило
+                Вечерняя молитва
             </label>
 
-            <ButtonBox
+            <button
+                type="button"
                 title="Сохранить"
-                onClick={handleSave}
+                disabled={disabled}
+                onClick={() => {
+                    void handleSave();
+                }}
                 className={css`
-                    border-radius: 6px;
-                    background-color: #4169e1 !important;
+                    width: 100%;
+                    max-width: 350px;
+                    height: 46px;
+                    margin-top: 52px;
+                    border-radius: 8px;
+                    background-color: ${GOLD};
+                    color: ${DARK};
+                    font-size: 15px;
+                    line-height: 46px;
                     text-align: center;
-                    margin-top: 16px !important;
+                    text-transform: uppercase;
                     cursor: pointer;
-                    color: white;
-                    opacity: ${saving ? 0.6 : 1};
+                    opacity: ${disabled ? 0.55 : 1};
                 `}
             >
-                {saving ? 'Сохранение...' : 'Сохранить'}
-            </ButtonBox>
+                {saving ? 'СОХРАНЕНИЕ...' : 'СОХРАНИТЬ'}
+            </button>
         </div>
     );
 };

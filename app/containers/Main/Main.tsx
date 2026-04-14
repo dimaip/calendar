@@ -25,6 +25,8 @@ import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
 import { useRecoilValue } from 'recoil';
 import themeState from 'state/themeState';
+import DelayedOnboarding from 'containers/HabitTracker/DelayedOnboarding';
+import PostPrayerPrompt from 'containers/HabitTracker/PostPrayerPrompt';
 
 import BorderedSection from './BorderedSection';
 import IosPrompt from './IosPrompt';
@@ -78,6 +80,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                     fastingLevelName={day.fastingLevelName}
                                     icon={day.icon}
                                 />
+                                <DelayedOnboarding />
                                 <div>
                                     <Zoom>
                                         <div
@@ -266,6 +269,7 @@ const Main = React.memo(({ services = false }) => {
             </div>
 
             <BottomNav active={services ? 'services' : 'calendar'} />
+            <PostPrayerPrompt />
             <IosPrompt />
         </div>
     );

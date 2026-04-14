@@ -1,15 +1,24 @@
-import React, { useMemo, useRef, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
 import { useQuery } from 'convex/react';
+
 import { api } from '../../../convex/_generated/api';
 
-const CELL_SIZE = 11;
-const CELL_GAP = 2;
-const TOTAL_CELL = CELL_SIZE + CELL_GAP;
-const DAYS_IN_WEEK = 7;
-
+const MONTH_CELL = 38;
+const MONTH_GAP = 10;
+const YEAR_CELL = 15;
+const YEAR_GAP = 3;
+const CARD = '#201f24';
+const EMPTY = '#2c2b32';
+const GOLD = '#ae831a';
+const BLUE = '#4169e1';
+const BLUE_DARK = '#26376a';
+const TEXT = '#fffffd';
+const MUTED = '#acacb0';
+const WEEKDAY_LABELS = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
 const MONTH_LABELS = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+
+type GraphMode = 'month' | 'year';
 
 function formatDate(date: Date): string {
     const y = date.getFullYear();
@@ -18,34 +27,40 @@ function formatDate(date: Date): string {
     return `${y}-${m}-${d}`;
 }
 
-const ContributionGraph = () => {
-    const theme = useTheme<any>();
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [weeks, setWeeks] = useState(0);
+function addDays(date: Date, amount: number): Date {
+    const next = new Date(date);
+    next.setDate(next.getDate() + amount);
+    return next;
+}
 
-    useEffect(() => {
-        const updateWeeks = () => {
-            if (containerRef.current) {
-                const w = Math.floor(containerRef.current.clientWidth / TOTAL_CELL);
-                setWeeks(Math.max(w, 1));
-            }
+function getMondayBasedDay(date: Date): number {
+    const dow = date.getDay();
+    return dow === 0 ? 6 : dow - 1;
+}
+
+function buildCells(startDate: Date, count: number) {
+    return Array.from({ length: count }, (_, index) => {
+        const date = addDays(startDate, index);
+        return {
+            date,
+            dateStr: formatDate(date),
+            index,
         };
-        updateWeeks();
-        window.addEventListener('resize', updateWeeks);
-        return () => window.removeEventListener('resize', updateWeeks);
-    }, []);
+    });
+}
 
+const ContributionGraph = () => {
+    const [mode, setMode] = useState<GraphMode>('month');
     const today = new Date();
-    const todayDow = today.getDay();
-    const todayMondayBased = todayDow === 0 ? 6 : todayDow - 1;
-    const daysBack = (weeks - 1) * 7 + todayMondayBased;
-    const startDate = new Date(today);
-    startDate.setDate(today.getDate() - daysBack);
+    const currentYear = today.getFullYear();
+    const todayStr = formatDate(today);
+    const yearStart = new Date(currentYear, 0, 1);
+    const monthStart = addDays(today, -getMondayBasedDay(today) - 21);
 
-    const sessions = useQuery(
-        api.habitTracker.getSessionsForRange,
-        weeks > 0 ? { startDate: formatDate(startDate), endDate: formatDate(today) } : 'skip'
-    );
+    const sessions = useQuery(api.habitTracker.getSessionsForRange, {
+        startDate: formatDate(yearStart),
+        endDate: todayStr,
+    });
 
     const sessionMap = useMemo(() => {
         const map: Record<string, { morning: boolean; evening: boolean }> = {};
@@ -60,83 +75,165 @@ const ContributionGraph = () => {
 
     const getColor = (dateStr: string) => {
         const entry = sessionMap[dateStr];
-        if (!entry) return theme.colours?.bgGray || '#ebedf0';
+        if (!entry) return EMPTY;
         const count = (entry.morning ? 1 : 0) + (entry.evening ? 1 : 0);
-        if (count >= 2) return '#216e39';
-        if (count === 1) return '#40c463';
-        return theme.colours?.bgGray || '#ebedf0';
+        if (count >= 2) return BLUE;
+        if (count === 1) return BLUE_DARK;
+        return EMPTY;
     };
 
-    // Build grid cells
-    const cells: { date: Date; dateStr: string; week: number; day: number }[] = [];
-    if (weeks > 0) {
-        const current = new Date(startDate);
-        for (let w = 0; w < weeks; w++) {
-            for (let d = 0; d < DAYS_IN_WEEK; d++) {
-                if (current <= today) {
-                    cells.push({
-                        date: new Date(current),
-                        dateStr: formatDate(current),
-                        week: w,
-                        day: d,
-                    });
-                }
-                current.setDate(current.getDate() + 1);
-            }
-        }
-    }
-
-    // Month labels with their starting week positions, skip if too close
-    const MIN_LABEL_GAP = 3; // minimum weeks between labels
-    const monthLabels: { label: string; week: number }[] = [];
-    let lastMonth = -1;
-    let lastLabelWeek = -MIN_LABEL_GAP;
-    for (const cell of cells) {
-        const month = cell.date.getMonth();
-        if (month !== lastMonth) {
-            if (cell.week - lastLabelWeek >= MIN_LABEL_GAP) {
-                monthLabels.push({ label: MONTH_LABELS[month], week: cell.week });
-                lastLabelWeek = cell.week;
-            }
-            lastMonth = month;
-        }
-    }
-
-    const svgWidth = weeks * TOTAL_CELL;
-    const svgHeight = DAYS_IN_WEEK * TOTAL_CELL + 16;
+    const monthCells = buildCells(monthStart, 28);
+    const yearMonths = MONTH_LABELS.map((label, month) => ({
+        label,
+        days: Array.from({ length: 31 }, (_, index) => new Date(currentYear, month, index + 1))
+            .filter((date) => date.getMonth() === month)
+            .map((date) => ({
+                date,
+                dateStr: formatDate(date),
+            })),
+    }));
 
     return (
         <div
-            ref={containerRef}
             className={css`
-                padding: 8px 0;
+                margin-bottom: 16px;
+                padding: 21px 16px 24px;
+                border-radius: 7px;
+                background: ${CARD};
             `}
         >
-            {weeks > 0 && (
-                <svg width={svgWidth} height={svgHeight}>
-                    {monthLabels.map((m, i) => (
-                        <text
-                            key={i}
-                            x={m.week * TOTAL_CELL}
-                            y={10}
-                            fontSize={10}
-                            fill={theme.colours?.gray || '#767676'}
+            <div
+                className={css`
+                    display: flex;
+                    gap: 5px;
+                    margin-bottom: 25px;
+                `}
+            >
+                {(['month', 'year'] as GraphMode[]).map((tab) => {
+                    const active = mode === tab;
+                    return (
+                        <button
+                            key={tab}
+                            type="button"
+                            onClick={() => setMode(tab)}
+                            className={css`
+                                min-width: ${tab === 'month' ? 72 : 58}px;
+                                height: 22px;
+                                border-radius: 8px;
+                                background: ${active ? GOLD : 'transparent'};
+                                border: 1px solid ${active ? GOLD : '#717175'};
+                                color: ${active ? '#201f24' : MUTED};
+                                font-size: 12px;
+                                line-height: 20px;
+                                cursor: pointer;
+                            `}
                         >
-                            {m.label}
-                        </text>
+                            {tab === 'month' ? 'Месяц' : 'Год'}
+                        </button>
+                    );
+                })}
+            </div>
+
+            {mode === 'month' ? (
+                <>
+                    <div
+                        className={css`
+                            display: grid;
+                            grid-template-columns: repeat(7, ${MONTH_CELL}px);
+                            gap: 0 ${MONTH_GAP}px;
+                            justify-content: center;
+                            margin-bottom: 13px;
+                        `}
+                    >
+                        {WEEKDAY_LABELS.map((day) => (
+                            <div
+                                key={day}
+                                className={css`
+                                    color: ${TEXT};
+                                    font-size: 13px;
+                                    line-height: 17px;
+                                    text-align: center;
+                                `}
+                            >
+                                {day}
+                            </div>
+                        ))}
+                    </div>
+                    <div
+                        className={css`
+                            display: grid;
+                            grid-template-columns: repeat(7, ${MONTH_CELL}px);
+                            gap: ${MONTH_GAP}px;
+                            justify-content: center;
+                        `}
+                    >
+                        {monthCells.map((cell) => {
+                            const future = cell.date > today;
+                            return (
+                                <div
+                                    key={cell.dateStr}
+                                    title={cell.dateStr}
+                                    className={css`
+                                        width: ${MONTH_CELL}px;
+                                        height: ${MONTH_CELL}px;
+                                        border-radius: 50%;
+                                        background: ${future ? EMPTY : getColor(cell.dateStr)};
+                                        opacity: ${future ? 0.35 : 1};
+                                    `}
+                                />
+                            );
+                        })}
+                    </div>
+                </>
+            ) : (
+                <div
+                    className={css`
+                        display: grid;
+                        grid-template-columns: repeat(6, minmax(0, 1fr));
+                        gap: 24px 5px;
+                    `}
+                >
+                    {yearMonths.map((month) => (
+                        <div key={month.label}>
+                            <div
+                                className={css`
+                                    margin-bottom: 8px;
+                                    color: ${TEXT};
+                                    font-size: 13px;
+                                    line-height: 17px;
+                                    text-align: center;
+                                `}
+                            >
+                                {month.label}
+                            </div>
+                            <div
+                                className={css`
+                                    display: grid;
+                                    grid-template-columns: repeat(3, ${YEAR_CELL}px);
+                                    gap: ${YEAR_GAP}px;
+                                    justify-content: center;
+                                `}
+                            >
+                                {month.days.map((cell) => {
+                                    const future = cell.date > today;
+                                    return (
+                                        <div
+                                            key={cell.dateStr}
+                                            title={cell.dateStr}
+                                            className={css`
+                                                width: ${YEAR_CELL}px;
+                                                height: ${YEAR_CELL}px;
+                                                border-radius: 50%;
+                                                background: ${future ? EMPTY : getColor(cell.dateStr)};
+                                                opacity: ${future ? 0.35 : 1};
+                                            `}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        </div>
                     ))}
-                    {cells.map((cell, i) => (
-                        <rect
-                            key={i}
-                            x={cell.week * TOTAL_CELL}
-                            y={cell.day * TOTAL_CELL + 16}
-                            width={CELL_SIZE}
-                            height={CELL_SIZE}
-                            rx={2}
-                            fill={getColor(cell.dateStr)}
-                        />
-                    ))}
-                </svg>
+                </div>
             )}
         </div>
     );
