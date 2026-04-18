@@ -220,10 +220,12 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
         )}
 </>
 
-  {(props.brightWeek) && (
-        <MdxLoader src="Shared/EkteniaOglash" lang={props.lang} />
+<If condition={!props.brightWeek}>
+
+    <MdxLoader src="Shared/EkteniaOglash" lang={props.lang} />
     <MdxLoader src="Matins/PrayerKatekhumens" lang={props.lang} />
-    )}
+
+</If>
 
 **П** Оглашаемые, отступи́те!
 
