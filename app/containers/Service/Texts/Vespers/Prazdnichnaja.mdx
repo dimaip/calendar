@@ -97,10 +97,14 @@ import Prokimens from 'containers/Service/Texts/Vespers/Prokimens/Prokimens';
 
 ### Проповедь
 
-<MdxLoader src="Shared/EkteniaOglash" lang={props.lang} />
-<MdxLoader src="Vespers/PrayerKatekhumens" lang={props.lang} />
+<If condition={!props.brightWeek}>
 
-**П** Оглашаемые, отступи́те!
+    <MdxLoader src="Shared/EkteniaOglash" lang={props.lang} />
+    <MdxLoader src="Matins/PrayerKatekhumens" lang={props.lang} />
+
+    **П** Оглашаемые, отступи́те!
+
+</If>
 
 <MdxLoader src="Shared/SugubajaPolnaja" lang={props.lang} />
 <MdxLoader src="Vespers/Udostoi" lang={props.lang} />
