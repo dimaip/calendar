@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
-import { useAuth } from 'oidc-react';
 import { useQuery } from 'convex/react';
+import { useTheme } from 'emotion-theming';
+import { useSession } from 'containers/AuthProvider';
 import HeaderMain from 'containers/Main/HeaderMain';
 import Loader from 'components/Loader/Loader';
 import BottomNav from 'components/BottomNav/BottomNav';
@@ -9,15 +10,31 @@ import { useDocumentTitle } from 'utils/useDocumentTitle';
 import PrayerSetup from 'containers/HabitTracker/PrayerSetup';
 import ContributionGraph from 'containers/HabitTracker/ContributionGraph';
 import DrawerWithHeader from 'components/Drawer/DrawerWithHeader';
+import PrayerCheck from 'components/svgs/PrayerCheck';
+import QuestionMarkCircle from 'components/svgs/QuestionMarkCircle';
 
 import { api } from '../../../convex/_generated/api';
 
-const DARK = '#201f24';
-const PAGE = '#2c2b32';
-const TEXT = '#fffffd';
-const MUTED = '#acacb0';
-const GOLD = '#ae831a';
-const BLUE = '#4169e1';
+interface TrackerTheme {
+    colours?: {
+        white?: string;
+        bgGray?: string;
+        bgGrayLight?: string;
+        darkGray?: string;
+        gray?: string;
+        lightGray?: string;
+        lineGray?: string;
+        primary?: string;
+        blue?: string;
+    };
+}
+
+const GRAPH_SKELETON_COLUMNS = 53;
+const GRAPH_SKELETON_ROWS = 7;
+const GRAPH_SKELETON_CELL = 15;
+const GRAPH_SKELETON_GAP = 5;
+const GRAPH_SKELETON_DAY_MS = 24 * 60 * 60 * 1000;
+const GRAPH_SKELETON_MONTHS = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
 
 function formatDate(date: Date): string {
     const y = date.getFullYear();
@@ -26,60 +43,68 @@ function formatDate(date: Date): string {
     return `${y}-${m}-${d}`;
 }
 
+function addDays(date: Date, amount: number): Date {
+    const next = new Date(date);
+    next.setDate(next.getDate() + amount);
+    return next;
+}
+
+function getMondayBasedDay(date: Date): number {
+    const dow = date.getDay();
+    return dow === 0 ? 6 : dow - 1;
+}
+
 function formatDisplayDate(date: Date): string {
     const month = date.toLocaleString('ru-RU', { month: 'long' });
     const weekday = date.toLocaleString('ru-RU', { weekday: 'short' }).replace('.', '');
     return `${date.getDate()} ${month}, ${weekday}`;
 }
 
-const PrayerStatusIcon = ({ done }: { done: boolean }) => (
+function formatCompletionTime(timestamp: number): string {
+    return new Intl.DateTimeFormat('ru-RU', {
+        hour: 'numeric',
+        minute: '2-digit',
+    }).format(new Date(timestamp));
+}
+
+const PrayerStatusIcon = ({
+    done,
+    activeColour,
+    idleColour,
+}: {
+    done: boolean;
+    activeColour: string;
+    idleColour: string;
+}) => (
     <div
         className={css`
-            display: flex;
             width: 31px;
             height: 31px;
             flex-shrink: 0;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: ${done ? BLUE : '#38373f'};
-            color: ${done ? '#201f24' : '#5a5960'};
-            font-size: 22px;
-            line-height: 1;
         `}
     >
-        ✓
+        <PrayerCheck colour={done ? activeColour : idleColour} />
     </div>
 );
 
-const AccountNote = () => (
+const AccountNote = ({ textColour, iconColour }: { textColour: string; iconColour: string }) => (
     <div
         className={css`
             display: flex;
             gap: 9px;
             align-items: flex-start;
-            color: ${TEXT};
+            color: ${textColour};
             font-size: 13px;
             line-height: 1.3;
         `}
     >
         <span
             className={css`
-                display: flex;
-                width: 15px;
-                height: 15px;
                 flex-shrink: 0;
-                align-items: center;
-                justify-content: center;
                 margin-top: 1px;
-                border-radius: 50%;
-                background: ${MUTED};
-                color: ${DARK};
-                font-size: 11px;
-                font-weight: bold;
             `}
         >
-            ?
+            <QuestionMarkCircle colour={iconColour} />
         </span>
         <span>
             Если вы смените устройство, вы всегда сможете сохранить ваши личные (и соборные!) настройки. Например,
@@ -89,37 +114,375 @@ const AccountNote = () => (
     </div>
 );
 
+const ProfileSkeletonBlock = ({
+    width = '100%',
+    height,
+    radius = 8,
+    base,
+    highlight,
+}: {
+    width?: string;
+    height: number;
+    radius?: number;
+    base: string;
+    highlight: string;
+}) => (
+    <div
+        className={css`
+            width: ${width};
+            height: ${height}px;
+            border-radius: ${radius}px;
+            background: linear-gradient(90deg, ${base} 0%, ${highlight} 50%, ${base} 100%);
+            background-size: 200% 100%;
+            animation: profileSkeletonShift 1.4s ease-in-out infinite;
+
+            @keyframes profileSkeletonShift {
+                0% {
+                    background-position: 200% 0;
+                }
+                100% {
+                    background-position: -200% 0;
+                }
+            }
+        `}
+    />
+);
+
+const ProfileLoadingState = ({
+    greeting,
+    dateLabel,
+    pageBg,
+    cardBg,
+    text,
+    dateText,
+    skeletonBase,
+    skeletonHighlight,
+    graphMonthAnchors,
+}: {
+    greeting: string;
+    dateLabel: string;
+    pageBg: string;
+    cardBg: string;
+    text: string;
+    dateText: string;
+    skeletonBase: string;
+    skeletonHighlight: string;
+    graphMonthAnchors: Array<{ label: string; left: number }>;
+}) => (
+    <div
+        className={css`
+            display: flex;
+            min-height: calc(100vh - 110px);
+            flex-direction: column;
+            padding: 26px 15px 24px;
+            background: ${pageBg};
+            color: ${text};
+        `}
+    >
+        <div
+            className={css`
+                flex-grow: 1;
+            `}
+        >
+            <h1
+                className={css`
+                    margin-bottom: 5px;
+                    padding-left: 5px;
+                    font-size: 25px;
+                    font-weight: bold;
+                    line-height: 1.2;
+                `}
+            >
+                {greeting}
+            </h1>
+            <div
+                className={css`
+                    margin-bottom: 19px;
+                    padding-left: 5px;
+                    color: ${dateText};
+                    font-size: 16px;
+                    line-height: 1.2;
+                `}
+            >
+                {dateLabel}
+            </div>
+
+            <div
+                className={css`
+                    margin-bottom: 8px;
+                    padding: 19px 16px 21px;
+                    border-radius: 8px;
+                    background: ${cardBg};
+                `}
+            >
+                <div
+                    className={css`
+                        display: flex;
+                        align-items: center;
+                        gap: 9px;
+                    `}
+                >
+                    <ProfileSkeletonBlock
+                        width="31px"
+                        height={31}
+                        radius={16}
+                        base={skeletonBase}
+                        highlight={skeletonHighlight}
+                    />
+                    <div
+                        className={css`
+                            flex: 1;
+                        `}
+                    >
+                        <ProfileSkeletonBlock
+                            height={21}
+                            radius={6}
+                            base={skeletonBase}
+                            highlight={skeletonHighlight}
+                        />
+                        <div
+                            className={css`
+                                margin-top: 7px;
+                            `}
+                        >
+                            <ProfileSkeletonBlock
+                                width="112px"
+                                height={12}
+                                radius={6}
+                                base={skeletonBase}
+                                highlight={skeletonHighlight}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    className={css`
+                        margin-top: 14px;
+                        display: flex;
+                        align-items: center;
+                        gap: 9px;
+                    `}
+                >
+                    <ProfileSkeletonBlock
+                        width="31px"
+                        height={31}
+                        radius={16}
+                        base={skeletonBase}
+                        highlight={skeletonHighlight}
+                    />
+                    <div
+                        className={css`
+                            flex: 1;
+                        `}
+                    >
+                        <ProfileSkeletonBlock
+                            height={21}
+                            radius={6}
+                            base={skeletonBase}
+                            highlight={skeletonHighlight}
+                        />
+                        <div
+                            className={css`
+                                margin-top: 7px;
+                            `}
+                        >
+                            <ProfileSkeletonBlock
+                                width="124px"
+                                height={12}
+                                radius={6}
+                                base={skeletonBase}
+                                highlight={skeletonHighlight}
+                            />
+                        </div>
+                    </div>
+                </div>
+                <div
+                    className={css`
+                        margin-top: 24px;
+                    `}
+                >
+                    <ProfileSkeletonBlock
+                        width="118px"
+                        height={15}
+                        radius={6}
+                        base={skeletonBase}
+                        highlight={skeletonHighlight}
+                    />
+                </div>
+            </div>
+
+            <div
+                className={css`
+                    padding: 20px 14px 24px;
+                    border-radius: 8px;
+                    background: ${cardBg};
+                `}
+            >
+                <div
+                    className={css`
+                        overflow: hidden;
+                    `}
+                >
+                    <div
+                        className={css`
+                            display: flex;
+                            justify-content: flex-end;
+                        `}
+                    >
+                        <div
+                            className={css`
+                                position: relative;
+                                width: ${GRAPH_SKELETON_COLUMNS * GRAPH_SKELETON_CELL +
+                                (GRAPH_SKELETON_COLUMNS - 1) * GRAPH_SKELETON_GAP}px;
+                                min-width: ${GRAPH_SKELETON_COLUMNS * GRAPH_SKELETON_CELL +
+                                (GRAPH_SKELETON_COLUMNS - 1) * GRAPH_SKELETON_GAP}px;
+                            `}
+                        >
+                            <div
+                                className={css`
+                                    position: relative;
+                                    height: 28px;
+                                    margin-bottom: 12px;
+                                `}
+                            >
+                                {graphMonthAnchors.map((month) => (
+                                    <div
+                                        key={`${month.label}-${month.left}`}
+                                        className={css`
+                                            position: absolute;
+                                            left: ${month.left}px;
+                                            top: 0;
+                                            color: ${skeletonHighlight};
+                                            font-size: 16px;
+                                            line-height: 1.2;
+                                            white-space: nowrap;
+                                        `}
+                                    >
+                                        {month.label}
+                                    </div>
+                                ))}
+                            </div>
+                            <div
+                                className={css`
+                                    display: grid;
+                                    grid-template-rows: repeat(7, ${GRAPH_SKELETON_CELL}px);
+                                    grid-auto-flow: column;
+                                    grid-auto-columns: ${GRAPH_SKELETON_CELL}px;
+                                    row-gap: ${GRAPH_SKELETON_GAP}px;
+                                    column-gap: ${GRAPH_SKELETON_GAP}px;
+                                `}
+                            >
+                                {Array.from({
+                                    length: GRAPH_SKELETON_COLUMNS * GRAPH_SKELETON_ROWS,
+                                }).map((_, index) => (
+                                    <ProfileSkeletonBlock
+                                        key={index}
+                                        height={GRAPH_SKELETON_CELL}
+                                        radius={GRAPH_SKELETON_CELL}
+                                        base={skeletonBase}
+                                        highlight={skeletonHighlight}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+);
+
 const Inner = () => {
-    const auth = useAuth();
+    const theme = useTheme<TrackerTheme>();
+    const session = useSession();
     const [signingOut, setSigningOut] = useState(false);
     const [showSetup, setShowSetup] = useState(false);
     const today = new Date();
     const todayStr = formatDate(today);
-    const profile = auth.userData?.profile;
+    const profile = session.profile;
     const settings = useQuery(api.habitTracker.getSettings, profile ? undefined : 'skip');
     const habitTrackerEnabled = !!settings?.habitTracker;
     const sessions = useQuery(
         api.habitTracker.getSessionsForRange,
         profile && habitTrackerEnabled ? { startDate: todayStr, endDate: todayStr } : 'skip'
     );
-    const morningDone = !!sessions?.some((session) => session.timeOfDay === 'morning');
-    const eveningDone = !!sessions?.some((session) => session.timeOfDay === 'evening');
+    const morningSession =
+        sessions
+            ?.filter((session) => session.timeOfDay === 'morning')
+            .sort((left, right) => right.createdAt - left.createdAt)[0] ?? null;
+    const eveningSession =
+        sessions
+            ?.filter((session) => session.timeOfDay === 'evening')
+            .sort((left, right) => right.createdAt - left.createdAt)[0] ?? null;
+    const morningDone = !!morningSession;
+    const eveningDone = !!eveningSession;
+    const isDarkTheme = theme.colours?.white === '#201f24';
+    const pageBg = isDarkTheme ? '#2c2b32' : theme.colours?.bgGray || '#EFEFF4';
+    const onboardingBg = isDarkTheme ? '#201f24' : theme.colours?.bgGray || '#EFEFF4';
+    const cardBg = isDarkTheme ? '#201f24' : theme.colours?.white || '#ffffff';
+    const text = theme.colours?.darkGray || '#201f24';
+    const muted = theme.colours?.gray || '#717175';
+    const dateText = isDarkTheme ? muted : text;
+    const primary = theme.colours?.primary || '#ae831a';
+    const primaryContrast = isDarkTheme ? '#201f24' : '#ffffff';
+    const idleIconBg = isDarkTheme ? '#38373f' : theme.colours?.lightGray || '#acacb0';
+    const doneIconBg = theme.colours?.blue || '#4169E1';
+    const skeletonBase = isDarkTheme ? '#38373f' : '#e5e5ea';
+    const skeletonHighlight = isDarkTheme ? '#4a4952' : '#f3f3f7';
+    const graphRollingStart = addDays(today, -364);
+    const graphGridStart = addDays(graphRollingStart, -getMondayBasedDay(graphRollingStart));
+    const graphMonthAnchors = [
+        {
+            label: GRAPH_SKELETON_MONTHS[graphRollingStart.getMonth()],
+            left: 0,
+        },
+        ...Array.from({ length: 12 }, (_, offset) => {
+            const monthStartDate = new Date(
+                graphRollingStart.getFullYear(),
+                graphRollingStart.getMonth() + offset + 1,
+                1
+            );
+            return {
+                label: GRAPH_SKELETON_MONTHS[monthStartDate.getMonth()],
+                left:
+                    Math.floor((monthStartDate.getTime() - graphGridStart.getTime()) / GRAPH_SKELETON_DAY_MS / 7) *
+                    (GRAPH_SKELETON_CELL + GRAPH_SKELETON_GAP),
+                date: monthStartDate,
+            };
+        }).filter((anchor) => anchor.date <= today),
+    ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left);
 
-    if (signingOut || auth.isLoading) {
+    if (signingOut || session.isLoading) {
         return <Loader />;
     }
     if (!profile) {
-        void auth.signIn();
+        void session.signIn();
         return <Loader />;
     }
 
     const signOut = () => {
         setSigningOut(true);
-        void auth.signOut();
-        window.location.href = `https://z.molitva.app/oidc/v1/end_session?id_token_hint=${auth.userData?.id_token}&post_logout_redirect_uri=https://molitva.app`;
+        void session.signOut();
     };
 
     const greeting = profile.given_name ? `Привет, ${profile.given_name}!` : 'Привет!';
+    const isProfileLoading = settings === undefined || (habitTrackerEnabled && sessions === undefined);
+
+    if (isProfileLoading) {
+        return (
+            <ProfileLoadingState
+                greeting={greeting}
+                dateLabel={formatDisplayDate(today)}
+                pageBg={pageBg}
+                cardBg={cardBg}
+                text={text}
+                dateText={dateText}
+                skeletonBase={skeletonBase}
+                skeletonHighlight={skeletonHighlight}
+                graphMonthAnchors={graphMonthAnchors}
+            />
+        );
+    }
 
     if (!habitTrackerEnabled && settings !== undefined) {
         return (
@@ -129,8 +492,8 @@ const Inner = () => {
                     min-height: calc(100vh - 110px);
                     flex-direction: column;
                     padding: 0 13px 24px;
-                    background: ${DARK};
-                    color: ${TEXT};
+                    background: ${onboardingBg};
+                    color: ${text};
                 `}
             >
                 {showSetup ? (
@@ -179,8 +542,8 @@ const Inner = () => {
                                     width: 100%;
                                     height: 46px;
                                     border-radius: 8px;
-                                    background: ${GOLD};
-                                    color: ${DARK};
+                                    background: ${primary};
+                                    color: ${primaryContrast};
                                     font-size: 15px;
                                     line-height: 46px;
                                     text-transform: uppercase;
@@ -190,7 +553,10 @@ const Inner = () => {
                                 УСТАНОВИТЬ
                             </button>
                         </div>
-                        <AccountNote />
+                        <AccountNote
+                            textColour={muted}
+                            iconColour={isDarkTheme ? '#acacb0' : theme.colours?.gray || '#acacb0'}
+                        />
                     </>
                 )}
                 <button
@@ -198,7 +564,7 @@ const Inner = () => {
                     onClick={signOut}
                     className={css`
                         margin: 16px auto 0;
-                        color: ${MUTED};
+                        color: ${muted};
                         font-size: 13px;
                         cursor: pointer;
                     `}
@@ -215,9 +581,9 @@ const Inner = () => {
                 display: flex;
                 min-height: calc(100vh - 110px);
                 flex-direction: column;
-                padding: 24px 8px 24px;
-                background: ${PAGE};
-                color: ${TEXT};
+                padding: 26px 15px 24px;
+                background: ${pageBg};
+                color: ${text};
             `}
         >
             <div
@@ -240,7 +606,7 @@ const Inner = () => {
                     className={css`
                         margin-bottom: 19px;
                         padding-left: 5px;
-                        color: ${MUTED};
+                        color: ${dateText};
                         font-size: 16px;
                         line-height: 1.2;
                     `}
@@ -252,10 +618,10 @@ const Inner = () => {
                     <>
                         <div
                             className={css`
-                                margin-bottom: 6px;
-                                padding: 16px;
-                                border-radius: 7px;
-                                background: ${DARK};
+                                margin-bottom: 8px;
+                                padding: 19px 16px 21px;
+                                border-radius: 8px;
+                                background: ${cardBg};
                             `}
                         >
                             {(settings?.habitTracker?.trackMorning || settings?.habitTracker?.trackEvening) && (
@@ -268,24 +634,31 @@ const Inner = () => {
                                                 gap: 9px;
                                             `}
                                         >
-                                            <PrayerStatusIcon done={morningDone} />
+                                            <PrayerStatusIcon
+                                                done={morningDone}
+                                                activeColour={doneIconBg}
+                                                idleColour={idleIconBg}
+                                            />
                                             <div>
                                                 <div
                                                     className={css`
-                                                        font-size: 16px;
-                                                        line-height: 1.2;
+                                                        color: ${text};
+                                                        font-size: 18px;
+                                                        line-height: 1.15;
                                                     `}
                                                 >
                                                     Утренняя молитва
                                                 </div>
                                                 <div
                                                     className={css`
-                                                        color: ${MUTED};
+                                                        color: ${muted};
                                                         font-size: 12px;
-                                                        line-height: 1.2;
+                                                        line-height: 1.15;
                                                     `}
                                                 >
-                                                    {morningDone ? 'Отмечено сегодня' : 'Пока не отмечено'}
+                                                    {morningSession
+                                                        ? formatCompletionTime(morningSession.createdAt)
+                                                        : 'Пока не отмечено'}
                                                 </div>
                                             </div>
                                         </div>
@@ -299,24 +672,31 @@ const Inner = () => {
                                                 margin-top: ${settings?.habitTracker?.trackMorning ? '14px' : '0'};
                                             `}
                                         >
-                                            <PrayerStatusIcon done={eveningDone} />
+                                            <PrayerStatusIcon
+                                                done={eveningDone}
+                                                activeColour={doneIconBg}
+                                                idleColour={idleIconBg}
+                                            />
                                             <div>
                                                 <div
                                                     className={css`
-                                                        font-size: 16px;
-                                                        line-height: 1.2;
+                                                        color: ${text};
+                                                        font-size: 18px;
+                                                        line-height: 1.15;
                                                     `}
                                                 >
                                                     Вечерняя молитва
                                                 </div>
                                                 <div
                                                     className={css`
-                                                        color: ${MUTED};
+                                                        color: ${muted};
                                                         font-size: 12px;
-                                                        line-height: 1.2;
+                                                        line-height: 1.15;
                                                     `}
                                                 >
-                                                    {eveningDone ? 'Отмечено сегодня' : 'Пока не отмечено'}
+                                                    {eveningSession
+                                                        ? formatCompletionTime(eveningSession.createdAt)
+                                                        : 'Пока не отмечено'}
                                                 </div>
                                             </div>
                                         </div>
@@ -327,9 +707,9 @@ const Inner = () => {
                                 type="button"
                                 onClick={() => setShowSetup(true)}
                                 className={css`
-                                    margin-top: 18px;
-                                    color: ${GOLD};
-                                    font-size: 16px;
+                                    margin-top: 24px;
+                                    color: ${primary};
+                                    font-size: 14px;
                                     line-height: 1.2;
                                     text-decoration: underline;
                                     cursor: pointer;
@@ -348,7 +728,7 @@ const Inner = () => {
                             className={css`
                                 min-height: 360px;
                                 margin: 0 -16px -16px;
-                                background: ${DARK};
+                                background: ${theme.colours?.white || '#ffffff'};
                             `}
                         >
                             <PrayerSetup onComplete={() => setShowSetup(false)} />
@@ -361,7 +741,7 @@ const Inner = () => {
                 onClick={signOut}
                 className={css`
                     margin: 16px auto 0;
-                    color: ${MUTED};
+                    color: ${muted};
                     font-size: 13px;
                     cursor: pointer;
                 `}

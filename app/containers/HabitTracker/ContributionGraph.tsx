@@ -1,24 +1,28 @@
-import React, { useMemo, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { css } from 'emotion';
 import { useQuery } from 'convex/react';
+import { useTheme } from 'emotion-theming';
 
 import { api } from '../../../convex/_generated/api';
 
-const MONTH_CELL = 38;
-const MONTH_GAP = 10;
-const YEAR_CELL = 15;
-const YEAR_GAP = 3;
-const CARD = '#201f24';
-const EMPTY = '#2c2b32';
-const GOLD = '#ae831a';
-const BLUE = '#4169e1';
-const BLUE_DARK = '#26376a';
-const TEXT = '#fffffd';
-const MUTED = '#acacb0';
-const WEEKDAY_LABELS = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
-const MONTH_LABELS = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
+interface TrackerTheme {
+    colours?: {
+        white?: string;
+        bgGray?: string;
+        bgGrayLight?: string;
+        darkGray?: string;
+        gray?: string;
+        lineGray?: string;
+        primary?: string;
+        blue?: string;
+    };
+}
 
-type GraphMode = 'month' | 'year';
+const YEAR_CELL_SIZE = 15;
+const YEAR_CELL_GAP = 5;
+const YEAR_LABEL_HEIGHT = 28;
+const DAY_MS = 24 * 60 * 60 * 1000;
+const MONTH_LABELS = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
 
 function formatDate(date: Date): string {
     const y = date.getFullYear();
@@ -50,15 +54,15 @@ function buildCells(startDate: Date, count: number) {
 }
 
 const ContributionGraph = () => {
-    const [mode, setMode] = useState<GraphMode>('month');
+    const theme = useTheme<TrackerTheme>();
+    const scrollRef = useRef<HTMLDivElement | null>(null);
     const today = new Date();
-    const currentYear = today.getFullYear();
+    const rollingStart = addDays(today, -364);
     const todayStr = formatDate(today);
-    const yearStart = new Date(currentYear, 0, 1);
-    const monthStart = addDays(today, -getMondayBasedDay(today) - 21);
+    const rollingStartStr = formatDate(rollingStart);
 
     const sessions = useQuery(api.habitTracker.getSessionsForRange, {
-        startDate: formatDate(yearStart),
+        startDate: rollingStartStr,
         endDate: todayStr,
     });
 
@@ -73,168 +77,129 @@ const ContributionGraph = () => {
         return map;
     }, [sessions]);
 
+    const isDarkTheme = theme.colours?.white === '#201f24';
+    const card = isDarkTheme ? '#201f24' : theme.colours?.white || '#ffffff';
+    const empty = isDarkTheme ? '#2c2b32' : theme.colours?.bgGray || '#EFEFF4';
+    const blue = theme.colours?.blue || '#4169E1';
+    const blueMuted = 'rgba(65, 105, 225, 0.55)';
+    const text = theme.colours?.darkGray || '#201f24';
+
     const getColor = (dateStr: string) => {
         const entry = sessionMap[dateStr];
-        if (!entry) return EMPTY;
+        if (!entry) return empty;
         const count = (entry.morning ? 1 : 0) + (entry.evening ? 1 : 0);
-        if (count >= 2) return BLUE;
-        if (count === 1) return BLUE_DARK;
-        return EMPTY;
+        if (count >= 2) return blue;
+        if (count === 1) return blueMuted;
+        return empty;
     };
 
-    const monthCells = buildCells(monthStart, 28);
-    const yearMonths = MONTH_LABELS.map((label, month) => ({
-        label,
-        days: Array.from({ length: 31 }, (_, index) => new Date(currentYear, month, index + 1))
-            .filter((date) => date.getMonth() === month)
-            .map((date) => ({
-                date,
-                dateStr: formatDate(date),
-            })),
+    const yearGridStart = addDays(rollingStart, -getMondayBasedDay(rollingStart));
+    const yearCellCount = Math.round((today.getTime() - yearGridStart.getTime()) / DAY_MS) + 1;
+    const yearCells = buildCells(yearGridStart, yearCellCount).map((cell) => ({
+        ...cell,
+        inRange: cell.date >= rollingStart && cell.date <= today,
     }));
+    const yearWeekCount = Math.ceil(yearCells.length / 7);
+    const yearGridWidth = yearWeekCount * YEAR_CELL_SIZE + (yearWeekCount - 1) * YEAR_CELL_GAP;
+    const monthAnchors = [
+        {
+            label: MONTH_LABELS[rollingStart.getMonth()],
+            left: 0,
+        },
+        ...Array.from({ length: 12 }, (_, offset) => {
+            const monthStartDate = new Date(rollingStart.getFullYear(), rollingStart.getMonth() + offset + 1, 1);
+            return {
+                label: MONTH_LABELS[monthStartDate.getMonth()],
+                left:
+                    Math.floor((monthStartDate.getTime() - yearGridStart.getTime()) / DAY_MS / 7) *
+                    (YEAR_CELL_SIZE + YEAR_CELL_GAP),
+                date: monthStartDate,
+            };
+        }).filter((anchor) => anchor.date <= today),
+    ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left);
+
+    useLayoutEffect(() => {
+        const node = scrollRef.current;
+        if (!node) return;
+        node.scrollLeft = node.scrollWidth - node.clientWidth;
+    }, [yearGridWidth]);
 
     return (
         <div
             className={css`
                 margin-bottom: 16px;
-                padding: 21px 16px 24px;
-                border-radius: 7px;
-                background: ${CARD};
+                padding: 20px 14px 24px;
+                border-radius: 8px;
+                background: ${card};
             `}
         >
             <div
+                ref={scrollRef}
                 className={css`
-                    display: flex;
-                    gap: 5px;
-                    margin-bottom: 25px;
+                    width: 100%;
+                    overflow-x: auto;
+                    overflow-y: hidden;
+                    -webkit-overflow-scrolling: touch;
                 `}
             >
-                {(['month', 'year'] as GraphMode[]).map((tab) => {
-                    const active = mode === tab;
-                    return (
-                        <button
-                            key={tab}
-                            type="button"
-                            onClick={() => setMode(tab)}
-                            className={css`
-                                min-width: ${tab === 'month' ? 72 : 58}px;
-                                height: 22px;
-                                border-radius: 8px;
-                                background: ${active ? GOLD : 'transparent'};
-                                border: 1px solid ${active ? GOLD : '#717175'};
-                                color: ${active ? '#201f24' : MUTED};
-                                font-size: 12px;
-                                line-height: 20px;
-                                cursor: pointer;
-                            `}
-                        >
-                            {tab === 'month' ? 'Месяц' : 'Год'}
-                        </button>
-                    );
-                })}
-            </div>
-
-            {mode === 'month' ? (
-                <>
+                <div
+                    className={css`
+                        position: relative;
+                        width: ${yearGridWidth}px;
+                        min-width: ${yearGridWidth}px;
+                    `}
+                >
                     <div
                         className={css`
-                            display: grid;
-                            grid-template-columns: repeat(7, ${MONTH_CELL}px);
-                            gap: 0 ${MONTH_GAP}px;
-                            justify-content: center;
-                            margin-bottom: 13px;
+                            position: relative;
+                            height: ${YEAR_LABEL_HEIGHT}px;
+                            margin-bottom: 12px;
                         `}
                     >
-                        {WEEKDAY_LABELS.map((day) => (
+                        {monthAnchors.map((month) => (
                             <div
-                                key={day}
+                                key={`${month.label}-${month.left}`}
                                 className={css`
-                                    color: ${TEXT};
-                                    font-size: 13px;
-                                    line-height: 17px;
-                                    text-align: center;
+                                    position: absolute;
+                                    left: ${month.left}px;
+                                    top: 0;
+                                    color: ${text};
+                                    font-size: 16px;
+                                    line-height: 1.2;
+                                    white-space: nowrap;
                                 `}
                             >
-                                {day}
+                                {month.label}
                             </div>
                         ))}
                     </div>
                     <div
                         className={css`
                             display: grid;
-                            grid-template-columns: repeat(7, ${MONTH_CELL}px);
-                            gap: ${MONTH_GAP}px;
-                            justify-content: center;
+                            grid-template-rows: repeat(7, ${YEAR_CELL_SIZE}px);
+                            grid-auto-flow: column;
+                            grid-auto-columns: ${YEAR_CELL_SIZE}px;
+                            row-gap: ${YEAR_CELL_GAP}px;
+                            column-gap: ${YEAR_CELL_GAP}px;
+                            width: ${yearGridWidth}px;
                         `}
                     >
-                        {monthCells.map((cell) => {
-                            const future = cell.date > today;
-                            return (
-                                <div
-                                    key={cell.dateStr}
-                                    title={cell.dateStr}
-                                    className={css`
-                                        width: ${MONTH_CELL}px;
-                                        height: ${MONTH_CELL}px;
-                                        border-radius: 50%;
-                                        background: ${future ? EMPTY : getColor(cell.dateStr)};
-                                        opacity: ${future ? 0.35 : 1};
-                                    `}
-                                />
-                            );
-                        })}
+                        {yearCells.map((cell) => (
+                            <div
+                                key={cell.dateStr}
+                                title={cell.inRange ? cell.dateStr : undefined}
+                                className={css`
+                                    width: ${YEAR_CELL_SIZE}px;
+                                    height: ${YEAR_CELL_SIZE}px;
+                                    border-radius: 50%;
+                                    background: ${cell.inRange ? getColor(cell.dateStr) : 'transparent'};
+                                    opacity: ${cell.inRange ? 1 : 0};
+                                `}
+                            />
+                        ))}
                     </div>
-                </>
-            ) : (
-                <div
-                    className={css`
-                        display: grid;
-                        grid-template-columns: repeat(6, minmax(0, 1fr));
-                        gap: 24px 5px;
-                    `}
-                >
-                    {yearMonths.map((month) => (
-                        <div key={month.label}>
-                            <div
-                                className={css`
-                                    margin-bottom: 8px;
-                                    color: ${TEXT};
-                                    font-size: 13px;
-                                    line-height: 17px;
-                                    text-align: center;
-                                `}
-                            >
-                                {month.label}
-                            </div>
-                            <div
-                                className={css`
-                                    display: grid;
-                                    grid-template-columns: repeat(3, ${YEAR_CELL}px);
-                                    gap: ${YEAR_GAP}px;
-                                    justify-content: center;
-                                `}
-                            >
-                                {month.days.map((cell) => {
-                                    const future = cell.date > today;
-                                    return (
-                                        <div
-                                            key={cell.dateStr}
-                                            title={cell.dateStr}
-                                            className={css`
-                                                width: ${YEAR_CELL}px;
-                                                height: ${YEAR_CELL}px;
-                                                border-radius: 50%;
-                                                background: ${future ? EMPTY : getColor(cell.dateStr)};
-                                                opacity: ${future ? 0.35 : 1};
-                                            `}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    ))}
                 </div>
-            )}
+            </div>
         </div>
     );
 };

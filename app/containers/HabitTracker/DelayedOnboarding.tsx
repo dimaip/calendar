@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
-import { useAuth } from 'oidc-react';
+import { useTheme } from 'emotion-theming';
 import { useQuery } from 'convex/react';
+import { useSession } from 'containers/AuthProvider';
 import DrawerWithHeader from 'components/Drawer/DrawerWithHeader';
 
 import { api } from '../../../convex/_generated/api';
+
 import PrayerSetup from './PrayerSetup';
 
 const ANON_SESSIONS_KEY = 'habitTracker_anonSessions';
@@ -14,6 +16,12 @@ const DARK_CARD = '#2c2b32';
 const TEXT = '#fffffd';
 const MUTED = '#acacb0';
 const GOLD = '#ae831a';
+
+interface TrackerTheme {
+    colours?: {
+        white?: string;
+    };
+}
 
 function getAnonSessionCount(): number {
     try {
@@ -43,8 +51,9 @@ function isOnboardingDismissed(): boolean {
  * who have 3+ anonymous prayer sessions but haven't enabled tracking.
  */
 const DelayedOnboarding = () => {
-    const auth = useAuth();
-    const isLoggedIn = !!auth.userData?.profile;
+    const theme = useTheme<TrackerTheme>();
+    const session = useSession();
+    const isLoggedIn = !!session.profile;
     const settings = useQuery(api.habitTracker.getSettings, isLoggedIn ? undefined : 'skip');
     const [showSetup, setShowSetup] = useState(false);
     const [dismissed, setDismissed] = useState(false);
@@ -140,7 +149,7 @@ const DelayedOnboarding = () => {
                         className={css`
                             min-height: 360px;
                             margin: 0 -16px -16px;
-                            background: ${DARK};
+                            background: ${theme.colours?.white || '#ffffff'};
                         `}
                     >
                         <PrayerSetup onComplete={handleSetupComplete} />

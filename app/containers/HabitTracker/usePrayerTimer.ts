@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { useAuth } from 'oidc-react';
 import { useMutation, useQuery } from 'convex/react';
+import { useSession } from 'containers/AuthProvider';
 import { api } from '../../../convex/_generated/api';
 
 const PRAYER_THRESHOLD_SECONDS = 240; // 4 minutes
@@ -14,8 +14,8 @@ interface PrayerTimerProps {
 }
 
 export const usePrayerTimer = ({ date, serviceId }: PrayerTimerProps) => {
-    const auth = useAuth();
-    const isLoggedIn = !!auth.userData?.profile;
+    const session = useSession();
+    const isLoggedIn = !!session.profile;
     const settings = useQuery(api.habitTracker.getSettings);
     const habitTrackerEnabled = !!settings?.habitTracker;
     const recordSession = useMutation(api.habitTracker.recordSession);
@@ -102,7 +102,12 @@ export const usePrayerTimer = ({ date, serviceId }: PrayerTimerProps) => {
 };
 
 async function flushOfflineQueue(
-    recordSession: (args: { date: string; timeOfDay: string; durationSeconds: number; serviceId: string }) => Promise<any>
+    recordSession: (args: {
+        date: string;
+        timeOfDay: string;
+        durationSeconds: number;
+        serviceId: string;
+    }) => Promise<any>
 ) {
     try {
         const raw = localStorage.getItem(OFFLINE_QUEUE_KEY);

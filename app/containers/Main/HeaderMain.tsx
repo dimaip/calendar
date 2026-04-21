@@ -1,7 +1,7 @@
 import React from 'react';
 import { css } from 'emotion';
-import { useAuth } from 'oidc-react';
 import { useTheme } from 'emotion-theming';
+import { useSession } from 'containers/AuthProvider';
 import Button from 'components/Button/Button';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import Header from 'components/Header/Header';
@@ -14,10 +14,10 @@ import SettingsButton from 'components/SettingsButton/SettingsButton';
 import CalendarStreakWidget from 'containers/HabitTracker/CalendarStreakWidget';
 
 const UserIcon = () => {
-    const { userData } = useAuth();
+    const { profile } = useSession();
     const theme = useTheme();
-    const initials = userData?.profile.given_name
-        ? `${userData?.profile.given_name?.[0]}${userData?.profile?.family_name?.[0]}`
+    const initials = profile?.given_name
+        ? `${profile.given_name?.[0]}${profile?.family_name?.[0]}`
         : 'U';
 
     return (
@@ -37,8 +37,8 @@ const UserIcon = () => {
 
 const ProfileIcon = () => {
     const history = useHistory();
-    const auth = useAuth();
-    const loggedIn = auth.userData?.profile;
+    const { profile } = useSession();
+    const loggedIn = profile;
     return (
         <Button
             title={loggedIn ? 'Выйти' : 'Войти'}

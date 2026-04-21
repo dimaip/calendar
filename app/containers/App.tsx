@@ -36,7 +36,7 @@ export default () => {
             loader.style.display = 'none';
             reactRoot.style.display = 'block';
         }
-        Plugins.SplashScreen.hide();
+        void Plugins.SplashScreen.hide();
     }, []);
     const dark = isDarkMode();
     return (
@@ -44,23 +44,23 @@ export default () => {
             <HashRouter>
                 <AuthProvider>
                     <ConvexClientProvider>
-                    <SyncWithDB>
-                        <ScrollRestoration />
-                        <Pullable
-                            spinnerColor={dark ? '#fff' : '#000'}
-                            onRefresh={async () => {
-                                const newVersion = await checkVersion();
-                                if (newVersion) {
-                                    setPendingUpdate(newVersion);
-                                }
-                                await precache(true);
-                                await queryClient.refetchQueries();
-                            }}
-                            shouldPullToRefresh={() => window.scrollY <= 0 && !window.pullDownDisabled}
-                        >
-                            <Routes />
-                        </Pullable>
-                    </SyncWithDB>
+                        <SyncWithDB>
+                            <ScrollRestoration />
+                            <Pullable
+                                spinnerColor={dark ? '#fff' : '#000'}
+                                onRefresh={async () => {
+                                    const newVersion = await checkVersion();
+                                    if (newVersion) {
+                                        setPendingUpdate(newVersion);
+                                    }
+                                    await precache(true);
+                                    await queryClient.refetchQueries();
+                                }}
+                                shouldPullToRefresh={() => window.scrollY <= 0 && !window.pullDownDisabled}
+                            >
+                                <Routes />
+                            </Pullable>
+                        </SyncWithDB>
                     </ConvexClientProvider>
                 </AuthProvider>
             </HashRouter>

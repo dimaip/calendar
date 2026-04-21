@@ -1,18 +1,21 @@
 import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
-import { useAuth } from 'oidc-react';
 import { useQuery } from 'convex/react';
+import { useSession } from 'containers/AuthProvider';
 import { useHistory } from 'react-router-dom';
+import PrayerCheck from 'components/svgs/PrayerCheck';
 
 import { api } from '../../../convex/_generated/api';
 
-type HeaderTheme = {
+interface HeaderTheme {
     colours?: {
         primary?: string;
         gray?: string;
+        blue?: string;
+        lightGray?: string;
     };
-};
+}
 
 function formatDate(date: Date): string {
     const y = date.getFullYear();
@@ -22,12 +25,14 @@ function formatDate(date: Date): string {
 }
 
 const CalendarStreakWidget = () => {
-    const theme = useTheme() as HeaderTheme;
-    const auth = useAuth();
+    const theme = useTheme<HeaderTheme>();
+    const session = useSession();
     const history = useHistory();
-    const isLoggedIn = !!auth.userData?.profile;
+    const isLoggedIn = !!session.profile;
     const activeColour = theme.colours?.primary || '#ae831a';
     const mutedColour = theme.colours?.gray || '#717175';
+    const doneColour = theme.colours?.blue || '#4169E1';
+    const idleRing = theme.colours?.lightGray || '#acacb0';
 
     const settings = useQuery(api.habitTracker.getSettings, isLoggedIn ? undefined : 'skip');
     const todayStr = formatDate(new Date());
@@ -86,24 +91,31 @@ const CalendarStreakWidget = () => {
                         color: ${item.done ? activeColour : mutedColour};
                         font-size: 13px;
                         line-height: 19px;
-                        font-weight: 700;
+                        font-weight: 400;
                     `}
                 >
                     <span
                         className={css`
-                            width: 13px;
-                            height: 13px;
-                            border-radius: 50%;
-                            border: 1.5px solid ${item.done ? activeColour : mutedColour};
                             display: flex;
                             align-items: center;
                             justify-content: center;
-                            font-size: 9px;
-                            line-height: 1;
-                            color: ${item.done ? activeColour : 'transparent'};
+                            width: 18px;
+                            height: 18px;
+                            flex-shrink: 0;
                         `}
                     >
-                        ✓
+                        {item.done ? (
+                            <PrayerCheck colour={doneColour} size={18} />
+                        ) : (
+                            <span
+                                className={css`
+                                    width: 16px;
+                                    height: 16px;
+                                    border: 2px solid ${idleRing};
+                                    border-radius: 50%;
+                                `}
+                            />
+                        )}
                     </span>
                     {item.label}
                 </div>

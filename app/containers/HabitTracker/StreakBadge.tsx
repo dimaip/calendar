@@ -1,12 +1,12 @@
 import React from 'react';
 import { css } from 'emotion';
-import { useAuth } from 'oidc-react';
 import { useQuery } from 'convex/react';
+import { useSession } from 'containers/AuthProvider';
 import { api } from '../../../convex/_generated/api';
 
 const StreakBadge = () => {
-    const auth = useAuth();
-    const isLoggedIn = !!auth.userData?.profile;
+    const session = useSession();
+    const isLoggedIn = !!session.profile;
     const streak = useQuery(api.habitTracker.getStreak, isLoggedIn ? undefined : 'skip');
 
     if (!isLoggedIn || !streak) return null;

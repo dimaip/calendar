@@ -1,19 +1,26 @@
 import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useMutation, useQuery } from 'convex/react';
+import { useTheme } from 'emotion-theming';
 
 import { api } from '../../../convex/_generated/api';
+
+interface TrackerTheme {
+    colours?: {
+        primary?: string;
+        darkGray?: string;
+        white?: string;
+        gray?: string;
+    };
+}
 
 interface PrayerSetupProps {
     onComplete: () => void;
     className?: string;
 }
 
-const GOLD = '#ae831a';
-const DARK = '#201f24';
-const TEXT = '#fffffd';
-
 const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
+    const theme = useTheme<TrackerTheme>();
     const settings = useQuery(api.habitTracker.getSettings);
     const saveSettings = useMutation(api.habitTracker.saveSettings);
 
@@ -32,6 +39,9 @@ const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
     };
 
     const disabled = saving || (!trackMorning && !trackEvening);
+    const primary = theme.colours?.primary || '#ae831a';
+    const text = theme.colours?.darkGray || '#201f24';
+    const buttonText = theme.colours?.white === '#201f24' ? '#201f24' : '#ffffff';
 
     return (
         <div
@@ -42,7 +52,8 @@ const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
                 align-items: center;
                 justify-content: center;
                 padding: 28px 12px;
-                color: ${TEXT};
+                background: ${theme.colours?.white || '#ffffff'};
+                color: ${text};
             `} ${className}`}
         >
             <h2
@@ -64,9 +75,9 @@ const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
                 className={css`
                     display: flex;
                     align-items: center;
-                    gap: 9px;
-                    min-width: 165px;
-                    padding: 3px 0;
+                    gap: 12px;
+                    min-width: 220px;
+                    padding: 5px 0;
                     font-size: 16px;
                     line-height: 1.2;
                     cursor: pointer;
@@ -78,37 +89,30 @@ const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
                     checked={trackMorning}
                     onChange={(e) => setTrackMorning(e.target.checked)}
                     className={css`
-                        width: 14px;
-                        height: 14px;
+                        width: 18px;
+                        height: 18px;
                         flex-shrink: 0;
                         margin: 0;
-                        appearance: none;
-                        border: 1px solid ${GOLD};
-                        border-radius: 1px;
-                        background: transparent;
-                        color: ${GOLD};
                         cursor: pointer;
-
-                        &:checked::after {
-                            content: '✓';
-                            display: block;
-                            margin-top: -4px;
-                            font-size: 15px;
-                            line-height: 14px;
-                            text-align: center;
-                        }
+                        accent-color: ${primary};
                     `}
                 />
-                Утренняя молитва
+                <span
+                    className={css`
+                        color: ${text};
+                    `}
+                >
+                    Утренняя молитва
+                </span>
             </label>
 
             <label
                 className={css`
                     display: flex;
                     align-items: center;
-                    gap: 9px;
-                    min-width: 165px;
-                    padding: 3px 0;
+                    gap: 12px;
+                    min-width: 220px;
+                    padding: 5px 0;
                     font-size: 16px;
                     line-height: 1.2;
                     cursor: pointer;
@@ -120,28 +124,21 @@ const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
                     checked={trackEvening}
                     onChange={(e) => setTrackEvening(e.target.checked)}
                     className={css`
-                        width: 14px;
-                        height: 14px;
+                        width: 18px;
+                        height: 18px;
                         flex-shrink: 0;
                         margin: 0;
-                        appearance: none;
-                        border: 1px solid ${GOLD};
-                        border-radius: 1px;
-                        background: transparent;
-                        color: ${GOLD};
                         cursor: pointer;
-
-                        &:checked::after {
-                            content: '✓';
-                            display: block;
-                            margin-top: -4px;
-                            font-size: 15px;
-                            line-height: 14px;
-                            text-align: center;
-                        }
+                        accent-color: ${primary};
                     `}
                 />
-                Вечерняя молитва
+                <span
+                    className={css`
+                        color: ${text};
+                    `}
+                >
+                    Вечерняя молитва
+                </span>
             </label>
 
             <button
@@ -157,8 +154,8 @@ const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
                     height: 46px;
                     margin-top: 52px;
                     border-radius: 8px;
-                    background-color: ${GOLD};
-                    color: ${DARK};
+                    background-color: ${primary};
+                    color: ${buttonText};
                     font-size: 15px;
                     line-height: 46px;
                     text-align: center;
