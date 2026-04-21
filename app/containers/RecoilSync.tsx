@@ -9,8 +9,7 @@ const parseState = (state: string): Record<string, unknown> => {
     }
     try {
         return JSON.parse(state) as Record<string, unknown>;
-    } catch (e) {
-        console.error(e);
+    } catch {
         return {};
     }
 };
@@ -50,7 +49,6 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
         diff.forEach((value, key) => {
             setState(key, value);
             if (canSyncRef.current) {
-                console.debug('Uploading a setting to the server', key, value);
                 void authorisedFetchRef.current({
                     url: `/setSetting`,
                     method: 'POST',
@@ -76,7 +74,6 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
                         .filter((key) => !serverKeys.includes(key))
                         .forEach((key) => {
                             const value = localState[key];
-                            console.debug('Uploading settings to the server', key, value);
                             void authorisedFetchRef.current({
                                 url: `/setSetting`,
                                 method: 'POST',
@@ -84,7 +81,6 @@ export const SyncWithDB = ({ children }: { children: React.ReactNode }): JSX.Ele
                             });
                         });
                     Object.keys(settings).forEach((key) => {
-                        console.debug('Downloaded a setting from the server', key, settings[key]);
                         setState(key, settings[key]);
                         updateItem(key, settings[key]);
                     });
