@@ -7,6 +7,8 @@ import HeaderMain from 'containers/Main/HeaderMain';
 import Loader from 'components/Loader/Loader';
 import BottomNav from 'components/BottomNav/BottomNav';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
+import type { AppTheme } from 'styles/AppTheme';
+import { formatDateKey } from 'utils/formatDateKey';
 import PrayerSetup from 'containers/HabitTracker/PrayerSetup';
 import ContributionGraph from 'containers/HabitTracker/ContributionGraph';
 import DrawerWithHeader from 'components/Drawer/DrawerWithHeader';
@@ -15,33 +17,12 @@ import QuestionMarkCircle from 'components/svgs/QuestionMarkCircle';
 
 import { api } from '../../../convex/_generated/api';
 
-interface TrackerTheme {
-    colours?: {
-        white?: string;
-        bgGray?: string;
-        bgGrayLight?: string;
-        darkGray?: string;
-        gray?: string;
-        lightGray?: string;
-        lineGray?: string;
-        primary?: string;
-        blue?: string;
-    };
-}
-
 const GRAPH_SKELETON_COLUMNS = 53;
 const GRAPH_SKELETON_ROWS = 7;
 const GRAPH_SKELETON_CELL = 15;
 const GRAPH_SKELETON_GAP = 5;
 const GRAPH_SKELETON_DAY_MS = 24 * 60 * 60 * 1000;
 const GRAPH_SKELETON_MONTHS = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
-
-function formatDate(date: Date): string {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const d = String(date.getDate()).padStart(2, '0');
-    return `${y}-${m}-${d}`;
-}
 
 function addDays(date: Date, amount: number): Date {
     const next = new Date(date);
@@ -393,12 +374,12 @@ const ProfileLoadingState = ({
 );
 
 const Inner = () => {
-    const theme = useTheme<TrackerTheme>();
+    const theme = useTheme<AppTheme>();
     const session = useSession();
     const [signingOut, setSigningOut] = useState(false);
     const [showSetup, setShowSetup] = useState(false);
     const today = new Date();
-    const todayStr = formatDate(today);
+    const todayStr = formatDateKey(today);
     const profile = session.profile;
     const settings = useQuery(api.habitTracker.getSettings, profile ? undefined : 'skip');
     const habitTrackerEnabled = !!settings?.habitTracker;
@@ -417,18 +398,18 @@ const Inner = () => {
     const morningDone = !!morningSession;
     const eveningDone = !!eveningSession;
     const isDarkTheme = theme.colours?.white === '#201f24';
-    const pageBg = isDarkTheme ? '#2c2b32' : theme.colours?.bgGray || '#EFEFF4';
-    const onboardingBg = isDarkTheme ? '#201f24' : theme.colours?.bgGray || '#EFEFF4';
-    const cardBg = isDarkTheme ? '#201f24' : theme.colours?.white || '#ffffff';
+    const pageBg = theme.colours?.bgGrayLight || '#EFEFF4';
+    const onboardingBg = theme.colours?.white || '#ffffff';
+    const cardBg = theme.colours?.white || '#ffffff';
     const text = theme.colours?.darkGray || '#201f24';
     const muted = theme.colours?.gray || '#717175';
-    const dateText = isDarkTheme ? muted : text;
+    const dateText = muted;
     const primary = theme.colours?.primary || '#ae831a';
     const primaryContrast = isDarkTheme ? '#201f24' : '#ffffff';
-    const idleIconBg = isDarkTheme ? '#38373f' : theme.colours?.lightGray || '#acacb0';
+    const idleIconBg = theme.colours?.bgGray || '#acacb0';
     const doneIconBg = theme.colours?.blue || '#4169E1';
-    const skeletonBase = isDarkTheme ? '#38373f' : '#e5e5ea';
-    const skeletonHighlight = isDarkTheme ? '#4a4952' : '#f3f3f7';
+    const skeletonBase = theme.colours?.bgGray || '#e5e5ea';
+    const skeletonHighlight = theme.colours?.bgGrayLight || '#f3f3f7';
     const graphRollingStart = addDays(today, -364);
     const graphGridStart = addDays(graphRollingStart, -getMondayBasedDay(graphRollingStart));
     const graphMonthAnchors = [
@@ -553,10 +534,7 @@ const Inner = () => {
                                 УСТАНОВИТЬ
                             </button>
                         </div>
-                        <AccountNote
-                            textColour={muted}
-                            iconColour={isDarkTheme ? '#acacb0' : theme.colours?.gray || '#acacb0'}
-                        />
+                        <AccountNote textColour={muted} iconColour={muted} />
                     </>
                 )}
                 <button

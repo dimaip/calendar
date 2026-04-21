@@ -2,17 +2,9 @@ import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useMutation, useQuery } from 'convex/react';
 import { useTheme } from 'emotion-theming';
+import type { AppTheme } from 'styles/AppTheme';
 
 import { api } from '../../../convex/_generated/api';
-
-interface TrackerTheme {
-    colours?: {
-        primary?: string;
-        darkGray?: string;
-        white?: string;
-        gray?: string;
-    };
-}
 
 interface PrayerSetupProps {
     onComplete: () => void;
@@ -20,7 +12,7 @@ interface PrayerSetupProps {
 }
 
 const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
-    const theme = useTheme<TrackerTheme>();
+    const theme = useTheme<AppTheme>();
     const settings = useQuery(api.habitTracker.getSettings);
     const saveSettings = useMutation(api.habitTracker.saveSettings);
 
@@ -159,12 +151,11 @@ const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
                     font-size: 15px;
                     line-height: 46px;
                     text-align: center;
-                    text-transform: uppercase;
                     cursor: pointer;
                     opacity: ${disabled ? 0.55 : 1};
                 `}
             >
-                {saving ? 'СОХРАНЕНИЕ...' : 'СОХРАНИТЬ'}
+                {saving ? 'Сохранение…' : 'Сохранить'}
             </button>
         </div>
     );

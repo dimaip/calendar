@@ -5,27 +5,13 @@ import { useQuery } from 'convex/react';
 import { useSession } from 'containers/AuthProvider';
 import { useHistory } from 'react-router-dom';
 import PrayerCheck from 'components/svgs/PrayerCheck';
+import type { AppTheme } from 'styles/AppTheme';
+import { formatDateKey } from 'utils/formatDateKey';
 
 import { api } from '../../../convex/_generated/api';
 
-interface HeaderTheme {
-    colours?: {
-        primary?: string;
-        gray?: string;
-        blue?: string;
-        lightGray?: string;
-    };
-}
-
-function formatDate(date: Date): string {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const d = String(date.getDate()).padStart(2, '0');
-    return `${y}-${m}-${d}`;
-}
-
 const CalendarStreakWidget = () => {
-    const theme = useTheme<HeaderTheme>();
+    const theme = useTheme<AppTheme>();
     const session = useSession();
     const history = useHistory();
     const isLoggedIn = !!session.profile;
@@ -35,7 +21,7 @@ const CalendarStreakWidget = () => {
     const idleRing = theme.colours?.lightGray || '#acacb0';
 
     const settings = useQuery(api.habitTracker.getSettings, isLoggedIn ? undefined : 'skip');
-    const todayStr = formatDate(new Date());
+    const todayStr = formatDateKey(new Date());
     const sessions = useQuery(
         api.habitTracker.getSessionsForRange,
         isLoggedIn && settings?.habitTracker ? { startDate: todayStr, endDate: todayStr } : 'skip'

@@ -2,34 +2,16 @@ import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { css } from 'emotion';
 import { useQuery } from 'convex/react';
 import { useTheme } from 'emotion-theming';
+import type { AppTheme } from 'styles/AppTheme';
+import { formatDateKey } from 'utils/formatDateKey';
 
 import { api } from '../../../convex/_generated/api';
-
-interface TrackerTheme {
-    colours?: {
-        white?: string;
-        bgGray?: string;
-        bgGrayLight?: string;
-        darkGray?: string;
-        gray?: string;
-        lineGray?: string;
-        primary?: string;
-        blue?: string;
-    };
-}
 
 const YEAR_CELL_SIZE = 15;
 const YEAR_CELL_GAP = 5;
 const YEAR_LABEL_HEIGHT = 28;
 const DAY_MS = 24 * 60 * 60 * 1000;
 const MONTH_LABELS = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
-
-function formatDate(date: Date): string {
-    const y = date.getFullYear();
-    const m = String(date.getMonth() + 1).padStart(2, '0');
-    const d = String(date.getDate()).padStart(2, '0');
-    return `${y}-${m}-${d}`;
-}
 
 function addDays(date: Date, amount: number): Date {
     const next = new Date(date);
@@ -47,19 +29,19 @@ function buildCells(startDate: Date, count: number) {
         const date = addDays(startDate, index);
         return {
             date,
-            dateStr: formatDate(date),
+            dateStr: formatDateKey(date),
             index,
         };
     });
 }
 
 const ContributionGraph = () => {
-    const theme = useTheme<TrackerTheme>();
+    const theme = useTheme<AppTheme>();
     const scrollRef = useRef<HTMLDivElement | null>(null);
     const today = new Date();
     const rollingStart = addDays(today, -364);
-    const todayStr = formatDate(today);
-    const rollingStartStr = formatDate(rollingStart);
+    const todayStr = formatDateKey(today);
+    const rollingStartStr = formatDateKey(rollingStart);
 
     const sessions = useQuery(api.habitTracker.getSessionsForRange, {
         startDate: rollingStartStr,
@@ -77,9 +59,8 @@ const ContributionGraph = () => {
         return map;
     }, [sessions]);
 
-    const isDarkTheme = theme.colours?.white === '#201f24';
-    const card = isDarkTheme ? '#201f24' : theme.colours?.white || '#ffffff';
-    const empty = isDarkTheme ? '#2c2b32' : theme.colours?.bgGray || '#EFEFF4';
+    const card = theme.colours?.white || '#ffffff';
+    const empty = theme.colours?.bgGrayLight || '#EFEFF4';
     const blue = theme.colours?.blue || '#4169E1';
     const blueMuted = 'rgba(65, 105, 225, 0.55)';
     const text = theme.colours?.darkGray || '#201f24';
