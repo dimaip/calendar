@@ -1,4 +1,4 @@
-import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
+import { makeIsEasterOffsetRange, makeIsDate } from 'domain/getDayInfo';
 
 import React from 'react';
 import useDay from 'hooks/useDay';
@@ -27,8 +27,9 @@ const Zlatoust = ({ lang, date }) => {
     const dateObj = new Date(date);
     const dayOfWeek = dateObj.getDay();
     const { data: day } = useDay(date);
+    const isDate = makeIsDate(dateObj);
 
-    const isAnnunciation = day?.title === 'Благовещение Богородицы';
+    const isAnnunciation = isDate(4, 7);
 
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
     const brightWeek = isEasterOffsetRange(0, 6);

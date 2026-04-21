@@ -79,7 +79,7 @@ const Vespers = ({ date, obihod }) => {
             <Saints saints={tomorrowDay.saints} date={date} />
         </SolidSection>
     );
-    const isAnnunciation = tomorrowDay?.title === 'Благовещение Богородицы';
+    const isAnnunciation = isDate(4, 7);
     const isTransfiguration = isDate(8, 19);
     const isCross = isDate(9, 27);
 
