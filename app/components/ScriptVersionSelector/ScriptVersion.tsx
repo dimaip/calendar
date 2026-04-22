@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import { useRecoilState } from 'recoil';
-import { useAuth } from 'oidc-react';
+import { useSession } from 'containers/AuthProvider';
 import Button from 'components/Button/Button';
 import Input from 'components/Input/Input';
 import scriptVersionSelectorIsActiveState from 'state/scriptVersionSelectorIsActiveState';
@@ -31,8 +31,8 @@ export const ScriptVersion = ({ version, serviceId }: { version: Version; servic
     const [scriptVersions, setScriptVersions] = useRecoilState(scriptVersionsState(serviceId));
     const [currentScriptVersion, setCurrentScriptVersion] = useRecoilState(currentScriptVersionState(serviceId));
     const [_, setScriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
-    const auth = useAuth();
-    const userId = auth.userData?.profile?.sub;
+    const session = useSession();
+    const userId = session.profile?.sub;
 
     const saveNameHandler = () => {
         setScriptVersions([

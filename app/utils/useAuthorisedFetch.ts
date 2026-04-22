@@ -1,21 +1,33 @@
-import { useAuth } from 'oidc-react';
+import { useCallback, useRef } from 'react';
+import { useSession } from 'containers/AuthProvider';
 
 export const useAuthorisedFetch = () => {
-    const auth = useAuth();
-    const token = auth?.userData?.id_token;
-    return async <T>({
-        url,
-        body,
-        method = 'GET',
-    }: {
-        url: string;
-        body?: unknown;
-        method?: 'GET' | 'POST';
-    }): Promise<T | null> => {
-        if (token) {
-            const doFetch = async (token: string) =>
+    const session = useSession();
+    const sessionRef = useRef(session);
+    sessionRef.current = session;
+
+    return useCallback(
+        async <T>({
+            url,
+            body,
+            method = 'GET',
+        }: {
+            url: string;
+            body?: unknown;
+            method?: 'GET' | 'POST';
+        }): Promise<T | null> => {
+            const currentSession = sessionRef.current;
+            const token = await currentSession.getToken();
+            if (!token) {
+                return null;
+            }
+
+            const doFetch = async (activeToken: string) =>
                 fetch(`${process.env.API_HOST}${url}`, {
-                    headers: { Authorization: `Bearer ${token}` },
+                    headers: {
+                        Authorization: `Bearer ${activeToken}`,
+                        ...(body ? { 'Content-Type': 'application/json' } : {}),
+                    },
                     method,
                     ...(body
                         ? {
@@ -23,29 +35,29 @@ export const useAuthorisedFetch = () => {
                           }
                         : {}),
                 });
+
             return doFetch(token).then(async (resp) => {
                 if (!resp.ok && resp.status === 401) {
-                    console.warn('Expried, re-trying');
-                    const user = await auth?.userManager?.signinSilent();
-                    const newToken = user?.id_token;
+                    // A 401 means the backend already rejected the current JWT, so
+                    // this path uses the explicit renew contract instead of the
+                    // cache-friendly `getToken` path used by background consumers.
+                    const newToken = await currentSession.renewToken();
                     if (!newToken) {
-                        console.warn('Bad token recieved, signing out');
-                        void auth.signOut();
+                        void currentSession.expire();
                         throw Error('Bad Token, failed to refresh');
                     }
 
-                    return doFetch(newToken).then((resp) => {
-                        if (!resp.ok && resp.status === 401) {
-                            console.warn('Bad token, signing out');
-                            void auth.signOut();
+                    return doFetch(newToken).then((renewedResp) => {
+                        if (!renewedResp.ok && renewedResp.status === 401) {
+                            void currentSession.expire();
                             throw Error('Bad Token, new token failed');
                         }
-                        return resp.json() as T;
+                        return renewedResp.json() as T;
                     });
                 }
                 return resp.json() as T;
             });
-        }
-        return null;
-    };
+        },
+        []
+    );
 };

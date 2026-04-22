@@ -15,6 +15,7 @@ import Routes from '../Routes';
 
 import { SyncWithDB } from './RecoilSync';
 import { AuthProvider } from './AuthProvider';
+import { ConvexClientProvider } from './HabitTracker/ConvexClientProvider';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -35,30 +36,32 @@ export default () => {
             loader.style.display = 'none';
             reactRoot.style.display = 'block';
         }
-        Plugins.SplashScreen.hide();
+        void Plugins.SplashScreen.hide();
     }, []);
     const dark = isDarkMode();
     return (
         <QueryClientProvider client={queryClient}>
             <HashRouter>
                 <AuthProvider>
-                    <SyncWithDB>
-                        <ScrollRestoration />
-                        <Pullable
-                            spinnerColor={dark ? '#fff' : '#000'}
-                            onRefresh={async () => {
-                                const newVersion = await checkVersion();
-                                if (newVersion) {
-                                    setPendingUpdate(newVersion);
-                                }
-                                await precache(true);
-                                await queryClient.refetchQueries();
-                            }}
-                            shouldPullToRefresh={() => window.scrollY <= 0 && !window.pullDownDisabled}
-                        >
-                            <Routes />
-                        </Pullable>
-                    </SyncWithDB>
+                    <ConvexClientProvider>
+                        <SyncWithDB>
+                            <ScrollRestoration />
+                            <Pullable
+                                spinnerColor={dark ? '#fff' : '#000'}
+                                onRefresh={async () => {
+                                    const newVersion = await checkVersion();
+                                    if (newVersion) {
+                                        setPendingUpdate(newVersion);
+                                    }
+                                    await precache(true);
+                                    await queryClient.refetchQueries();
+                                }}
+                                shouldPullToRefresh={() => window.scrollY <= 0 && !window.pullDownDisabled}
+                            >
+                                <Routes />
+                            </Pullable>
+                        </SyncWithDB>
+                    </ConvexClientProvider>
                 </AuthProvider>
             </HashRouter>
         </QueryClientProvider>

@@ -26,7 +26,6 @@ import { useDocumentTitle } from 'utils/useDocumentTitle';
 import { useRecoilValue } from 'recoil';
 import themeState from 'state/themeState';
 
-import BorderedSection from './BorderedSection';
 import IosPrompt from './IosPrompt';
 import Services from './Services';
 import ThisDays from './ThisDays';
