@@ -17,7 +17,7 @@ export const useAuthorisedFetch = () => {
             method?: 'GET' | 'POST';
         }): Promise<T | null> => {
             const currentSession = sessionRef.current;
-            const token = currentSession.token;
+            const token = await currentSession.getToken();
             if (!token) {
                 return null;
             }
@@ -38,8 +38,10 @@ export const useAuthorisedFetch = () => {
 
             return doFetch(token).then(async (resp) => {
                 if (!resp.ok && resp.status === 401) {
-                    const user = await currentSession.renew();
-                    const newToken = user?.id_token;
+                    // A 401 means the backend already rejected the current JWT, so
+                    // this path uses the explicit renew contract instead of the
+                    // cache-friendly `getToken` path used by background consumers.
+                    const newToken = await currentSession.renewToken();
                     if (!newToken) {
                         void currentSession.expire();
                         throw Error('Bad Token, failed to refresh');

@@ -1,60 +1,41 @@
-import React, { useLayoutEffect, useMemo, useRef } from 'react';
-import { ConvexProvider, ConvexReactClient } from 'convex/react';
+import React, { useEffect, useMemo, useRef } from 'react';
+import { ConvexProviderWithAuth, ConvexReactClient } from 'convex/react';
 import { useSession } from 'containers/AuthProvider';
 
 const convexUrl = process.env.CONVEX_URL || '';
 
-export const ConvexClientProvider = ({ children }: { children: React.ReactNode }) => {
+const useSessionAuth = () => {
     const session = useSession();
     const sessionRef = useRef(session);
     sessionRef.current = session;
+
+    return useMemo(
+        () => ({
+            // Convex owns the reconnect/auth handshake. This hook only translates
+            // those callbacks into our session contract.
+            fetchAccessToken: async ({ forceRefreshToken }: { forceRefreshToken: boolean }) => {
+                const currentSession = sessionRef.current;
+                return forceRefreshToken ? currentSession.renewToken() : currentSession.getToken();
+            },
+            isAuthenticated: session.isAuthenticated,
+            isLoading: session.isLoading,
+        }),
+        [session.isAuthenticated, session.isLoading]
+    );
+};
+
+export const ConvexClientProvider = ({ children }: { children: React.ReactNode }) => {
     const client = useMemo(() => new ConvexReactClient(convexUrl), []);
-    const appliedAuthRef = useRef<string | null>(null);
 
-    useLayoutEffect(() => {
-        const token = session.token;
-        if (!token) {
-            if (session.status === 'signedOut' || session.status === 'expired') {
-                if (appliedAuthRef.current === 'cleared') {
-                    return;
-                }
-                client.clearAuth();
-                appliedAuthRef.current = 'cleared';
-            }
-            return;
-        }
-
-        if (appliedAuthRef.current === token) {
-            return;
-        }
-
-        client.setAuth(async ({ forceRefreshToken }) => {
-            const currentSession = sessionRef.current;
-            const currentToken = currentSession.token;
-            const currentUser = currentSession.user;
-            if (forceRefreshToken) {
-                if (currentToken && currentUser && !currentUser.expired) {
-                    return currentToken;
-                }
-
-                try {
-                    const user = await currentSession.renew();
-                    return user?.expired ? null : user?.id_token ?? null;
-                } catch {
-                    return null;
-                }
-            }
-
-            return currentUser?.expired ? null : currentToken;
-        });
-        appliedAuthRef.current = token;
-    }, [client, session.status, session.token]);
-
-    useLayoutEffect(() => {
+    useEffect(() => {
         return () => {
             void client.close();
         };
     }, [client]);
 
-    return <ConvexProvider client={client}>{children}</ConvexProvider>;
+    return (
+        <ConvexProviderWithAuth client={client} useAuth={useSessionAuth}>
+            {children}
+        </ConvexProviderWithAuth>
+    );
 };
