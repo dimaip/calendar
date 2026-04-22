@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
 import { useQuery } from 'convex/react';
 import { useTheme } from 'emotion-theming';
@@ -433,11 +433,16 @@ const Inner = () => {
         }).filter((anchor) => anchor.date <= today),
     ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left);
 
+    useEffect(() => {
+        if (!signingOut && !session.isLoading && !profile) {
+            void session.signIn();
+        }
+    }, [profile, session, signingOut]);
+
     if (signingOut || session.isLoading) {
         return <Loader />;
     }
     if (!profile) {
-        void session.signIn();
         return <Loader />;
     }
 
