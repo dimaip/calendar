@@ -66,80 +66,85 @@ const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
             <div
                 className={css`
                     display: flex;
-                    flex-direction: column;
-                    align-items: flex-start;
-                    min-width: 220px;
+                    width: 100%;
+                    justify-content: center;
                 `}
             >
-                <label
+                <div
                     className={css`
-                        display: flex;
-                        align-items: center;
-                        gap: 12px;
-                        width: 100%;
-                        padding: 5px 0;
-                        font-size: 16px;
-                        line-height: 1.2;
-                        cursor: pointer;
-                        user-select: none;
+                        display: inline-flex;
+                        flex-direction: column;
+                        align-items: flex-start;
                     `}
                 >
-                    <input
-                        type="checkbox"
-                        checked={trackMorning}
-                        onChange={(e) => setTrackMorning(e.target.checked)}
+                    <label
                         className={css`
-                            width: 18px;
-                            height: 18px;
-                            flex-shrink: 0;
-                            margin: 0;
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                            padding: 5px 0;
+                            font-size: 16px;
+                            line-height: 1.2;
                             cursor: pointer;
-                            accent-color: ${primary};
-                        `}
-                    />
-                    <span
-                        className={css`
-                            color: ${text};
+                            user-select: none;
                         `}
                     >
-                        Утренняя молитва
-                    </span>
-                </label>
+                        <input
+                            type="checkbox"
+                            checked={trackMorning}
+                            onChange={(e) => setTrackMorning(e.target.checked)}
+                            className={css`
+                                width: 18px;
+                                height: 18px;
+                                flex-shrink: 0;
+                                margin: 0;
+                                cursor: pointer;
+                                accent-color: ${primary};
+                            `}
+                        />
+                        <span
+                            className={css`
+                                color: ${text};
+                            `}
+                        >
+                            Утренняя молитва
+                        </span>
+                    </label>
 
-                <label
-                    className={css`
-                        display: flex;
-                        align-items: center;
-                        gap: 12px;
-                        width: 100%;
-                        padding: 5px 0;
-                        font-size: 16px;
-                        line-height: 1.2;
-                        cursor: pointer;
-                        user-select: none;
-                    `}
-                >
-                    <input
-                        type="checkbox"
-                        checked={trackEvening}
-                        onChange={(e) => setTrackEvening(e.target.checked)}
+                    <label
                         className={css`
-                            width: 18px;
-                            height: 18px;
-                            flex-shrink: 0;
-                            margin: 0;
+                            display: flex;
+                            align-items: center;
+                            gap: 12px;
+                            padding: 5px 0;
+                            font-size: 16px;
+                            line-height: 1.2;
                             cursor: pointer;
-                            accent-color: ${primary};
-                        `}
-                    />
-                    <span
-                        className={css`
-                            color: ${text};
+                            user-select: none;
                         `}
                     >
-                        Вечерняя молитва
-                    </span>
-                </label>
+                        <input
+                            type="checkbox"
+                            checked={trackEvening}
+                            onChange={(e) => setTrackEvening(e.target.checked)}
+                            className={css`
+                                width: 18px;
+                                height: 18px;
+                                flex-shrink: 0;
+                                margin: 0;
+                                cursor: pointer;
+                                accent-color: ${primary};
+                            `}
+                        />
+                        <span
+                            className={css`
+                                color: ${text};
+                            `}
+                        >
+                            Вечерняя молитва
+                        </span>
+                    </label>
+                </div>
             </div>
 
             <button
