@@ -7,7 +7,6 @@ import MdxLoader from '../../MdxLoader';
 
 const Ending = ({ date, saints, annunciation, isFast }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
-    const easterSeason = isEasterOffsetRange(0, 38);
     const isBrightWeek = isEasterOffsetRange(0, 6);
     const dateObject = new Date(date);
     const isSunday = dateObject.getDay() === 0;
@@ -19,7 +18,7 @@ const Ending = ({ date, saints, annunciation, isFast }) => {
             date={date}
             partNames={['shared.Отпуст Синаксарный']}
             fallback={
-                isSunday || easterSeason ? (
+                isSunday || isBrightWeek ? (
                     <MdxLoader src="Shared/Ending/EasterOtpust" />
                 ) : (
                     <MdxLoader src="Shared/Ending/Otpust" />
@@ -28,7 +27,7 @@ const Ending = ({ date, saints, annunciation, isFast }) => {
         />
     );
 
-    if (easterSeason) {
+    if (isBrightWeek) {
         return <MdxLoader src="Shared/Ending/EasterEnding" otpust={otpust} saints={saints} />;
     }
     return (
