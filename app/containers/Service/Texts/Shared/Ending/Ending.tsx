@@ -7,7 +7,7 @@ import MdxLoader from '../../MdxLoader';
 
 const Ending = ({ date, saints, annunciation, isFast }) => {
     const isEasterOffsetRange = makeIsEasterOffsetRange(date);
-    const easterSeason = isEasterOffsetRange(0, 6);
+    const isBrightWeek = isEasterOffsetRange(0, 6);
     const dateObject = new Date(date);
     const isSunday = dateObject.getDay() === 0;
 
