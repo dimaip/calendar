@@ -12,7 +12,6 @@ import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import { Note } from 'components/Note/Note';
 import ScriptVersionSelector from 'components/ScriptVersionSelector/ScriptVersionSelector';
 import ScriptEditorToggle from 'components/ScriptEditor/ScriptEditorToggle';
-import { Tour } from 'components/Tour/Tour';
 import { useSyncCurrentScriptVersion } from 'components/ScriptVersionSelector/useSyncCurrentScriptVersion';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
 import { useRecoilState } from 'recoil';
@@ -169,7 +168,6 @@ const Service = () => {
                 <LayoutInner left={left} right={right} paddedContent={false}>
                     {service?.scriptEditor && (
                         <>
-                            <Tour serviceId={serviceId} />
                             <ScriptEditorToggle serviceId={serviceId} />
                         </>
                     )}
