@@ -14,7 +14,34 @@ export const recordSession = mutation({
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) throw new Error("Not authenticated");
 
-    await ctx.db.insert("habitTrackerSessions", {
+    const existingSessions = await ctx.db
+      .query("habitTrackerSessions")
+      .withIndex("byUserSession", (q) =>
+        q
+          .eq("userId", identity.subject)
+          .eq("date", args.date)
+          .eq("timeOfDay", args.timeOfDay)
+          .eq("serviceId", args.serviceId)
+      )
+      .collect();
+
+    const bestExisting = existingSessions.reduce<(typeof existingSessions)[number] | null>((best, session) => {
+      if (!best || session.durationSeconds >= best.durationSeconds) {
+        return session;
+      }
+      return best;
+    }, null);
+
+    if (bestExisting) {
+      if (args.durationSeconds > bestExisting.durationSeconds) {
+        await ctx.db.patch(bestExisting._id, {
+          durationSeconds: args.durationSeconds,
+        });
+      }
+      return bestExisting._id;
+    }
+
+    return await ctx.db.insert("habitTrackerSessions", {
       userId: identity.subject,
       date: args.date,
       timeOfDay: args.timeOfDay,

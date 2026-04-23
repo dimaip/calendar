@@ -21,5 +21,6 @@ export default defineSchema({
     createdAt: v.number(),
   })
     .index("byUserDate", ["userId", "date"])
-    .index("byUser", ["userId"]),
+    .index("byUser", ["userId"])
+    .index("byUserSession", ["userId", "date", "timeOfDay", "serviceId"]),
 });
