@@ -24,7 +24,7 @@ const GRAPH_SKELETON_GAP = 5;
 const GRAPH_SKELETON_DAY_MS = 24 * 60 * 60 * 1000;
 const GRAPH_SKELETON_MIN_MONTH_LABEL_GAP = 44;
 const PROFILE_BOTTOM_NAV_HEIGHT = 'calc(60px + env(safe-area-inset-bottom))';
-const PROFILE_SIGN_OUT_FOOTER_SPACE = 'calc(60px + env(safe-area-inset-bottom) + 56px)';
+const PROFILE_SIGN_OUT_FOOTER_SPACE = 'calc(60px + env(safe-area-inset-bottom) + 86px)';
 const GRAPH_SKELETON_MONTHS = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
 type SignInMethod = 'google' | 'email';
 
@@ -100,8 +100,7 @@ function getSignInMethod(profile: Record<string, unknown> | null | undefined): S
 }
 
 const EmailAuthIcon = ({ colour }: { colour: string }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 18 18">
-        <rect width="18" height="18" rx="9" fill={colour} fillOpacity="0.12" />
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 18 18">
         <path
             d="M4.5 6.25h9a.75.75 0 0 1 .75.75v4a1.5 1.5 0 0 1-1.5 1.5h-7.5a1.5 1.5 0 0 1-1.5-1.5V7a.75.75 0 0 1 .75-.75Z"
             stroke={colour}
@@ -125,14 +124,11 @@ const GoogleAuthIcon = () => (
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 18px;
-            height: 18px;
-            border: 1px solid #dadce0;
-            border-radius: 50%;
-            background: #fff;
-            color: #4285f4;
-            font-size: 11px;
-            font-weight: 700;
+            width: 14px;
+            height: 14px;
+            color: currentColor;
+            font-size: 10px;
+            font-weight: 600;
             line-height: 1;
             font-family: Arial, sans-serif;
         `}
@@ -191,30 +187,24 @@ const AccountNote = ({ textColour, iconColour }: { textColour: string; iconColou
 const AccountIdentity = ({
     email,
     method,
-    textColour,
     mutedColour,
-    background,
-    borderColour,
     className = '',
 }: {
     email: string;
     method: SignInMethod;
-    textColour: string;
     mutedColour: string;
-    background: string;
-    borderColour: string;
     className?: string;
 }) => (
     <div
         className={`${css`
             display: flex;
             align-items: center;
-            gap: 10px;
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid ${borderColour};
-            border-radius: 10px;
-            background: ${background};
+            justify-content: center;
+            gap: 6px;
+            color: ${mutedColour};
+            font-size: 12px;
+            line-height: 1.2;
+            text-align: center;
         `} ${className}`}
     >
         <span
@@ -223,39 +213,22 @@ const AccountIdentity = ({
                 align-items: center;
                 justify-content: center;
                 flex-shrink: 0;
+                color: ${mutedColour};
             `}
         >
             {method === 'google' ? <GoogleAuthIcon /> : <EmailAuthIcon colour={mutedColour} />}
         </span>
-        <div
+        <span
             className={css`
                 min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             `}
+            title={email}
         >
-            <div
-                className={css`
-                    overflow: hidden;
-                    color: ${textColour};
-                    font-size: 14px;
-                    font-weight: 500;
-                    line-height: 1.25;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                `}
-                title={email}
-            >
-                {email}
-            </div>
-            <div
-                className={css`
-                    color: ${mutedColour};
-                    font-size: 12px;
-                    line-height: 1.2;
-                `}
-            >
-                {method === 'google' ? 'Google' : 'E-mail'}
-            </div>
-        </div>
+            {email}
+        </span>
     </div>
 );
 
@@ -572,8 +545,6 @@ const Inner = () => {
     const primaryContrast = isDarkTheme ? '#201f24' : '#ffffff';
     const idleIconBg = theme.colours?.bgGray || '#acacb0';
     const doneIconBg = theme.colours?.blue || '#4169E1';
-    const accountBadgeBg = isDarkTheme ? 'rgba(255, 255, 255, 0.04)' : '#ffffff';
-    const accountBadgeBorder = isDarkTheme ? 'rgba(255, 255, 255, 0.08)' : '#e5e5ea';
     const skeletonBase = theme.colours?.bgGray || '#e5e5ea';
     const skeletonHighlight = theme.colours?.bgGrayLight || '#f3f3f7';
     const graphRollingStart = addDays(today, -364);
@@ -679,21 +650,6 @@ const Inner = () => {
                             >
                                 {greeting}
                             </h1>
-                            {accountEmail && (
-                                <AccountIdentity
-                                    email={accountEmail}
-                                    method={signInMethod}
-                                    textColour={text}
-                                    mutedColour={muted}
-                                    background={accountBadgeBg}
-                                    borderColour={accountBadgeBorder}
-                                    className={css`
-                                        max-width: 320px;
-                                        margin: 0 auto 18px;
-                                        text-align: left;
-                                    `}
-                                />
-                            )}
                             <p
                                 className={css`
                                     max-width: 258px;
@@ -741,6 +697,16 @@ const Inner = () => {
                         );
                     `}
                 >
+                    {accountEmail && (
+                        <AccountIdentity
+                            email={accountEmail}
+                            method={signInMethod}
+                            mutedColour={muted}
+                            className={css`
+                                margin-bottom: 10px;
+                            `}
+                        />
+                    )}
                     <button
                         type="button"
                         onClick={signOut}
@@ -799,19 +765,6 @@ const Inner = () => {
                 >
                     {formatDisplayDate(today)}
                 </div>
-                {accountEmail && (
-                    <AccountIdentity
-                        email={accountEmail}
-                        method={signInMethod}
-                        textColour={text}
-                        mutedColour={muted}
-                        background={accountBadgeBg}
-                        borderColour={accountBadgeBorder}
-                        className={css`
-                            margin: 0 0 16px;
-                        `}
-                    />
-                )}
 
                 {habitTrackerEnabled && (
                     <>
@@ -951,6 +904,16 @@ const Inner = () => {
                     );
                 `}
             >
+                {accountEmail && (
+                    <AccountIdentity
+                        email={accountEmail}
+                        method={signInMethod}
+                        mutedColour={muted}
+                        className={css`
+                            margin-bottom: 10px;
+                        `}
+                    />
+                )}
                 <button
                     type="button"
                     onClick={signOut}
