@@ -48,9 +48,15 @@ function filterGraphMonthAnchors<T extends { left: number }>(anchors: T[]): T[] 
 }
 
 function formatDisplayDate(date: Date): string {
-    const month = date.toLocaleString('ru-RU', { month: 'long' });
-    const weekday = date.toLocaleString('ru-RU', { weekday: 'short' }).replace('.', '');
-    return `${date.getDate()} ${month}, ${weekday}`;
+    const parts = new Intl.DateTimeFormat('ru-RU', {
+        day: 'numeric',
+        month: 'long',
+        weekday: 'short',
+    }).formatToParts(date);
+    const day = parts.find((part) => part.type === 'day')?.value ?? String(date.getDate());
+    const month = parts.find((part) => part.type === 'month')?.value ?? '';
+    const weekday = (parts.find((part) => part.type === 'weekday')?.value ?? '').replace('.', '');
+    return `${day} ${month}, ${weekday}`;
 }
 
 function formatCompletionTime(timestamp: number): string {
