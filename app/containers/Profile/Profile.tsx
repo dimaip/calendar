@@ -22,6 +22,7 @@ const GRAPH_SKELETON_ROWS = 7;
 const GRAPH_SKELETON_CELL = 15;
 const GRAPH_SKELETON_GAP = 5;
 const GRAPH_SKELETON_DAY_MS = 24 * 60 * 60 * 1000;
+const GRAPH_SKELETON_MIN_MONTH_LABEL_GAP = 44;
 const GRAPH_SKELETON_MONTHS = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
 
 function addDays(date: Date, amount: number): Date {
@@ -33,6 +34,17 @@ function addDays(date: Date, amount: number): Date {
 function getMondayBasedDay(date: Date): number {
     const dow = date.getDay();
     return dow === 0 ? 6 : dow - 1;
+}
+
+function filterGraphMonthAnchors<T extends { left: number }>(anchors: T[]): T[] {
+    return anchors.reduce<T[]>((visible, anchor) => {
+        const prev = visible[visible.length - 1];
+        if (prev && anchor.left - prev.left < GRAPH_SKELETON_MIN_MONTH_LABEL_GAP) {
+            return visible;
+        }
+        visible.push(anchor);
+        return visible;
+    }, []);
 }
 
 function formatDisplayDate(date: Date): string {
@@ -412,7 +424,7 @@ const Inner = () => {
     const skeletonHighlight = theme.colours?.bgGrayLight || '#f3f3f7';
     const graphRollingStart = addDays(today, -364);
     const graphGridStart = addDays(graphRollingStart, -getMondayBasedDay(graphRollingStart));
-    const graphMonthAnchors = [
+    const graphMonthAnchors = filterGraphMonthAnchors([
         {
             label: GRAPH_SKELETON_MONTHS[graphRollingStart.getMonth()],
             left: 0,
@@ -431,7 +443,7 @@ const Inner = () => {
                 date: monthStartDate,
             };
         }).filter((anchor) => anchor.date <= today),
-    ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left);
+    ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left));
 
     useEffect(() => {
         if (!signingOut && !session.isLoading && !profile) {

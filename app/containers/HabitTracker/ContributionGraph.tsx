@@ -11,6 +11,7 @@ const YEAR_CELL_SIZE = 15;
 const YEAR_CELL_GAP = 5;
 const YEAR_LABEL_HEIGHT = 28;
 const DAY_MS = 24 * 60 * 60 * 1000;
+const MIN_MONTH_LABEL_GAP = 44;
 const MONTH_LABELS = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
 
 function addDays(date: Date, amount: number): Date {
@@ -33,6 +34,17 @@ function buildCells(startDate: Date, count: number) {
             index,
         };
     });
+}
+
+function filterMonthAnchors<T extends { left: number }>(anchors: T[]): T[] {
+    return anchors.reduce<T[]>((visible, anchor) => {
+        const prev = visible[visible.length - 1];
+        if (prev && anchor.left - prev.left < MIN_MONTH_LABEL_GAP) {
+            return visible;
+        }
+        visible.push(anchor);
+        return visible;
+    }, []);
 }
 
 const ContributionGraph = () => {
@@ -82,7 +94,7 @@ const ContributionGraph = () => {
     }));
     const yearWeekCount = Math.ceil(yearCells.length / 7);
     const yearGridWidth = yearWeekCount * YEAR_CELL_SIZE + (yearWeekCount - 1) * YEAR_CELL_GAP;
-    const monthAnchors = [
+    const monthAnchors = filterMonthAnchors([
         {
             label: MONTH_LABELS[rollingStart.getMonth()],
             left: 0,
@@ -97,7 +109,7 @@ const ContributionGraph = () => {
                 date: monthStartDate,
             };
         }).filter((anchor) => anchor.date <= today),
-    ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left);
+    ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left));
 
     useLayoutEffect(() => {
         const node = scrollRef.current;
