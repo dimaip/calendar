@@ -18,7 +18,7 @@ const CalendarStreakWidget = () => {
     const activeColour = theme.colours?.primary || '#ae831a';
     const mutedColour = theme.colours?.gray || '#717175';
     const doneColour = theme.colours?.blue || '#4169E1';
-    const idleRing = theme.colours?.lightGray || '#acacb0';
+    const idleColour = theme.colours?.bgGray || '#acacb0';
 
     const settings = useQuery(api.habitTracker.getSettings, isLoggedIn ? undefined : 'skip');
     const todayStr = formatDateKey(new Date());
@@ -90,18 +90,7 @@ const CalendarStreakWidget = () => {
                             flex-shrink: 0;
                         `}
                     >
-                        {item.done ? (
-                            <PrayerCheck colour={doneColour} size={18} />
-                        ) : (
-                            <span
-                                className={css`
-                                    width: 16px;
-                                    height: 16px;
-                                    border: 2px solid ${idleRing};
-                                    border-radius: 50%;
-                                `}
-                            />
-                        )}
+                        <PrayerCheck colour={item.done ? doneColour : idleColour} size={18} />
                     </span>
                     {item.label}
                 </div>

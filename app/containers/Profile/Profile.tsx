@@ -23,6 +23,8 @@ const GRAPH_SKELETON_CELL = 15;
 const GRAPH_SKELETON_GAP = 5;
 const GRAPH_SKELETON_DAY_MS = 24 * 60 * 60 * 1000;
 const GRAPH_SKELETON_MIN_MONTH_LABEL_GAP = 44;
+const PROFILE_BOTTOM_NAV_HEIGHT = 'calc(60px + env(safe-area-inset-bottom))';
+const PROFILE_SIGN_OUT_FOOTER_SPACE = 'calc(60px + env(safe-area-inset-bottom) + 56px)';
 const GRAPH_SKELETON_MONTHS = ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'];
 
 function addDays(date: Date, amount: number): Date {
@@ -495,7 +497,7 @@ const Inner = () => {
                     display: flex;
                     min-height: calc(100vh - 110px);
                     flex-direction: column;
-                    padding: 0 13px 24px;
+                    padding: 0 13px ${PROFILE_SIGN_OUT_FOOTER_SPACE};
                     background: ${onboardingBg};
                     color: ${text};
                 `}
@@ -559,18 +561,38 @@ const Inner = () => {
                         <AccountNote textColour={muted} iconColour={muted} />
                     </>
                 )}
-                <button
-                    type="button"
-                    onClick={signOut}
+                <div
                     className={css`
-                        margin: 16px auto 0;
-                        color: ${muted};
-                        font-size: 13px;
-                        cursor: pointer;
+                        position: sticky;
+                        bottom: ${PROFILE_BOTTOM_NAV_HEIGHT};
+                        z-index: 1;
+                        margin-top: auto;
+                        padding: 16px 0 8px;
+                        text-align: center;
+                        background: linear-gradient(
+                            180deg,
+                            transparent 0,
+                            ${onboardingBg} 24px,
+                            ${onboardingBg} 100%
+                        );
                     `}
                 >
-                    Выйти из аккаунта
-                </button>
+                    <button
+                        type="button"
+                        onClick={signOut}
+                        className={css`
+                            color: ${text};
+                            font-size: 14px;
+                            font-weight: 500;
+                            line-height: 1.2;
+                            text-decoration: underline;
+                            text-underline-offset: 2px;
+                            cursor: pointer;
+                        `}
+                    >
+                        Выйти из аккаунта
+                    </button>
+                </div>
             </div>
         );
     }
@@ -581,7 +603,7 @@ const Inner = () => {
                 display: flex;
                 min-height: calc(100vh - 110px);
                 flex-direction: column;
-                padding: 26px 15px 24px;
+                padding: 26px 15px ${PROFILE_SIGN_OUT_FOOTER_SPACE};
                 background: ${pageBg};
                 color: ${text};
             `}
@@ -736,18 +758,38 @@ const Inner = () => {
                     </DrawerWithHeader>
                 )}
             </div>
-            <button
-                type="button"
-                onClick={signOut}
+            <div
                 className={css`
-                    margin: 16px auto 0;
-                    color: ${muted};
-                    font-size: 13px;
-                    cursor: pointer;
+                    position: sticky;
+                    bottom: ${PROFILE_BOTTOM_NAV_HEIGHT};
+                    z-index: 1;
+                    margin-top: auto;
+                    padding: 16px 0 8px;
+                    text-align: center;
+                    background: linear-gradient(
+                        180deg,
+                        transparent 0,
+                        ${pageBg} 24px,
+                        ${pageBg} 100%
+                    );
                 `}
             >
-                Выйти из аккаунта
-            </button>
+                <button
+                    type="button"
+                    onClick={signOut}
+                    className={css`
+                        color: ${text};
+                        font-size: 14px;
+                        font-weight: 500;
+                        line-height: 1.2;
+                        text-decoration: underline;
+                        text-underline-offset: 2px;
+                        cursor: pointer;
+                    `}
+                >
+                    Выйти из аккаунта
+                </button>
+            </div>
         </div>
     );
 };
