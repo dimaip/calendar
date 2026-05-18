@@ -1,0 +1,16 @@
+{
+	admin off
+}
+
+:{$CONVEX_PROXY_PORT:8080} {
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+	}
+
+	reverse_proxy https://{$CONVEX_UPSTREAM_HOST:expert-marmot-529.convex.cloud} {
+		header_up Host {$CONVEX_UPSTREAM_HOST:expert-marmot-529.convex.cloud}
+		header_up X-Forwarded-Host {host}
+	}
+}
