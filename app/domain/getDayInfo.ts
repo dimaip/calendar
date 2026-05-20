@@ -522,10 +522,6 @@ export const getFeastInfo = memoize(
             icon = 'vhod.svg';
         }
 
-        if (isEasterOffsetRange(39, 47)) {
-            icon = 'ascension.svg';
-        }
-
         if (isEasterOffsetRange(-8)) {
             icon = 'lazar.svg';
         }
@@ -767,6 +763,10 @@ export const getFeastInfo = memoize(
             isEasterOffsetRange(-3)
         ) {
             icon = 'john.svg';
+        }
+
+        if (isEasterOffsetRange(39, 47)) {
+            icon = 'ascension.svg';
         }
 
         if (new Date(y, 9, 30).getTime() <= date.getTime() && date.getTime() <= new Date(y, 10, 7).getTime()) {
