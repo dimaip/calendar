@@ -1,12 +1,16 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
 import { useSession } from 'containers/AuthProvider';
 
 import { api } from '../../../convex/_generated/api';
 
+import { trackedPrayerTimeOfDayByServiceId } from './trackedPrayerTimeOfDay';
+import type { TrackedPrayerTimeOfDay } from './trackedPrayerTimeOfDay';
+
 const PRAYER_THRESHOLD_SECONDS = 240; // 4 minutes
 const PRAYER_SCROLL_COMPLETION_RATIO = 0.95;
 const OFFLINE_QUEUE_KEY = 'habitTracker_offlineQueue';
+const COMPLETION_PROMPT_SHOWN_KEY_PREFIX = 'habitTracker_completionPromptShown';
 
 interface PrayerTimerProps {
     date: string;
@@ -24,35 +28,72 @@ export const usePrayerTimer = ({ date, serviceId }: PrayerTimerProps) => {
     const session = useSession();
     const isLoggedIn = !!session.profile;
     const settings = useQuery(api.habitTracker.getSettings);
-    const habitTrackerEnabled = !!settings?.habitTracker;
+    const trackedPrayerTimeOfDay = trackedPrayerTimeOfDayByServiceId[serviceId];
+    const sessions = useQuery(
+        api.habitTracker.getSessionsForRange,
+        isLoggedIn && trackedPrayerTimeOfDay && settings?.habitTracker ? { startDate: date, endDate: date } : 'skip'
+    );
+    const alreadyCompletedPrayerSession = sessions?.some((prayerSession) => {
+        return prayerSession.timeOfDay === trackedPrayerTimeOfDay;
+    });
+    const [completionPromptTimeOfDay, setCompletionPromptTimeOfDay] = useState<TrackedPrayerTimeOfDay | null>(null);
+    const habitTrackerConfigured = !!settings?.habitTracker;
+    const canRecordPrayerSession =
+        !!settings?.habitTracker &&
+        !!trackedPrayerTimeOfDay &&
+        !alreadyCompletedPrayerSession &&
+        (trackedPrayerTimeOfDay === 'morning'
+            ? settings.habitTracker.trackMorning
+            : settings.habitTracker.trackEvening);
     const recordSession = useMutation(api.habitTracker.recordSession);
     const startTimeRef = useRef<number>(Date.now());
     const thresholdHandledRef = useRef(false);
     const completionHandledRef = useRef(false);
+    const shownPromptKeysRef = useRef<Set<string>>(new Set());
 
     // Flush any queued offline sessions on mount
     useEffect(() => {
-        if (!isLoggedIn || !habitTrackerEnabled) return;
+        if (!isLoggedIn || !habitTrackerConfigured) return;
         void flushOfflineQueue(recordSession);
-    }, [isLoggedIn, habitTrackerEnabled, recordSession]);
+    }, [isLoggedIn, habitTrackerConfigured, recordSession]);
 
     // Use refs to capture latest values for the cleanup function
     const isLoggedInRef = useRef(isLoggedIn);
-    const habitTrackerEnabledRef = useRef(habitTrackerEnabled);
+    const canRecordPrayerSessionRef = useRef(canRecordPrayerSession);
     isLoggedInRef.current = isLoggedIn;
-    habitTrackerEnabledRef.current = habitTrackerEnabled;
+    canRecordPrayerSessionRef.current = canRecordPrayerSession;
 
     useEffect(() => {
+        if (!trackedPrayerTimeOfDay) return;
+
         startTimeRef.current = Date.now();
         thresholdHandledRef.current = false;
         completionHandledRef.current = false;
+        setCompletionPromptTimeOfDay(null);
 
         const persistSession = (durationSeconds: number) => {
-            if (!isLoggedInRef.current || !habitTrackerEnabledRef.current) return;
+            if (!isLoggedInRef.current || !canRecordPrayerSessionRef.current) return;
+
+            const completionPromptKey = `${COMPLETION_PROMPT_SHOWN_KEY_PREFIX}:${date}:${trackedPrayerTimeOfDay}`;
+            try {
+                if (
+                    !shownPromptKeysRef.current.has(completionPromptKey) &&
+                    localStorage.getItem(completionPromptKey) !== '1'
+                ) {
+                    shownPromptKeysRef.current.add(completionPromptKey);
+                    localStorage.setItem(completionPromptKey, '1');
+                    setCompletionPromptTimeOfDay(trackedPrayerTimeOfDay);
+                }
+            } catch {
+                if (!shownPromptKeysRef.current.has(completionPromptKey)) {
+                    shownPromptKeysRef.current.add(completionPromptKey);
+                    setCompletionPromptTimeOfDay(trackedPrayerTimeOfDay);
+                }
+            }
 
             const sessionData = {
                 date,
-                timeOfDay: new Date().getHours() < 12 ? 'morning' : 'evening',
+                timeOfDay: trackedPrayerTimeOfDay,
                 durationSeconds,
                 serviceId,
             };
@@ -107,7 +148,16 @@ export const usePrayerTimer = ({ date, serviceId }: PrayerTimerProps) => {
                 persistSession(elapsed);
             }
         };
-    }, [date, serviceId, recordSession]);
+    }, [date, serviceId, trackedPrayerTimeOfDay, recordSession]);
+
+    const dismissCompletionPrompt = useCallback(() => {
+        setCompletionPromptTimeOfDay(null);
+    }, []);
+
+    return {
+        completionPromptTimeOfDay,
+        dismissCompletionPrompt,
+    };
 };
 
 async function flushOfflineQueue(recordSession: (args: QueuedSession) => Promise<unknown>) {

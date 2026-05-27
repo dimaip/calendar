@@ -21,6 +21,8 @@ import customPrayerEditIdState from 'state/customPrayerEditIdState';
 import Button from 'components/Button/Button';
 import Pencil from 'components/svgs/Pencil';
 import CustomPrayerInput from 'components/CustomPrayers/CustomPrayerInput';
+import { usePrayerTimer } from 'containers/HabitTracker/usePrayerTimer';
+import PostPrayerPrompt from 'containers/HabitTracker/PostPrayerPrompt';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
@@ -29,7 +31,6 @@ import MDXProvider from './MDXProvider';
 import ParallelLanguageBar from './ParallelLanguageBar';
 import { LangContext } from './LangContext';
 import { ServiceContext } from './ServiceContext';
-import { usePrayerTimer } from 'containers/HabitTracker/usePrayerTimer';
 
 const reloadOnFailedImport = (e) => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
@@ -95,7 +96,11 @@ const Service = () => {
         window.TOC = {};
     }, [serviceId]);
 
-    usePrayerTimer({ date, serviceId: serviceId || originalServiceId });
+    const currentServiceId = serviceId || originalServiceId;
+    const { completionPromptTimeOfDay, dismissCompletionPrompt } = usePrayerTimer({
+        date,
+        serviceId: currentServiceId,
+    });
 
     useDocumentTitle(`${date} - ${service?.title} - Православное богослужение на русском языке`);
 
@@ -223,6 +228,7 @@ const Service = () => {
                             }}
                         />
                     )}
+                    <PostPrayerPrompt timeOfDay={completionPromptTimeOfDay} onDismiss={dismissCompletionPrompt} />
                 </LayoutInner>
             </LangContext.Provider>
         </ServiceContext.Provider>

@@ -1,3 +1,5 @@
+import path from 'path';
+
 import express from 'express';
 import webpack from 'webpack';
 
@@ -18,11 +20,24 @@ const start = async () => {
         // const { default: webpackHotMiddleware } = await import('webpack-hot-middleware');
         const { default: config } = await import('./webpack.dev.js');
         const compiler = webpack(config);
-        app.use(
-            webpackDevMiddleware(compiler, {
-                publicPath: '/built/',
-            })
-        );
+        const devMiddleware = webpackDevMiddleware(compiler, {
+            publicPath: '/built/',
+        });
+        app.use(devMiddleware);
+        app.get(['/', '/index.html'], (req, res, next) => {
+            devMiddleware.waitUntilValid(() => {
+                const indexPath = path.join(config.output.path, '../index.html');
+                devMiddleware.context.outputFileSystem.readFile(indexPath, (error, file) => {
+                    if (error) {
+                        next(error);
+                        return;
+                    }
+
+                    res.set('Content-Type', 'text/html');
+                    res.send(file);
+                });
+            });
+        });
         // NOTE: Only the client bundle needs to be passed to `webpack-hot-middleware`.
         // app.use(webpackHotMiddleware(compiler));
     }
