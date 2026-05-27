@@ -6,8 +6,9 @@ import type { AppTheme } from 'styles/AppTheme';
 import { trackedPrayerLabelByTimeOfDay } from './trackedPrayerTimeOfDay';
 import type { TrackedPrayerTimeOfDay } from './trackedPrayerTimeOfDay';
 
-const POST_PRAYER_PROMPT_DISMISS_MS = 4000;
+const POST_PRAYER_PROMPT_DISMISS_MS = 8000;
 const POST_PRAYER_PROMPT_ANIMATION_MS = 600;
+const POST_PRAYER_PROMPT_HEIGHT = 40;
 
 interface PostPrayerPromptProps {
     timeOfDay: TrackedPrayerTimeOfDay | null | undefined;
@@ -56,7 +57,7 @@ const PostPrayerPrompt = ({ timeOfDay, onDismiss }: PostPrayerPromptProps) => {
         <>
             <div
                 className={css`
-                    height: calc(52px + env(safe-area-inset-bottom));
+                    height: calc(${POST_PRAYER_PROMPT_HEIGHT}px + env(safe-area-inset-bottom));
                 `}
             />
             <div
@@ -71,10 +72,10 @@ const PostPrayerPrompt = ({ timeOfDay, onDismiss }: PostPrayerPromptProps) => {
                     box-sizing: border-box;
                     display: flex;
                     width: 100%;
-                    min-height: calc(52px + env(safe-area-inset-bottom));
+                    min-height: calc(${POST_PRAYER_PROMPT_HEIGHT}px + env(safe-area-inset-bottom));
                     align-items: center;
-                    gap: 13px;
-                    padding: 10px 18px calc(10px + env(safe-area-inset-bottom));
+                    gap: 10px;
+                    padding: 8px 18px calc(8px + env(safe-area-inset-bottom));
                     border-top: 1px solid ${border};
                     background: ${background};
                     color: ${text};
@@ -113,22 +114,22 @@ const PostPrayerPrompt = ({ timeOfDay, onDismiss }: PostPrayerPromptProps) => {
                 <span
                     className={css`
                         display: flex;
-                        width: 31px;
-                        height: 31px;
+                        width: 15px;
+                        height: 15px;
                         flex-shrink: 0;
                         align-items: center;
                         justify-content: center;
                     `}
                     aria-hidden="true"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" fill="none" viewBox="0 0 31 31">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 15 15">
                         <circle
-                            cx="15.5"
-                            cy="15.5"
-                            r="15.5"
+                            cx="7.5"
+                            cy="7.5"
+                            r="7.5"
                             fill={blue}
                             className={css`
-                                transform-origin: 15.5px 15.5px;
+                                transform-origin: 7.5px 7.5px;
                                 animation: prayerPromptCircle 380ms ease-out both;
 
                                 @keyframes prayerPromptCircle {
@@ -151,11 +152,11 @@ const PostPrayerPrompt = ({ timeOfDay, onDismiss }: PostPrayerPromptProps) => {
                             `}
                         />
                         <path
-                            d="M8.2 15.95 12.7 20.7 22.8 9.95"
+                            d="M4 7.7 6.2 10 11 5"
                             stroke="#fff"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            strokeWidth="2.4"
+                            strokeWidth="1.6"
                             className={css`
                                 stroke-dasharray: 22;
                                 stroke-dashoffset: 22;
