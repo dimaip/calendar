@@ -9,6 +9,7 @@
  */
 
 import type * as habitTracker from "../habitTracker.js";
+import type * as updates from "../updates.js";
 
 import type {
   ApiFromModules,
@@ -18,6 +19,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   habitTracker: typeof habitTracker;
+  updates: typeof updates;
 }>;
 
 /**

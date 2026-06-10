@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { css } from 'emotion';
 import { useQuery } from 'convex/react';
 import { useTheme } from 'emotion-theming';
+import { useHistory } from 'react-router-dom';
 import { useSession } from 'containers/AuthProvider';
 import HeaderMain from 'containers/Main/HeaderMain';
+import Button from 'components/Button/Button';
 import Loader from 'components/Loader/Loader';
 import BottomNav from 'components/BottomNav/BottomNav';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
@@ -182,6 +184,80 @@ const AccountNote = ({ textColour, iconColour }: { textColour: string; iconColou
             устройстве!
         </span>
     </div>
+);
+
+const UnreadUpdateCard = ({
+    update,
+    cardBg,
+    text,
+    primary,
+    border,
+    onOpen,
+}: {
+    update: { title?: string; body: string };
+    cardBg: string;
+    text: string;
+    primary: string;
+    border: string;
+    onOpen: () => void;
+}) => (
+    <Button
+        onClick={onOpen}
+        className={css`
+            display: block;
+            width: 100%;
+            margin-bottom: 12px;
+            padding: 14px 16px 16px;
+            border: 1px solid ${border};
+            border-radius: 8px;
+            background: ${cardBg};
+            color: ${text};
+            text-align: left;
+            cursor: pointer;
+
+            &:active {
+                opacity: 0.8;
+            }
+        `}
+    >
+        {update.title && (
+            <div
+                className={css`
+                    margin-bottom: 7px;
+                    font-size: 15px;
+                    font-weight: 700;
+                    line-height: 1.25;
+                `}
+            >
+                {update.title}
+            </div>
+        )}
+        <div
+            className={css`
+                display: -webkit-box;
+                overflow: hidden;
+                color: ${text};
+                font-size: 15px;
+                line-height: 1.25;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 3;
+            `}
+        >
+            {update.body}
+        </div>
+        <div
+            className={css`
+                margin-top: 13px;
+                color: ${primary};
+                font-size: 14px;
+                line-height: 1.2;
+                text-decoration: underline;
+                text-underline-offset: 2px;
+            `}
+        >
+            Смотреть обновление
+        </div>
+    </Button>
 );
 
 const AccountIdentity = ({
@@ -513,12 +589,15 @@ const ProfileLoadingState = ({
 const Inner = () => {
     const theme = useTheme<AppTheme>();
     const session = useSession();
+    const history = useHistory();
     const [signingOut, setSigningOut] = useState(false);
     const [showSetup, setShowSetup] = useState(false);
     const today = new Date();
     const todayStr = formatDateKey(today);
     const profile = session.profile;
     const settings = useQuery(api.habitTracker.getSettings, profile ? undefined : 'skip');
+    const unreadUpdates = useQuery(api.updates.getUnread, profile ? undefined : 'skip');
+    const latestUnreadUpdate = unreadUpdates?.[0] ?? null;
     const habitTrackerEnabled = !!settings?.habitTracker;
     const sessions = useQuery(
         api.habitTracker.getSessionsForRange,
@@ -766,6 +845,17 @@ const Inner = () => {
                     {formatDisplayDate(today)}
                 </div>
 
+                {latestUnreadUpdate && (
+                    <UnreadUpdateCard
+                        update={latestUnreadUpdate}
+                        cardBg={cardBg}
+                        text={text}
+                        primary={primary}
+                        border={theme.colours?.blue || '#4169E1'}
+                        onOpen={() => history.push('/updates')}
+                    />
+                )}
+
                 {habitTrackerEnabled && (
                     <>
                         <div
@@ -939,7 +1029,7 @@ const Profile = React.memo(() => {
 
     return (
         <div>
-            <HeaderMain />
+            <HeaderMain showUpdatesButton />
             <Inner />
             <BottomNav active={undefined} />
         </div>

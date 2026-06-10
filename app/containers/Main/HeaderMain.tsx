@@ -1,28 +1,50 @@
 import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
+import { useQuery } from 'convex/react';
 import { useSession } from 'containers/AuthProvider';
 import Button from 'components/Button/Button';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import QuestionIcon from 'components/svgs/QuestionIcon';
+import Bell from 'components/svgs/Bell';
 import { useHistory } from 'react-router-dom';
 import Share from 'components/Share/Share';
 import useDay from 'hooks/useDay';
 import SettingsButton from 'components/SettingsButton/SettingsButton';
 import CalendarStreakWidget from 'containers/HabitTracker/CalendarStreakWidget';
 
-const UserIcon = () => {
+import { api } from '../../../convex/_generated/api';
+
+const NotificationDot = () => {
+    const theme = useTheme();
+
+    return (
+        <span
+            className={css`
+                position: absolute;
+                top: -2px;
+                right: -2px;
+                width: 9px;
+                height: 9px;
+                border: 2px solid ${theme.colours.bgGrayLight};
+                border-radius: 50%;
+                background: ${theme.colours.red};
+            `}
+        />
+    );
+};
+
+const UserIcon = ({ hasUnread }: { hasUnread: boolean }) => {
     const { profile } = useSession();
     const theme = useTheme();
-    const initials = profile?.given_name
-        ? `${profile.given_name?.[0]}${profile?.family_name?.[0]}`
-        : 'U';
+    const initials = profile?.given_name ? `${profile.given_name?.[0]}${profile?.family_name?.[0]}` : 'U';
 
     return (
         <div
             className={css`
+                position: relative;
                 padding: 5px;
                 font-size: 10px;
                 background-color: ${theme.colours.blue};
@@ -31,11 +53,12 @@ const UserIcon = () => {
             `}
         >
             {initials}
+            {hasUnread && <NotificationDot />}
         </div>
     );
 };
 
-const ProfileIcon = () => {
+const ProfileIcon = ({ hasUnread }: { hasUnread: boolean }) => {
     const history = useHistory();
     const { profile } = useSession();
     const loggedIn = profile;
@@ -52,7 +75,7 @@ const ProfileIcon = () => {
             `}
         >
             {loggedIn ? (
-                <UserIcon />
+                <UserIcon hasUnread={hasUnread} />
             ) : (
                 <div
                     className={css`
@@ -62,6 +85,37 @@ const ProfileIcon = () => {
                     <QuestionIcon />
                 </div>
             )}
+        </Button>
+    );
+};
+
+const UpdatesButton = ({ hasUnread }: { hasUnread: boolean }) => {
+    const history = useHistory();
+
+    return (
+        <Button
+            title="Обновления"
+            onClick={() => {
+                history.push('/updates');
+            }}
+            className={css`
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 10px 8px !important;
+                z-index: 1;
+            `}
+        >
+            <span
+                className={css`
+                    position: relative;
+                    display: inline-flex;
+                `}
+            >
+                <Bell />
+                {hasUnread && <NotificationDot />}
+            </span>
         </Button>
     );
 };
@@ -97,7 +151,10 @@ const Today = ({ date, setNewDate }) => {
     );
 };
 
-const HeaderMain = ({ setNewDate, date, calendarRef }) => {
+const HeaderMain = ({ setNewDate, date, calendarRef, showUpdatesButton = false }) => {
+    const { profile } = useSession();
+    const unreadUpdates = useQuery(api.updates.getUnread, profile ? undefined : 'skip');
+    const hasUnreadUpdates = !!unreadUpdates?.length;
     const dayQuery = useDay(date);
     const day = dayQuery.data;
     return (
@@ -118,7 +175,7 @@ const HeaderMain = ({ setNewDate, date, calendarRef }) => {
                         align-items: center;
                     `}
                 >
-                    <ProfileIcon />
+                    <ProfileIcon hasUnread={hasUnreadUpdates} />
                 </div>
                 {setNewDate && <CalendarStreakWidget />}
                 <div
@@ -137,6 +194,7 @@ const HeaderMain = ({ setNewDate, date, calendarRef }) => {
                         </>
                     )}
 
+                    {showUpdatesButton && <UpdatesButton hasUnread={hasUnreadUpdates} />}
                     <DotsMenu>
                         <SettingsButton />
                         <Share

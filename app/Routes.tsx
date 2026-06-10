@@ -29,6 +29,8 @@ import themeState from 'state/themeState';
 import SermonListContainer from 'containers/SermonList/SermonList';
 import SermonDetail from 'containers/SermonDetail/SermonDetail';
 import SettingsMenu from 'containers/Main/SettingsMenu';
+import Updates from 'containers/Updates/Updates';
+import UpdatesAdmin from 'containers/Updates/UpdatesAdmin';
 
 import checkVersion from './checkVersion';
 
@@ -140,6 +142,18 @@ export default () => {
                         </Route>
                         <Route exact path="/profile">
                             <Profile />
+                        </Route>
+                        <Route exact path="/updates">
+                            <Updates />
+                        </Route>
+                        <Route exact path="/admin/updates/new">
+                            <UpdatesAdmin />
+                        </Route>
+                        <Route exact path="/admin/updates/:updateId">
+                            <UpdatesAdmin />
+                        </Route>
+                        <Route exact path="/admin/updates">
+                            <UpdatesAdmin />
                         </Route>
                         <Route exact path="/share/:versionData">
                             <AddSharedVersion />

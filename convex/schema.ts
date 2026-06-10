@@ -23,4 +23,28 @@ export default defineSchema({
     .index("byUserDate", ["userId", "date"])
     .index("byUser", ["userId"])
     .index("byUserSession", ["userId", "date", "timeOfDay", "serviceId"]),
+
+  updates: defineTable({
+    title: v.optional(v.string()),
+    body: v.string(),
+    cta: v.optional(
+      v.object({
+        label: v.string(),
+        url: v.string(),
+      })
+    ),
+    status: v.union(v.literal("draft"), v.literal("published")),
+    publishedAt: v.number(),
+    notifyUntil: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }).index("byStatusPublishedAt", ["status", "publishedAt"]),
+
+  updateReads: defineTable({
+    userId: v.string(),
+    updateId: v.id("updates"),
+    readAt: v.number(),
+  })
+    .index("byUserUpdate", ["userId", "updateId"])
+    .index("byUpdate", ["updateId"]),
 });
