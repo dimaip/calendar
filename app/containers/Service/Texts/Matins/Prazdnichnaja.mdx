@@ -63,13 +63,31 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
     )}
 </>
 
+<>
+    {!props.brightWeek && (props.isHoliday || props.dayOfWeek === 5) && (
+        <MdxLoader src="Matins/Prayer5" lang={props.lang} />
+    )}
+</>
+
+<>
+    {!props.brightWeek && (props.isHoliday || props.dayOfWeek === 6) && (
+        <MdxLoader src="Matins/Prayer6" lang={props.lang} />
+    )}
+</>
+
+<>
+    {!props.brightWeek && (props.isHoliday) && (
+        <MdxLoader src="Matins/Prayer7" lang={props.lang} />
+    )}
+</>
+
 <If condition={props.isHoliday}>
     <MdxLoader src="Shared/SnovaSnova" lang={props.lang} />
 </If>
 
 <>
-    {!props.brightWeek && (props.isHoliday || props.dayOfWeek === 5) && (
-        <MdxLoader src="Matins/Prayer7" lang={props.lang} />
+    {!props.brightWeek && (props.isHoliday) && (
+        <MdxLoader src="Matins/Prayer8" lang={props.lang} />
     )}
 </>
 
@@ -91,12 +109,6 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
         <MdxLoader src="Matins/TropsVoskr" lang={props.lang} />
     )}
 </>
-
-<If condition={props.isHoliday}>
-    <MdxLoader src="Shared/SnovaSnova" lang={props.lang} />
-</If>
-
-<>{(props.isHoliday || props.dayOfWeek === 6) && <MdxLoader src="Matins/Prayer8" lang={props.lang} />}</>
 
 <If condition={props.isEasterOffsetRange(-7 * 2 - 1)}>
     <AkafistPohvala {...props} />
