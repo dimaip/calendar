@@ -114,6 +114,10 @@ import AkafistPohvala from 'containers/Service/Texts/AkafistPohvala/AkafistPohva
     <AkafistPohvala {...props} />
 </If>
 
+<If condition={props.isHoliday}>
+    <MdxLoader src="Shared/GospoduPomolimsa" lang={props.lang} />
+</If>
+
 <>{props.isHoliday && <MdxLoader src="Matins/Prayer10" lang={props.lang} />}</>
 <>{props.isHoliday && <Psalm50 lang={props.lang} />}</>
 
