@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import useParts from 'hooks/useParts';
 import RteText from 'components/RteText/RteText';
 import { LangContext } from 'containers/Service/LangContext';
@@ -53,7 +53,7 @@ const PartRenderer = ({
         .map((partName) => {
             return objAccess(parts, partName, serviceType) || [];
         })
-        .flatten();
+        .flat();
 
     texts = partsProcessor(texts);
     const hasExclusiveTexts = Boolean(texts.find((text) => text?.includes?.('ЗАМЕНА')));

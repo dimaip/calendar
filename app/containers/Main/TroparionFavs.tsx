@@ -4,7 +4,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 import troparionFavsState from 'state/troparionFavsState';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { HymnButton } from 'containers/Hymns/HymnButton';
 
 import SectionHeading from './SectionHeading';
@@ -16,7 +16,7 @@ export const TroparionFavs = (): JSX.Element => {
 
     return (
         <>
-            {status === 'loading' ? (
+            {status === 'pending' ? (
                 <Loader />
             ) : status === 'error' ? (
                 <ErrorMessage500 />

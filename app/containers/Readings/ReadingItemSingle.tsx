@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import Zoom, { ZoomContext } from 'components/Zoom/Zoom';
 import { useParams } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
@@ -25,7 +25,6 @@ const ReadingItemSingle = ({
     const [translation, _setTranslation] = useState(null);
     const { date } = useParams();
     const [translationPriority, setTranslationPriority] = useRecoilState<string[]>(translationPriorityState);
-    // @ts-expect-error
     const { data: reading, status } = useReading(
         readingVerse,
         translation || defaultTranslation,
@@ -39,7 +38,7 @@ const ReadingItemSingle = ({
         setTranslationPriority([value, ...(translationPriority || []).filter((i) => i !== value)]);
     };
 
-    if (status === 'loading') {
+    if (status === 'pending') {
         return <Loader />;
     }
 
@@ -138,8 +137,12 @@ const ReadingItemSingle = ({
                                 width: 100%;
                             `}
                             onChange={(value) => setTranslation(value)}
-                            value={reading.translationCurrent}
-                            items={reading.translationList.map((i) => ({ label: i.name, value: i.id }))}
+                            value={reading.translationCurrent || defaultTranslation}
+                            items={reading.translationList.map((i) => ({
+                                label: i.name,
+                                shortLabel: i.name,
+                                value: i.id,
+                            }))}
                         />
                     </div>
                 ) : null}

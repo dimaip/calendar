@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
 import useSermonFacets from 'hooks/useSermonFacets';
 import SelectBox from 'components/SelectBox/SelectBox';
@@ -12,15 +12,15 @@ import BottomNav from 'components/BottomNav/BottomNav';
 
 const SermonListContainer = () => {
     const theme = useTheme();
-    const history = useHistory();
+    const navigate = useNavigate();
     const { authorId } = useParams();
     const [themeId, setThemeId] = useState<string | undefined>();
 
     const setAuthorId = (authorId: string) => {
         if (authorId) {
-            history.push(`/sermons/${authorId}`);
+            void navigate(`/sermons/${authorId}`);
         } else {
-            history.push('/sermons');
+            void navigate('/sermons');
         }
     };
 

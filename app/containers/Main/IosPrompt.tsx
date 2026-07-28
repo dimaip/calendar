@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useTheme } from 'emotion-theming';
-import { css } from 'emotion';
+import { useTheme } from '@emotion/react';
+import { css } from '@emotion/css';
 import Button from 'components/Button/Button';
 import { isCapacitor, isIphone, isInStandaloneMode } from 'utils/deviceInfo';
 import { useRecoilState } from 'recoil';

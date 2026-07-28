@@ -1,10 +1,15 @@
 import React, { useRef } from 'react';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import useAudio from 'hooks/useAudio';
 
-const RteText = React.forwardRef(({ html = '', className = '' }, ref) => {
-    const localRef = useRef();
+interface RteTextProps {
+    html?: string;
+    className?: string;
+}
+
+const RteText = React.forwardRef<HTMLDivElement, RteTextProps>(({ html = '', className = '' }, ref) => {
+    const localRef = useRef<HTMLDivElement>(null);
     const effectiveRef = ref || localRef;
     const theme = useTheme();
     const htmlWithStrongSlashes = html

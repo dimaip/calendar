@@ -1,5 +1,5 @@
 import ButtonBox from 'components/ButtonBox/ButtonBox';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { Hymn } from 'hooks/useHymns';
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -14,12 +14,8 @@ export const HymnButton = ({ hymn }: { hymn: Hymn }) => {
                 cursor: ${'pointer'};
                 user-select: none;
             `}
-            to={{
-                pathname: `/hymns/${hymn.id}`,
-                state: {
-                    backLink: location.pathname,
-                },
-            }}
+            to={`/hymns/${hymn.id}`}
+            state={{ backLink: location.pathname }}
         >
             <ButtonBox>
                 <div

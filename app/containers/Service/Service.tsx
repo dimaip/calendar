@@ -2,8 +2,8 @@ import { getFeastInfo } from 'domain/getDayInfo';
 
 import * as Sentry from '@sentry/react';
 import React, { Suspense, useState, useEffect, useContext } from 'react';
-import { useParams, useHistory, Redirect } from 'react-router-dom';
-import { css } from 'emotion';
+import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { css } from '@emotion/css';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import Loader from 'components/Loader/Loader';
@@ -40,10 +40,11 @@ const reloadOnFailedImport = (e) => {
 const toUpperCase = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 
 const Service = () => {
-    const { serviceId: originalServiceId, date, prayerId } = useParams();
+    const { serviceId: originalServiceId = '', date = '', prayerId } = useParams<'date' | 'prayerId' | 'serviceId'>();
     const { data: day } = useDay(date);
 
-    const history = useHistory();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const langState = useContext(LangContext);
 
@@ -112,19 +113,18 @@ const Service = () => {
     if (!serviceId) {
         if (day?.readings) {
             if (day?.readings?.['Вечерня'] && lpod) {
-                return <Redirect to={{ pathname: `/date/${date}/service/Вечерня`, state: history.location.state }} />;
+                return <Navigate replace state={location.state} to={`/date/${date}/service/Вечерня`} />;
             }
             if (day?.readings?.['Литургия']) {
-                return <Redirect to={{ pathname: `/date/${date}/service/Литургия`, state: history.location.state }} />;
+                return <Navigate replace state={location.state} to={`/date/${date}/service/Литургия`} />;
             }
-            return <Redirect to={`/date/${date}`} />;
+            return <Navigate replace to={`/date/${date}`} />;
         }
     }
 
     const setNewDate = (dateString) => {
-        history.push({
-            pathname: `/date/${dateString}/service/${originalServiceId}`,
-            state: { backLink: history.location.state?.backLink },
+        void navigate(`/date/${dateString}/service/${originalServiceId}`, {
+            state: { backLink: location.state?.backLink },
         });
     };
 

@@ -1,6 +1,6 @@
 import React, { ReactNode, Suspense, useState } from 'react';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import TagManager from 'react-gtm-module';
 import Button from 'components/Button/Button';
 import { useRecoilState } from 'recoil';

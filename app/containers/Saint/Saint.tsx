@@ -1,12 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import Loader from 'components/Loader/Loader';
 import Zoom from 'components/Zoom/Zoom';
 import ErrorMessage404 from 'components/ErrorMessage404/ErrorMessage404';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import RteText from 'components/RteText/RteText';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
 
@@ -21,7 +21,7 @@ const Saint = () => {
 
     return (
         <LayoutInner>
-            {status === 'loading' ? (
+            {status === 'pending' ? (
                 <Loader />
             ) : status === 'error' ? (
                 <ErrorMessage500 />

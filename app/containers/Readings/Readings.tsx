@@ -1,12 +1,12 @@
 import { getFeastInfo } from 'domain/getDayInfo';
 
 import React, { useEffect } from 'react';
-import { useParams, Link, useHistory, useLocation } from 'react-router-dom';
-import { css } from 'emotion';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { css } from '@emotion/css';
 import Loader from 'components/Loader/Loader';
 import useDay from 'hooks/useDay';
 import Prayer from 'components/svgs/Prayer';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import CalendarToggle from 'components/CalendarToggle/CalendarToggle';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
@@ -15,12 +15,14 @@ import ServiceSelector from './ServiceSelector';
 import ReadingsForService from './ReadingsForService';
 
 const Readings = ({ brother = false }) => {
-    const { service, date } = useParams();
-    const history = useHistory();
+    const { service = '', date = '' } = useParams<'date' | 'service'>();
+    const location = useLocation();
+    const navigate = useNavigate();
     const { data: day } = useDay(date);
     const readings = brother ? day?.bReadings : day?.readings;
     const readingsForService = readings?.[service];
     const services = Object.keys(readings || {});
+    const firstService = services[0];
     const theme = useTheme();
 
     useDocumentTitle(`${date} - Чтения - Православное богослужение на русском языке`);
@@ -28,48 +30,35 @@ const Readings = ({ brother = false }) => {
     useEffect(() => {
         // Redirect to first available service, if current one doesn't exist
         if (readings && !readingsForService) {
-            history.replace({ pathname: `/date/${date}/readings/${services[0]}`, state: history.location.state });
+            void navigate(`/date/${date}/readings/${firstService}`, {
+                replace: true,
+                state: location.state,
+            });
         }
-    });
+    }, [date, firstService, location.state, navigate, readings, readingsForService]);
 
     const setNewDate = (dateString) => {
-        history.push({
-            pathname: `/date/${dateString}/readings/${service}`,
+        void navigate(`/date/${dateString}/readings/${service}`, {
             state: {
-                backLink: history.location.state?.backLink,
+                backLink: location.state?.backLink,
             },
         });
     };
 
     const { lpod } = getFeastInfo(new Date(date));
 
-    let to = null;
+    let servicePath: string | null = null;
 
     if (brother && service === 'Утром') {
-        to = {
-            pathname: `/date/${date}/service/matins`,
-            state: { backLink: history.location.pathname },
-        };
+        servicePath = `/date/${date}/service/matins`;
     } else if (brother && service === 'Вечером') {
-        to = {
-            pathname: `/date/${date}/service/vespers`,
-            state: { backLink: history.location.pathname },
-        };
+        servicePath = `/date/${date}/service/vespers`;
     } else if (service === 'Литургия') {
-        to = {
-            pathname: `/date/${date}/service/Литургия`,
-            state: { backLink: history.location.pathname },
-        };
+        servicePath = `/date/${date}/service/Литургия`;
     } else if (service === 'Вечерня' && lpod) {
-        to = {
-            pathname: `/date/${date}/service/Вечерня`,
-            state: { backLink: history.location.pathname },
-        };
+        servicePath = `/date/${date}/service/Вечерня`;
     } else if (service === '6-й час') {
-        to = {
-            pathname: `/date/${date}/service/sixthHour`,
-            state: { backLink: history.location.pathname },
-        };
+        servicePath = `/date/${date}/service/sixthHour`;
     }
 
     const left = (
@@ -85,18 +74,19 @@ const Readings = ({ brother = false }) => {
                 {...{
                     service,
                     services,
-                    onChange: (value) =>
-                        history.push({
-                            pathname: `/date/${date}/${brother ? 'bReadings' : 'readings'}/${value}`,
+                    onChange: (value) => {
+                        void navigate(`/date/${date}/${brother ? 'bReadings' : 'readings'}/${value}`, {
                             state: {
-                                backLink: history.location.state?.backLink,
+                                backLink: location.state?.backLink,
                             },
-                        }),
+                        });
+                    },
                 }}
             />
-            {to && (
+            {servicePath && (
                 <Link
-                    to={to}
+                    to={servicePath}
+                    state={{ backLink: location.pathname }}
                     title="На службу"
                     className={css`
                         margin-left: 10px;

@@ -1,7 +1,7 @@
 import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import Button from 'components/Button/Button';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import { format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import Cross from 'components/svgs/Cross';

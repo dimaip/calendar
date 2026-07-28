@@ -1,7 +1,7 @@
 import scriptVersionsState, { Version } from 'state/scriptVersionsState';
 import React, { useState } from 'react';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import { useRecoilState } from 'recoil';
 import { useSession } from 'containers/AuthProvider';
 import Button from 'components/Button/Button';

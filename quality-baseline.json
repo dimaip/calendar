@@ -1,0 +1,1802 @@
+{
+  "version": 2,
+  "toolchain": {
+    "eslint": "^9.39.5",
+    "prettier": "^3.9.6",
+    "typescript": "^5.9.3",
+    "typescriptEslint": "^8.65.0"
+  },
+  "lint": {
+    "errors": 1944,
+    "warnings": 32,
+    "files": {
+      "app/Routes.tsx": {
+        "error:import/order": 15,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "error:prettier/prettier": 1
+      },
+      "app/checkVersion.ts": {
+        "error:prettier/prettier": 1,
+        "error:@typescript-eslint/no-unnecessary-type-assertion": 1,
+        "warning:no-console": 3
+      },
+      "app/client.tsx": {
+        "error:import/order": 3,
+        "error:import/default": 1,
+        "error:@typescript-eslint/no-floating-promises": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-call": 4,
+        "error:@typescript-eslint/no-unsafe-member-access": 4
+      },
+      "app/components/BottomNav/BottomNav.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 12,
+        "error:@typescript-eslint/no-unsafe-assignment": 4
+      },
+      "app/components/Button/Button.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/components/ButtonBox/ButtonBox.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 5,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/components/Calendar/Calendar.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/components/CalendarToggle/CalendarToggle.tsx": {
+        "error:import/order": 8,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:react-hooks/rules-of-hooks": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/ChangeThemeButton/ChangeThemeButton.tsx": {
+        "error:import/order": 8,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/CustomPrayers/CustomPrayerInput.tsx": {
+        "error:import/order": 6,
+        "warning:@typescript-eslint/no-explicit-any": 1,
+        "error:jsx-a11y/label-has-associated-control": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/CustomPrayers/CustomPrayers.tsx": {
+        "error:import/order": 6,
+        "error:@typescript-eslint/no-unsafe-member-access": 9,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/no-unsafe-call": 6,
+        "error:@typescript-eslint/no-unsafe-assignment": 5
+      },
+      "app/components/DotsMenu/DotsMenu.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-empty-function": 2,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/no-unsafe-call": 3,
+        "error:@typescript-eslint/no-unsafe-member-access": 5,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/components/Drawer/Drawer.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-empty-function": 1
+      },
+      "app/components/Drawer/DrawerWithHeader.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-empty-function": 1
+      },
+      "app/components/ErrorMessage404/ErrorMessage404.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/ErrorMessage500/ErrorMessage500.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/FindInPageButton/FindInPageButton.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/Header/Header.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/HeightUpdate/HeightUpdater.tsx": {
+        "error:@typescript-eslint/no-unsafe-call": 1
+      },
+      "app/components/If/If.tsx": {
+        "error:prettier/prettier": 3
+      },
+      "app/components/InPageSearch/InPageSearch.tsx": {
+        "error:@typescript-eslint/no-unnecessary-type-assertion": 3,
+        "warning:@typescript-eslint/no-explicit-any": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 10,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "warning:@typescript-eslint/no-non-null-assertion": 2,
+        "warning:react-hooks/exhaustive-deps": 1
+      },
+      "app/components/Input/Input.tsx": {
+        "error:@typescript-eslint/no-empty-function": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 4,
+        "error:@typescript-eslint/no-unsafe-call": 1
+      },
+      "app/components/LayoutInner/LayoutInner.tsx": {
+        "error:import/order": 7,
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 1,
+        "error:@typescript-eslint/no-unused-vars": 2
+      },
+      "app/components/NamesEditor/NamesEditorInput.tsx": {
+        "error:import/order": 6,
+        "error:@typescript-eslint/no-unsafe-member-access": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/components/Nav/Nav.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/NotFound/NotFound.tsx": {
+        "error:import/order": 1
+      },
+      "app/components/Note/Note.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/Parts/Parts.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 22,
+        "error:@typescript-eslint/no-unsafe-call": 26,
+        "error:@typescript-eslint/no-unsafe-member-access": 31,
+        "error:@typescript-eslint/no-unsafe-return": 14
+      },
+      "app/components/RteText/RteText.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 4
+      },
+      "app/components/ScriptEditor/ScriptEditorInput.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-member-access": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/components/ScriptEditor/ScriptEditorToggle.tsx": {
+        "error:import/order": 8,
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-unsafe-call": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 3,
+        "error:prefer-template": 2
+      },
+      "app/components/ScriptEditorPromo/ScriptEditorPromo.tsx": {
+        "error:import/order": 3,
+        "error:no-irregular-whitespace": 7,
+        "error:@typescript-eslint/no-floating-promises": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/ScriptVersionSelector/DuplicateButton.tsx": {
+        "error:import/order": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/ScriptVersionSelector/ScriptVersion.tsx": {
+        "error:import/order": 7,
+        "error:@typescript-eslint/no-unused-vars": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 13,
+        "error:@typescript-eslint/no-unsafe-call": 5,
+        "error:@typescript-eslint/no-unsafe-assignment": 4
+      },
+      "app/components/ScriptVersionSelector/ScriptVersionSelector.tsx": {
+        "error:import/order": 3,
+        "error:prettier/prettier": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 6
+      },
+      "app/components/ScriptVersionSelector/useAddNewVersion.ts": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unused-vars": 3
+      },
+      "app/components/ScriptVersionSelector/useDuplicateVersion.ts": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unused-vars": 1
+      },
+      "app/components/ScriptVersionSelector/useSyncCurrentScriptVersion.ts": {
+        "error:import/order": 4,
+        "warning:react-hooks/exhaustive-deps": 1
+      },
+      "app/components/ScrollRestoration/ScrollRestoration.tsx": {
+        "error:@typescript-eslint/no-unused-vars": 1
+      },
+      "app/components/SectionLayout/SectionLayout.tsx": {
+        "error:import/order": 1
+      },
+      "app/components/SelectBox/SelectBox.tsx": {
+        "error:import/order": 4,
+        "error:prettier/prettier": 17,
+        "error:@typescript-eslint/no-unsafe-member-access": 12
+      },
+      "app/components/SermonList/SermonList.tsx": {
+        "error:import/order": 4,
+        "warning:import/no-duplicates": 2,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 4,
+        "error:@typescript-eslint/no-unnecessary-type-assertion": 1,
+        "warning:@typescript-eslint/no-explicit-any": 2,
+        "error:prettier/prettier": 1,
+        "error:@typescript-eslint/no-unsafe-return": 1,
+        "error:@typescript-eslint/require-await": 1,
+        "error:@typescript-eslint/no-floating-promises": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 4
+      },
+      "app/components/SermonSmall/SermonSmall.tsx": {
+        "error:import/order": 5,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/SettingsButton/SettingsButton.tsx": {
+        "error:import/order": 4
+      },
+      "app/components/Share/Share.tsx": {
+        "error:import/order": 1,
+        "warning:no-console": 1
+      },
+      "app/components/Share/ShareLogin.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-floating-promises": 1
+      },
+      "app/components/ShareIcon/ShareIcon.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/SolidSection/SolidSection.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/SwipeableLink/SwipeableLink.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 5,
+        "error:@typescript-eslint/no-unsafe-call": 2
+      },
+      "app/components/Textarea/Textarea.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 4,
+        "error:@typescript-eslint/no-unsafe-call": 1
+      },
+      "app/components/ThemeControl/ThemeControl.tsx": {
+        "error:import/order": 8,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/Tooltip/Tooltip.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/components/Typography/Typography.tsx": {
+        "error:prettier/prettier": 2,
+        "error:@typescript-eslint/no-base-to-string": 1
+      },
+      "app/components/UpdatePrompt/UpdatePrompt.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/Zoom/Zoom.tsx": {
+        "error:import/order": 4
+      },
+      "app/components/ZoomControl/ZoomControl.tsx": {
+        "error:import/order": 6,
+        "error:@typescript-eslint/restrict-plus-operands": 1
+      },
+      "app/components/svgs/Bell.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/Bible.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-member-access": 3
+      },
+      "app/components/svgs/Burger.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/CalendarIcon.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/Check.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/Cross.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/CrossCircle.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/svgs/CrossIcon.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-member-access": 3
+      },
+      "app/components/svgs/Dots.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/Duplicate.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/ExternalLink.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/Gear.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/svgs/Heart.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/svgs/LeftIcon.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/Moon.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/svgs/Pencil.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 4,
+        "error:@typescript-eslint/no-unsafe-assignment": 3
+      },
+      "app/components/svgs/PencilLine.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 4,
+        "error:@typescript-eslint/no-unsafe-member-access": 4
+      },
+      "app/components/svgs/PlusIcon.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/Prayer.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-member-access": 3
+      },
+      "app/components/svgs/QuestionIcon.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/RightIcon.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/Sermons.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-member-access": 3
+      },
+      "app/components/svgs/Switch.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/System.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/svgs/TrashIcon.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/components/svgs/Visibility.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/components/svgs/VisibilityOff.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/AddSharedVersion/AddSharedVersion.tsx": {
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-floating-promises": 1
+      },
+      "app/containers/AuthProvider.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/require-await": 1,
+        "error:@typescript-eslint/no-floating-promises": 1
+      },
+      "app/containers/HabitTracker/CalendarStreakWidget.tsx": {
+        "error:import/order": 5,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-misused-promises": 1,
+        "error:@typescript-eslint/promise-function-async": 1
+      },
+      "app/containers/HabitTracker/ContributionGraph.tsx": {
+        "error:import/order": 2,
+        "error:prettier/prettier": 16
+      },
+      "app/containers/HabitTracker/ConvexClientProvider.tsx": {
+        "error:import/order": 1
+      },
+      "app/containers/HabitTracker/DelayedOnboarding.tsx": {
+        "error:@typescript-eslint/no-unused-vars": 1
+      },
+      "app/containers/HabitTracker/PostPrayerPrompt.tsx": {
+        "error:import/order": 2
+      },
+      "app/containers/HabitTracker/PrayerSetup.tsx": {
+        "error:import/order": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/HabitTracker/usePrayerTimer.ts": {
+        "error:import/order": 2
+      },
+      "app/containers/Hymns/FavButton.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/containers/Hymns/Hymn.tsx": {
+        "error:import/order": 9,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 6,
+        "error:@typescript-eslint/no-unsafe-member-access": 5
+      },
+      "app/containers/Hymns/HymnButton.tsx": {
+        "error:import/order": 5
+      },
+      "app/containers/Hymns/Hymns.tsx": {
+        "error:import/order": 11,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/containers/Main/BorderedSection.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/containers/Main/HeaderMain.tsx": {
+        "error:import/order": 5,
+        "error:@typescript-eslint/no-unsafe-member-access": 6,
+        "error:@typescript-eslint/no-floating-promises": 2,
+        "error:@typescript-eslint/no-unsafe-return": 1,
+        "error:@typescript-eslint/no-unsafe-call": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 6
+      },
+      "app/containers/Main/HeadingBar.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/containers/Main/IosPrompt.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/ban-ts-comment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 8,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/containers/Main/Links.tsx": {
+        "error:import/order": 3
+      },
+      "app/containers/Main/Main.tsx": {
+        "error:import/order": 25,
+        "error:@typescript-eslint/no-unsafe-assignment": 15,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "error:@typescript-eslint/no-floating-promises": 1,
+        "warning:react-hooks/exhaustive-deps": 2
+      },
+      "app/containers/Main/ReadingGroup.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 3,
+        "error:@typescript-eslint/no-unsafe-return": 1
+      },
+      "app/containers/Main/ReadingItem.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 3,
+        "error:@typescript-eslint/no-unsafe-call": 2
+      },
+      "app/containers/Main/ReadingList.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-call": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Main/ReadingsForService.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-unsafe-call": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:react-hooks/rules-of-hooks": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Main/Saints.tsx": {
+        "error:import/order": 1,
+        "error:import/named": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/containers/Main/SectionHeading.tsx": {
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Main/Sermons.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 3,
+        "error:@typescript-eslint/no-unsafe-call": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/containers/Main/Services.tsx": {
+        "error:import/order": 10,
+        "error:@typescript-eslint/ban-ts-comment": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 5,
+        "error:@typescript-eslint/no-unused-vars": 2,
+        "error:@typescript-eslint/no-unsafe-call": 3,
+        "error:@typescript-eslint/no-unsafe-return": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 16
+      },
+      "app/containers/Main/SettingsMenu.tsx": {
+        "error:import/order": 7,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 6,
+        "error:@typescript-eslint/ban-ts-comment": 1
+      },
+      "app/containers/Main/ThisDays.tsx": {
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 6,
+        "error:@typescript-eslint/no-unsafe-member-access": 9,
+        "error:@typescript-eslint/no-unsafe-call": 1
+      },
+      "app/containers/Main/TroparionFavs.tsx": {
+        "error:import/order": 8
+      },
+      "app/containers/Main/TroparionFavsHome.tsx": {
+        "error:import/order": 12,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Profile/Profile.tsx": {
+        "error:import/order": 2,
+        "error:prettier/prettier": 27,
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:@typescript-eslint/no-misused-promises": 1,
+        "error:@typescript-eslint/promise-function-async": 1
+      },
+      "app/containers/Readings/ReadingItem.tsx": {
+        "error:import/order": 5,
+        "error:@typescript-eslint/no-unsafe-member-access": 4,
+        "error:@typescript-eslint/no-unsafe-call": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 9
+      },
+      "app/containers/Readings/ReadingItemSingle.tsx": {
+        "error:import/order": 8,
+        "error:@typescript-eslint/no-unsafe-member-access": 7,
+        "error:array-callback-return": 1,
+        "error:eqeqeq": 1,
+        "error:@typescript-eslint/no-unsafe-return": 1,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/containers/Readings/Readings.tsx": {
+        "error:import/order": 9,
+        "error:import/named": 1,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 12,
+        "error:@typescript-eslint/no-unsafe-call": 4,
+        "error:@typescript-eslint/no-unsafe-member-access": 12,
+        "error:@typescript-eslint/no-unsafe-return": 1
+      },
+      "app/containers/Readings/ReadingsForService.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 7,
+        "error:@typescript-eslint/no-unsafe-member-access": 3,
+        "error:@typescript-eslint/no-unsafe-call": 2
+      },
+      "app/containers/Readings/ServiceSelector.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 5,
+        "error:@typescript-eslint/no-unsafe-call": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/RecoilSync.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 2,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 2,
+        "error:prettier/prettier": 22
+      },
+      "app/containers/Saint/Saint.tsx": {
+        "error:import/order": 5,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Sermon/Sermon.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/containers/SermonDetail/SermonDetail.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/containers/SermonList/SermonList.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-floating-promises": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Service/LanguageSwitcher.tsx": {
+        "error:import/order": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "warning:react-hooks/exhaustive-deps": 2
+      },
+      "app/containers/Service/MDXProvider.tsx": {
+        "error:import/order": 1,
+        "error:react-hooks/rules-of-hooks": 2
+      },
+      "app/containers/Service/ParallelLanguageBar.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/ban-ts-comment": 1
+      },
+      "app/containers/Service/Service.tsx": {
+        "error:import/order": 15,
+        "error:import/named": 2,
+        "warning:no-console": 1,
+        "error:@typescript-eslint/no-unsafe-return": 2,
+        "error:@typescript-eslint/no-unsafe-call": 5,
+        "error:@typescript-eslint/no-unsafe-member-access": 7,
+        "error:@typescript-eslint/no-unsafe-assignment": 9,
+        "warning:@typescript-eslint/no-explicit-any": 1
+      },
+      "app/containers/Service/TOCSwitcher.tsx": {
+        "error:@typescript-eslint/no-unused-vars": 1
+      },
+      "app/containers/Service/Texts/Blagodarstvennie/index.dyn.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/ChinPrigotovlenija/index.dyn.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/CustomPrayer/index.dyn.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-call": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/containers/Service/Texts/EasterChin/index.dyn.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-call": 1
+      },
+      "app/containers/Service/Texts/EasterHours/index.dyn.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/FirstHour/index.dyn.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/containers/Service/Texts/Jacob/index.dyn.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-unsafe-assignment": 4
+      },
+      "app/containers/Service/Texts/Litiya/index.dyn.tsx": {
+        "error:prettier/prettier": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Aliluja/Aliluja.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 4,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Antifon1/Antifon1.tsx": {
+        "error:import/order": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Antifon2/Antifon2.tsx": {
+        "error:import/order": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Antifon3/Antifon3.tsx": {
+        "error:import/order": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Katekhumen.tsx": {
+        "error:import/order": 10,
+        "error:@typescript-eslint/no-unsafe-call": 4,
+        "error:@typescript-eslint/no-unsafe-member-access": 7,
+        "error:@typescript-eslint/no-unsafe-assignment": 25
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Prokimens/Prokimens.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unused-vars": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 4,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Reading/Reading.tsx": {
+        "error:import/order": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 3
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Trisvatoe/Trisvatoe.tsx": {
+        "error:import/order": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/VhodnoiStih/VhodnoiStih.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Vasiliy.tsx": {
+        "error:import/order": 6,
+        "error:@typescript-eslint/no-unsafe-assignment": 6,
+        "error:@typescript-eslint/no-unsafe-call": 1
+      },
+      "app/containers/Service/Texts/Liturgies/Vernie/Otpust/Otpust.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 3
+      },
+      "app/containers/Service/Texts/Liturgies/Vernie/Prichasten/Prichasten.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Vernie/Zadastoinik/Zadastoinik.tsx": {
+        "error:import/order": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Vernie/useLiturgy.tsx": {
+        "error:import/order": 5,
+        "error:@typescript-eslint/no-unsafe-assignment": 3
+      },
+      "app/containers/Service/Texts/Liturgies/Zlatoust.tsx": {
+        "error:import/order": 7,
+        "error:@typescript-eslint/no-unsafe-call": 5,
+        "error:@typescript-eslint/no-unsafe-member-access": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 13,
+        "error:react-hooks/rules-of-hooks": 1
+      },
+      "app/containers/Service/Texts/Lpod/Otpust/Otpust.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/Lpod/Prichasten/Prichasten.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/Lpod/index.dyn.tsx": {
+        "error:import/order": 6,
+        "error:@typescript-eslint/no-unsafe-call": 5,
+        "error:@typescript-eslint/no-unsafe-member-access": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 15
+      },
+      "app/containers/Service/Texts/Matins/Exapostilari/Exapostilari.tsx": {
+        "error:import/order": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/containers/Service/Texts/Matins/Prokimens/Prokimens.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 4,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Service/Texts/Matins/Stepenny/Stepenny.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 4,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Service/Texts/Matins/StihiriAfterPsalm50/StihiriAfterPsalm50.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/containers/Service/Texts/Matins/StihiriNaHvalite/StihiriNaHvalite.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 7,
+        "error:@typescript-eslint/no-unsafe-member-access": 4
+      },
+      "app/containers/Service/Texts/Matins/index.dyn.tsx": {
+        "error:import/order": 13,
+        "error:@typescript-eslint/no-unsafe-assignment": 7
+      },
+      "app/containers/Service/Texts/MatinsObihod/index.dyn.tsx": {
+        "error:prettier/prettier": 5,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/MdxLoader.tsx": {
+        "error:import/order": 8,
+        "warning:no-console": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 7,
+        "error:@typescript-eslint/no-unsafe-assignment": 18,
+        "error:@typescript-eslint/only-throw-error": 1
+      },
+      "app/containers/Service/Texts/MolebenBoliaschih/index.dyn.tsx": {
+        "error:import/order": 2,
+        "error:prettier/prettier": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-call": 1
+      },
+      "app/containers/Service/Texts/NinthHour/index.dyn.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/Polunochnica/index.dyn.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-call": 1
+      },
+      "app/containers/Service/Texts/PsalmsSpiritualCants/index.dyn.tsx": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/Shared/Ending/Ending.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 5,
+        "error:react/jsx-no-duplicate-props": 1
+      },
+      "app/containers/Service/Texts/Shared/IpakoyiVoskr/IpakoyiVoskr.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Service/Texts/Shared/Kondacs/Kondacs.tsx": {
+        "error:import/order": 2,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 9,
+        "error:@typescript-eslint/no-unsafe-member-access": 2,
+        "error:prettier/prettier": 1
+      },
+      "app/containers/Service/Texts/Shared/Troparions/Troparions.tsx": {
+        "error:import/order": 2,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 9,
+        "error:@typescript-eslint/no-unsafe-member-access": 2,
+        "error:prettier/prettier": 1
+      },
+      "app/containers/Service/Texts/SixthHour/index.dyn.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/containers/Service/Texts/Texts.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-return": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 6,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 4
+      },
+      "app/containers/Service/Texts/ThirdHour/index.dyn.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/VariableSection.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Service/Texts/VelikoePovecherie/index.dyn.tsx": {
+        "error:import/order": 3
+      },
+      "app/containers/Service/Texts/Vespers/Prokimens/Prokimens.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 2
+      },
+      "app/containers/Service/Texts/Vespers/StihiriNaGV/StihiriNaGV.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 8,
+        "error:@typescript-eslint/no-unsafe-member-access": 3
+      },
+      "app/containers/Service/Texts/Vespers/StihiriNaStihah/StihiriNaStihah.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 8,
+        "error:@typescript-eslint/no-unsafe-member-access": 1
+      },
+      "app/containers/Service/Texts/Vespers/index.dyn.tsx": {
+        "error:import/order": 13,
+        "error:@typescript-eslint/no-unused-vars": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 9,
+        "error:@typescript-eslint/no-unsafe-call": 1
+      },
+      "app/containers/Service/Texts/VespersChurch/index.dyn.tsx": {
+        "error:prettier/prettier": 5,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/VhodOblachenie/index.dyn.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Service/Texts/VodosviatnyMoleben/index.dyn.tsx": {
+        "error:import/order": 1,
+        "error:@typescript-eslint/no-unsafe-assignment": 3,
+        "error:@typescript-eslint/no-unsafe-call": 1
+      },
+      "app/containers/ThisDay/ThisDay.tsx": {
+        "error:import/order": 4,
+        "error:@typescript-eslint/no-unsafe-member-access": 6,
+        "error:@typescript-eslint/no-unsafe-assignment": 3
+      },
+      "app/containers/Updates/Updates.tsx": {
+        "error:import/order": 2,
+        "error:@typescript-eslint/no-floating-promises": 2,
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/containers/Updates/UpdatesAdmin.tsx": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/consistent-type-definitions": 2,
+        "error:@typescript-eslint/no-floating-promises": 3,
+        "error:prettier/prettier": 4,
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unnecessary-type-assertion": 2,
+        "warning:react-hooks/exhaustive-deps": 1,
+        "error:jsx-a11y/label-has-associated-control": 1,
+        "error:no-void": 2,
+        "error:@typescript-eslint/promise-function-async": 1
+      },
+      "app/containers/auth/sessionHelpers.ts": {
+        "error:prettier/prettier": 6
+      },
+      "app/domain/getDayInfo.ts": {
+        "error:@typescript-eslint/no-unsafe-assignment": 10,
+        "error:@typescript-eslint/no-unsafe-call": 16,
+        "error:@typescript-eslint/no-unsafe-member-access": 16,
+        "error:no-param-reassign": 1,
+        "error:prettier/prettier": 20
+      },
+      "app/domain/isGospel.ts": {
+        "error:@typescript-eslint/no-unsafe-return": 1,
+        "error:@typescript-eslint/no-unsafe-call": 4,
+        "error:@typescript-eslint/no-unsafe-member-access": 4
+      },
+      "app/globals.d.ts": {
+        "warning:@typescript-eslint/no-explicit-any": 1
+      },
+      "app/hooks/useAddSharedVersion.ts": {
+        "error:import/order": 3,
+        "error:@typescript-eslint/unbound-method": 1,
+        "error:prettier/prettier": 5
+      },
+      "app/hooks/useAudio.ts": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-member-access": 34,
+        "error:@typescript-eslint/no-unsafe-call": 15,
+        "error:@typescript-eslint/no-unused-expressions": 1
+      },
+      "app/hooks/useSermon.ts": {
+        "error:@typescript-eslint/promise-function-async": 1
+      },
+      "app/precache.ts": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-call": 2,
+        "error:@typescript-eslint/no-unsafe-member-access": 2
+      },
+      "app/redirectToHome.ts": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1,
+        "error:@typescript-eslint/no-unsafe-call": 1
+      },
+      "app/service-worker.js": {
+        "warning:no-console": 1
+      },
+      "app/serviceWorker.js": {
+        "warning:no-console": 4
+      },
+      "app/sharePolyfill.js": {
+        "error:prettier/prettier": 5,
+        "error:no-unused-vars": 1
+      },
+      "app/state/currentScript.ts": {
+        "error:prettier/prettier": 5
+      },
+      "app/state/isParallel.ts": {
+        "error:import/order": 2
+      },
+      "app/state/langState.ts": {
+        "error:import/order": 2
+      },
+      "app/styles/getTheme.ts": {
+        "error:@typescript-eslint/no-unsafe-assignment": 1
+      },
+      "app/utils/StorageAPIWrapper.ts": {
+        "error:@typescript-eslint/no-unsafe-call": 48,
+        "error:@typescript-eslint/no-unsafe-member-access": 36,
+        "error:@typescript-eslint/no-unsafe-return": 12,
+        "error:@typescript-eslint/no-unsafe-assignment": 5
+      },
+      "app/utils/cachedFetch.ts": {
+        "error:@typescript-eslint/no-unsafe-return": 2,
+        "error:@typescript-eslint/prefer-promise-reject-errors": 2,
+        "error:@typescript-eslint/no-empty-function": 3,
+        "warning:no-console": 3
+      },
+      "app/utils/deviceInfo.ts": {
+        "error:@typescript-eslint/ban-ts-comment": 1
+      },
+      "app/utils/isDarkMode.ts": {
+        "error:@typescript-eslint/no-unused-vars": 1
+      },
+      "app/utils/useAuthorisedFetch.ts": {
+        "error:import/order": 1
+      }
+    }
+  },
+  "typescript": {
+    "diagnostics": 972,
+    "files": {
+      "app/client.tsx": {
+        "TS1192": 1,
+        "TS5097": 1,
+        "TS2339": 7,
+        "TS2345": 1,
+        "TS7006": 1
+      },
+      "app/components/BottomNav/BottomNav.tsx": {
+        "TS7031": 1,
+        "TS18046": 12
+      },
+      "app/components/Button/Button.tsx": {
+        "TS2322": 1,
+        "TS2339": 3
+      },
+      "app/components/ButtonBox/ButtonBox.tsx": {
+        "TS7006": 1,
+        "TS18046": 2
+      },
+      "app/components/Calendar/Calendar.tsx": {
+        "TS7016": 1,
+        "TS7031": 3,
+        "TS7006": 5,
+        "TS2339": 3,
+        "TS18046": 1,
+        "TS2345": 1
+      },
+      "app/components/CalendarToggle/CalendarToggle.tsx": {
+        "TS7016": 1,
+        "TS7031": 2,
+        "TS7006": 2,
+        "TS2322": 1,
+        "TS18046": 2
+      },
+      "app/components/ChangeThemeButton/ChangeThemeButton.tsx": {
+        "TS2322": 1,
+        "TS18046": 2
+      },
+      "app/components/CustomPrayers/CustomPrayerInput.tsx": {
+        "TS2322": 1,
+        "TS18046": 2
+      },
+      "app/components/CustomPrayers/CustomPrayers.tsx": {
+        "TS18046": 5,
+        "TS7006": 4,
+        "TS2339": 1,
+        "TS2322": 2,
+        "TS2786": 1,
+        "TS2461": 2
+      },
+      "app/components/DotsMenu/DotsMenu.tsx": {
+        "TS7031": 2,
+        "TS18046": 2,
+        "TS2345": 1,
+        "TS7006": 1,
+        "TS2339": 1,
+        "TS2322": 2
+      },
+      "app/components/Drawer/Drawer.tsx": {
+        "TS7031": 2
+      },
+      "app/components/Drawer/DrawerWithHeader.tsx": {
+        "TS7031": 3,
+        "TS2322": 1
+      },
+      "app/components/ErrorMessage404/ErrorMessage404.tsx": {
+        "TS18046": 2
+      },
+      "app/components/ErrorMessage500/ErrorMessage500.tsx": {
+        "TS18046": 2,
+        "TS2322": 1
+      },
+      "app/components/FindInPageButton/FindInPageButton.tsx": {
+        "TS2322": 1,
+        "TS18046": 1
+      },
+      "app/components/Header/Header.tsx": {
+        "TS7031": 1,
+        "TS18046": 2
+      },
+      "app/components/HeightUpdate/HeightUpdater.tsx": {
+        "TS2724": 1,
+        "TS2339": 1
+      },
+      "app/components/If/If.tsx": {
+        "TS7031": 4,
+        "TS2339": 2
+      },
+      "app/components/InPageSearch/InPageSearch.tsx": {
+        "TS18046": 6,
+        "TS2322": 3,
+        "TS2345": 1
+      },
+      "app/components/Input/Input.tsx": {
+        "TS7006": 1,
+        "TS18046": 2
+      },
+      "app/components/LayoutInner/LayoutInner.tsx": {
+        "TS2322": 2,
+        "TS2345": 1
+      },
+      "app/components/NamesEditor/NamesEditorInput.tsx": {
+        "TS2322": 1,
+        "TS18046": 2
+      },
+      "app/components/Nav/Nav.tsx": {
+        "TS7031": 3,
+        "TS2322": 3,
+        "TS18046": 2
+      },
+      "app/components/Note/Note.tsx": {
+        "TS18046": 2
+      },
+      "app/components/Parts/Parts.tsx": {
+        "TS7006": 15,
+        "TS7031": 12,
+        "TS2339": 3,
+        "TS2322": 2
+      },
+      "app/components/RteText/RteText.tsx": {
+        "TS18046": 4
+      },
+      "app/components/ScriptEditor/ScriptEditorInput.tsx": {
+        "TS7031": 1,
+        "TS7006": 1,
+        "TS2345": 3,
+        "TS2322": 2,
+        "TS18046": 2
+      },
+      "app/components/ScriptEditor/ScriptEditorToggle.tsx": {
+        "TS7031": 1,
+        "TS2345": 1,
+        "TS2339": 1,
+        "TS7006": 1,
+        "TS18046": 1,
+        "TS2322": 2
+      },
+      "app/components/ScriptEditorPromo/ScriptEditorPromo.tsx": {
+        "TS18046": 1
+      },
+      "app/components/ScriptVersionSelector/DuplicateButton.tsx": {
+        "TS2322": 1,
+        "TS18046": 1,
+        "TS2353": 1
+      },
+      "app/components/ScriptVersionSelector/ScriptVersion.tsx": {
+        "TS18046": 7,
+        "TS7006": 4,
+        "TS2322": 4,
+        "TS2741": 3,
+        "TS2353": 1
+      },
+      "app/components/ScriptVersionSelector/ScriptVersionSelector.tsx": {
+        "TS18046": 5,
+        "TS7006": 1,
+        "TS2322": 1
+      },
+      "app/components/ScriptVersionSelector/useAddNewVersion.ts": {
+        "TS2345": 2,
+        "TS2461": 1
+      },
+      "app/components/ScriptVersionSelector/useSyncCurrentScriptVersion.ts": {
+        "TS2345": 1
+      },
+      "app/components/SelectBox/SelectBox.tsx": {
+        "TS18049": 1,
+        "TS2339": 1,
+        "TS18046": 12,
+        "TS2345": 1
+      },
+      "app/components/SermonList/SermonList.tsx": {
+        "TS2322": 2
+      },
+      "app/components/SermonSmall/SermonSmall.tsx": {
+        "TS18046": 2
+      },
+      "app/components/SettingsButton/SettingsButton.tsx": {
+        "TS2322": 1
+      },
+      "app/components/Share/Share.tsx": {
+        "TS2322": 1
+      },
+      "app/components/Share/ShareLogin.tsx": {
+        "TS2322": 1
+      },
+      "app/components/ShareIcon/ShareIcon.tsx": {
+        "TS2339": 1,
+        "TS18046": 2
+      },
+      "app/components/SolidSection/SolidSection.tsx": {
+        "TS7031": 1,
+        "TS18046": 2
+      },
+      "app/components/svgs/Bell.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/Bible.tsx": {
+        "TS18046": 3
+      },
+      "app/components/svgs/Burger.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/CalendarIcon.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/Check.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/Cross.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/CrossCircle.tsx": {
+        "TS18046": 2
+      },
+      "app/components/svgs/CrossIcon.tsx": {
+        "TS18046": 3
+      },
+      "app/components/svgs/Dots.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/Duplicate.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/ExternalLink.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/Gear.tsx": {
+        "TS18046": 2
+      },
+      "app/components/svgs/Heart.tsx": {
+        "TS7031": 1,
+        "TS18046": 2
+      },
+      "app/components/svgs/LeftIcon.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/Moon.tsx": {
+        "TS18046": 2
+      },
+      "app/components/svgs/Pencil.tsx": {
+        "TS18046": 4
+      },
+      "app/components/svgs/PencilLine.tsx": {
+        "TS18046": 4
+      },
+      "app/components/svgs/PlusIcon.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/Prayer.tsx": {
+        "TS18046": 3
+      },
+      "app/components/svgs/PrayerCheck.tsx": {
+        "TS18048": 1
+      },
+      "app/components/svgs/QuestionIcon.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/RightIcon.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/Sermons.tsx": {
+        "TS18046": 3
+      },
+      "app/components/svgs/Switch.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/System.tsx": {
+        "TS18046": 2
+      },
+      "app/components/svgs/TrashIcon.tsx": {
+        "TS18046": 1
+      },
+      "app/components/svgs/Visibility.tsx": {
+        "TS18046": 2
+      },
+      "app/components/svgs/VisibilityOff.tsx": {
+        "TS18046": 1
+      },
+      "app/components/SwipeableLink/SwipeableLink.tsx": {
+        "TS7006": 3
+      },
+      "app/components/Textarea/Textarea.tsx": {
+        "TS7006": 1,
+        "TS2349": 1,
+        "TS18046": 2
+      },
+      "app/components/ThemeControl/ThemeControl.tsx": {
+        "TS18046": 1,
+        "TS2322": 3
+      },
+      "app/components/Tooltip/Tooltip.tsx": {
+        "TS7031": 1,
+        "TS2769": 1
+      },
+      "app/components/UpdatePrompt/UpdatePrompt.tsx": {
+        "TS2322": 1,
+        "TS18046": 1
+      },
+      "app/components/Zoom/Zoom.tsx": {
+        "TS7031": 1,
+        "TS18046": 1,
+        "TS2322": 1
+      },
+      "app/components/ZoomControl/ZoomControl.tsx": {
+        "TS18046": 7,
+        "TS2322": 2
+      },
+      "app/containers/AddSharedVersion/AddSharedVersion.tsx": {
+        "TS2739": 1
+      },
+      "app/containers/App.tsx": {
+        "TS7016": 1,
+        "TS2339": 1
+      },
+      "app/containers/AuthProvider.tsx": {
+        "TS2322": 4,
+        "TS2345": 2
+      },
+      "app/containers/Hymns/FavButton.tsx": {
+        "TS2322": 1,
+        "TS7006": 1
+      },
+      "app/containers/Hymns/Hymn.tsx": {
+        "TS2339": 3,
+        "TS2322": 3,
+        "TS18048": 4,
+        "TS18046": 1
+      },
+      "app/containers/Hymns/HymnButton.tsx": {
+        "TS2353": 1
+      },
+      "app/containers/Hymns/Hymns.tsx": {
+        "TS18046": 1,
+        "TS7006": 1
+      },
+      "app/containers/Main/BorderedSection.tsx": {
+        "TS7031": 1,
+        "TS18046": 2
+      },
+      "app/containers/Main/HeaderMain.tsx": {
+        "TS18046": 6,
+        "TS2322": 3,
+        "TS7031": 5
+      },
+      "app/containers/Main/HeadingBar.tsx": {
+        "TS7031": 5,
+        "TS18046": 2
+      },
+      "app/containers/Main/IosPrompt.tsx": {
+        "TS18046": 8,
+        "TS2322": 1
+      },
+      "app/containers/Main/Main.tsx": {
+        "TS7016": 1,
+        "TS2339": 6,
+        "TS18048": 11,
+        "TS2322": 2,
+        "TS7006": 4,
+        "TS7031": 2,
+        "TS2786": 1
+      },
+      "app/containers/Main/ReadingGroup.tsx": {
+        "TS7031": 2,
+        "TS7006": 1,
+        "TS18046": 1
+      },
+      "app/containers/Main/ReadingItem.tsx": {
+        "TS7031": 1,
+        "TS18046": 1
+      },
+      "app/containers/Main/ReadingList.tsx": {
+        "TS7016": 1,
+        "TS7031": 2,
+        "TS7034": 1,
+        "TS7006": 2,
+        "TS7005": 1
+      },
+      "app/containers/Main/ReadingsForService.tsx": {
+        "TS7016": 1,
+        "TS7031": 3,
+        "TS7034": 1,
+        "TS7006": 2,
+        "TS2769": 1,
+        "TS2322": 1,
+        "TS18046": 1,
+        "TS7005": 1
+      },
+      "app/containers/Main/Saints.tsx": {
+        "TS2305": 1
+      },
+      "app/containers/Main/SectionHeading.tsx": {
+        "TS7031": 1,
+        "TS18046": 1
+      },
+      "app/containers/Main/Sermons.tsx": {
+        "TS2339": 2,
+        "TS7006": 1
+      },
+      "app/containers/Main/Services.tsx": {
+        "TS7016": 1,
+        "TS7031": 3,
+        "TS7006": 3,
+        "TS18046": 5,
+        "TS2739": 1
+      },
+      "app/containers/Main/SettingsMenu.tsx": {
+        "TS18046": 6,
+        "TS2322": 1
+      },
+      "app/containers/Main/ThisDays.tsx": {
+        "TS7031": 5,
+        "TS7006": 1
+      },
+      "app/containers/Main/TroparionFavsHome.tsx": {
+        "TS18046": 1
+      },
+      "app/containers/Profile/Profile.tsx": {
+        "TS2322": 1,
+        "TS2739": 1
+      },
+      "app/containers/Readings/ReadingItem.tsx": {
+        "TS7031": 2,
+        "TS18046": 3,
+        "TS2339": 3
+      },
+      "app/containers/Readings/ReadingItemSingle.tsx": {
+        "TS7031": 3,
+        "TS2345": 2,
+        "TS7006": 2,
+        "TS18046": 5,
+        "TS2322": 1,
+        "TS2741": 1
+      },
+      "app/containers/Readings/Readings.tsx": {
+        "TS2305": 1,
+        "TS2345": 1,
+        "TS2538": 1,
+        "TS7006": 2,
+        "TS2769": 1,
+        "TS2353": 1,
+        "TS18046": 1
+      },
+      "app/containers/Readings/ReadingsForService.tsx": {
+        "TS7016": 1,
+        "TS7006": 5,
+        "TS7031": 1,
+        "TS7034": 1,
+        "TS7005": 1
+      },
+      "app/containers/Readings/ServiceSelector.tsx": {
+        "TS7031": 3,
+        "TS7006": 1
+      },
+      "app/containers/RecoilSync.tsx": {
+        "TS7006": 3,
+        "TS7031": 2
+      },
+      "app/containers/Saint/Saint.tsx": {
+        "TS2345": 1,
+        "TS18046": 1
+      },
+      "app/containers/Sermon/Sermon.tsx": {
+        "TS2345": 1,
+        "TS18046": 2
+      },
+      "app/containers/SermonDetail/SermonDetail.tsx": {
+        "TS2345": 1,
+        "TS18046": 2
+      },
+      "app/containers/SermonList/SermonList.tsx": {
+        "TS18046": 1,
+        "TS2322": 4,
+        "TS2339": 4
+      },
+      "app/containers/Service/LanguageSwitcher.tsx": {
+        "TS7006": 1,
+        "TS2322": 1
+      },
+      "app/containers/Service/MDXProvider.tsx": {
+        "TS7006": 1,
+        "TS7031": 1,
+        "TS2322": 1
+      },
+      "app/containers/Service/ParallelLanguageBar.tsx": {
+        "TS2322": 2
+      },
+      "app/containers/Service/Service.tsx": {
+        "TS2305": 1,
+        "TS2724": 1,
+        "TS7006": 3,
+        "TS2345": 2,
+        "TS2769": 1,
+        "TS7034": 1,
+        "TS2538": 1,
+        "TS2339": 6,
+        "TS7005": 2,
+        "TS18048": 1,
+        "TS2322": 5,
+        "TS18047": 2,
+        "TS2698": 1,
+        "TS2786": 1,
+        "TS2604": 1
+      },
+      "app/containers/Service/Texts/Blagodarstvennie/index.dyn.tsx": {
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/BratMolitvoslov/index.dyn.tsx": {
+        "TS2786": 1
+      },
+      "app/containers/Service/Texts/ChinPrigotovlenija/index.dyn.tsx": {
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/CustomPrayer/index.dyn.tsx": {
+        "TS2339": 1,
+        "TS7006": 1
+      },
+      "app/containers/Service/Texts/EasterChin/index.dyn.tsx": {
+        "TS7016": 1,
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/EasterHours/index.dyn.tsx": {
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/FirstHour/index.dyn.tsx": {
+        "TS7031": 3
+      },
+      "app/containers/Service/Texts/Jacob/index.dyn.tsx": {
+        "TS7031": 2,
+        "TS2322": 1
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Aliluja/Aliluja.tsx": {
+        "TS7031": 4,
+        "TS2786": 2,
+        "TS2322": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Antifon1/Antifon1.tsx": {
+        "TS2786": 10
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Antifon2/Antifon2.tsx": {
+        "TS2786": 10
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Antifon3/Antifon3.tsx": {
+        "TS2786": 10
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Katekhumen.tsx": {
+        "TS7016": 1,
+        "TS7031": 6,
+        "TS7006": 4,
+        "TS7034": 1,
+        "TS7005": 2,
+        "TS2322": 1
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Prokimens/Prokimens.tsx": {
+        "TS7031": 4,
+        "TS2786": 2,
+        "TS2322": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Reading/Reading.tsx": {
+        "TS7031": 2,
+        "TS2786": 1
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/Trisvatoe/Trisvatoe.tsx": {
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/Liturgies/Katekhumen/VhodnoiStih/VhodnoiStih.tsx": {
+        "TS7031": 2,
+        "TS2786": 2,
+        "TS2322": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Vasiliy.tsx": {
+        "TS7016": 1,
+        "TS7031": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Vernie/Otpust/Otpust.tsx": {
+        "TS7031": 4,
+        "TS2786": 2,
+        "TS2322": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Vernie/Prichasten/Prichasten.tsx": {
+        "TS7031": 3,
+        "TS2786": 1,
+        "TS2322": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Vernie/useLiturgy.tsx": {
+        "TS7006": 2,
+        "TS2345": 1,
+        "TS2322": 1
+      },
+      "app/containers/Service/Texts/Liturgies/Vernie/Zadastoinik/Zadastoinik.tsx": {
+        "TS7031": 3,
+        "TS2786": 2,
+        "TS2322": 2
+      },
+      "app/containers/Service/Texts/Liturgies/Zlatoust.tsx": {
+        "TS7016": 2,
+        "TS7031": 5,
+        "TS7034": 1,
+        "TS7006": 3,
+        "TS7005": 4
+      },
+      "app/containers/Service/Texts/Lpod/index.dyn.tsx": {
+        "TS7016": 2,
+        "TS7031": 4,
+        "TS2769": 1,
+        "TS2345": 1,
+        "TS7034": 1,
+        "TS7006": 3,
+        "TS7005": 6
+      },
+      "app/containers/Service/Texts/Lpod/Otpust/Otpust.tsx": {
+        "TS7031": 1,
+        "TS2322": 2,
+        "TS2786": 1
+      },
+      "app/containers/Service/Texts/Lpod/Prichasten/Prichasten.tsx": {
+        "TS7031": 1,
+        "TS2322": 2,
+        "TS2786": 1
+      },
+      "app/containers/Service/Texts/Matins/Exapostilari/Exapostilari.tsx": {
+        "TS7031": 2,
+        "TS2786": 1,
+        "TS2322": 2
+      },
+      "app/containers/Service/Texts/Matins/index.dyn.tsx": {
+        "TS7031": 4,
+        "TS2322": 1,
+        "TS2741": 1
+      },
+      "app/containers/Service/Texts/Matins/Prokimens/Prokimens.tsx": {
+        "TS7031": 4,
+        "TS2786": 1,
+        "TS2322": 2
+      },
+      "app/containers/Service/Texts/Matins/Stepenny/Stepenny.tsx": {
+        "TS7031": 4,
+        "TS2786": 1,
+        "TS2322": 2
+      },
+      "app/containers/Service/Texts/Matins/StihiriAfterPsalm50/StihiriAfterPsalm50.tsx": {
+        "TS7031": 2,
+        "TS2786": 1,
+        "TS2322": 2
+      },
+      "app/containers/Service/Texts/Matins/StihiriNaHvalite/StihiriNaHvalite.tsx": {
+        "TS7031": 6,
+        "TS2786": 2,
+        "TS2322": 3,
+        "TS7006": 3
+      },
+      "app/containers/Service/Texts/MatinsObihod/index.dyn.tsx": {
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/MdxLoader.tsx": {
+        "TS7006": 3,
+        "TS2339": 4,
+        "TS2345": 2,
+        "TS2322": 4,
+        "TS18046": 1
+      },
+      "app/containers/Service/Texts/MolebenBoliaschih/index.dyn.tsx": {
+        "TS7016": 1,
+        "TS7031": 1,
+        "TS2769": 1
+      },
+      "app/containers/Service/Texts/NinthHour/index.dyn.tsx": {
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/Polunochnica/index.dyn.tsx": {
+        "TS7016": 1,
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/PsalmsSpiritualCants/index.dyn.tsx": {
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/Shared/Ending/Ending.tsx": {
+        "TS7031": 4,
+        "TS2322": 1,
+        "TS2786": 4,
+        "TS17001": 1
+      },
+      "app/containers/Service/Texts/Shared/IpakoyiVoskr/IpakoyiVoskr.tsx": {
+        "TS7031": 2,
+        "TS2786": 1
+      },
+      "app/containers/Service/Texts/Shared/Kondacs/Kondacs.tsx": {
+        "TS7031": 9,
+        "TS2786": 2,
+        "TS2322": 1,
+        "TS7006": 1
+      },
+      "app/containers/Service/Texts/Shared/Troparions/Troparions.tsx": {
+        "TS7031": 9,
+        "TS2786": 2,
+        "TS2322": 1,
+        "TS7006": 1
+      },
+      "app/containers/Service/Texts/SixthHour/index.dyn.tsx": {
+        "TS7031": 3
+      },
+      "app/containers/Service/Texts/Texts.tsx": {
+        "TS7006": 2,
+        "TS7053": 4,
+        "TS18046": 1
+      },
+      "app/containers/Service/Texts/ThirdHour/index.dyn.tsx": {
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/VariableSection.tsx": {
+        "TS7031": 2,
+        "TS18046": 1
+      },
+      "app/containers/Service/Texts/Vespers/index.dyn.tsx": {
+        "TS7016": 1,
+        "TS7031": 4,
+        "TS2322": 1
+      },
+      "app/containers/Service/Texts/Vespers/Prokimens/Prokimens.tsx": {
+        "TS7031": 2,
+        "TS2786": 1,
+        "TS2322": 2
+      },
+      "app/containers/Service/Texts/Vespers/StihiriNaGV/StihiriNaGV.tsx": {
+        "TS7031": 6,
+        "TS2786": 1,
+        "TS2322": 2,
+        "TS7006": 3
+      },
+      "app/containers/Service/Texts/Vespers/StihiriNaStihah/StihiriNaStihah.tsx": {
+        "TS7031": 6,
+        "TS2786": 1,
+        "TS2322": 2,
+        "TS7006": 3
+      },
+      "app/containers/Service/Texts/VespersChurch/index.dyn.tsx": {
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/VhodOblachenie/index.dyn.tsx": {
+        "TS7031": 1
+      },
+      "app/containers/Service/Texts/VodosviatnyMoleben/index.dyn.tsx": {
+        "TS7016": 1,
+        "TS7031": 1,
+        "TS2769": 1
+      },
+      "app/containers/ThisDay/ThisDay.tsx": {
+        "TS7031": 3,
+        "TS2345": 1
+      },
+      "app/containers/Updates/Updates.tsx": {
+        "TS2322": 3
+      },
+      "app/containers/Updates/UpdatesAdmin.tsx": {
+        "TS2322": 6
+      },
+      "app/domain/getDayInfo.ts": {
+        "TS7006": 3,
+        "TS7053": 1
+      },
+      "app/domain/isGospel.ts": {
+        "TS7006": 1
+      },
+      "app/hooks/useAudio.ts": {
+        "TS7006": 12,
+        "TS7053": 1,
+        "TS2554": 5
+      },
+      "app/precache.ts": {
+        "TS7006": 2
+      },
+      "app/redirectToHome.ts": {
+        "TS7016": 1
+      },
+      "app/Routes.tsx": {
+        "TS7016": 1,
+        "TS2322": 2
+      },
+      "app/state/currentScriptVersion.ts": {
+        "TS2322": 1
+      },
+      "app/state/disabledPrayersState.ts": {
+        "TS2322": 1
+      },
+      "app/state/langState.ts": {
+        "TS2322": 1
+      },
+      "app/state/namesState.ts": {
+        "TS2322": 1
+      },
+      "app/state/scriptVersionsState.ts": {
+        "TS2322": 1
+      },
+      "app/state/troparionFavsState.ts": {
+        "TS2322": 1
+      },
+      "app/styles/getTheme.ts": {
+        "TS7006": 2
+      },
+      "app/utils/cachedFetch.ts": {
+        "TS7006": 2,
+        "TS2345": 1
+      },
+      "app/utils/StorageAPIWrapper.ts": {
+        "TS7006": 22,
+        "TS7031": 13
+      }
+    }
+  }
+}

@@ -1,14 +1,8 @@
 import React from 'react';
-import { useTheme } from 'emotion-theming';
-
-interface IconTheme {
-    colours?: {
-        blue?: string;
-    };
-}
+import { useTheme } from '@emotion/react';
 
 const PrayerCheck = ({ colour, size = 31 }: { colour?: string; size?: number }): JSX.Element => {
-    const theme = useTheme<IconTheme>();
+    const theme = useTheme();
 
     return (
         <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} fill="none" viewBox="0 0 31 31">

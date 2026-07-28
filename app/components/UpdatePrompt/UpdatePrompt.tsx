@@ -1,20 +1,22 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
+import Button from '@mui/material/Button';
+import Snackbar from '@mui/material/Snackbar';
+import type { SnackbarCloseReason } from '@mui/material/Snackbar';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 import { useRecoilState } from 'recoil';
+import { useTheme } from '@emotion/react';
+import { css } from '@emotion/css';
+
 import pendingUpdateState from 'state/pendingUpdateState';
-import { useTheme } from 'emotion-theming';
-import { css } from 'emotion';
 
 export default function UpdatePrompt(): JSX.Element {
     const [pendingVersion, setPendingVersion] = useRecoilState(pendingUpdateState);
     const theme = useTheme();
 
-    const handleClose = (_event: React.SyntheticEvent | React.MouseEvent, reason?: string): void => {
+    const handleClose = (_event: Event | React.SyntheticEvent, reason?: SnackbarCloseReason): void => {
         if (reason === 'clickaway') {
-            return null;
+            return;
         }
 
         setPendingVersion(null);

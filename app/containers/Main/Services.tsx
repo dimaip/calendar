@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useTheme } from 'emotion-theming';
-import { css } from 'emotion';
+import { useTheme } from '@emotion/react';
+import { css } from '@emotion/css';
 import { Link, useLocation } from 'react-router-dom';
 import RightIcon from 'components/svgs/RightIcon';
 import TrashIcon from 'components/svgs/TrashIcon';
@@ -91,12 +91,8 @@ const Services = ({ date, readings }) => {
                                             cursor: ${service.enabled ? 'pointer' : 'arrow'};
                                             user-select: none;
                                         `}
-                                        to={{
-                                            pathname: `/date/${date}/service/${service.id}`,
-                                            state: {
-                                                backLink: location.pathname,
-                                            },
-                                        }}
+                                        to={`/date/${date}/service/${service.id}`}
+                                        state={{ backLink: location.pathname }}
                                         key={service.id}
                                     >
                                         <ButtonBox>
@@ -220,12 +216,8 @@ const Services = ({ date, readings }) => {
                                 cursor: ${'pointer'};
                                 user-select: none;
                             `}
-                            to={{
-                                pathname: `/hymns`,
-                                state: {
-                                    backLink: location.pathname,
-                                },
-                            }}
+                            to="/hymns"
+                            state={{ backLink: location.pathname }}
                         >
                             <ButtonBox>
                                 <div
@@ -264,12 +256,8 @@ const Services = ({ date, readings }) => {
                                 cursor: ${'pointer'};
                                 user-select: none;
                             `}
-                            to={{
-                                pathname: `/date/${date}/service/psalmsSpiritualCants`,
-                                state: {
-                                    backLink: location.pathname,
-                                },
-                            }}
+                            to={`/date/${date}/service/psalmsSpiritualCants`}
+                            state={{ backLink: location.pathname }}
                         >
                             <ButtonBox>
                                 <div

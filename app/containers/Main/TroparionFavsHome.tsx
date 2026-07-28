@@ -4,10 +4,10 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 import troparionFavsState from 'state/troparionFavsState';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { Link } from 'react-router-dom';
 import { HymnButton } from 'containers/Hymns/HymnButton';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import PlusIcon from 'components/svgs/PlusIcon';
 
@@ -21,7 +21,7 @@ export const TroparionFavsHome = () => {
 
     return (
         <>
-            {status === 'loading' ? (
+            {status === 'pending' ? (
                 <Loader />
             ) : status === 'error' ? (
                 <ErrorMessage500 />
