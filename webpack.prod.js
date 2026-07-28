@@ -9,7 +9,7 @@ const hash = Array(1)
     .join('');
 
 export default merge(common, {
-    entry: ['babel-polyfill', 'client.tsx'],
+    entry: ['client.tsx'],
     mode: 'production',
     output: {
         filename: '[name].[contenthash].js',

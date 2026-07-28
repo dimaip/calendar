@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import Cross from 'components/svgs/Cross';
 import Button from 'components/Button/Button';
 import Pencil from 'components/svgs/Pencil';

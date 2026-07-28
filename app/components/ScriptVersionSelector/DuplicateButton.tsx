@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import Button from 'components/Button/Button';
 import { Version } from 'state/scriptVersionsState';
 import Duplicate from 'components/svgs/Duplicate';

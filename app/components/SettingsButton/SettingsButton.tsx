@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 import Button from 'components/Button/Button';
 import Gear from 'components/svgs/Gear';

@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 
 const Button = forwardRef((props, ref) => (
     <button

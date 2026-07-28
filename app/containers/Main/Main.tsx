@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback, Suspense } from 'react';
-import { css } from 'emotion';
-import { ThemeProvider } from 'emotion-theming';
-import { useParams, useHistory } from 'react-router-dom';
+import { css } from '@emotion/css';
+import { ThemeProvider } from '@emotion/react';
+import { useNavigate, useParams } from 'react-router-dom';
 import HeaderMain from 'containers/Main/HeaderMain';
 import Nav from 'components/Nav/Nav';
 import Loader from 'components/Loader/Loader';
@@ -54,7 +54,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
     const banners = [Sing, Peace, Books];
     const TodaysBanner = banners[new Date(date).getDate() % banners.length];
 
-    const themeColour = useRef();
+    const themeColour = useRef<string | null>();
     if (day) {
         themeColour.current = day.colour;
     }
@@ -66,7 +66,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                 <div>
                     <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
                     <div>
-                        {dayQuery.status === 'loading' && <Loader />}
+                        {dayQuery.status === 'pending' && <Loader />}
                         {dayQuery.status === 'error' && <ErrorMessage500 />}
                         {dayQuery.status === 'success' && (
                             <div>
@@ -75,7 +75,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                     glas={day.glas}
                                     fastName={day.fastName}
                                     fastingLevelName={day.fastingLevelName}
-                                    icon={day.icon}
+                                    icon={day.icon || 'default.svg'}
                                 />
                                 <div>
                                     <Zoom>
@@ -94,7 +94,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
 
                                                         <div style={{ marginTop: -18 }}>
                                                             <SectionHeading>Святые дня</SectionHeading>
-                                                            <Saints saints={day.saints} date={date} />
+                                                            <Saints saints={day.saints || ''} date={date} />
                                                         </div>
                                                         <ThisDays thisDays={thisDays} date={date} />
                                                         {/* <div style={{ marginBottom: 18 }}>
@@ -179,7 +179,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
 });
 
 const Main = React.memo(({ services = false }) => {
-    const { date } = useParams();
+    const { date = '' } = useParams<'date'>();
     // pre-fetch readings
     useReadings(date);
 
@@ -187,9 +187,9 @@ const Main = React.memo(({ services = false }) => {
 
     useDocumentTitle(`${date} - Православное богослужение на русском языке`);
 
-    const history = useHistory();
+    const navigate = useNavigate();
     const setNewDate = (dateString) => {
-        history.push(`/date/${dateString}${services ? '/services' : ''}`);
+        void navigate(`/date/${dateString}${services ? '/services' : ''}`);
     };
     const makeHandleClickShift = useCallback(
         (direction) => () => {
@@ -202,7 +202,7 @@ const Main = React.memo(({ services = false }) => {
                     break;
             }
         },
-        [date, services]
+        [date, navigate, services]
     );
     const handleToggleClick = useCallback(() => {
         calendarRef?.current?.toggleCalendarShown(true);

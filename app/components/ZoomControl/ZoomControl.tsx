@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'components/Button/Button';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import zoomState from 'state/zoomState';
 import { useRecoilState } from 'recoil';
 

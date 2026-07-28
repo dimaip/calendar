@@ -1,7 +1,7 @@
 import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import useDay from 'hooks/useDay';
 
 import EasterHoursMdx from './EasterHours.mdx';

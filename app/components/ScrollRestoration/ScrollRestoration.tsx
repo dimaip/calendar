@@ -1,5 +1,5 @@
-import React, { useEffect, memo, useRef } from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const scrollTo = (scrollnumber = 0): number =>
     window.requestAnimationFrame(() => {
@@ -14,57 +14,49 @@ export const getScrollPage = (): number => {
     return window.pageYOffset || docScrollTop;
 };
 
-interface Props {
-    visitedUrl: Map<string, number>;
-}
+export default function ScrollRestoration(): null {
+    const location = useLocation();
+    const locationRef = useRef(location);
+    const previousLocationRef = useRef(location);
+    const visitedUrlRef = useRef(new Map<string, number>());
 
-function ScrollRestoration({ history, visitedUrl }: RouteComponentProps & Props): null {
-    const handlePopStateChange = (): void => {
-        setTimeout(() => {
-            const { location } = history;
-            const { pathname } = location;
-            const existingRecord = visitedUrl.get(pathname);
-            scrollTo(existingRecord || 0);
-        }, 100);
-    };
+    useLayoutEffect(() => {
+        const previousLocation = previousLocationRef.current;
+        const locationChanged =
+            (location.pathname !== previousLocation.pathname || location.search !== previousLocation.search) &&
+            location.hash === '';
+
+        if (locationChanged) {
+            visitedUrlRef.current.set(previousLocation.pathname, getScrollPage());
+        }
+
+        locationRef.current = location;
+        previousLocationRef.current = location;
+    }, [location]);
 
     useEffect(() => {
+        const pendingTimeouts = new Set<number>();
+        const handlePopStateChange = (): void => {
+            const timeoutId = window.setTimeout(() => {
+                pendingTimeouts.delete(timeoutId);
+                const existingRecord = visitedUrlRef.current.get(locationRef.current.pathname);
+                scrollTo(existingRecord || 0);
+            }, 100);
+            pendingTimeouts.add(timeoutId);
+        };
+
         window.addEventListener('popstate', handlePopStateChange);
         window.addEventListener('pushstate', handlePopStateChange);
         window.addEventListener('replacestate', handlePopStateChange);
+
         return () => {
             window.removeEventListener('popstate', handlePopStateChange);
             window.removeEventListener('pushstate', handlePopStateChange);
             window.removeEventListener('replacestate', handlePopStateChange);
+            pendingTimeouts.forEach((timeoutId) => window.clearTimeout(timeoutId));
+            pendingTimeouts.clear();
         };
     }, []);
 
     return null;
-}
-
-const ScrollRestorationWithRouter = withRouter(
-    memo(ScrollRestoration, (prevProps, nextProps) => {
-        const { location: prevLoaction, visitedUrl } = prevProps;
-        const { location: nextLoaction } = nextProps;
-
-        const key = prevLoaction.pathname;
-
-        const locationChanged =
-            (nextLoaction.pathname !== prevLoaction.pathname || nextLoaction.search !== prevLoaction.search) &&
-            nextLoaction.hash === '';
-
-        const scroll = getScrollPage();
-
-        if (locationChanged) {
-            visitedUrl.set(key, scroll);
-        }
-
-        return false;
-    })
-);
-
-export default function Wrapper(): JSX.Element {
-    const visitedUrl = useRef(new Map());
-
-    return <ScrollRestorationWithRouter visitedUrl={visitedUrl.current} />;
 }

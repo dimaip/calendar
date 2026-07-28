@@ -1,5 +1,5 @@
 import React, { useContext, createContext } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import useWindowSize from 'hooks/useWindowSize';
 import zoomState from 'state/zoomState';
 import { useRecoilValue } from 'recoil';

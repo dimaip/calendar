@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.json",
+    "files": [
+        "app/containers/HabitTracker/trackedPrayerTimeOfDay.ts",
+        "app/utils/formatDateKey.ts",
+        "app/utils/truncateText.ts",
+        "app/utils/truthy.ts"
+    ],
+    "include": []
+}

@@ -2,7 +2,7 @@ import isGospel from 'domain/isGospel';
 import { makeIsEasterOffsetRange, getFeastInfo, makeIsDate } from 'domain/getDayInfo';
 
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import SolidSection from 'components/SolidSection/SolidSection';
 import forEach from 'lodash.foreach';
 import useExternalDay from 'hooks/useExternalDay';

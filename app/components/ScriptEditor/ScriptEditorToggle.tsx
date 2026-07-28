@@ -1,12 +1,12 @@
 import React from 'react';
 import Button from 'components/Button/Button';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { useRecoilState } from 'recoil';
 import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
 import scriptVersionsState from 'state/scriptVersionsState';
 import currentScriptVersionState from 'state/currentScriptVersion';
 import Cross from 'components/svgs/Cross';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import Pencil from 'components/svgs/Pencil';
 
 const ScriptEditorToggle = ({ serviceId }) => {

@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import HeaderMain from 'containers/Main/HeaderMain';
 import Loader from 'components/Loader/Loader';
 import BottomNav from 'components/BottomNav/BottomNav';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import SectionHeading from 'containers/Main/SectionHeading';
 import useSharedService, { SharedService } from 'hooks/useSharedService';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAddSharedVersion } from 'hooks/useAddSharedVersion';
 
 const Inner = ({ sharedServiceData }: { sharedServiceData: SharedService }) => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const addSharedVersion = useAddSharedVersion(sharedServiceData?.service);
 
@@ -35,7 +35,9 @@ const Inner = ({ sharedServiceData }: { sharedServiceData: SharedService }) => {
                 title="Добавить"
                 onClick={() => {
                     addSharedVersion(sharedServiceData);
-                    history.push(`/date/${new Date().toISOString().slice(0, 10)}/service/${sharedServiceData.service}`);
+                    void navigate(
+                        `/date/${new Date().toISOString().slice(0, 10)}/service/${sharedServiceData.service}`
+                    );
                 }}
                 className={css`
                     border-radius: 6px;
@@ -53,7 +55,7 @@ const Inner = ({ sharedServiceData }: { sharedServiceData: SharedService }) => {
 };
 
 const AddSharedVersion = React.memo(() => {
-    const { versionData } = useParams();
+    const { versionData = '' } = useParams<'versionData'>();
     const { data: sharedServiceData } = useSharedService(versionData);
 
     return (

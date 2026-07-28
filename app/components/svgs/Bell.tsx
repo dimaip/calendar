@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 
 const Bell = ({ colour, size = 24 }: { colour?: string; size?: number }): JSX.Element => {
     const theme = useTheme();

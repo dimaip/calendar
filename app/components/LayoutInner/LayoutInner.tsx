@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { useParams, Link, useHistory } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import LeftIcon from 'components/svgs/LeftIcon';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import { useUpdateTOC } from 'hooks/useUpdateTOC';
@@ -31,12 +31,12 @@ const LayoutInner = ({
     paddedContent?: boolean;
     onBackClick?: () => void;
 }) => {
-    const { date } = useParams();
+    const { date } = useParams<'date'>();
     const dayQuery = useDay(date);
     const day = dayQuery.data;
-    const history = useHistory();
+    const location = useLocation();
     useUpdateTOC();
-    const backLinkEffective = backLink || history.location.state?.backLink || backLinkFallback;
+    const backLinkEffective = backLink || location.state?.backLink || backLinkFallback;
 
     const [menuShown, setMenuShown] = useRecoilState(menuShownState);
 
@@ -92,7 +92,7 @@ const LayoutInner = ({
 
                         <Share
                             title="Православное богослужение на русском языке"
-                            text={day?.title}
+                            text={day?.title || ''}
                             url={window.location.href}
                         />
                     </DotsMenu>

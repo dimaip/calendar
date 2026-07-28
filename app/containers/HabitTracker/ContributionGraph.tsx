@@ -1,11 +1,11 @@
 import React, { useLayoutEffect, useMemo, useRef } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { useQuery } from 'convex/react';
-import { useTheme } from 'emotion-theming';
-import type { AppTheme } from 'styles/AppTheme';
-import { formatDateKey } from 'utils/formatDateKey';
+import { useTheme } from '@emotion/react';
 
 import { api } from '../../../convex/_generated/api';
+
+import { formatDateKey } from 'utils/formatDateKey';
 
 const YEAR_CELL_SIZE = 15;
 const YEAR_CELL_GAP = 5;
@@ -48,7 +48,7 @@ function filterMonthAnchors<T extends { left: number }>(anchors: T[]): T[] {
 }
 
 const ContributionGraph = () => {
-    const theme = useTheme<AppTheme>();
+    const theme = useTheme();
     const scrollRef = useRef<HTMLDivElement | null>(null);
     const today = new Date();
     const rollingStart = addDays(today, -364);
@@ -94,22 +94,24 @@ const ContributionGraph = () => {
     }));
     const yearWeekCount = Math.ceil(yearCells.length / 7);
     const yearGridWidth = yearWeekCount * YEAR_CELL_SIZE + (yearWeekCount - 1) * YEAR_CELL_GAP;
-    const monthAnchors = filterMonthAnchors([
-        {
-            label: MONTH_LABELS[rollingStart.getMonth()],
-            left: 0,
-        },
-        ...Array.from({ length: 12 }, (_, offset) => {
-            const monthStartDate = new Date(rollingStart.getFullYear(), rollingStart.getMonth() + offset + 1, 1);
-            return {
-                label: MONTH_LABELS[monthStartDate.getMonth()],
-                left:
-                    Math.floor((monthStartDate.getTime() - yearGridStart.getTime()) / DAY_MS / 7) *
-                    (YEAR_CELL_SIZE + YEAR_CELL_GAP),
-                date: monthStartDate,
-            };
-        }).filter((anchor) => anchor.date <= today),
-    ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left));
+    const monthAnchors = filterMonthAnchors(
+        [
+            {
+                label: MONTH_LABELS[rollingStart.getMonth()],
+                left: 0,
+            },
+            ...Array.from({ length: 12 }, (_, offset) => {
+                const monthStartDate = new Date(rollingStart.getFullYear(), rollingStart.getMonth() + offset + 1, 1);
+                return {
+                    label: MONTH_LABELS[monthStartDate.getMonth()],
+                    left:
+                        Math.floor((monthStartDate.getTime() - yearGridStart.getTime()) / DAY_MS / 7) *
+                        (YEAR_CELL_SIZE + YEAR_CELL_GAP),
+                    date: monthStartDate,
+                };
+            }).filter((anchor) => anchor.date <= today),
+        ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left)
+    );
 
     useLayoutEffect(() => {
         const node = scrollRef.current;

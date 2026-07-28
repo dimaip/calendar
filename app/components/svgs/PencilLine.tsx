@@ -1,5 +1,5 @@
 import React, { StyleHTMLAttributes } from 'react';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 
 export default ({ style, colour = null }: { style: StyleHTMLAttributes<SVGElement>; colour: string | null }) => {
     const theme = useTheme();

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Button from 'components/Button/Button';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 import Moon from 'components/svgs/Moon';
 import Sun from 'components/svgs/Sun';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 
 const Cross = ({ white = false }) => {
     const theme = useTheme();

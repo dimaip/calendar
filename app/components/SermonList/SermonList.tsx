@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import Loader from 'components/Loader/Loader';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import useFilteredSermons from 'hooks/useFilteredSermons';
@@ -26,7 +26,7 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
         limit ? undefined : offset
     );
 
-    const isLoading = sermonsStatus === 'loading' && offset === 0;
+    const isLoading = sermonsStatus === 'pending' && offset === 0;
     const isError = sermonsStatus === 'error';
 
     // Reset when filters change

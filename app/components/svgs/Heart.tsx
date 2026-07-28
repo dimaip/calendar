@@ -1,4 +1,4 @@
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import React from 'react';
 
 const Heart = ({ isActive }) => {

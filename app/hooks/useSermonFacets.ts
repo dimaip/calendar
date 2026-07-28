@@ -1,21 +1,18 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
+import type { UseQueryResult } from '@tanstack/react-query';
+
 import cachedFetch from 'utils/cachedFetch';
+import type { SermonFacets } from 'data/contracts';
+import { queryKeys } from 'data/queryKeys';
 
-export interface SermonTag {
-    id: string;
-    title: string;
-    count: number;
-}
+export type { SermonFacets, SermonTag } from 'data/contracts';
 
-export interface SermonFacets {
-    authors: SermonTag[];
-    themes: SermonTag[];
-}
+const fetchSermonFacets = async (): Promise<SermonFacets> => cachedFetch<SermonFacets>('https://psmb.ru/?facets=1');
 
-const fetchSermonFacets = async (): Promise<SermonFacets> => cachedFetch('https://psmb.ru/?facets=1');
-
-const useSermonFacets = () =>
-    useQuery(['sermon-facets'], async () => fetchSermonFacets(), {
+const useSermonFacets = (): UseQueryResult<SermonFacets, Error> =>
+    useQuery<SermonFacets>({
+        queryKey: queryKeys.sermonFacets(),
+        queryFn: fetchSermonFacets,
         retry: false,
     });
 
