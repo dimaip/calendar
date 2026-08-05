@@ -2,10 +2,10 @@
 
 Last updated: 2026-08-05
 
-Overall status: `in-progress`; PERF-017 measurement foundation is complete and
-PERF-034 retained-heap stabilization is proposed
+Overall status: `in-progress`; PERF-018 schedule-only candidates were rejected,
+PERF-019 is next, and PERF-034/PERF-035 follow-ups are proposed
 
-Recommended next unit: `PERF-018`
+Recommended next unit: `PERF-019`
 
 Scope: returning-user startup, long-service rendering, touch responsiveness,
 route and language transitions, scrolling, memory retention, and perceived
@@ -214,26 +214,27 @@ It must also satisfy all applicable safeguards:
 
 ## Work-unit tracker
 
-| ID       | Priority | Work unit                                                     | Status     | Risk                      | Depends on                   | Conflict group            |
-| -------- | -------- | ------------------------------------------------------------- | ---------- | ------------------------- | ---------------------------- | ------------------------- |
-| PERF-017 | P0       | Installed-startup and real-touch measurement foundation       | `done`     | Low                       | PERF-016                     | measurement               |
-| PERF-018 | P0       | Defer future-date precaching and cache refresh contention     | `proposed` | Medium, offline-sensitive | PERF-017                     | startup-client            |
-| PERF-019 | P0       | Defer analytics, tracing, Webvisor, and optional polyfills    | `proposed` | Medium                    | PERF-017                     | startup-client            |
-| PERF-020 | P0       | Replace the global pull-to-refresh touch path                 | `proposed` | Medium                    | PERF-017                     | interaction-shell         |
-| PERF-021 | P0       | Render one calendar slide during startup                      | `proposed` | Medium                    | PERF-017                     | calendar-runtime          |
-| PERF-022 | P1       | Split below-fold calendar and optional home features          | `proposed` | Medium, offline-sensitive | PERF-021                     | calendar-runtime          |
-| PERF-023 | P1       | Remove avoidable UI libraries from the initial shell          | `proposed` | Medium                    | PERF-017                     | startup-shell             |
-| PERF-024 | P1       | Defer optional auth, Convex, and native-platform code         | `proposed` | High                      | PERF-017, PERF-023           | startup-providers         |
-| PERF-025 | P1       | Cache persisted state parsing and delay data revalidation     | `proposed` | Medium, offline-sensitive | PERF-017                     | state-and-data            |
-| PERF-026 | P1       | Add responsive route/language transitions and intent loading  | `proposed` | Medium, offline-sensitive | PERF-017                     | service-navigation        |
-| PERF-027 | P1       | Remove remaining per-fragment MDX reader overhead             | `proposed` | Medium                    | PERF-017                     | service-runtime           |
-| PERF-028 | P2       | Pilot coarse service `content-visibility`                     | `proposed` | High                      | PERF-027                     | service-runtime           |
-| PERF-029 | P2       | Refine service-resolved MDX loading packs                     | `proposed` | High, offline-sensitive   | PERF-017, PERF-027           | mdx-build                 |
-| PERF-030 | P3       | Prototype a compact static-reader content representation      | `deferred` | High, offline-sensitive   | PERF-029                     | mdx-build                 |
-| PERF-031 | P1       | Reduce first-open menu and search latency                     | `proposed` | Low, offline-sensitive    | PERF-017                     | service-navigation        |
-| PERF-032 | P2       | Evaluate replacing swipeable-views gesture handling           | `deferred` | High                      | PERF-017, PERF-020, PERF-021 | calendar-runtime          |
-| PERF-033 | P1       | Physical-device and long-session retention validation         | `proposed` | Low                       | PERF-017                     | validation                |
-| PERF-034 | P1       | Stabilize retained heap over repeated service/language cycles | `proposed` | Medium                    | PERF-017                     | state-and-service-runtime |
+| ID       | Priority | Work unit                                                     | Status      | Risk                      | Depends on                   | Conflict group            |
+| -------- | -------- | ------------------------------------------------------------- | ----------- | ------------------------- | ---------------------------- | ------------------------- |
+| PERF-017 | P0       | Installed-startup and real-touch measurement foundation       | `done`      | Low                       | PERF-016                     | measurement               |
+| PERF-018 | P0       | Defer future-date precaching and cache refresh contention     | `cancelled` | Medium, offline-sensitive | PERF-017                     | startup-client            |
+| PERF-019 | P0       | Defer analytics, tracing, Webvisor, and optional polyfills    | `proposed`  | Medium                    | PERF-017                     | startup-client            |
+| PERF-020 | P0       | Replace the global pull-to-refresh touch path                 | `proposed`  | Medium                    | PERF-017                     | interaction-shell         |
+| PERF-021 | P0       | Render one calendar slide during startup                      | `proposed`  | Medium                    | PERF-017                     | calendar-runtime          |
+| PERF-022 | P1       | Split below-fold calendar and optional home features          | `proposed`  | Medium, offline-sensitive | PERF-021                     | calendar-runtime          |
+| PERF-023 | P1       | Remove avoidable UI libraries from the initial shell          | `proposed`  | Medium                    | PERF-017                     | startup-shell             |
+| PERF-024 | P1       | Defer optional auth, Convex, and native-platform code         | `proposed`  | High                      | PERF-017, PERF-023           | startup-providers         |
+| PERF-025 | P1       | Cache persisted state parsing and delay data revalidation     | `proposed`  | Medium, offline-sensitive | PERF-017                     | state-and-data            |
+| PERF-026 | P1       | Add responsive route/language transitions and intent loading  | `proposed`  | Medium, offline-sensitive | PERF-017                     | service-navigation        |
+| PERF-027 | P1       | Remove remaining per-fragment MDX reader overhead             | `proposed`  | Medium                    | PERF-017                     | service-runtime           |
+| PERF-028 | P2       | Pilot coarse service `content-visibility`                     | `proposed`  | High                      | PERF-027                     | service-runtime           |
+| PERF-029 | P2       | Refine service-resolved MDX loading packs                     | `proposed`  | High, offline-sensitive   | PERF-017, PERF-027           | mdx-build                 |
+| PERF-030 | P3       | Prototype a compact static-reader content representation      | `deferred`  | High, offline-sensitive   | PERF-029                     | mdx-build                 |
+| PERF-031 | P1       | Reduce first-open menu and search latency                     | `proposed`  | Low, offline-sensitive    | PERF-017                     | service-navigation        |
+| PERF-032 | P2       | Evaluate replacing swipeable-views gesture handling           | `deferred`  | High                      | PERF-017, PERF-020, PERF-021 | calendar-runtime          |
+| PERF-033 | P1       | Physical-device and long-session retention validation         | `proposed`  | Low                       | PERF-017                     | validation                |
+| PERF-034 | P1       | Stabilize retained heap over repeated service/language cycles | `proposed`  | Medium                    | PERF-017                     | state-and-service-runtime |
+| PERF-035 | P2       | Validate precache correctness before broader experiments      | `proposed`  | Medium, offline-sensitive | PERF-018                     | precache-validation       |
 
 ## Execution waves
 
@@ -247,13 +248,15 @@ produce machine-readable artifacts.
 
 ### Wave B — Remove critical-window contention
 
-1. PERF-018
+1. PERF-018 — cancelled after both schedule-only candidates failed retention
+   thresholds; immediate behavior remains in place.
 2. PERF-019
 3. PERF-020
 4. PERF-021
 
-PERF-018 and PERF-019 share `client.tsx` and must not be implemented concurrently
-in the same worktree. Their A/B measurements may be prepared independently.
+PERF-018 and PERF-019 share `client.tsx`; PERF-018 is closed before PERF-019 is
+claimed. PERF-035 is required before any future precache concurrency,
+persistence, or deduplication product experiment.
 
 Exit: useful calendar content is no longer competing with optional background
 work; real finger scrolling does not depend on a permanent global non-passive
@@ -296,7 +299,8 @@ work while preserving the complete-document contract.
    React-fiber bottleneck.
 2. PERF-032 only if real-touch measurements still show swipe-handler cost.
 3. PERF-034 to resolve the measured repeated-cycle retained-heap failure.
-4. PERF-033 after each retained wave and before release.
+4. PERF-035 before reopening broader precache product changes.
+5. PERF-033 after each retained wave and before release.
 
 ## Detailed work units
 
@@ -439,7 +443,39 @@ the complete future-date offline corpus is available after the bounded refresh.
 Coordination: likely touches `client.tsx`, `precache.ts`, the worker, and cached
 fetch scheduling. Do not overlap PERF-019 in a shared worktree.
 
-Execution notes: not started.
+Execution notes: `cancelled` on 2026-08-05; both schedule-only candidates were
+rejected and immediate scheduling remains unchanged.
+
+The final decision uses a fresh, comparable three-run core control from the same
+measurement session:
+
+- control: `output/performance/perf-018-immediate-core-smoke-3-a/report.json`;
+- route-ready candidate:
+  `output/performance/perf-018-route-ready-core-smoke-3-a/report.json`, compared
+  in `output/performance/perf-018-route-ready-core-smoke-comparison-a.json`;
+- idle-after-ready candidate:
+  `output/performance/perf-018-idle-core-smoke-3-a/report.json`, compared in
+  `output/performance/perf-018-idle-core-smoke-comparison-a.json`.
+
+The first saved comparison used an older control collected at a different time
+and was temporally confounded; it is not evidence for the final conclusion.
+Against the fresh control's 561.64 ms cold-online process-ready p75,
+route-ready measures 608.93 ms (`-8.42%` improvement, or 8.42% slower) and
+idle-after-ready measures 595.39 ms (`-6.01%` improvement, or 6.01% slower).
+Neither meets the global target.
+
+Both candidates also fail safeguards. Route-ready regresses cold-online task
+time by 7.03%, persisted-parallel complete by 8.46%, persisted-parallel TOC by
+5.16%, and persisted-parallel task time by 10.66%. Idle-after-ready regresses
+the same metrics by 5.79%, 8.37%, 5.69%, and 8.73%, respectively. Semantic and
+offline-compatible shapes pass, but that is necessary rather than sufficient.
+The exact 44-key corpus, ten-day horizon, worker/Capacitor split, and service
+worker were preserved.
+
+Concurrency, successful-refresh persistence, and request deduplication were not
+changed or measured here. They move to PERF-035 and cannot justify a product
+change until its dedicated correctness harness exists and the resulting
+candidate meets both the global evidence threshold and all offline gates.
 
 ### PERF-019 — Defer analytics, tracing, Webvisor, and optional polyfills
 
@@ -797,6 +833,45 @@ editing them.
 Execution notes: not started. Do not weaken either the 10% heap-growth gate or
 the 128 KiB/cycle slope gate to close this unit.
 
+### PERF-035 — Precache correctness harness
+
+Status: `proposed`; P2; offline-sensitive; depends on PERF-018.
+
+Objective: prove future-date precache correctness in missing-data states and on
+physical Capacitor before considering concurrency, persistence, or deduplication
+changes to the product runtime.
+
+Work:
+
+- Add deterministic empty-corpus and partially missing-corpus fixtures that
+  verify recovery to the exact 44-key, ten-day future corpus.
+- Detect missing, unexpected, stale, or duplicate records and failed hashed
+  requests rather than accepting record-count equivalence.
+- Exercise the browser-worker/service-worker path and the separate Capacitor
+  path without collapsing their execution or lifecycle semantics.
+- Run the correctness matrix on a physical Capacitor device before proposing a
+  runtime change.
+- Only after the harness passes, benchmark concurrency limits,
+  successful-refresh persistence, and request deduplication as isolated
+  experiments with fresh same-session controls.
+
+Acceptance:
+
+- Empty and partially missing fixtures converge to exactly the expected 44 keys
+  across the ten-day horizon, while intentionally incomplete results fail.
+- Browser worker, existing service worker, and physical Capacitor paths preserve
+  their current ownership split and produce equivalent required data.
+- Fresh-install, unvisited-content, update, and fully offline gates remain
+  explicit and pass; the known strict first-ever-offline Church
+  Slavonic/parallel gap is not hidden or weakened.
+- No product candidate is retained unless it independently meets the global
+  evidence threshold and all offline safeguards.
+
+Coordination: conflict group `precache-validation`; the dedicated harness comes
+before product changes to precache concurrency, persistence, or deduplication.
+
+Execution notes: not started.
+
 ## Explicit non-goals and rejected defaults
 
 - Full service virtualization without field evidence of memory or scroll failure.
@@ -814,9 +889,10 @@ the 128 KiB/cycle slope gate to close this unit.
 
 Add one row when claiming a unit. Keep completed rows as durable handoff history.
 
-| Unit     | Status | Owner / agent         | Started    | Branch / worktree               | Baseline artifact                           | Latest result / blocker                                                                                                                                                                   | Next handoff                                                               |
-| -------- | ------ | --------------------- | ---------- | ------------------------------- | ------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| PERF-017 | `done` | Root + perf017 agents | 2026-08-05 | `dimaip/frontend-modernization` | Commit `47b69ba4`; existing service reports | Final three-run older-phone baseline and sampled trace pass; separate strict retention run fails only the 13.27% heap-growth gate; strict unvisited CSJ/parallel offline data gap remains | PERF-034 owns heap stabilization; PERF-033 owns physical-device validation |
+| Unit     | Status      | Owner / agent         | Started    | Branch / worktree               | Baseline artifact                                                                                        | Latest result / blocker                                                                                                                                                                   | Next handoff                                                                                |
+| -------- | ----------- | --------------------- | ---------- | ------------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| PERF-017 | `done`      | Root + perf017 agents | 2026-08-05 | `dimaip/frontend-modernization` | Commit `47b69ba4`; existing service reports                                                              | Final three-run older-phone baseline and sampled trace pass; separate strict retention run fails only the 13.27% heap-growth gate; strict unvisited CSJ/parallel offline data gap remains | PERF-034 owns heap stabilization; PERF-033 owns physical-device validation                  |
+| PERF-018 | `cancelled` | Root + perf018 agents | 2026-08-05 | `dimaip/frontend-modernization` | Fresh same-session immediate control: `output/performance/perf-018-immediate-core-smoke-3-a/report.json` | Route-ready and idle-after-ready are 8.42% and 6.01% slower on cold-online process readiness and regress safeguards; semantic/offline-compatible shapes pass                              | Immediate behavior retained; PERF-019 is next and PERF-035 owns broader precache validation |
 
 ## Decision log
 
@@ -829,3 +905,5 @@ Add one row when claiming a unit. Keep completed rows as durable handoff history
 | 2026-08-05 | PERF-017 | Evidence     | Retain immutable build/harness provenance, exact Workbox/IndexedDB coverage, phase-scoped metrics, and a separate strict unvisited-all-language offline gate. |
 | 2026-08-05 | PERF-017 | Completed    | Final three-run older-phone baseline and sampled trace pass with matching harness fingerprints; strict diagnostics remain separate and visible.               |
 | 2026-08-05 | PERF-034 | Proposed     | The strict twenty-cycle run exceeds retained heap by percentage (13.27% > 10%) despite passing the 128 KiB/cycle slope and listener/observer/node gates.      |
+| 2026-08-05 | PERF-018 | Cancelled    | Fresh same-session control shows route-ready and idle-after-ready are 8.42% and 6.01% slower and regress safeguards; immediate scheduling is retained.        |
+| 2026-08-05 | PERF-035 | Proposed     | Build missing-corpus and physical Capacitor correctness coverage before testing precache concurrency, persistence, or deduplication product changes.          |

@@ -3,8 +3,8 @@
 Last updated: 2026-08-05
 
 Overall status: In progress; service-performance implementation and PERF-017
-older-device/perceived-performance measurement are complete; PERF-034
-retained-heap stabilization is proposed
+measurement are complete, PERF-018 was cancelled with immediate behavior
+retained, and PERF-019 is next
 
 Current milestone: M3 — Continue targeted modernization
 
@@ -101,7 +101,7 @@ The next measured performance round is coordinated in
 | PERF-015 | Evaluate progressive parallel/below-fold rendering           | `cancelled`   | High, offline-sensitive   | PERF-011, PERF-014          | [Service performance](./service-performance-study.md#perf-013015--structural-work)                                                          |
 | PERF-016 | Add field performance telemetry                              | `done`        | Low                       | PERF-006                    | [Service performance](./service-performance-study.md#perf-016--field-telemetry)                                                             |
 | PERF-017 | Add installed-startup and real-touch measurement             | `done`        | Low                       | PERF-016                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-017--installed-startup-and-real-touch-measurement-foundation)   |
-| PERF-018 | Defer future-date precache contention                        | `proposed`    | Medium, offline-sensitive | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-018--defer-future-date-precaching-and-cache-refresh-contention) |
+| PERF-018 | Defer future-date precache contention                        | `cancelled`   | Medium, offline-sensitive | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-018--defer-future-date-precaching-and-cache-refresh-contention) |
 | PERF-019 | Defer analytics, tracing, Webvisor, and polyfills            | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-019--defer-analytics-tracing-webvisor-and-optional-polyfills)   |
 | PERF-020 | Replace the global pull-to-refresh touch path                | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-020--replace-the-global-pull-to-refresh-touch-path)             |
 | PERF-021 | Render one calendar slide during startup                     | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-021--render-one-calendar-slide-during-startup)                  |
@@ -118,6 +118,7 @@ The next measured performance round is coordinated in
 | PERF-032 | Evaluate replacing swipeable-views gesture handling          | `deferred`    | High                      | PERF-017, PERF-020–021      | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-032--evaluate-replacing-swipeable-views-gesture-handling)       |
 | PERF-033 | Validate physical-device and long-session retention          | `proposed`    | Low                       | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-033--physical-device-and-long-session-retention-validation)     |
 | PERF-034 | Stabilize retained heap over service/language cycles         | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-034--retained-heap-stabilization)                               |
+| PERF-035 | Build a dedicated precache correctness harness               | `proposed`    | Medium, offline-sensitive | PERF-018                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-035--precache-correctness-harness)                              |
 | DEP-001  | Align React and TypeScript type packages                     | `done`        | Low                       | FND-002                     | [Dependencies](./03-dependencies-and-tooling.md#dep-001-align-the-react-type-system)                                                        |
 | DEP-002  | Apply low-risk patch/minor upgrades                          | `done`        | Low                       | FND-002, TEST-001           | [Dependencies](./03-dependencies-and-tooling.md#dep-002-low-risk-dependency-refresh)                                                        |
 | DEP-003  | Upgrade lint, format, and TypeScript tooling                 | `done`        | Medium                    | FND-003, DEP-001            | [Dependencies](./03-dependencies-and-tooling.md#dep-003-modernize-quality-tooling)                                                          |
@@ -249,6 +250,22 @@ DEP-008 remains deferred until the earlier milestones are complete. A bundler mi
   gate. Strict first-ever offline Church Slavonic and parallel remain a known
   gap because production precaching omits Church Slavonic parts and individual
   `91Slavic` readings.
+- PERF-018 is cancelled with no retained product change. The final conclusion
+  uses fresh same-session three-run reports: `perf-018-immediate-core-smoke-3-a`
+  as control and the route-ready and idle `core-smoke-3-a` candidates with their
+  matching comparison JSON. Route-ready cold-online process readiness is
+  608.93 ms p75 versus 561.64 ms immediate (8.42% slower); idle-after-ready is
+  595.39 ms (6.01% slower). Route-ready also regresses task, persisted complete,
+  TOC, and persisted task by 7.03%, 8.46%, 5.16%, and 10.66%; idle regresses
+  them by 5.79%, 8.37%, 5.69%, and 8.73%. Both preserve semantic and
+  offline-compatible shapes but fail the target and safeguards, so immediate
+  behavior remains. The first older saved comparison was temporally confounded
+  and is excluded from this decision.
+- PERF-035 proposes a dedicated empty/missing-corpus and physical Capacitor
+  correctness harness before any precache concurrency, persistence, or
+  deduplication product change. It must preserve the exact 44-key, ten-day
+  corpus, worker/Capacitor split, service worker, and every offline gate; later
+  candidates still require the global evidence threshold.
 - Older-phone complete Liturgy with production-like gzip: 4.16 s complete /
   5.72 s settled, with the exact deterministic 67-heading content shape.
 - Static delivery now has Brotli/gzip server compression, gzip static-deploy
