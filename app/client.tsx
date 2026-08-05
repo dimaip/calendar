@@ -15,7 +15,9 @@ import './redirectToHome';
 import { isCapacitor } from 'utils/deviceInfo';
 import precache from 'precache.ts';
 import { startPerformanceTelemetry } from 'utils/performanceTelemetry';
+import { markPerformance } from 'utils/performanceMarks';
 
+markPerformance('bundle_evaluated');
 window.APP_LOADED = true;
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -42,6 +44,7 @@ if (isProd) {
 
 const rootElement = document.getElementById('react-root');
 const root = createRoot(rootElement);
+markPerformance('react_render_requested');
 root.render(
     <RecoilRoot>
         <App />
@@ -52,9 +55,11 @@ if (isProd) {
     serviceWorker.register();
 }
 if (isCapacitor()) {
+    markPerformance('background_precache_started', { mode: 'capacitor' });
     precache();
 } else {
     const precacheWorker = new Worker();
+    markPerformance('background_precache_started', { mode: 'worker' });
     precacheWorker.postMessage('precache');
 }
 

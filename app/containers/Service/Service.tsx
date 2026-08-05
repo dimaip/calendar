@@ -24,6 +24,7 @@ import CustomPrayerInput from 'components/CustomPrayers/CustomPrayerInput';
 import { usePrayerTimer } from 'containers/HabitTracker/usePrayerTimer';
 import PostPrayerPrompt from 'containers/HabitTracker/PostPrayerPrompt';
 import { TOCProvider } from 'components/TOC/TOCProvider';
+import { markNavigationIntent, markPerformance } from 'utils/performanceMarks';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
@@ -48,11 +49,15 @@ const ServiceCommitMarker = ({ renderKey }: { renderKey: string }): null => {
         }
 
         performance.clearMarks?.('service_complete_commit');
-        try {
-            performance.mark('service_complete_commit', { detail: { renderKey } });
-        } catch {
-            performance.mark('service_complete_commit');
-        }
+        markPerformance('service_complete_commit', { renderKey });
+    }, [renderKey]);
+
+    return null;
+};
+
+const ServiceShellMarker = ({ renderKey }: { renderKey: string }): null => {
+    useEffect(() => {
+        markPerformance('service_shell_ready', { renderKey });
     }, [renderKey]);
 
     return null;
@@ -154,7 +159,9 @@ const Service = () => {
     }
 
     const setNewDate = (dateString) => {
-        void navigate(`/date/${dateString}/service/${originalServiceId}`, {
+        const target = `/date/${dateString}/service/${originalServiceId}`;
+        markNavigationIntent({ initiator: 'service-date-change', target });
+        void navigate(target, {
             state: { backLink: location.state?.backLink },
         });
     };
@@ -203,6 +210,7 @@ const Service = () => {
             <LangContext.Provider value={effectiveLangState}>
                 <TOCProvider key={`${date}:${currentServiceId}`}>
                     <LayoutInner left={left} right={right} paddedContent={false}>
+                        <ServiceShellMarker renderKey={serviceRenderKey} />
                         {service?.scriptEditor && (
                             <>
                                 <ScriptEditorToggle serviceId={serviceId} />
