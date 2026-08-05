@@ -286,10 +286,13 @@ DEP-008 remains deferred until the earlier milestones are complete. A bundler mi
   with exact-once browser execution, fail-closed external routing, a bounded
   quiet window, disposable-clone unregistration plus blocking of an installed
   intercepting service worker, and fixture identity checks across reports.
-  Normal installed/offline scenarios remain service-worker-controlled. No live
-  vendor bodies or runtime result are claimed, and transfer/network/service-worker
-  cost remains out of scope. The candidate remains undecided until a clean
-  reverse-order rerun passes.
+  Normal installed/offline scenarios remain service-worker-controlled. A
+  fail-closed production capture now records five validated decoded bodies
+  totalling 1,629,159 B; all external non-script traffic is blocked and volatile
+  URL parameters are discarded. The first replay was refused before artifact
+  creation because host load remained above the gate, so no runtime result is
+  claimed; transfer/network/service-worker cost remains out of scope. The
+  candidate remains undecided until a clean reverse-order rerun passes.
   Because the harness blocks/stubs third-party remote execution, Yandex/GTM
   remote costs require a separate controlled diagnostic.
 - Older-phone complete Liturgy with production-like gzip: 4.16 s complete /

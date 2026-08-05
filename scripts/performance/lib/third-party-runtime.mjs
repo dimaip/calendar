@@ -58,9 +58,13 @@ export const matchThirdPartyScriptUrl = (input) => {
         url.pathname === '/gtm.js' &&
         hasSingleNonemptyParameter(url, 'id') &&
         url.searchParams.get('id') === 'GTM-MSCF98P' &&
+        url.searchParams.getAll('gtm_auth').length <= 1 &&
+        (!url.searchParams.has('gtm_auth') || url.searchParams.get('gtm_auth') === '') &&
+        url.searchParams.getAll('gtm_preview').length <= 1 &&
+        (!url.searchParams.has('gtm_preview') || url.searchParams.get('gtm_preview') === '') &&
         url.searchParams.getAll('gtm_cookies_win').length <= 1 &&
         (!url.searchParams.has('gtm_cookies_win') || url.searchParams.get('gtm_cookies_win') === 'x') &&
-        hasExactQueryKeys(url, ['id', 'gtm_cookies_win'])
+        hasExactQueryKeys(url, ['id', 'gtm_auth', 'gtm_preview', 'gtm_cookies_win'])
     ) {
         return {
             className: 'google-tag-manager',
@@ -234,22 +238,26 @@ export const loadThirdPartyRuntimeSnapshot = (manifestPath) => {
     };
 };
 
-const matchKnownSinkRequest = (method, resourceType, url, postData) => {
+export const matchKnownThirdPartyRuntimeSink = (method, resourceType, url, postData) => {
     if (!isPlainHttpsUrl(url)) return null;
     const telemetryResource = ['fetch', 'image', 'other', 'ping', 'xhr'].includes(resourceType);
-    if (!telemetryResource) return null;
     if (
-        url.hostname === 'mc.yandex.ru' &&
+        (telemetryResource || resourceType === 'script') &&
+        ['mc.yandex.com', 'mc.yandex.ru'].includes(url.hostname) &&
         ((url.pathname.replace(/\/$/u, '') === '/watch/99820027' && ['GET', 'POST'].includes(method)) ||
             (/^\/(?:clmap|webvisor)\/99820027\/?$/u.test(url.pathname) && method === 'POST'))
     ) {
         return 'yandex-metrika';
     }
+    if (!telemetryResource) return null;
     if (
-        ['analytics.google.com', 'region1.google-analytics.com', 'www.google-analytics.com'].includes(url.hostname) &&
+        ['analytics.google.com', 'region1.google-analytics.com', 'www.google-analytics.com', 'www.google.com'].includes(
+            url.hostname
+        ) &&
         ['/collect', '/g/collect', '/j/collect'].includes(url.pathname) &&
         ((method === 'GET' && hasSingleNonemptyParameter(url, 'tid')) ||
-            (method === 'POST' && hasSingleNonemptyBodyParameter(postData, 'tid')))
+            (method === 'POST' &&
+                (hasSingleNonemptyParameter(url, 'tid') || hasSingleNonemptyBodyParameter(postData, 'tid'))))
     ) {
         return 'google-analytics';
     }
@@ -308,6 +316,18 @@ export const configureThirdPartyRuntimeSnapshot = async ({ baseUrl, context, sna
         }
         lastExternalActivityAt = Date.now();
 
+        const sink = matchKnownThirdPartyRuntimeSink(request.method(), request.resourceType(), url, request.postData());
+        if (sink) {
+            sinks[sink] = (sinks[sink] ?? 0) + 1;
+            if (request.resourceType() === 'script') {
+                await route.abort('blockedbyclient');
+            } else {
+                fulfilled += 1;
+                await route.fulfill({ body: '', headers: { 'cache-control': 'no-store' }, status: 204 });
+            }
+            return;
+        }
+
         if (request.resourceType() === 'script') {
             const match = matchThirdPartyScriptUrl(requestUrl);
             const entry = match ? snapshot.entriesByCanonicalUrl.get(match.canonicalUrl) : null;
@@ -333,14 +353,6 @@ export const configureThirdPartyRuntimeSnapshot = async ({ baseUrl, context, sna
                 status: entry.status,
             });
             responses[match.className] += 1;
-            return;
-        }
-
-        const sink = matchKnownSinkRequest(request.method(), request.resourceType(), url, request.postData());
-        if (sink) {
-            sinks[sink] = (sinks[sink] ?? 0) + 1;
-            fulfilled += 1;
-            await route.fulfill({ body: '', headers: { 'cache-control': 'no-store' }, status: 204 });
             return;
         }
 

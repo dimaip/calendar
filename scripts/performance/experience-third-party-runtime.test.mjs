@@ -98,6 +98,21 @@ test('canonical script matchers retain exact IDs and normalize only volatile gta
         }
     );
     assert.equal(matchThirdPartyScriptUrl('https://www.googletagmanager.com/gtm.js?id=GTM-WRONG'), null);
+    assert.deepEqual(
+        matchThirdPartyScriptUrl(
+            'https://www.googletagmanager.com/gtm.js?id=GTM-MSCF98P&gtm_auth=&gtm_preview=&gtm_cookies_win=x'
+        ),
+        {
+            canonicalUrl: 'https://www.googletagmanager.com/gtm.js?id=GTM-MSCF98P&gtm_cookies_win=x',
+            className: 'google-tag-manager',
+        }
+    );
+    assert.equal(
+        matchThirdPartyScriptUrl(
+            'https://www.googletagmanager.com/gtm.js?id=GTM-MSCF98P&gtm_auth=unexpected&gtm_preview=&gtm_cookies_win=x'
+        ),
+        null
+    );
     assert.equal(matchThirdPartyScriptUrl('https://www.googletagmanager.com/gtag/js?id=G-EXACT123&unexpected=1'), null);
     assert.equal(matchThirdPartyScriptUrl('http://www.google-analytics.com/analytics.js'), null);
 });
@@ -182,12 +197,21 @@ test('snapshot replay fulfills every captured script exactly once and sinks know
         await context.handler(analyticsSink);
         assert.equal(analyticsSink.actions[0].response.status, 204);
 
+        const queryAnalyticsSink = createRoute('https://www.google.com/g/collect?tid=G-EXACT', 'fetch', 'POST');
+        await context.handler(queryAnalyticsSink);
+        assert.equal(queryAnalyticsSink.actions[0].response.status, 204);
+
+        const yandexScriptSink = createRoute('https://mc.yandex.com/watch/99820027?callback=fixture', 'script');
+        await context.handler(yandexScriptSink);
+        assert.equal(yandexScriptSink.actions[0].type, 'abort');
+
         const activity = await replay.waitForResponses({ timeoutMs: 50 });
         assert.deepEqual(Object.values(activity.counts), [1, 1, 1, 1, 1]);
-        assert.equal(activity.sinks['yandex-metrika'], 1);
+        assert.equal(activity.sinks['yandex-metrika'], 2);
+        assert.equal(activity.sinks['google-analytics'], 2);
 
         const invalidAnalyticsSink = createRoute(
-            'https://www.google-analytics.com/j/collect?tid=QUERY-ONLY',
+            'https://www.google-analytics.com/j/collect',
             'xhr',
             'POST',
             'v=1&t=pageview'

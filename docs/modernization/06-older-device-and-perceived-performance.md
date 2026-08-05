@@ -563,8 +563,19 @@ fulfillment does not reproduce production compression or transport throttling,
 and Playwright cannot route requests already intercepted by a service worker,
 so its results may support parse/evaluate/runtime scheduling decisions but must
 not be presented as total third-party network cost or service-worker overhead.
-No live script bodies have been captured and no production runtime result is
-claimed yet.
+
+The fail-closed capture command now writes through a sibling staging directory,
+refuses nonempty destinations, blocks every external non-script request, and
+persists only canonical allowlisted URLs. The 2026-08-05 production capture at
+`output/performance/perf-019-third-party-runtime-fixture-2026-08-05/manifest.json`
+contains five decoded bodies totalling 1,629,159 B with fixture digest
+`4ff1cf6b3eb5e156bf2fa26a73c479c364bcfadd96cfed70095b0f39a8a124da`.
+Production also exposed two narrow URL-shape facts now covered by tests: the
+installed GTM client emits empty `gtm_auth`/`gtm_preview` parameters, and Yandex
+uses a `.com` JSONP watch request that returns a redirect with no executable body
+and is treated as blocked telemetry rather than a sixth runtime body. No runtime timing result
+is claimed yet: the first CPU-only replay attempt was rejected before artifact
+creation at 4.63/3.98 one-/five-minute load per CPU, above the 0.75 gate.
 
 The next action is a fresh reverse-order schema 3 control/candidate smoke after
 the load gate passes, followed by twenty-run comparison only if the smoke is
@@ -967,11 +978,11 @@ Execution notes: not started.
 
 Add one row when claiming a unit. Keep completed rows as durable handoff history.
 
-| Unit     | Status        | Owner / agent         | Started    | Branch / worktree               | Baseline artifact                                                                                                                                      | Latest result / blocker                                                                                                                                                                   | Next handoff                                                                                    |
-| -------- | ------------- | --------------------- | ---------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| PERF-017 | `done`        | Root + perf017 agents | 2026-08-05 | `dimaip/frontend-modernization` | Commit `47b69ba4`; existing service reports                                                                                                            | Final three-run older-phone baseline and sampled trace pass; separate strict retention run fails only the 13.27% heap-growth gate; strict unvisited CSJ/parallel offline data gap remains | PERF-034 owns heap stabilization; PERF-033 owns physical-device validation                      |
-| PERF-018 | `cancelled`   | Root + perf018 agents | 2026-08-05 | `dimaip/frontend-modernization` | Fresh same-session immediate control: `output/performance/perf-018-immediate-core-smoke-3-a/report.json`                                               | Route-ready and idle-after-ready are 8.42% and 6.01% slower on cold-online process readiness and regress safeguards; semantic/offline-compatible shapes pass                              | Immediate behavior retained; PERF-019 is next and PERF-035 owns broader precache validation     |
-| PERF-019 | `in-progress` | Root + perf019 agents | 2026-08-05 | `dimaip/frontend-modernization` | Immutable schema 1 anchor: `output/performance/perf-018-immediate-core-smoke-3-a/report.json`; candidate bundle: `perf-019-tracing-bundle-report.json` | BrowserTracing saves 29,513 B raw / 8,726 B gzip; latency runs invalidated by host load above 180; schema 3 rejects contaminated runs and mismatched vendor fixtures                      | Rerun reverse-order schema 3 tracing A/B; then capture and validate the CPU-only vendor fixture |
+| Unit     | Status        | Owner / agent         | Started    | Branch / worktree               | Baseline artifact                                                                                                                                      | Latest result / blocker                                                                                                                                                                   | Next handoff                                                                                   |
+| -------- | ------------- | --------------------- | ---------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| PERF-017 | `done`        | Root + perf017 agents | 2026-08-05 | `dimaip/frontend-modernization` | Commit `47b69ba4`; existing service reports                                                                                                            | Final three-run older-phone baseline and sampled trace pass; separate strict retention run fails only the 13.27% heap-growth gate; strict unvisited CSJ/parallel offline data gap remains | PERF-034 owns heap stabilization; PERF-033 owns physical-device validation                     |
+| PERF-018 | `cancelled`   | Root + perf018 agents | 2026-08-05 | `dimaip/frontend-modernization` | Fresh same-session immediate control: `output/performance/perf-018-immediate-core-smoke-3-a/report.json`                                               | Route-ready and idle-after-ready are 8.42% and 6.01% slower on cold-online process readiness and regress safeguards; semantic/offline-compatible shapes pass                              | Immediate behavior retained; PERF-019 is next and PERF-035 owns broader precache validation    |
+| PERF-019 | `in-progress` | Root + perf019 agents | 2026-08-05 | `dimaip/frontend-modernization` | Immutable schema 1 anchor: `output/performance/perf-018-immediate-core-smoke-3-a/report.json`; candidate bundle: `perf-019-tracing-bundle-report.json` | BrowserTracing saves 29,513 B raw / 8,726 B gzip; the validated five-body vendor fixture totals 1,629,159 B; timing remains blocked by host load                                          | Rerun reverse-order schema 3 tracing A/B and CPU-only vendor replay after the load gate passes |
 
 ## Decision log
 
@@ -988,4 +999,5 @@ Add one row when claiming a unit. Keep completed rows as durable handoff history
 | 2026-08-05 | PERF-035 | Proposed     | Build missing-corpus and physical Capacitor correctness coverage before testing precache concurrency, persistence, or deduplication product changes.              |
 | 2026-08-05 | PERF-019 | Claimed      | First candidate isolates BrowserTracing removal while preserving Sentry errors and all other subsystems; third-party remote costs remain a separate diagnostic.   |
 | 2026-08-05 | PERF-019 | Evidence fix | Initial timing was invalidated after host load exceeded 180; schema 2 adds fail-fast preflight, scenario checkpoints, CPU/load compatibility, and no-index roots. |
-| 2026-08-05 | PERF-019 | Fixture gate | Schema 3 adds hash-verified, fail-closed, CPU-only five-script replay; live bodies and a production runtime result remain deliberately absent.                    |
+| 2026-08-05 | PERF-019 | Fixture gate | Schema 3 adds hash-verified, fail-closed, CPU-only five-script replay; capture and runtime evidence remain separate gates.                                        |
+| 2026-08-05 | PERF-019 | Fixture data | Captured and validated the five production bodies (1,629,159 B decoded); the first replay was correctly refused by the host-load preflight.                       |
