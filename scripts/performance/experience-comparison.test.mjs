@@ -1,0 +1,321 @@
+import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import test from 'node:test';
+
+import {
+    compareExperienceReports,
+    createArtifactWriter,
+    createExperienceReportIntegrity,
+} from './lib/experience-artifacts.mjs';
+import {
+    createBuildFingerprint,
+    createHarnessFingerprint,
+    verifyBuildFingerprint,
+    verifyHarnessFingerprint,
+} from './lib/build-fingerprint.mjs';
+import { parseComparisonArguments } from './lib/experience-options.mjs';
+
+const createBuild = (directory, marker) => {
+    fs.mkdirSync(path.join(directory, 'built'), { recursive: true });
+    fs.writeFileSync(path.join(directory, 'index.html'), `<title>${marker}</title>`);
+    fs.writeFileSync(path.join(directory, 'service-worker.js'), `self.marker=${JSON.stringify(marker)}`);
+    fs.writeFileSync(path.join(directory, 'built', 'precache.worker.123.js'), `postMessage(${JSON.stringify(marker)})`);
+    fs.writeFileSync(path.join(directory, 'built', 'main.123.js'), `window.marker=${JSON.stringify(marker)}`);
+};
+
+const harnessFingerprint = createHarnessFingerprint(process.cwd());
+
+const createReport = ({ mode = 'comparison', root, runs = mode === 'comparison' ? 20 : 3, target = 1000 }) => {
+    const scenario = 'startup-process-cold-offline';
+    const report = {
+        allRunsPassed: true,
+        environment: {
+            browser: 'chromium',
+            browserVersion: { product: 'Chrome/151.0.0.0', protocolVersion: '1.3', revision: 'fixture' },
+            harnessFingerprint,
+            hostname: 'fixture-host',
+            platform: 'fixture-platform',
+            processor: 'fixture-processor',
+            projectRoot: process.cwd(),
+        },
+        options: {
+            browser: 'chromium',
+            contentEncoding: 'gzip',
+            headless: true,
+            mode,
+            root,
+            runs,
+            selectedProfiles: ['older-phone'],
+            selectedScenarios: [scenario],
+            stateFixture: 'anonymous-normal',
+            trace: 'none',
+        },
+        profiles: {
+            'older-phone': {
+                configuration: { cpuRate: 4, latencyMs: 150 },
+                runs: Array.from({ length: runs }, (_, index) => ({
+                    index,
+                    scenarioPassed: { [scenario]: true },
+                    scenarios: {
+                        [scenario]: {
+                            csj: {
+                                headingShapeHash: 'csj-shape',
+                                paragraphCount: 84,
+                                renderKey: 'csj',
+                                serviceWorkerControlled: true,
+                                textCharacters: 4096,
+                            },
+                            date: {
+                                headingShapeHash: 'date-shape',
+                                paragraphCount: 42,
+                                serviceWorkerControlled: true,
+                                textCharacters: 2048,
+                            },
+                            offline: true,
+                            parallel: {
+                                headingShapeHash: 'parallel-shape',
+                                paragraphCount: 168,
+                                renderKey: 'parallel',
+                                serviceWorkerControlled: true,
+                                textCharacters: 8192,
+                            },
+                            readyMs: target,
+                            ru: {
+                                headingShapeHash: 'ru-shape',
+                                paragraphCount: 84,
+                                renderKey: 'ru',
+                                serviceWorkerControlled: true,
+                                textCharacters: 4096,
+                            },
+                        },
+                    },
+                })),
+                seed: { active: true, cacheEntries: [{ entries: 4, name: 'precache' }], controlled: true },
+            },
+        },
+        route: { date: '/#/date/2026-07-28', fixedDate: '2026-07-28', service: '/#/service/test' },
+        schemaVersion: 1,
+        summary: {
+            'older-phone.startup-process-cold-offline.readyMs': { p75: target, samples: runs },
+        },
+    };
+    report.integrity = createExperienceReportIntegrity(report, root);
+    return report;
+};
+
+test('build fingerprints cover core, precache, and sorted built artifact content', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-build-'));
+    try {
+        createBuild(root, 'baseline');
+        const fingerprint = createBuildFingerprint(root);
+        assert.equal(fingerprint.algorithm, 'sha256');
+        assert.equal(fingerprint.assetInventory.count, 2);
+        assert.equal(fingerprint.precache.length, 1);
+        assert.equal(verifyBuildFingerprint(fingerprint, root).valid, true);
+
+        fs.writeFileSync(path.join(root, 'built', 'main.123.js'), 'window.marker="changed"');
+        const verification = verifyBuildFingerprint(fingerprint, root);
+        assert.equal(verification.valid, false);
+        assert(verification.issues.some((issue) => issue.includes('digest')));
+    } finally {
+        fs.rmSync(root, { force: true, recursive: true });
+    }
+});
+
+test('harness fingerprint is self-verifying and changes with harness source', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-harness-'));
+    try {
+        fs.mkdirSync(path.join(root, 'scripts', 'performance'), { recursive: true });
+        fs.writeFileSync(path.join(root, 'scripts', 'performance', 'benchmark.mjs'), 'export const version = 1;');
+        fs.writeFileSync(path.join(root, 'package.json'), '{}');
+        fs.writeFileSync(path.join(root, 'yarn.lock'), '# fixture');
+        const fingerprint = createHarnessFingerprint(root);
+        assert.equal(verifyHarnessFingerprint(fingerprint, root).valid, true);
+        fs.writeFileSync(path.join(root, 'scripts', 'performance', 'benchmark.mjs'), 'export const version = 2;');
+        assert.equal(verifyHarnessFingerprint(fingerprint, root).valid, false);
+    } finally {
+        fs.rmSync(root, { force: true, recursive: true });
+    }
+});
+
+test('report integrity detects build changes between the pre-run and post-run fingerprints', () => {
+    const root = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-build-mutation-'));
+    try {
+        createBuild(root, 'before');
+        const report = createReport({ mode: 'smoke', root });
+        const before = createBuildFingerprint(root);
+        fs.writeFileSync(path.join(root, 'built', 'main.123.js'), 'window.marker="after"');
+        const integrity = createExperienceReportIntegrity(report, root, { buildFingerprintBefore: before });
+        assert.equal(integrity.buildImmutability.unchanged, false);
+    } finally {
+        fs.rmSync(root, { force: true, recursive: true });
+    }
+});
+
+test('authoritative comparison accepts self-verified different builds with exact semantic shape', () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-different-builds-'));
+    const baselineRoot = path.join(directory, 'baseline');
+    const candidateRoot = path.join(directory, 'candidate');
+    try {
+        createBuild(baselineRoot, 'baseline');
+        createBuild(candidateRoot, 'candidate');
+        const comparison = compareExperienceReports({
+            baseline: createReport({ root: baselineRoot, target: 1000 }),
+            candidate: createReport({ root: candidateRoot, target: 850 }),
+            targets: ['older-phone.startup-process-cold-offline.readyMs'],
+        });
+        assert.equal(comparison.authoritative, true);
+        assert.equal(comparison.buildIdentity.sameBuild, false);
+        assert.equal(comparison.compatible, true);
+        assert.equal(comparison.passed, true);
+    } finally {
+        fs.rmSync(directory, { force: true, recursive: true });
+    }
+});
+
+test('comparison aggregates malformed gates, semantic drift, trace, and sample incompatibilities', () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-incompatible-'));
+    const baselineRoot = path.join(directory, 'baseline');
+    const candidateRoot = path.join(directory, 'candidate');
+    try {
+        createBuild(baselineRoot, 'baseline');
+        createBuild(candidateRoot, 'candidate');
+        const baseline = createReport({ root: baselineRoot });
+        const candidate = createReport({ root: candidateRoot });
+        delete baseline.allRunsPassed;
+        candidate.options.trace = 'all';
+        candidate.environment.hostname = 'different-host';
+        candidate.environment.browserVersion = { product: 'Chrome/152.0.0.0' };
+        candidate.profiles['older-phone'].runs[0].scenarios['startup-process-cold-offline'].date.paragraphCount = 43;
+        const comparison = compareExperienceReports({ baseline, candidate, targets: ['missing'] });
+        assert.equal(comparison.passed, false);
+        assert(comparison.incompatibilities.some((issue) => issue.includes('allRunsPassed')));
+        assert(comparison.incompatibilities.some((issue) => issue.includes('trace')));
+        assert(comparison.incompatibilities.some((issue) => issue.includes('actual browser version')));
+        assert(comparison.incompatibilities.some((issue) => issue.includes('host differ')));
+        assert(comparison.incompatibilities.some((issue) => issue.includes('paragraphCount changed')));
+        assert(comparison.incompatibilities.some((issue) => issue.includes('missing a finite p75')));
+    } finally {
+        fs.rmSync(directory, { force: true, recursive: true });
+    }
+});
+
+test('comparison CLI emits all incompatibilities and exits nonzero', () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-cli-incompatible-'));
+    const baselineRoot = path.join(directory, 'baseline-build');
+    const candidateRoot = path.join(directory, 'candidate-build');
+    try {
+        createBuild(baselineRoot, 'baseline');
+        createBuild(candidateRoot, 'candidate');
+        const baseline = createReport({ root: baselineRoot });
+        const candidate = createReport({ root: candidateRoot });
+        delete baseline.allRunsPassed;
+        candidate.options.trace = 'sampled';
+        const baselineFile = path.join(directory, 'baseline.json');
+        const candidateFile = path.join(directory, 'candidate.json');
+        fs.writeFileSync(baselineFile, JSON.stringify(baseline));
+        fs.writeFileSync(candidateFile, JSON.stringify(candidate));
+        const result = spawnSync(
+            process.execPath,
+            [
+                new URL('./compare-experience.mjs', import.meta.url).pathname,
+                '--baseline',
+                baselineFile,
+                '--candidate',
+                candidateFile,
+                '--output',
+                path.join(directory, 'comparison.json'),
+                '--targets',
+                'older-phone.startup-process-cold-offline.readyMs',
+            ],
+            { encoding: 'utf8' }
+        );
+        const comparison = JSON.parse(result.stdout);
+        assert.equal(result.status, 1);
+        assert(comparison.incompatibilities.some((issue) => issue.includes('allRunsPassed')));
+        assert(comparison.incompatibilities.some((issue) => issue.includes('trace')));
+    } finally {
+        fs.rmSync(directory, { force: true, recursive: true });
+    }
+});
+
+test('smoke comparisons are explicitly informational while comparison mode requires twenty samples', () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-samples-'));
+    const baselineRoot = path.join(directory, 'baseline');
+    const candidateRoot = path.join(directory, 'candidate');
+    try {
+        createBuild(baselineRoot, 'baseline');
+        createBuild(candidateRoot, 'candidate');
+        const smoke = compareExperienceReports({
+            baseline: createReport({ mode: 'smoke', root: baselineRoot, target: 1000 }),
+            candidate: createReport({ mode: 'smoke', root: candidateRoot, target: 850 }),
+            targets: ['older-phone.startup-process-cold-offline.readyMs'],
+        });
+        assert.equal(smoke.informational, true);
+        assert.equal(smoke.authoritative, false);
+        assert.equal(smoke.passed, true);
+
+        const shortBaseline = createReport({ root: baselineRoot, runs: 19, target: 1000 });
+        const shortCandidate = createReport({ root: candidateRoot, runs: 19, target: 850 });
+        const comparison = compareExperienceReports({
+            baseline: shortBaseline,
+            candidate: shortCandidate,
+            targets: ['older-phone.startup-process-cold-offline.readyMs'],
+        });
+        assert.equal(comparison.authoritative, true);
+        assert.equal(comparison.passed, false);
+        assert(comparison.incompatibilities.some((issue) => issue.includes('at least 20')));
+    } finally {
+        fs.rmSync(directory, { force: true, recursive: true });
+    }
+});
+
+test('comparison arguments validate finite thresholds and support higher-is-better metrics', () => {
+    assert.throws(
+        () =>
+            parseComparisonArguments([
+                '--baseline',
+                'baseline.json',
+                '--candidate',
+                'candidate.json',
+                '--output',
+                'comparison.json',
+                '--targets',
+                'score',
+                '--threshold-percent',
+                'Infinity',
+            ]),
+        /finite, nonnegative/u
+    );
+    const options = parseComparisonArguments([
+        '--baseline',
+        'baseline.json',
+        '--candidate',
+        'candidate.json',
+        '--output',
+        'comparison.json',
+        '--targets',
+        'score',
+        '--direction',
+        'higher',
+    ]);
+    assert.equal(options.direction, 'higher');
+});
+
+test('artifact writer refuses a nonempty output and duplicate artifacts', () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-artifacts-'));
+    try {
+        fs.writeFileSync(path.join(directory, 'stale.json'), '{}');
+        assert.throws(() => createArtifactWriter(directory), /not empty/u);
+
+        fs.rmSync(path.join(directory, 'stale.json'));
+        const writer = createArtifactWriter(directory);
+        writer.writeJson('report.json', { fresh: true });
+        assert.throws(() => writer.writeJson('report.json', { stale: true }), /EEXIST/u);
+    } finally {
+        fs.rmSync(directory, { force: true, recursive: true });
+    }
+});
