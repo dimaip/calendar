@@ -18,6 +18,15 @@ const SettingsMenu = () => {
     const theme = useTheme();
     const setPendingUpdate = useSetRecoilState(pendingUpdateState);
     const queryClient = useQueryClient();
+    const refreshApplicationData = async () => {
+        const newVersion = await checkVersion();
+        if (newVersion) {
+            setPendingUpdate(newVersion);
+        }
+        await precache(true);
+        await queryClient.refetchQueries();
+    };
+
     if (!menuShown) {
         return null;
     }
@@ -181,13 +190,8 @@ const SettingsMenu = () => {
                                 className={css`
                                     text-decoration: underline;
                                 `}
-                                onClick={async () => {
-                                    const newVersion = await checkVersion();
-                                    if (newVersion) {
-                                        setPendingUpdate(newVersion);
-                                    }
-                                    await precache(true);
-                                    await queryClient.refetchQueries();
+                                onClick={() => {
+                                    void refreshApplicationData();
                                 }}
                             >
                                 Обновить данные

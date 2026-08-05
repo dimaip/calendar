@@ -19,12 +19,11 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
     const [hasMore, setHasMore] = useState(true);
     const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-    const { data: sermons, status: sermonsStatus, refetch } = useFilteredSermons(
-        authorId,
-        themeId,
-        limit || SERMONS_PER_PAGE,
-        limit ? undefined : offset
-    );
+    const {
+        data: sermons,
+        status: sermonsStatus,
+        refetch,
+    } = useFilteredSermons(authorId, themeId, limit || SERMONS_PER_PAGE, limit ? undefined : offset);
 
     const isLoading = sermonsStatus === 'pending' && offset === 0;
     const isError = sermonsStatus === 'error';
@@ -50,7 +49,7 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
         }
     }, [sermons, offset, limit]);
 
-    const handleLoadMore = async () => {
+    const handleLoadMore = () => {
         setIsLoadingMore(true);
         setOffset((prev) => prev + SERMONS_PER_PAGE);
     };
@@ -58,7 +57,7 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
     // Refetch when offset changes
     useEffect(() => {
         if (offset > 0) {
-            refetch();
+            void refetch();
         }
     }, [offset, refetch]);
 

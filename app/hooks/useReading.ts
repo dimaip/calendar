@@ -6,6 +6,7 @@ import useReadings from './useReadings';
 import cachedFetch from 'utils/cachedFetch';
 import type { ReadingResponse } from 'data/contracts';
 import { queryKeys } from 'data/queryKeys';
+import { getReadingQueryPlan } from 'data/readingQueryPolicy';
 
 export async function fetchReading(
     link: string,
@@ -44,15 +45,19 @@ const useReading = (
     date: string,
     translationPriority: string[] = []
 ): ReadingQueryResult => {
-    const { data: readings } = useReadings(date);
+    const initialQueryPlan = getReadingQueryPlan(translation, 'pending', false);
+    const readingsQuery = useReadings(date, initialQueryPlan.fetchBulkReadings);
+    const bulkReading = readingsQuery.data?.[link];
+    const queryPlan = getReadingQueryPlan(translation, readingsQuery.status, Boolean(bulkReading));
     const readingQuery = useQuery<ReadingResponse>({
         queryKey: queryKeys.reading(link, translation),
         queryFn: async () => fetchReading(link, translation, translationPriority),
         retry: false,
+        enabled: queryPlan.fetchIndividualReading,
     });
-    if (readings?.[link] && translation === 'default') {
+    if (queryPlan.useBulkReading) {
         return {
-            data: readings[link],
+            data: bulkReading,
             status: 'success',
         };
     }

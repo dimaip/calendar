@@ -1,32 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { css } from '@emotion/css';
-import { useRecoilValue } from 'recoil';
 
 import SelectBox from '../../components/SelectBox/SelectBox';
 
-import TOCState from 'state/TOCState';
+import { useTOCItems } from 'components/TOC/TOCProvider';
 
-interface TOCSwitcherProps {
-    lang: string;
-    service?: unknown;
-}
-
-const TOCSwitcher = ({ lang }: TOCSwitcherProps): JSX.Element => {
-    const TOC = useRecoilValue(TOCState);
+const TOCSwitcher = (): JSX.Element => {
+    const TOC = useTOCItems();
     const [activeItem, setActiveItem] = useState('');
+    const observerRef = useRef<IntersectionObserver | null>(null);
+    const observedNodesRef = useRef(new Map<string, Element>());
 
     useEffect(() => {
-        if (typeof window.IntersectionObserver !== 'function' || !TOC.length) {
+        if (typeof window.IntersectionObserver !== 'function') {
             return undefined;
         }
 
-        let disposed = false;
-        const pendingTimeouts = new Set<number>();
         const observer = new IntersectionObserver(
             (entries) => {
-                if (disposed) {
-                    return;
-                }
                 entries.forEach((entry) => {
                     if (entry.isIntersecting && entry.target.id) {
                         setActiveItem(entry.target.id);
@@ -38,34 +29,47 @@ const TOCSwitcher = ({ lang }: TOCSwitcherProps): JSX.Element => {
                 threshold: 0.3,
             }
         );
-
-        // The MDX content can mount after the TOC data, so retry until each heading exists.
-        const observeOrCue = (nodeId: string) => {
-            if (disposed) {
-                return;
-            }
-            const node = document.getElementById(nodeId);
-            if (node) {
-                observer.observe(node);
-                return;
-            }
-
-            const timeoutId = window.setTimeout(() => {
-                pendingTimeouts.delete(timeoutId);
-                observeOrCue(nodeId);
-            }, 500);
-            pendingTimeouts.add(timeoutId);
-        };
-
-        TOC.forEach(({ value }) => observeOrCue(value));
+        observerRef.current = observer;
 
         return () => {
-            disposed = true;
-            pendingTimeouts.forEach((timeoutId) => window.clearTimeout(timeoutId));
-            pendingTimeouts.clear();
             observer.disconnect();
+            observerRef.current = null;
+            observedNodesRef.current.clear();
         };
-    }, [lang, TOC]);
+    }, []);
+
+    useEffect(() => {
+        const observer = observerRef.current;
+        if (!observer) {
+            return;
+        }
+
+        const nextNodes = new Map<string, Element>();
+        TOC.forEach(({ value }) => {
+            const node = document.getElementById(value);
+            if (node) {
+                nextNodes.set(value, node);
+            }
+        });
+
+        observedNodesRef.current.forEach((node, id) => {
+            if (nextNodes.get(id) !== node) {
+                observer.unobserve(node);
+            }
+        });
+        nextNodes.forEach((node, id) => {
+            if (observedNodesRef.current.get(id) !== node) {
+                observer.observe(node);
+            }
+        });
+        observedNodesRef.current = nextNodes;
+    }, [TOC]);
+
+    useEffect(() => {
+        if (activeItem && !TOC.some(({ value }) => value === activeItem)) {
+            setActiveItem('');
+        }
+    }, [activeItem, TOC]);
 
     return (
         <SelectBox
@@ -93,7 +97,7 @@ const TOCSwitcher = ({ lang }: TOCSwitcherProps): JSX.Element => {
                     setActiveItem(anchorID);
                     try {
                         domNode.scrollIntoView({ block: 'center' });
-                    } catch (error) {
+                    } catch {
                         // fallback to prevent browser crashing
                         domNode.scrollIntoView();
                     }
