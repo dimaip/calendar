@@ -545,6 +545,16 @@ Schema 1 reports remain historical anchors but cannot be used in a new
 authoritative comparison; schema 2 introduced host-load integrity and schema 3
 adds third-party fixture provenance.
 
+A read-only process audit found that the current sustained load is primarily
+32–34 Spotlight workers indexing the separate 5.1 GB
+`~/conductor/workspaces/marketplace/deed-426` workspace, not the calendar
+artifact directory (which has the no-index marker). Before any authoritative
+rerun, pause that workspace or add it to Spotlight Privacy, leave other browser
+and build work idle, wait for the five-minute average to decay, and require both
+the one- and five-minute totals to be at or below 7.5 on this ten-logical-CPU
+host. The harness remains the final authority and will reject the run if the
+machine becomes busy again.
+
 The remaining vendor-runtime experiments now have a separate, opt-in
 `startup-third-party-runtime` foundation. It validates a manifest and all five
 executable bodies by SHA-256, replays only the exact Yandex, GTM, gtag,
