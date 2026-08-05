@@ -4,49 +4,93 @@ import { css } from '@emotion/css';
 import Button from 'components/Button/Button';
 import SolidSection from 'components/SolidSection/SolidSection';
 import { useTheme } from '@emotion/react';
-import { useRecoilState, useRecoilValue } from 'recoil';
-import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
-import disabledPrayersState from 'state/disabledPrayersState';
 import Visibility from 'components/svgs/Visibility';
 import VisibilityOff from 'components/svgs/VisibilityOff';
 import CustomPrayers from 'components/CustomPrayers/CustomPrayers';
 
 import { LangContext } from '../LangContext';
-import { ServiceContext } from '../ServiceContext';
-import currentScriptVersionState from 'state/currentScriptVersion';
+import { useMdxLoaderRuntime } from './MdxLoaderRuntime';
+import { createSuspenseResourceCache } from './suspenseResourceCache';
 
 export const MdxLoaderContext = createContext(0);
 
-const catchFailedImport = (e) => {
-    console.warn('Loading mdx file failed', e);
-    Sentry.captureException?.(e);
+interface MdxLoaderProps {
+    isCustomPrayer?: boolean;
+    lang?: string;
+    langOverride?: string;
+    src: string;
+    [key: string]: unknown;
+}
+
+const catchFailedImport = (error: unknown): never => {
+    console.warn('Loading mdx file failed', error);
+    Sentry.captureException?.(error);
+    throw error instanceof Error ? error : new Error(String(error));
 };
 
 /**
  * The world is not without good people: https://twitter.com/JLarky/status/1585448425813725184
  */
-const componentCache = new Map();
+const componentCache = createSuspenseResourceCache<React.ComponentType<MdxLoaderProps>>();
 
-const LazyComponent = (props) => {
-    const key = `${props.src}${props.lang || 'ru'}`;
-    const Component = componentCache.get(key);
-    if (Component) {
-        return <Component {...props} />;
+interface MdxModule {
+    default: React.ComponentType<MdxLoaderProps>;
+}
+
+const loadMdxModule = async (src: string, language: string): Promise<MdxModule> => {
+    if (src.startsWith('Liturgies/Katekhumen/') && language === 'ru') {
+        const relativeSource = src.slice('Liturgies/Katekhumen/'.length);
+        return (await import(
+            /* webpackMode: "lazy-once", webpackChunkName: "mdx-liturgy-katekhumen-ru" */
+            `containers/Service/Texts/Liturgies/Katekhumen/${relativeSource}/ru.mdx`
+        )) as MdxModule;
     }
-    throw import(`containers/Service/Texts/${props.src}/${props.lang || 'ru'}.mdx`)
-        .then((x) => {
-            componentCache.set(key, x.default);
-        })
-        .catch(catchFailedImport);
+    if (src.startsWith('Liturgies/Katekhumen/') && language === 'csj') {
+        const relativeSource = src.slice('Liturgies/Katekhumen/'.length);
+        return (await import(
+            /* webpackMode: "lazy-once", webpackChunkName: "mdx-liturgy-katekhumen-csj" */
+            `containers/Service/Texts/Liturgies/Katekhumen/${relativeSource}/csj.mdx`
+        )) as MdxModule;
+    }
+    if (src.startsWith('Liturgies/Vernie/') && language === 'ru') {
+        const relativeSource = src.slice('Liturgies/Vernie/'.length);
+        return (await import(
+            /* webpackMode: "lazy-once", webpackChunkName: "mdx-liturgy-vernie-ru" */
+            `containers/Service/Texts/Liturgies/Vernie/${relativeSource}/ru.mdx`
+        )) as MdxModule;
+    }
+    if (src.startsWith('Liturgies/Vernie/') && language === 'csj') {
+        const relativeSource = src.slice('Liturgies/Vernie/'.length);
+        return (await import(
+            /* webpackMode: "lazy-once", webpackChunkName: "mdx-liturgy-vernie-csj" */
+            `containers/Service/Texts/Liturgies/Vernie/${relativeSource}/csj.mdx`
+        )) as MdxModule;
+    }
+
+    return (await import(
+        /* webpackExclude: /Liturgies\/(?:Katekhumen|Vernie)\// */
+        `containers/Service/Texts/${src}/${language}.mdx`
+    )) as MdxModule;
 };
 
-const MdxLoader = (props) => {
+const LazyComponent = (props: MdxLoaderProps): JSX.Element => {
+    const language = props.lang || 'ru';
+    const Component = componentCache.read(`${props.src}\0${language}`, async () => {
+        try {
+            const module = await loadMdxModule(props.src, language);
+            return module.default;
+        } catch (error) {
+            return catchFailedImport(error);
+        }
+    });
+
+    return <Component {...props} />;
+};
+
+const MdxLoader = (props: MdxLoaderProps): JSX.Element | null => {
     const theme = useTheme();
-    const serviceContext = useContext(ServiceContext);
-    const serviceId = serviceContext?.serviceId;
-    const currentScriptVersion = useRecoilValue<string | null>(currentScriptVersionState(serviceId));
-    const [scriptEditorIsActive] = useRecoilState(scriptEditorIsActiveState);
-    const [disabledPrayers, setDisabledPrayers] = useRecoilState(disabledPrayersState);
+    const { currentScriptVersion, disabledPrayers, scriptEditorIsActive, serviceId, setDisabledPrayers } =
+        useMdxLoaderRuntime();
     const { lang, langA, langB } = useContext(LangContext);
     const nestingLevel = useContext(MdxLoaderContext);
     const langEffective = props.langOverride || lang;
@@ -144,12 +188,14 @@ const MdxLoader = (props) => {
             </>
         );
     }
+    if (isDisabled) {
+        return null;
+    }
+
     return (
-        !isDisabled && (
-            <MdxLoaderContext.Provider value={nestingLevel + 1}>
-                <LazyComponent {...props} src={src} lang={langEffective} />
-            </MdxLoaderContext.Provider>
-        )
+        <MdxLoaderContext.Provider value={nestingLevel + 1}>
+            <LazyComponent {...props} src={src} lang={langEffective} />
+        </MdxLoaderContext.Provider>
     );
 };
 

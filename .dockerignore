@@ -7,3 +7,15 @@ convertBibleQuote/bible
 /electron
 /android
 /.circleci
+/node_modules
+/.git
+/.env
+/.env.*
+/.auto-claude
+/ZITADEL_AUTH_CONFIG.md
+/www/built
+/www/index.html
+/www/service-worker.*
+/www/version
+/test-results
+/playwright-report

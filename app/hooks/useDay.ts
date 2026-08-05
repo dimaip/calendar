@@ -4,6 +4,7 @@ import type { UseQueryResult } from '@tanstack/react-query';
 import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
 import type { Day, DayApiResponse } from 'data/contracts';
 import { queryKeys } from 'data/queryKeys';
+import { getCalendarQueryPolicy } from 'data/calendarQueryPolicy';
 import cachedFetch from 'utils/cachedFetch';
 
 export async function fetchDay(date: string): Promise<Day> {
@@ -43,6 +44,7 @@ const useDay = (date: string): UseQueryResult<Day, Error> =>
         queryKey: queryKeys.day(date),
         queryFn: async () => fetchDay(date),
         retry: false,
+        ...getCalendarQueryPolicy(date),
     });
 
 export default useDay;

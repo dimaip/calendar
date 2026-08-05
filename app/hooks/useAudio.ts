@@ -1,5 +1,6 @@
 import { useTheme } from '@emotion/react';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
+import type { RefObject } from 'react';
 import { css } from '@emotion/css';
 
 const formatTime = (seconds) => new Date(1000 * parseInt(seconds || 0)).toISOString().substr(14, 5);
@@ -239,38 +240,68 @@ const augmentAudio = (audioElement, theme) => {
     };
 };
 
-const useAudio = (ref) => {
+const useAudio = (ref: RefObject<HTMLElement | null>) => {
     const theme = useTheme();
-    const cleanups = useRef(new Map<HTMLAudioElement, () => void>());
 
     useEffect(() => {
-        if (!ref?.current) {
-            return;
+        const root = ref?.current;
+        if (!root) {
+            return undefined;
         }
 
-        const audioElements = new Set<HTMLAudioElement>(ref.current.querySelectorAll('audio'));
-        cleanups.current.forEach((cleanup, audioElement) => {
-            if (!audioElements.has(audioElement)) {
-                cleanup();
-                cleanups.current.delete(audioElement);
+        const cleanups = new Map<HTMLAudioElement, () => void>();
+        const enhanceAudioElement = (audioElement: HTMLAudioElement) => {
+            if (audioElement.closest('[data-audio-root]') !== root || cleanups.has(audioElement)) {
+                return;
             }
-        });
-        audioElements.forEach((audioElement) => {
-            if (!cleanups.current.has(audioElement)) {
-                const cleanup = augmentAudio(audioElement, theme);
-                if (cleanup) {
-                    cleanups.current.set(audioElement, cleanup);
-                }
-            }
-        });
-    });
 
-    useEffect(
-        () => () => {
-            cleanups.current.forEach((cleanup) => cleanup());
-            cleanups.current.clear();
-        },
-        []
-    );
+            const cleanup = augmentAudio(audioElement, theme);
+            if (cleanup) {
+                cleanups.set(audioElement, cleanup);
+            }
+        };
+        const enhanceAudioInNode = (node: Node) => {
+            if (!(node instanceof Element)) {
+                return;
+            }
+            if (node instanceof HTMLAudioElement) {
+                enhanceAudioElement(node);
+            }
+            node.querySelectorAll<HTMLAudioElement>('audio').forEach(enhanceAudioElement);
+        };
+        const removeDetachedAudio = () => {
+            cleanups.forEach((cleanup, audioElement) => {
+                if (!root.contains(audioElement)) {
+                    cleanup();
+                    cleanups.delete(audioElement);
+                }
+            });
+        };
+
+        enhanceAudioInNode(root);
+
+        const observer = new MutationObserver((mutations) => {
+            let mayHaveRemovedAudio = false;
+            mutations.forEach((mutation) => {
+                mutation.addedNodes.forEach(enhanceAudioInNode);
+                if (mutation.removedNodes.length > 0) {
+                    mayHaveRemovedAudio = true;
+                }
+            });
+
+            if (mayHaveRemovedAudio) {
+                removeDetachedAudio();
+            }
+        });
+        observer.observe(root, { childList: true, subtree: true });
+
+        return () => {
+            observer.disconnect();
+            cleanups.forEach((cleanup) => {
+                cleanup();
+            });
+            cleanups.clear();
+        };
+    }, [ref, theme]);
 };
 export default useAudio;

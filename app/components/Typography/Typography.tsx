@@ -1,65 +1,31 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
+
+import { getHeadingLabel } from './headingLabel';
 
 import ScriptEditorInput from 'components/ScriptEditor/ScriptEditorInput';
-import type { TOCItem } from 'state/TOCState';
+import { useTOCHeading } from 'components/TOC/TOCProvider';
 
 interface TypographyProps {
     children?: React.ReactNode;
 }
 
-const useAddToTOC = (title: React.ReactNode, level?: number): string => {
-    const randomNumberRef = useRef(Math.floor(Math.random() * 100));
-    const domId =
-        typeof title === 'string'
-            ? title
-            : Array.isArray(title)
-            ? title.filter((i) => typeof i === 'string').join(' ')
-            : null;
-
-    const processedDomId = domId ? `r-${domId}-${randomNumberRef.current}` : '';
-
-    useEffect(() => {
-        if (!processedDomId || !domId) {
-            return undefined;
-        }
-
-        const item: TOCItem = {
-            value: processedDomId,
-            label: domId,
-            shortLabel: domId,
-            level,
-        };
-        window.TOC = window.TOC || {};
-        window.TOC[processedDomId] = item;
-
-        return () => {
-            if (window.TOC?.[processedDomId] === item) {
-                Reflect.deleteProperty(window.TOC, processedDomId);
-            }
-        };
-    }, [domId, level, processedDomId]);
-
-    if (!domId) {
-        return '';
-    }
-    return processedDomId;
-};
-
 export const H1 = ({ children }: TypographyProps): JSX.Element => <h1 className="H1">{children}</h1>;
 
-export const H2 = ({ children }: TypographyProps): JSX.Element => {
-    const domId = useAddToTOC(children, 2);
+export const H2 = ({ children, id, ...headingProps }: React.ComponentPropsWithoutRef<'h2'>): JSX.Element => {
+    const label = getHeadingLabel(children);
+    const ref = useTOCHeading({ explicitId: id, label, level: 2 });
     return (
-        <h2 className="H2" id={domId}>
+        <h2 {...headingProps} className="H2" id={id} ref={ref}>
             {children}
         </h2>
     );
 };
 
-export const H3 = ({ children }: TypographyProps): JSX.Element => {
-    const domId = useAddToTOC(children, 3);
+export const H3 = ({ children, id, ...headingProps }: React.ComponentPropsWithoutRef<'h3'>): JSX.Element => {
+    const label = getHeadingLabel(children);
+    const ref = useTOCHeading({ explicitId: id, label, level: 3 });
     return (
-        <h3 className="H3" id={domId}>
+        <h3 {...headingProps} className="H3" id={id} ref={ref}>
             {children} <ScriptEditorInput id={`${window.location.href}${String(children)}`} />
         </h3>
     );

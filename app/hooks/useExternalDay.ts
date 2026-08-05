@@ -5,6 +5,7 @@ import cachedFetch from 'utils/cachedFetch';
 import useDay from 'hooks/useDay';
 import type { ExternalDay, ReadingVersesByType } from 'data/contracts';
 import { queryKeys } from 'data/queryKeys';
+import { getCalendarQueryPolicy } from 'data/calendarQueryPolicy';
 
 const fetchExternalDay = async (date: string, verses?: ReadingVersesByType): Promise<ExternalDay> =>
     cachedFetch<ExternalDay>(
@@ -21,6 +22,7 @@ const useExternalDay = (date: string): UseQueryResult<ExternalDay, Error> => {
         queryFn: async () => fetchExternalDay(date, readings),
         retry: false,
         enabled: dayQuery.isFetched,
+        ...getCalendarQueryPolicy(date),
     });
 };
 

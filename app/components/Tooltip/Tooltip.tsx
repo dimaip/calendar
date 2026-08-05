@@ -1,6 +1,9 @@
 import React from 'react';
 import { Tooltip as Tippy } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
+
+import { OMIT_FROM_HEADING_LABEL } from 'components/Typography/headingLabel';
+
 const Tooltip = ({ children }) => (
     <Tippy html={children} arrow tag="span" style={{ marginLeft: 5 }}>
         <svg viewBox="0 0 24 24" style={{ width: 18, height: 18, fill: 'rgb(130, 148, 158)', verticalAlign: '-10%' }}>
@@ -11,5 +14,7 @@ const Tooltip = ({ children }) => (
         </svg>
     </Tippy>
 );
+
+Tooltip[OMIT_FROM_HEADING_LABEL] = true;
 
 export default Tooltip;

@@ -48,13 +48,7 @@ export default merge(common, {
         usedExports: true,
         runtimeChunk: 'single',
         splitChunks: {
-            cacheGroups: {
-                vendor: {
-                    test: /[\\/]node_modules[\\/]/,
-                    name: 'vendor',
-                    chunks: 'all',
-                },
-            },
+            chunks: 'all',
         },
     },
 });

@@ -1,18 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React, { Suspense, useCallback, useRef, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import LeftIcon from 'components/svgs/LeftIcon';
 import { css } from '@emotion/css';
+
+import LeftIcon from 'components/svgs/LeftIcon';
 import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
-import { useUpdateTOC } from 'hooks/useUpdateTOC';
-import Share from 'components/Share/Share';
 import useDay from 'hooks/useDay';
 import Button from 'components/Button/Button';
-import { useRecoilState } from 'recoil';
-import menuShownState from 'state/menuShownState';
-import SettingsButton from 'components/SettingsButton/SettingsButton';
-import { FindInPageButton } from 'components/FindInPageButton/FindInPageButton';
-import InPageSearch from 'components/InPageSearch/InPageSearch';
+
+const LayoutOverflowMenuItems = React.lazy(
+    async () =>
+        await import(/* webpackChunkName: "layout-overflow-menu" */ 'components/LayoutInner/LayoutOverflowMenuItems')
+);
+const InPageSearch = React.lazy(
+    async () => await import(/* webpackChunkName: "in-page-search" */ 'components/InPageSearch/InPageSearch')
+);
 
 const LayoutInner = ({
     children,
@@ -35,10 +37,7 @@ const LayoutInner = ({
     const dayQuery = useDay(date);
     const day = dayQuery.data;
     const location = useLocation();
-    useUpdateTOC();
     const backLinkEffective = backLink || location.state?.backLink || backLinkFallback;
-
-    const [menuShown, setMenuShown] = useRecoilState(menuShownState);
 
     const backElement = (
         <div
@@ -62,6 +61,8 @@ const LayoutInner = ({
     );
     const contentRef = useRef<HTMLDivElement | null>(null);
     const [isFindOpen, setIsFindOpen] = useState(false);
+    const openFind = useCallback(() => setIsFindOpen(true), []);
+    const closeFind = useCallback(() => setIsFindOpen(false), []);
     return (
         <div
             className={css`
@@ -87,14 +88,9 @@ const LayoutInner = ({
                 >
                     {right}
                     <DotsMenu>
-                        <SettingsButton />
-                        <FindInPageButton onOpen={() => setIsFindOpen(true)} />
-
-                        <Share
-                            title="Православное богослужение на русском языке"
-                            text={day?.title || ''}
-                            url={window.location.href}
-                        />
+                        <Suspense fallback={null}>
+                            <LayoutOverflowMenuItems dayTitle={day?.title || ''} onFindOpen={openFind} />
+                        </Suspense>
                     </DotsMenu>
                 </div>
             </Header>
@@ -111,7 +107,11 @@ const LayoutInner = ({
             >
                 {children}
             </div>
-            {isFindOpen && <InPageSearch containerRef={contentRef} onClose={() => setIsFindOpen(false)} />}
+            {isFindOpen && (
+                <Suspense fallback={null}>
+                    <InPageSearch containerRef={contentRef} onClose={closeFind} />
+                </Suspense>
+            )}
         </div>
     );
 };

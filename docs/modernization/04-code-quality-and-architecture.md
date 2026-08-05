@@ -10,13 +10,13 @@ Make feature work safer by clarifying boundaries and reducing oversized, weakly 
 
 ## Tracker
 
-| ID | Unit | Status | Expected risk |
-| --- | --- | --- | --- |
-| QUAL-001 | Type the boundaries first | `done` | Medium |
-| QUAL-002 | Stabilize the application shell | `done` | Medium |
-| QUAL-003 | Split large modules by responsibility | `in-progress` | Medium |
-| QUAL-004 | Remove accidental global state | `in-progress` | Low |
-| QUAL-005 | Clarify state ownership | `done` | Medium |
+| ID       | Unit                                  | Status        | Expected risk |
+| -------- | ------------------------------------- | ------------- | ------------- |
+| QUAL-001 | Type the boundaries first             | `done`        | Medium        |
+| QUAL-002 | Stabilize the application shell       | `done`        | Medium        |
+| QUAL-003 | Split large modules by responsibility | `in-progress` | Medium        |
+| QUAL-004 | Remove accidental global state        | `in-progress` | Low           |
+| QUAL-005 | Clarify state ownership               | `done`        | Medium        |
 
 ## Target boundaries
 
@@ -95,7 +95,7 @@ Objective: reduce hidden coupling and browser lifecycle leaks.
 
 Initial candidates:
 
-- `window.TOC`
+- `window.TOC` (`done` through PERF-011)
 - `window.pullDownDisabled`
 - custom history events and scroll globals
 - direct `window.matchMedia` listeners
@@ -143,8 +143,8 @@ Acceptance criteria:
 
 ## Completion notes
 
-| Date | ID | Extracted/changed boundary | Result | Pull request / commit |
-| --- | --- | --- | --- | --- |
-| 2026-07-28 | QUAL-001/002 | Typed API/query boundaries and named provider/error shell | Tests, quality, and browser smoke pass | This branch |
-| 2026-07-28 | QUAL-003 | `getDayInfo.ts` split into calendar, fasting, feast/liturgy, and daily-selection modules | 16 calendar characterizations pass | This branch |
-| 2026-07-28 | QUAL-004/005 | TOC lifecycle/global contract stabilized and state ownership documented | Remaining globals stay tracked | This branch |
+| Date       | ID           | Extracted/changed boundary                                                               | Result                                 | Pull request / commit |
+| ---------- | ------------ | ---------------------------------------------------------------------------------------- | -------------------------------------- | --------------------- |
+| 2026-07-28 | QUAL-001/002 | Typed API/query boundaries and named provider/error shell                                | Tests, quality, and browser smoke pass | This branch           |
+| 2026-07-28 | QUAL-003     | `getDayInfo.ts` split into calendar, fasting, feast/liturgy, and daily-selection modules | 16 calendar characterizations pass     | This branch           |
+| 2026-07-28 | QUAL-004/005 | TOC lifecycle/global contract stabilized and state ownership documented                  | Remaining globals stay tracked         | This branch           |
