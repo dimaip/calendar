@@ -96,11 +96,13 @@ test('API fixture routing aborts unknown endpoints instead of returning an empty
     assert.deepEqual(resolveExperienceApiFixture('/parts/2026-08-05/csj'), {});
 });
 
-test('measured cloned launches are route-free and fixture routing remains seed-only', async () => {
+test('measured clones keep fixture routing seed-only and isolate third-party routing to snapshot mode', async () => {
     const source = await fs.readFile(new URL('./lib/browser-profile.mjs', import.meta.url), 'utf8');
     assert.match(source, /fixtures = false/u);
+    assert.match(source, /thirdPartyRuntime = 'blocked'/u);
     assert.match(source, /fixtures: true[\s\S]+seedPersistentProfile|seedPersistentProfile[\s\S]+fixtures: true/u);
     assert.match(source, /fixtures \? await configureExperienceFixtures\(context\) : \{ fulfilled: 0 \}/u);
+    assert.match(source, /thirdPartyRuntime === 'snapshot'[\s\S]+configureThirdPartyRuntimeSnapshot/u);
 });
 
 test('treats failures for every built asset type as lifecycle failures', () => {

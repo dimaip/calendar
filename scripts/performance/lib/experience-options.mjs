@@ -31,6 +31,7 @@ export const EXPERIENCE_SCENARIOS = [
     'startup-process-cold-online',
     'startup-process-cold-offline',
     'startup-warm-process',
+    'startup-third-party-runtime',
     'offline-unvisited-all-languages',
     'touch-reading-rapid',
     'touch-reading-precision',
@@ -43,7 +44,7 @@ export const EXPERIENCE_SCENARIOS = [
 ];
 
 const scenarioGroups = {
-    startup: EXPERIENCE_SCENARIOS.filter((scenario) => scenario.startsWith('startup-')),
+    startup: ['startup-process-cold-online', 'startup-process-cold-offline', 'startup-warm-process'],
     'offline-coverage': ['offline-unvisited-all-languages'],
     touch: EXPERIENCE_SCENARIOS.filter((scenario) => scenario.startsWith('touch-')),
     language: EXPERIENCE_SCENARIOS.filter((scenario) => scenario.startsWith('service-')),
@@ -93,7 +94,7 @@ const nonnegativeNumber = (value, name) => {
 
 const expandScenarios = (requested) => {
     if (requested.includes('all')) {
-        return EXPERIENCE_SCENARIOS;
+        return EXPERIENCE_SCENARIOS.filter((scenario) => scenario !== 'startup-third-party-runtime');
     }
 
     const expanded = requested.flatMap((name) => scenarioGroups[name] ?? [name]);
@@ -149,6 +150,41 @@ export const parseExperienceArguments = (argv = process.argv.slice(2)) => {
         throw new Error('--browser must be chromium or chrome.');
     }
 
+    const thirdPartyRuntime = values.get('third-party-runtime') ?? 'blocked';
+    if (!['blocked', 'snapshot'].includes(thirdPartyRuntime)) {
+        throw new Error('--third-party-runtime must be blocked or snapshot.');
+    }
+    const thirdPartySnapshotValue = values.get('third-party-snapshot');
+    const selectedScenarios = expandScenarios(commaList(values.get('scenarios') ?? 'startup,touch,language'));
+    const offlineScenarios = selectedScenarios.filter(
+        (scenario) => scenario === 'startup-process-cold-offline' || scenario === 'offline-unvisited-all-languages'
+    );
+    if (thirdPartyRuntime === 'snapshot' && !thirdPartySnapshotValue) {
+        throw new Error('--third-party-snapshot is required when --third-party-runtime snapshot is selected.');
+    }
+    if (thirdPartyRuntime === 'blocked' && thirdPartySnapshotValue) {
+        throw new Error('--third-party-snapshot is only valid with --third-party-runtime snapshot.');
+    }
+    if (thirdPartyRuntime === 'snapshot' && offlineScenarios.length) {
+        throw new Error(
+            `Third-party snapshot replay is online-only and cannot run offline scenarios: ${offlineScenarios.join(', ')}.`
+        );
+    }
+    if (selectedScenarios.includes('startup-third-party-runtime') && thirdPartyRuntime !== 'snapshot') {
+        throw new Error('startup-third-party-runtime requires --third-party-runtime snapshot.');
+    }
+    if (
+        thirdPartyRuntime === 'snapshot' &&
+        (selectedScenarios.length !== 1 || selectedScenarios[0] !== 'startup-third-party-runtime')
+    ) {
+        throw new Error('--third-party-runtime snapshot is isolated to the startup-third-party-runtime scenario.');
+    }
+    if (thirdPartyRuntime === 'snapshot' && (selectedProfiles.length !== 1 || selectedProfiles[0] !== 'cpu-only')) {
+        throw new Error(
+            '--third-party-runtime snapshot is CPU-only because route.fulfill does not reproduce production transfer encoding or transport.'
+        );
+    }
+
     return {
         browser,
         contentEncoding: values.get('encoding') ?? 'gzip',
@@ -165,8 +201,10 @@ export const parseExperienceArguments = (argv = process.argv.slice(2)) => {
         root: path.resolve(rootValue),
         runs: integer(values.get('runs') ?? (mode === 'comparison' ? '20' : '3'), 'runs'),
         selectedProfiles,
-        selectedScenarios: expandScenarios(commaList(values.get('scenarios') ?? 'startup,touch,language')),
+        selectedScenarios,
         stateFixture,
+        thirdPartyRuntime,
+        thirdPartySnapshot: thirdPartySnapshotValue ? path.resolve(thirdPartySnapshotValue) : null,
         trace,
     };
 };

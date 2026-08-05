@@ -91,6 +91,14 @@ export const createExperienceServer = async ({ contentEncoding = 'gzip', port, r
         const host = request.headers.host ?? `127.0.0.1:${port}`;
         const origin = `http://${host}`;
         const requestUrl = new URL(request.url ?? '/', origin);
+        if (requestUrl.pathname === '/__performance__/service-worker-isolation') {
+            response.writeHead(200, {
+                'Cache-Control': 'no-store',
+                'Content-Type': 'text/html; charset=utf-8',
+            });
+            response.end('<!doctype html><title>Performance service-worker isolation</title>');
+            return;
+        }
         const relativePath =
             requestUrl.pathname === '/' ? 'index.html' : decodeURIComponent(requestUrl.pathname.slice(1));
         const filePath = path.resolve(root, relativePath);
@@ -237,13 +245,13 @@ export const configureExperienceFixtures = async (context) => {
         await fulfill(route, { json: { sermons: [], thisDays: [] } });
     });
     await context.route(/https:\/\/(?:www\.)?googletagmanager\.com\/.*/u, async (route) => {
-        await fulfill(route, { status: 204, body: '' });
+        await fulfill(route, { status: 204, body: '', headers: { 'cache-control': 'no-store' } });
     });
     await context.route(/https:\/\/mc\.yandex\.ru\/.*/u, async (route) => {
-        await fulfill(route, { status: 204, body: '' });
+        await fulfill(route, { status: 204, body: '', headers: { 'cache-control': 'no-store' } });
     });
     await context.route(/https:\/\/[^/]*sentry\.io\/.*/u, async (route) => {
-        await fulfill(route, { status: 204, body: '' });
+        await fulfill(route, { status: 204, body: '', headers: { 'cache-control': 'no-store' } });
     });
     return activity;
 };
