@@ -40,6 +40,7 @@ import { createBuildFingerprint, createHarnessFingerprint } from './lib/build-fi
 import { EXPERIENCE_PROFILES, parseExperienceArguments } from './lib/experience-options.mjs';
 import { createExperienceServer } from './lib/experience-server.mjs';
 import { collectHostLoadSample, createHostLoadProvenance, evaluateHostLoadGate } from './lib/host-load.mjs';
+import { loadThirdPartyRuntimeSnapshot } from './lib/third-party-runtime.mjs';
 import { dispatchTrustedTouchGesture, horizontalGesture, verticalGesture } from './lib/touch-input.mjs';
 
 const readGit = (args, fallback = null) => {
@@ -50,7 +51,7 @@ const readGit = (args, fallback = null) => {
     }
 };
 
-const collectEnvironment = (options) => {
+const collectEnvironment = (options, thirdPartyRuntimeSnapshot) => {
     const projectRoot = process.cwd();
     return {
         browser: options.browser,
@@ -64,6 +65,11 @@ const collectEnvironment = (options) => {
         platform: `${os.platform()} ${os.release()} ${os.arch()}`,
         processor: os.cpus()[0]?.model ?? null,
         projectRoot,
+        thirdPartyRuntime: {
+            mode: options.thirdPartyRuntime,
+            serviceWorkerPolicy: options.thirdPartyRuntime === 'snapshot' ? 'unregister-and-block' : 'allow',
+            snapshot: thirdPartyRuntimeSnapshot?.provenance ?? null,
+        },
     };
 };
 
@@ -167,6 +173,31 @@ const runNavigationScenario = async ({ baseUrl, harness, offline, warm }) => {
         navigationToReadyMs: readyAt - navigationStartedAt,
         offline,
         ...(warm ? {} : { processLaunchToReadyMs: readyAt - harness.processLaunchStartedAt }),
+    };
+};
+
+const runThirdPartyRuntimeScenario = async ({ baseUrl, harness }) => {
+    const navigationStartedAt = hostPerformance.now();
+    await harness.page.goto(`${baseUrl}${DATE_PATH}`, { waitUntil: 'domcontentloaded', timeout: 120_000 });
+    await waitForDateReady(harness.page);
+    const usefulReadyAt = hostPerformance.now();
+    const usefulReadyBrowserMs = await harness.page.evaluate(() => performance.now());
+    await harness.waitForThirdPartyRuntimeExecution();
+    const runtimeExecutedAt = hostPerformance.now();
+    await harness.waitForThirdPartyRuntimeQuiescence();
+    const runtimeSettledAt = hostPerformance.now();
+    const metrics = await collectPageResult(harness.page, harness.session);
+    const thirdPartyRuntime = harness.assertThirdPartyRuntimeSettled();
+    return {
+        ...metrics,
+        diagnosticScope: 'cpu-runtime-service-worker-isolated',
+        lifecycle: 'persistent-profile-process-restart-service-worker-isolated',
+        navigationToReadyMs: usefulReadyAt - navigationStartedAt,
+        navigationToRuntimeExecutedMs: runtimeExecutedAt - navigationStartedAt,
+        navigationToRuntimeSettledMs: runtimeSettledAt - navigationStartedAt,
+        offline: false,
+        readyMs: usefulReadyBrowserMs,
+        thirdPartyRuntime,
     };
 };
 
@@ -457,6 +488,8 @@ const executeScenario = async ({
         headless: options.headless,
         offline,
         profile,
+        thirdPartyRuntime: scenario === 'startup-third-party-runtime' ? options.thirdPartyRuntime : 'blocked',
+        thirdPartySnapshot: scenario === 'startup-third-party-runtime' ? options.thirdPartyRuntimeSnapshot : null,
         userDataDir: cloned.userDataDir,
     });
     const checkpoint = {
@@ -469,7 +502,7 @@ const executeScenario = async ({
     ]);
     if (!checkpointGate.passed) {
         try {
-            await harness.close();
+            await harness.close({ validateThirdPartyRuntime: false });
         } finally {
             await removeTemporaryProfile(cloned.parent);
         }
@@ -503,6 +536,8 @@ const executeScenario = async ({
             });
         } else if (scenario === 'startup-process-cold-online') {
             metrics = await runNavigationScenario({ baseUrl, harness, offline, warm: false });
+        } else if (scenario === 'startup-third-party-runtime') {
+            metrics = await runThirdPartyRuntimeScenario({ baseUrl, harness });
         } else if (scenario === 'startup-warm-process') {
             metrics = await runNavigationScenario({ baseUrl, harness, offline: false, warm: true });
         } else if (scenario.startsWith('touch-reading-')) {
@@ -588,14 +623,24 @@ const executeScenario = async ({
             }
         }
         result.trace = trace;
-        await harness.close();
-        await removeTemporaryProfile(cloned.parent);
+        try {
+            await harness.close();
+        } catch (error) {
+            result.errors.push(`Third-party runtime finalization failed: ${String(error?.stack ?? error)}`);
+            result.passed = false;
+            failure ??= error;
+        } finally {
+            await removeTemporaryProfile(cloned.parent);
+        }
     }
     return result;
 };
 
 const main = async () => {
     const requestedOptions = parseExperienceArguments();
+    const thirdPartyRuntimeSnapshot = requestedOptions.thirdPartySnapshot
+        ? loadThirdPartyRuntimeSnapshot(requestedOptions.thirdPartySnapshot)
+        : null;
     const logicalCpuCount = os.cpus().length;
     if (logicalCpuCount < 1) throw new Error('Host load preflight could not detect any logical CPUs.');
     if (os.platform() === 'win32') {
@@ -613,18 +658,20 @@ const main = async () => {
     const sourceBuildFingerprint = createBuildFingerprint(requestedOptions.root);
     const snapshotRoot = path.join(requestedOptions.output, 'build');
     fs.cpSync(requestedOptions.root, snapshotRoot, { recursive: true });
-    const options = { ...requestedOptions, root: snapshotRoot };
+    const options = { ...requestedOptions, root: snapshotRoot, thirdPartyRuntimeSnapshot };
     const buildFingerprintBefore = createBuildFingerprint(snapshotRoot);
     if (sourceBuildFingerprint.digest !== buildFingerprintBefore.digest) {
         throw new Error('The immutable benchmark build snapshot does not match the requested source build.');
     }
     const server = await createExperienceServer(options);
+    const reportOptions = { ...options };
+    delete reportOptions.thirdPartyRuntimeSnapshot;
     const report = {
         allRunsPassed: true,
-        environment: collectEnvironment(options),
+        environment: collectEnvironment(options, thirdPartyRuntimeSnapshot),
         label: options.label,
         options: {
-            ...options,
+            ...reportOptions,
             output: options.output,
             root: options.root,
             sourceRoot: requestedOptions.root,
@@ -715,6 +762,7 @@ const main = async () => {
     report.integrity = createExperienceReportIntegrity(report, options.root, { buildFingerprintBefore });
     if (!report.integrity.buildImmutability.unchanged) report.allRunsPassed = false;
     if (!report.integrity.hostLoad.passed) report.allRunsPassed = false;
+    if (!report.integrity.thirdPartyRuntime.valid) report.allRunsPassed = false;
     artifactWriter.writeJson('report.json', report);
     artifactWriter.writeJson('environment.json', report.environment);
     process.stderr.write('\n');

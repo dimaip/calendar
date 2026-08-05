@@ -16,6 +16,7 @@ import {
     deterministicDayFixture,
     extractExpectedPrecacheUrls,
 } from './experience-server.mjs';
+import { configureThirdPartyRuntimeSnapshot } from './third-party-runtime.mjs';
 
 export const FIXED_DATE = '2026-07-28';
 export const DATE_PATH = `/#/date/${FIXED_DATE}`;
@@ -179,6 +180,8 @@ export const launchPersistentHarness = async ({
     headless,
     offline = false,
     profile,
+    thirdPartyRuntime = 'blocked',
+    thirdPartySnapshot = null,
     userDataDir,
 }) => {
     const processLaunchStartedAt = hostPerformance.now();
@@ -196,7 +199,9 @@ export const launchPersistentHarness = async ({
         isMobile: true,
         locale: 'ru-RU',
         screen: profile.viewport,
-        serviceWorkers: 'allow',
+        // Workbox Google Analytics intercepts vendor scripts before BrowserContext.route.
+        // Snapshot mode isolates CPU execution by disabling that interception explicitly.
+        serviceWorkers: thirdPartyRuntime === 'snapshot' ? 'block' : 'allow',
         timezoneId: 'Europe/Moscow',
         userAgent:
             'Mozilla/5.0 (Linux; Android 10; Moto G (5S)) AppleWebKit/537.36 ' +
@@ -204,13 +209,35 @@ export const launchPersistentHarness = async ({
         viewport: profile.viewport,
     });
     const fixtureActivity = fixtures ? await configureExperienceFixtures(context) : { fulfilled: 0 };
+    const thirdPartyActivity =
+        thirdPartyRuntime === 'snapshot'
+            ? await configureThirdPartyRuntimeSnapshot({ baseUrl, context, snapshot: thirdPartySnapshot })
+            : null;
     await installExperienceObservers(context, { diagnosticCounters });
 
-    const page = context.pages()[0] ?? (await context.newPage());
+    let page = context.pages()[0] ?? (await context.newPage());
+    if (thirdPartyRuntime === 'snapshot') {
+        await page.goto(`${baseUrl}/__performance__/service-worker-isolation`, {
+            waitUntil: 'domcontentloaded',
+        });
+        const registrationIsolation = await page.evaluate(async () => {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            const removed = await Promise.all(registrations.map((registration) => registration.unregister()));
+            return { found: registrations.length, removed: removed.filter(Boolean).length };
+        });
+        if (registrationIsolation.found < 1 || registrationIsolation.removed !== registrationIsolation.found) {
+            await context.close();
+            throw new Error(
+                `Third-party runtime snapshot could not isolate every installed service worker: ${JSON.stringify(registrationIsolation)}.`
+            );
+        }
+        await page.close();
+        page = await context.newPage();
+    }
     if (page.url() !== 'about:blank') await page.goto('about:blank');
     const session = await context.newCDPSession(page);
     await configureCdp(session, profile, { offline });
-    if (!fixtures) {
+    if (!fixtures && thirdPartyRuntime === 'blocked') {
         await session.send('Network.setBlockedURLs', {
             urls: [
                 'https://api.c.psmb.ru/*',
@@ -223,15 +250,33 @@ export const launchPersistentHarness = async ({
                 'wss://*.convex.cloud/*',
             ],
         });
+    } else if (!fixtures) {
+        await session.send('Network.setBlockedURLs', {
+            urls: [
+                'https://api.c.psmb.ru/*',
+                'https://psmb.ru/*',
+                'https://*.convex.cloud/*',
+                'wss://*.convex.cloud/*',
+            ],
+        });
     }
     const activity = recordPageActivity(page, baseUrl);
     const launchId = randomUUID();
 
     return {
         ...activity,
-        close: async () => {
+        close: async ({ validateThirdPartyRuntime = true } = {}) => {
+            let validationError = null;
+            if (thirdPartyActivity && validateThirdPartyRuntime) {
+                try {
+                    await thirdPartyActivity.waitForQuiescence();
+                } catch (error) {
+                    validationError = error;
+                }
+            }
             await session.detach().catch(() => undefined);
             await context.close();
+            if (validationError) throw validationError;
         },
         context,
         externalFulfillments: fixtureActivity.fulfilled,
@@ -240,6 +285,10 @@ export const launchPersistentHarness = async ({
         page,
         processLaunchStartedAt,
         session,
+        assertThirdPartyRuntimeSettled: () => thirdPartyActivity?.assertSettled() ?? null,
+        waitForThirdPartyRuntimeExecution: (options) =>
+            thirdPartyActivity?.waitForExecution({ page, ...options }) ?? null,
+        waitForThirdPartyRuntimeQuiescence: (options) => thirdPartyActivity?.waitForQuiescence(options) ?? null,
     };
 };
 

@@ -278,11 +278,18 @@ DEP-008 remains deferred until the earlier milestones are complete. A bundler mi
   retaining Sentry errors and every other subsystem. Its bundle is 29,513 B raw
   / 8,726 B gzip smaller, but its first timings and follow-up control are
   invalid because Spotlight indexing drove host load above 180 on ten logical
-  CPUs. Experience report schema 2 now fails before artifact creation above
+  CPUs. Experience report schema 3 now fails before artifact creation above
   0.75 load per logical CPU, checkpoints immediately before each measured
   scenario after setup, requires the exact checkpoint sequence, equal CPU
   capacity, and comparable one-/five-minute load, and creates no-index artifact roots.
-  The candidate remains undecided until a clean reverse-order rerun passes.
+  It also provides an opt-in, CPU-only, hash-verified five-script vendor replay
+  with exact-once browser execution, fail-closed external routing, a bounded
+  quiet window, disposable-clone unregistration plus blocking of an installed
+  intercepting service worker, and fixture identity checks across reports.
+  Normal installed/offline scenarios remain service-worker-controlled. No live
+  vendor bodies or runtime result are claimed, and transfer/network/service-worker
+  cost remains out of scope. The candidate remains undecided until a clean
+  reverse-order rerun passes.
   Because the harness blocks/stubs third-party remote execution, Yandex/GTM
   remote costs require a separate controlled diagnostic.
 - Older-phone complete Liturgy with production-like gzip: 4.16 s complete /

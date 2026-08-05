@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -19,6 +20,12 @@ import {
 } from './lib/build-fingerprint.mjs';
 import { parseComparisonArguments } from './lib/experience-options.mjs';
 import { collectHostLoadSample, createHostLoadProvenance } from './lib/host-load.mjs';
+import {
+    loadThirdPartyRuntimeSnapshot,
+    matchThirdPartyScriptUrl,
+    THIRD_PARTY_RUNTIME_POLICY,
+    THIRD_PARTY_RUNTIME_SCHEMA_VERSION,
+} from './lib/third-party-runtime.mjs';
 
 const createBuild = (directory, marker) => {
     fs.mkdirSync(path.join(directory, 'built'), { recursive: true });
@@ -26,6 +33,44 @@ const createBuild = (directory, marker) => {
     fs.writeFileSync(path.join(directory, 'service-worker.js'), `self.marker=${JSON.stringify(marker)}`);
     fs.writeFileSync(path.join(directory, 'built', 'precache.worker.123.js'), `postMessage(${JSON.stringify(marker)})`);
     fs.writeFileSync(path.join(directory, 'built', 'main.123.js'), `window.marker=${JSON.stringify(marker)}`);
+};
+
+const thirdPartyScriptUrls = [
+    ['yandex-metrika-tag', 'https://mc.yandex.ru/metrika/tag.js'],
+    ['google-tag-manager', 'https://www.googletagmanager.com/gtm.js?id=GTM-MSCF98P&gtm_cookies_win=x'],
+    ['google-tag', 'https://www.googletagmanager.com/gtag/js?id=G-FIXTURE&gtm=volatile&cx=c'],
+    ['google-tag-destination', 'https://www.googletagmanager.com/gtag/destination?id=G-FIXTURE&gtm=volatile&cx=c'],
+    ['google-analytics', 'https://www.google-analytics.com/analytics.js'],
+];
+
+const createThirdPartySnapshot = (directory, marker) => {
+    fs.mkdirSync(directory, { recursive: true });
+    const scripts = thirdPartyScriptUrls.map(([className, url]) => {
+        const body = Buffer.from(`window.fixture=${JSON.stringify(`${className}-${marker}`)};`);
+        const bodyPath = `${className}.js`;
+        fs.writeFileSync(path.join(directory, bodyPath), body);
+        return {
+            body: bodyPath,
+            bytes: body.byteLength,
+            canonicalUrl: matchThirdPartyScriptUrl(url).canonicalUrl,
+            className,
+            contentType: 'application/javascript; charset=utf-8',
+            sha256: createHash('sha256').update(body).digest('hex'),
+            status: 200,
+            url,
+        };
+    });
+    const manifestPath = path.join(directory, 'manifest.json');
+    fs.writeFileSync(
+        manifestPath,
+        JSON.stringify({
+            capturedAt: '2026-08-05T12:00:00.000Z',
+            policy: THIRD_PARTY_RUNTIME_POLICY,
+            schemaVersion: THIRD_PARTY_RUNTIME_SCHEMA_VERSION,
+            scripts,
+        })
+    );
+    return { manifestPath, provenance: loadThirdPartyRuntimeSnapshot(manifestPath).provenance };
 };
 
 const harnessFingerprint = createHarnessFingerprint(process.cwd());
@@ -36,7 +81,9 @@ const createHostLoad = ({
     oneMinute = 1,
     postRunFiveMinutes,
     postRunOneMinute,
+    profileName = 'older-phone',
     runs = 20,
+    scenario = 'startup-process-cold-offline',
 } = {}) => {
     const sample = (one, five, recordedAt) =>
         collectHostLoadSample({
@@ -46,7 +93,7 @@ const createHostLoad = ({
         });
     return createHostLoadProvenance({
         checkpoints: Array.from({ length: runs }, (_, runIndex) => ({
-            label: `older-phone.run-${runIndex + 1}.startup-process-cold-offline`,
+            label: `${profileName}.run-${runIndex + 1}.${scenario}`,
             ...sample(oneMinute, fiveMinutes, '2026-08-05T12:00:30.000Z'),
         })),
         logicalCpuCount,
@@ -59,12 +106,57 @@ const createHostLoad = ({
 const createReport = ({
     hostLoad,
     mode = 'comparison',
+    profileName = 'older-phone',
     root,
     runs = mode === 'comparison' ? 20 : 3,
+    scenario = 'startup-process-cold-offline',
     target = 1000,
+    thirdPartyProvenance = { mode: 'blocked', serviceWorkerPolicy: 'allow', snapshot: null },
+    thirdPartyRuntime = 'blocked',
+    thirdPartySnapshot = null,
 }) => {
-    const scenario = 'startup-process-cold-offline';
-    const resolvedHostLoad = hostLoad === undefined ? createHostLoad({ runs }) : hostLoad;
+    const resolvedHostLoad = hostLoad === undefined ? createHostLoad({ profileName, runs, scenario }) : hostLoad;
+    const scenarioMetrics =
+        scenario === 'startup-third-party-runtime'
+            ? {
+                  headingShapeHash: 'date-shape',
+                  offline: false,
+                  paragraphCount: 42,
+                  readyMs: target,
+                  serviceWorkerControlled: false,
+                  textCharacters: 2048,
+              }
+            : {
+                  csj: {
+                      headingShapeHash: 'csj-shape',
+                      paragraphCount: 84,
+                      renderKey: 'csj',
+                      serviceWorkerControlled: true,
+                      textCharacters: 4096,
+                  },
+                  date: {
+                      headingShapeHash: 'date-shape',
+                      paragraphCount: 42,
+                      serviceWorkerControlled: true,
+                      textCharacters: 2048,
+                  },
+                  offline: true,
+                  parallel: {
+                      headingShapeHash: 'parallel-shape',
+                      paragraphCount: 168,
+                      renderKey: 'parallel',
+                      serviceWorkerControlled: true,
+                      textCharacters: 8192,
+                  },
+                  readyMs: target,
+                  ru: {
+                      headingShapeHash: 'ru-shape',
+                      paragraphCount: 84,
+                      renderKey: 'ru',
+                      serviceWorkerControlled: true,
+                      textCharacters: 4096,
+                  },
+              };
     const report = {
         allRunsPassed: true,
         environment: {
@@ -76,6 +168,7 @@ const createReport = ({
             platform: 'fixture-platform',
             processor: 'fixture-processor',
             projectRoot: process.cwd(),
+            thirdPartyRuntime: thirdPartyProvenance,
         },
         options: {
             browser: 'chromium',
@@ -84,49 +177,22 @@ const createReport = ({
             mode,
             root,
             runs,
-            selectedProfiles: ['older-phone'],
+            selectedProfiles: [profileName],
             selectedScenarios: [scenario],
             stateFixture: 'anonymous-normal',
+            thirdPartyRuntime,
+            thirdPartySnapshot,
             trace: 'none',
         },
         profiles: {
-            'older-phone': {
-                configuration: { cpuRate: 4, latencyMs: 150 },
+            [profileName]: {
+                configuration:
+                    profileName === 'cpu-only' ? { cpuRate: 6, latencyMs: 0 } : { cpuRate: 4, latencyMs: 150 },
                 runs: Array.from({ length: runs }, (_, index) => ({
                     index,
                     scenarioPassed: { [scenario]: true },
                     scenarios: {
-                        [scenario]: {
-                            csj: {
-                                headingShapeHash: 'csj-shape',
-                                paragraphCount: 84,
-                                renderKey: 'csj',
-                                serviceWorkerControlled: true,
-                                textCharacters: 4096,
-                            },
-                            date: {
-                                headingShapeHash: 'date-shape',
-                                paragraphCount: 42,
-                                serviceWorkerControlled: true,
-                                textCharacters: 2048,
-                            },
-                            offline: true,
-                            parallel: {
-                                headingShapeHash: 'parallel-shape',
-                                paragraphCount: 168,
-                                renderKey: 'parallel',
-                                serviceWorkerControlled: true,
-                                textCharacters: 8192,
-                            },
-                            readyMs: target,
-                            ru: {
-                                headingShapeHash: 'ru-shape',
-                                paragraphCount: 84,
-                                renderKey: 'ru',
-                                serviceWorkerControlled: true,
-                                textCharacters: 4096,
-                            },
-                        },
+                        [scenario]: structuredClone(scenarioMetrics),
                     },
                 })),
                 seed: { active: true, cacheEntries: [{ entries: 4, name: 'precache' }], controlled: true },
@@ -136,7 +202,7 @@ const createReport = ({
         route: { date: '/#/date/2026-07-28', fixedDate: '2026-07-28', service: '/#/service/test' },
         schemaVersion: EXPERIENCE_REPORT_SCHEMA_VERSION,
         summary: {
-            'older-phone.startup-process-cold-offline.readyMs': { p75: target, samples: runs },
+            [`${profileName}.${scenario}.readyMs`]: { p75: target, samples: runs },
         },
     };
     report.integrity = createExperienceReportIntegrity(report, root);
@@ -262,6 +328,48 @@ test('comparison rejects different CPU capacity and materially different initial
         assert(
             swappedWindows.incompatibilities.some((issue) => issue.includes('initial fiveMinutes host load differs'))
         );
+    } finally {
+        fs.rmSync(directory, { force: true, recursive: true });
+    }
+});
+
+test('comparison accepts a shared valid third-party snapshot and rejects a different valid snapshot', () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'perf019-third-party-compatibility-'));
+    const baselineRoot = path.join(directory, 'baseline');
+    const candidateRoot = path.join(directory, 'candidate');
+    try {
+        createBuild(baselineRoot, 'baseline');
+        createBuild(candidateRoot, 'candidate');
+        const firstSnapshot = createThirdPartySnapshot(path.join(directory, 'snapshot-a'), 'a');
+        const secondSnapshot = createThirdPartySnapshot(path.join(directory, 'snapshot-b'), 'b');
+        const createSnapshotReport = (root, snapshot) =>
+            createReport({
+                profileName: 'cpu-only',
+                root,
+                scenario: 'startup-third-party-runtime',
+                thirdPartyProvenance: {
+                    mode: 'snapshot',
+                    serviceWorkerPolicy: 'unregister-and-block',
+                    snapshot: snapshot.provenance,
+                },
+                thirdPartyRuntime: 'snapshot',
+                thirdPartySnapshot: snapshot.manifestPath,
+            });
+        const baseline = createSnapshotReport(baselineRoot, firstSnapshot);
+        const matching = compareExperienceReports({
+            baseline,
+            candidate: createSnapshotReport(candidateRoot, firstSnapshot),
+            targets: ['cpu-only.startup-third-party-runtime.readyMs'],
+        });
+        assert.equal(matching.compatible, true);
+        assert.equal(matching.passed, false);
+        const different = compareExperienceReports({
+            baseline,
+            candidate: createSnapshotReport(candidateRoot, secondSnapshot),
+            targets: ['cpu-only.startup-third-party-runtime.readyMs'],
+        });
+        assert.equal(different.passed, false);
+        assert(different.incompatibilities.some((issue) => issue.includes('third-party runtime fixtures differ')));
     } finally {
         fs.rmSync(directory, { force: true, recursive: true });
     }

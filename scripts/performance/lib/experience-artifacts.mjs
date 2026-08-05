@@ -4,9 +4,10 @@ import path from 'node:path';
 import { quantile } from './browser-observers.mjs';
 import { createBuildFingerprint, verifyBuildFingerprint, verifyHarnessFingerprint } from './build-fingerprint.mjs';
 import { HOST_LOAD_COMPARISON_DELTA_PER_CPU, validateHostLoadProvenance } from './host-load.mjs';
+import { validateThirdPartyRuntimeProvenance } from './third-party-runtime.mjs';
 
 const SEMANTIC_FIELDS = ['headingShapeHash', 'paragraphCount', 'renderKey', 'textCharacters'];
-export const EXPERIENCE_REPORT_SCHEMA_VERSION = 2;
+export const EXPERIENCE_REPORT_SCHEMA_VERSION = 3;
 
 const flattenNumbers = (value, prefix = '', target = {}) => {
     if (typeof value === 'number' && Number.isFinite(value)) {
@@ -139,8 +140,11 @@ const analyzeReportSamples = (report) => {
                 offline,
                 serviceWorkerControlled,
             };
-            if (scenario !== 'retention' && !sameJson(serviceWorkerControlled, [true])) {
-                issues.push(`${key} must record serviceWorkerControlled=true in every successful sample.`);
+            const expectedServiceWorkerControl = scenario === 'startup-third-party-runtime' ? [false] : [true];
+            if (scenario !== 'retention' && !sameJson(serviceWorkerControlled, expectedServiceWorkerControl)) {
+                issues.push(
+                    `${key} must record serviceWorkerControlled=${expectedServiceWorkerControl[0]} in every successful sample.`
+                );
             }
             if (
                 (scenario === 'startup-process-cold-offline' || scenario === 'offline-unvisited-all-languages') &&
@@ -149,7 +153,9 @@ const analyzeReportSamples = (report) => {
                 issues.push(`${key} must record offline=true in every successful sample.`);
             }
             if (
-                (scenario === 'startup-process-cold-online' || scenario === 'startup-warm-process') &&
+                (scenario === 'startup-process-cold-online' ||
+                    scenario === 'startup-third-party-runtime' ||
+                    scenario === 'startup-warm-process') &&
                 !sameJson(offline, [false])
             ) {
                 issues.push(`${key} must record offline=false in every successful sample.`);
@@ -175,12 +181,38 @@ const analyzeReportSamples = (report) => {
         reportRecordedAt: report?.recordedAt,
     });
     issues.push(...hostLoad.issues);
+    const thirdPartyRuntimeValidation = validateThirdPartyRuntimeProvenance({
+        manifestPath: report?.options?.thirdPartySnapshot,
+        mode: report?.options?.thirdPartyRuntime,
+        recorded: report?.environment?.thirdPartyRuntime,
+    });
+    issues.push(...thirdPartyRuntimeValidation.issues);
+    if (
+        report?.options?.thirdPartyRuntime === 'snapshot' &&
+        (scenarios.length !== 1 || scenarios[0] !== 'startup-third-party-runtime')
+    ) {
+        issues.push('Snapshot thirdPartyRuntime reports must contain only startup-third-party-runtime.');
+    }
+    if (report?.options?.thirdPartyRuntime === 'snapshot' && !sameJson(reportProfiles(report), ['cpu-only'])) {
+        issues.push('Snapshot thirdPartyRuntime reports must use only the cpu-only profile.');
+    }
+    if (report?.options?.thirdPartyRuntime === 'blocked' && scenarios.includes('startup-third-party-runtime')) {
+        issues.push('startup-third-party-runtime cannot be reported with blocked thirdPartyRuntime mode.');
+    }
+    const thirdPartyRuntime = {
+        fixtureDigest: report?.environment?.thirdPartyRuntime?.snapshot?.fixtureDigest ?? null,
+        manifestSha256: report?.environment?.thirdPartyRuntime?.snapshot?.manifestSha256 ?? null,
+        mode: report?.options?.thirdPartyRuntime ?? null,
+        serviceWorkerPolicy: report?.environment?.thirdPartyRuntime?.serviceWorkerPolicy ?? null,
+        valid: thirdPartyRuntimeValidation.valid,
+    };
     return {
         hostLoad: { passed: hostLoad.passed, valid: hostLoad.valid },
         issues,
         offlineServiceWorker,
         semanticShape,
         successfulSamples,
+        thirdPartyRuntime,
     };
 };
 
@@ -204,6 +236,7 @@ export const createExperienceReportIntegrity = (
         offlineServiceWorker: analysis.offlineServiceWorker,
         semanticShape: analysis.semanticShape,
         successfulSamples: analysis.successfulSamples,
+        thirdPartyRuntime: analysis.thirdPartyRuntime,
     };
 };
 
@@ -270,6 +303,15 @@ export const validateExperienceReportCompatibility = ({ baseline, candidate }) =
         if (typeof report.options.stateFixture !== 'string' || report.options.stateFixture.length === 0) {
             incompatibilities.push(`${label} options.stateFixture must be recorded.`);
         }
+        if (!['blocked', 'snapshot'].includes(report.options.thirdPartyRuntime)) {
+            incompatibilities.push(`${label} options.thirdPartyRuntime must be "blocked" or "snapshot".`);
+        }
+        if (
+            report.options.thirdPartySnapshot !== null &&
+            (typeof report.options.thirdPartySnapshot !== 'string' || report.options.thirdPartySnapshot.length === 0)
+        ) {
+            incompatibilities.push(`${label} options.thirdPartySnapshot must be null or a nonempty string.`);
+        }
         if (typeof report.options.root !== 'string' || report.options.root.length === 0) {
             incompatibilities.push(`${label} options.root must record the build provenance path.`);
         }
@@ -301,6 +343,7 @@ export const validateExperienceReportCompatibility = ({ baseline, candidate }) =
                 ['offlineServiceWorker', analysis.offlineServiceWorker],
                 ['semanticShape', analysis.semanticShape],
                 ['successfulSamples', analysis.successfulSamples],
+                ['thirdPartyRuntime', analysis.thirdPartyRuntime],
             ]) {
                 if (!sameJson(integrity[property], actual)) {
                     incompatibilities.push(`${label} integrity.${property} does not match the recorded runs.`);
@@ -353,6 +396,7 @@ export const validateExperienceReportCompatibility = ({ baseline, candidate }) =
         ],
         ['content encoding', baseline.options?.contentEncoding, candidate.options?.contentEncoding],
         ['state fixture', baseline.options?.stateFixture, candidate.options?.stateFixture],
+        ['third-party runtime mode', baseline.options?.thirdPartyRuntime, candidate.options?.thirdPartyRuntime],
         ['mode', baseline.options?.mode, candidate.options?.mode],
         [
             'selected profiles',
@@ -366,6 +410,9 @@ export const validateExperienceReportCompatibility = ({ baseline, candidate }) =
         ],
     ]) {
         if (!sameJson(left, right)) incompatibilities.push(`Baseline and candidate ${name} differ.`);
+    }
+    if (!sameJson(baselineAnalysis.thirdPartyRuntime, candidateAnalysis.thirdPartyRuntime)) {
+        incompatibilities.push('Baseline and candidate third-party runtime fixtures differ.');
     }
     const baselineInitialHostLoad = baseline.environment?.hostLoad?.checkpoints?.[0]?.perCpu;
     const candidateInitialHostLoad = candidate.environment?.hostLoad?.checkpoints?.[0]?.perCpu;
