@@ -9,6 +9,7 @@ import {
     compareExperienceReports,
     createArtifactWriter,
     createExperienceReportIntegrity,
+    EXPERIENCE_REPORT_SCHEMA_VERSION,
 } from './lib/experience-artifacts.mjs';
 import {
     createBuildFingerprint,
@@ -17,6 +18,7 @@ import {
     verifyHarnessFingerprint,
 } from './lib/build-fingerprint.mjs';
 import { parseComparisonArguments } from './lib/experience-options.mjs';
+import { collectHostLoadSample, createHostLoadProvenance } from './lib/host-load.mjs';
 
 const createBuild = (directory, marker) => {
     fs.mkdirSync(path.join(directory, 'built'), { recursive: true });
@@ -28,14 +30,48 @@ const createBuild = (directory, marker) => {
 
 const harnessFingerprint = createHarnessFingerprint(process.cwd());
 
-const createReport = ({ mode = 'comparison', root, runs = mode === 'comparison' ? 20 : 3, target = 1000 }) => {
+const createHostLoad = ({
+    fiveMinutes = 1,
+    logicalCpuCount = 4,
+    oneMinute = 1,
+    postRunFiveMinutes,
+    postRunOneMinute,
+    runs = 20,
+} = {}) => {
+    const sample = (one, five, recordedAt) =>
+        collectHostLoadSample({
+            loadAverage: [one, five, 1],
+            logicalCpuCount,
+            recordedAt,
+        });
+    return createHostLoadProvenance({
+        checkpoints: Array.from({ length: runs }, (_, runIndex) => ({
+            label: `older-phone.run-${runIndex + 1}.startup-process-cold-offline`,
+            ...sample(oneMinute, fiveMinutes, '2026-08-05T12:00:30.000Z'),
+        })),
+        logicalCpuCount,
+        platform: 'darwin',
+        postRun: sample(postRunOneMinute ?? oneMinute, postRunFiveMinutes ?? fiveMinutes, '2026-08-05T12:01:00.000Z'),
+        preRun: sample(oneMinute, fiveMinutes, '2026-08-05T12:00:00.000Z'),
+    });
+};
+
+const createReport = ({
+    hostLoad,
+    mode = 'comparison',
+    root,
+    runs = mode === 'comparison' ? 20 : 3,
+    target = 1000,
+}) => {
     const scenario = 'startup-process-cold-offline';
+    const resolvedHostLoad = hostLoad === undefined ? createHostLoad({ runs }) : hostLoad;
     const report = {
         allRunsPassed: true,
         environment: {
             browser: 'chromium',
             browserVersion: { product: 'Chrome/151.0.0.0', protocolVersion: '1.3', revision: 'fixture' },
             harnessFingerprint,
+            hostLoad: resolvedHostLoad,
             hostname: 'fixture-host',
             platform: 'fixture-platform',
             processor: 'fixture-processor',
@@ -96,8 +132,9 @@ const createReport = ({ mode = 'comparison', root, runs = mode === 'comparison' 
                 seed: { active: true, cacheEntries: [{ entries: 4, name: 'precache' }], controlled: true },
             },
         },
+        recordedAt: '2026-08-05T12:00:30.000Z',
         route: { date: '/#/date/2026-07-28', fixedDate: '2026-07-28', service: '/#/service/test' },
-        schemaVersion: 1,
+        schemaVersion: EXPERIENCE_REPORT_SCHEMA_VERSION,
         summary: {
             'older-phone.startup-process-cold-offline.readyMs': { p75: target, samples: runs },
         },
@@ -164,13 +201,120 @@ test('authoritative comparison accepts self-verified different builds with exact
         createBuild(candidateRoot, 'candidate');
         const comparison = compareExperienceReports({
             baseline: createReport({ root: baselineRoot, target: 1000 }),
-            candidate: createReport({ root: candidateRoot, target: 850 }),
+            candidate: createReport({
+                hostLoad: createHostLoad({ fiveMinutes: 2, oneMinute: 2 }),
+                root: candidateRoot,
+                target: 850,
+            }),
             targets: ['older-phone.startup-process-cold-offline.readyMs'],
         });
         assert.equal(comparison.authoritative, true);
         assert.equal(comparison.buildIdentity.sameBuild, false);
         assert.equal(comparison.compatible, true);
         assert.equal(comparison.passed, true);
+    } finally {
+        fs.rmSync(directory, { force: true, recursive: true });
+    }
+});
+
+test('comparison rejects different CPU capacity and materially different initial host load', () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-load-compatibility-'));
+    const baselineRoot = path.join(directory, 'baseline');
+    const candidateRoot = path.join(directory, 'candidate');
+    try {
+        createBuild(baselineRoot, 'baseline');
+        createBuild(candidateRoot, 'candidate');
+        const cpuMismatch = compareExperienceReports({
+            baseline: createReport({ root: baselineRoot }),
+            candidate: createReport({ hostLoad: createHostLoad({ logicalCpuCount: 8 }), root: candidateRoot }),
+            targets: ['older-phone.startup-process-cold-offline.readyMs'],
+        });
+        assert.equal(cpuMismatch.passed, false);
+        assert(cpuMismatch.incompatibilities.some((issue) => issue.includes('logical CPU count')));
+
+        const loadMismatch = compareExperienceReports({
+            baseline: createReport({
+                hostLoad: createHostLoad({ fiveMinutes: 0.4, oneMinute: 0.4 }),
+                root: baselineRoot,
+            }),
+            candidate: createReport({
+                hostLoad: createHostLoad({ fiveMinutes: 2, oneMinute: 2 }),
+                root: candidateRoot,
+            }),
+            targets: ['older-phone.startup-process-cold-offline.readyMs'],
+        });
+        assert.equal(loadMismatch.passed, false);
+        assert(loadMismatch.incompatibilities.some((issue) => issue.includes('initial oneMinute host load differs')));
+
+        const swappedWindows = compareExperienceReports({
+            baseline: createReport({
+                hostLoad: createHostLoad({ fiveMinutes: 2.4, oneMinute: 0.4 }),
+                root: baselineRoot,
+            }),
+            candidate: createReport({
+                hostLoad: createHostLoad({ fiveMinutes: 0.4, oneMinute: 2.4 }),
+                root: candidateRoot,
+            }),
+            targets: ['older-phone.startup-process-cold-offline.readyMs'],
+        });
+        assert.equal(swappedWindows.passed, false);
+        assert(swappedWindows.incompatibilities.some((issue) => issue.includes('initial oneMinute host load differs')));
+        assert(
+            swappedWindows.incompatibilities.some((issue) => issue.includes('initial fiveMinutes host load differs'))
+        );
+    } finally {
+        fs.rmSync(directory, { force: true, recursive: true });
+    }
+});
+
+test('comparison rejects missing, malformed, and over-threshold host load provenance', () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-load-provenance-'));
+    const baselineRoot = path.join(directory, 'baseline');
+    const candidateRoot = path.join(directory, 'candidate');
+    try {
+        createBuild(baselineRoot, 'baseline');
+        createBuild(candidateRoot, 'candidate');
+        const malformed = createHostLoad();
+        malformed.preRun.perCpu.oneMinute = 99;
+        const cases = [
+            createReport({ hostLoad: null, root: baselineRoot }),
+            createReport({ hostLoad: malformed, root: baselineRoot }),
+            createReport({ hostLoad: createHostLoad({ runs: 0 }), root: baselineRoot }),
+            createReport({ hostLoad: createHostLoad({ oneMinute: 9 }), root: baselineRoot }),
+        ];
+        for (const baseline of cases) {
+            const comparison = compareExperienceReports({
+                baseline,
+                candidate: createReport({ root: candidateRoot, target: 850 }),
+                targets: ['older-phone.startup-process-cold-offline.readyMs'],
+            });
+            assert.equal(comparison.passed, false);
+            assert(comparison.incompatibilities.some((issue) => issue.includes('Host load')));
+        }
+    } finally {
+        fs.rmSync(directory, { force: true, recursive: true });
+    }
+});
+
+test('comparison reports an empty declared checkpoint matrix without throwing', () => {
+    const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-empty-load-matrix-'));
+    const baselineRoot = path.join(directory, 'baseline');
+    const candidateRoot = path.join(directory, 'candidate');
+    try {
+        createBuild(baselineRoot, 'baseline');
+        createBuild(candidateRoot, 'candidate');
+        const baseline = createReport({ hostLoad: createHostLoad({ runs: 0 }), root: baselineRoot });
+        baseline.options.selectedProfiles = [];
+        baseline.options.selectedScenarios = [];
+        baseline.profiles = {};
+        baseline.integrity = createExperienceReportIntegrity(baseline, baselineRoot);
+        const comparison = compareExperienceReports({
+            baseline,
+            candidate: createReport({ root: candidateRoot }),
+            targets: ['older-phone.startup-process-cold-offline.readyMs'],
+        });
+        assert.equal(comparison.passed, false);
+        assert(comparison.incompatibilities.some((issue) => issue.includes('expected checkpoint labels')));
     } finally {
         fs.rmSync(directory, { force: true, recursive: true });
     }
@@ -313,8 +457,24 @@ test('artifact writer refuses a nonempty output and duplicate artifacts', () => 
 
         fs.rmSync(path.join(directory, 'stale.json'));
         const writer = createArtifactWriter(directory);
+        const noIndexMarker = path.join(directory, '.metadata_never_index');
+        assert.equal(fs.existsSync(noIndexMarker), true);
+        const buildRoot = path.join(directory, 'build');
+        createBuild(buildRoot, 'marker-exclusion');
+        const fingerprintBefore = createBuildFingerprint(buildRoot);
+        fs.writeFileSync(noIndexMarker, 'changed outside the build snapshot');
+        assert.equal(createBuildFingerprint(buildRoot).digest, fingerprintBefore.digest);
+        assert.equal(fs.existsSync(path.join(buildRoot, '.metadata_never_index')), false);
         writer.writeJson('report.json', { fresh: true });
         assert.throws(() => writer.writeJson('report.json', { stale: true }), /EEXIST/u);
+
+        const existingMarkerOnly = fs.mkdtempSync(path.join(os.tmpdir(), 'perf017-artifact-marker-'));
+        try {
+            fs.writeFileSync(path.join(existingMarkerOnly, '.metadata_never_index'), '');
+            assert.throws(() => createArtifactWriter(existingMarkerOnly), /not empty/u);
+        } finally {
+            fs.rmSync(existingMarkerOnly, { force: true, recursive: true });
+        }
     } finally {
         fs.rmSync(directory, { force: true, recursive: true });
     }

@@ -33,11 +33,13 @@ import {
 import {
     createArtifactWriter,
     createExperienceReportIntegrity,
+    EXPERIENCE_REPORT_SCHEMA_VERSION,
     summarizeExperienceRuns,
 } from './lib/experience-artifacts.mjs';
 import { createBuildFingerprint, createHarnessFingerprint } from './lib/build-fingerprint.mjs';
 import { EXPERIENCE_PROFILES, parseExperienceArguments } from './lib/experience-options.mjs';
 import { createExperienceServer } from './lib/experience-server.mjs';
+import { collectHostLoadSample, createHostLoadProvenance, evaluateHostLoadGate } from './lib/host-load.mjs';
 import { dispatchTrustedTouchGesture, horizontalGesture, verticalGesture } from './lib/touch-input.mjs';
 
 const readGit = (args, fallback = null) => {
@@ -403,6 +405,8 @@ const runRetentionScenario = async ({ baseUrl, cycles, dates, harness }) => {
 const executeScenario = async ({
     artifactWriter,
     baseUrl,
+    hostLoadCheckpoints,
+    logicalCpuCount,
     options,
     profile,
     profileName,
@@ -455,6 +459,22 @@ const executeScenario = async ({
         profile,
         userDataDir: cloned.userDataDir,
     });
+    const checkpoint = {
+        label: `${profileName}.run-${runIndex + 1}.${scenario}`,
+        ...collectHostLoadSample({ logicalCpuCount }),
+    };
+    hostLoadCheckpoints.push(checkpoint);
+    const checkpointGate = evaluateHostLoadGate([
+        { phase: `checkpoint ${JSON.stringify(checkpoint.label)}`, sample: checkpoint },
+    ]);
+    if (!checkpointGate.passed) {
+        try {
+            await harness.close();
+        } finally {
+            await removeTemporaryProfile(cloned.parent);
+        }
+        throw new Error(`Host load checkpoint failed: ${JSON.stringify(checkpointGate)}.`);
+    }
     const traceEnabled = shouldTrace(options.trace, runIndex);
     let traceCategories = [];
     let traceBuffer = null;
@@ -576,7 +596,20 @@ const executeScenario = async ({
 
 const main = async () => {
     const requestedOptions = parseExperienceArguments();
+    const logicalCpuCount = os.cpus().length;
+    if (logicalCpuCount < 1) throw new Error('Host load preflight could not detect any logical CPUs.');
+    if (os.platform() === 'win32') {
+        throw new Error(
+            'Host load preflight is unsupported on Windows because os.loadavg() does not report contention.'
+        );
+    }
+    const preRunHostLoad = collectHostLoadSample({ logicalCpuCount });
+    const preflightGate = evaluateHostLoadGate([{ phase: 'preRun', sample: preRunHostLoad }]);
+    if (!preflightGate.passed) {
+        throw new Error(`Host load preflight failed: ${JSON.stringify(preflightGate)}.`);
+    }
     const artifactWriter = createArtifactWriter(requestedOptions.output);
+    const hostLoadCheckpoints = [];
     const sourceBuildFingerprint = createBuildFingerprint(requestedOptions.root);
     const snapshotRoot = path.join(requestedOptions.output, 'build');
     fs.cpSync(requestedOptions.root, snapshotRoot, { recursive: true });
@@ -599,7 +632,7 @@ const main = async () => {
         profiles: {},
         recordedAt: new Date().toISOString(),
         route: { date: DATE_PATH, fixedDate: FIXED_DATE, service: SERVICE_PATH },
-        schemaVersion: 1,
+        schemaVersion: EXPERIENCE_REPORT_SCHEMA_VERSION,
         summary: {},
     };
 
@@ -625,6 +658,8 @@ const main = async () => {
                         const result = await executeScenario({
                             artifactWriter,
                             baseUrl: server.baseUrl,
+                            hostLoadCheckpoints,
+                            logicalCpuCount,
                             options,
                             profile,
                             profileName,
@@ -671,8 +706,15 @@ const main = async () => {
         await server.close();
     }
 
+    report.environment.hostLoad = createHostLoadProvenance({
+        checkpoints: hostLoadCheckpoints,
+        logicalCpuCount,
+        postRun: collectHostLoadSample({ logicalCpuCount }),
+        preRun: preRunHostLoad,
+    });
     report.integrity = createExperienceReportIntegrity(report, options.root, { buildFingerprintBefore });
     if (!report.integrity.buildImmutability.unchanged) report.allRunsPassed = false;
+    if (!report.integrity.hostLoad.passed) report.allRunsPassed = false;
     artifactWriter.writeJson('report.json', report);
     artifactWriter.writeJson('environment.json', report.environment);
     process.stderr.write('\n');
