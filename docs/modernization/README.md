@@ -4,7 +4,7 @@ Last updated: 2026-08-05
 
 Overall status: In progress; service-performance implementation and PERF-017
 measurement are complete, PERF-018 was cancelled with immediate behavior
-retained, and PERF-019 is next
+retained, and PERF-019 is underway
 
 Current milestone: M3 — Continue targeted modernization
 
@@ -102,7 +102,7 @@ The next measured performance round is coordinated in
 | PERF-016 | Add field performance telemetry                              | `done`        | Low                       | PERF-006                    | [Service performance](./service-performance-study.md#perf-016--field-telemetry)                                                             |
 | PERF-017 | Add installed-startup and real-touch measurement             | `done`        | Low                       | PERF-016                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-017--installed-startup-and-real-touch-measurement-foundation)   |
 | PERF-018 | Defer future-date precache contention                        | `cancelled`   | Medium, offline-sensitive | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-018--defer-future-date-precaching-and-cache-refresh-contention) |
-| PERF-019 | Defer analytics, tracing, Webvisor, and polyfills            | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-019--defer-analytics-tracing-webvisor-and-optional-polyfills)   |
+| PERF-019 | Defer analytics, tracing, Webvisor, and polyfills            | `in-progress` | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-019--defer-analytics-tracing-webvisor-and-optional-polyfills)   |
 | PERF-020 | Replace the global pull-to-refresh touch path                | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-020--replace-the-global-pull-to-refresh-touch-path)             |
 | PERF-021 | Render one calendar slide during startup                     | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-021--render-one-calendar-slide-during-startup)                  |
 | PERF-022 | Split below-fold calendar and optional home features         | `proposed`    | Medium, offline-sensitive | PERF-021                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-022--split-below-fold-calendar-and-optional-home-features)      |
@@ -266,6 +266,25 @@ DEP-008 remains deferred until the earlier milestones are complete. A bundler mi
   deduplication product change. It must preserve the exact 44-key, ten-day
   corpus, worker/Capacitor split, service worker, and every offline gate; later
   candidates still require the global evidence threshold.
+- PERF-019 is claimed against the fresh immutable three-run core smoke in
+  `perf-018-immediate-core-smoke-3-a` (build `190017db…`, harness `17ba5e44…`).
+  Its p75 anchors are 561.64 ms cold-online process readiness with 183.5 ms
+  script / 368.7 ms task; 542.55 ms cold-offline process-to-date with 190.9 ms
+  script / 376.2 ms task; 284.67 ms warm navigation with 121.7 ms script /
+  256.4 ms task; and persisted-parallel 795.95 ms complete, 1,329.4 ms TOC,
+  1,350.3 ms ready, 387.7 ms script, 758.2 ms task, 170.5 ms longest task, and
+  CLS 0.0161. Initial JavaScript is 1,516,050 B decoded / 439,000 B gzip, 1,943 B
+  above the review gate. The first candidate removes only BrowserTracing while
+  retaining Sentry errors and every other subsystem. Its bundle is 29,513 B raw
+  / 8,726 B gzip smaller, but its first timings and follow-up control are
+  invalid because Spotlight indexing drove host load above 180 on ten logical
+  CPUs. Experience report schema 2 now fails before artifact creation above
+  0.75 load per logical CPU, checkpoints immediately before each measured
+  scenario after setup, requires the exact checkpoint sequence, equal CPU
+  capacity, and comparable one-/five-minute load, and creates no-index artifact roots.
+  The candidate remains undecided until a clean reverse-order rerun passes.
+  Because the harness blocks/stubs third-party remote execution, Yandex/GTM
+  remote costs require a separate controlled diagnostic.
 - Older-phone complete Liturgy with production-like gzip: 4.16 s complete /
   5.72 s settled, with the exact deterministic 67-heading content shape.
 - Static delivery now has Brotli/gzip server compression, gzip static-deploy

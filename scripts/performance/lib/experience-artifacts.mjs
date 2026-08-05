@@ -3,9 +3,10 @@ import path from 'node:path';
 
 import { quantile } from './browser-observers.mjs';
 import { createBuildFingerprint, verifyBuildFingerprint, verifyHarnessFingerprint } from './build-fingerprint.mjs';
+import { HOST_LOAD_COMPARISON_DELTA_PER_CPU, validateHostLoadProvenance } from './host-load.mjs';
 
 const SEMANTIC_FIELDS = ['headingShapeHash', 'paragraphCount', 'renderKey', 'textCharacters'];
-export const EXPERIENCE_REPORT_SCHEMA_VERSION = 1;
+export const EXPERIENCE_REPORT_SCHEMA_VERSION = 2;
 
 const flattenNumbers = (value, prefix = '', target = {}) => {
     if (typeof value === 'number' && Number.isFinite(value)) {
@@ -156,7 +157,31 @@ const analyzeReportSamples = (report) => {
         }
     }
 
-    return { issues, offlineServiceWorker, semanticShape, successfulSamples };
+    const expectedCheckpointLabels =
+        Array.isArray(report?.options?.selectedProfiles) &&
+        Array.isArray(report?.options?.selectedScenarios) &&
+        Number.isInteger(report?.options?.runs) &&
+        report.options.runs > 0
+            ? report.options.selectedProfiles.flatMap((profileName) =>
+                  Array.from({ length: report.options.runs }, (_, runIndex) =>
+                      report.options.selectedScenarios.map(
+                          (scenario) => `${profileName}.run-${runIndex + 1}.${scenario}`
+                      )
+                  ).flat()
+              )
+            : null;
+    const hostLoad = validateHostLoadProvenance(report?.environment?.hostLoad, {
+        expectedCheckpointLabels,
+        reportRecordedAt: report?.recordedAt,
+    });
+    issues.push(...hostLoad.issues);
+    return {
+        hostLoad: { passed: hostLoad.passed, valid: hostLoad.valid },
+        issues,
+        offlineServiceWorker,
+        semanticShape,
+        successfulSamples,
+    };
 };
 
 export const createExperienceReportIntegrity = (
@@ -175,6 +200,7 @@ export const createExperienceReportIntegrity = (
             before,
             unchanged: sameJson(before, after),
         },
+        hostLoad: analysis.hostLoad,
         offlineServiceWorker: analysis.offlineServiceWorker,
         semanticShape: analysis.semanticShape,
         successfulSamples: analysis.successfulSamples,
@@ -271,6 +297,7 @@ export const validateExperienceReportCompatibility = ({ baseline, candidate }) =
         } else {
             for (const [property, actual] of [
                 ['analysisIssues', analysis.issues],
+                ['hostLoad', analysis.hostLoad],
                 ['offlineServiceWorker', analysis.offlineServiceWorker],
                 ['semanticShape', analysis.semanticShape],
                 ['successfulSamples', analysis.successfulSamples],
@@ -315,6 +342,11 @@ export const validateExperienceReportCompatibility = ({ baseline, candidate }) =
         ['platform', baseline.environment?.platform, candidate.environment?.platform],
         ['processor', baseline.environment?.processor, candidate.environment?.processor],
         [
+            'logical CPU count',
+            baseline.environment?.hostLoad?.logicalCpuCount,
+            candidate.environment?.hostLoad?.logicalCpuCount,
+        ],
+        [
             'harness fingerprint digest',
             baseline.environment?.harnessFingerprint?.digest,
             candidate.environment?.harnessFingerprint?.digest,
@@ -334,6 +366,25 @@ export const validateExperienceReportCompatibility = ({ baseline, candidate }) =
         ],
     ]) {
         if (!sameJson(left, right)) incompatibilities.push(`Baseline and candidate ${name} differ.`);
+    }
+    const baselineInitialHostLoad = baseline.environment?.hostLoad?.checkpoints?.[0]?.perCpu;
+    const candidateInitialHostLoad = candidate.environment?.hostLoad?.checkpoints?.[0]?.perCpu;
+    if (
+        baselineAnalysis.hostLoad.valid &&
+        candidateAnalysis.hostLoad.valid &&
+        baselineInitialHostLoad &&
+        candidateInitialHostLoad
+    ) {
+        for (const window of ['oneMinute', 'fiveMinutes']) {
+            if (
+                Math.abs(baselineInitialHostLoad[window] - candidateInitialHostLoad[window]) >
+                HOST_LOAD_COMPARISON_DELTA_PER_CPU
+            ) {
+                incompatibilities.push(
+                    `Baseline and candidate initial ${window} host load differs by more than ${HOST_LOAD_COMPARISON_DELTA_PER_CPU} per logical CPU.`
+                );
+            }
+        }
     }
     for (const profileName of new Set([...reportProfiles(baseline), ...reportProfiles(candidate)])) {
         if (
@@ -535,6 +586,8 @@ export const createArtifactWriter = (outputDirectory, { allowExisting = false } 
         }
     }
     fs.mkdirSync(root, { recursive: true });
+    const noIndexMarker = path.join(root, '.metadata_never_index');
+    if (!fs.existsSync(noIndexMarker)) fs.writeFileSync(noIndexMarker, '', { flag: 'wx' });
 
     const targetPath = (relativePath) => {
         const target = path.resolve(root, relativePath);
