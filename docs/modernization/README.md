@@ -219,12 +219,12 @@ DEP-008 remains deferred until the earlier milestones are complete. A bundler mi
 
 ## Current execution snapshot
 
-- Production build: passes on Node 22 with Webpack 5.
-- Initial JavaScript: 1,512,607 bytes raw / 437,057 bytes gzip.
-- Initial JavaScript reduction: 487,359 bytes raw / 106,134 bytes gzip
-  (19.54% gzip) from the audit baseline.
-- Workbox precache: 1,555 verified local URLs / 7,712,284 bytes.
-- Frontend tests: 62 unit/contract tests plus seven production-browser journeys.
+- Production build: passes on Node 24 with Webpack 5.
+- Initial JavaScript: 1,516,034 bytes raw / 438,388 bytes gzip.
+- Initial JavaScript reduction: 483,932 bytes raw / 104,803 bytes gzip
+  (19.29% gzip) from the audit baseline.
+- Workbox precache: 1,555 verified local URLs / 7,715,843 bytes.
+- Frontend tests: 71 unit/contract tests plus eight production-browser journeys.
 - Quality ratchets: ESLint and TypeScript diagnostic totals both decreased from
   their modern-tooling baselines; the strict TypeScript seed passes.
 - Offline chunk verification: unvisited route, optional search, full Zlatoust,
