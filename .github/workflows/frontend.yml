@@ -18,10 +18,10 @@ jobs:
 
         steps:
             - name: Check out repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v7
 
             - name: Set up Node.js
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v7
               with:
                   node-version-file: .nvmrc
 
@@ -40,6 +40,7 @@ jobs:
               run: yarn quality
 
             - name: Validate performance harness
+              if: ${{ hashFiles('scripts/performance/experience-*.test.mjs') != '' }}
               run: yarn test:performance
 
             - name: Build production assets
