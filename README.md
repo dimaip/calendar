@@ -2,7 +2,7 @@
 
 ## Frontend setup
 
-The supported frontend toolchain is Node 22.14.0 and Yarn 1.22.22. With `nvm`:
+The supported frontend toolchain is Node 24.18.0 and Yarn 1.22.22. With `nvm`:
 
 ```sh
 nvm use
