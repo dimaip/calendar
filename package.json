@@ -7,8 +7,8 @@
     "type": "module",
     "packageManager": "yarn@1.22.22",
     "engines": {
-        "node": ">=20.19.0 <23",
-        "yarn": "1.22.22"
+        "node": ">=22.14.0 <25",
+        "yarn": ">=1.22.19 <2"
     },
     "resolutions": {
         "@types/react": "18.3.31"

@@ -1,0 +1,55 @@
+name: Frontend verification
+
+on:
+    pull_request:
+    push:
+        branches:
+            - master
+    workflow_dispatch:
+
+concurrency:
+    group: frontend-${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    verify:
+        runs-on: ubuntu-latest
+        timeout-minutes: 20
+
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: .nvmrc
+
+            - name: Pin Yarn
+              run: |
+                  corepack enable
+                  corepack prepare yarn@1.22.22 --activate
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Run frontend tests
+              run: yarn test
+
+            - name: Run quality ratchets
+              run: yarn quality
+
+            - name: Validate performance harness
+              run: yarn test:performance
+
+            - name: Build production assets
+              run: yarn build
+
+            - name: Report bundle and precache sizes
+              run: yarn analyze:bundle
+
+            - name: Install Chromium
+              run: yarn playwright install --with-deps chromium
+
+            - name: Run browser and offline journeys
+              run: yarn test:e2e
