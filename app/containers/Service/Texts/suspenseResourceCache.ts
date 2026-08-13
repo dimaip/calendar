@@ -1,3 +1,5 @@
+import { registerErrorRecovery } from 'utils/recoverableError';
+
 interface PendingResource<T> {
     status: 'pending';
     promise: Promise<T>;
@@ -22,6 +24,17 @@ export interface SuspenseResourceCache<T> {
 
 export const createSuspenseResourceCache = <T>(): SuspenseResourceCache<T> => {
     const resources = new Map<string, Resource<T>>();
+    const retainRejection = (key: string, error: unknown): Error => {
+        const loadError = error instanceof Error ? error : new Error(String(error));
+        const resource: RejectedResource = { status: 'rejected', error: loadError };
+        resources.set(key, resource);
+        registerErrorRecovery(loadError, () => {
+            if (resources.get(key) === resource) {
+                resources.delete(key);
+            }
+        });
+        return loadError;
+    };
 
     return {
         clear: () => {
@@ -36,9 +49,7 @@ export const createSuspenseResourceCache = <T>(): SuspenseResourceCache<T> => {
                 try {
                     loadPromise = load();
                 } catch (error) {
-                    const loadError = error instanceof Error ? error : new Error(String(error));
-                    resources.set(key, { status: 'rejected', error: loadError });
-                    throw loadError;
+                    throw retainRejection(key, error);
                 }
 
                 const promise = loadPromise.then(
@@ -47,9 +58,7 @@ export const createSuspenseResourceCache = <T>(): SuspenseResourceCache<T> => {
                         return value;
                     },
                     (error: unknown) => {
-                        const loadError = error instanceof Error ? error : new Error(String(error));
-                        resources.set(key, { status: 'rejected', error: loadError });
-                        throw loadError;
+                        throw retainRejection(key, error);
                     }
                 );
 

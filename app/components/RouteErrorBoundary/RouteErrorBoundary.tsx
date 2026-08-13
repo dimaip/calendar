@@ -2,6 +2,8 @@ import React, { Component, createRef } from 'react';
 import * as Sentry from '@sentry/react';
 import { useLocation } from 'react-router-dom';
 
+import { recoverFromError } from 'utils/recoverableError';
+
 import './RouteErrorBoundary.css';
 
 const pageStyles: React.CSSProperties = {
@@ -69,11 +71,15 @@ class ApplicationErrorBoundary extends Component<ApplicationErrorBoundaryProps, 
 
     componentDidUpdate(previousProps: ApplicationErrorBoundaryProps): void {
         if (this.state.error && previousProps.resetKey !== this.props.resetKey) {
+            recoverFromError(this.state.error);
             this.setState({ error: null });
         }
     }
 
     private readonly retry = (): void => {
+        if (this.state.error) {
+            recoverFromError(this.state.error);
+        }
         this.setState({ error: null });
     };
 

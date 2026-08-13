@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 import { createSuspenseResourceCache } from './suspenseResourceCache.ts';
+import { recoverFromError } from '../../../utils/recoverableError.ts';
 
 const readSuspendedPromise = (cache, key, load) => {
     try {
@@ -58,13 +59,17 @@ test('keeps source and language resources independent', async () => {
     );
 });
 
-test('preserves a rejected load and does not retry it on later renders', async () => {
+test('allows an asynchronous load to retry after explicit error recovery', async () => {
     const cache = createSuspenseResourceCache();
     const importError = new Error('offline chunk is unavailable');
+    const component = () => null;
     let loadCount = 0;
     const load = async () => {
         loadCount += 1;
-        throw importError;
+        if (loadCount === 1) {
+            throw importError;
+        }
+        return component;
     };
 
     const rejectedPromise = readSuspendedPromise(cache, 'Shared/Ending\u0000ru', load);
@@ -74,25 +79,64 @@ test('preserves a rejected load and does not retry it on later renders', async (
         () => cache.read('Shared/Ending\u0000ru', load),
         (error) => error === importError
     );
-    assert.equal(loadCount, 1);
+
+    recoverFromError(importError);
+    const retryPromise = readSuspendedPromise(cache, 'Shared/Ending\u0000ru', load);
+    await retryPromise;
+
+    assert.equal(cache.read('Shared/Ending\u0000ru', load), component);
+    assert.equal(loadCount, 2);
 });
 
-test('preserves synchronous loader failures without retrying', () => {
+test('allows a synchronous loader failure to retry after explicit error recovery', async () => {
     const cache = createSuspenseResourceCache();
     const importError = new Error('invalid module request');
+    const component = () => null;
     let loadCount = 0;
     const load = () => {
         loadCount += 1;
-        throw importError;
+        if (loadCount === 1) {
+            throw importError;
+        }
+        return Promise.resolve(component);
     };
 
     assert.throws(
         () => cache.read('Shared/Ending\u0000ru', load),
         (error) => error === importError
     );
-    assert.throws(
-        () => cache.read('Shared/Ending\u0000ru', load),
-        (error) => error === importError
-    );
-    assert.equal(loadCount, 1);
+
+    recoverFromError(importError);
+    const retryPromise = readSuspendedPromise(cache, 'Shared/Ending\u0000ru', load);
+    await retryPromise;
+
+    assert.equal(cache.read('Shared/Ending\u0000ru', load), component);
+    assert.equal(loadCount, 2);
+});
+
+test('recovers every cache key rejected by the same chunk error', async () => {
+    const cache = createSuspenseResourceCache();
+    const importError = new Error('shared chunk is unavailable');
+    const component = () => null;
+    let shouldFail = true;
+    const load = async () => {
+        if (shouldFail) {
+            throw importError;
+        }
+        return component;
+    };
+
+    const firstPromise = readSuspendedPromise(cache, 'Shared/First\u0000ru', load);
+    const secondPromise = readSuspendedPromise(cache, 'Shared/Second\u0000ru', load);
+    await Promise.allSettled([firstPromise, secondPromise]);
+
+    recoverFromError(importError);
+    shouldFail = false;
+
+    const firstRetry = readSuspendedPromise(cache, 'Shared/First\u0000ru', load);
+    const secondRetry = readSuspendedPromise(cache, 'Shared/Second\u0000ru', load);
+    await Promise.all([firstRetry, secondRetry]);
+
+    assert.equal(cache.read('Shared/First\u0000ru', load), component);
+    assert.equal(cache.read('Shared/Second\u0000ru', load), component);
 });

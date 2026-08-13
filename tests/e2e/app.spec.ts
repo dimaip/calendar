@@ -102,6 +102,32 @@ test('deep-links to dynamically loaded service MDX and switches its language', a
     await expect(page.getByText(FIRST_HOUR_CHURCH_SLAVONIC_TEXT, { exact: false })).toBeVisible();
 });
 
+test('recovers a failed service MDX chunk when the user retries', async ({ page }) => {
+    await page.goto(`/#/date/${FIXED_DATE}/service/firstHour`);
+    await expect(page.getByText(FIRST_HOUR_RUSSIAN_TEXT, { exact: false })).toBeVisible();
+
+    let failedChunkUrl = '';
+    await page.route('**/built/*.js', async (route) => {
+        if (!failedChunkUrl) {
+            failedChunkUrl = route.request().url();
+            await route.abort('failed');
+            return;
+        }
+        await route.continue();
+    });
+
+    await page.getByRole('combobox', { name: 'меню' }).filter({ hasText: 'РУС' }).click();
+    await page.getByRole('option', { name: 'ЦСЯ' }).click();
+
+    await expect.poll(() => failedChunkUrl).toContain('/built/');
+    await expect(page.getByRole('heading', { name: 'Что-то пошло не так' })).toBeVisible();
+
+    await page.unroute('**/built/*.js');
+    await page.getByRole('button', { name: 'Попробовать ещё раз' }).click();
+
+    await expect(page.getByText(FIRST_HOUR_CHURCH_SLAVONIC_TEXT, { exact: false })).toBeVisible();
+});
+
 test('publishes a deterministic service TOC and navigates to a registered heading', async ({ page }) => {
     await page.addInitScript(() => {
         const NativeIntersectionObserver = window.IntersectionObserver;
