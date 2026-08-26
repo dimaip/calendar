@@ -1,6 +1,6 @@
 import React from 'react';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import { useQuery } from 'convex/react';
 import { useSession } from 'containers/AuthProvider';
 import Button from 'components/Button/Button';
@@ -9,7 +9,7 @@ import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import QuestionIcon from 'components/svgs/QuestionIcon';
 import Bell from 'components/svgs/Bell';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Share from 'components/Share/Share';
 import useDay from 'hooks/useDay';
 import SettingsButton from 'components/SettingsButton/SettingsButton';
@@ -59,14 +59,14 @@ const UserIcon = ({ hasUnread }: { hasUnread: boolean }) => {
 };
 
 const ProfileIcon = ({ hasUnread }: { hasUnread: boolean }) => {
-    const history = useHistory();
+    const navigate = useNavigate();
     const { profile } = useSession();
     const loggedIn = profile;
     return (
         <Button
             title={loggedIn ? 'Выйти' : 'Войти'}
             onClick={() => {
-                history.push('/profile');
+                void navigate('/profile');
             }}
             className={css`
                 display: block;
@@ -90,13 +90,13 @@ const ProfileIcon = ({ hasUnread }: { hasUnread: boolean }) => {
 };
 
 const UpdatesButton = ({ hasUnread }: { hasUnread: boolean }) => {
-    const history = useHistory();
+    const navigate = useNavigate();
 
     return (
         <Button
             title="Обновления"
             onClick={() => {
-                history.push('/updates');
+                void navigate('/updates');
             }}
             className={css`
                 position: relative;
@@ -199,7 +199,7 @@ const HeaderMain = ({ setNewDate, date, calendarRef, showUpdatesButton = false }
                         <SettingsButton />
                         <Share
                             title="Православное богослужение на русском языке"
-                            text={day?.title}
+                            text={day?.title || ''}
                             url={window.location.href}
                         />
                     </DotsMenu>

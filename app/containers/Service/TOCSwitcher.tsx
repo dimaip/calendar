@@ -1,62 +1,72 @@
 import React, { useEffect, useState } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { useRecoilValue } from 'recoil';
-import TOCState from 'state/TOCState';
 
 import SelectBox from '../../components/SelectBox/SelectBox';
 
-const TOCSwitcher = ({ lang }) => {
+import TOCState from 'state/TOCState';
+
+interface TOCSwitcherProps {
+    lang: string;
+    service?: unknown;
+}
+
+const TOCSwitcher = ({ lang }: TOCSwitcherProps): JSX.Element => {
     const TOC = useRecoilValue(TOCState);
     const [activeItem, setActiveItem] = useState('');
-    if ('IntersectionObserver' in window) {
-        useEffect(() => {
-            let observer = null;
-            if (TOC.length) {
-                observer = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting && entry.target.id) {
-                                if (observer) {
-                                    setActiveItem(entry.target.id);
-                                }
-                            }
-                        });
-                    },
-                    {
-                        rootMargin: '-50px 0px -250px 0px',
-                        threshold: 0.3,
-                    }
-                );
 
-                // @TODO: any better way to do it without timeout?
-                // We keep on polling for dom nodes, till all nodes are found
-                const observeOrCue = (nodeId) => {
-                    if (!observer) {
-                        return;
-                    }
-                    const node = document.getElementById(nodeId);
-                    if (node) {
-                        observer.observe(node);
-                    } else {
-                        setTimeout(() => {
-                            observeOrCue(nodeId);
-                        }, 500);
-                    }
-                };
+    useEffect(() => {
+        if (typeof window.IntersectionObserver !== 'function' || !TOC.length) {
+            return undefined;
+        }
 
-                TOC.map((nodeId) => {
-                    observeOrCue(nodeId.value);
-                });
-                setTimeout(() => {}, 0);
-            }
-            return () => {
-                if (observer) {
-                    observer.disconnect();
-                    observer = null;
+        let disposed = false;
+        const pendingTimeouts = new Set<number>();
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (disposed) {
+                    return;
                 }
-            };
-        }, [lang, TOC]);
-    }
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && entry.target.id) {
+                        setActiveItem(entry.target.id);
+                    }
+                });
+            },
+            {
+                rootMargin: '-50px 0px -250px 0px',
+                threshold: 0.3,
+            }
+        );
+
+        // The MDX content can mount after the TOC data, so retry until each heading exists.
+        const observeOrCue = (nodeId: string) => {
+            if (disposed) {
+                return;
+            }
+            const node = document.getElementById(nodeId);
+            if (node) {
+                observer.observe(node);
+                return;
+            }
+
+            const timeoutId = window.setTimeout(() => {
+                pendingTimeouts.delete(timeoutId);
+                observeOrCue(nodeId);
+            }, 500);
+            pendingTimeouts.add(timeoutId);
+        };
+
+        TOC.forEach(({ value }) => observeOrCue(value));
+
+        return () => {
+            disposed = true;
+            pendingTimeouts.forEach((timeoutId) => window.clearTimeout(timeoutId));
+            pendingTimeouts.clear();
+            observer.disconnect();
+        };
+    }, [lang, TOC]);
+
     return (
         <SelectBox
             className={css`

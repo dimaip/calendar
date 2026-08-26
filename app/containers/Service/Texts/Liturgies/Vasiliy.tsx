@@ -5,7 +5,7 @@ import useDay from 'hooks/useDay';
 import Loader from 'components/Loader/Loader';
 import ReadingsForService from 'containers/Readings/ReadingsForService';
 import dateFormat from 'dateformat';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 
 import VariableSection from '../VariableSection';
 

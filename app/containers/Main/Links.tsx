@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import ExternalLink from 'components/svgs/ExternalLink';
 import { useParams } from 'react-router-dom';
 

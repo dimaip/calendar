@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
 import Loader from 'components/Loader/Loader';
 import ErrorMessage404 from 'components/ErrorMessage404/ErrorMessage404';
@@ -22,7 +22,7 @@ const SermonDetail = () => {
 
     return (
         <LayoutInner backLinkFallback="/sermons">
-            {status === 'loading' ? (
+            {status === 'pending' ? (
                 <Loader />
             ) : status === 'error' ? (
                 <ErrorMessage500 />

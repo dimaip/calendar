@@ -1,7 +1,7 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { Link, useParams } from 'react-router-dom';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import CrossIcon from 'components/svgs/CrossIcon';
 import Bible from 'components/svgs/Bible';
 import Prayer from 'components/svgs/Prayer';

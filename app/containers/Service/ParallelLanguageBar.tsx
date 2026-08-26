@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import Button from 'components/Button/Button';
 import Cross from 'components/svgs/Cross';
 import { useRecoilState } from 'recoil';

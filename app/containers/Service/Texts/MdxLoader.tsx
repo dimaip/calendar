@@ -1,9 +1,9 @@
 import React, { createContext, useContext } from 'react';
 import * as Sentry from '@sentry/react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import Button from 'components/Button/Button';
 import SolidSection from 'components/SolidSection/SolidSection';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import scriptEditorIsActiveState from 'state/scriptEditorIsActiveState';
 import disabledPrayersState from 'state/disabledPrayersState';

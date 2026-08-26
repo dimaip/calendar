@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTheme } from 'emotion-theming';
-import { css } from 'emotion';
+import { useTheme } from '@emotion/react';
+import { css } from '@emotion/css';
 
 export const Note = ({ children }: { children: React.ReactNode }): JSX.Element => {
     const theme = useTheme();

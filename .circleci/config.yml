@@ -1,38 +1,55 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
+version: 2.1
+
 jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:7.10
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+    build:
+        docker:
+            - image: cimg/node:24.18.0
 
-    working_directory: ~/repo
+        working_directory: ~/repo
 
-    steps:
-      - checkout
+        steps:
+            - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
+            - run:
+                  name: Pin Yarn
+                  command: |
+                      corepack enable
+                      corepack prepare yarn@1.22.22 --activate
 
-      - run: yarn install
+            - restore_cache:
+                  keys:
+                      - v2-yarn-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+                      - v2-yarn-
 
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-        
-      # run tests!
-      - run: yarn test
+            - run:
+                  name: Install dependencies
+                  command: yarn install --frozen-lockfile
 
+            - save_cache:
+                  key: v2-yarn-{{ checksum "package.json" }}-{{ checksum "yarn.lock" }}
+                  paths:
+                      - ~/.cache/yarn
+
+            - run:
+                  name: Test
+                  command: yarn test
+
+            - run:
+                  name: Quality ratchets
+                  command: yarn quality
+
+            - run:
+                  name: Production build
+                  command: |
+                      mkdir -p /tmp/build-reports
+                      yarn build 2>&1 | tee /tmp/build-reports/build-output.txt
+
+            - run:
+                  name: Report artifact size
+                  command: |
+                      node scripts/bundle-report.mjs --out /tmp/build-reports/bundle-report.json
+                      cat /tmp/build-reports/bundle-report.json
+
+            - store_artifacts:
+                  path: /tmp/build-reports
+                  destination: build-reports

@@ -1,8 +1,8 @@
 import React from 'react';
-import { useTheme } from 'emotion-theming';
-import { css } from 'emotion';
+import { useTheme } from '@emotion/react';
+import { css } from '@emotion/css';
 
-export default ({ colour = null }) => {
+export default ({ colour = null }: { colour?: string | null }): JSX.Element => {
     const theme = useTheme();
     return (
         <svg

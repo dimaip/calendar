@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Switch, Redirect, useHistory, useParams } from 'react-router-dom';
+import React, { Suspense, useEffect, useRef } from 'react';
+import { Navigate, Route, Routes as RouterRoutes, useLocation, useParams } from 'react-router-dom';
 import Main from 'containers/Main/Main';
 import NotFound from 'components/NotFound/NotFound';
 import Readings from 'containers/Readings/Readings';
@@ -8,11 +8,10 @@ import Sermon from 'containers/Sermon/Sermon';
 import Saint from 'containers/Saint/Saint';
 import ThisDay from 'containers/ThisDay/ThisDay';
 import Service from 'containers/Service/Service';
-import { Global, css as rcss } from '@emotion/react';
+import { Global, ThemeProvider, css as rcss } from '@emotion/react';
+import { css } from '@emotion/css';
 import useDay from 'hooks/useDay';
 import getTheme from 'styles/getTheme';
-import { ThemeProvider } from 'emotion-theming';
-import { css } from 'emotion';
 import langState from 'state/langState';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { LangContext } from 'containers/Service/LangContext';
@@ -20,22 +19,42 @@ import pendingUpdateState from 'state/pendingUpdateState';
 import UpdatePrompt from 'components/UpdatePrompt/UpdatePrompt';
 import isParallelState from 'state/isParallel';
 import { Promo } from 'components/Promo/Promo';
-import { Hymns } from 'containers/Hymns/Hymns';
-import { Hymn } from 'containers/Hymns/Hymn';
-import Profile from 'containers/Profile/Profile';
-import AddSharedVersion from 'containers/AddSharedVersion/AddSharedVersion';
 import Loader from 'components/Loader/Loader';
 import themeState from 'state/themeState';
-import SermonListContainer from 'containers/SermonList/SermonList';
-import SermonDetail from 'containers/SermonDetail/SermonDetail';
 import SettingsMenu from 'containers/Main/SettingsMenu';
-import Updates from 'containers/Updates/Updates';
-import UpdatesAdmin from 'containers/Updates/UpdatesAdmin';
 
 import checkVersion from './checkVersion';
 
+const Hymns = React.lazy(async () => {
+    const module = await import(/* webpackChunkName: "route-hymns" */ 'containers/Hymns/Hymns');
+    return { default: module.Hymns };
+});
+const Hymn = React.lazy(async () => {
+    const module = await import(/* webpackChunkName: "route-hymns" */ 'containers/Hymns/Hymn');
+    return { default: module.Hymn };
+});
+const Profile = React.lazy(
+    async () => await import(/* webpackChunkName: "route-profile" */ 'containers/Profile/Profile')
+);
+const AddSharedVersion = React.lazy(
+    async () =>
+        await import(/* webpackChunkName: "route-shared-version" */ 'containers/AddSharedVersion/AddSharedVersion')
+);
+const SermonListContainer = React.lazy(
+    async () => await import(/* webpackChunkName: "route-sermons" */ 'containers/SermonList/SermonList')
+);
+const SermonDetail = React.lazy(
+    async () => await import(/* webpackChunkName: "route-sermons" */ 'containers/SermonDetail/SermonDetail')
+);
+const Updates = React.lazy(
+    async () => await import(/* webpackChunkName: "route-updates" */ 'containers/Updates/Updates')
+);
+const UpdatesAdmin = React.lazy(
+    async () => await import(/* webpackChunkName: "route-updates-admin" */ 'containers/Updates/UpdatesAdmin')
+);
+
 const DateRoutes = () => {
-    const { date } = useParams();
+    const { date = '' } = useParams<'date'>();
     const themeStateValue = useRecoilValue(themeState);
 
     const tomorrowDateObj = new Date(date);
@@ -49,35 +68,17 @@ const DateRoutes = () => {
     return (
         <ThemeProvider theme={theme}>
             <Promo>
-                <Switch>
-                    <Route exact path="/date/:date">
-                        <Main />
-                    </Route>
-                    <Route exact path="/date/:date/services">
-                        <Main services />
-                    </Route>
-                    <Route exact path="/date/:date/readings/:service">
-                        <Readings />
-                    </Route>
-                    <Route exact path="/date/:date/bReadings/:service">
-                        <Readings brother />
-                    </Route>
-                    <Route exact path="/date/:date/sermon/:sermonId">
-                        <Sermon />
-                    </Route>
-                    <Route exact path="/date/:date/saint/:saintId">
-                        <Saint />
-                    </Route>
-                    <Route exact path="/date/:date/thisday/:thisDayId">
-                        <ThisDay />
-                    </Route>
-                    <Route exact path="/date/:date/service/:serviceId/:prayerId?">
-                        <Service />
-                    </Route>
-                    <Route>
-                        <NotFound />
-                    </Route>
-                </Switch>
+                <RouterRoutes>
+                    <Route index element={<Main />} />
+                    <Route path="services" element={<Main services />} />
+                    <Route path="readings/:service" element={<Readings />} />
+                    <Route path="bReadings/:service" element={<Readings brother />} />
+                    <Route path="sermon/:sermonId" element={<Sermon />} />
+                    <Route path="saint/:saintId" element={<Saint />} />
+                    <Route path="thisday/:thisDayId" element={<ThisDay />} />
+                    <Route path="service/:serviceId/:prayerId?" element={<Service />} />
+                    <Route path="*" element={<NotFound />} />
+                </RouterRoutes>
                 <UpdatePrompt />
                 {/* <ScriptEditorPromo /> */}
             </Promo>
@@ -85,16 +86,29 @@ const DateRoutes = () => {
     );
 };
 
-export default () => {
+const Routes = () => {
     const langStateValue = useRecoilValue(langState);
-    const history = useHistory();
+    const location = useLocation();
+    const previousLocationKey = useRef(location.key);
     const setPendingUpdate = useSetRecoilState(pendingUpdateState);
-    history.listen(async () => {
-        const newVersion = await checkVersion();
-        if (newVersion) {
-            setPendingUpdate(newVersion);
+
+    useEffect(() => {
+        if (previousLocationKey.current === location.key) {
+            return undefined;
         }
-    });
+        previousLocationKey.current = location.key;
+
+        let active = true;
+        void checkVersion().then((newVersion) => {
+            if (active && newVersion) {
+                setPendingUpdate(newVersion);
+            }
+        });
+
+        return () => {
+            active = false;
+        };
+    }, [location.key, setPendingUpdate]);
     const isParallel = useRecoilValue(isParallelState);
     const themeStateValue = useRecoilValue(themeState);
     const theme = getTheme(undefined, themeStateValue);
@@ -125,54 +139,32 @@ export default () => {
                     `}
                 >
                     <SettingsMenu />
-                    <Switch>
-                        <Route
-                            exact
-                            path="/"
-                            render={() => {
-                                const date = dateFormat(new Date(), 'yyyy-mm-dd');
-                                return <Redirect to={`/date/${date}`} />;
-                            }}
-                        />
-                        <Route exact path="/hymns/:hymnId">
-                            <Hymn />
-                        </Route>
-                        <Route exact path="/hymns">
-                            <Hymns />
-                        </Route>
-                        <Route exact path="/profile">
-                            <Profile />
-                        </Route>
-                        <Route exact path="/updates">
-                            <Updates />
-                        </Route>
-                        <Route exact path="/admin/updates/new">
-                            <UpdatesAdmin />
-                        </Route>
-                        <Route exact path="/admin/updates/:updateId">
-                            <UpdatesAdmin />
-                        </Route>
-                        <Route exact path="/admin/updates">
-                            <UpdatesAdmin />
-                        </Route>
-                        <Route exact path="/share/:versionData">
-                            <AddSharedVersion />
-                        </Route>
-                        <Route path="/date/:date">
-                            <DateRoutes />
-                        </Route>
-                        <Route exact path="/sermons">
-                            <SermonListContainer />
-                        </Route>
-                        <Route exact path="/sermons/:authorId">
-                            <SermonListContainer />
-                        </Route>
-                        <Route exact path="/sermon/:sermonId">
-                            <SermonDetail />
-                        </Route>
-                    </Switch>
+                    <Suspense fallback={<Loader />}>
+                        <RouterRoutes>
+                            <Route
+                                path="/"
+                                element={
+                                    <Navigate replace to={`/date/${dateFormat(new Date(), 'yyyy-mm-dd')}`} />
+                                }
+                            />
+                            <Route path="/hymns/:hymnId" element={<Hymn />} />
+                            <Route path="/hymns" element={<Hymns />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/updates" element={<Updates />} />
+                            <Route path="/admin/updates/new" element={<UpdatesAdmin />} />
+                            <Route path="/admin/updates/:updateId" element={<UpdatesAdmin />} />
+                            <Route path="/admin/updates" element={<UpdatesAdmin />} />
+                            <Route path="/share/:versionData" element={<AddSharedVersion />} />
+                            <Route path="/date/:date/*" element={<DateRoutes />} />
+                            <Route path="/sermons" element={<SermonListContainer />} />
+                            <Route path="/sermons/:authorId" element={<SermonListContainer />} />
+                            <Route path="/sermon/:sermonId" element={<SermonDetail />} />
+                        </RouterRoutes>
+                    </Suspense>
                 </div>
             </ThemeProvider>
         </LangContext.Provider>
     );
 };
+
+export default Routes;

@@ -1,0 +1,4 @@
+.route-error-boundary__button:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}

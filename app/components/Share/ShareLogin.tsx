@@ -1,19 +1,19 @@
 import React, { useContext } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 import Button from 'components/Button/Button';
 import ShareIcon from 'components/ShareIcon/ShareIcon';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ShareLogin = ({ className }: { className?: string }) => {
     const { toggleOpen } = useContext(DotsMenuContext);
-    const history = useHistory();
+    const navigate = useNavigate();
     return (
         <Button
             onClick={() => {
                 toggleOpen();
                 alert('Войдите в аккаунт, чтобы иметь возможность поделиться чинопоследованием');
-                history.replace('/profile');
+                void navigate('/profile', { replace: true });
             }}
             className={`${className} ${css`
                 padding: 6px 6px !important;

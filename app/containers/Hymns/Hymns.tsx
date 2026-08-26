@@ -7,8 +7,8 @@ import SolidSection from 'components/SolidSection/SolidSection';
 import Input from 'components/Input/Input';
 import Fuse from 'fuse.js';
 import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
 
 import { HymnButton } from './HymnButton';
@@ -26,7 +26,7 @@ export const Hymns = () => {
     const searchResults = searchTerm.length > 0 ? fuse.search(searchTerm) : hymns || [];
     return (
         <LayoutInner backLink="/" left={<LanguageSwitcher />}>
-            {status === 'loading' ? (
+            {status === 'pending' ? (
                 <Loader />
             ) : status === 'error' ? (
                 <ErrorMessage500 />

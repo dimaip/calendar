@@ -1,17 +1,21 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
+import type { UseQueryResult } from '@tanstack/react-query';
 
-import { Sermon } from './useFilteredSermons';
+import type { SermonDetail } from 'data/contracts';
+import { queryKeys } from 'data/queryKeys';
 
-const fetchSermon = async (sermonId: string): Promise<Sermon | null> =>
+const fetchSermon = async (sermonId: string): Promise<SermonDetail | null> =>
     fetch(`https://psmb.ru/s/${sermonId}.html?format=json`).then((response) => {
         if (!response.ok) {
             return null;
         }
-        return (response.json() as unknown) as Sermon;
+        return response.json() as Promise<SermonDetail>;
     });
 
-const useSermon = (sermonId: string) =>
-    useQuery(['sermon', { sermonId }], async () => fetchSermon(sermonId), {
+const useSermon = (sermonId: string): UseQueryResult<SermonDetail | null, Error> =>
+    useQuery<SermonDetail | null>({
+        queryKey: queryKeys.sermon(sermonId),
+        queryFn: async () => fetchSermon(sermonId),
         retry: false,
         enabled: Boolean(sermonId),
     });

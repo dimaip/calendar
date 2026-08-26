@@ -2,11 +2,11 @@ import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { DatePickerCalendar } from 'react-nice-dates';
 import { ru } from 'date-fns/locale';
 import './Calendar.scss';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 
 const Calendar = ({ date, handleDayClick, onClose }) => {
     const theme = useTheme();

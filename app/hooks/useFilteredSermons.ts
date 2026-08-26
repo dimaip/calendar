@@ -1,17 +1,18 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
+import type { UseQueryResult } from '@tanstack/react-query';
+
 import cachedFetch from 'utils/cachedFetch';
+import type { SermonSummary } from 'data/contracts';
+import { queryKeys } from 'data/queryKeys';
 
-export interface Sermon {
-    id: string;
-    title: string;
-    authorName: string;
-    authorId: string;
-    teaser: string;
-    bodytext: string;
-    date?: string;
-}
+export type { SermonSummary as Sermon } from 'data/contracts';
 
-const fetchFilteredSermons = async (authorId?: string, themeId?: string, limit?: number, offset?: number): Promise<Sermon[]> => {
+const fetchFilteredSermons = async (
+    authorId?: string,
+    themeId?: string,
+    limit?: number,
+    offset?: number
+): Promise<SermonSummary[]> => {
     const url = new URL('https://psmb.ru/?listSermons=1');
 
     if (authorId) {
@@ -30,16 +31,19 @@ const fetchFilteredSermons = async (authorId?: string, themeId?: string, limit?:
         url.searchParams.append('offset', offset.toString());
     }
 
-    return cachedFetch(url.toString());
+    return cachedFetch<SermonSummary[]>(url.toString());
 };
 
-const useFilteredSermons = (authorId?: string, themeId?: string, limit?: number, offset?: number) =>
-    useQuery(
-        ['filtered-sermons', { authorId, themeId, limit, offset }],
-        async () => fetchFilteredSermons(authorId, themeId, limit, offset),
-        {
-            retry: false,
-        }
-    );
+const useFilteredSermons = (
+    authorId?: string,
+    themeId?: string,
+    limit?: number,
+    offset?: number
+): UseQueryResult<SermonSummary[], Error> =>
+    useQuery<SermonSummary[]>({
+        queryKey: queryKeys.filteredSermons(authorId, themeId, limit, offset),
+        queryFn: async () => fetchFilteredSermons(authorId, themeId, limit, offset),
+        retry: false,
+    });
 
 export default useFilteredSermons;
