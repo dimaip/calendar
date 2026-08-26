@@ -1,0 +1,216 @@
+{
+    "schemaVersion": 1,
+    "recordedAt": "2026-07-28",
+    "route": "/#/date/2026-07-28/service/%D0%9B%D0%B8%D1%82%D1%83%D1%80%D0%B3%D0%B8%D1%8F",
+    "revisions": {
+        "original": "6a94bde3ffbcd8ce4439cf73d30ef2e197d42e0f",
+        "current": "2f40aab3"
+    },
+    "primaryProfile": {
+        "browser": "Chromium 151.0.7922.34",
+        "viewport": "360x640@2x",
+        "mobile": true,
+        "touch": true,
+        "cpuThrottleRate": 4,
+        "latencyMs": 150,
+        "downloadBitsPerSecond": 1677721.6,
+        "uploadBitsPerSecond": 768000,
+        "cacheDisabled": true,
+        "serviceWorkers": "blocked",
+        "runsPerRevision": 6
+    },
+    "primaryColdComparison": {
+        "unit": "median",
+        "metrics": {
+            "completeServiceHeadingMs": {
+                "original": 14088.54,
+                "current": 12312.02,
+                "deltaPercent": -12.61
+            },
+            "domContentLoadedMs": {
+                "original": 10609.8,
+                "current": 8865.55,
+                "deltaPercent": -16.44
+            },
+            "loadEventMs": {
+                "original": 10732.25,
+                "current": 8969.6,
+                "deltaPercent": -16.42
+            },
+            "firstContentfulPaintMs": {
+                "original": 834,
+                "current": 838,
+                "deltaPercent": 0.48
+            },
+            "largestContentfulPaintMs": {
+                "original": 10788,
+                "current": 9018,
+                "deltaPercent": -16.41
+            },
+            "localTransferBytes": {
+                "original": 2504035,
+                "current": 2150701,
+                "deltaPercent": -14.11
+            },
+            "scriptTransferBytes": {
+                "original": 2286917,
+                "current": 1943882,
+                "deltaPercent": -15
+            },
+            "longTaskTotalMs": {
+                "original": 403.5,
+                "current": 212,
+                "deltaPercent": -47.46
+            },
+            "domNodes": {
+                "original": 2319,
+                "current": 2318,
+                "deltaPercent": -0.04
+            }
+        }
+    },
+    "extendedExploratoryProfile": {
+        "sameAsPrimaryExcept": {
+            "deterministicFixture": "Real 2026-07-28 day shape with network responses replayed",
+            "runsPerRevision": 2,
+            "settledDefinition": "Complete service heading, at least 65 TOC entries and document height stable for three 250 ms samples, no relevant request pending, and no DOM mutation for 750 ms"
+        },
+        "metrics": {
+            "completeServiceCommitMs": {
+                "original": 14450,
+                "current": 12638.75,
+                "deltaPercent": -12.53
+            },
+            "serviceAndTocSettledMs": {
+                "original": 16303.75,
+                "current": 14564.4,
+                "deltaPercent": -10.67
+            },
+            "totalBlockingTimeMs": {
+                "original": 389,
+                "current": 201,
+                "deltaPercent": -48.33
+            },
+            "longestTaskMs": {
+                "original": 306,
+                "current": 150.5,
+                "deltaPercent": -50.82
+            },
+            "cdpTaskDurationMs": {
+                "original": 3115.88,
+                "current": 2915.83,
+                "deltaPercent": -6.42
+            },
+            "cdpScriptDurationMs": {
+                "original": 2378.96,
+                "current": 2197.12,
+                "deltaPercent": -7.64
+            },
+            "cdpLayoutDurationMs": {
+                "original": 89.24,
+                "current": 89.62,
+                "deltaPercent": 0.42
+            },
+            "parallelModeDomNodes": {
+                "original": 4103,
+                "current": 4102,
+                "deltaPercent": -0.02
+            },
+            "parallelModeTaskDurationMs": {
+                "original": 584.46,
+                "current": 636.62,
+                "deltaPercent": 8.93
+            }
+        }
+    },
+    "cpuIsolationExploratoryProfile": {
+        "configuration": {
+            "viewport": "390x844@2x",
+            "cpuThrottleRate": 6,
+            "network": "unthrottled local",
+            "serviceWorkers": "blocked",
+            "runsPerRevision": 3
+        },
+        "metrics": {
+            "completeServiceCommitMs": {
+                "original": 1672.9,
+                "current": 1235,
+                "deltaPercent": -26.18
+            },
+            "serviceAndTocSettledMs": {
+                "original": 3464,
+                "current": 3141.4,
+                "deltaPercent": -9.31
+            },
+            "totalBlockingTimeMs": {
+                "original": 827,
+                "current": 426,
+                "deltaPercent": -48.49
+            },
+            "cdpScriptDurationMs": {
+                "original": 1411.02,
+                "current": 1034.31,
+                "deltaPercent": -26.7
+            },
+            "cdpLayoutDurationMs": {
+                "original": 134.04,
+                "current": 136.71,
+                "deltaPercent": 1.99
+            },
+            "churchSlavonicSettledMs": {
+                "original": 2516.6,
+                "current": 1973.7,
+                "deltaPercent": -21.57
+            },
+            "parallelSettledMs": {
+                "original": 2072,
+                "current": 1805.2,
+                "deltaPercent": -12.88
+            }
+        }
+    },
+    "documentShape": {
+        "russian": {
+            "domNodes": 2326,
+            "paragraphs": 568,
+            "headings": 70,
+            "tocEntriesObservedRange": [66, 67],
+            "textCharacters": 52178,
+            "scrollHeightPxAt360Width": 55128
+        },
+        "parallel": {
+            "domNodes": 4102,
+            "paragraphs": 1153,
+            "domNodeGrowthPercent": 76.35
+        }
+    },
+    "bundle": {
+        "originalInitialJavaScript": {
+            "bytes": 1999984,
+            "gzipBytes": 540455
+        },
+        "currentInitialJavaScript": {
+            "bytes": 1673491,
+            "gzipBytes": 483321
+        },
+        "delta": {
+            "bytes": -326493,
+            "gzipBytes": -57134,
+            "gzipPercent": -10.57
+        }
+    },
+    "deliveryAudit": {
+        "checkedUrl": "https://molitva.app",
+        "productionVendorBytes": 1389939,
+        "contentEncoding": null,
+        "cacheControl": null,
+        "finding": "The production JavaScript response was served uncompressed and without an explicit immutable cache policy."
+    },
+    "interpretationLimits": [
+        "Lab CPU and network throttling are comparison proxies, not field percentiles.",
+        "The six-run cold comparison is the primary result; extended interaction and settled metrics are exploratory because they have two runs per revision.",
+        "The deterministic fixture isolates frontend and content rendering. It does not measure backend latency.",
+        "Service workers were blocked so the result does not alter or conflate offline behavior.",
+        "The local server matches the observed production delivery behavior by serving JavaScript without compression."
+    ]
+}

@@ -14,6 +14,7 @@ import Worker from './precache.worker.js';
 import './redirectToHome';
 import { isCapacitor } from 'utils/deviceInfo';
 import precache from 'precache.ts';
+import { startPerformanceTelemetry } from 'utils/performanceTelemetry';
 
 window.APP_LOADED = true;
 const isProd = process.env.NODE_ENV === 'production';
@@ -36,6 +37,7 @@ if (isProd) {
             namesSubmit: 'Names Submit',
         },
     });
+    startPerformanceTelemetry();
 }
 
 const rootElement = document.getElementById('react-root');

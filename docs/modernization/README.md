@@ -1,8 +1,9 @@
 # Frontend Modernization Roadmap
 
-Last updated: 2026-07-28
+Last updated: 2026-08-05
 
-Overall status: In progress
+Overall status: In progress; service-performance implementation complete and
+the older-device/perceived-performance round is planned
 
 Current milestone: M3 — Continue targeted modernization
 
@@ -22,8 +23,8 @@ This roadmap modernizes the frontend incrementally while preserving the behavior
 ### Explicitly out of scope
 
 - PHP/backend changes
-- Service-worker source changes
-- Offline cache, prefetch, or storage behavior changes
+- Service-worker strategy or activation changes
+- Offline storage semantics changes
 - Capacitor or native iOS upgrades
 - Android TWA upgrades
 - Replacing the current MDX content model
@@ -33,7 +34,9 @@ The out-of-scope areas may get separate plans later. They must not be pulled int
 
 ## Offline preservation rule
 
-The service worker and offline implementation are frozen during this roadmap. Some frontend changes can still alter generated chunks or the Workbox manifest indirectly. Any such unit is marked **offline-sensitive** and may proceed only when:
+Offline-sensitive chunk changes may proceed, but offline behavior is a hard
+release gate. The service-worker strategy and activation behavior remain
+unchanged. Any offline-sensitive unit may proceed only when:
 
 1. The service-worker source is unchanged.
 2. A production build succeeds.
@@ -43,15 +46,15 @@ The service worker and offline implementation are frozen during this roadmap. So
 
 ## Status values
 
-| Status | Meaning |
-| --- | --- |
-| `proposed` | Defined, but not yet approved for execution |
-| `ready` | Approved and all prerequisites are satisfied |
-| `in-progress` | Currently being implemented |
-| `blocked` | Cannot proceed; the blocker must be recorded |
-| `done` | Acceptance criteria and verification are complete |
-| `deferred` | Intentionally postponed |
-| `cancelled` | No longer planned, with the reason recorded |
+| Status        | Meaning                                           |
+| ------------- | ------------------------------------------------- |
+| `proposed`    | Defined, but not yet approved for execution       |
+| `ready`       | Approved and all prerequisites are satisfied      |
+| `in-progress` | Currently being implemented                       |
+| `blocked`     | Cannot proceed; the blocker must be recorded      |
+| `done`        | Acceptance criteria and verification are complete |
+| `deferred`    | Intentionally postponed                           |
+| `cancelled`   | No longer planned, with the reason recorded       |
 
 Status should be updated in both this master table and the detailed workstream file.
 
@@ -69,38 +72,69 @@ Status should be updated in both this master table and the detailed workstream f
 
 Reference: [frontend state ownership](./frontend-state-ownership.md) records the durable-state and global compatibility contracts that refactors must preserve.
 
+The next measured performance round is coordinated in
+[the older-device and perceived-performance plan](./06-older-device-and-perceived-performance.md).
+
 ## Master work-unit tracker
 
-| ID | Work unit | Status | Risk | Depends on | Plan |
-| --- | --- | --- | --- | --- | --- |
-| FND-001 | Pin and document the frontend runtime | `done` | Low | — | [Foundation](./01-foundation-and-ci.md#fnd-001-pin-the-runtime) |
-| FND-002 | Repair package scripts and frontend CI | `done` | Low | FND-001, TEST-001 | [Foundation](./01-foundation-and-ci.md#fnd-002-repair-scripts-and-ci) |
-| FND-003 | Make linting a useful incremental gate | `done` | Low | FND-002 | [Foundation](./01-foundation-and-ci.md#fnd-003-establish-a-lint-ratchet) |
-| FND-004 | Establish an incremental TypeScript gate | `done` | Medium | FND-002, DEP-001 | [Foundation](./01-foundation-and-ci.md#fnd-004-establish-a-typescript-ratchet) |
-| PERF-001 | Record bundle and runtime baselines | `in-progress` | Low | FND-002 | [Performance](./02-performance.md#perf-001-create-the-performance-baseline) |
-| PERF-002 | Add route-level code splitting | `done` | Medium, offline-sensitive | TEST-005, PERF-001 | [Performance](./02-performance.md#perf-002-lazy-load-non-core-routes) |
-| PERF-003 | Fix measured render and lifecycle waste | `done` | Low | PERF-001, TEST-003 | [Performance](./02-performance.md#perf-003-fix-measured-render-and-lifecycle-waste) |
-| PERF-004 | Remove obsolete startup code and polyfills | `done` | Medium, offline-sensitive | PERF-001, DEP-001, TEST-005 | [Performance](./02-performance.md#perf-004-reduce-startup-and-compatibility-cost) |
-| PERF-005 | Optimize static assets and delivery metadata | `done` | Low | PERF-001 | [Performance](./02-performance.md#perf-005-optimize-static-assets) |
-| DEP-001 | Align React and TypeScript type packages | `done` | Low | FND-002 | [Dependencies](./03-dependencies-and-tooling.md#dep-001-align-the-react-type-system) |
-| DEP-002 | Apply low-risk patch/minor upgrades | `done` | Low | FND-002, TEST-001 | [Dependencies](./03-dependencies-and-tooling.md#dep-002-low-risk-dependency-refresh) |
-| DEP-003 | Upgrade lint, format, and TypeScript tooling | `done` | Medium | FND-003, DEP-001 | [Dependencies](./03-dependencies-and-tooling.md#dep-003-modernize-quality-tooling) |
-| DEP-004 | Upgrade React Router separately | `done` | Medium | TEST-005, QUAL-002 | [Dependencies](./03-dependencies-and-tooling.md#dep-004-router-migration) |
-| DEP-005 | Upgrade React Query separately | `done` | Medium | TEST-002, QUAL-001 | [Dependencies](./03-dependencies-and-tooling.md#dep-005-query-library-migration) |
-| DEP-006 | Consolidate Emotion and UI dependencies | `done` | Medium | TEST-004, QUAL-003 | [Dependencies](./03-dependencies-and-tooling.md#dep-006-ui-and-styling-consolidation) |
-| DEP-007 | Replace obsolete leaf dependencies | `in-progress` | Medium | TEST-003, TEST-005 | [Dependencies](./03-dependencies-and-tooling.md#dep-007-retire-obsolete-leaf-libraries) |
-| DEP-008 | Decide the future build tool | `deferred` | High, offline-sensitive | All M0–M3 units | [Dependencies](./03-dependencies-and-tooling.md#dep-008-build-tool-decision) |
-| QUAL-001 | Introduce typed API/domain boundaries | `done` | Medium | TEST-001, DEP-001 | [Code quality](./04-code-quality-and-architecture.md#qual-001-type-the-boundaries-first) |
-| QUAL-002 | Stabilize routing and application-shell boundaries | `done` | Medium | TEST-005 | [Code quality](./04-code-quality-and-architecture.md#qual-002-stabilize-the-application-shell) |
-| QUAL-003 | Split oversized feature modules | `in-progress` | Medium | TEST-002, TEST-003 | [Code quality](./04-code-quality-and-architecture.md#qual-003-split-large-modules-by-responsibility) |
-| QUAL-004 | Remove accidental globals and lifecycle leaks | `in-progress` | Low | TEST-003 | [Code quality](./04-code-quality-and-architecture.md#qual-004-remove-accidental-global-state) |
-| QUAL-005 | Document and enforce state ownership | `done` | Medium | QUAL-001, TEST-002 | [Code quality](./04-code-quality-and-architecture.md#qual-005-clarify-state-ownership) |
-| TEST-001 | Consolidate the frontend test command | `done` | Low | FND-001 | [Testing](./05-test-coverage.md#test-001-create-one-test-entry-point) |
-| TEST-002 | Expand calendar and data-hook tests | `done` | Low | TEST-001 | [Testing](./05-test-coverage.md#test-002-domain-and-data-tests) |
-| TEST-003 | Add component and interaction tests | `in-progress` | Low | TEST-001 | [Testing](./05-test-coverage.md#test-003-component-tests) |
-| TEST-004 | Add MDX compile and render coverage | `done` | Medium | TEST-001 | [Testing](./05-test-coverage.md#test-004-mdx-contract-tests) |
-| TEST-005 | Add browser regression smoke tests | `done` | Medium | TEST-001 | [Testing](./05-test-coverage.md#test-005-browser-smoke-suite) |
-| TEST-006 | Introduce coverage ratchets | `deferred` | Low | TEST-002, TEST-003 | [Testing](./05-test-coverage.md#test-006-coverage-ratchet) |
+| ID       | Work unit                                                    | Status        | Risk                      | Depends on                  | Plan                                                                                                                                        |
+| -------- | ------------------------------------------------------------ | ------------- | ------------------------- | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| FND-001  | Pin and document the frontend runtime                        | `done`        | Low                       | —                           | [Foundation](./01-foundation-and-ci.md#fnd-001-pin-the-runtime)                                                                             |
+| FND-002  | Repair package scripts and frontend CI                       | `done`        | Low                       | FND-001, TEST-001           | [Foundation](./01-foundation-and-ci.md#fnd-002-repair-scripts-and-ci)                                                                       |
+| FND-003  | Make linting a useful incremental gate                       | `done`        | Low                       | FND-002                     | [Foundation](./01-foundation-and-ci.md#fnd-003-establish-a-lint-ratchet)                                                                    |
+| FND-004  | Establish an incremental TypeScript gate                     | `done`        | Medium                    | FND-002, DEP-001            | [Foundation](./01-foundation-and-ci.md#fnd-004-establish-a-typescript-ratchet)                                                              |
+| PERF-001 | Record bundle and runtime baselines                          | `done`        | Low                       | FND-002                     | [Performance](./02-performance.md#perf-001-create-the-performance-baseline)                                                                 |
+| PERF-002 | Add route-level code splitting                               | `done`        | Medium, offline-sensitive | TEST-005, PERF-001          | [Performance](./02-performance.md#perf-002-lazy-load-non-core-routes)                                                                       |
+| PERF-003 | Fix measured render and lifecycle waste                      | `done`        | Low                       | PERF-001, TEST-003          | [Performance](./02-performance.md#perf-003-fix-measured-render-and-lifecycle-waste)                                                         |
+| PERF-004 | Remove obsolete startup code and polyfills                   | `done`        | Medium, offline-sensitive | PERF-001, DEP-001, TEST-005 | [Performance](./02-performance.md#perf-004-reduce-startup-and-compatibility-cost)                                                           |
+| PERF-005 | Optimize static assets and delivery metadata                 | `done`        | Low                       | PERF-001                    | [Performance](./02-performance.md#perf-005-optimize-static-assets)                                                                          |
+| PERF-006 | Finish the reproducible service benchmark and budgets        | `done`        | Low                       | PERF-001                    | [Service performance](./service-performance-study.md#perf-006--benchmark-and-budgets)                                                       |
+| PERF-007 | Enable compressed immutable delivery for hashed assets       | `done`        | Low                       | PERF-006                    | [Service performance](./service-performance-study.md#perf-007--static-delivery)                                                             |
+| PERF-008 | Remove avoidable service-entry and inactive-feature work     | `done`        | Low–medium                | PERF-006                    | [Service performance](./service-performance-study.md#perf-008--service-entry-and-inactive-features)                                         |
+| PERF-009 | Stabilize MDX import caching and failure handling            | `done`        | Low                       | PERF-006, TEST-004          | [Service performance](./service-performance-study.md#perf-009--mdx-import-cache)                                                            |
+| PERF-010 | Remove repeated per-fragment effects and subscriptions       | `done`        | Medium                    | PERF-006, TEST-003          | [Service performance](./service-performance-study.md#perf-010--repeated-fragment-work)                                                      |
+| PERF-011 | Replace TOC polling with batched incremental updates         | `done`        | Medium                    | PERF-006, TEST-003          | [Service performance](./service-performance-study.md#perf-011--toc-architecture)                                                            |
+| PERF-012 | Reduce data-query fan-out with explicit freshness rules      | `done`        | Medium                    | PERF-006, TEST-002          | [Service performance](./service-performance-study.md#perf-012--query-fan-out)                                                               |
+| PERF-013 | Split optional service features and inspect vendor grouping  | `done`        | Medium, offline-sensitive | PERF-006, TEST-005          | [Service performance](./service-performance-study.md#perf-013015--structural-work)                                                          |
+| PERF-014 | Generate measured coherent MDX chunk groups                  | `done`        | High, offline-sensitive   | PERF-009–013                | [Service performance](./service-performance-study.md#perf-013015--structural-work)                                                          |
+| PERF-015 | Evaluate progressive parallel/below-fold rendering           | `cancelled`   | High, offline-sensitive   | PERF-011, PERF-014          | [Service performance](./service-performance-study.md#perf-013015--structural-work)                                                          |
+| PERF-016 | Add field performance telemetry                              | `done`        | Low                       | PERF-006                    | [Service performance](./service-performance-study.md#perf-016--field-telemetry)                                                             |
+| PERF-017 | Add installed-startup and real-touch measurement             | `ready`       | Low                       | PERF-016                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-017--installed-startup-and-real-touch-measurement-foundation)   |
+| PERF-018 | Defer future-date precache contention                        | `proposed`    | Medium, offline-sensitive | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-018--defer-future-date-precaching-and-cache-refresh-contention) |
+| PERF-019 | Defer analytics, tracing, Webvisor, and polyfills            | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-019--defer-analytics-tracing-webvisor-and-optional-polyfills)   |
+| PERF-020 | Replace the global pull-to-refresh touch path                | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-020--replace-the-global-pull-to-refresh-touch-path)             |
+| PERF-021 | Render one calendar slide during startup                     | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-021--render-one-calendar-slide-during-startup)                  |
+| PERF-022 | Split below-fold calendar and optional home features         | `proposed`    | Medium, offline-sensitive | PERF-021                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-022--split-below-fold-calendar-and-optional-home-features)      |
+| PERF-023 | Remove avoidable UI libraries from the initial shell         | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-023--remove-avoidable-ui-libraries-from-the-initial-shell)      |
+| PERF-024 | Defer optional auth, Convex, and native-platform code        | `proposed`    | High                      | PERF-017, PERF-023          | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-024--defer-optional-auth-convex-and-native-platform-code)       |
+| PERF-025 | Optimize persisted-state parsing and data revalidation       | `proposed`    | Medium, offline-sensitive | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-025--cache-persisted-state-parsing-and-delay-data-revalidation) |
+| PERF-026 | Add responsive route/language transitions and intent loading | `proposed`    | Medium, offline-sensitive | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-026--responsive-routelanguage-transitions-and-intent-loading)   |
+| PERF-027 | Remove remaining per-fragment MDX reader overhead            | `proposed`    | Medium                    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-027--remove-remaining-per-fragment-mdx-reader-overhead)         |
+| PERF-028 | Pilot coarse service content visibility                      | `proposed`    | High                      | PERF-027                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-028--pilot-coarse-service-content-visibility)                   |
+| PERF-029 | Refine service-resolved MDX loading packs                    | `proposed`    | High, offline-sensitive   | PERF-017, PERF-027          | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-029--refine-service-resolved-mdx-loading-packs)                 |
+| PERF-030 | Prototype compact static-reader content                      | `deferred`    | High, offline-sensitive   | PERF-029                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-030--prototype-a-compact-static-reader-content-representation)  |
+| PERF-031 | Reduce first-open menu and search latency                    | `proposed`    | Low, offline-sensitive    | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-031--reduce-first-open-menu-and-search-latency)                 |
+| PERF-032 | Evaluate replacing swipeable-views gesture handling          | `deferred`    | High                      | PERF-017, PERF-020–021      | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-032--evaluate-replacing-swipeable-views-gesture-handling)       |
+| PERF-033 | Validate physical-device and long-session retention          | `proposed`    | Low                       | PERF-017                    | [Perceived performance](./06-older-device-and-perceived-performance.md#perf-033--physical-device-and-long-session-retention-validation)     |
+| DEP-001  | Align React and TypeScript type packages                     | `done`        | Low                       | FND-002                     | [Dependencies](./03-dependencies-and-tooling.md#dep-001-align-the-react-type-system)                                                        |
+| DEP-002  | Apply low-risk patch/minor upgrades                          | `done`        | Low                       | FND-002, TEST-001           | [Dependencies](./03-dependencies-and-tooling.md#dep-002-low-risk-dependency-refresh)                                                        |
+| DEP-003  | Upgrade lint, format, and TypeScript tooling                 | `done`        | Medium                    | FND-003, DEP-001            | [Dependencies](./03-dependencies-and-tooling.md#dep-003-modernize-quality-tooling)                                                          |
+| DEP-004  | Upgrade React Router separately                              | `done`        | Medium                    | TEST-005, QUAL-002          | [Dependencies](./03-dependencies-and-tooling.md#dep-004-router-migration)                                                                   |
+| DEP-005  | Upgrade React Query separately                               | `done`        | Medium                    | TEST-002, QUAL-001          | [Dependencies](./03-dependencies-and-tooling.md#dep-005-query-library-migration)                                                            |
+| DEP-006  | Consolidate Emotion and UI dependencies                      | `done`        | Medium                    | TEST-004, QUAL-003          | [Dependencies](./03-dependencies-and-tooling.md#dep-006-ui-and-styling-consolidation)                                                       |
+| DEP-007  | Replace obsolete leaf dependencies                           | `in-progress` | Medium                    | TEST-003, TEST-005          | [Dependencies](./03-dependencies-and-tooling.md#dep-007-retire-obsolete-leaf-libraries)                                                     |
+| DEP-008  | Decide the future build tool                                 | `deferred`    | High, offline-sensitive   | All M0–M3 units             | [Dependencies](./03-dependencies-and-tooling.md#dep-008-build-tool-decision)                                                                |
+| QUAL-001 | Introduce typed API/domain boundaries                        | `done`        | Medium                    | TEST-001, DEP-001           | [Code quality](./04-code-quality-and-architecture.md#qual-001-type-the-boundaries-first)                                                    |
+| QUAL-002 | Stabilize routing and application-shell boundaries           | `done`        | Medium                    | TEST-005                    | [Code quality](./04-code-quality-and-architecture.md#qual-002-stabilize-the-application-shell)                                              |
+| QUAL-003 | Split oversized feature modules                              | `in-progress` | Medium                    | TEST-002, TEST-003          | [Code quality](./04-code-quality-and-architecture.md#qual-003-split-large-modules-by-responsibility)                                        |
+| QUAL-004 | Remove accidental globals and lifecycle leaks                | `in-progress` | Low                       | TEST-003                    | [Code quality](./04-code-quality-and-architecture.md#qual-004-remove-accidental-global-state)                                               |
+| QUAL-005 | Document and enforce state ownership                         | `done`        | Medium                    | QUAL-001, TEST-002          | [Code quality](./04-code-quality-and-architecture.md#qual-005-clarify-state-ownership)                                                      |
+| TEST-001 | Consolidate the frontend test command                        | `done`        | Low                       | FND-001                     | [Testing](./05-test-coverage.md#test-001-create-one-test-entry-point)                                                                       |
+| TEST-002 | Expand calendar and data-hook tests                          | `done`        | Low                       | TEST-001                    | [Testing](./05-test-coverage.md#test-002-domain-and-data-tests)                                                                             |
+| TEST-003 | Add component and interaction tests                          | `in-progress` | Low                       | TEST-001                    | [Testing](./05-test-coverage.md#test-003-component-tests)                                                                                   |
+| TEST-004 | Add MDX compile and render coverage                          | `done`        | Medium                    | TEST-001                    | [Testing](./05-test-coverage.md#test-004-mdx-contract-tests)                                                                                |
+| TEST-005 | Add browser regression smoke tests                           | `done`        | Medium                    | TEST-001                    | [Testing](./05-test-coverage.md#test-005-browser-smoke-suite)                                                                               |
+| TEST-006 | Introduce coverage ratchets                                  | `deferred`    | Low                       | TEST-002, TEST-003          | [Testing](./05-test-coverage.md#test-006-coverage-ratchet)                                                                                  |
 
 ## Milestones and execution order
 
@@ -183,17 +217,27 @@ DEP-008 remains deferred until the earlier milestones are complete. A bundler mi
 ## Current execution snapshot
 
 - Production build: passes on Node 22 with Webpack 5.
-- Initial JavaScript: 1,673,473 bytes raw / 483,303 bytes gzip.
-- Initial JavaScript reduction: 326,493 bytes raw / 59,888 bytes gzip
-  (11.03% gzip) from the audit baseline.
-- Workbox precache: 1,865 verified local URLs / 7,612,840 bytes.
-- Frontend tests: 37 unit/contract tests plus five production-browser journeys.
+- Initial JavaScript: 1,512,607 bytes raw / 437,057 bytes gzip.
+- Initial JavaScript reduction: 487,359 bytes raw / 106,134 bytes gzip
+  (19.54% gzip) from the audit baseline.
+- Workbox precache: 1,555 verified local URLs / 7,712,284 bytes.
+- Frontend tests: 62 unit/contract tests plus seven production-browser journeys.
 - Quality ratchets: ESLint and TypeScript diagnostic totals both decreased from
   their modern-tooling baselines; the strict TypeScript seed passes.
-- Offline verification: a generated lazy-route chunk reloads with the browser
-  fully offline, with no service-worker source changes.
+- Offline verification: unvisited route, optional search, full Zlatoust,
+  Church Slavonic, and parallel chunks load fully offline with no failed hashed
+  requests and no service-worker source changes.
+- Older-phone complete Liturgy with production-like gzip: 4.16 s complete /
+  5.72 s settled, with the exact deterministic 67-heading content shape.
+- Static delivery now has Brotli/gzip server compression, gzip static-deploy
+  preparation, immutable hashed-asset caching, and revalidating shell/version
+  metadata. Real-host header validation remains a deployment check.
 
 Machine-readable measurements are in
-[performance-report.json](./performance-report.json).
+[performance-report.json](./performance-report.json) and
+[service-performance-report.json](./service-performance-report.json), with the
+post-implementation comparison in
+[service-performance-implementation-summary.json](./service-performance-implementation-summary.json).
 
-These numbers are directional baselines. PERF-001 will make the collection reproducible.
+The version 3 benchmark reproduces cold, reload, warm, hot, language, parallel,
+TOC, scroll, search, and retention measurements.

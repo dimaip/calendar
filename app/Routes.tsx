@@ -1,19 +1,18 @@
 import React, { Suspense, useEffect, useRef } from 'react';
 import { Navigate, Route, Routes as RouterRoutes, useLocation, useParams } from 'react-router-dom';
-import Main from 'containers/Main/Main';
-import NotFound from 'components/NotFound/NotFound';
-import Readings from 'containers/Readings/Readings';
 import dateFormat from 'dateformat';
-import Sermon from 'containers/Sermon/Sermon';
-import Saint from 'containers/Saint/Saint';
-import ThisDay from 'containers/ThisDay/ThisDay';
-import Service from 'containers/Service/Service';
 import { Global, ThemeProvider, css as rcss } from '@emotion/react';
 import { css } from '@emotion/css';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+import { loadServiceRoute } from './routeLoaders';
+import checkVersion from './checkVersion';
+
+import Main from 'containers/Main/Main';
+import NotFound from 'components/NotFound/NotFound';
 import useDay from 'hooks/useDay';
 import getTheme from 'styles/getTheme';
 import langState from 'state/langState';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { LangContext } from 'containers/Service/LangContext';
 import pendingUpdateState from 'state/pendingUpdateState';
 import UpdatePrompt from 'components/UpdatePrompt/UpdatePrompt';
@@ -21,9 +20,7 @@ import isParallelState from 'state/isParallel';
 import { Promo } from 'components/Promo/Promo';
 import Loader from 'components/Loader/Loader';
 import themeState from 'state/themeState';
-import SettingsMenu from 'containers/Main/SettingsMenu';
-
-import checkVersion from './checkVersion';
+import menuShownState from 'state/menuShownState';
 
 const Hymns = React.lazy(async () => {
     const module = await import(/* webpackChunkName: "route-hymns" */ 'containers/Hymns/Hymns');
@@ -33,6 +30,20 @@ const Hymn = React.lazy(async () => {
     const module = await import(/* webpackChunkName: "route-hymns" */ 'containers/Hymns/Hymn');
     return { default: module.Hymn };
 });
+const Readings = React.lazy(
+    async () => await import(/* webpackChunkName: "route-readings" */ 'containers/Readings/Readings')
+);
+const Sermon = React.lazy(
+    async () => await import(/* webpackChunkName: "route-date-sermon" */ 'containers/Sermon/Sermon')
+);
+const Saint = React.lazy(async () => await import(/* webpackChunkName: "route-date-saint" */ 'containers/Saint/Saint'));
+const ThisDay = React.lazy(
+    async () => await import(/* webpackChunkName: "route-this-day" */ 'containers/ThisDay/ThisDay')
+);
+const Service = React.lazy(loadServiceRoute);
+const SettingsMenu = React.lazy(
+    async () => await import(/* webpackChunkName: "settings-menu" */ 'containers/Main/SettingsMenu')
+);
 const Profile = React.lazy(
     async () => await import(/* webpackChunkName: "route-profile" */ 'containers/Profile/Profile')
 );
@@ -110,6 +121,7 @@ const Routes = () => {
         };
     }, [location.key, setPendingUpdate]);
     const isParallel = useRecoilValue(isParallelState);
+    const menuShown = useRecoilValue(menuShownState);
     const themeStateValue = useRecoilValue(themeState);
     const theme = getTheme(undefined, themeStateValue);
 
@@ -138,14 +150,16 @@ const Routes = () => {
                         margin: 0 auto;
                     `}
                 >
-                    <SettingsMenu />
+                    {menuShown && (
+                        <Suspense fallback={null}>
+                            <SettingsMenu />
+                        </Suspense>
+                    )}
                     <Suspense fallback={<Loader />}>
                         <RouterRoutes>
                             <Route
                                 path="/"
-                                element={
-                                    <Navigate replace to={`/date/${dateFormat(new Date(), 'yyyy-mm-dd')}`} />
-                                }
+                                element={<Navigate replace to={`/date/${dateFormat(new Date(), 'yyyy-mm-dd')}`} />}
                             />
                             <Route path="/hymns/:hymnId" element={<Hymn />} />
                             <Route path="/hymns" element={<Hymns />} />
