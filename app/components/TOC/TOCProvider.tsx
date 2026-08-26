@@ -2,6 +2,8 @@ import React, { createContext, useCallback, useContext, useEffect, useRef, useSt
 
 import { getTOCSnapshotSignature, TOCHeadingDefinition, TOCItem, TOCRegistryController } from './tocRegistry';
 
+import { getCurrentNavigationMeasurement, markPerformance } from 'utils/performanceMarks';
+
 const TOCRegistrationContext = createContext<TOCRegistryController['register'] | null>(null);
 const TOCItemsContext = createContext<TOCItem[]>([]);
 const TOC_READY_DELAY_MS = 500;
@@ -25,7 +27,7 @@ export const TOCProvider = ({ children }: { children: React.ReactNode }): JSX.El
     }
 
     const register = controllerRef.current.register;
-    const lastMarkedSignatureRef = useRef('');
+    const lastMarkedSnapshotRef = useRef<{ navigationKey: string; signature: string }>();
 
     useEffect(() => {
         if (typeof window.performance?.clearMarks === 'function') {
@@ -42,17 +44,21 @@ export const TOCProvider = ({ children }: { children: React.ReactNode }): JSX.El
             return undefined;
         }
 
+        const navigation = getCurrentNavigationMeasurement();
         const signature = getTOCSnapshotSignature(items);
-        if (signature === lastMarkedSignatureRef.current) {
+        if (
+            signature === lastMarkedSnapshotRef.current?.signature &&
+            navigation.key === lastMarkedSnapshotRef.current.navigationKey
+        ) {
             return undefined;
         }
 
         const timeoutId = window.setTimeout(() => {
             if (typeof window.performance?.mark === 'function') {
                 window.performance.clearMarks('service_toc_ready');
-                window.performance.mark('service_toc_ready');
+                markPerformance('service_toc_ready', { tocEntryCount: items.length }, navigation);
             }
-            lastMarkedSignatureRef.current = signature;
+            lastMarkedSnapshotRef.current = { navigationKey: navigation.key, signature };
         }, TOC_READY_DELAY_MS);
 
         return () => window.clearTimeout(timeoutId);

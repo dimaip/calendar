@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { css } from '@emotion/css';
 import { useTheme } from '@emotion/react';
 import { useQuery } from 'convex/react';
@@ -14,6 +14,7 @@ import Share from 'components/Share/Share';
 import useDay from 'hooks/useDay';
 import SettingsButton from 'components/SettingsButton/SettingsButton';
 import CalendarStreakWidget from 'containers/HabitTracker/CalendarStreakWidget';
+import { markNavigationIntent, markPerformance } from 'utils/performanceMarks';
 
 import { api } from '../../../convex/_generated/api';
 
@@ -66,6 +67,7 @@ const ProfileIcon = ({ hasUnread }: { hasUnread: boolean }) => {
         <Button
             title={loggedIn ? 'Выйти' : 'Войти'}
             onClick={() => {
+                markNavigationIntent({ initiator: 'header-profile', target: '/profile' });
                 void navigate('/profile');
             }}
             className={css`
@@ -96,6 +98,7 @@ const UpdatesButton = ({ hasUnread }: { hasUnread: boolean }) => {
         <Button
             title="Обновления"
             onClick={() => {
+                markNavigationIntent({ initiator: 'header-updates', target: '/updates' });
                 void navigate('/updates');
             }}
             className={css`
@@ -157,6 +160,10 @@ const HeaderMain = ({ setNewDate, date, calendarRef, showUpdatesButton = false }
     const hasUnreadUpdates = !!unreadUpdates?.length;
     const dayQuery = useDay(date);
     const day = dayQuery.data;
+    useEffect(() => {
+        markPerformance('app_header_ready', { date });
+    }, [date]);
+
     return (
         <Header>
             <div

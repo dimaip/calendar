@@ -14,8 +14,7 @@ test('derives the top-level service module during render and marks only complete
     assert.match(serviceSource, /const TextComponent = useMemo\(/);
     assert.doesNotMatch(serviceSource, /setTextComponent/);
     assert.match(serviceSource, /performance\.clearMarks\?\.\('service_complete_commit'\)/);
-    assert.match(serviceSource, /performance\.mark\('service_complete_commit', \{ detail: \{ renderKey \} \}\)/);
-    assert.match(serviceSource, /performance\.mark\('service_complete_commit'\)/);
+    assert.match(serviceSource, /markPerformance\('service_complete_commit', \{ renderKey \}\)/);
     assert.match(
         serviceSource,
         /<Suspense[\s\S]*?<TextComponent[\s\S]*?<ServiceCommitMarker renderKey=\{serviceRenderKey\} \/>[\s\S]*?<\/Suspense>/
