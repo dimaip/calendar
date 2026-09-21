@@ -7,8 +7,8 @@ import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Zoom from 'components/Zoom/Zoom';
 import RteText from 'components/RteText/RteText';
-import { useTheme } from 'emotion-theming';
-import { css } from 'emotion';
+import { useTheme } from '@emotion/react';
+import { css } from '@emotion/css';
 import LanguageSwitcher from 'containers/Service/LanguageSwitcher';
 import { LangContext } from 'containers/Service/LangContext';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
@@ -74,7 +74,7 @@ export const Hymn = () => {
 
     return (
         <LayoutInner left={<LanguageSwitcher />}>
-            {status === 'loading' ? (
+            {status === 'pending' ? (
                 <Loader />
             ) : status === 'error' ? (
                 <ErrorMessage500 />

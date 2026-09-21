@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 import { useSelect } from 'downshift';
 import Loader from 'components/Loader/Loader';
-import ExpandLess from '@material-ui/icons/ExpandLess';
-import ExpandMore from '@material-ui/icons/ExpandMore';
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import { truncateText } from 'utils/truncateText';
 import { truthy } from 'utils/truthy';
 import Cross from 'components/svgs/Cross';

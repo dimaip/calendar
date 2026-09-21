@@ -1,20 +1,25 @@
-import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
+import { useQuery } from '@tanstack/react-query';
+import type { UseQueryResult } from '@tanstack/react-query';
 
-import { useQuery } from 'react-query';
+import { getFeastInfo, getLentInfo } from 'domain/getDayInfo';
+import type { Day, DayApiResponse } from 'data/contracts';
+import { queryKeys } from 'data/queryKeys';
 import cachedFetch from 'utils/cachedFetch';
 
-export function fetchDay(date) {
-    return cachedFetch(`${process.env.API_HOST}/day/${date}`).then((res) => {
-        let day = {};
+export async function fetchDay(date: string): Promise<Day> {
+    return cachedFetch<DayApiResponse>(`${process.env.API_HOST}/day/${date}`).then((res) => {
+        let day: Day = {};
         if (res) {
             const { comment, readings, bReadings, saints, seromns, title, glas, week, matinsGospelKey } = res;
 
             const { colour: feastColour, icon: feastIcon } = getFeastInfo(new Date(date));
-            const { fastName, fastingLevelName, colour: lentColour, icon: lentIcon } = getLentInfo(new Date(date));
+            const lentInfo = getLentInfo(new Date(date));
+            const fastingLevelName =
+                typeof lentInfo?.fastingLevelName === 'string' ? lentInfo.fastingLevelName : undefined;
 
             day = {
                 comment,
-                fastName,
+                fastName: lentInfo?.fastName,
                 fastingLevelName,
                 readings,
                 bReadings,
@@ -24,8 +29,8 @@ export function fetchDay(date) {
                 glas,
                 week,
                 matinsGospelKey,
-                colour: feastColour || lentColour,
-                icon: feastIcon || lentIcon || 'default.svg',
+                colour: feastColour || lentInfo?.colour,
+                icon: feastIcon || lentInfo?.icon || 'default.svg',
             };
         }
 
@@ -33,6 +38,11 @@ export function fetchDay(date) {
     });
 }
 
-const useDay = (date) => useQuery(['day', { date }], () => fetchDay(date), { retry: false });
+const useDay = (date: string): UseQueryResult<Day, Error> =>
+    useQuery<Day>({
+        queryKey: queryKeys.day(date),
+        queryFn: async () => fetchDay(date),
+        retry: false,
+    });
 
 export default useDay;

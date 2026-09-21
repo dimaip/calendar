@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { css } from 'emotion';
-import FindInPage from '@material-ui/icons/FindInPage';
+import { css } from '@emotion/css';
+import FindInPage from '@mui/icons-material/FindInPage';
 import { DotsMenuContext } from 'components/DotsMenu/DotsMenu';
 import Button from 'components/Button/Button';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '@emotion/react';
 
 export const FindInPageButton = ({ onOpen }: { onOpen: () => void }) => {
     const { toggleOpen } = useContext(DotsMenuContext);

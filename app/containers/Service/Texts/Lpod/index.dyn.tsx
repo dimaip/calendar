@@ -4,7 +4,7 @@ import dateFormat from 'dateformat';
 import forEach from 'lodash.foreach';
 import useDay from 'hooks/useDay';
 import ReadingItem from 'containers/Readings/ReadingItem';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import SolidSection from 'components/SolidSection/SolidSection';
 import SectionHeading from 'containers/Main/SectionHeading';
 import Saints from 'containers/Main/Saints';

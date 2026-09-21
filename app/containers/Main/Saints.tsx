@@ -1,31 +1,47 @@
 import React, { useRef, useEffect } from 'react';
-import { css } from 'emotion';
-import { useHistory } from 'react-router-dom';
+import { css } from '@emotion/css';
+import { useLocation, useNavigate } from 'react-router-dom';
 import RteText from 'components/RteText/RteText';
 
-const Saints = ({ saints, date }) => {
-    const ref = useRef(null);
-    const history = useHistory();
+interface SaintsProps {
+    saints: string;
+    date: string;
+}
+
+const Saints = ({ saints, date }: SaintsProps) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const location = useLocation();
+    const navigate = useNavigate();
+
     useEffect(() => {
-        if (ref.current) {
-            ref.current.addEventListener('click', (ev) => {
-                const a = ev.target.closest('a');
-                if (!a || !ref.current.contains(a)) {
-                    return null;
-                }
-                ev.preventDefault();
-                const saintId = a.dataset.saint;
-                if (ev.metaKey || ev.ctrlKey) {
-                    window.open(`${process.env.PUBLIC_URL}/#/date/${date}/saint/${saintId}`, '_blank');
-                } else {
-                    history.push({
-                        pathname: `/date/${date}/saint/${saintId}`,
-                        state: { backLink: history.location.pathname },
-                    });
-                }
-            });
+        const root = ref.current;
+        if (!root) {
+            return;
         }
-    }, []);
+
+        const handleClick = (ev: MouseEvent) => {
+            if (!(ev.target instanceof Element)) {
+                return;
+            }
+
+            const a = ev.target.closest<HTMLAnchorElement>('a');
+            if (!a || !root.contains(a)) {
+                return;
+            }
+            ev.preventDefault();
+            const saintId = a.dataset.saint;
+            if (ev.metaKey || ev.ctrlKey) {
+                window.open(`${process.env.PUBLIC_URL}/#/date/${date}/saint/${saintId}`, '_blank');
+            } else {
+                void navigate(`/date/${date}/saint/${saintId}`, {
+                    state: { backLink: location.pathname },
+                });
+            }
+        };
+
+        root.addEventListener('click', handleClick);
+        return () => root.removeEventListener('click', handleClick);
+    }, [date, location.pathname, navigate]);
     return (
         <RteText
             html={saints}

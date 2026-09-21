@@ -5,7 +5,7 @@ import useDay from 'hooks/useDay';
 import dateFormat from 'dateformat';
 import forEach from 'lodash.foreach';
 import ReadingItem from 'containers/Readings/ReadingItem';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 
 import ZlatoustMdx from './Zlatoust.mdx';
 import VespersWithZlatoustMdx from './VespersWithZlatoust.mdx';

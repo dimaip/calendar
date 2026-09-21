@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { Dialog as MuiDialog, DialogActions, DialogContent, DialogTitle } from '@material-ui/core';
+import { Dialog as MuiDialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 
 export const Dialog = ({
     children,

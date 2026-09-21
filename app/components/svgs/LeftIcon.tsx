@@ -1,6 +1,6 @@
 import React from 'react';
-import { css } from 'emotion';
-import { useTheme } from 'emotion-theming';
+import { css } from '@emotion/css';
+import { useTheme } from '@emotion/react';
 
 export default ({ colour = null }) => {
     const theme = useTheme();

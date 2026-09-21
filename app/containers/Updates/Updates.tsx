@@ -1,8 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { css } from 'emotion';
+import { css } from '@emotion/css';
 import { useMutation, usePaginatedQuery, useQuery } from 'convex/react';
-import { useTheme } from 'emotion-theming';
-import { useHistory } from 'react-router-dom';
+import { useTheme } from '@emotion/react';
+import { useNavigate } from 'react-router-dom';
+
+import { api } from '../../../convex/_generated/api';
+
 import Header from 'components/Header/Header';
 import Button from 'components/Button/Button';
 import LeftIcon from 'components/svgs/LeftIcon';
@@ -10,9 +13,6 @@ import CrossIcon from 'components/svgs/CrossIcon';
 import Loader from 'components/Loader/Loader';
 import { useSession } from 'containers/AuthProvider';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
-import type { AppTheme } from 'styles/AppTheme';
-
-import { api } from '../../../convex/_generated/api';
 
 const PAGE_SIZE = 12;
 
@@ -37,8 +37,8 @@ function formatUpdateDate(timestamp: number): string {
 }
 
 const UpdatesHeader = () => {
-    const history = useHistory();
-    const theme = useTheme<AppTheme>();
+    const navigate = useNavigate();
+    const theme = useTheme();
 
     return (
         <Header>
@@ -54,7 +54,7 @@ const UpdatesHeader = () => {
                 <Button
                     title="Назад"
                     onClick={() => {
-                        history.push('/profile');
+                        void navigate('/profile');
                     }}
                     className={css`
                         padding: 18px !important;
@@ -108,8 +108,8 @@ const UpdatesHeader = () => {
 const Updates = () => {
     useDocumentTitle('Обновления - Православное богослужение на русском языке');
 
-    const theme = useTheme<AppTheme>();
-    const history = useHistory();
+    const theme = useTheme();
+    const navigate = useNavigate();
     const session = useSession();
     const markAllRead = useMutation(api.updates.markAllRead);
     const markedReadRef = useRef(false);
@@ -202,7 +202,7 @@ const Updates = () => {
                     {adminStatus?.isAdmin && (
                         <Button
                             onClick={() => {
-                                history.push('/admin/updates');
+                                void navigate('/admin/updates');
                             }}
                             className={css`
                                 display: block;

@@ -1,12 +1,12 @@
 import React from 'react';
-import { useTheme } from 'emotion-theming';
-import { css } from 'emotion';
+import { useTheme } from '@emotion/react';
+import { css } from '@emotion/css';
 import Button from 'components/Button/Button';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import pendingUpdateState from 'state/pendingUpdateState';
 import checkVersion from 'checkVersion';
 import precache from 'precache';
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import LeftIcon from 'components/svgs/LeftIcon';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
 import ThemeControl from 'components/ThemeControl/ThemeControl';

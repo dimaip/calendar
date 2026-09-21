@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "recordedAt": "2026-07-28",
+  "baseline": {
+    "initialJavaScript": {
+      "bytes": 1999966,
+      "gzipBytes": 543191
+    },
+    "precache": {
+      "entries": 1859,
+      "approximateBytes": 8030000
+    }
+  },
+  "current": {
+    "build": {
+      "files": 3663,
+      "bytes": 17141844
+    },
+    "initialJavaScript": {
+      "files": 3,
+      "bytes": 1673473,
+      "gzipBytes": 483303
+    },
+    "javascript": {
+      "files": 1854,
+      "bytes": 7412726
+    },
+    "precache": {
+      "entries": 1865,
+      "localEntries": 1865,
+      "localBytes": 7612840
+    }
+  },
+  "delta": {
+    "initialJavaScriptBytes": -326493,
+    "initialJavaScriptGzipBytes": -59888,
+    "initialJavaScriptGzipPercent": -11.03
+  }
+}
