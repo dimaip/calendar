@@ -4,7 +4,7 @@ import { useSession } from 'containers/AuthProvider';
 
 import { api } from '../../../convex/_generated/api';
 
-import { trackedPrayerTimeOfDayByServiceId } from './trackedPrayerTimeOfDay';
+import { getPrayerTrackingPolicy } from './trackedPrayerTimeOfDay';
 import type { TrackedPrayerTimeOfDay } from './trackedPrayerTimeOfDay';
 
 const PRAYER_THRESHOLD_SECONDS = 240; // 4 minutes
@@ -27,8 +27,8 @@ interface QueuedSession {
 export const usePrayerTimer = ({ date, serviceId }: PrayerTimerProps) => {
     const session = useSession();
     const isLoggedIn = !!session.profile;
-    const settings = useQuery(api.habitTracker.getSettings);
-    const trackedPrayerTimeOfDay = trackedPrayerTimeOfDayByServiceId[serviceId];
+    const { trackedPrayerTimeOfDay, subscribeToSettings } = getPrayerTrackingPolicy(serviceId, isLoggedIn);
+    const settings = useQuery(api.habitTracker.getSettings, subscribeToSettings ? undefined : 'skip');
     const sessions = useQuery(
         api.habitTracker.getSessionsForRange,
         isLoggedIn && trackedPrayerTimeOfDay && settings?.habitTracker ? { startDate: date, endDate: date } : 'skip'

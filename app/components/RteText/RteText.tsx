@@ -1,6 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useImperativeHandle, useRef } from 'react';
 import { css } from '@emotion/css';
 import { useTheme } from '@emotion/react';
+
 import useAudio from 'hooks/useAudio';
 
 interface RteTextProps {
@@ -10,16 +11,17 @@ interface RteTextProps {
 
 const RteText = React.forwardRef<HTMLDivElement, RteTextProps>(({ html = '', className = '' }, ref) => {
     const localRef = useRef<HTMLDivElement>(null);
-    const effectiveRef = ref || localRef;
     const theme = useTheme();
     const htmlWithStrongSlashes = html
         .replace(/([\s])\/\/([\s])/g, '$1<strong>//</strong>$2')
         .replace(/([\s])\/([\s])/g, '$1<strong>/</strong>$2');
 
-    useAudio(effectiveRef);
+    useImperativeHandle(ref, () => localRef.current as HTMLDivElement);
+    useAudio(localRef);
     return (
         <div
-            ref={effectiveRef}
+            ref={localRef}
+            data-audio-root
             dangerouslySetInnerHTML={{ __html: htmlWithStrongSlashes }}
             className={`${css`
                 font-size: 18px;

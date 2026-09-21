@@ -1,12 +1,15 @@
 import React, { useRef } from 'react';
 import { MDXProvider as OriginalMDXProvider } from '@mdx-js/react';
+
 import If, { Then, Else } from 'components/If/If';
 import Tooltip from 'components/Tooltip/Tooltip';
 import MdxLoader from 'containers/Service/Texts/MdxLoader';
+import { MdxLoaderRuntimeProvider } from 'containers/Service/Texts/MdxLoaderRuntime';
 import Parts from 'components/Parts/Parts';
 import './mdx.css';
 import useAudio from 'hooks/useAudio';
 import { H1, H2, H3, H4, P, Petit, PetitInline, Red, Super } from 'components/Typography/Typography';
+import { ScriptEditorStateProvider } from 'components/ScriptEditor/ScriptEditorInput';
 
 const mapping = {
     h1: H1,
@@ -28,13 +31,28 @@ const mapping = {
     MdxLoader,
     Parts,
 
-    wrapper: (props) => {
-        const ref = useRef();
-        useAudio(ref);
-        return <div {...props} ref={ref} />;
-    },
+    wrapper: (props) => <div {...props} />,
 };
 
-const MDXProvider = ({ children }) => <OriginalMDXProvider components={mapping}>{children}</OriginalMDXProvider>;
+const AudioRoot = ({ children }: { children: React.ReactNode }): JSX.Element => {
+    const ref = useRef<HTMLDivElement>(null);
+    useAudio(ref);
+
+    return (
+        <div ref={ref} data-audio-root>
+            {children}
+        </div>
+    );
+};
+
+const MDXProvider = ({ children }): JSX.Element => (
+    <MdxLoaderRuntimeProvider>
+        <ScriptEditorStateProvider>
+            <OriginalMDXProvider components={mapping}>
+                <AudioRoot>{children}</AudioRoot>
+            </OriginalMDXProvider>
+        </ScriptEditorStateProvider>
+    </MdxLoaderRuntimeProvider>
+);
 
 export default MDXProvider;

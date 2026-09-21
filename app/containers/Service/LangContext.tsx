@@ -1,3 +1,13 @@
 import { createContext } from 'react';
 
-export const LangContext = createContext(null);
+export interface LangContextValue {
+    lang: string;
+    langA: string;
+    langB: string;
+}
+
+export const LangContext = createContext<LangContextValue>({
+    lang: 'ru',
+    langA: 'ru',
+    langB: 'csj',
+});

@@ -1,0 +1,76 @@
+{
+    "version": 1,
+    "date": "2026-07-28",
+    "route": "/#/date/2026-07-28/service/Литургия",
+    "profile": {
+        "name": "older-phone",
+        "runs": 3,
+        "cpuSlowdown": 4,
+        "latencyMs": 150,
+        "downloadMbps": 1.6,
+        "uploadKbps": 750,
+        "contentEncoding": "gzip"
+    },
+    "comparison": {
+        "ungrouped": {
+            "completeCommitMs": 6015.7,
+            "tocReadyMs": 6523.3,
+            "settledMs": 7576.7,
+            "fcpMs": 432,
+            "lcpMs": 3260,
+            "totalBlockingTimeMs": 123,
+            "javascriptTransferBytes": 605386,
+            "taskDurationMs": 2188.223,
+            "scriptDurationMs": 1609.207
+        },
+        "coherentLiturgyChunks": {
+            "completeCommitMs": 4156.8,
+            "tocReadyMs": 4662.8,
+            "settledMs": 5718.4,
+            "fcpMs": 424,
+            "lcpMs": 3232,
+            "totalBlockingTimeMs": 110,
+            "javascriptTransferBytes": 543712,
+            "taskDurationMs": 869.582,
+            "scriptDurationMs": 540.966
+        },
+        "deltaPercent": {
+            "completeCommit": -30.9,
+            "settled": -24.53,
+            "totalBlockingTime": -10.57,
+            "javascriptTransfer": -10.19,
+            "taskDuration": -60.26,
+            "scriptDuration": -66.38
+        }
+    },
+    "shape": {
+        "tocEntries": 67,
+        "headingShapeHash": "e063017a",
+        "domNodes": 2274,
+        "paragraphs": 568,
+        "scrollHeightPx": 55128
+    },
+    "build": {
+        "initialJavaScriptRawBytes": 1512607,
+        "initialJavaScriptGzipBytes": 437057,
+        "precacheEntries": 1555,
+        "precacheBytes": 7712284
+    },
+    "interactionSmoke": {
+        "tocSelectionMs": 146.6,
+        "searchMs": 239.5,
+        "parallelCompleteCommitMs": 121.6,
+        "parallelTocReadyMs": 848.4,
+        "parallelLongTaskMaxMs": 150,
+        "warmSpaCompleteCommitMsAt6xCpu": 486.9,
+        "hotRevisitCompleteCommitMsAt6xCpu": 202.5
+    },
+    "verification": {
+        "unitTests": 62,
+        "browserTests": 7,
+        "offlineZlatoustRussianChurchSlavonicParallel": "passed",
+        "failedContentHashedOfflineRequests": 0,
+        "eslintRatchet": "passed",
+        "typescriptRatchet": "passed"
+    }
+}

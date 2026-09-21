@@ -1,3 +1,7 @@
 import { createContext } from 'react';
 
-export const ServiceContext = createContext(null);
+interface ServiceContextValue {
+    serviceId?: string;
+}
+
+export const ServiceContext = createContext<ServiceContextValue | null>(null);
