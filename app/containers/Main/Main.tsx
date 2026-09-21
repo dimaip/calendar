@@ -25,6 +25,7 @@ import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
 import { useRecoilValue } from 'recoil';
 import themeState from 'state/themeState';
+import { getCurrentNavigationMeasurement, markNavigationIntent, markPerformance } from 'utils/performanceMarks';
 
 import IosPrompt from './IosPrompt';
 import Services from './Services';
@@ -44,7 +45,40 @@ import Sing from './Sing';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
-const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClickShift, services }) => {
+const DatePrimaryContentMarker = ({ date }: { date: string }): null => {
+    React.useEffect(() => {
+        const navigation = getCurrentNavigationMeasurement();
+        markPerformance('date_primary_content_ready', { date }, navigation);
+        let stableFrame = 0;
+        const firstFrame = window.requestAnimationFrame(() => {
+            stableFrame = window.requestAnimationFrame(() => {
+                markPerformance('above_fold_stable', { date }, navigation);
+            });
+        });
+        return () => {
+            window.cancelAnimationFrame(firstFrame);
+            window.cancelAnimationFrame(stableFrame);
+        };
+    }, [date]);
+
+    return null;
+};
+
+interface SwipeableContainerProps {
+    date: string;
+    handleToggleClick: () => void;
+    isPrimary: boolean;
+    makeHandleClickShift: (direction: 'left' | 'right') => () => void;
+    services: boolean;
+}
+
+const SwipeableContainer = React.memo(function SwipeableContainer({
+    date,
+    handleToggleClick,
+    isPrimary,
+    makeHandleClickShift,
+    services,
+}: SwipeableContainerProps) {
     const dayQuery = useDay(date);
     const day = dayQuery.data;
     const externalDayQuery = useExternalDay(date);
@@ -70,6 +104,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                         {dayQuery.status === 'error' && <ErrorMessage500 />}
                         {dayQuery.status === 'success' && (
                             <div>
+                                {isPrimary && <DatePrimaryContentMarker date={date} />}
                                 <HeadingBar
                                     title={day.title}
                                     glas={day.glas}
@@ -189,7 +224,9 @@ const Main = React.memo(({ services = false }) => {
 
     const navigate = useNavigate();
     const setNewDate = (dateString) => {
-        void navigate(`/date/${dateString}${services ? '/services' : ''}`);
+        const target = `/date/${dateString}${services ? '/services' : ''}`;
+        markNavigationIntent({ initiator: 'date-change', target });
+        void navigate(target);
     };
     const makeHandleClickShift = useCallback(
         (direction) => () => {
@@ -221,6 +258,7 @@ const Main = React.memo(({ services = false }) => {
                 <SwipeableContainer
                     key={key}
                     date={effectiveDate}
+                    isPrimary={index === activeIndex}
                     services={services}
                     handleToggleClick={handleToggleClick}
                     makeHandleClickShift={makeHandleClickShift}

@@ -1,5 +1,8 @@
 import type { Metric } from 'web-vitals';
 
+import { markPerformance } from 'utils/performanceMarks';
+import type { NavigationMeasurement } from 'utils/performanceMarks';
+
 interface PerformanceConnection {
     effectiveType?: string;
     saveData?: boolean;
@@ -12,7 +15,10 @@ interface PerformanceNavigator extends Navigator {
 
 interface ServiceMilestones {
     complete?: number;
+    intent?: number;
+    navigation: NavigationMeasurement;
     renderKey?: string;
+    settledTimer?: number;
     tocReady?: number;
 }
 
@@ -42,40 +48,122 @@ const observeServiceMilestones = () => {
         return;
     }
 
-    const milestones: ServiceMilestones = {};
-    let settledTimer: number | undefined;
+    let milestones: ServiceMilestones | undefined;
 
     const scheduleSettledReport = () => {
-        if (milestones.complete === undefined || milestones.tocReady === undefined) {
+        if (
+            !milestones ||
+            milestones.complete === undefined ||
+            milestones.tocReady === undefined ||
+            milestones.tocReady < milestones.complete
+        ) {
             return;
         }
 
-        window.clearTimeout(settledTimer);
-        settledTimer = window.setTimeout(() => {
+        window.clearTimeout(milestones.settledTimer);
+        const expectedMilestones = milestones;
+        const complete = milestones.complete;
+        const tocReady = milestones.tocReady;
+        const { intent, navigation, renderKey } = expectedMilestones;
+        expectedMilestones.settledTimer = window.setTimeout(() => {
+            if (
+                milestones !== expectedMilestones ||
+                milestones.complete !== complete ||
+                milestones.intent !== intent ||
+                milestones.renderKey !== renderKey ||
+                milestones.tocReady !== tocReady
+            ) {
+                return;
+            }
+
             const settled = performance.now();
+            const intentDurations =
+                intent === undefined
+                    ? {}
+                    : {
+                          completeFromIntent: complete - intent,
+                          navigationIntent: intent,
+                          settledFromIntent: settled - intent,
+                          tocReadyFromIntent: tocReady - intent,
+                      };
             performance.clearMarks?.('service_settled');
-            performance.mark?.('service_settled');
+            markPerformance(
+                'service_settled',
+                { completeCommit: complete, ...intentDurations, renderKey, settled, tocReady },
+                navigation
+            );
             pushPerformanceEvent({
+                completeCommit: complete,
                 event: 'service_performance',
-                completeCommit: milestones.complete,
-                renderKey: milestones.renderKey,
+                ...intentDurations,
+                navigationKey: navigation.key,
+                navigationSequence: navigation.sequence,
+                renderKey,
                 settled,
-                tocReady: milestones.tocReady,
+                tocReady,
             });
-            milestones.complete = undefined;
-            milestones.renderKey = undefined;
-            milestones.tocReady = undefined;
+            expectedMilestones.complete = undefined;
+            expectedMilestones.intent = undefined;
+            expectedMilestones.renderKey = undefined;
+            expectedMilestones.settledTimer = undefined;
+            expectedMilestones.tocReady = undefined;
         }, 750);
     };
 
     const observer = new PerformanceObserver((list) => {
         for (const entry of list.getEntries()) {
+            if (
+                entry.name !== 'navigation_intent' &&
+                entry.name !== 'service_complete_commit' &&
+                entry.name !== 'service_toc_ready'
+            ) {
+                continue;
+            }
+
+            const detail = (entry as PerformanceMark).detail as {
+                navigationKey?: unknown;
+                navigationSequence?: unknown;
+                renderKey?: unknown;
+            } | null;
+            if (
+                typeof detail?.navigationKey !== 'string' ||
+                typeof detail.navigationSequence !== 'number' ||
+                !Number.isFinite(detail.navigationSequence)
+            ) {
+                continue;
+            }
+
+            if (
+                !milestones ||
+                detail.navigationSequence > milestones.navigation.sequence ||
+                (detail.navigationSequence === milestones.navigation.sequence &&
+                    detail.navigationKey !== milestones.navigation.key)
+            ) {
+                window.clearTimeout(milestones?.settledTimer);
+                milestones = {
+                    navigation: {
+                        key: detail.navigationKey,
+                        sequence: detail.navigationSequence,
+                    },
+                };
+            } else if (
+                detail.navigationSequence < milestones.navigation.sequence ||
+                detail.navigationKey !== milestones.navigation.key
+            ) {
+                continue;
+            }
+
+            if (entry.name === 'navigation_intent') {
+                milestones.intent = entry.startTime;
+                scheduleSettledReport();
+                continue;
+            }
+
             if (entry.name === 'service_complete_commit') {
                 milestones.complete = entry.startTime;
-                const detail = (entry as PerformanceMark).detail as { renderKey?: unknown } | null;
                 milestones.renderKey = typeof detail?.renderKey === 'string' ? detail.renderKey : undefined;
                 scheduleSettledReport();
-            } else if (entry.name === 'service_toc_ready') {
+            } else {
                 milestones.tocReady = entry.startTime;
                 scheduleSettledReport();
             }

@@ -18,6 +18,7 @@ import precache from 'precache';
 import isDarkMode from 'utils/isDarkMode';
 import RouteErrorBoundary from 'components/RouteErrorBoundary/RouteErrorBoundary';
 import ScrollRestoration from 'components/ScrollRestoration/ScrollRestoration';
+import { markNavigationIntent, markPerformance } from 'utils/performanceMarks';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -37,8 +38,46 @@ const App = () => {
         if (loader && reactRoot) {
             loader.style.display = 'none';
             reactRoot.style.display = 'block';
+            markPerformance('inline_loader_hidden');
         }
         void Plugins.SplashScreen.hide();
+    }, []);
+    useEffect(() => {
+        const markLinkNavigationIntent = (event: MouseEvent) => {
+            if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+                return;
+            }
+
+            const eventTarget = event.target;
+            if (!(eventTarget instanceof Element)) {
+                return;
+            }
+
+            const link = eventTarget.closest('a[href]');
+            if (!link || link.hasAttribute('download') || link.getAttribute('target') === '_blank') {
+                return;
+            }
+
+            const destination = new URL((link as HTMLAnchorElement).href, window.location.href);
+            if (destination.origin !== window.location.origin) {
+                return;
+            }
+
+            markNavigationIntent({ initiator: 'link-click', target: `${destination.pathname}${destination.hash}` });
+        };
+        const markHistoryNavigationIntent = () => {
+            markNavigationIntent({
+                initiator: 'browser-history',
+                target: `${window.location.pathname}${window.location.hash}`,
+            });
+        };
+
+        document.addEventListener('click', markLinkNavigationIntent, { capture: true, passive: true });
+        window.addEventListener('popstate', markHistoryNavigationIntent);
+        return () => {
+            document.removeEventListener('click', markLinkNavigationIntent, { capture: true });
+            window.removeEventListener('popstate', markHistoryNavigationIntent);
+        };
     }, []);
     const dark = isDarkMode();
     return (
