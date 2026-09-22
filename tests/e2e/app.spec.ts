@@ -297,6 +297,35 @@ test('persists the selected theme across a reload', async ({ page }) => {
     await expect.poll(() => page.evaluate(() => getComputedStyle(document.body).backgroundColor)).toBe(darkBackground);
 });
 
+test('reads a persisted date after an offline event with an empty in-memory query cache', async ({ page, context }) => {
+    await page.goto(`/#/date/${FIXED_DATE}`);
+    await expect(page.getByText('Fixture feast day', { exact: true }).first()).toBeVisible();
+
+    // A different, non-adjacent date avoids the swipe view's mounted neighbours.
+    // Reload clears QueryClient memory, but must retain the IndexedDB data above.
+    await page.goto('/#/date/2024-02-15');
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await expect(page.getByText('Fixture feast day', { exact: true }).first()).toBeVisible();
+    await page.evaluate(() => performance.clearMarks('date_primary_content_ready'));
+
+    // Fulfilled network mocks otherwise continue responding while Playwright is offline.
+    await context.unrouteAll({ behavior: 'wait' });
+    await context.setOffline(true);
+    await page.waitForFunction(() => navigator.onLine === false);
+    await page.evaluate((date) => {
+        location.hash = `#/date/${date}`;
+    }, FIXED_DATE);
+
+    await expect(page.getByText('Fixture feast day', { exact: true }).first()).toBeVisible();
+    await page.waitForFunction(
+        (date) =>
+            performance
+                .getEntriesByName('date_primary_content_ready')
+                .some((entry) => (entry as PerformanceMark).detail?.date === date),
+        FIXED_DATE
+    );
+});
+
 test('reloads installed lazy routes and optional service controls while fully offline', async ({ browser }) => {
     test.setTimeout(120_000);
 
@@ -312,6 +341,10 @@ test('reloads installed lazy routes and optional service controls while fully of
     });
 
     try {
+        // Persist the fixture date before losing the network. Offline requests
+        // must not be rescued by the online API mocks below.
+        await page.goto(`/#/date/${FIXED_DATE}`);
+        await expect(page.getByText('Fixture feast day', { exact: true }).first()).toBeVisible();
         await page.goto('/#/hymns');
         await expect(page.getByRole('heading', { name: 'Тропарион' })).toBeVisible();
         await expect(page.getByRole('link', { name: new RegExp(HYMN_TITLE) })).toBeVisible();
@@ -321,6 +354,7 @@ test('reloads installed lazy routes and optional service controls while fully of
         });
         await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
 
+        await context.unrouteAll({ behavior: 'wait' });
         await context.setOffline(true);
         await page.reload({ waitUntil: 'domcontentloaded' });
 

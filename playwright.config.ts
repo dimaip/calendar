@@ -23,8 +23,7 @@ export default defineConfig({
         trace: 'retain-on-failure',
     },
     webServer: {
-        command:
-            'yarn build:e2e && cross-env NODE_PORT=4173 NODE_ENV=production node server.js',
+        command: 'yarn build:e2e && cross-env NODE_PORT=4173 NODE_ENV=production node server.js',
         url: baseURL,
         reuseExistingServer: !process.env.CI,
         timeout: 180_000,
@@ -34,6 +33,16 @@ export default defineConfig({
             name: 'chromium',
             use: {
                 ...devices['Desktop Chrome'],
+            },
+        },
+        {
+            name: 'webkit',
+            // WebKit's simulated-offline navigation fails even for a synthetic
+            // service worker response. Exercise the IndexedDB transition here;
+            // installed/offline navigation remains a Chromium + physical iOS gate.
+            grep: /reads a persisted date/,
+            use: {
+                ...devices['Desktop Safari'],
             },
         },
     ],

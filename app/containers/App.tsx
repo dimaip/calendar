@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
 import Pullable from 'react-pullable';
 import 'styles/reset.css';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { Plugins } from '@capacitor/core';
 import { useSetRecoilState } from 'recoil';
 
@@ -19,16 +19,7 @@ import isDarkMode from 'utils/isDarkMode';
 import RouteErrorBoundary from 'components/RouteErrorBoundary/RouteErrorBoundary';
 import ScrollRestoration from 'components/ScrollRestoration/ScrollRestoration';
 import { markNavigationIntent, markPerformance } from 'utils/performanceMarks';
-
-const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            refetchOnMount: false,
-            refetchOnWindowFocus: false,
-            refetchOnReconnect: false,
-        },
-    },
-});
+import { queryClient } from 'data/queryClient';
 
 const App = () => {
     const setPendingUpdate = useSetRecoilState(pendingUpdateState);
