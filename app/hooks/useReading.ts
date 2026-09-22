@@ -1,19 +1,10 @@
-import { useQuery } from '@tanstack/react-query';
-import type { UseQueryResult } from '@tanstack/react-query';
+import { useQuery } from 'react-query';
+import cachedFetch from 'utils/cachedFetch';
 
 import useReadings from './useReadings';
 
-import cachedFetch from 'utils/cachedFetch';
-import type { ReadingResponse } from 'data/contracts';
-import { queryKeys } from 'data/queryKeys';
-import { getReadingQueryPlan } from 'data/readingQueryPolicy';
-
-export async function fetchReading(
-    link: string,
-    translation: string,
-    translationPriority: string[] = []
-): Promise<ReadingResponse> {
-    return cachedFetch<ReadingResponse>(
+export async function fetchReading(link, translation, translationPriority = []) {
+    return cachedFetch(
         `${process.env.API_HOST}/reading/${encodeURI(
             link
         )}&translation=${translation}&translationPriority=${translationPriority.join(',')}`
@@ -37,27 +28,18 @@ export async function fetchReading(
     });
 }
 
-type ReadingQueryResult = Pick<UseQueryResult<ReadingResponse, Error>, 'data' | 'status'>;
-
-const useReading = (
-    link: string,
-    translation: string,
-    date: string,
-    translationPriority: string[] = []
-): ReadingQueryResult => {
-    const initialQueryPlan = getReadingQueryPlan(translation, 'pending', false);
-    const readingsQuery = useReadings(date, initialQueryPlan.fetchBulkReadings);
-    const bulkReading = readingsQuery.data?.[link];
-    const queryPlan = getReadingQueryPlan(translation, readingsQuery.status, Boolean(bulkReading));
-    const readingQuery = useQuery<ReadingResponse>({
-        queryKey: queryKeys.reading(link, translation),
-        queryFn: async () => fetchReading(link, translation, translationPriority),
-        retry: false,
-        enabled: queryPlan.fetchIndividualReading,
-    });
-    if (queryPlan.useBulkReading) {
+const useReading = (link, translation, date, translationPriority = []) => {
+    const { data: readings, status: readingsStatus } = useReadings(date);
+    const readingQuery = useQuery(
+        ['reading', { link, translation }],
+        async () => fetchReading(link, translation, translationPriority),
+        {
+            retry: false,
+        }
+    );
+    if (readings?.[link] && translation === 'default') {
         return {
-            data: bulkReading,
+            data: readings[link],
             status: 'success',
         };
     }

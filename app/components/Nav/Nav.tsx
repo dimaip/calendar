@@ -1,9 +1,9 @@
 import React from 'react';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 import PropTypes from 'prop-types';
 import LeftIcon from 'components/svgs/LeftIcon';
 import RightIcon from 'components/svgs/RightIcon';
-import { useTheme } from '@emotion/react';
+import { useTheme } from 'emotion-theming';
 import { subDays, format, parseISO } from 'date-fns';
 import { ru } from 'date-fns/locale';
 

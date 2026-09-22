@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { css } from '@emotion/css';
-import { useTheme } from '@emotion/react';
+import { css } from 'emotion';
+import { useTheme } from 'emotion-theming';
 import Loader from 'components/Loader/Loader';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import useFilteredSermons from 'hooks/useFilteredSermons';
@@ -19,13 +19,14 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
     const [hasMore, setHasMore] = useState(true);
     const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-    const {
-        data: sermons,
-        status: sermonsStatus,
-        refetch,
-    } = useFilteredSermons(authorId, themeId, limit || SERMONS_PER_PAGE, limit ? undefined : offset);
+    const { data: sermons, status: sermonsStatus, refetch } = useFilteredSermons(
+        authorId,
+        themeId,
+        limit || SERMONS_PER_PAGE,
+        limit ? undefined : offset
+    );
 
-    const isLoading = sermonsStatus === 'pending' && offset === 0;
+    const isLoading = sermonsStatus === 'loading' && offset === 0;
     const isError = sermonsStatus === 'error';
 
     // Reset when filters change
@@ -49,7 +50,7 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
         }
     }, [sermons, offset, limit]);
 
-    const handleLoadMore = () => {
+    const handleLoadMore = async () => {
         setIsLoadingMore(true);
         setOffset((prev) => prev + SERMONS_PER_PAGE);
     };
@@ -57,7 +58,7 @@ export const SermonList = ({ authorId, themeId, limit }: { authorId?: string; th
     // Refetch when offset changes
     useEffect(() => {
         if (offset > 0) {
-            void refetch();
+            refetch();
         }
     }, [offset, refetch]);
 

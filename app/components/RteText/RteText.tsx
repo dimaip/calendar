@@ -1,27 +1,20 @@
-import React, { useImperativeHandle, useRef } from 'react';
-import { css } from '@emotion/css';
-import { useTheme } from '@emotion/react';
-
+import React, { useRef } from 'react';
+import { css } from 'emotion';
+import { useTheme } from 'emotion-theming';
 import useAudio from 'hooks/useAudio';
 
-interface RteTextProps {
-    html?: string;
-    className?: string;
-}
-
-const RteText = React.forwardRef<HTMLDivElement, RteTextProps>(({ html = '', className = '' }, ref) => {
-    const localRef = useRef<HTMLDivElement>(null);
+const RteText = React.forwardRef(({ html = '', className = '' }, ref) => {
+    const localRef = useRef();
+    const effectiveRef = ref || localRef;
     const theme = useTheme();
     const htmlWithStrongSlashes = html
         .replace(/([\s])\/\/([\s])/g, '$1<strong>//</strong>$2')
         .replace(/([\s])\/([\s])/g, '$1<strong>/</strong>$2');
 
-    useImperativeHandle(ref, () => localRef.current as HTMLDivElement);
-    useAudio(localRef);
+    useAudio(effectiveRef);
     return (
         <div
-            ref={localRef}
-            data-audio-root
+            ref={effectiveRef}
             dangerouslySetInnerHTML={{ __html: htmlWithStrongSlashes }}
             className={`${css`
                 font-size: 18px;

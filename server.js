@@ -1,10 +1,7 @@
 import path from 'path';
 
-import compression from 'compression';
 import express from 'express';
 import webpack from 'webpack';
-
-import { cacheControlForStaticPath } from './app/utils/staticDelivery.mjs';
 
 const app = express();
 const isProd = process.env.NODE_ENV === 'production';
@@ -45,19 +42,7 @@ const start = async () => {
         // app.use(webpackHotMiddleware(compiler));
     }
 
-    app.use(compression());
-    app.use(
-        '/',
-        express.static('www', {
-            setHeaders: (response, filePath) => {
-                if (!isProd) {
-                    return;
-                }
-                const relativePath = path.relative(path.resolve('www'), filePath);
-                response.set('Cache-Control', cacheControlForStaticPath(relativePath));
-            },
-        })
-    );
+    app.use('/', express.static('www'));
 
     app.listen(port, () => console.log(`=== Go to http://localhost:${port} ===`));
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 import TagManager from 'react-gtm-module';
 import Textarea from 'components/Textarea/Textarea';
 import { useRecoilState } from 'recoil';
@@ -8,7 +8,7 @@ import customPrayerInputState from 'state/customPrayerInputState';
 import customPrayerEditIdState from 'state/customPrayerEditIdState';
 import DrawerWithHeader from 'components/Drawer/DrawerWithHeader';
 import Button from 'components/Button/Button';
-import { useTheme } from '@emotion/react';
+import { useTheme } from 'emotion-theming';
 
 const CustomPrayerInput = ({
     onSave,

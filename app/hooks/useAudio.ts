@@ -1,7 +1,6 @@
-import { useTheme } from '@emotion/react';
+import { useTheme } from 'emotion-theming';
 import { useEffect } from 'react';
-import type { RefObject } from 'react';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 
 const formatTime = (seconds) => new Date(1000 * parseInt(seconds || 0)).toISOString().substr(14, 5);
 
@@ -38,9 +37,8 @@ const el = (tagName, attributes, children) => {
 
 const augmentAudio = (audioElement, theme) => {
     let touching = false;
-    const animationFrames = new Set<number>();
     if (!audioElement.hasAttribute('controls')) {
-        return null;
+        return;
     }
     audioElement.removeAttribute('controls');
 
@@ -147,8 +145,7 @@ const augmentAudio = (audioElement, theme) => {
     play.addEventListener('click', handlePlay);
 
     const updateUI = (time) => {
-        const animationFrame = requestAnimationFrame(() => {
-            animationFrames.delete(animationFrame);
+        requestAnimationFrame(() => {
             const effectiveTime = Math.max(
                 0,
                 Math.min(audioElement.duration, typeof time === 'number' ? time : audioElement.currentTime || 0)
@@ -170,11 +167,10 @@ const augmentAudio = (audioElement, theme) => {
 
     audioElement.addEventListener('canplaythrough', updateUIFromTime, false);
     audioElement.addEventListener('timeupdate', updateUIFromTime, false);
-    const handleEnded = () => {
+    audioElement.addEventListener('ended', () => {
         play.innerHTML =
             '<svg width="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M152.443 136.417L359.557 255.99 152.443 375.583z"/></svg>';
-    };
-    audioElement.addEventListener('ended', handleEnded);
+    });
 
     const preventTouch = (event) => {
         event.preventDefault();
@@ -205,10 +201,9 @@ const augmentAudio = (audioElement, theme) => {
     timelineWrapper.addEventListener('touchend', touchEnd);
     timelineWrapper.addEventListener('touchcancel', touchEnd);
     timelineWrapper.addEventListener('mouseup', touchEnd);
-    const stopTouching = () => {
+    document.addEventListener('mouseup', () => {
         touching = false;
-    };
-    document.addEventListener('mouseup', stopTouching);
+    });
 
     const touchMove = (event) => {
         if (touching) {
@@ -218,90 +213,16 @@ const augmentAudio = (audioElement, theme) => {
     timelineWrapper.addEventListener('touchmove', touchMove);
     timelineWrapper.addEventListener('mousemove', touchMove);
     updateUI();
-
-    return () => {
-        animationFrames.forEach((animationFrame) => cancelAnimationFrame(animationFrame));
-        play.removeEventListener('click', handlePlay);
-        audioElement.removeEventListener('canplaythrough', updateUIFromTime, false);
-        audioElement.removeEventListener('timeupdate', updateUIFromTime, false);
-        audioElement.removeEventListener('ended', handleEnded);
-        ui.removeEventListener('touchmove', preventTouch);
-        ui.removeEventListener('mousemove', preventTouch);
-        timelineWrapper.removeEventListener('touchstart', startTouch);
-        timelineWrapper.removeEventListener('mousedown', startTouch);
-        timelineWrapper.removeEventListener('touchend', touchEnd);
-        timelineWrapper.removeEventListener('touchcancel', touchEnd);
-        timelineWrapper.removeEventListener('mouseup', touchEnd);
-        document.removeEventListener('mouseup', stopTouching);
-        timelineWrapper.removeEventListener('touchmove', touchMove);
-        timelineWrapper.removeEventListener('mousemove', touchMove);
-        ui.remove();
-        audioElement.setAttribute('controls', '');
-    };
 };
 
-const useAudio = (ref: RefObject<HTMLElement | null>) => {
+const useAudio = (ref) => {
     const theme = useTheme();
-
     useEffect(() => {
-        const root = ref?.current;
-        if (!root) {
-            return undefined;
+        if (ref?.current) {
+            ref.current.querySelectorAll('audio').forEach((audioElement) => {
+                augmentAudio(audioElement, theme);
+            });
         }
-
-        const cleanups = new Map<HTMLAudioElement, () => void>();
-        const enhanceAudioElement = (audioElement: HTMLAudioElement) => {
-            if (audioElement.closest('[data-audio-root]') !== root || cleanups.has(audioElement)) {
-                return;
-            }
-
-            const cleanup = augmentAudio(audioElement, theme);
-            if (cleanup) {
-                cleanups.set(audioElement, cleanup);
-            }
-        };
-        const enhanceAudioInNode = (node: Node) => {
-            if (!(node instanceof Element)) {
-                return;
-            }
-            if (node instanceof HTMLAudioElement) {
-                enhanceAudioElement(node);
-            }
-            node.querySelectorAll<HTMLAudioElement>('audio').forEach(enhanceAudioElement);
-        };
-        const removeDetachedAudio = () => {
-            cleanups.forEach((cleanup, audioElement) => {
-                if (!root.contains(audioElement)) {
-                    cleanup();
-                    cleanups.delete(audioElement);
-                }
-            });
-        };
-
-        enhanceAudioInNode(root);
-
-        const observer = new MutationObserver((mutations) => {
-            let mayHaveRemovedAudio = false;
-            mutations.forEach((mutation) => {
-                mutation.addedNodes.forEach(enhanceAudioInNode);
-                if (mutation.removedNodes.length > 0) {
-                    mayHaveRemovedAudio = true;
-                }
-            });
-
-            if (mayHaveRemovedAudio) {
-                removeDetachedAudio();
-            }
-        });
-        observer.observe(root, { childList: true, subtree: true });
-
-        return () => {
-            observer.disconnect();
-            cleanups.forEach((cleanup) => {
-                cleanup();
-            });
-            cleanups.clear();
-        };
-    }, [ref, theme]);
+    });
 };
 export default useAudio;

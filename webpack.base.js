@@ -89,19 +89,12 @@ export default {
             },
             {
                 test: /\.(js|ts|tsx)$/,
-                exclude: /node_modules\/(?!capacitor-data-storage-sqlite)(?!recoil).*$/,
+                exclude: /node_modules\/(?!capacitor-data-storage-sqlite)(?!recoil)(?!unfetch).*$/,
                 use: [
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: [
-                                [
-                                    '@babel/preset-env',
-                                    {
-                                        targets: '> 0.5%, last 2 versions, Firefox ESR, not dead',
-                                    },
-                                ],
-                            ],
+                            presets: [['@babel/preset-env', { targets: { browsers: ['ie >= 11', 'safari > 9'] } }]],
                         },
                     },
                 ],
@@ -134,14 +127,7 @@ export default {
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: [
-                                [
-                                    '@babel/preset-env',
-                                    {
-                                        targets: '> 0.5%, last 2 versions, Firefox ESR, not dead',
-                                    },
-                                ],
-                            ],
+                            presets: ['@babel/preset-env'],
                         },
                     },
                     {

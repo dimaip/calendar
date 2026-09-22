@@ -1,19 +1,19 @@
 import React from 'react';
-import { css } from '@emotion/css';
-import { useTheme } from '@emotion/react';
+import { css } from 'emotion';
+import { useTheme } from 'emotion-theming';
 import { useQuery } from 'convex/react';
-import { useNavigate } from 'react-router-dom';
+import { useSession } from 'containers/AuthProvider';
+import { useHistory } from 'react-router-dom';
+import PrayerCheck from 'components/svgs/PrayerCheck';
+import type { AppTheme } from 'styles/AppTheme';
+import { formatDateKey } from 'utils/formatDateKey';
 
 import { api } from '../../../convex/_generated/api';
 
-import { useSession } from 'containers/AuthProvider';
-import PrayerCheck from 'components/svgs/PrayerCheck';
-import { formatDateKey } from 'utils/formatDateKey';
-
 const CalendarStreakWidget = () => {
-    const theme = useTheme();
+    const theme = useTheme<AppTheme>();
     const session = useSession();
-    const navigate = useNavigate();
+    const history = useHistory();
     const isLoggedIn = !!session.profile;
     const activeColour = theme.colours?.primary || '#ae831a';
     const mutedColour = theme.colours?.gray || '#717175';
@@ -49,9 +49,7 @@ const CalendarStreakWidget = () => {
 
     return (
         <div
-            onClick={() => {
-                void navigate('/profile');
-            }}
+            onClick={() => history.push('/profile')}
             className={css`
                 position: absolute;
                 left: 50%;

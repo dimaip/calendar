@@ -1,9 +1,9 @@
 import { getFeastInfo } from 'domain/getDayInfo';
 
 import * as Sentry from '@sentry/react';
-import React, { Suspense, useContext, useEffect, useLayoutEffect, useMemo, useState } from 'react';
-import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { css } from '@emotion/css';
+import React, { Suspense, useState, useEffect, useContext } from 'react';
+import { useParams, useHistory, Redirect } from 'react-router-dom';
+import { css } from 'emotion';
 import useDay from 'hooks/useDay';
 import Zoom from 'components/Zoom/Zoom';
 import Loader from 'components/Loader/Loader';
@@ -23,8 +23,6 @@ import Pencil from 'components/svgs/Pencil';
 import CustomPrayerInput from 'components/CustomPrayers/CustomPrayerInput';
 import { usePrayerTimer } from 'containers/HabitTracker/usePrayerTimer';
 import PostPrayerPrompt from 'containers/HabitTracker/PostPrayerPrompt';
-import { TOCProvider } from 'components/TOC/TOCProvider';
-import { markNavigationIntent, markPerformance } from 'utils/performanceMarks';
 
 import LanguageSwitcher from './LanguageSwitcher';
 import TOCSwitcher from './TOCSwitcher';
@@ -37,38 +35,15 @@ import { ServiceContext } from './ServiceContext';
 const reloadOnFailedImport = (e) => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
     Sentry.captureException?.(e);
-    throw e;
 };
 
 const toUpperCase = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 
-const ServiceCommitMarker = ({ renderKey }: { renderKey: string }): null => {
-    useEffect(() => {
-        if (typeof performance === 'undefined' || !performance.mark) {
-            return;
-        }
-
-        performance.clearMarks?.('service_complete_commit');
-        markPerformance('service_complete_commit', { renderKey });
-    }, [renderKey]);
-
-    return null;
-};
-
-const ServiceShellMarker = ({ renderKey }: { renderKey: string }): null => {
-    useEffect(() => {
-        markPerformance('service_shell_ready', { renderKey });
-    }, [renderKey]);
-
-    return null;
-};
-
 const Service = () => {
-    const { serviceId: originalServiceId = '', date = '', prayerId } = useParams<'date' | 'prayerId' | 'serviceId'>();
+    const { serviceId: originalServiceId, date, prayerId } = useParams();
     const { data: day } = useDay(date);
 
-    const location = useLocation();
-    const navigate = useNavigate();
+    const history = useHistory();
 
     const langState = useContext(LangContext);
 
@@ -106,34 +81,22 @@ const Service = () => {
         serviceId = originalServiceId.split('/')[0];
     }
 
-    const TextComponent = useMemo(() => {
-        if (!serviceId) {
-            return null;
+    const [TextComponent, setTextComponent] = useState();
+    useEffect(() => {
+        if (serviceId) {
+            const serviceIdUpper = toUpperCase(serviceId);
+            const Component = React.lazy(async () =>
+                import(`./Texts/${serviceIdUpper}/index.dyn.tsx`).catch(reloadOnFailedImport)
+            );
+            setTextComponent(Component);
         }
-
-        const serviceIdUpper = toUpperCase(serviceId);
-        return React.lazy(async () => {
-            try {
-                return await import(`./Texts/${serviceIdUpper}/index.dyn.tsx`);
-            } catch (error) {
-                return reloadOnFailedImport(error);
-            }
-        });
     }, [serviceId]);
-    const currentServiceId = serviceId || originalServiceId;
-    const serviceRenderKey = [
-        date,
-        currentServiceId,
-        service?.lang ? langState?.lang || 'ru' : 'ru',
-        service?.lang ? langState?.langA || '' : '',
-        service?.lang ? langState?.langB || '' : '',
-    ].join(':');
-    useLayoutEffect(() => {
-        if (typeof performance !== 'undefined') {
-            performance.clearMarks?.('service_complete_commit');
-        }
-    }, [serviceRenderKey]);
+    useEffect(() => {
+        // Reset TOC on service change
+        window.TOC = {};
+    }, [serviceId]);
 
+    const currentServiceId = serviceId || originalServiceId;
     const { completionPromptTimeOfDay, dismissCompletionPrompt } = usePrayerTimer({
         date,
         serviceId: currentServiceId,
@@ -149,20 +112,19 @@ const Service = () => {
     if (!serviceId) {
         if (day?.readings) {
             if (day?.readings?.['Вечерня'] && lpod) {
-                return <Navigate replace state={location.state} to={`/date/${date}/service/Вечерня`} />;
+                return <Redirect to={{ pathname: `/date/${date}/service/Вечерня`, state: history.location.state }} />;
             }
             if (day?.readings?.['Литургия']) {
-                return <Navigate replace state={location.state} to={`/date/${date}/service/Литургия`} />;
+                return <Redirect to={{ pathname: `/date/${date}/service/Литургия`, state: history.location.state }} />;
             }
-            return <Navigate replace to={`/date/${date}`} />;
+            return <Redirect to={`/date/${date}`} />;
         }
     }
 
     const setNewDate = (dateString) => {
-        const target = `/date/${dateString}/service/${originalServiceId}`;
-        markNavigationIntent({ initiator: 'service-date-change', target });
-        void navigate(target, {
-            state: { backLink: location.state?.backLink },
+        history.push({
+            pathname: `/date/${dateString}/service/${originalServiceId}`,
+            state: { backLink: history.location.state?.backLink },
         });
     };
 
@@ -178,7 +140,7 @@ const Service = () => {
                 />
             )}
             {service?.lang && <LanguageSwitcher />}
-            {!service?.hideTOC && <TOCSwitcher />}
+            {!service?.hideTOC && <TOCSwitcher service={service} lang={langState.lang} />}
             {service?.scriptEditor && <ScriptVersionSelector serviceId={serviceId} />}
         </>
     );
@@ -208,74 +170,66 @@ const Service = () => {
     return (
         <ServiceContext.Provider value={{ serviceId }}>
             <LangContext.Provider value={effectiveLangState}>
-                <TOCProvider key={`${date}:${currentServiceId}`}>
-                    <LayoutInner left={left} right={right} paddedContent={false}>
-                        <ServiceShellMarker renderKey={serviceRenderKey} />
-                        {service?.scriptEditor && (
-                            <>
-                                <ScriptEditorToggle serviceId={serviceId} />
-                            </>
-                        )}
+                <LayoutInner left={left} right={right} paddedContent={false}>
+                    {service?.scriptEditor && (
+                        <>
+                            <ScriptEditorToggle serviceId={serviceId} />
+                        </>
+                    )}
 
-                        <ParallelLanguageBar />
-                        <Zoom>
-                            <>
-                                <div
-                                    className={css`
-                                        margin-left: 12px;
-                                        margin-right: 12px;
-                                        margin-bottom: 24px;
-                                    `}
-                                >
-                                    {service?.warn && (
-                                        <Note>
-                                            Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда
-                                            ошибается. За наиболее точной информацией обращайтесь к{' '}
-                                            <a
-                                                className={css`
-                                                    text-decoration: underline;
-                                                `}
-                                                href={`http://www.patriarchia.ru/bu/${date}`}
-                                                target="_blank"
-                                            >
-                                                богослужебным указаниям.
-                                            </a>{' '}
-                                            Если вы обнаружили ошибку, пожалуйста,{' '}
-                                            <a
-                                                className={css`
-                                                    text-decoration: underline;
-                                                `}
-                                                href="mailto:pb@psmb.ru"
-                                                target="_blank"
-                                            >
-                                                напишите нам
-                                            </a>
-                                        </Note>
-                                    )}
+                    <ParallelLanguageBar />
+                    <Zoom>
+                        <>
+                            <div
+                                className={css`
+                                    margin-left: 12px;
+                                    margin-right: 12px;
+                                    margin-bottom: 24px;
+                                `}
+                            >
+                                {service?.warn && (
+                                    <Note>
+                                        Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда
+                                        ошибается. За наиболее точной информацией обращайтесь к{' '}
+                                        <a
+                                            className={css`
+                                                text-decoration: underline;
+                                            `}
+                                            href={`http://www.patriarchia.ru/bu/${date}`}
+                                            target="_blank"
+                                        >
+                                            богослужебным указаниям.
+                                        </a>{' '}
+                                        Если вы обнаружили ошибку, пожалуйста,{' '}
+                                        <a
+                                            className={css`
+                                                text-decoration: underline;
+                                            `}
+                                            href="mailto:pb@psmb.ru"
+                                            target="_blank"
+                                        >
+                                            напишите нам
+                                        </a>
+                                    </Note>
+                                )}
 
-                                    <MDXProvider>
-                                        <Suspense fallback={<Loader />}>
-                                            {TextComponent && (
-                                                <>
-                                                    <TextComponent date={date} lang={langState.lang} />
-                                                    <ServiceCommitMarker renderKey={serviceRenderKey} />
-                                                </>
-                                            )}
-                                        </Suspense>
-                                    </MDXProvider>
-                                </div>
-                            </>
-                        </Zoom>
-                        {customPrayerInputShown && (
-                            <CustomPrayerInput
-                                onClose={() => {
-                                    setCustomPrayerInputShown(false);
-                                }}
-                            />
-                        )}
-                        <PostPrayerPrompt timeOfDay={completionPromptTimeOfDay} onDismiss={dismissCompletionPrompt} />
-                    </LayoutInner>
-                </TOCProvider>
+                                <MDXProvider>
+                                    <Suspense fallback={<Loader />}>
+                                        {TextComponent && <TextComponent date={date} lang={langState.lang} />}
+                                    </Suspense>
+                                </MDXProvider>
+                            </div>
+                        </>
+                    </Zoom>
+                    {customPrayerInputShown && (
+                        <CustomPrayerInput
+                            onClose={() => {
+                                setCustomPrayerInputShown(false);
+                            }}
+                        />
+                    )}
+                    <PostPrayerPrompt timeOfDay={completionPromptTimeOfDay} onDismiss={dismissCompletionPrompt} />
+                </LayoutInner>
             </LangContext.Provider>
         </ServiceContext.Provider>
     );

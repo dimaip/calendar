@@ -1,11 +1,9 @@
 import React, { useCallback } from 'react';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 import { useRecoilState } from 'recoil';
+import langState from 'state/langState';
 
 import SelectBox from '../../components/SelectBox/SelectBox';
-
-import langState from 'state/langState';
-import { markNavigationIntent } from 'utils/performanceMarks';
 
 const serviceLanguages = [
     {
@@ -25,15 +23,10 @@ const serviceLanguages = [
 const LanguageSwitcher = () => {
     const [langStateValue, setLang] = useRecoilState(langState);
     const onChange = useCallback(
-        (lang: string) => {
-            markNavigationIntent({
-                initiator: 'service-language-control',
-                sourceLanguage: langStateValue.lang,
-                targetLanguage: lang,
-            });
+        (lang) => {
             setLang({ ...langStateValue, lang });
         },
-        [langStateValue, setLang]
+        [JSON.stringify(langStateValue)]
     );
     return (
         <SelectBox

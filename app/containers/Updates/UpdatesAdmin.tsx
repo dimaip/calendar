@@ -1,12 +1,8 @@
 import React, { ReactNode, useEffect, useState } from 'react';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 import { useMutation, usePaginatedQuery, useQuery } from 'convex/react';
-import { useTheme } from '@emotion/react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
-
-import { api } from '../../../convex/_generated/api';
-import type { Id } from '../../../convex/_generated/dataModel';
-
+import { useTheme } from 'emotion-theming';
+import { useHistory, useParams } from 'react-router-dom';
 import Button from 'components/Button/Button';
 import Header from 'components/Header/Header';
 import Input from 'components/Input/Input';
@@ -16,12 +12,16 @@ import LeftIcon from 'components/svgs/LeftIcon';
 import PlusIcon from 'components/svgs/PlusIcon';
 import { useSession } from 'containers/AuthProvider';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
+import type { AppTheme } from 'styles/AppTheme';
+
+import { api } from '../../../convex/_generated/api';
+import type { Id } from '../../../convex/_generated/dataModel';
 
 const PAGE_SIZE = 20;
 
 type UpdateStatus = 'draft' | 'published';
 
-interface AdminUpdate {
+type AdminUpdate = {
     _id: Id<'updates'>;
     title?: string;
     body: string;
@@ -32,9 +32,9 @@ interface AdminUpdate {
     status: UpdateStatus;
     publishedAt: number;
     notifyUntil?: number;
-}
+};
 
-interface UpdateFormState {
+type UpdateFormState = {
     title: string;
     body: string;
     ctaLabel: string;
@@ -42,7 +42,7 @@ interface UpdateFormState {
     status: UpdateStatus;
     publishedAt: string;
     notifyUntil: string;
-}
+};
 
 function toDateTimeLocal(timestamp?: number): string {
     if (!timestamp) {
@@ -101,7 +101,7 @@ function formatAdminDate(timestamp?: number): string {
 }
 
 const UpdatesAdminHeader = ({ title, action }: { title: string; action?: ReactNode }) => {
-    const navigate = useNavigate();
+    const history = useHistory();
 
     return (
         <Header>
@@ -116,7 +116,7 @@ const UpdatesAdminHeader = ({ title, action }: { title: string; action?: ReactNo
                 <Button
                     title="Назад"
                     onClick={() => {
-                        void navigate('/updates');
+                        history.push('/updates');
                     }}
                     className={css`
                         padding: 18px !important;
@@ -145,17 +145,20 @@ const UpdatesAdminHeader = ({ title, action }: { title: string; action?: ReactNo
 };
 
 const UpdatesAdmin = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
+    const history = useHistory();
     const { updateId } = useParams<{ updateId?: string }>();
-    const isCreateScreen = location.pathname === '/admin/updates/new';
+    const isCreateScreen = history.location.pathname === '/admin/updates/new';
     const isEditScreen = !!updateId;
     const isFormScreen = isCreateScreen || isEditScreen;
-    const title = isCreateScreen ? 'Новое обновление' : isEditScreen ? 'Редактировать обновление' : 'Админ: обновления';
+    const title = isCreateScreen
+        ? 'Новое обновление'
+        : isEditScreen
+        ? 'Редактировать обновление'
+        : 'Админ: обновления';
 
     useDocumentTitle(`${title} - Православное богослужение на русском языке`);
 
-    const theme = useTheme();
+    const theme = useTheme<AppTheme>();
     const session = useSession();
     const profile = session.profile;
     const adminStatus = useQuery(api.updates.adminStatus, profile ? undefined : 'skip');
@@ -192,7 +195,7 @@ const UpdatesAdmin = () => {
             return;
         }
         if (editingUpdate) {
-            setForm(getFormFromUpdate(editingUpdate));
+            setForm(getFormFromUpdate(editingUpdate as AdminUpdate));
         }
     }, [editingUpdate?._id, isCreateScreen]);
 
@@ -245,7 +248,7 @@ const UpdatesAdmin = () => {
                     notifyUntil: notifyUntil ?? null,
                 });
             }
-            void navigate('/admin/updates');
+            history.push('/admin/updates');
         } catch (err) {
             setError(err instanceof Error ? err.message : 'Не удалось сохранить обновление.');
         } finally {
@@ -590,9 +593,7 @@ const UpdatesAdmin = () => {
                 action={
                     <Button
                         title="Новое обновление"
-                        onClick={() => {
-                            void navigate('/admin/updates/new');
-                        }}
+                        onClick={() => history.push('/admin/updates/new')}
                         className={css`
                             padding: 13px 16px !important;
                         `}
@@ -675,11 +676,9 @@ const UpdatesAdmin = () => {
                                             flex-shrink: 0;
                                             padding: 3px 7px;
                                             border-radius: 999px;
-                                            background: ${
-                                                update.status === 'published'
-                                                    ? theme.colours.blue
-                                                    : theme.colours.bgGray
-                                            };
+                                            background: ${update.status === 'published'
+                                                ? theme.colours.blue
+                                                : theme.colours.bgGray};
                                             color: ${update.status === 'published' ? '#fff' : muted};
                                             font-size: 11px;
                                             line-height: 1.2;
@@ -731,7 +730,7 @@ const UpdatesAdmin = () => {
                                 >
                                     <Button
                                         onClick={() => {
-                                            void navigate(`/admin/updates/${update._id}`);
+                                            history.push(`/admin/updates/${update._id}`);
                                         }}
                                         className={css`
                                             flex: 1;
@@ -743,7 +742,7 @@ const UpdatesAdmin = () => {
                                         Изменить
                                     </Button>
                                     <Button
-                                        onClick={() => void remove(update)}
+                                        onClick={() => void remove(update as AdminUpdate)}
                                         className={css`
                                             border-radius: 8px;
                                             color: ${theme.colours.red};

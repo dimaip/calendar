@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 import { useQuery } from 'convex/react';
-import { useTheme } from '@emotion/react';
-import { useNavigate } from 'react-router-dom';
-
-import { api } from '../../../convex/_generated/api';
-
+import { useTheme } from 'emotion-theming';
+import { useHistory } from 'react-router-dom';
 import { useSession } from 'containers/AuthProvider';
 import HeaderMain from 'containers/Main/HeaderMain';
 import Button from 'components/Button/Button';
 import Loader from 'components/Loader/Loader';
 import BottomNav from 'components/BottomNav/BottomNav';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
+import type { AppTheme } from 'styles/AppTheme';
 import { formatDateKey } from 'utils/formatDateKey';
 import PrayerSetup from 'containers/HabitTracker/PrayerSetup';
 import ContributionGraph from 'containers/HabitTracker/ContributionGraph';
 import DrawerWithHeader from 'components/Drawer/DrawerWithHeader';
 import PrayerCheck from 'components/svgs/PrayerCheck';
 import QuestionMarkCircle from 'components/svgs/QuestionMarkCircle';
+
+import { api } from '../../../convex/_generated/api';
 
 const GRAPH_SKELETON_COLUMNS = 53;
 const GRAPH_SKELETON_ROWS = 7;
@@ -526,14 +526,10 @@ const ProfileLoadingState = ({
                         <div
                             className={css`
                                 position: relative;
-                                width: ${
-                                    GRAPH_SKELETON_COLUMNS * GRAPH_SKELETON_CELL +
-                                    (GRAPH_SKELETON_COLUMNS - 1) * GRAPH_SKELETON_GAP
-                                }px;
-                                min-width: ${
-                                    GRAPH_SKELETON_COLUMNS * GRAPH_SKELETON_CELL +
-                                    (GRAPH_SKELETON_COLUMNS - 1) * GRAPH_SKELETON_GAP
-                                }px;
+                                width: ${GRAPH_SKELETON_COLUMNS * GRAPH_SKELETON_CELL +
+                                (GRAPH_SKELETON_COLUMNS - 1) * GRAPH_SKELETON_GAP}px;
+                                min-width: ${GRAPH_SKELETON_COLUMNS * GRAPH_SKELETON_CELL +
+                                (GRAPH_SKELETON_COLUMNS - 1) * GRAPH_SKELETON_GAP}px;
                             `}
                         >
                             <div
@@ -591,9 +587,9 @@ const ProfileLoadingState = ({
 );
 
 const Inner = () => {
-    const theme = useTheme();
+    const theme = useTheme<AppTheme>();
     const session = useSession();
-    const navigate = useNavigate();
+    const history = useHistory();
     const [signingOut, setSigningOut] = useState(false);
     const [showSetup, setShowSetup] = useState(false);
     const today = new Date();
@@ -632,28 +628,26 @@ const Inner = () => {
     const skeletonHighlight = theme.colours?.bgGrayLight || '#f3f3f7';
     const graphRollingStart = addDays(today, -364);
     const graphGridStart = addDays(graphRollingStart, -getMondayBasedDay(graphRollingStart));
-    const graphMonthAnchors = filterGraphMonthAnchors(
-        [
-            {
-                label: GRAPH_SKELETON_MONTHS[graphRollingStart.getMonth()],
-                left: 0,
-            },
-            ...Array.from({ length: 12 }, (_, offset) => {
-                const monthStartDate = new Date(
-                    graphRollingStart.getFullYear(),
-                    graphRollingStart.getMonth() + offset + 1,
-                    1
-                );
-                return {
-                    label: GRAPH_SKELETON_MONTHS[monthStartDate.getMonth()],
-                    left:
-                        Math.floor((monthStartDate.getTime() - graphGridStart.getTime()) / GRAPH_SKELETON_DAY_MS / 7) *
-                        (GRAPH_SKELETON_CELL + GRAPH_SKELETON_GAP),
-                    date: monthStartDate,
-                };
-            }).filter((anchor) => anchor.date <= today),
-        ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left)
-    );
+    const graphMonthAnchors = filterGraphMonthAnchors([
+        {
+            label: GRAPH_SKELETON_MONTHS[graphRollingStart.getMonth()],
+            left: 0,
+        },
+        ...Array.from({ length: 12 }, (_, offset) => {
+            const monthStartDate = new Date(
+                graphRollingStart.getFullYear(),
+                graphRollingStart.getMonth() + offset + 1,
+                1
+            );
+            return {
+                label: GRAPH_SKELETON_MONTHS[monthStartDate.getMonth()],
+                left:
+                    Math.floor((monthStartDate.getTime() - graphGridStart.getTime()) / GRAPH_SKELETON_DAY_MS / 7) *
+                    (GRAPH_SKELETON_CELL + GRAPH_SKELETON_GAP),
+                date: monthStartDate,
+            };
+        }).filter((anchor) => anchor.date <= today),
+    ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left));
 
     useEffect(() => {
         if (!signingOut && !session.isLoading && !profile) {
@@ -743,8 +737,7 @@ const Inner = () => {
                                     line-height: 1.2;
                                 `}
                             >
-                                Вы можете установить ритм ежедневной домашней утренней и вечерней молитвы и
-                                отслеживать&nbsp;его
+                                Вы можете установить ритм ежедневной домашней утренней и вечерней молитвы и отслеживать&nbsp;его
                             </p>
                             <button
                                 type="button"
@@ -775,7 +768,12 @@ const Inner = () => {
                         margin-top: auto;
                         padding: 16px 0 8px;
                         text-align: center;
-                        background: linear-gradient(180deg, transparent 0, ${onboardingBg} 24px, ${onboardingBg} 100%);
+                        background: linear-gradient(
+                            180deg,
+                            transparent 0,
+                            ${onboardingBg} 24px,
+                            ${onboardingBg} 100%
+                        );
                     `}
                 >
                     {accountEmail && (
@@ -854,9 +852,7 @@ const Inner = () => {
                         text={text}
                         primary={primary}
                         border={theme.colours?.blue || '#4169E1'}
-                        onOpen={() => {
-                            void navigate('/updates');
-                        }}
+                        onOpen={() => history.push('/updates')}
                     />
                 )}
 
@@ -990,7 +986,12 @@ const Inner = () => {
                     margin-top: auto;
                     padding: 16px 0 8px;
                     text-align: center;
-                    background: linear-gradient(180deg, transparent 0, ${pageBg} 24px, ${pageBg} 100%);
+                    background: linear-gradient(
+                        180deg,
+                        transparent 0,
+                        ${pageBg} 24px,
+                        ${pageBg} 100%
+                    );
                 `}
             >
                 {accountEmail && (

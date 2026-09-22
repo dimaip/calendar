@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 import { Link, useParams } from 'react-router-dom';
 import TagManager from 'react-gtm-module';
 

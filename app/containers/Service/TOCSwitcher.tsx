@@ -1,76 +1,62 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { css } from '@emotion/css';
+import React, { useEffect, useState } from 'react';
+import { css } from 'emotion';
+import { useRecoilValue } from 'recoil';
+import TOCState from 'state/TOCState';
 
 import SelectBox from '../../components/SelectBox/SelectBox';
 
-import { useTOCItems } from 'components/TOC/TOCProvider';
-
-const TOCSwitcher = (): JSX.Element => {
-    const TOC = useTOCItems();
+const TOCSwitcher = ({ lang }) => {
+    const TOC = useRecoilValue(TOCState);
     const [activeItem, setActiveItem] = useState('');
-    const observerRef = useRef<IntersectionObserver | null>(null);
-    const observedNodesRef = useRef(new Map<string, Element>());
-
-    useEffect(() => {
-        if (typeof window.IntersectionObserver !== 'function') {
-            return undefined;
-        }
-
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && entry.target.id) {
-                        setActiveItem(entry.target.id);
+    if ('IntersectionObserver' in window) {
+        useEffect(() => {
+            let observer = null;
+            if (TOC.length) {
+                observer = new IntersectionObserver(
+                    (entries) => {
+                        entries.forEach((entry) => {
+                            if (entry.isIntersecting && entry.target.id) {
+                                if (observer) {
+                                    setActiveItem(entry.target.id);
+                                }
+                            }
+                        });
+                    },
+                    {
+                        rootMargin: '-50px 0px -250px 0px',
+                        threshold: 0.3,
                     }
+                );
+
+                // @TODO: any better way to do it without timeout?
+                // We keep on polling for dom nodes, till all nodes are found
+                const observeOrCue = (nodeId) => {
+                    if (!observer) {
+                        return;
+                    }
+                    const node = document.getElementById(nodeId);
+                    if (node) {
+                        observer.observe(node);
+                    } else {
+                        setTimeout(() => {
+                            observeOrCue(nodeId);
+                        }, 500);
+                    }
+                };
+
+                TOC.map((nodeId) => {
+                    observeOrCue(nodeId.value);
                 });
-            },
-            {
-                rootMargin: '-50px 0px -250px 0px',
-                threshold: 0.3,
+                setTimeout(() => {}, 0);
             }
-        );
-        observerRef.current = observer;
-
-        return () => {
-            observer.disconnect();
-            observerRef.current = null;
-            observedNodesRef.current.clear();
-        };
-    }, []);
-
-    useEffect(() => {
-        const observer = observerRef.current;
-        if (!observer) {
-            return;
-        }
-
-        const nextNodes = new Map<string, Element>();
-        TOC.forEach(({ value }) => {
-            const node = document.getElementById(value);
-            if (node) {
-                nextNodes.set(value, node);
-            }
-        });
-
-        observedNodesRef.current.forEach((node, id) => {
-            if (nextNodes.get(id) !== node) {
-                observer.unobserve(node);
-            }
-        });
-        nextNodes.forEach((node, id) => {
-            if (observedNodesRef.current.get(id) !== node) {
-                observer.observe(node);
-            }
-        });
-        observedNodesRef.current = nextNodes;
-    }, [TOC]);
-
-    useEffect(() => {
-        if (activeItem && !TOC.some(({ value }) => value === activeItem)) {
-            setActiveItem('');
-        }
-    }, [activeItem, TOC]);
-
+            return () => {
+                if (observer) {
+                    observer.disconnect();
+                    observer = null;
+                }
+            };
+        }, [lang, TOC]);
+    }
     return (
         <SelectBox
             className={css`
@@ -97,7 +83,7 @@ const TOCSwitcher = (): JSX.Element => {
                     setActiveItem(anchorID);
                     try {
                         domNode.scrollIntoView({ block: 'center' });
-                    } catch {
+                    } catch (error) {
                         // fallback to prevent browser crashing
                         domNode.scrollIntoView();
                     }
