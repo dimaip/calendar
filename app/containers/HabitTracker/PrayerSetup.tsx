@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 import { useMutation, useQuery } from 'convex/react';
-import { useTheme } from '@emotion/react';
+import { useTheme } from 'emotion-theming';
+import type { AppTheme } from 'styles/AppTheme';
 
 import { api } from '../../../convex/_generated/api';
 
@@ -11,7 +12,7 @@ interface PrayerSetupProps {
 }
 
 const PrayerSetup = ({ onComplete, className = '' }: PrayerSetupProps) => {
-    const theme = useTheme();
+    const theme = useTheme<AppTheme>();
     const settings = useQuery(api.habitTracker.getSettings);
     const saveSettings = useMutation(api.habitTracker.saveSettings);
 

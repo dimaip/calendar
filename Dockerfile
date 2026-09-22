@@ -1,15 +1,16 @@
-FROM node:24-alpine
+FROM node:10-alpine
 
+# Create app directory
 WORKDIR /usr/src/app
 
-RUN corepack enable
+COPY yarn.lock ./
+COPY package*.json ./
 
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
+RUN yarn
 
 COPY . .
 
 RUN yarn build
 
 EXPOSE 80
-CMD ["yarn", "serve"]
+ENTRYPOINT yarn serve

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTheme } from '@emotion/react';
-import { css } from '@emotion/css';
+import { useTheme } from 'emotion-theming';
+import { css } from 'emotion';
 
 const SolidSection = ({
     children,

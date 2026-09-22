@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { css } from '@emotion/css';
-import { useTheme } from '@emotion/react';
+import React from 'react';
+import { css } from 'emotion';
+import { useTheme } from 'emotion-theming';
 import { useQuery } from 'convex/react';
 import { useSession } from 'containers/AuthProvider';
 import Button from 'components/Button/Button';
@@ -9,12 +9,11 @@ import Header from 'components/Header/Header';
 import DotsMenu from 'components/DotsMenu/DotsMenu';
 import QuestionIcon from 'components/svgs/QuestionIcon';
 import Bell from 'components/svgs/Bell';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Share from 'components/Share/Share';
 import useDay from 'hooks/useDay';
 import SettingsButton from 'components/SettingsButton/SettingsButton';
 import CalendarStreakWidget from 'containers/HabitTracker/CalendarStreakWidget';
-import { markNavigationIntent, markPerformance } from 'utils/performanceMarks';
 
 import { api } from '../../../convex/_generated/api';
 
@@ -60,15 +59,14 @@ const UserIcon = ({ hasUnread }: { hasUnread: boolean }) => {
 };
 
 const ProfileIcon = ({ hasUnread }: { hasUnread: boolean }) => {
-    const navigate = useNavigate();
+    const history = useHistory();
     const { profile } = useSession();
     const loggedIn = profile;
     return (
         <Button
             title={loggedIn ? 'Выйти' : 'Войти'}
             onClick={() => {
-                markNavigationIntent({ initiator: 'header-profile', target: '/profile' });
-                void navigate('/profile');
+                history.push('/profile');
             }}
             className={css`
                 display: block;
@@ -92,14 +90,13 @@ const ProfileIcon = ({ hasUnread }: { hasUnread: boolean }) => {
 };
 
 const UpdatesButton = ({ hasUnread }: { hasUnread: boolean }) => {
-    const navigate = useNavigate();
+    const history = useHistory();
 
     return (
         <Button
             title="Обновления"
             onClick={() => {
-                markNavigationIntent({ initiator: 'header-updates', target: '/updates' });
-                void navigate('/updates');
+                history.push('/updates');
             }}
             className={css`
                 position: relative;
@@ -160,10 +157,6 @@ const HeaderMain = ({ setNewDate, date, calendarRef, showUpdatesButton = false }
     const hasUnreadUpdates = !!unreadUpdates?.length;
     const dayQuery = useDay(date);
     const day = dayQuery.data;
-    useEffect(() => {
-        markPerformance('app_header_ready', { date });
-    }, [date]);
-
     return (
         <Header>
             <div
@@ -206,7 +199,7 @@ const HeaderMain = ({ setNewDate, date, calendarRef, showUpdatesButton = false }
                         <SettingsButton />
                         <Share
                             title="Православное богослужение на русском языке"
-                            text={day?.title || ''}
+                            text={day?.title}
                             url={window.location.href}
                         />
                     </DotsMenu>

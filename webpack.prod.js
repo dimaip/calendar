@@ -9,7 +9,7 @@ const hash = Array(1)
     .join('');
 
 export default merge(common, {
-    entry: ['client.tsx'],
+    entry: ['babel-polyfill', 'client.tsx'],
     mode: 'production',
     output: {
         filename: '[name].[contenthash].js',
@@ -48,7 +48,13 @@ export default merge(common, {
         usedExports: true,
         runtimeChunk: 'single',
         splitChunks: {
-            chunks: 'all',
+            cacheGroups: {
+                vendor: {
+                    test: /[\\/]node_modules[\\/]/,
+                    name: 'vendor',
+                    chunks: 'all',
+                },
+            },
         },
     },
 });

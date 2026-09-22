@@ -1,7 +1,14 @@
 // Signals to script in index.html that the app assets have been loaded
+// import './wdyr';
+import './forEachPolyfill';
+import 'array-flat-polyfill';
+import 'unfetch/polyfill/index.js';
+import 'element-closest-polyfill';
+import 'regenerator-runtime/runtime.js';
 import './sharePolyfill';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { AppContainer } from 'react-hot-loader';
 import App from 'containers/App';
 import { RecoilRoot } from 'recoil';
 import TagManager from 'react-gtm-module';
@@ -14,10 +21,8 @@ import Worker from './precache.worker.js';
 import './redirectToHome';
 import { isCapacitor } from 'utils/deviceInfo';
 import precache from 'precache.ts';
-import { startPerformanceTelemetry } from 'utils/performanceTelemetry';
-import { markPerformance } from 'utils/performanceMarks';
+import { SyncWithDB } from 'containers/RecoilSync';
 
-markPerformance('bundle_evaluated');
 window.APP_LOADED = true;
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -39,27 +44,43 @@ if (isProd) {
             namesSubmit: 'Names Submit',
         },
     });
-    startPerformanceTelemetry();
+}
+
+let preloadedState = {};
+
+try {
+    preloadedState = localStorage.getItem('persistedState') ? JSON.parse(localStorage.getItem('persistedState')) : {};
+} catch (e) {
+    console.warn(e);
 }
 
 const rootElement = document.getElementById('react-root');
 const root = createRoot(rootElement);
-markPerformance('react_render_requested');
-root.render(
-    <RecoilRoot>
-        <App />
-    </RecoilRoot>
-);
+const render = (Component) => {
+    return root.render(
+        <RecoilRoot>
+            <AppContainer>
+                <Component />
+            </AppContainer>
+        </RecoilRoot>
+    );
+};
+
+render(App);
+
+if (module.hot) {
+    module.hot.accept('containers/App', () => {
+        render(App);
+    });
+}
 
 if (isProd) {
     serviceWorker.register();
 }
 if (isCapacitor()) {
-    markPerformance('background_precache_started', { mode: 'capacitor' });
     precache();
 } else {
     const precacheWorker = new Worker();
-    markPerformance('background_precache_started', { mode: 'worker' });
     precacheWorker.postMessage('precache');
 }
 

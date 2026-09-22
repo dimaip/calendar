@@ -1,6 +1,6 @@
 import React, { StyleHTMLAttributes } from 'react';
-import { css } from '@emotion/css';
-import { useTheme } from '@emotion/react';
+import { css } from 'emotion';
+import { useTheme } from 'emotion-theming';
 
 export default ({
     size = 24,

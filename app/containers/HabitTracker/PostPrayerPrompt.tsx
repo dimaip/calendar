@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { css } from '@emotion/css';
-import { useTheme } from '@emotion/react';
+import { css } from 'emotion';
+import { useTheme } from 'emotion-theming';
+import type { AppTheme } from 'styles/AppTheme';
 
 import { trackedPrayerLabelByTimeOfDay } from './trackedPrayerTimeOfDay';
 import type { TrackedPrayerTimeOfDay } from './trackedPrayerTimeOfDay';
@@ -15,7 +16,7 @@ interface PostPrayerPromptProps {
 }
 
 const PostPrayerPrompt = ({ timeOfDay, onDismiss }: PostPrayerPromptProps) => {
-    const theme = useTheme();
+    const theme = useTheme<AppTheme>();
     const [visibleTimeOfDay, setVisibleTimeOfDay] = useState<TrackedPrayerTimeOfDay | null>(timeOfDay ?? null);
     const [isExiting, setIsExiting] = useState(false);
     const onDismissRef = useRef(onDismiss);

@@ -1,7 +1,7 @@
 import React from 'react';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 import Tooltip from 'components/Tooltip/Tooltip';
-import { useTheme } from '@emotion/react';
+import { useTheme } from 'emotion-theming';
 
 const VariableSection = ({ children, date }) => {
     const theme = useTheme();

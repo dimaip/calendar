@@ -3,7 +3,7 @@ import { makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import React from 'react';
 import PropTypes from 'prop-types';
 import forEach from 'lodash.foreach';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 
 import ReadingsForService from './ReadingsForService';
 import Canon from './Canon';

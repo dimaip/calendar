@@ -1,5 +1,5 @@
 import React from 'react';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 import useDay from 'hooks/useDay';
 import useExternalDay from 'hooks/useExternalDay';
 import SolidSection from 'components/SolidSection/SolidSection';

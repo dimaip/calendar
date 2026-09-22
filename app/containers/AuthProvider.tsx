@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { User, UserManager, WebStorageStateStore } from 'oidc-client-ts';
 import {
     buildLogoutUrl,
@@ -48,7 +48,7 @@ const SessionProvider = ({ children }: { children: React.ReactNode }) => {
     // - keep the current browser session in sync with oidc-client-ts
     // - expose a cheap "current token" path for normal callers
     // - expose an explicit "renew token" path for callers recovering from auth failure
-    const navigate = useNavigate();
+    const history = useHistory();
     const [currentUser, setCurrentUser] = useState<User | null>(null);
     const [status, setStatus] = useState<SessionStatus>('loading');
     const [reauthRequired, setReauthRequired] = useState(false);
@@ -176,7 +176,7 @@ const SessionProvider = ({ children }: { children: React.ReactNode }) => {
 
                 if (isCallback) {
                     window.history.replaceState({}, document.title, window.location.pathname);
-                    void navigate('/profile', { replace: true });
+                    history.replace('/profile');
                 }
 
                 if (user && !user.expired) {
@@ -273,7 +273,7 @@ const SessionProvider = ({ children }: { children: React.ReactNode }) => {
             removeAccessTokenExpired();
             removeSilentRenewError();
         };
-    }, [navigate, renewUser, transitionToAuthenticated, transitionToExpired, transitionToSignedOut]);
+    }, [history, renewUser, transitionToAuthenticated, transitionToExpired, transitionToSignedOut]);
 
     const value = useMemo<SessionContextValue>(
         () => ({

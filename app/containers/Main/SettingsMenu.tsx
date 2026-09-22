@@ -1,12 +1,12 @@
 import React from 'react';
-import { useTheme } from '@emotion/react';
-import { css } from '@emotion/css';
+import { useTheme } from 'emotion-theming';
+import { css } from 'emotion';
 import Button from 'components/Button/Button';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import pendingUpdateState from 'state/pendingUpdateState';
 import checkVersion from 'checkVersion';
 import precache from 'precache';
-import { useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from 'react-query';
 import LeftIcon from 'components/svgs/LeftIcon';
 import ZoomControl from 'components/ZoomControl/ZoomControl';
 import ThemeControl from 'components/ThemeControl/ThemeControl';
@@ -18,15 +18,6 @@ const SettingsMenu = () => {
     const theme = useTheme();
     const setPendingUpdate = useSetRecoilState(pendingUpdateState);
     const queryClient = useQueryClient();
-    const refreshApplicationData = async () => {
-        const newVersion = await checkVersion();
-        if (newVersion) {
-            setPendingUpdate(newVersion);
-        }
-        await precache(true);
-        await queryClient.refetchQueries();
-    };
-
     if (!menuShown) {
         return null;
     }
@@ -190,8 +181,13 @@ const SettingsMenu = () => {
                                 className={css`
                                     text-decoration: underline;
                                 `}
-                                onClick={() => {
-                                    void refreshApplicationData();
+                                onClick={async () => {
+                                    const newVersion = await checkVersion();
+                                    if (newVersion) {
+                                        setPendingUpdate(newVersion);
+                                    }
+                                    await precache(true);
+                                    await queryClient.refetchQueries();
                                 }}
                             >
                                 Обновить данные

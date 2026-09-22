@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 import { Link, useLocation } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 
 import SectionHeading from './SectionHeading';
 
-interface ThisDayLinkProps {
-    to: string;
-    state?: { backLink: string };
-    href?: string;
-    children: React.ReactNode;
-}
-
-const ThisDayLink = ({ to, state, href, children }: ThisDayLinkProps) => {
+const ThisDayLink = ({ to, href, children }) => {
     if (href) {
         return (
             <a href={href} target="_blank">
@@ -20,11 +13,7 @@ const ThisDayLink = ({ to, state, href, children }: ThisDayLinkProps) => {
             </a>
         );
     }
-    return (
-        <Link state={state} to={to}>
-            {children}
-        </Link>
-    );
+    return <Link to={to}>{children}</Link>;
 };
 
 const ThisDays = ({ thisDays, date }) => {
@@ -70,8 +59,10 @@ const ThisDays = ({ thisDays, date }) => {
                             `}
                         >
                             <ThisDayLink
-                                to={`/date/${date}/thisday/${thisDay.id}`}
-                                state={{ backLink: location.pathname }}
+                                to={{
+                                    pathname: `/date/${date}/thisday/${thisDay.id}`,
+                                    state: { backLink: location.pathname },
+                                }}
                                 href={thisDay.link}
                             >
                                 <div

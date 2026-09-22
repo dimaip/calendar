@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
-import { useTheme } from '@emotion/react';
-import { css } from '@emotion/css';
+import { useTheme } from 'emotion-theming';
+import { css } from 'emotion';
 import { Link, useLocation } from 'react-router-dom';
-import groupBy from 'lodash.groupby';
-import { useRecoilState } from 'recoil';
-
-import { preloadServiceRoute } from '../../routeLoaders';
-
-import SectionHeading from './SectionHeading';
-
 import RightIcon from 'components/svgs/RightIcon';
 import TrashIcon from 'components/svgs/TrashIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import useServices from 'containers/Service/Texts/Texts';
+import groupBy from 'lodash.groupby';
 import customPrayersState from 'state/customPrayersState';
+import { useRecoilState } from 'recoil';
 import PlusIcon from 'components/svgs/PlusIcon';
 import CustomPrayerInput from 'components/CustomPrayers/CustomPrayerInput';
 import customPrayerInputState from 'state/customPrayerInputState';
+import { truncate } from 'lodash';
+
+import SectionHeading from './SectionHeading';
 
 const OptionalLink = ({ enabled, ...rest }) =>
     enabled ? (
@@ -89,15 +87,16 @@ const Services = ({ date, readings }) => {
                                 {servicesForGroup.map((service) => (
                                     <OptionalLink
                                         enabled={service.enabled}
-                                        onFocus={preloadServiceRoute}
-                                        onMouseEnter={preloadServiceRoute}
-                                        onTouchStart={preloadServiceRoute}
                                         className={css`
                                             cursor: ${service.enabled ? 'pointer' : 'arrow'};
                                             user-select: none;
                                         `}
-                                        to={`/date/${date}/service/${service.id}`}
-                                        state={{ backLink: location.pathname }}
+                                        to={{
+                                            pathname: `/date/${date}/service/${service.id}`,
+                                            state: {
+                                                backLink: location.pathname,
+                                            },
+                                        }}
                                         key={service.id}
                                     >
                                         <ButtonBox>
@@ -216,13 +215,17 @@ const Services = ({ date, readings }) => {
                         `}
                     >
                         <OptionalLink
-                            enabled
+                            enabled={truncate}
                             className={css`
                                 cursor: ${'pointer'};
                                 user-select: none;
                             `}
-                            to="/hymns"
-                            state={{ backLink: location.pathname }}
+                            to={{
+                                pathname: `/hymns`,
+                                state: {
+                                    backLink: location.pathname,
+                                },
+                            }}
                         >
                             <ButtonBox>
                                 <div
@@ -256,16 +259,17 @@ const Services = ({ date, readings }) => {
                             </ButtonBox>
                         </OptionalLink>
                         <OptionalLink
-                            enabled
-                            onFocus={preloadServiceRoute}
-                            onMouseEnter={preloadServiceRoute}
-                            onTouchStart={preloadServiceRoute}
+                            enabled={truncate}
                             className={css`
                                 cursor: ${'pointer'};
                                 user-select: none;
                             `}
-                            to={`/date/${date}/service/psalmsSpiritualCants`}
-                            state={{ backLink: location.pathname }}
+                            to={{
+                                pathname: `/date/${date}/service/psalmsSpiritualCants`,
+                                state: {
+                                    backLink: location.pathname,
+                                },
+                            }}
                         >
                             <ButtonBox>
                                 <div

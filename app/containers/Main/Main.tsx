@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback, Suspense } from 'react';
-import { css } from '@emotion/css';
-import { ThemeProvider } from '@emotion/react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { css } from 'emotion';
+import { ThemeProvider } from 'emotion-theming';
+import { useParams, useHistory } from 'react-router-dom';
 import HeaderMain from 'containers/Main/HeaderMain';
 import Nav from 'components/Nav/Nav';
 import Loader from 'components/Loader/Loader';
@@ -25,7 +25,6 @@ import Kondacs from 'containers/Service/Texts/Shared/Kondacs/Kondacs';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
 import { useRecoilValue } from 'recoil';
 import themeState from 'state/themeState';
-import { getCurrentNavigationMeasurement, markNavigationIntent, markPerformance } from 'utils/performanceMarks';
 
 import IosPrompt from './IosPrompt';
 import Services from './Services';
@@ -45,40 +44,7 @@ import Sing from './Sing';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
-const DatePrimaryContentMarker = ({ date }: { date: string }): null => {
-    React.useEffect(() => {
-        const navigation = getCurrentNavigationMeasurement();
-        markPerformance('date_primary_content_ready', { date }, navigation);
-        let stableFrame = 0;
-        const firstFrame = window.requestAnimationFrame(() => {
-            stableFrame = window.requestAnimationFrame(() => {
-                markPerformance('above_fold_stable', { date }, navigation);
-            });
-        });
-        return () => {
-            window.cancelAnimationFrame(firstFrame);
-            window.cancelAnimationFrame(stableFrame);
-        };
-    }, [date]);
-
-    return null;
-};
-
-interface SwipeableContainerProps {
-    date: string;
-    handleToggleClick: () => void;
-    isPrimary: boolean;
-    makeHandleClickShift: (direction: 'left' | 'right') => () => void;
-    services: boolean;
-}
-
-const SwipeableContainer = React.memo(function SwipeableContainer({
-    date,
-    handleToggleClick,
-    isPrimary,
-    makeHandleClickShift,
-    services,
-}: SwipeableContainerProps) {
+const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClickShift, services }) => {
     const dayQuery = useDay(date);
     const day = dayQuery.data;
     const externalDayQuery = useExternalDay(date);
@@ -88,7 +54,7 @@ const SwipeableContainer = React.memo(function SwipeableContainer({
     const banners = [Sing, Peace, Books];
     const TodaysBanner = banners[new Date(date).getDate() % banners.length];
 
-    const themeColour = useRef<string | null>();
+    const themeColour = useRef();
     if (day) {
         themeColour.current = day.colour;
     }
@@ -100,17 +66,16 @@ const SwipeableContainer = React.memo(function SwipeableContainer({
                 <div>
                     <Nav date={date} handleToggleClick={handleToggleClick} handleClickShift={makeHandleClickShift} />
                     <div>
-                        {dayQuery.status === 'pending' && <Loader />}
+                        {dayQuery.status === 'loading' && <Loader />}
                         {dayQuery.status === 'error' && <ErrorMessage500 />}
                         {dayQuery.status === 'success' && (
                             <div>
-                                {isPrimary && <DatePrimaryContentMarker date={date} />}
                                 <HeadingBar
                                     title={day.title}
                                     glas={day.glas}
                                     fastName={day.fastName}
                                     fastingLevelName={day.fastingLevelName}
-                                    icon={day.icon || 'default.svg'}
+                                    icon={day.icon}
                                 />
                                 <div>
                                     <Zoom>
@@ -129,7 +94,7 @@ const SwipeableContainer = React.memo(function SwipeableContainer({
 
                                                         <div style={{ marginTop: -18 }}>
                                                             <SectionHeading>Святые дня</SectionHeading>
-                                                            <Saints saints={day.saints || ''} date={date} />
+                                                            <Saints saints={day.saints} date={date} />
                                                         </div>
                                                         <ThisDays thisDays={thisDays} date={date} />
                                                         {/* <div style={{ marginBottom: 18 }}>
@@ -214,7 +179,7 @@ const SwipeableContainer = React.memo(function SwipeableContainer({
 });
 
 const Main = React.memo(({ services = false }) => {
-    const { date = '' } = useParams<'date'>();
+    const { date } = useParams();
     // pre-fetch readings
     useReadings(date);
 
@@ -222,11 +187,9 @@ const Main = React.memo(({ services = false }) => {
 
     useDocumentTitle(`${date} - Православное богослужение на русском языке`);
 
-    const navigate = useNavigate();
+    const history = useHistory();
     const setNewDate = (dateString) => {
-        const target = `/date/${dateString}${services ? '/services' : ''}`;
-        markNavigationIntent({ initiator: 'date-change', target });
-        void navigate(target);
+        history.push(`/date/${dateString}${services ? '/services' : ''}`);
     };
     const makeHandleClickShift = useCallback(
         (direction) => () => {
@@ -239,7 +202,7 @@ const Main = React.memo(({ services = false }) => {
                     break;
             }
         },
-        [date, navigate, services]
+        [date, services]
     );
     const handleToggleClick = useCallback(() => {
         calendarRef?.current?.toggleCalendarShown(true);
@@ -258,7 +221,6 @@ const Main = React.memo(({ services = false }) => {
                 <SwipeableContainer
                     key={key}
                     date={effectiveDate}
-                    isPrimary={index === activeIndex}
                     services={services}
                     handleToggleClick={handleToggleClick}
                     makeHandleClickShift={makeHandleClickShift}

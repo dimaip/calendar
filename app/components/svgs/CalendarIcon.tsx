@@ -1,6 +1,6 @@
 import React from 'react';
-import { css } from '@emotion/css';
-import { useTheme } from '@emotion/react';
+import { css } from 'emotion';
+import { useTheme } from 'emotion-theming';
 
 const CalendarIcon = ({ colour = null }) => {
     const theme = useTheme();

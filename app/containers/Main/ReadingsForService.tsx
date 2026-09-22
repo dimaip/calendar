@@ -2,10 +2,10 @@ import { getFeastInfo } from 'domain/getDayInfo';
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { css } from '@emotion/css';
+import { css } from 'emotion';
 import { Link, useParams, useLocation } from 'react-router-dom';
 import forEach from 'lodash.foreach';
-import { useTheme } from '@emotion/react';
+import { useTheme } from 'emotion-theming';
 import RightIcon from 'components/svgs/RightIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 
@@ -20,7 +20,6 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
     const { date } = useParams();
     const theme = useTheme();
 
-    let state;
     let to;
     let effectiveTitle = title;
     const { vasiliy, lpod } = getFeastInfo(new Date(date));
@@ -30,22 +29,30 @@ const ReadingsForService = ({ title, readingsForService, brother }) => {
     }
     const location = useLocation();
     if (title === 'Литургия') {
-        to = `/date/${date}/readings/Литургия`;
-        state = { backLink: location.pathname };
+        to = {
+            pathname: `/date/${date}/readings/Литургия`,
+            state: { backLink: location.pathname },
+        };
         effectiveTitle += ` ${vasiliy ? 'Василия Великого' : 'Иоанна Златоуста'}`;
     } else if (title === 'Вечерня' && lpod) {
-        to = `/date/${date}/readings/Вечерня`;
-        state = { backLink: location.pathname };
+        to = {
+            pathname: `/date/${date}/readings/Вечерня`,
+            state: { backLink: location.pathname },
+        };
         effectiveTitle = 'Литургия преждеосвященных даров';
     } else if (brother) {
         to = `/date/${date}/bReadings/${title}`;
     } else {
-        to = `/date/${date}/readings/${title}`;
-        state = { backLink: location.pathname };
+        to = {
+            pathname: `/date/${date}/readings/${title}`,
+            state: {
+                backLink: location.pathname,
+            },
+        };
     }
 
     return (
-        <Link state={state} to={to}>
+        <Link to={to}>
             <ButtonBox>
                 <h2
                     className={css`

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from '@emotion/react';
+import { useTheme } from 'emotion-theming';
 
 const Burger = () => {
     const theme = useTheme();

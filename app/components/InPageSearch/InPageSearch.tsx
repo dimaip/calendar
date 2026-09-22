@@ -1,105 +1,109 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { css } from '@emotion/css';
-import { useTheme } from '@emotion/react';
+import { css } from 'emotion';
+import { useTheme } from 'emotion-theming';
 
 import Button from 'components/Button/Button';
 
 const HIGHLIGHT_CLASS = 'inpage-find-highlight';
 const ACTIVE_CLASS = 'inpage-find-active';
-const SEARCH_DEBOUNCE_MS = 180;
-const MINIMUM_QUERY_LENGTH = 2;
 
 const useHighlights = (containerRef: React.RefObject<HTMLElement>) => {
-    const clearHighlights = useCallback(() => {
+    const clearHighlights = () => {
         const container = containerRef.current;
-        if (!container) {
-            return;
-        }
+        if (!container) return;
         const highlighted = Array.from(container.querySelectorAll(`span.${HIGHLIGHT_CLASS}`));
         highlighted.forEach((span) => {
             const parent = span.parentNode;
-            if (!parent) {
-                return;
-            }
-            while (span.firstChild) {
-                parent.insertBefore(span.firstChild, span);
-            }
+            if (!parent) return;
+            while (span.firstChild) parent.insertBefore(span.firstChild, span);
             parent.removeChild(span);
             parent.normalize();
         });
-    }, [containerRef]);
+    };
 
-    const createHighlights = useCallback(
-        (query: string) => {
-            const container = containerRef.current;
-            if (!container) {
-                return [];
-            }
-            const matches: HTMLElement[] = [];
-            const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
-                acceptNode: (node: Node) => {
-                    if (!node.textContent) {
-                        return NodeFilter.FILTER_REJECT;
-                    }
-                    const parentElement = node.parentElement;
-                    if (
-                        !parentElement ||
-                        parentElement.closest('script, style') ||
-                        parentElement.classList.contains(HIGHLIGHT_CLASS)
-                    ) {
-                        return NodeFilter.FILTER_REJECT;
-                    }
-                    return NodeFilter.FILTER_ACCEPT;
-                },
-            });
-            const lowerQuery = query.toLocaleLowerCase();
-            const toProcess: Text[] = [];
-            let current = walker.nextNode();
-            while (current) {
-                toProcess.push(current as Text);
-                current = walker.nextNode();
-            }
-
-            toProcess.forEach((textNode) => {
-                const text = textNode.data;
-                const textLower = text.toLocaleLowerCase();
-                let startIndex = 0;
-                const ranges: Array<{ start: number; end: number }> = [];
-                let matchIndex = textLower.indexOf(lowerQuery, startIndex);
-                while (matchIndex !== -1) {
-                    ranges.push({ start: matchIndex, end: matchIndex + lowerQuery.length });
-                    startIndex = matchIndex + lowerQuery.length;
-                    matchIndex = textLower.indexOf(lowerQuery, startIndex);
+    const createHighlights = (query: string) => {
+        const container = containerRef.current;
+        if (!container) return [] as HTMLElement[];
+        const matches: HTMLElement[] = [];
+        const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
+            acceptNode: (node: any) => {
+                if (!node || !node.data) {
+                    return NodeFilter.FILTER_REJECT;
                 }
-
-                if (!ranges.length) {
-                    return;
+                // Skip text nodes that are inside script/style or already highlighted
+                const parentElement = node.parentElement || null;
+                if (!parentElement) {
+                    return NodeFilter.FILTER_REJECT;
                 }
-
-                const containerFragment = document.createDocumentFragment();
-                let lastIndex = 0;
-                ranges.forEach((range) => {
-                    if (range.start > lastIndex) {
-                        containerFragment.appendChild(document.createTextNode(text.slice(lastIndex, range.start)));
-                    }
-                    const span = document.createElement('span');
-                    span.className = HIGHLIGHT_CLASS;
-                    span.textContent = text.slice(range.start, range.end);
-                    containerFragment.appendChild(span);
-                    matches.push(span);
-                    lastIndex = range.end;
-                });
-                if (lastIndex < text.length) {
-                    containerFragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+                if (parentElement.closest('script, style')) {
+                    return NodeFilter.FILTER_REJECT;
                 }
-                textNode.replaceWith(containerFragment);
-            });
+                if (parentElement.classList?.contains(HIGHLIGHT_CLASS)) {
+                    return NodeFilter.FILTER_REJECT;
+                }
+                return NodeFilter.FILTER_ACCEPT;
+            },
+        } as any);
 
+        const q = query;
+        if (!q) {
             return matches;
-        },
-        [containerRef]
-    );
+        }
+        const lowerQ = q.toLocaleLowerCase();
+
+        const toProcess: Text[] = [];
+        let current: Node | null = walker.nextNode();
+        while (current) {
+            toProcess.push(current as Text);
+            current = walker.nextNode();
+        }
+
+        toProcess.forEach((textNode) => {
+            const text = textNode.data;
+            const textLower = text.toLocaleLowerCase();
+            let startIndex = 0;
+            let containerFragment: DocumentFragment | null = null;
+            let hasMatch = false;
+
+            // Collect all match ranges first
+            const ranges: Array<{ start: number; end: number }> = [];
+            let idx = textLower.indexOf(lowerQ, startIndex);
+            while (idx !== -1) {
+                ranges.push({ start: idx, end: idx + lowerQ.length });
+                startIndex = idx + lowerQ.length;
+                idx = textLower.indexOf(lowerQ, startIndex);
+            }
+
+            if (!ranges.length) {
+                return;
+            }
+
+            containerFragment = document.createDocumentFragment();
+            let lastIndex = 0;
+            ranges.forEach((r) => {
+                if (r.start > lastIndex) {
+                    containerFragment!.appendChild(document.createTextNode(text.slice(lastIndex, r.start)));
+                }
+                const span = document.createElement('span');
+                span.className = HIGHLIGHT_CLASS;
+                span.textContent = text.slice(r.start, r.end);
+                containerFragment!.appendChild(span);
+                matches.push(span);
+                lastIndex = r.end;
+                hasMatch = true;
+            });
+            if (lastIndex < text.length) {
+                containerFragment.appendChild(document.createTextNode(text.slice(lastIndex)));
+            }
+
+            if (hasMatch && containerFragment) {
+                textNode.replaceWith(containerFragment);
+            }
+        });
+
+        return matches;
+    };
 
     return { clearHighlights, createHighlights };
 };
@@ -112,15 +116,10 @@ const InPageSearch = ({ containerRef, onClose }: InPageSearchProps) => {
     const theme = useTheme();
     const inputRef = useRef<HTMLInputElement | null>(null);
     const [query, setQuery] = useState<string>('');
-    const [searchQuery, setSearchQuery] = useState<string>('');
     const [matches, setMatches] = useState<HTMLElement[]>([]);
     const [activeIndex, setActiveIndex] = useState<number>(0);
 
     const { clearHighlights, createHighlights } = useHighlights(containerRef);
-    const handleClose = useCallback(() => {
-        clearHighlights();
-        onClose();
-    }, [clearHighlights, onClose]);
 
     // Focus input on mount
     useEffect(() => {
@@ -134,32 +133,22 @@ const InPageSearch = ({ containerRef, onClose }: InPageSearchProps) => {
         document.addEventListener('keydown', onKey, true);
         return () => {
             document.removeEventListener('keydown', onKey, true);
-            clearHighlights();
         };
-    }, [clearHighlights, handleClose]);
+    }, []);
 
-    useEffect(() => {
-        if (query.length < MINIMUM_QUERY_LENGTH) {
-            setSearchQuery('');
-            return undefined;
-        }
-
-        const timeoutId = window.setTimeout(() => setSearchQuery(query), SEARCH_DEBOUNCE_MS);
-        return () => window.clearTimeout(timeoutId);
-    }, [query]);
-
-    // Updating the long service DOM is deliberately delayed until typing pauses.
+    // Update highlights when query changes
     useEffect(() => {
         clearHighlights();
-        if (!searchQuery) {
+        if (!query || query.length === 0) {
             setMatches([]);
             setActiveIndex(0);
             return;
         }
-        const newMatches = createHighlights(searchQuery);
+        const newMatches = createHighlights(query);
         setMatches(newMatches);
-        setActiveIndex(0);
-    }, [clearHighlights, createHighlights, searchQuery]);
+        setActiveIndex(newMatches.length ? 0 : 0);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [query]);
 
     // Ensure only active match has active class and is scrolled into view
     useEffect(() => {
@@ -174,6 +163,11 @@ const InPageSearch = ({ containerRef, onClose }: InPageSearchProps) => {
             }
         });
     }, [activeIndex, matches]);
+
+    const handleClose = () => {
+        clearHighlights();
+        onClose();
+    };
 
     const gotoNext = () => {
         if (!matches.length) {
@@ -226,7 +220,7 @@ const InPageSearch = ({ containerRef, onClose }: InPageSearchProps) => {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={onKeyDownInput}
-                placeholder="Найти (от 2 букв)"
+                placeholder="Найти на странице"
                 className={css`
                     border: 1px solid ${theme.colours.lineGray};
                     border-radius: 6px;

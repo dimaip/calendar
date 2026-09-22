@@ -1,4 +1,4 @@
-import { useTheme } from '@emotion/react';
+import { useTheme } from 'emotion-theming';
 import React from 'react';
 
 export default () => {

@@ -78,6 +78,6 @@ const StorageAPIWrapper = (storage) => ({
     },
 });
 
-const wrapper = StorageAPIWrapper(CapacitorDataStorageSqlite);
+const wrapper = new StorageAPIWrapper(CapacitorDataStorageSqlite);
 
 export default () => wrapper;

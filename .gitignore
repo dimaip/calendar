@@ -24,4 +24,3 @@ app-release-*
 .claude_settings.json
 
 .env.local
-/output/performance/

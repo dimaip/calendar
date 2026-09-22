@@ -1,14 +1,14 @@
 import React from 'react';
-import { css } from '@emotion/css';
-import Button from '@mui/material/Button';
-import { useTheme } from '@emotion/react';
+import { css } from 'emotion';
+import Button from '@material-ui/core/Button';
+import { useTheme } from 'emotion-theming';
 import { useRecoilState } from 'recoil';
 import TagManager from 'react-gtm-module';
 import scriptEditorPromoDismissedState from 'state/scriptEditorPromoDismissedState';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 export const ScriptEditorPromo = (): JSX.Element | null => {
-    const navigate = useNavigate();
+    const history = useHistory();
     const { date } = useParams();
     const theme = useTheme();
 
@@ -68,7 +68,7 @@ export const ScriptEditorPromo = (): JSX.Element | null => {
                         setTimeout(() => {
                             setPrompoDismissed(true);
                         }, 0);
-                        void navigate(`/date/${date}/service/${new Date().getHours() < 13 ? 'matins' : 'vespers'}`);
+                        history.push(`/date/${date}/service/${new Date().getHours() < 13 ? 'matins' : 'vespers'}`);
                     }}
                     size="large"
                     style={{
