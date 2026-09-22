@@ -64,7 +64,7 @@ must explicitly revise it with replacement evidence, not weaken it to turn CI gr
 | Strict typecheck               | Passed                      | Button, theme, presentation utilities                                        |
 | Whole-project ratchets         | Passed against new baseline | 2,161 lint errors, 38 warnings, 1,039 TS diagnostics remain as explicit debt |
 | Hosted CI                      | Pending                     | Link final results on PR                                                     |
-| Browser smoke                  | Pending                     | Calendar and July 28 Liturgy                                                 |
+| Browser smoke                  | Passed locally              | Chromium, 390×844; calendar and 67-heading July 28 Liturgy; no page errors with local public URL |
 | User QA / merge / deploy       | Pending                     | Separate authorization required                                              |
 
 Ratchets enforce both total and per-file/rule or TS-code counts. They do not prove
