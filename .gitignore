@@ -24,3 +24,7 @@ app-release-*
 .claude_settings.json
 
 .env.local
+
+/output/
+/test-results/
+/playwright-report/

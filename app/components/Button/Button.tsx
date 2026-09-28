@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import { css } from 'emotion';
 
-const Button = forwardRef((props, ref) => (
+const Button = forwardRef<HTMLButtonElement, React.ButtonHTMLAttributes<HTMLButtonElement>>((props, ref) => (
     <button
         {...props}
         ref={ref}

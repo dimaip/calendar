@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.json",
+    "files": [
+        "app/components/Button/Button.tsx",
+        "app/styles/getTheme.ts",
+        "app/utils/formatDateKey.ts",
+        "app/utils/truncateText.ts",
+        "app/utils/truthy.ts"
+    ],
+    "include": []
+}

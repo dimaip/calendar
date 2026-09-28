@@ -1,38 +1,23 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
+version: 2.1
 jobs:
-  build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:7.10
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: yarn install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-        
-      # run tests!
-      - run: yarn test
-
+    build:
+        docker:
+            - image: cimg/node:24.18.0
+        steps:
+            - checkout
+            - run: sudo npm install --global yarn@1.22.22 --force
+            - restore_cache:
+                  keys:
+                      - frontend-node24-v1-{{ checksum "yarn.lock" }}
+            - run: yarn install --frozen-lockfile
+            - save_cache:
+                  key: frontend-node24-v1-{{ checksum "yarn.lock" }}
+                  paths: [~/.cache/yarn]
+            - run: git fetch origin 4b2db35575a80db33eb09ddf70a8ee4c440d0369
+            - run: yarn verify:scope
+            - run: yarn test && yarn test:tooling
+            - run: yarn quality
+            - run: yarn build
+workflows:
+    frontend:
+        jobs: [build]

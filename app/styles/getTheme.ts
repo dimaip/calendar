@@ -11,7 +11,7 @@ const gray5 = '#fafafc';
 const gray6 = '#ffffff';
 const blue = '#4169E1';
 
-const getTheme = (primary, theme) => {
+const getTheme = (primary: string | null | undefined, theme: unknown) => {
     const dark = theme === 'system' ? isDarkMode() : theme === 'dark' || theme === true;
 
     return {
@@ -31,5 +31,7 @@ const getTheme = (primary, theme) => {
         },
     };
 };
+
+export type AppTheme = ReturnType<typeof getTheme>;
 
 export default getTheme;
