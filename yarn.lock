@@ -4905,6 +4905,11 @@ convert-source-map@^2.0.0:
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-2.0.0.tgz#4b560f649fc4e918dd0ab75cf4961e8bc882d82a"
   integrity sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==
 
+convex-test@0.0.41:
+  version "0.0.41"
+  resolved "https://registry.yarnpkg.com/convex-test/-/convex-test-0.0.41.tgz#616f6c8b031c3d1859fac2bbf6030ea6835d6b0e"
+  integrity sha512-GPHeYFOi70n7UtW0eCEQFVhzl/+m8PvbWkDCbKpHLybI1MrScf4sVpGeM0cC2qmtxiduxa2nLPbehPalhh9oyQ==
+
 convex@^1.33.1:
   version "1.33.1"
   resolved "https://registry.yarnpkg.com/convex/-/convex-1.33.1.tgz#5f83f8c62b22cdd7b61502bc292c557a0332f70e"
