@@ -1,4 +1,3 @@
-import type { AppTheme } from 'styles/AppTheme';
 import React, { useState } from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
@@ -19,6 +18,7 @@ import {
 import type { BroadcastOccurrence } from '../../../convex/lib/broadcastSchedule';
 
 import AdminNavigation from 'components/AdminNavigation/AdminNavigation';
+import type { AppTheme } from 'styles/AppTheme';
 import Button from 'components/Button/Button';
 import Header from 'components/Header/Header';
 import Loader from 'components/Loader/Loader';
@@ -82,7 +82,7 @@ function BroadcastForm({
             background: ${theme.colours.bgGray};
             color: ${theme.colours.darkGray};
             font: inherit;
-            color-scheme: ${theme.palette.type};
+            color-scheme: ${theme.colours.white === '#201f24' ? 'dark' : 'light'};
         }
         input[type='checkbox'] {
             width: 18px;
@@ -278,7 +278,7 @@ function BroadcastForm({
 }
 
 export default function BroadcastsAdmin() {
-    const { broadcastId, originalDate } = useParams<'broadcastId' | 'originalDate'>();
+    const { broadcastId, originalDate } = useParams<{ broadcastId?: string; originalDate?: string }>();
     const isNew = broadcastId === 'new';
     const session = useSession();
     const adminStatus = useQuery(api.updates.adminStatus, session.profile ? {} : 'skip');

@@ -1,8 +1,9 @@
-import type { AppTheme } from 'styles/AppTheme';
 import React from 'react';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 import { NavLink } from 'react-router-dom';
+
+import type { AppTheme } from 'styles/AppTheme';
 
 const sections = [
     { path: '/admin/updates', label: 'Обновления' },
@@ -54,7 +55,7 @@ export default function AdminNavigation() {
                             }
                             &[aria-current='page'] {
                                 background: ${theme.colours.primary};
-                                color: ${theme.palette.type === 'dark' ? theme.colours.white : theme.colours.darkGray};
+                                color: #201f24;
                                 box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
                             }
                             &:focus-visible {

@@ -151,11 +151,7 @@ const UpdatesAdmin = () => {
     const isCreateScreen = history.location.pathname === '/admin/updates/new';
     const isEditScreen = !!updateId;
     const isFormScreen = isCreateScreen || isEditScreen;
-    const title = isCreateScreen
-        ? 'Новое обновление'
-        : isEditScreen
-        ? 'Редактировать обновление'
-        : 'Админ: обновления';
+    const title = isCreateScreen ? 'Новое обновление' : isEditScreen ? 'Редактировать обновление' : 'Админ: обновления';
 
     useDocumentTitle(`${title} - Православное богослужение на русском языке`);
 
@@ -354,6 +350,7 @@ const UpdatesAdmin = () => {
             return (
                 <div>
                     <UpdatesAdminHeader title={title} />
+                    <AdminNavigation />
                     <main
                         className={css`
                             min-height: calc(100vh - 50px - env(safe-area-inset-top));
@@ -381,6 +378,7 @@ const UpdatesAdmin = () => {
         return (
             <div>
                 <UpdatesAdminHeader title={title} />
+                <AdminNavigation />
                 <main
                     className={css`
                         min-height: calc(100vh - 50px - env(safe-area-inset-top));
@@ -603,6 +601,7 @@ const UpdatesAdmin = () => {
                     </Button>
                 }
             />
+            <AdminNavigation />
             <main
                 className={css`
                     min-height: calc(100vh - 50px - env(safe-area-inset-top));
@@ -677,9 +676,11 @@ const UpdatesAdmin = () => {
                                             flex-shrink: 0;
                                             padding: 3px 7px;
                                             border-radius: 999px;
-                                            background: ${update.status === 'published'
-                                                ? theme.colours.blue
-                                                : theme.colours.bgGray};
+                                            background: ${
+                                                update.status === 'published'
+                                                    ? theme.colours.blue
+                                                    : theme.colours.bgGray
+                                            };
                                             color: ${update.status === 'published' ? '#fff' : muted};
                                             font-size: 11px;
                                             line-height: 1.2;

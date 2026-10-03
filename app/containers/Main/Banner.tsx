@@ -19,7 +19,7 @@ const Banner = ({ banner, now }: { banner: BroadcastBanner; now: number }) => (
             overflow: hidden;
             min-height: ${banner.state === 'generic' ? '80px' : banner.state === 'live' ? '108px' : '141px'};
             background-color: #aa945f;
-            background-image: url('/assets/icons/hands.svg');
+            background-image: url('/assets/icons/hands.svg?v=figma-20261003');
             background-repeat: no-repeat;
             background-size: auto ${banner.state === 'live' || banner.state === 'generic' ? '141px' : '100%'};
             background-position: right top;

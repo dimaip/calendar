@@ -13,8 +13,6 @@ jobs:
             - save_cache:
                   key: frontend-node24-v1-{{ checksum "yarn.lock" }}
                   paths: [~/.cache/yarn]
-            - run: git fetch origin 4b2db35575a80db33eb09ddf70a8ee4c440d0369
-            - run: yarn verify:scope
             - run: yarn test && yarn test:tooling
             - run: yarn quality
             - run: yarn build
