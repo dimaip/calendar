@@ -31,6 +31,7 @@ import SermonDetail from 'containers/SermonDetail/SermonDetail';
 import SettingsMenu from 'containers/Main/SettingsMenu';
 import Updates from 'containers/Updates/Updates';
 import UpdatesAdmin from 'containers/Updates/UpdatesAdmin';
+import BroadcastsAdmin from 'containers/Broadcasts/BroadcastsAdmin';
 
 import checkVersion from './checkVersion';
 
@@ -154,6 +155,15 @@ export default () => {
                         </Route>
                         <Route exact path="/admin/updates">
                             <UpdatesAdmin />
+                        </Route>
+                        <Route exact path="/admin/broadcasts">
+                            <BroadcastsAdmin />
+                        </Route>
+                        <Route exact path="/admin/broadcasts/:broadcastId">
+                            <BroadcastsAdmin />
+                        </Route>
+                        <Route exact path="/admin/broadcasts/:broadcastId/occurrence/:originalDate">
+                            <BroadcastsAdmin />
                         </Route>
                         <Route exact path="/share/:versionData">
                             <AddSharedVersion />

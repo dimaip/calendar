@@ -8,7 +8,11 @@
  * @module
  */
 
+import type * as broadcasts from "../broadcasts.js";
 import type * as habitTracker from "../habitTracker.js";
+import type * as lib_admin from "../lib/admin.js";
+import type * as lib_broadcastSchedule from "../lib/broadcastSchedule.js";
+import type * as lib_broadcastValidators from "../lib/broadcastValidators.js";
 import type * as updates from "../updates.js";
 
 import type {
@@ -18,7 +22,11 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  broadcasts: typeof broadcasts;
   habitTracker: typeof habitTracker;
+  "lib/admin": typeof lib_admin;
+  "lib/broadcastSchedule": typeof lib_broadcastSchedule;
+  "lib/broadcastValidators": typeof lib_broadcastValidators;
   updates: typeof updates;
 }>;
 
