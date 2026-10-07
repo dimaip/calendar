@@ -43,6 +43,7 @@ Opening or merging a PR does not mean it is shipped.
 
 - [MOD-01 scope, verification and release checklist](01-runtime-preserving-pr.md)
 - [Remaining work for individual review](02-remaining-backlog.md)
+- [Update prompt and reload-loop fix](03-update-flow.md)
 
 Historical plans and measurement scripts remain at commit `365fa6e7` under
 `docs/modernization/` and `scripts/performance/`. Old timing results are leads, not

@@ -182,7 +182,7 @@ const SettingsMenu = () => {
                                     text-decoration: underline;
                                 `}
                                 onClick={async () => {
-                                    const newVersion = await checkVersion();
+                                    const newVersion = await checkVersion(true);
                                     if (newVersion) {
                                         setPendingUpdate(newVersion);
                                     }

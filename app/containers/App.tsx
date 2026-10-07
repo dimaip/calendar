@@ -49,7 +49,7 @@ export default () => {
                             <Pullable
                                 spinnerColor={dark ? '#fff' : '#000'}
                                 onRefresh={async () => {
-                                    const newVersion = await checkVersion();
+                                    const newVersion = await checkVersion(true);
                                     if (newVersion) {
                                         setPendingUpdate(newVersion);
                                     }

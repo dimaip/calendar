@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, Redirect, useHistory, useParams } from 'react-router-dom';
 import Main from 'containers/Main/Main';
 import NotFound from 'components/NotFound/NotFound';
@@ -90,12 +90,19 @@ export default () => {
     const langStateValue = useRecoilValue(langState);
     const history = useHistory();
     const setPendingUpdate = useSetRecoilState(pendingUpdateState);
-    history.listen(async () => {
-        const newVersion = await checkVersion();
-        if (newVersion) {
-            setPendingUpdate(newVersion);
-        }
-    });
+    useEffect(() => {
+        let active = true;
+        const checkForUpdate = async () => {
+            const newVersion = await checkVersion();
+            if (active && newVersion) setPendingUpdate(newVersion);
+        };
+        const unsubscribe = history.listen(checkForUpdate);
+        void checkForUpdate();
+        return () => {
+            active = false;
+            unsubscribe();
+        };
+    }, [history, setPendingUpdate]);
     const isParallel = useRecoilValue(isParallelState);
     const themeStateValue = useRecoilValue(themeState);
     const theme = getTheme(undefined, themeStateValue);
