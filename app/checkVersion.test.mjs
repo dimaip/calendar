@@ -9,6 +9,10 @@ import ts from 'typescript';
 const source = ts.transpileModule(readFileSync(new URL('./checkVersion.ts', import.meta.url), 'utf8'), {
     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
 }).outputText;
+const activationSource = ts.transpileModule(
+    readFileSync(new URL('./waitForControllingWorker.ts', import.meta.url), 'utf8'),
+    { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }
+).outputText;
 
 function browser(storage = new Map(), storedError = false) {
     const worker = Object.assign(new EventTarget(), { state: 'activated' });
@@ -21,14 +25,14 @@ function browser(storage = new Map(), storedError = false) {
         serviceWorker,
         online: true,
         release: 'bbbb',
-        nextMain: '/built/main.bbbb.js',
+        shellRelease: 'bbbb',
         reloads: 0,
         updates: 0,
         fetches: [],
         fetchError: false,
         storedError,
         shellOK: true,
-        shellHasMain: true,
+        shellHasVersion: true,
     };
     const registration = {
         active: worker,
@@ -78,10 +82,11 @@ function browser(storage = new Map(), storedError = false) {
                 },
             },
         },
-        document: { querySelector: () => ({ src: 'https://example.test/built/main.aaaa.js' }) },
         DOMParser: class {
             parseFromString() {
-                return { querySelector: () => (state.shellHasMain ? { getAttribute: () => state.nextMain } : null) };
+                return {
+                    querySelector: () => (state.shellHasVersion ? { getAttribute: () => state.shellRelease } : null),
+                };
             }
         },
         async fetch(url, options) {
@@ -91,6 +96,15 @@ function browser(storage = new Map(), storedError = false) {
             return { ok: state.shellOK, text: async () => '<html></html>' };
         },
     });
+    context.require = (id) => {
+        assert.equal(id, './waitForControllingWorker');
+        return {
+            default: vm.runInContext(
+                `(() => { const exports = {}; ${activationSource}; return exports.default; })()`,
+                context
+            ),
+        };
+    };
     vm.runInContext(source, context);
     return { state, context, registration, navigator, ...context.exports };
 }
@@ -108,7 +122,7 @@ test('detection announces a release without updating the worker or reloading', a
 test('dismissal survives repeated navigation and a reload in the same session', async () => {
     const env = browser();
     assert.equal(await env.default(), 'bbbb');
-    env.dismissUpdate('bbbb');
+    env.suppressUpdateNotice('bbbb');
     for (let i = 0; i < 10; i += 1) assert.equal(await env.default(), null);
     const reloaded = browser(env.state.storage);
     assert.equal(await reloaded.default(), null);
@@ -127,20 +141,20 @@ test('dismissal wins over a detection already waiting for registration', async (
         });
     const check = env.default();
     await flush();
-    env.dismissUpdate('bbbb');
+    env.suppressUpdateNotice('bbbb');
     complete(env.registration);
     assert.equal(await check, null);
 });
 
 test('unavailable or malformed session storage does not break detection or dismissal', async () => {
-    const env = browser(new Map([['app-updates:dismissed:v1', '{broken']]));
+    const env = browser(new Map([['app-updates:suppressed:v1', '{broken']]));
     env.state.storedError = true;
     assert.equal(await env.default(), 'bbbb');
-    env.dismissUpdate('bbbb');
+    env.suppressUpdateNotice('bbbb');
     assert.equal(await env.default(), null);
     const denied = browser(new Map(), true);
     assert.equal(await denied.default(), 'bbbb');
-    denied.dismissUpdate('bbbb');
+    denied.suppressUpdateNotice('bbbb');
     assert.equal(await denied.default(), null);
 });
 
@@ -309,24 +323,39 @@ for (const stage of ['registration', 'worker-update', 'activation']) {
     });
 }
 
-for (const failure of ['changed-release', 'same-shell', 'missing-main', 'shell-http', 'network', 'no-registration']) {
+for (const failure of [
+    'changed-release',
+    'same-shell',
+    'wrong-shell-release',
+    'missing-version',
+    'shell-http',
+    'network',
+    'no-registration',
+    'no-worker',
+]) {
     test(`${failure} never reloads and leaves the old app retryable`, async () => {
         const env = browser();
         if (failure === 'changed-release') env.state.release = 'cccc';
-        if (failure === 'same-shell') env.state.nextMain = '/built/main.aaaa.js';
-        if (failure === 'missing-main') env.state.shellHasMain = false;
+        if (failure === 'same-shell') env.state.shellRelease = 'aaaa';
+        if (failure === 'wrong-shell-release') env.state.shellRelease = 'cccc';
+        if (failure === 'missing-version') env.state.shellHasVersion = false;
         if (failure === 'shell-http') env.state.shellOK = false;
         if (failure === 'network') env.state.fetchError = true;
         if (failure === 'no-registration') env.state.serviceWorker.getRegistration = async () => undefined;
+        if (failure === 'no-worker') env.registration.active = null;
         await assert.rejects(env.applyUpdate('bbbb'));
         assert.equal(env.state.reloads, 0);
-        assert.equal(env.state.storage.has('app-updates:reloaded:v1'), false);
+        assert.equal(env.state.storage.has('app-updates:suppressed:v1'), false);
+        if (['same-shell', 'wrong-shell-release', 'missing-version', 'shell-http'].includes(failure)) {
+            assert.equal(await env.default(), 'bbbb', 'A failed attempt must not hide the still-pending release');
+        }
         env.state.release = 'bbbb';
-        env.state.nextMain = '/built/main.bbbb.js';
-        env.state.shellHasMain = true;
+        env.state.shellRelease = 'bbbb';
+        env.state.shellHasVersion = true;
         env.state.shellOK = true;
         env.state.fetchError = false;
         env.state.serviceWorker.getRegistration = async () => env.registration;
+        env.registration.active = env.state.worker;
         await env.applyUpdate('bbbb');
         assert.equal(env.state.reloads, 1);
     });

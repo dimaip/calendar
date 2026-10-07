@@ -2,6 +2,7 @@
 
 Status: `in-review` (2026-10-07). Branch: `dimaip/fix-update-loops`.
 Scope approved: update detection, dismissal, explicit installation and reload.
+Follow-up approved: simpler bookkeeping and exact release identification in HTML.
 Merge and production deployment require a separate release decision.
 
 ## Evidence and boundaries
@@ -23,7 +24,7 @@ workers as an update-recovery step. Do not use the old performance branches.
 | Unit  | Status        | Scope / acceptance                                                                                                                                                |
 | ----- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | UP-01 | `implemented` | One cleaned-up route listener; remember a dismissed release for the tab's browsing session, including reloads; deduplicate version checks.                        |
-| UP-02 | `implemented` | Click → updating indicator → wait for activation/controller takeover → verify newer cached app shell → exactly one reload. No reload on failure.                  |
+| UP-02 | `implemented` | Click → updating indicator → wait for activation/controller takeover → verify the exact HTML release ID → exactly one reload. No reload on failure.               |
 | UP-03 | `blocked`     | Unit tests and Chromium upgrade/offline QA pass. WebKit automation has the same unusable precache on unmodified master; complete WebKit/device QA before release. |
 | UP-04 | `pending`     | Review, retained-device QA, release authorization, merge/deploy and production QA.                                                                                |
 
@@ -36,6 +37,8 @@ workers as an update-recovery step. Do not use the old performance branches.
 - Dismissal is keyed by release, not a global "hide updates" flag. Another release
   can be offered. Session storage remembers dismissal across reloads; an in-memory
   fallback handles denied storage. A pending check cannot undo a dismissal.
+  One suppression record covers both dismissal and a successful reload request;
+  failed attempts are never recorded as handled.
 - Settings "Обновить данные" and pull-to-refresh explicitly check for updates even
   if that release was dismissed. Existing content-refresh behavior is unchanged.
 - Clicking "Обновить" shares one update operation and disables duplicate clicks
@@ -45,14 +48,19 @@ workers as an update-recovery step. Do not use the old performance branches.
   bounded by a two-minute attempt timeout. Failure leaves the app open with a
   retry/dismiss choice, not an automatic retry or reload.
 - A newer advertised version alone is insufficient. Before reload, the active
-  worker must control the page and serve an HTML shell referencing a different
-  hashed main bundle. Preserve the actual entry URL, including homescreen query
-  parameters. Missing/unchanged shells or a changed advertised release fail safely.
+  worker must control the page and serve HTML whose `app-version` meta tag exactly
+  matches the advertised release. The existing HTML plugin injects the tag from
+  the same build variable used for `VERSION` and `version.json`; a contract test
+  checks that these cannot drift. No bundle-name inspection or new dependency.
+  Preserve the actual entry URL, including homescreen query parameters. Missing,
+  old or wrong-release HTML and a changed advertised release fail safely.
 - Record the attempted release before reload. If delivery still serves the old
   document, automatic checks do not re-offer that release during the same session.
   Explicit manual checks remain available. No navigation causes another reload.
 - Worker/controller and timeout listeners are removed on success and failure.
   Updating one tab does not force other tabs to reload; each user's click is local.
+  The activation/controller wait is isolated in `waitForControllingWorker.ts`,
+  using the browser's native types rather than a custom lifecycle abstraction.
 
 ## Verification and release gates
 
@@ -60,7 +68,12 @@ Automated tests exercise the actual update module, not a duplicate implementatio
 dismissal/reload persistence, different releases, manual override, denied storage,
 in-flight dismissal, concurrent detection/clicks, offline retry, invalid versions,
 network errors, slow registration/update/activation, redundant workers, changed
-releases, old/missing/error shells, and a reload returning the old document.
+releases, old/missing/error shells, wrong-release shells, a missing worker and a
+reload returning the old document.
+
+The review caught a gap in the original candidate's different-bundle check:
+running A, advertising B and serving C caused a reload into C and suppressed B.
+Exact release identification now rejects that case without reload or suppression.
 
 Browser upgrade QA must use two production-mode builds at one origin, retaining
 the original worker/caches. Do not clear site data between announcement and update.
@@ -82,8 +95,8 @@ logic until the new worker finishes and the new app is loaded.
 
 ### Results
 
-- Node 22 and 24 unit suites: 79 passed, including 22 new update tests; three existing TODOs.
-- Tooling suite: seven passed.
+- Node 22 and 24 unit suites: 81 passed, including 24 new update tests; three existing TODOs.
+- Tooling suite: eight passed, including the shared release-identity contract.
 - Quality ratchets and expanded strict TypeScript scope: passed without new debt.
 - Node 22 and 24 production builds and Node 24 production-mode fixture builds: passed
   (existing bundle-size warnings only).
@@ -91,8 +104,11 @@ logic until the new worker finishes and the new app is loaded.
   download causes zero reloads until ready, then exactly one; failed download
   causes zero reloads and an explicit retry recovers with one. Another open tab
   is not forcibly reloaded, and its own update click reloads it exactly once.
+- The simpler implementation repeats these Chromium checks. Advertising release C
+  while the updated worker serves B causes zero reloads, records no suppression,
+  and offers retry. Both actual fixture HTML files carry their expected release ID.
 - Chromium offline after update: all eleven calendar days (today + ten ahead),
-  a 67-heading service, ten viewed cover/icon URLs, and cached reload after an
+  a 67-heading service, viewed cover/icon URLs, and cached reload after an
   uncached-date error passed. The 1,859-entry precache and runtime caches survived.
   No unexpected page errors or dialogs.
 - WebKit automation: **not passed**. With both HTTP and HTTPS fixtures, an activated

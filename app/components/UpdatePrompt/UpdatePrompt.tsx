@@ -8,7 +8,7 @@ import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
 
 import pendingUpdateState, { updateStatusState } from 'state/pendingUpdateState';
-import { applyUpdate, dismissUpdate } from 'checkVersion';
+import { applyUpdate, suppressUpdateNotice } from 'checkVersion';
 
 export default function UpdatePrompt(): JSX.Element {
     const [pendingVersion, setPendingVersion] = useRecoilState(pendingUpdateState);
@@ -24,7 +24,7 @@ export default function UpdatePrompt(): JSX.Element {
             return;
         }
 
-        if (pendingVersion) dismissUpdate(pendingVersion);
+        if (pendingVersion) suppressUpdateNotice(pendingVersion);
         setPendingVersion(null);
     };
 
