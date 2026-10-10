@@ -16,11 +16,13 @@ export function getBroadcastBanner(occurrences: BroadcastOccurrence[], calendarD
     const remaining = occurrence.startAt - now;
     return {
         placement:
-            !isToday || remaining <= 24 * BROADCAST_DURATION
+            !isToday || remaining < 4 * BROADCAST_DURATION
                 ? ('top' as const)
-                : remaining <= 48 * BROADCAST_DURATION
-                  ? ('middle' as const)
-                  : ('bottom' as const),
+                : remaining <= 24 * BROADCAST_DURATION
+                  ? ('after-readings' as const)
+                  : remaining <= 48 * BROADCAST_DURATION
+                    ? ('middle' as const)
+                    : ('bottom' as const),
         state: live
             ? ('live' as const)
             : remaining <= 2 * BROADCAST_DURATION

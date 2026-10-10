@@ -89,7 +89,9 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                             <SolidSection>
                                                 {banner &&
                                                     (banner.placement === 'top' ||
-                                                        (services && banner.placement === 'middle')) && (
+                                                        (services &&
+                                                            (banner.placement === 'middle' ||
+                                                                banner.placement === 'after-readings'))) && (
                                                         <div style={{ marginTop: 8, marginBottom: 18 }}>
                                                             <Banner banner={banner} now={now} />
                                                         </div>
@@ -100,6 +102,12 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                     <>
                                                         <SectionHeading>Богослужебные чтения</SectionHeading>
                                                         <ReadingList readings={day.readings || {}} date={date} />
+
+                                                        {banner?.placement === 'after-readings' && (
+                                                            <div style={{ marginBottom: 18 }}>
+                                                                <Banner banner={banner} now={now} />
+                                                            </div>
+                                                        )}
 
                                                         <div style={{ marginTop: -18 }}>
                                                             <SectionHeading>Святые дня</SectionHeading>
