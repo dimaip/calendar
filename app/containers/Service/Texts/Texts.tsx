@@ -289,6 +289,16 @@ const useServices = (date, readings = {}): ServiceInfo[] => {
             scriptEditor: true,
         },
         {
+            title: 'Вечерня СФИ',
+            id: 'vespersSfi',
+            enabled: true,
+            calendar: true,
+            lang: false,
+            skipRedirect: true,
+            group: 'Домашняя молитва',
+            warn: false,
+        },
+        {
             title: 'Покаянный канон',
             id: 'pokajanni',
             enabled: true,

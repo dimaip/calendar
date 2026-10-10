@@ -26,6 +26,7 @@ import PassionFriday from './PassionFriday.mdx';
 import PassionSaturday from './PassionSaturday.mdx';
 import Pentecost from './Pentecost.mdx';
 import PentecostObihod from './PentecostObihod.mdx';
+import Missia from './Missia.mdx';
 
 const Readings = ({ readingsForService, day }) =>
     Boolean(day) ? (
@@ -40,7 +41,7 @@ const Readings = ({ readingsForService, day }) =>
         <Loader />
     );
 
-const Vespers = ({ date, obihod }) => {
+const Vespers = ({ date, obihod = false, sfi = false }: { date: string; obihod?: boolean; sfi?: boolean }) => {
     const dateObj = new Date(date);
     const tomorrowDateObj = new Date(date);
     const y = dateObj.getFullYear();
@@ -139,6 +140,10 @@ const Vespers = ({ date, obihod }) => {
         isTransfiguration,
         isCross,
     };
+
+    if (sfi) {
+        return <Missia {...props} />;
+    }
 
     if (obihod && isEasterOffsetRange(50)) {
         return <PentecostObihod {...props} />;
