@@ -13,6 +13,7 @@ import SolidSection from 'components/SolidSection/SolidSection';
 import useExternalDay from 'hooks/useExternalDay';
 import { parseISO, formatISO, subDays, addDays } from 'date-fns';
 import useReadings from 'hooks/useReadings';
+import useBroadcastBanner from 'hooks/useBroadcastBanner';
 import ErrorMessage500 from 'components/ErrorMessage500/ErrorMessage500';
 import SwipeableViews from 'react-swipeable-views';
 import { virtualize } from 'react-swipeable-views-utils';
@@ -46,6 +47,7 @@ const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
 const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClickShift, services }) => {
     const dayQuery = useDay(date);
+    const { banner, now } = useBroadcastBanner(date);
     const day = dayQuery.data;
     const externalDayQuery = useExternalDay(date);
     const { sermons, thisDays } = externalDayQuery.data || {};
@@ -85,6 +87,13 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                             `}
                                         >
                                             <SolidSection>
+                                                {banner &&
+                                                    (banner.placement === 'top' ||
+                                                        (services && banner.placement === 'middle')) && (
+                                                        <div style={{ marginTop: 8, marginBottom: 18 }}>
+                                                            <Banner banner={banner} now={now} />
+                                                        </div>
+                                                    )}
                                                 {services ? (
                                                     <Services date={date} readings={day.readings || {}} />
                                                 ) : (
@@ -103,6 +112,12 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                         <div style={{ margin: '0 -10px 0 -10px' }}>
                                                             <TodaysBanner />
                                                         </div>
+
+                                                        {banner?.placement === 'middle' && (
+                                                            <div style={{ marginTop: 18 }}>
+                                                                <Banner banner={banner} now={now} />
+                                                            </div>
+                                                        )}
 
                                                         <div>
                                                             <div
@@ -160,9 +175,11 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                         <Sermons date={date} sermons={sermons} />
                                                     </>
                                                 )}
-                                                <div style={{ marginBottom: 8 }}>
-                                                    <Banner />
-                                                </div>
+                                                {banner?.placement === 'bottom' && (
+                                                    <div style={{ marginBottom: 8 }}>
+                                                        <Banner banner={banner} now={now} />
+                                                    </div>
+                                                )}
                                             </SolidSection>
                                         </div>
                                     </Zoom>

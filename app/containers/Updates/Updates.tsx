@@ -200,23 +200,45 @@ const Updates = () => {
                     `}
                 >
                     {adminStatus?.isAdmin && (
-                        <Button
-                            onClick={() => {
-                                history.push('/admin/updates');
-                            }}
+                        <div
                             className={css`
-                                display: block;
-                                margin: 0 0 14px auto;
-                                padding: 8px 12px !important;
-                                border-radius: 8px;
-                                background: ${cardBg};
-                                color: ${primary};
-                                font-size: 14px;
-                                line-height: 1.2;
+                                display: flex;
+                                justify-content: flex-end;
+                                gap: 8px;
+                                margin-bottom: 14px;
                             `}
                         >
-                            Админ
-                        </Button>
+                            <Button
+                                onClick={() => {
+                                    history.push('/admin/broadcasts');
+                                }}
+                                className={css`
+                                    padding: 8px 12px !important;
+                                    border-radius: 8px;
+                                    background: ${cardBg};
+                                    color: ${primary};
+                                    font-size: 14px;
+                                `}
+                            >
+                                Админ: трансляции
+                            </Button>
+                            <Button
+                                onClick={() => {
+                                    history.push('/admin/updates');
+                                }}
+                                className={css`
+                                    display: block;
+                                    padding: 8px 12px !important;
+                                    border-radius: 8px;
+                                    background: ${cardBg};
+                                    color: ${primary};
+                                    font-size: 14px;
+                                    line-height: 1.2;
+                                `}
+                            >
+                                Админ: обновления
+                            </Button>
+                        </div>
                     )}
                     {status === 'LoadingFirstPage' ? (
                         <div

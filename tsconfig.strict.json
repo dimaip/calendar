@@ -1,6 +1,8 @@
 {
     "extends": "./tsconfig.json",
     "files": [
+        "app/globals.d.ts",
+        "app/checkVersion.ts",
         "app/components/Button/Button.tsx",
         "app/styles/getTheme.ts",
         "app/utils/formatDateKey.ts",

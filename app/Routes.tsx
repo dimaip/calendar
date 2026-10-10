@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, Redirect, useHistory, useParams } from 'react-router-dom';
 import Main from 'containers/Main/Main';
 import NotFound from 'components/NotFound/NotFound';
@@ -31,6 +31,7 @@ import SermonDetail from 'containers/SermonDetail/SermonDetail';
 import SettingsMenu from 'containers/Main/SettingsMenu';
 import Updates from 'containers/Updates/Updates';
 import UpdatesAdmin from 'containers/Updates/UpdatesAdmin';
+import BroadcastsAdmin from 'containers/Broadcasts/BroadcastsAdmin';
 
 import checkVersion from './checkVersion';
 
@@ -89,12 +90,19 @@ export default () => {
     const langStateValue = useRecoilValue(langState);
     const history = useHistory();
     const setPendingUpdate = useSetRecoilState(pendingUpdateState);
-    history.listen(async () => {
-        const newVersion = await checkVersion();
-        if (newVersion) {
-            setPendingUpdate(newVersion);
-        }
-    });
+    useEffect(() => {
+        let active = true;
+        const checkForUpdate = async () => {
+            const newVersion = await checkVersion();
+            if (active && newVersion) setPendingUpdate(newVersion);
+        };
+        const unsubscribe = history.listen(checkForUpdate);
+        void checkForUpdate();
+        return () => {
+            active = false;
+            unsubscribe();
+        };
+    }, [history, setPendingUpdate]);
     const isParallel = useRecoilValue(isParallelState);
     const themeStateValue = useRecoilValue(themeState);
     const theme = getTheme(undefined, themeStateValue);
@@ -154,6 +162,15 @@ export default () => {
                         </Route>
                         <Route exact path="/admin/updates">
                             <UpdatesAdmin />
+                        </Route>
+                        <Route exact path="/admin/broadcasts">
+                            <BroadcastsAdmin />
+                        </Route>
+                        <Route exact path="/admin/broadcasts/:broadcastId">
+                            <BroadcastsAdmin />
+                        </Route>
+                        <Route exact path="/admin/broadcasts/:broadcastId/occurrence/:originalDate">
+                            <BroadcastsAdmin />
                         </Route>
                         <Route exact path="/share/:versionData">
                             <AddSharedVersion />

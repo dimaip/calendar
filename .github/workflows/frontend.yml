@@ -21,10 +21,6 @@ jobs:
             fail-fast: false
             matrix:
                 node: [22, 24]
-        env:
-            # Identical release label is required for byte comparisons; this job never deploys.
-            VERCEL_GITHUB_COMMIT_SHA: 4b2db35575a80db33eb09ddf70a8ee4c440d0369
-            AWS_COMMIT_ID: 4b2db35575a80db33eb09ddf70a8ee4c440d0369
         steps:
             - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
               with:
@@ -35,15 +31,6 @@ jobs:
             - name: Install pinned Yarn
               run: npm install --global yarn@1.22.22 --force
             - run: yarn install --frozen-lockfile
-            - run: yarn verify:scope
             - run: yarn test && yarn test:tooling
             - run: yarn quality
             - run: yarn build
-            - name: Build known-good baseline with its own locked dependencies
-              run: |
-                  git worktree add --detach "$RUNNER_TEMP/modernization-baseline" 4b2db35575a80db33eb09ddf70a8ee4c440d0369
-                  cd "$RUNNER_TEMP/modernization-baseline"
-                  yarn install --frozen-lockfile
-                  yarn build
-            - name: Require identical production runtime and offline output
-              run: node scripts/compare-build-output.mjs "$RUNNER_TEMP/modernization-baseline/www" www

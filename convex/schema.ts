@@ -1,50 +1,67 @@
-import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+import { defineSchema, defineTable } from 'convex/server';
+import { v } from 'convex/values';
+import { broadcastDetails } from './lib/broadcastValidators';
 
 export default defineSchema({
-  userSettings: defineTable({
-    userId: v.string(),
-    habitTracker: v.optional(
-      v.object({
-        trackMorning: v.boolean(),
-        trackEvening: v.boolean(),
-      })
-    ),
-  }).index("byUser", ["userId"]),
+    broadcasts: defineTable({
+        ...broadcastDetails.fields,
+        createdAt: v.number(),
+        updatedAt: v.number(),
+    }),
 
-  habitTrackerSessions: defineTable({
-    userId: v.string(),
-    date: v.string(),
-    timeOfDay: v.string(),
-    durationSeconds: v.number(),
-    serviceId: v.string(),
-    createdAt: v.number(),
-  })
-    .index("byUserDate", ["userId", "date"])
-    .index("byUser", ["userId"])
-    .index("byUserSession", ["userId", "date", "timeOfDay", "serviceId"]),
+    broadcastExceptions: defineTable({
+        broadcastId: v.id('broadcasts'),
+        originalDate: v.string(),
+        title: v.string(),
+        startAt: v.number(),
+        streamUrl: v.optional(v.string()),
+        cancelled: v.boolean(),
+        updatedAt: v.number(),
+    }).index('byBroadcastDate', ['broadcastId', 'originalDate']),
 
-  updates: defineTable({
-    title: v.optional(v.string()),
-    body: v.string(),
-    cta: v.optional(
-      v.object({
-        label: v.string(),
-        url: v.string(),
-      })
-    ),
-    status: v.union(v.literal("draft"), v.literal("published")),
-    publishedAt: v.number(),
-    notifyUntil: v.optional(v.number()),
-    createdAt: v.number(),
-    updatedAt: v.number(),
-  }).index("byStatusPublishedAt", ["status", "publishedAt"]),
+    userSettings: defineTable({
+        userId: v.string(),
+        habitTracker: v.optional(
+            v.object({
+                trackMorning: v.boolean(),
+                trackEvening: v.boolean(),
+            })
+        ),
+    }).index('byUser', ['userId']),
 
-  updateReads: defineTable({
-    userId: v.string(),
-    updateId: v.id("updates"),
-    readAt: v.number(),
-  })
-    .index("byUserUpdate", ["userId", "updateId"])
-    .index("byUpdate", ["updateId"]),
+    habitTrackerSessions: defineTable({
+        userId: v.string(),
+        date: v.string(),
+        timeOfDay: v.string(),
+        durationSeconds: v.number(),
+        serviceId: v.string(),
+        createdAt: v.number(),
+    })
+        .index('byUserDate', ['userId', 'date'])
+        .index('byUser', ['userId'])
+        .index('byUserSession', ['userId', 'date', 'timeOfDay', 'serviceId']),
+
+    updates: defineTable({
+        title: v.optional(v.string()),
+        body: v.string(),
+        cta: v.optional(
+            v.object({
+                label: v.string(),
+                url: v.string(),
+            })
+        ),
+        status: v.union(v.literal('draft'), v.literal('published')),
+        publishedAt: v.number(),
+        notifyUntil: v.optional(v.number()),
+        createdAt: v.number(),
+        updatedAt: v.number(),
+    }).index('byStatusPublishedAt', ['status', 'publishedAt']),
+
+    updateReads: defineTable({
+        userId: v.string(),
+        updateId: v.id('updates'),
+        readAt: v.number(),
+    })
+        .index('byUserUpdate', ['userId', 'updateId'])
+        .index('byUpdate', ['updateId']),
 });

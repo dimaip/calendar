@@ -60,6 +60,7 @@ export default {
             template: 'index.html',
             filename: '../index.html',
             alwaysWriteToDisk: true,
+            meta: { 'app-version': version },
         }),
         new HtmlWebpackHarddiskPlugin(),
         new CreateFileWebpack({
