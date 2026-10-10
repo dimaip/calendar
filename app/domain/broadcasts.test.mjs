@@ -161,7 +161,7 @@ test('converting a weekly schedule into a one-off event ignores old occurrence e
     assert.deepEqual(listBroadcastOccurrences(broadcast, [moved], moved.startAt, moved.startAt + DAY), []);
 });
 
-test('today promotes the nearest event at 24 hours and switches to countdown at 2 hours', (t) => {
+test('today promotes at 48 and 24 hours independently of the 2-hour countdown', (t) => {
     const original = process.env.TZ;
     process.env.TZ = 'UTC';
     t.after(() => {
@@ -169,17 +169,23 @@ test('today promotes the nearest event at 24 hours and switches to countdown at 
     });
     const broadcast = schedule();
     const event = getBroadcastOccurrence(broadcast, '2026-10-04');
-    for (const [hours, placement, state] of [
-        [25, 'bottom', 'scheduled'],
-        [24, 'middle', 'scheduled'],
-        [3, 'middle', 'scheduled'],
-        [2, 'top', 'countdown'],
-        [1, 'top', 'countdown'],
+    for (const [remaining, placement, state] of [
+        [49 * BROADCAST_DURATION, 'bottom', 'scheduled'],
+        [48 * BROADCAST_DURATION + 1, 'bottom', 'scheduled'],
+        [48 * BROADCAST_DURATION, 'middle', 'scheduled'],
+        [48 * BROADCAST_DURATION - 1, 'middle', 'scheduled'],
+        [24 * BROADCAST_DURATION + 1, 'middle', 'scheduled'],
+        [24 * BROADCAST_DURATION, 'top', 'scheduled'],
+        [24 * BROADCAST_DURATION - 1, 'top', 'scheduled'],
+        [3 * BROADCAST_DURATION, 'top', 'scheduled'],
+        [2 * BROADCAST_DURATION + 1, 'top', 'scheduled'],
+        [2 * BROADCAST_DURATION, 'top', 'countdown'],
+        [BROADCAST_DURATION, 'top', 'countdown'],
     ]) {
-        const now = event.startAt - hours * BROADCAST_DURATION;
+        const now = event.startAt - remaining;
         const banner = getBroadcastBanner([event], formatDateKey(new Date(now)), now);
-        assert.equal(banner.placement, placement);
-        assert.equal(banner.state, state);
+        assert.equal(banner.placement, placement, `${remaining}ms before the event`);
+        assert.equal(banner.state, state, `${remaining}ms before the event`);
     }
 });
 
