@@ -161,7 +161,7 @@ test('converting a weekly schedule into a one-off event ignores old occurrence e
     assert.deepEqual(listBroadcastOccurrences(broadcast, [moved], moved.startAt, moved.startAt + DAY), []);
 });
 
-test('today promotes at 48 and 24 hours independently of the 2-hour countdown', (t) => {
+test('today promotes at 48 and 24 hours and below 4 hours independently of the 2-hour countdown', (t) => {
     const original = process.env.TZ;
     process.env.TZ = 'UTC';
     t.after(() => {
@@ -175,8 +175,11 @@ test('today promotes at 48 and 24 hours independently of the 2-hour countdown', 
         [48 * BROADCAST_DURATION, 'middle', 'scheduled'],
         [48 * BROADCAST_DURATION - 1, 'middle', 'scheduled'],
         [24 * BROADCAST_DURATION + 1, 'middle', 'scheduled'],
-        [24 * BROADCAST_DURATION, 'top', 'scheduled'],
-        [24 * BROADCAST_DURATION - 1, 'top', 'scheduled'],
+        [24 * BROADCAST_DURATION, 'after-readings', 'scheduled'],
+        [24 * BROADCAST_DURATION - 1, 'after-readings', 'scheduled'],
+        [4 * BROADCAST_DURATION + 1, 'after-readings', 'scheduled'],
+        [4 * BROADCAST_DURATION, 'after-readings', 'scheduled'],
+        [4 * BROADCAST_DURATION - 1, 'top', 'scheduled'],
         [3 * BROADCAST_DURATION, 'top', 'scheduled'],
         [2 * BROADCAST_DURATION + 1, 'top', 'scheduled'],
         [2 * BROADCAST_DURATION, 'top', 'countdown'],
