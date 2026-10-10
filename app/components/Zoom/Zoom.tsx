@@ -1,11 +1,12 @@
 import React, { useContext, createContext } from 'react';
 import { css } from 'emotion';
+import { useRecoilValue } from 'recoil';
+
 import useWindowSize from 'hooks/useWindowSize';
 import zoomState from 'state/zoomState';
-import { useRecoilValue } from 'recoil';
 import isParallelState from 'state/isParallel';
 
-export const ZoomContext = createContext(null);
+export const ZoomContext = createContext<number | null>(null);
 
 const Zoom = ({ children }) => {
     const [width] = useWindowSize();
