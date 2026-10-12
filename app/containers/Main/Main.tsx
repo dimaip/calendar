@@ -87,15 +87,11 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                             `}
                                         >
                                             <SolidSection>
-                                                {banner &&
-                                                    (banner.placement === 'top' ||
-                                                        (services &&
-                                                            (banner.placement === 'middle' ||
-                                                                banner.placement === 'after-readings'))) && (
-                                                        <div style={{ marginTop: 8, marginBottom: 18 }}>
-                                                            <Banner banner={banner} now={now} />
-                                                        </div>
-                                                    )}
+                                                {!services && banner?.placement === 'top' && (
+                                                    <div style={{ marginTop: 8, marginBottom: 18 }}>
+                                                        <Banner banner={banner} now={now} />
+                                                    </div>
+                                                )}
                                                 {services ? (
                                                     <Services date={date} readings={day.readings || {}} />
                                                 ) : (
@@ -183,7 +179,7 @@ const SwipeableContainer = React.memo(({ date, handleToggleClick, makeHandleClic
                                                         <Sermons date={date} sermons={sermons} />
                                                     </>
                                                 )}
-                                                {banner?.placement === 'bottom' && (
+                                                {!services && banner?.placement === 'bottom' && (
                                                     <div style={{ marginBottom: 8 }}>
                                                         <Banner banner={banner} now={now} />
                                                     </div>
