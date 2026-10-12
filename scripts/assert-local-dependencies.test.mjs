@@ -21,4 +21,10 @@ test('production builds accept local dependencies and reject shared dependencies
     const alias = join(root, 'alias');
     symlinkSync(normal, alias, 'junction');
     assert.doesNotThrow(() => assertLocalDependencies(alias));
+
+    const fresh = join(root, 'fresh');
+    mkdirSync(fresh);
+    assert.doesNotThrow(() => assertLocalDependencies(fresh));
+    symlinkSync(join(root, 'missing-dependencies'), join(fresh, 'node_modules'), 'junction');
+    assert.throws(() => assertLocalDependencies(fresh), /checkout-local node_modules/);
 });

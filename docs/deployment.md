@@ -29,6 +29,10 @@ symlink another checkout's dependencies into a worktree: resolved loader and
 dependency paths become different webpack identifiers and can invalidate every
 lazy MDX chunk even when its text is unchanged. Install dependencies separately
 with `yarn install --frozen-lockfile`. Development builds are not restricted.
+If `node_modules` is a shared symlink, remove only that link before installing;
+do not remove its target. Deployment checks the layout before installation so
+it cannot accidentally modify another checkout's dependencies. A fresh checkout
+without dependencies is allowed to perform its first install.
 
 `yarn verify:build` builds identical inputs in two checkout locations, rejects a
 shared-dependency production layout, and checks exact filenames/bytes (excluding

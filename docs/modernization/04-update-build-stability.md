@@ -45,6 +45,8 @@ behavior. Local artifacts are under ignored `output/playwright/`.
 
 - Full precaching still precedes activation. Cache keys, manifest generation,
   old-worker fallback, image/API caching and explicit reload checks are unchanged.
+- Deployment rejects a shared dependency symlink before running Yarn, including
+  dangling links; it never removes the link or changes its target automatically.
 - Retry request clones retain URL, credentials, cache mode and headers. Success,
   permanent errors, runtime requests and network exceptions are not retried.
 - The limit is per install-time request, not a platform-wide outage retry loop.

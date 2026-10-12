@@ -21,7 +21,7 @@
         "lint:tsc": "tsc --noEmit",
         "lint-fix": "eslint app --fix",
         "test:auth": "tsx --test app/containers/auth/*.test.mjs app/utils/*.test.mjs",
-        "deploy": "git stash && git pull --ff-only && yarn install --frozen-lockfile && node scripts/deploy-static.mjs",
+        "deploy": "git stash && git pull --ff-only && node scripts/assert-local-dependencies.mjs && yarn install --frozen-lockfile && node scripts/deploy-static.mjs",
         "deploy:dry-run": "node scripts/deploy-static.mjs --dry-run",
         "deploy:verify": "node scripts/deploy-static.mjs --verify-only",
         "typecheck": "tsc --noEmit",
