@@ -34,3 +34,6 @@ jobs:
             - run: yarn test && yarn test:tooling
             - run: yarn quality
             - run: yarn build
+            - name: Verify cross-checkout builds and UI-only chunk stability
+              if: matrix.node == 24
+              run: yarn verify:build
