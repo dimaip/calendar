@@ -1,7 +1,12 @@
+import { fileURLToPath } from 'node:url';
+
 import { merge } from 'webpack-merge';
 import { InjectManifest } from 'workbox-webpack-plugin';
 
 import common from './webpack.base.js';
+import { assertLocalDependencies } from './scripts/assert-local-dependencies.mjs';
+
+assertLocalDependencies(fileURLToPath(new URL('.', import.meta.url)));
 
 const hash = Array(1)
     .fill(null)

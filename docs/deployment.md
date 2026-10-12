@@ -4,7 +4,7 @@ Run `yarn deploy` with Node 22 or 24, Yarn 1, `s3cmd` configured for the
 `molitva.app` Yandex bucket, and curl 7.84 or newer.
 
 The command keeps the existing stash/pull/install workflow (pull is now
-fast-forward-only). It builds using the checked-out commit as the release ID,
+fast-forward-only; installation uses the frozen lockfile). It builds using the checked-out commit as the release ID,
 then uploads in this order:
 
 1. Content-hashed `built/` assets with
@@ -20,8 +20,36 @@ then uploads in this order:
 
 Headers are attached during upload. No metadata-only S3 copy permissions are
 needed. `no-cache` allows storage but requires HTTP revalidation; it does not
-disable the service worker's offline Cache API. Worker code and cache handling
-are unchanged.
+disable the service worker's offline Cache API.
+
+## Stable build layout
+
+Production builds require a checkout-local `node_modules` directory. Do not
+symlink another checkout's dependencies into a worktree: resolved loader and
+dependency paths become different webpack identifiers and can invalidate every
+lazy MDX chunk even when its text is unchanged. Install dependencies separately
+with `yarn install --frozen-lockfile`. Development builds are not restricted.
+
+`yarn verify:build` builds identical inputs in two checkout locations, rejects a
+shared-dependency production layout, and checks exact filenames/bytes (excluding
+source maps and the four existing random shell revisions). It then makes a
+UI-only edit in a disposable fixture and requires every numbered lazy chunk to
+remain byte-identical. It does not upload anything, but replaces the local `www`
+output with a synthetic test release; run `yarn deploy` to build the actual commit
+before any authorized release. The fixture is removed afterward.
+
+## Transient precache errors
+
+The worker retries install-time HTTP 500, 502, 503 and 504 responses at most twice,
+after one and two seconds. It preserves the original request options and caches
+only the final successful response. Permanent errors and runtime image/API requests
+are not retried. If the final attempt still fails, installation fails and the old
+worker remains active. Successfully prepared entries can be reused on the next
+installation attempt.
+
+Full precaching still precedes activation; no shell-first/background activation
+or automatic page reload is introduced. The update UI's existing two-minute
+timeout is unchanged and does not cancel Chrome's independent installation.
 
 `yarn deploy:dry-run` prints the upload plan for the existing `www/` build
 without building, changing Git, uploading, or making network requests.

@@ -21,7 +21,7 @@
         "lint:tsc": "tsc --noEmit",
         "lint-fix": "eslint app --fix",
         "test:auth": "tsx --test app/containers/auth/*.test.mjs app/utils/*.test.mjs",
-        "deploy": "git stash && git pull --ff-only && yarn && node scripts/deploy-static.mjs",
+        "deploy": "git stash && git pull --ff-only && yarn install --frozen-lockfile && node scripts/deploy-static.mjs",
         "deploy:dry-run": "node scripts/deploy-static.mjs --dry-run",
         "deploy:verify": "node scripts/deploy-static.mjs --verify-only",
         "typecheck": "tsc --noEmit",
@@ -30,6 +30,7 @@
         "quality:baseline": "node scripts/quality-ratchet.mjs update",
         "test": "node scripts/run-tests.mjs",
         "test:tooling": "node --test scripts/*.test.mjs",
+        "verify:build": "node scripts/verify-build-reproducibility.mjs",
         "format:check": "prettier --check \"app/**/*.{js,jsx,ts,tsx}\"",
         "verify:scope": "node scripts/verify-modernization-scope.mjs"
     },

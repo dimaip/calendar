@@ -1,7 +1,10 @@
-import { precacheAndRoute } from 'workbox-precaching';
+import 'regenerator-runtime/runtime.js';
+import { addPlugins, precacheAndRoute } from 'workbox-precaching';
 import { StaleWhileRevalidate, CacheFirst } from 'workbox-strategies';
 import { registerRoute } from 'workbox-routing';
 import * as googleAnalytics from 'workbox-google-analytics';
+
+import precacheRetryPlugin from './precacheRetryPlugin.js';
 
 googleAnalytics.initialize();
 
@@ -16,6 +19,7 @@ self.addEventListener('activate', function (event) {
 
 console.log('Precaching routes');
 // Pre-cache main JS assets
+addPlugins([precacheRetryPlugin]);
 precacheAndRoute(self.__WB_MANIFEST);
 
 // const apiHostRegexp = process.env.API_HOST;
