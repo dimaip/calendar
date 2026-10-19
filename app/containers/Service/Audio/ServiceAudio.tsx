@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import Dialog from '@material-ui/core/Dialog';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 import Headset from '@material-ui/icons/Headset';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import Pause from '@material-ui/icons/Pause';
@@ -7,7 +9,7 @@ import Close from '@material-ui/icons/Close';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Replay from '@material-ui/icons/Replay';
-import Forward from '@material-ui/icons/Forward';
+import Check from '@material-ui/icons/Check';
 import MenuBook from '@material-ui/icons/MenuBook';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { css } from 'emotion';
@@ -629,11 +631,17 @@ export const ServiceAudioPlayer = () => {
                                 font-size: 12px;
                             `}`}
                         >
-                            <Forward aria-hidden="true" />
+                            <Replay
+                                aria-hidden="true"
+                                className={css`
+                                    transform: scaleX(-1);
+                                `}
+                            />
                             <span>15</span>
                         </button>
                     </div>
                     <label
+                        id="service-audio-speed-label"
                         htmlFor="service-audio-speed"
                         className={css`
                             font-size: 14px;
@@ -642,27 +650,85 @@ export const ServiceAudioPlayer = () => {
                     >
                         Скорость
                     </label>
-                    <select
+                    <Select
                         id="service-audio-speed"
+                        labelId="service-audio-speed-label"
+                        variant="outlined"
+                        IconComponent={ExpandMore}
                         value={rate}
+                        renderValue={(value) => `${Number(value)}×`}
                         onChange={(event) => audio.changeRate(Number(event.target.value))}
+                        MenuProps={{
+                            getContentAnchorEl: null,
+                            anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
+                            transformOrigin: { vertical: 'top', horizontal: 'center' },
+                            PaperProps: {
+                                className: css`
+                                    margin-top: 6px;
+                                    border: 1px solid ${theme.colours.lineGray};
+                                    border-radius: 8px;
+                                    background: ${theme.colours.bgGrayLight};
+                                    color: ${theme.colours.darkGray};
+                                    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+                                `,
+                            },
+                            MenuListProps: { 'aria-labelledby': 'service-audio-speed-label' },
+                        }}
                         className={css`
                             align-self: center;
+                            min-width: 120px;
                             min-height: 44px;
-                            padding: 8px 16px;
                             background: ${theme.colours.bgGrayLight};
                             color: ${theme.colours.darkGray};
-                            border: 1px solid ${theme.colours.lineGray};
-                            border-radius: 6px;
+                            border-radius: 8px;
                             font-size: 16px;
+                            font-variant-numeric: tabular-nums;
+                            & .MuiSelect-select {
+                                padding: 12px 40px 12px 16px;
+                                text-align: left;
+                            }
+                            & .MuiSelect-select:focus {
+                                background: transparent;
+                                border-radius: 8px;
+                            }
+                            & .MuiSelect-icon {
+                                right: 10px;
+                                color: ${theme.colours.primary};
+                            }
+                            & .MuiOutlinedInput-notchedOutline {
+                                border-color: ${theme.colours.lineGray};
+                            }
+                            &:hover .MuiOutlinedInput-notchedOutline,
+                            &.Mui-focused .MuiOutlinedInput-notchedOutline {
+                                border-color: ${theme.colours.primary};
+                            }
                         `}
                     >
                         {[0.75, 1, 1.25, 1.5, 2].map((value) => (
-                            <option key={value} value={value}>
-                                {value}×
-                            </option>
+                            <MenuItem
+                                key={value}
+                                value={value}
+                                className={css`
+                                    display: flex;
+                                    justify-content: space-between;
+                                    gap: 20px;
+                                    min-height: 44px;
+                                    padding: 8px 16px;
+                                    font-size: 16px;
+                                    font-variant-numeric: tabular-nums;
+                                    &&.Mui-selected,
+                                    &&.Mui-selected:hover,
+                                    &:hover,
+                                    &:focus-visible {
+                                        background: ${theme.colours.bgGray};
+                                        color: ${theme.colours.primary};
+                                    }
+                                `}
+                            >
+                                {value}×{rate === value && <Check aria-hidden="true" fontSize="small" />}
+                            </MenuItem>
                         ))}
-                    </select>
+                    </Select>
                     {error && (
                         <p
                             role="alert"
