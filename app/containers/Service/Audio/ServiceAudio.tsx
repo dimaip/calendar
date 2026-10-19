@@ -562,17 +562,9 @@ export const ServiceAudioPlayer = () => {
                             Запись начинается с канона. Начальные молитвы и некоторые изменяемые части в неё не входят.
                         </p>
                     )}
-                    <label
-                        htmlFor="service-audio-seek"
-                        className={css`
-                            text-align: left;
-                            font-size: 14px;
-                        `}
-                    >
-                        Позиция воспроизведения
-                    </label>
                     <input
                         id="service-audio-seek"
+                        aria-label="Прогресс аудиозаписи"
                         type="range"
                         min={0}
                         max={duration}
