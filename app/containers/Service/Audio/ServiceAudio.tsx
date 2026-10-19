@@ -116,7 +116,7 @@ export const ServiceAudioButton = () => {
                     height: 32px;
                     border-radius: 5px;
                     background: ${audio.active ? theme.colours.primary : theme.colours.bgGray};
-                    color: ${audio.active ? '#fff' : theme.colours.darkGray};
+                    color: ${audio.active ? theme.colours.onPrimary : theme.colours.darkGray};
                 `}
             >
                 <Headset aria-hidden="true" fontSize="small" />
@@ -221,7 +221,7 @@ export const ServiceAudioPlayer = () => {
                 width: ${expanded ? 68 : 44}px;
                 height: ${expanded ? 68 : 44}px;
                 background: ${theme.colours.primary};
-                color: ${theme.colours.white};
+                color: ${theme.colours.onPrimary};
                 border-radius: 50%;
                 &:hover {
                     background: ${theme.colours.primary};
@@ -239,8 +239,8 @@ export const ServiceAudioPlayer = () => {
         <>
             <style>{`
                 ::highlight(service-audio-current) {
-                    background-color: #f2d676;
-                    color: #241d0c;
+                    background-color: ${theme.colours.readingHighlight};
+                    color: ${theme.colours.readingHighlightText};
                 }
             `}</style>
             {recording && (
@@ -538,9 +538,12 @@ export const ServiceAudioPlayer = () => {
                 onClose={() => audio.setMode('compact')}
                 aria-labelledby="service-audio-title"
                 PaperProps={{
+                    style: {
+                        backgroundColor: theme.colours.white,
+                        color: theme.colours.darkGray,
+                        colorScheme: theme.colorScheme,
+                    },
                     className: css`
-                        background: ${theme.colours.white};
-                        color: ${theme.colours.darkGray};
                         padding-top: env(safe-area-inset-top);
                         padding-bottom: env(safe-area-inset-bottom);
                         & button:focus-visible {
@@ -725,6 +728,7 @@ export const ServiceAudioPlayer = () => {
                         variant="outlined"
                         IconComponent={ExpandMore}
                         value={rate}
+                        style={{ color: theme.colours.darkGray }}
                         renderValue={(value) => `${Number(value)}×`}
                         onChange={(event) => audio.changeRate(Number(event.target.value))}
                         MenuProps={{
@@ -732,13 +736,16 @@ export const ServiceAudioPlayer = () => {
                             anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
                             transformOrigin: { vertical: 'top', horizontal: 'center' },
                             PaperProps: {
+                                style: {
+                                    backgroundColor: theme.colours.bgGrayLight,
+                                    color: theme.colours.darkGray,
+                                    colorScheme: theme.colorScheme,
+                                },
                                 className: css`
                                     margin-top: 6px;
                                     border: 1px solid ${theme.colours.lineGray};
                                     border-radius: 8px;
-                                    background: ${theme.colours.bgGrayLight};
-                                    color: ${theme.colours.darkGray};
-                                    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+                                    box-shadow: 0 6px 20px ${theme.colours.shadow};
                                 `,
                             },
                             MenuListProps: { 'aria-labelledby': 'service-audio-speed-label' },
@@ -748,7 +755,6 @@ export const ServiceAudioPlayer = () => {
                             min-width: 120px;
                             min-height: 44px;
                             background: ${theme.colours.bgGrayLight};
-                            color: ${theme.colours.darkGray};
                             border-radius: 8px;
                             font-size: 16px;
                             font-variant-numeric: tabular-nums;

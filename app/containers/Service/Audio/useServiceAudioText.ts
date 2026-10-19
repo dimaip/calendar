@@ -1,8 +1,10 @@
+import { useTheme } from 'emotion-theming';
 import { useEffect, useRef, useState } from 'react';
 import type { RefObject } from 'react';
 
 import { findSpokenWord, serviceTextTokens } from 'domain/serviceAudioTimings';
 import type { ServiceAudioTimings } from 'domain/serviceAudioTimings';
+import type { AppTheme } from 'styles/AppTheme';
 
 interface TimedTextWord {
     start: number;
@@ -19,6 +21,7 @@ export const useServiceAudioText = (
     started: boolean,
     expanded: boolean
 ) => {
+    const theme = useTheme<AppTheme>();
     const [target, setTarget] = useState<TimedTextWord | null>(null);
     const [following, setFollowing] = useState(true);
     const [ready, setReady] = useState(false);
@@ -50,8 +53,8 @@ export const useServiceAudioText = (
         const nativeHighlight = typeof Highlight !== 'undefined' && 'highlights' in CSS;
         const overlay = document.createElement('div');
         overlay.setAttribute('aria-hidden', 'true');
-        overlay.style.cssText =
-            'position:fixed;pointer-events:none;z-index:3;border-radius:3px;background:#d5b44c66;display:none';
+        overlay.style.cssText = 'position:fixed;pointer-events:none;z-index:3;border-radius:3px;display:none';
+        overlay.style.backgroundColor = theme.colours.readingHighlightOverlay;
         if (!nativeHighlight) document.body.appendChild(overlay);
 
         const clearHighlight = () => {
@@ -286,7 +289,7 @@ export const useServiceAudioText = (
             audio.removeEventListener('seeked', paint);
             followRequestRef.current = null;
         };
-    }, [timings, mediaRef, enabled, started, expanded]);
+    }, [timings, mediaRef, enabled, started, expanded, theme.colours.readingHighlightOverlay]);
 
     const followAudio = (position?: number) => followRequestRef.current?.(position);
     return { target, following, ready, unrecorded, followAudio };
