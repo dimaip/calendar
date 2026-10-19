@@ -690,6 +690,7 @@ export const ServiceAudioPlayer = () => {
                             & .MuiSelect-select:focus {
                                 background: transparent;
                                 border-radius: 8px;
+                                outline: none;
                             }
                             & .MuiSelect-icon {
                                 right: 10px;
@@ -698,8 +699,8 @@ export const ServiceAudioPlayer = () => {
                             & .MuiOutlinedInput-notchedOutline {
                                 border-color: ${theme.colours.lineGray};
                             }
-                            &:hover .MuiOutlinedInput-notchedOutline,
-                            &.Mui-focused .MuiOutlinedInput-notchedOutline {
+                            &&:hover .MuiOutlinedInput-notchedOutline,
+                            &&.Mui-focused .MuiOutlinedInput-notchedOutline {
                                 border-color: ${theme.colours.primary};
                             }
                         `}
