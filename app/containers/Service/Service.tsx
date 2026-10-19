@@ -1,10 +1,21 @@
-import { getFeastInfo } from 'domain/getDayInfo';
-
 import * as Sentry from '@sentry/react';
 import React, { Suspense, useState, useEffect, useContext } from 'react';
 import { useParams, useHistory, Redirect } from 'react-router-dom';
 import { css } from 'emotion';
+import { useRecoilState } from 'recoil';
+
+import LanguageSwitcher from './LanguageSwitcher';
+import TOCSwitcher from './TOCSwitcher';
+import useServices from './Texts/Texts';
+import MDXProvider from './MDXProvider';
+import ParallelLanguageBar from './ParallelLanguageBar';
+import { LangContext } from './LangContext';
+import { ServiceContext } from './ServiceContext';
+import { ServiceAudioProvider, ServiceAudioButton, ServiceAudioEntry, ServiceAudioPlayer } from './Audio/ServiceAudio';
+
+import { getFeastInfo } from 'domain/getDayInfo';
 import useDay from 'hooks/useDay';
+import useWindowSize from 'hooks/useWindowSize';
 import Zoom from 'components/Zoom/Zoom';
 import Loader from 'components/Loader/Loader';
 import LayoutInner from 'components/LayoutInner/LayoutInner';
@@ -14,7 +25,6 @@ import ScriptVersionSelector from 'components/ScriptVersionSelector/ScriptVersio
 import ScriptEditorToggle from 'components/ScriptEditor/ScriptEditorToggle';
 import { useSyncCurrentScriptVersion } from 'components/ScriptVersionSelector/useSyncCurrentScriptVersion';
 import { useDocumentTitle } from 'utils/useDocumentTitle';
-import { useRecoilState } from 'recoil';
 import customPrayersState from 'state/customPrayersState';
 import customPrayerInputState from 'state/customPrayerInputState';
 import customPrayerEditIdState from 'state/customPrayerEditIdState';
@@ -23,14 +33,6 @@ import Pencil from 'components/svgs/Pencil';
 import CustomPrayerInput from 'components/CustomPrayers/CustomPrayerInput';
 import { usePrayerTimer } from 'containers/HabitTracker/usePrayerTimer';
 import PostPrayerPrompt from 'containers/HabitTracker/PostPrayerPrompt';
-
-import LanguageSwitcher from './LanguageSwitcher';
-import TOCSwitcher from './TOCSwitcher';
-import useServices from './Texts/Texts';
-import MDXProvider from './MDXProvider';
-import ParallelLanguageBar from './ParallelLanguageBar';
-import { LangContext } from './LangContext';
-import { ServiceContext } from './ServiceContext';
 
 const reloadOnFailedImport = (e) => {
     console.warn('Imported asset not available, probably time to re-deploy', e);
@@ -42,6 +44,7 @@ const toUpperCase = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 const Service = () => {
     const { serviceId: originalServiceId, date, prayerId } = useParams();
     const { data: day } = useDay(date);
+    const [windowWidth] = useWindowSize();
 
     const history = useHistory();
 
@@ -133,6 +136,7 @@ const Service = () => {
             {service?.calendar && (
                 <CalendarToggle
                     date={date}
+                    iconOnly={Boolean(service?.recording) && windowWidth < 380}
                     setNewDate={setNewDate}
                     className={css`
                         margin-right: 8px;
@@ -170,66 +174,80 @@ const Service = () => {
     return (
         <ServiceContext.Provider value={{ serviceId }}>
             <LangContext.Provider value={effectiveLangState}>
-                <LayoutInner left={left} right={right} paddedContent={false}>
-                    {service?.scriptEditor && (
-                        <>
-                            <ScriptEditorToggle serviceId={serviceId} />
-                        </>
-                    )}
+                <ServiceAudioProvider key={`${currentServiceId}:${date}`} recording={service?.recording}>
+                    <LayoutInner
+                        left={left}
+                        right={
+                            <>
+                                <ServiceAudioButton />
+                                {right}
+                            </>
+                        }
+                        paddedContent={false}
+                    >
+                        {service?.scriptEditor && (
+                            <>
+                                <ScriptEditorToggle serviceId={serviceId} />
+                            </>
+                        )}
 
-                    <ParallelLanguageBar />
-                    <Zoom>
-                        <>
-                            <div
-                                className={css`
-                                    margin-left: 12px;
-                                    margin-right: 12px;
-                                    margin-bottom: 24px;
-                                `}
-                            >
-                                {service?.warn && (
-                                    <Note>
-                                        Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда
-                                        ошибается. За наиболее точной информацией обращайтесь к{' '}
-                                        <a
-                                            className={css`
-                                                text-decoration: underline;
-                                            `}
-                                            href={`http://www.patriarchia.ru/bu/${date}`}
-                                            target="_blank"
-                                        >
-                                            богослужебным указаниям.
-                                        </a>{' '}
-                                        Если вы обнаружили ошибку, пожалуйста,{' '}
-                                        <a
-                                            className={css`
-                                                text-decoration: underline;
-                                            `}
-                                            href="mailto:pb@psmb.ru"
-                                            target="_blank"
-                                        >
-                                            напишите нам
-                                        </a>
-                                    </Note>
-                                )}
+                        <ParallelLanguageBar />
+                        <ServiceAudioEntry />
+                        <Zoom>
+                            <>
+                                <div
+                                    id="service-text"
+                                    className={css`
+                                        margin-left: 12px;
+                                        margin-right: 12px;
+                                        margin-bottom: 24px;
+                                    `}
+                                >
+                                    {service?.warn && (
+                                        <Note>
+                                            Изменяемые части богослужения составлены нашим роботом-уставщиком. Он иногда
+                                            ошибается. За наиболее точной информацией обращайтесь к{' '}
+                                            <a
+                                                className={css`
+                                                    text-decoration: underline;
+                                                `}
+                                                href={`http://www.patriarchia.ru/bu/${date}`}
+                                                target="_blank"
+                                            >
+                                                богослужебным указаниям.
+                                            </a>{' '}
+                                            Если вы обнаружили ошибку, пожалуйста,{' '}
+                                            <a
+                                                className={css`
+                                                    text-decoration: underline;
+                                                `}
+                                                href="mailto:pb@psmb.ru"
+                                                target="_blank"
+                                            >
+                                                напишите нам
+                                            </a>
+                                        </Note>
+                                    )}
 
-                                <MDXProvider>
-                                    <Suspense fallback={<Loader />}>
-                                        {TextComponent && <TextComponent date={date} lang={langState.lang} />}
-                                    </Suspense>
-                                </MDXProvider>
-                            </div>
-                        </>
-                    </Zoom>
-                    {customPrayerInputShown && (
-                        <CustomPrayerInput
-                            onClose={() => {
-                                setCustomPrayerInputShown(false);
-                            }}
-                        />
-                    )}
-                    <PostPrayerPrompt timeOfDay={completionPromptTimeOfDay} onDismiss={dismissCompletionPrompt} />
-                </LayoutInner>
+                                    <MDXProvider>
+                                        <Suspense fallback={<Loader />}>
+                                            {TextComponent && <TextComponent date={date} lang={langState.lang} />}
+                                        </Suspense>
+                                    </MDXProvider>
+                                </div>
+                            </>
+                        </Zoom>
+                        {customPrayerInputShown && (
+                            <CustomPrayerInput
+                                onClose={() => {
+                                    setCustomPrayerInputShown(false);
+                                }}
+                            />
+                        )}
+                        <PostPrayerPrompt timeOfDay={completionPromptTimeOfDay} onDismiss={dismissCompletionPrompt} />
+                        <ServiceAudioPlayer />
+                    </LayoutInner>
+                </ServiceAudioProvider>
             </LangContext.Provider>
         </ServiceContext.Provider>
     );

@@ -2,19 +2,21 @@ import React, { useState } from 'react';
 import { useTheme } from 'emotion-theming';
 import { css } from 'emotion';
 import { Link, useLocation } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { truncate } from 'lodash';
+import Headset from '@material-ui/icons/Headset';
+
+import SectionHeading from './SectionHeading';
+
 import RightIcon from 'components/svgs/RightIcon';
 import TrashIcon from 'components/svgs/TrashIcon';
 import ButtonBox from 'components/ButtonBox/ButtonBox';
 import useServices from 'containers/Service/Texts/Texts';
-import groupBy from 'lodash.groupby';
 import customPrayersState from 'state/customPrayersState';
-import { useRecoilState } from 'recoil';
 import PlusIcon from 'components/svgs/PlusIcon';
 import CustomPrayerInput from 'components/CustomPrayers/CustomPrayerInput';
 import customPrayerInputState from 'state/customPrayerInputState';
-import { truncate } from 'lodash';
-
-import SectionHeading from './SectionHeading';
+import type { AppTheme } from 'styles/AppTheme';
 
 const OptionalLink = ({ enabled, ...rest }) =>
     enabled ? (
@@ -27,7 +29,7 @@ const OptionalLink = ({ enabled, ...rest }) =>
     );
 
 const Services = ({ date, readings }) => {
-    const theme = useTheme();
+    const theme = useTheme<AppTheme>();
 
     const location = useLocation();
 
@@ -38,7 +40,7 @@ const Services = ({ date, readings }) => {
     const [_inputText, setInputText] = useRecoilState(customPrayerInputState);
     const [customPrayers, setCustomPrayers] = useRecoilState(customPrayersState('Sugubaja'));
 
-    const groupedServices = groupBy(services, (service) => service.group);
+    const groupTitles = Array.from(new Set(services.map((service) => service.group)));
 
     return (
         <div
@@ -58,8 +60,8 @@ const Services = ({ date, readings }) => {
             >
                 Текст службы адаптируется под выбранную дату. Активны только те службы, которые служатся в этот день
             </div>
-            {Object.keys(groupedServices).map((groupTitle) => {
-                const servicesForGroup = groupedServices[groupTitle];
+            {groupTitles.map((groupTitle) => {
+                const servicesForGroup = services.filter((service) => service.group === groupTitle);
                 if (!groupTitle) {
                     return null;
                 }
@@ -120,6 +122,23 @@ const Services = ({ date, readings }) => {
                                                         {service.title}
                                                     </p>
                                                 </div>
+                                                {service.recording && (
+                                                    <span
+                                                        role="img"
+                                                        aria-label="Есть аудиозапись на русском языке"
+                                                        title="Есть аудиозапись на русском языке"
+                                                        className={css`
+                                                            display: flex;
+                                                            align-items: center;
+                                                            margin-left: 8px;
+                                                            margin-right: 8px;
+                                                            color: ${theme.colours.primary};
+                                                            flex-shrink: 0;
+                                                        `}
+                                                    >
+                                                        <Headset aria-hidden="true" fontSize="small" />
+                                                    </span>
+                                                )}
                                                 {service.customPrayerId ? (
                                                     <div
                                                         className={css`
