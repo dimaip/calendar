@@ -51,6 +51,8 @@ export const useServiceAudioText = (
         let autoScrollUntil = performance.now() + 800;
         let lastScrollY = window.scrollY;
         const nativeHighlight = typeof Highlight !== 'undefined' && 'highlights' in CSS;
+        const highlight = nativeHighlight ? new Highlight() : null;
+        if (highlight) CSS.highlights.set('service-audio-current', highlight);
         const overlay = document.createElement('div');
         overlay.setAttribute('aria-hidden', 'true');
         overlay.style.cssText = 'position:fixed;pointer-events:none;z-index:3;border-radius:3px;display:none';
@@ -58,7 +60,9 @@ export const useServiceAudioText = (
         if (!nativeHighlight) document.body.appendChild(overlay);
 
         const clearHighlight = () => {
-            if (nativeHighlight) CSS.highlights.delete('service-audio-current');
+            // Clear while still registered so WebKit repaints the previous word,
+            // including at line breaks: https://bugs.webkit.org/show_bug.cgi?id=297125
+            highlight?.clear();
             overlay.style.display = 'none';
         };
         const readingBounds = () => ({
@@ -103,7 +107,7 @@ export const useServiceAudioText = (
                 current = word;
                 clearHighlight();
                 if (word) {
-                    if (nativeHighlight) CSS.highlights.set('service-audio-current', new Highlight(word.range));
+                    if (highlight) highlight.add(word.range);
                     else {
                         const rect = word.range.getBoundingClientRect();
                         Object.assign(overlay.style, {
@@ -273,6 +277,7 @@ export const useServiceAudioText = (
         return () => {
             observer.disconnect();
             clearHighlight();
+            if (highlight) CSS.highlights.delete('service-audio-current');
             overlay.remove();
             window.cancelAnimationFrame(frame);
             window.cancelAnimationFrame(scrollFrame);
