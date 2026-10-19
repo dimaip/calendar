@@ -218,6 +218,7 @@ export const ServiceAudioPlayer = () => {
         </button>
     );
     const status = loading ? 'Загрузка…' : playing ? 'Воспроизведение' : 'Пауза';
+    const progress = Math.min(100, (position / duration) * 100);
 
     return (
         <>
@@ -259,17 +260,76 @@ export const ServiceAudioPlayer = () => {
                         `}
                     >
                         <div
-                            aria-hidden="true"
                             className={css`
+                                position: relative;
                                 height: 3px;
-                                background: ${theme.colours.lineGray};
                             `}
                         >
-                            <div
-                                style={{ width: `${Math.min(100, (position / duration) * 100)}%` }}
+                            <input
+                                id="service-audio-compact-seek"
+                                aria-label="Прогресс аудиозаписи"
+                                aria-valuetext={`${formatAudioTime(position)} из ${formatAudioTime(duration)}`}
+                                type="range"
+                                min={0}
+                                max={duration}
+                                step={1}
+                                value={Math.min(position, duration)}
+                                onChange={(event) => audio.seek(Number(event.target.value))}
+                                style={{
+                                    backgroundImage: `linear-gradient(to right, ${theme.colours.primary} ${progress}%, ${theme.colours.lineGray} ${progress}%)`,
+                                }}
                                 className={css`
-                                    height: 100%;
-                                    background: ${theme.colours.primary};
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 0;
+                                    transform: translateY(-50%);
+                                    width: 100%;
+                                    height: 28px;
+                                    margin: 0;
+                                    padding: 0;
+                                    appearance: none;
+                                    -webkit-appearance: none;
+                                    background-color: transparent;
+                                    background-size: 100% 3px;
+                                    background-position: center;
+                                    background-repeat: no-repeat;
+                                    cursor: pointer;
+                                    &:focus {
+                                        outline: none;
+                                    }
+                                    &::-webkit-slider-runnable-track {
+                                        height: 3px;
+                                        background: transparent;
+                                    }
+                                    &::-moz-range-track,
+                                    &::-moz-range-progress {
+                                        height: 3px;
+                                        background: transparent;
+                                    }
+                                    &::-webkit-slider-thumb {
+                                        -webkit-appearance: none;
+                                        width: 12px;
+                                        height: 12px;
+                                        margin-top: -4.5px;
+                                        border: 0;
+                                        border-radius: 50%;
+                                        background: ${theme.colours.primary};
+                                    }
+                                    &::-moz-range-thumb {
+                                        width: 12px;
+                                        height: 12px;
+                                        border: 0;
+                                        border-radius: 50%;
+                                        background: ${theme.colours.primary};
+                                    }
+                                    &:focus-visible::-webkit-slider-thumb {
+                                        outline: 2px solid ${theme.colours.primary};
+                                        outline-offset: 3px;
+                                    }
+                                    &:focus-visible::-moz-range-thumb {
+                                        outline: 2px solid ${theme.colours.primary};
+                                        outline-offset: 3px;
+                                    }
                                 `}
                             />
                         </div>
