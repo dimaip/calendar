@@ -50,20 +50,17 @@ export const useServiceAudioText = (
         // Route restoration and smooth scrolling can emit scroll events over many frames.
         let autoScrollUntil = performance.now() + 800;
         let lastScrollY = window.scrollY;
-        const nativeHighlight = typeof Highlight !== 'undefined' && 'highlights' in CSS;
-        const highlight = nativeHighlight ? new Highlight() : null;
-        if (highlight) CSS.highlights.set('service-audio-current', highlight);
+        // Use ordinary elements instead of CSS Custom Highlights: WebKit can
+        // leave painted fragments behind even after a registered range is cleared.
+        // Document coordinates keep the highlight attached during native scrolling.
         const overlay = document.createElement('div');
         overlay.setAttribute('aria-hidden', 'true');
-        overlay.style.cssText = 'position:fixed;pointer-events:none;z-index:3;border-radius:3px;display:none';
-        overlay.style.backgroundColor = theme.colours.readingHighlightOverlay;
-        if (!nativeHighlight) document.body.appendChild(overlay);
+        overlay.setAttribute('data-service-audio-highlight', 'true');
+        overlay.style.cssText = 'position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;z-index:3';
+        document.body.appendChild(overlay);
 
         const clearHighlight = () => {
-            // Clear while still registered so WebKit repaints the previous word,
-            // including at line breaks: https://bugs.webkit.org/show_bug.cgi?id=297125
-            highlight?.clear();
-            overlay.style.display = 'none';
+            overlay.replaceChildren();
         };
         const readingBounds = () => ({
             top: (document.querySelector('header')?.getBoundingClientRect().bottom ?? 50) + 12,
@@ -102,21 +99,24 @@ export const useServiceAudioText = (
             }, 200);
         };
         const paint = () => {
-            const word = started && audio.readyState > 0 ? findSpokenWord(words, audio.currentTime) : null;
+            const word = started && !expanded && audio.readyState > 0 ? findSpokenWord(words, audio.currentTime) : null;
             if (word !== current) {
                 current = word;
                 clearHighlight();
                 if (word) {
-                    if (highlight) highlight.add(word.range);
-                    else {
-                        const rect = word.range.getBoundingClientRect();
-                        Object.assign(overlay.style, {
-                            display: 'block',
-                            left: `${rect.left}px`,
-                            top: `${rect.top}px`,
+                    for (const rect of Array.from(word.range.getClientRects())) {
+                        if (!rect.width || !rect.height) continue;
+                        const fragment = document.createElement('div');
+                        Object.assign(fragment.style, {
+                            position: 'absolute',
+                            borderRadius: '3px',
+                            backgroundColor: theme.colours.readingHighlightOverlay,
+                            left: `${rect.left + window.scrollX}px`,
+                            top: `${rect.top + window.scrollY}px`,
                             width: `${rect.width}px`,
                             height: `${rect.height}px`,
                         });
+                        overlay.appendChild(fragment);
                     }
                 }
             }
@@ -185,10 +185,11 @@ export const useServiceAudioText = (
             }
             lastScrollY = window.scrollY;
             queueReadingPosition();
-            if (!nativeHighlight) {
-                current = null;
-                paint();
-            }
+        };
+        const onResize = () => {
+            current = null;
+            paint();
+            queueReadingPosition();
         };
         followRequestRef.current = (position) => {
             followingRef.current = true;
@@ -263,11 +264,13 @@ export const useServiceAudioText = (
         rebuild();
         const observer = new MutationObserver(rebuild);
         observer.observe(root, { childList: true, characterData: true, subtree: true });
+        const resizeObserver = new ResizeObserver(onResize);
+        resizeObserver.observe(root);
         window.addEventListener('wheel', detach, { passive: true });
         window.addEventListener('touchmove', detach, { passive: true });
         window.addEventListener('keydown', onKey);
         window.addEventListener('scroll', onScroll, { passive: true });
-        window.addEventListener('resize', queueReadingPosition);
+        window.addEventListener('resize', onResize);
         audio.addEventListener('play', onPlay);
         audio.addEventListener('playing', onPlaying);
         audio.addEventListener('pause', onPause);
@@ -276,8 +279,8 @@ export const useServiceAudioText = (
         if (!audio.paused) onPlaying();
         return () => {
             observer.disconnect();
+            resizeObserver.disconnect();
             clearHighlight();
-            if (highlight) CSS.highlights.delete('service-audio-current');
             overlay.remove();
             window.cancelAnimationFrame(frame);
             window.cancelAnimationFrame(scrollFrame);
@@ -286,7 +289,7 @@ export const useServiceAudioText = (
             window.removeEventListener('touchmove', detach);
             window.removeEventListener('keydown', onKey);
             window.removeEventListener('scroll', onScroll);
-            window.removeEventListener('resize', queueReadingPosition);
+            window.removeEventListener('resize', onResize);
             audio.removeEventListener('play', onPlay);
             audio.removeEventListener('playing', onPlaying);
             audio.removeEventListener('pause', onPause);

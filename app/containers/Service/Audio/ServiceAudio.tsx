@@ -237,12 +237,6 @@ export const ServiceAudioPlayer = () => {
 
     return (
         <>
-            <style>{`
-                ::highlight(service-audio-current) {
-                    background-color: ${theme.colours.readingHighlight};
-                    color: ${theme.colours.readingHighlightText};
-                }
-            `}</style>
             {recording && (
                 <>
                     <div

@@ -20,8 +20,6 @@ const getTheme = (primary: string | null | undefined, theme: unknown) => {
             primary: primary || (dark ? '#E1B74D' : '#AE841A'),
             onPrimary: dark ? gray1a : gray6,
             primaryTint: 'rgba(255,255,255,0.8)',
-            readingHighlight: dark ? '#70571b' : '#f2d676',
-            readingHighlightText: dark ? gray6 : gray1a,
             readingHighlightOverlay: dark ? 'rgba(225,183,77,0.3)' : 'rgba(213,180,76,0.4)',
             shadow: dark ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.15)',
             lightGray: dark ? gray2a : gray2b,
