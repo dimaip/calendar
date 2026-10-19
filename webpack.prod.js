@@ -25,6 +25,7 @@ export default merge(common, {
         new InjectManifest({
             swSrc: 'service-worker.js',
             swDest: '../service-worker.js',
+            excludeChunks: ['service-audio-player', 'service-audio-pokajanni', 'service-audio-chin-prigotovlenija'],
             additionalManifestEntries: [
                 {
                     url: '/',

@@ -16,6 +16,10 @@ yarn start
 
 Or `yarn build` for production build.
 
+## Service audio
+
+See [service recordings and word alignment](docs/service-audio.md) for playback behavior and the optional local annotation workflow.
+
 ## Broadcast schedules
 
 Admins manage one-off and weekly broadcasts at `/#/admin/broadcasts`.
