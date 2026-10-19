@@ -16,7 +16,9 @@ export const serviceRecordings: Partial<Record<string, ServiceRecording>> = {
         duration: 778.475083,
         language: 'ru',
         hasVariableText: false,
-        loadTimings: async () => (await import('data/serviceAudio/pokajanni.json')).default,
+        loadTimings: async () =>
+            (await import(/* webpackChunkName: "service-audio-pokajanni" */ 'data/serviceAudio/pokajanni.json'))
+                .default,
     },
     chinPrigotovlenija: {
         src: 'https://molitva.app/audio/services/chin-prigotovlenija.12221d154cf8e5ee.mp3',
@@ -24,7 +26,12 @@ export const serviceRecordings: Partial<Record<string, ServiceRecording>> = {
         duration: 1797.355083,
         language: 'ru',
         hasVariableText: true,
-        loadTimings: async () => (await import('data/serviceAudio/chinPrigotovlenija.json')).default,
+        loadTimings: async () =>
+            (
+                await import(
+                    /* webpackChunkName: "service-audio-chin-prigotovlenija" */ 'data/serviceAudio/chinPrigotovlenija.json'
+                )
+            ).default,
     },
 };
 

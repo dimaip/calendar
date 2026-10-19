@@ -100,7 +100,8 @@ export const useServiceAudioText = (
         };
         const paint = () => {
             const word = started && !expanded && audio.readyState > 0 ? findSpokenWord(words, audio.currentTime) : null;
-            if (word !== current) {
+            const wordChanged = word !== current;
+            if (wordChanged) {
                 current = word;
                 clearHighlight();
                 if (word) {
@@ -120,7 +121,7 @@ export const useServiceAudioText = (
                     }
                 }
             }
-            if (word && followingRef.current && !expanded && !audio.paused) {
+            if (word && followingRef.current && !audio.paused && (wordChanged || alignOnNextWord)) {
                 const rect = word.range.getBoundingClientRect();
                 const { top, bottom } = readingBounds();
                 const readingLine = top + (bottom - top) * 0.3;
@@ -150,7 +151,7 @@ export const useServiceAudioText = (
             frame = audio.paused ? 0 : window.requestAnimationFrame(tick);
         };
         const onPlaying = () => {
-            if (!frame) frame = window.requestAnimationFrame(tick);
+            if (!expanded && !frame) frame = window.requestAnimationFrame(tick);
         };
         const onPlay = () => {
             followingRef.current = true;

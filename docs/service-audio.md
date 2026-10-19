@@ -15,6 +15,12 @@ Playback highlights the current Russian word using the media element's actual cl
 
 Text missing from the recording has no seek target and displays “Этот фрагмент не входит в запись”. Чин приготовления starts at its canon; the earlier prayers and psalms shown in the app are absent. Calendar-dependent passages can also differ. Only matching Russian paragraphs receive timings; another text language offers a switch to Russian. Repeated refrains are matched by their occurrence in reading order.
 
+## Performance
+
+The player UI and the selected recording's timing data load in separate `service-audio-*` chunks only after entering audio mode. These chunks are excluded from service-worker precaching so installation does not download them in the background. The recording uses `preload="none"` and streams when playback starts. With audio mode off there is no audio element, text indexing, highlight layer, observer, audio scroll listener, or animation loop. Exiting disconnects listeners and observers, cancels pending frames and timers, and releases the media resource. Already downloaded code and timing data stay cached for reopening.
+
+During compact playback, timestamp lookup uses binary search. Highlight updates and following-related layout reads run when the spoken word changes, rather than every animation frame. Scroll-position updates are throttled to five per second. Paused playback and the full player do not run a text animation loop.
+
 ## Generate timings locally
 
 Use Python 3.11 and ffmpeg, start the app with `yarn start`, then install tools in an isolated environment:
