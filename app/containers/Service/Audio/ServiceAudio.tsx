@@ -94,18 +94,33 @@ export const ServiceAudioButton = () => {
                 align-self: center;
                 align-items: center;
                 justify-content: center;
-                color: ${audio.active ? theme.colours.primary : theme.colours.darkGray};
+                && {
+                    padding: 5px;
+                }
                 & svg {
                     font-size: 18px;
                 }
-                &:focus-visible svg {
+                &:focus-visible > span {
                     outline: 2px solid ${theme.colours.primary};
-                    outline-offset: 3px;
-                    border-radius: 2px;
+                    outline-offset: 2px;
                 }
             `}
         >
-            <Headset aria-hidden="true" fontSize="small" />
+            <span
+                aria-hidden="true"
+                className={css`
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 5px;
+                    background: ${audio.active ? theme.colours.primary : theme.colours.bgGray};
+                    color: ${audio.active ? '#fff' : theme.colours.darkGray};
+                `}
+            >
+                <Headset aria-hidden="true" fontSize="small" />
+            </span>
         </Button>
     );
 };
