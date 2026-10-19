@@ -24,6 +24,7 @@ import { formatAudioTime } from 'domain/serviceRecordings';
 import type { ServiceRecording } from 'domain/serviceRecordings';
 import type { ServiceAudioTimings } from 'domain/serviceAudioTimings';
 import langState from 'state/langState';
+import Button from 'components/Button/Button';
 
 const useServiceAudioController = (recording: ServiceRecording | undefined) => {
     const controller = useServiceAudio(recording);
@@ -81,30 +82,31 @@ export const ServiceAudioButton = () => {
     const theme = useTheme<AppTheme>();
     if (!audio) return null;
     return (
-        <button
-            type="button"
-            aria-label="Открыть аудиоплеер"
+        <Button
             aria-pressed={audio.active}
-            title="Аудиозапись на русском языке"
-            onClick={() => audio.setMode('compact')}
+            title={audio.active ? 'Выйти из аудиорежима' : 'Открыть аудиоплеер'}
+            onClick={() => {
+                if (audio.active) audio.closeAudio();
+                else audio.setMode('compact');
+            }}
             className={css`
-                display: flex;
+                display: inline-flex;
+                align-self: center;
                 align-items: center;
                 justify-content: center;
-                min-width: 44px;
-                min-height: 44px;
-                color: ${theme.colours.primary};
-                cursor: pointer;
-                border-radius: 6px;
-                background: ${audio.active ? theme.colours.bgGray : 'transparent'};
-                &:focus-visible {
+                color: ${audio.active ? theme.colours.primary : theme.colours.darkGray};
+                & svg {
+                    font-size: 18px;
+                }
+                &:focus-visible svg {
                     outline: 2px solid ${theme.colours.primary};
-                    outline-offset: 2px;
+                    outline-offset: 3px;
+                    border-radius: 2px;
                 }
             `}
         >
             <Headset aria-hidden="true" fontSize="small" />
-        </button>
+        </Button>
     );
 };
 
