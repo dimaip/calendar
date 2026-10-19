@@ -42,6 +42,7 @@ export const useServiceAudioText = (
         let current: TimedTextWord | null = null;
         let frame = 0;
         let scrollFrame = 0;
+        let scrollTimer = 0;
         let alignOnNextWord = !audio.paused;
         // Route restoration and smooth scrolling can emit scroll events over many frames.
         let autoScrollUntil = performance.now() + 800;
@@ -85,7 +86,13 @@ export const useServiceAudioText = (
             setUnrecorded(candidates.length === 0);
         };
         const queueReadingPosition = () => {
-            if (!scrollFrame) scrollFrame = window.requestAnimationFrame(updateReadingPosition);
+            if (scrollTimer || scrollFrame) return;
+            // Read the latest viewport at most five times per second, including
+            // one final update after scrolling stops.
+            scrollTimer = window.setTimeout(() => {
+                scrollTimer = 0;
+                scrollFrame = window.requestAnimationFrame(updateReadingPosition);
+            }, 200);
         };
         const paint = () => {
             const word = started && audio.readyState > 0 ? findSpokenWord(words, audio.currentTime) : null;
@@ -266,6 +273,7 @@ export const useServiceAudioText = (
             overlay.remove();
             window.cancelAnimationFrame(frame);
             window.cancelAnimationFrame(scrollFrame);
+            window.clearTimeout(scrollTimer);
             window.removeEventListener('wheel', detach);
             window.removeEventListener('touchmove', detach);
             window.removeEventListener('keydown', onKey);
