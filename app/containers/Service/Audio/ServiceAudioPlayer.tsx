@@ -266,7 +266,7 @@ const ServiceAudioPlayer = () => {
                                         overflow: hidden;
                                         text-overflow: ellipsis;
                                         white-space: nowrap;
-                                        font-size: 14px;
+                                        font-size: 16px;
                                     `}
                                 >
                                     {recording.title}
@@ -338,7 +338,7 @@ const ServiceAudioPlayer = () => {
                                                 gap: 6px;
                                                 padding: 0 8px;
                                                 color: ${theme.colours.primary};
-                                                font-size: 13px;
+                                                font-size: 15px;
                                             `}`}
                                         >
                                             <PlayArrow aria-hidden="true" fontSize="small" />
@@ -366,7 +366,7 @@ const ServiceAudioPlayer = () => {
                                             margin-left: auto;
                                             color: ${theme.colours.primary};
                                             gap: 4px;
-                                            font-size: 13px;
+                                            font-size: 15px;
                                         `}`}
                                     >
                                         <ArrowBack
