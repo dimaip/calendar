@@ -733,12 +733,12 @@ const ServiceAudioPlayer = () => {
                                 }}
                                 className={css`
                                     align-self: flex-start;
-                                    min-width: 64px;
+                                    min-width: 44px;
                                     min-height: 44px;
                                     border-radius: 6px;
                                     font-size: 14px;
                                     font-variant-numeric: tabular-nums;
-                                    & .MuiSelect-select {
+                                    && .MuiSelect-select {
                                         padding: 12px 24px 12px 8px;
                                         text-align: left;
                                     }
