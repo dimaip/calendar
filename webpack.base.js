@@ -106,10 +106,6 @@ export default {
                 dependency: { not: ['url'] },
             },
             {
-                test: /\.svg$/,
-                type: 'asset/inline',
-            },
-            {
                 test: /\.(eot|ttf|woff)$/,
                 use: 'file-loader',
             },
@@ -153,6 +149,12 @@ export default {
                         },
                     },
                 ],
+            },
+            // Append new rules so existing loader option identifiers and text
+            // chunk hashes stay stable across releases.
+            {
+                test: /\.svg$/,
+                type: 'asset/inline',
             },
         ],
     },
