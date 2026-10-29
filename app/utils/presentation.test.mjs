@@ -34,11 +34,24 @@ test('theme inputs preserve light, dark, legacy boolean, system, and custom prim
         'gray',
         'lightGray',
         'lineGray',
+        'onPrimary',
         'primary',
         'primaryTint',
+        'readingHighlightOverlay',
         'red',
+        'shadow',
+        'textSecondary',
         'white',
     ]);
+    for (const mode of ['light', 'dark']) {
+        const theme = getTheme(null, mode);
+        assert.equal(theme.colorScheme, mode);
+        assert.equal(theme.colours.onPrimary, theme.colours.white);
+        assert.notEqual(theme.colours.textSecondary, theme.colours.black);
+        assert.notEqual(theme.colours.textSecondary, theme.colours.white);
+        assert.deepEqual(Object.keys(theme.colours).sort(), Object.keys(getTheme(null, 'light').colours).sort());
+    }
+    assert.notEqual(getTheme(null, 'light').colours.textSecondary, getTheme(null, 'dark').colours.textSecondary);
 });
 
 test('theme calls still return independent objects; memoization is not part of this modernization', () => {

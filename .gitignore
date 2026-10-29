@@ -28,3 +28,4 @@ app-release-*
 /output/
 /test-results/
 /playwright-report/
+__pycache__/

@@ -106,7 +106,11 @@ export default {
                 dependency: { not: ['url'] },
             },
             {
-                test: /\.(eot|svg|ttf|woff)$/,
+                test: /\.svg$/,
+                type: 'asset/inline',
+            },
+            {
+                test: /\.(eot|ttf|woff)$/,
                 use: 'file-loader',
             },
             {

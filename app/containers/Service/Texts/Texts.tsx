@@ -1,6 +1,9 @@
-import { getFeastInfo, makeIsDate, makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import { useRecoilState } from 'recoil';
+
+import { getFeastInfo, makeIsDate, makeIsEasterOffsetRange } from 'domain/getDayInfo';
 import customPrayersState from 'state/customPrayersState';
+import { serviceRecordings } from 'domain/serviceRecordings';
+import type { ServiceRecording } from 'domain/serviceRecordings';
 
 export const bratMolitvoslovPrayers = [
     // {
@@ -50,6 +53,10 @@ interface ServiceInfo {
     skipRedirect: boolean;
     group: string;
     warn: boolean;
+    recording?: ServiceRecording;
+    scriptEditor?: boolean;
+    hideTOC?: boolean;
+    customPrayerId?: number;
 }
 
 // New texts must be put into `Texts/ServiceIdUppercase/index.dyn.tsx` and then added here
@@ -301,6 +308,7 @@ const useServices = (date, readings = {}): ServiceInfo[] => {
         {
             title: 'Покаянный канон',
             id: 'pokajanni',
+            recording: serviceRecordings.pokajanni,
             enabled: true,
             calendar: false,
             lang: true,
@@ -311,6 +319,7 @@ const useServices = (date, readings = {}): ServiceInfo[] => {
         {
             title: 'Чин приготовления',
             id: 'chinPrigotovlenija',
+            recording: serviceRecordings.chinPrigotovlenija,
             enabled: true,
             calendar: true,
             lang: true,
