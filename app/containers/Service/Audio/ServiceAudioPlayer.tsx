@@ -222,8 +222,10 @@ const ServiceAudioPlayer = () => {
                                 <small
                                     className={css`
                                         display: block;
-                                        color: ${theme.colours.gray};
+                                        color: ${theme.colours.textSecondary};
+                                        margin-top: 2px;
                                         font-size: 12px;
+                                        line-height: 1.4;
                                         font-variant-numeric: tabular-nums;
                                     `}
                                 >
@@ -295,7 +297,7 @@ const ServiceAudioPlayer = () => {
                                             className={css`
                                                 flex: 1;
                                                 padding: 8px;
-                                                color: ${theme.colours.gray};
+                                                color: ${theme.colours.textSecondary};
                                                 font-size: 13px;
                                             `}
                                         >
@@ -479,8 +481,9 @@ const ServiceAudioPlayer = () => {
                     </h1>
                     <p
                         className={css`
-                            color: ${theme.colours.gray};
+                            color: ${theme.colours.textSecondary};
                             font-size: 14px;
+                            line-height: 1.45;
                             margin: 0 0 32px;
                             @media (max-height: 700px) {
                                 margin-bottom: 24px;
@@ -492,6 +495,7 @@ const ServiceAudioPlayer = () => {
                     {recording.hasVariableText && (
                         <p
                             className={css`
+                                color: ${theme.colours.textSecondary};
                                 font-size: 14px;
                                 line-height: 1.5;
                                 margin: 0 0 20px;
@@ -568,7 +572,7 @@ const ServiceAudioPlayer = () => {
                         className={css`
                             display: flex;
                             justify-content: space-between;
-                            color: ${theme.colours.gray};
+                            color: ${theme.colours.textSecondary};
                             font-size: 13px;
                             font-variant-numeric: tabular-nums;
                         `}
@@ -635,7 +639,7 @@ const ServiceAudioPlayer = () => {
                                 htmlFor="service-audio-speed"
                                 className={css`
                                     font-size: 12px;
-                                    color: ${theme.colours.gray};
+                                    color: ${theme.colours.textSecondary};
                                     text-align: left;
                                     margin: 0 0 2px 12px;
                                 `}

@@ -160,7 +160,7 @@ export const ServiceAudioEntry = () => {
                     className={css`
                         display: block;
                         margin-top: 4px;
-                        color: ${theme.colours.gray};
+                        color: ${theme.colours.textSecondary};
                         font-size: 12px;
                     `}
                 >

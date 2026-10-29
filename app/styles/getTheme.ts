@@ -24,6 +24,7 @@ const getTheme = (primary: string | null | undefined, theme: unknown) => {
             shadow: dark ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.15)',
             lightGray: dark ? gray2a : gray2b,
             gray: dark ? gray4 : gray2a,
+            textSecondary: dark ? gray2b : gray2a,
             darkGray: dark ? gray6 : gray1a,
             bgGrayLight: dark ? gray1b : gray5,
             bgGray: dark ? gray1c : gray4,
