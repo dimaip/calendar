@@ -680,7 +680,7 @@ const ServiceAudioPlayer = () => {
                             justify-content: center;
                             align-items: center;
                             flex-wrap: wrap;
-                            gap: 8px 12px;
+                            gap: 8px 24px;
                             width: 100%;
                         `}
                     >
@@ -733,14 +733,15 @@ const ServiceAudioPlayer = () => {
                                 }}
                                 className={css`
                                     align-self: flex-start;
-                                    min-width: 44px;
+                                    width: 74px;
+                                    flex-shrink: 0;
                                     min-height: 44px;
                                     border-radius: 6px;
                                     font-size: 14px;
                                     font-variant-numeric: tabular-nums;
                                     && .MuiSelect-select {
                                         padding: 12px 24px 12px 8px;
-                                        text-align: left;
+                                        text-align: right;
                                     }
                                     & .MuiSelect-select:focus {
                                         background: transparent;
