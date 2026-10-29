@@ -39,6 +39,16 @@ const ServiceAudioPlayer = () => {
             background: ${theme.colours.bgGray};
         }
     `;
+    const skipButtonClass = `${buttonClass} ${css`
+        flex-direction: column;
+        width: 64px;
+        min-height: 80px;
+        color: ${theme.colours.primary};
+        font-size: 16px;
+        & svg {
+            font-size: 48px;
+        }
+    `}`;
     const playButton = (
         <button
             type="button"
@@ -47,11 +57,14 @@ const ServiceAudioPlayer = () => {
                 void audio.togglePlayback();
             }}
             className={`${buttonClass} ${css`
-                width: ${expanded ? 68 : 44}px;
-                height: ${expanded ? 68 : 44}px;
+                width: ${expanded ? 112 : 44}px;
+                height: ${expanded ? 112 : 44}px;
                 background: ${theme.colours.primary};
                 color: ${theme.colours.onPrimary};
                 border-radius: 50%;
+                & svg {
+                    font-size: ${expanded ? 56 : 24}px;
+                }
                 &:hover {
                     background: ${theme.colours.primary};
                     opacity: 0.8;
@@ -383,6 +396,14 @@ const ServiceAudioPlayer = () => {
                         gap: 8px;
                         padding: 6px 12px;
                         border-bottom: 1px solid ${theme.colours.lineGray};
+                        & button {
+                            width: 48px;
+                            height: 48px;
+                            color: ${theme.colours.primary};
+                        }
+                        & svg {
+                            font-size: 32px;
+                        }
                     `}
                 >
                     <button
@@ -397,6 +418,7 @@ const ServiceAudioPlayer = () => {
                         className={css`
                             flex: 1;
                             font-size: 16px;
+                            text-align: center;
                         `}
                     >
                         Аудиозапись
@@ -418,21 +440,30 @@ const ServiceAudioPlayer = () => {
                         justify-content: center;
                         align-items: stretch;
                         flex: 1;
+                        flex-shrink: 0;
                         width: 100%;
                         max-width: 480px;
                         box-sizing: border-box;
                         margin: auto;
-                        padding: 24px;
+                        padding: 32px 24px;
                         text-align: center;
+                        @media (max-height: 700px) {
+                            padding-top: 24px;
+                            padding-bottom: 24px;
+                        }
                     `}
                 >
                     <Headset
                         aria-hidden="true"
                         className={css`
                             align-self: center;
-                            margin-bottom: 24px;
+                            margin-bottom: 32px;
                             color: ${theme.colours.primary};
-                            font-size: 64px !important;
+                            font-size: 88px !important;
+                            @media (max-height: 700px) {
+                                font-size: 64px !important;
+                                margin-bottom: 24px;
+                            }
                         `}
                     />
                     <h1
@@ -440,6 +471,7 @@ const ServiceAudioPlayer = () => {
                         className={css`
                             margin: 0 0 8px;
                             font-size: 26px;
+                            font-weight: 400;
                             line-height: 1.3;
                         `}
                     >
@@ -449,7 +481,10 @@ const ServiceAudioPlayer = () => {
                         className={css`
                             color: ${theme.colours.gray};
                             font-size: 14px;
-                            margin: 0 0 24px;
+                            margin: 0 0 32px;
+                            @media (max-height: 700px) {
+                                margin-bottom: 24px;
+                            }
                         `}
                     >
                         На русском языке
@@ -475,12 +510,58 @@ const ServiceAudioPlayer = () => {
                         value={Math.min(position, duration)}
                         onChange={(event) => audio.seek(Number(event.target.value))}
                         aria-valuetext={`${formatAudioTime(position)} из ${formatAudioTime(duration)}`}
+                        style={{
+                            backgroundImage: `linear-gradient(to right, ${theme.colours.darkGray} ${progress}%, ${theme.colours.lineGray} ${progress}%)`,
+                        }}
                         className={css`
                             width: 100%;
-                            min-height: 44px;
+                            height: 44px;
+                            flex-shrink: 0;
                             margin: 0;
-                            accent-color: ${theme.colours.primary};
+                            padding: 0;
+                            appearance: none;
+                            -webkit-appearance: none;
+                            background-color: transparent;
+                            background-size: 100% 2px;
+                            background-position: center;
+                            background-repeat: no-repeat;
                             cursor: pointer;
+                            &:focus {
+                                outline: none;
+                            }
+                            &::-webkit-slider-runnable-track {
+                                height: 2px;
+                                background: transparent;
+                            }
+                            &::-moz-range-track,
+                            &::-moz-range-progress {
+                                height: 2px;
+                                background: transparent;
+                            }
+                            &::-webkit-slider-thumb {
+                                -webkit-appearance: none;
+                                width: 12px;
+                                height: 12px;
+                                margin-top: -5px;
+                                border: 0;
+                                border-radius: 50%;
+                                background: ${theme.colours.darkGray};
+                            }
+                            &::-moz-range-thumb {
+                                width: 12px;
+                                height: 12px;
+                                border: 0;
+                                border-radius: 50%;
+                                background: ${theme.colours.darkGray};
+                            }
+                            &:focus-visible::-webkit-slider-thumb {
+                                outline: 2px solid ${theme.colours.primary};
+                                outline-offset: 3px;
+                            }
+                            &:focus-visible::-moz-range-thumb {
+                                outline: 2px solid ${theme.colours.primary};
+                                outline-offset: 3px;
+                            }
                         `}
                     />
                     <div
@@ -498,20 +579,22 @@ const ServiceAudioPlayer = () => {
                     <div
                         className={css`
                             display: flex;
-                            justify-content: center;
+                            justify-content: space-between;
                             align-items: center;
-                            gap: 24px;
-                            margin: 24px 0;
+                            width: 100%;
+                            max-width: 344px;
+                            margin: 32px auto;
+                            @media (max-height: 700px) {
+                                margin-top: 24px;
+                                margin-bottom: 24px;
+                            }
                         `}
                     >
                         <button
                             type="button"
                             aria-label="Назад на 15 секунд"
                             onClick={() => audio.seek(position - 15)}
-                            className={`${buttonClass} ${css`
-                                flex-direction: column;
-                                font-size: 12px;
-                            `}`}
+                            className={skipButtonClass}
                         >
                             <Replay aria-hidden="true" />
                             <span>15</span>
@@ -521,10 +604,7 @@ const ServiceAudioPlayer = () => {
                             type="button"
                             aria-label="Вперёд на 15 секунд"
                             onClick={() => audio.seek(position + 15)}
-                            className={`${buttonClass} ${css`
-                                flex-direction: column;
-                                font-size: 12px;
-                            `}`}
+                            className={skipButtonClass}
                         >
                             <Replay
                                 aria-hidden="true"
@@ -535,99 +615,131 @@ const ServiceAudioPlayer = () => {
                             <span>15</span>
                         </button>
                     </div>
-                    <label
-                        id="service-audio-speed-label"
-                        htmlFor="service-audio-speed"
+                    <div
                         className={css`
-                            font-size: 14px;
-                            margin-bottom: 6px;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: flex-end;
+                            gap: 12px;
+                            width: 100%;
                         `}
                     >
-                        Скорость
-                    </label>
-                    <Select
-                        id="service-audio-speed"
-                        labelId="service-audio-speed-label"
-                        variant="outlined"
-                        IconComponent={ExpandMore}
-                        value={rate}
-                        style={{ color: theme.colours.darkGray }}
-                        renderValue={(value) => `${Number(value)}×`}
-                        onChange={(event) => audio.changeRate(Number(event.target.value))}
-                        MenuProps={{
-                            getContentAnchorEl: null,
-                            anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
-                            transformOrigin: { vertical: 'top', horizontal: 'center' },
-                            PaperProps: {
-                                style: {
-                                    backgroundColor: theme.colours.bgGrayLight,
-                                    color: theme.colours.darkGray,
-                                    colorScheme: theme.colorScheme,
-                                },
-                                className: css`
-                                    margin-top: 6px;
-                                    border: 1px solid ${theme.colours.lineGray};
-                                    border-radius: 8px;
-                                    box-shadow: 0 6px 20px ${theme.colours.shadow};
-                                `,
-                            },
-                            MenuListProps: { 'aria-labelledby': 'service-audio-speed-label' },
-                        }}
-                        className={css`
-                            align-self: center;
-                            min-width: 120px;
-                            min-height: 44px;
-                            background: ${theme.colours.bgGrayLight};
-                            border-radius: 8px;
-                            font-size: 16px;
-                            font-variant-numeric: tabular-nums;
-                            & .MuiSelect-select {
-                                padding: 12px 40px 12px 16px;
-                                text-align: left;
-                            }
-                            & .MuiSelect-select:focus {
-                                background: transparent;
-                                border-radius: 8px;
-                                outline: none;
-                            }
-                            & .MuiSelect-icon {
-                                right: 10px;
-                                color: ${theme.colours.primary};
-                            }
-                            & .MuiOutlinedInput-notchedOutline {
-                                border-color: ${theme.colours.lineGray};
-                            }
-                            &&:hover .MuiOutlinedInput-notchedOutline,
-                            &&.Mui-focused .MuiOutlinedInput-notchedOutline {
-                                border-color: ${theme.colours.primary};
-                            }
-                        `}
-                    >
-                        {[0.75, 1, 1.25, 1.5, 2].map((value) => (
-                            <MenuItem
-                                key={value}
-                                value={value}
+                        <div
+                            className={css`
+                                display: flex;
+                                flex-direction: column;
+                            `}
+                        >
+                            <label
+                                id="service-audio-speed-label"
+                                htmlFor="service-audio-speed"
                                 className={css`
-                                    display: flex;
-                                    justify-content: space-between;
-                                    gap: 20px;
+                                    font-size: 12px;
+                                    color: ${theme.colours.gray};
+                                    text-align: left;
+                                    margin: 0 0 2px 12px;
+                                `}
+                            >
+                                Скорость
+                            </label>
+                            <Select
+                                id="service-audio-speed"
+                                labelId="service-audio-speed-label"
+                                variant="outlined"
+                                IconComponent={ExpandMore}
+                                value={rate}
+                                style={{ color: theme.colours.darkGray }}
+                                renderValue={(value) => `${Number(value)}×`}
+                                onChange={(event) => audio.changeRate(Number(event.target.value))}
+                                MenuProps={{
+                                    getContentAnchorEl: null,
+                                    anchorOrigin: { vertical: 'bottom', horizontal: 'center' },
+                                    transformOrigin: { vertical: 'top', horizontal: 'center' },
+                                    PaperProps: {
+                                        style: {
+                                            backgroundColor: theme.colours.bgGrayLight,
+                                            color: theme.colours.darkGray,
+                                            colorScheme: theme.colorScheme,
+                                        },
+                                        className: css`
+                                            margin-top: 6px;
+                                            border: 1px solid ${theme.colours.lineGray};
+                                            border-radius: 8px;
+                                            box-shadow: 0 6px 20px ${theme.colours.shadow};
+                                        `,
+                                    },
+                                    MenuListProps: { 'aria-labelledby': 'service-audio-speed-label' },
+                                }}
+                                className={css`
+                                    align-self: flex-start;
+                                    min-width: 84px;
                                     min-height: 44px;
-                                    padding: 8px 16px;
+                                    background: ${theme.colours.bgGrayLight};
+                                    border-radius: 8px;
                                     font-size: 16px;
                                     font-variant-numeric: tabular-nums;
-                                    &&.Mui-selected,
-                                    &&.Mui-selected:hover,
-                                    &:hover,
-                                    &:focus-visible {
-                                        background: ${theme.colours.bgGray};
+                                    & .MuiSelect-select {
+                                        padding: 10px 32px 10px 12px;
+                                        text-align: left;
+                                    }
+                                    & .MuiSelect-select:focus {
+                                        background: transparent;
+                                        border-radius: 8px;
+                                        outline: none;
+                                    }
+                                    & .MuiSelect-icon {
+                                        right: 6px;
                                         color: ${theme.colours.primary};
+                                    }
+                                    & .MuiOutlinedInput-notchedOutline {
+                                        border-color: transparent;
+                                    }
+                                    &&:hover .MuiOutlinedInput-notchedOutline,
+                                    &&.Mui-focused .MuiOutlinedInput-notchedOutline {
+                                        border-color: ${theme.colours.primary};
                                     }
                                 `}
                             >
-                                {value}×{rate === value && <Check aria-hidden="true" fontSize="small" />}
-                            </MenuItem>
-                        ))}
-                    </Select>
+                                {[0.75, 1, 1.25, 1.5, 2].map((value) => (
+                                    <MenuItem
+                                        key={value}
+                                        value={value}
+                                        className={css`
+                                            display: flex;
+                                            justify-content: space-between;
+                                            gap: 20px;
+                                            min-height: 44px;
+                                            padding: 8px 16px;
+                                            font-size: 16px;
+                                            font-variant-numeric: tabular-nums;
+                                            &&.Mui-selected,
+                                            &&.Mui-selected:hover,
+                                            &:hover,
+                                            &:focus-visible {
+                                                background: ${theme.colours.bgGray};
+                                                color: ${theme.colours.primary};
+                                            }
+                                        `}
+                                    >
+                                        {value}×{rate === value && <Check aria-hidden="true" fontSize="small" />}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </div>
+                        <button
+                            type="button"
+                            onClick={() => audio.setMode('compact')}
+                            className={`${buttonClass} ${css`
+                                gap: 8px;
+                                color: ${theme.colours.primary};
+                                padding: 10px 0 10px 8px;
+                                font-size: 14px;
+                            `}`}
+                        >
+                            <MenuBook aria-hidden="true" fontSize="small" />
+                            Вернуться к тексту
+                        </button>
+                    </div>
                     {error && (
                         <p
                             role="alert"
@@ -651,19 +763,6 @@ const ServiceAudioPlayer = () => {
                             Загрузка…
                         </p>
                     )}
-                    <button
-                        type="button"
-                        onClick={() => audio.setMode('compact')}
-                        className={`${buttonClass} ${css`
-                            gap: 8px;
-                            color: ${theme.colours.primary};
-                            margin-top: 24px;
-                            font-size: 16px;
-                        `}`}
-                    >
-                        <MenuBook aria-hidden="true" fontSize="small" />
-                        Вернуться к тексту
-                    </button>
                 </div>
             </Dialog>
         </>

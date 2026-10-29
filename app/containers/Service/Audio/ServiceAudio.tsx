@@ -120,7 +120,7 @@ export const ServiceAudioEntry = () => {
     return (
         <button
             type="button"
-            aria-label="Открыть аудиоверсию службы"
+            aria-label="Слушать аудиозапись"
             onClick={() => audio.setMode('compact')}
             className={css`
                 display: flex;
@@ -129,10 +129,10 @@ export const ServiceAudioEntry = () => {
                 width: calc(100% - 24px);
                 max-width: 680px;
                 margin: 12px auto;
-                padding: 12px;
-                border: 1px solid ${theme.colours.lineGray};
+                padding: 16px;
+                border: 0;
                 border-radius: 8px;
-                background: ${theme.colours.bgGrayLight};
+                background: ${theme.colours.bgGray};
                 color: ${theme.colours.darkGray};
                 text-align: left;
                 cursor: pointer;
@@ -155,7 +155,7 @@ export const ServiceAudioEntry = () => {
                     font-size: 15px;
                 `}
             >
-                Аудиоверсия
+                Слушать аудиозапись
                 <small
                     className={css`
                         display: block;
@@ -166,14 +166,6 @@ export const ServiceAudioEntry = () => {
                 >
                     На русском · {formatAudioTime(audio.recording.duration)}
                 </small>
-            </span>
-            <span
-                className={css`
-                    color: ${theme.colours.primary};
-                    font-size: 13px;
-                `}
-            >
-                Открыть
             </span>
         </button>
     );
