@@ -80,11 +80,14 @@ export default {
         }),
     ],
     module: {
+        // Loader option identifiers are persistent cache keys, not rule positions.
+        // Keep these legacy values so existing production chunks remain reusable.
         rules: [
             {
                 test: /\.worker\.js$/,
                 use: {
                     loader: 'worker-loader',
+                    ident: 'ruleSet[1].rules[0].use',
                     options: { publicPath: '/built/' },
                 },
             },
@@ -94,6 +97,7 @@ export default {
                 use: [
                     {
                         loader: 'babel-loader',
+                        ident: 'ruleSet[1].rules[1].use[0]',
                         options: {
                             presets: [['@babel/preset-env', { targets: { browsers: ['ie >= 11', 'safari > 9'] } }]],
                         },
@@ -104,10 +108,6 @@ export default {
                 test: /\.woff2?$/i,
                 type: 'asset/resource',
                 dependency: { not: ['url'] },
-            },
-            {
-                test: /\.svg$/,
-                type: 'asset/inline',
             },
             {
                 test: /\.(eot|ttf|woff)$/,
@@ -131,12 +131,14 @@ export default {
                 use: [
                     {
                         loader: 'babel-loader',
+                        ident: 'ruleSet[1].rules[7].use[0]',
                         options: {
                             presets: ['@babel/preset-env'],
                         },
                     },
                     {
                         loader: '@mdx-js/loader',
+                        ident: 'ruleSet[1].rules[7].use[1]',
                         /** @type {import('@mdx-js/loader').Options} */
                         options: {
                             providerImportSource: '@mdx-js/react',
@@ -145,6 +147,7 @@ export default {
                     },
                     {
                         loader: 'pattern-replace-loader',
+                        ident: 'ruleSet[1].rules[7].use[2]',
                         options: {
                             multiple: [
                                 { search: '(\\s)\\/\\/(\\s)', replace: '$1**//**$2', flags: 'gi' },
@@ -153,6 +156,10 @@ export default {
                         },
                     },
                 ],
+            },
+            {
+                test: /\.svg$/,
+                type: 'asset/inline',
             },
         ],
     },
