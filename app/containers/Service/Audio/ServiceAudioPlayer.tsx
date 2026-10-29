@@ -3,6 +3,7 @@ import Dialog from '@material-ui/core/Dialog';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Headset from '@material-ui/icons/Headset';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import Pause from '@material-ui/icons/Pause';
@@ -34,8 +35,10 @@ const statusClass = css`
 const ServiceAudioPlayer = () => {
     const audio = useContext(AudioContext);
     const theme = useTheme<AppTheme>();
+    const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)', { noSsr: true });
     if (!audio?.recording || !audio.active) return null;
     const { recording, position, duration, playing, loading, error, expanded, rate } = audio;
+    const transitionDuration = prefersReducedMotion ? 0 : expanded ? 220 : 160;
     const buttonClass = css`
         display: inline-flex;
         align-items: center;
@@ -50,6 +53,9 @@ const ServiceAudioPlayer = () => {
             background: ${theme.colours.bgGray};
         }
     `;
+    const iconButtonClass = `${buttonClass} ${css`
+        color: ${theme.colours.primary};
+    `}`;
     const skipButtonClass = `${buttonClass} ${css`
         flex-direction: column;
         width: 44px;
@@ -288,7 +294,7 @@ const ServiceAudioPlayer = () => {
                                 type="button"
                                 aria-label="Развернуть аудиоплеер"
                                 onClick={() => audio.setMode('expanded')}
-                                className={buttonClass}
+                                className={iconButtonClass}
                             >
                                 <ExpandLess aria-hidden="true" />
                             </button>
@@ -297,7 +303,7 @@ const ServiceAudioPlayer = () => {
                                 aria-label="Выйти из аудиорежима"
                                 title="Выйти из аудиорежима"
                                 onClick={audio.closeAudio}
-                                className={buttonClass}
+                                className={iconButtonClass}
                             >
                                 <Close aria-hidden="true" />
                             </button>
@@ -416,6 +422,7 @@ const ServiceAudioPlayer = () => {
             <Dialog
                 open={expanded}
                 fullScreen
+                transitionDuration={transitionDuration}
                 onClose={() => audio.setMode('compact')}
                 aria-labelledby="service-audio-title"
                 PaperProps={{
@@ -427,6 +434,27 @@ const ServiceAudioPlayer = () => {
                     className: css`
                         padding-top: env(safe-area-inset-top);
                         padding-bottom: env(safe-area-inset-bottom);
+                        animation: ${expanded ? 'serviceAudioExpand' : 'serviceAudioCollapse'} ${transitionDuration}ms
+                            ${expanded ? 'ease-out' : 'ease-in'} both;
+                        @keyframes serviceAudioExpand {
+                            from {
+                                transform: translateY(12px);
+                            }
+                            to {
+                                transform: translateY(0);
+                            }
+                        }
+                        @keyframes serviceAudioCollapse {
+                            from {
+                                transform: translateY(0);
+                            }
+                            to {
+                                transform: translateY(12px);
+                            }
+                        }
+                        @media (prefers-reduced-motion: reduce) {
+                            animation: none;
+                        }
                         & button:focus-visible {
                             outline: 2px solid ${theme.colours.primary};
                             outline-offset: 2px;
@@ -446,7 +474,6 @@ const ServiceAudioPlayer = () => {
                         & button {
                             width: 44px;
                             height: 44px;
-                            color: ${theme.colours.primary};
                         }
                     `}
                 >
@@ -454,7 +481,7 @@ const ServiceAudioPlayer = () => {
                         type="button"
                         aria-label="Свернуть аудиоплеер"
                         onClick={() => audio.setMode('compact')}
-                        className={buttonClass}
+                        className={iconButtonClass}
                     >
                         <span
                             aria-hidden="true"
@@ -480,7 +507,7 @@ const ServiceAudioPlayer = () => {
                         aria-label="Выйти из аудиорежима"
                         title="Выйти из аудиорежима"
                         onClick={audio.closeAudio}
-                        className={buttonClass}
+                        className={iconButtonClass}
                     >
                         <span
                             aria-hidden="true"
