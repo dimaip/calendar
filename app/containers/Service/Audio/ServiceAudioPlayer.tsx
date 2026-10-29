@@ -792,12 +792,8 @@ const ServiceAudioPlayer = () => {
                             onClick={() => audio.setMode('compact')}
                             className={`${buttonClass} ${css`
                                 color: ${theme.colours.primary};
-                                padding: 10px 12px;
-                                font-size: 14px;
-                                &:hover {
-                                    background: transparent;
-                                    opacity: 0.8;
-                                }
+                                padding: 0 8px;
+                                font-size: 15px;
                             `}`}
                         >
                             Вернуться к тексту
