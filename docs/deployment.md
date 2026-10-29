@@ -35,12 +35,20 @@ it cannot accidentally modify another checkout's dependencies. A fresh checkout
 without dependencies is allowed to perform its first install.
 
 `yarn verify:build` builds identical inputs in two checkout locations, rejects a
-shared-dependency production layout, and checks exact filenames/bytes (excluding
+shared-dependency production layout, and inserts an unrelated rule before the
+fixture's existing Webpack rules. It checks exact filenames/bytes (excluding
 source maps and the four existing random shell revisions). It then makes a
 UI-only edit in a disposable fixture and requires every numbered lazy chunk to
 remain byte-identical. It does not upload anything, but replaces the local `www`
 output with a synthetic test release; run `yarn deploy` to build the actual commit
 before any authorized release. The fixture is removed afterward.
+
+Webpack loader options have explicit, stable `ident` values. Their strings retain
+the old generated names for compatibility with deployed chunk URLs; they must not
+be renumbered when rules move. New loaders with options should get a unique, stable
+identifier too. A fast tooling test checks JavaScript, TSX, MDX, and worker loader
+identities when an unrelated rule is inserted, and the full build check verifies
+the resulting files. Both checks run in CI.
 
 ## Transient precache errors
 

@@ -69,9 +69,21 @@ try {
         mode: constants.COPYFILE_FICLONE,
     });
     build(root);
+
+    // An unrelated rule must not renumber loader option identities and invalidate
+    // every service text. Exercise the real build as well as the fast tooling test.
+    const webpackConfig = join(fixture, 'webpack.base.js');
+    const webpackSource = readFileSync(webpackConfig, 'utf8');
+    assert.ok(webpackSource.includes('rules: ['), 'Webpack rule probe target is missing');
+    writeFileSync(
+        webpackConfig,
+        webpackSource.replace('rules: [', "rules: [{ test: /\\.unused-stability-probe$/, type: 'asset/source' },")
+    );
     build(fixture);
     const count = compareBuildOutput(join(root, 'www'), join(fixture, 'www'));
-    console.log(`Cross-checkout equivalence: ${count} production files match (excluding maps and shell nonces).`);
+    console.log(
+        `Cross-checkout + unrelated-rule equivalence: ${count} production files match (excluding maps and shell nonces).`
+    );
 
     // A genuine UI-only edit must change the shell, not every lazy MDX chunk.
     const main = join(fixture, 'app/containers/Main/Main.tsx');
