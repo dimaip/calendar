@@ -792,10 +792,10 @@ const ServiceAudioPlayer = () => {
                             onClick={() => audio.setMode('compact')}
                             className={`${buttonClass} ${css`
                                 color: ${theme.colours.primary};
-                                background: ${theme.colours.bgGray};
                                 padding: 10px 12px;
                                 font-size: 14px;
                                 &:hover {
+                                    background: transparent;
                                     opacity: 0.8;
                                 }
                             `}`}
