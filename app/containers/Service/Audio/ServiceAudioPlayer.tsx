@@ -680,7 +680,7 @@ const ServiceAudioPlayer = () => {
                             justify-content: center;
                             align-items: center;
                             flex-wrap: wrap;
-                            gap: 8px 20px;
+                            gap: 8px 12px;
                             width: 100%;
                         `}
                     >
@@ -792,10 +792,12 @@ const ServiceAudioPlayer = () => {
                             onClick={() => audio.setMode('compact')}
                             className={`${buttonClass} ${css`
                                 color: ${theme.colours.primary};
-                                padding: 10px 0;
+                                background: ${theme.colours.bgGray};
+                                padding: 10px 12px;
                                 font-size: 14px;
-                                text-decoration: underline;
-                                text-underline-offset: 3px;
+                                &:hover {
+                                    opacity: 0.8;
+                                }
                             `}`}
                         >
                             Вернуться к тексту
