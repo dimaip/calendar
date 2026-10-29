@@ -72,6 +72,7 @@ const LayoutInner = ({
                 <div
                     className={css`
                         flex-grow: 1;
+                        min-width: 0;
                         display: flex;
                         align-items: center;
                     `}
@@ -82,6 +83,7 @@ const LayoutInner = ({
                 <div
                     className={css`
                         flex-grow: 0;
+                        flex-shrink: 0;
                         display: flex;
                     `}
                 >

@@ -58,9 +58,11 @@ const TOCSwitcher = ({ lang }) => {
         }, [lang, TOC]);
     }
     return (
-        <SelectBox
+        <div
             className={css`
                 flex-shrink: 1;
+                min-width: 0;
+                margin-right: 6px;
                 max-width: 70px;
                 @media (min-width: 340px) {
                     max-width: 80px;
@@ -75,21 +77,30 @@ const TOCSwitcher = ({ lang }) => {
                     max-width: 140px;
                 }
             `}
-            items={TOC}
-            value={activeItem}
-            onChange={(anchorID) => {
-                const domNode = document.getElementById(anchorID);
-                if (domNode) {
-                    setActiveItem(anchorID);
-                    try {
-                        domNode.scrollIntoView({ block: 'center' });
-                    } catch (error) {
-                        // fallback to prevent browser crashing
-                        domNode.scrollIntoView();
+        >
+            <SelectBox
+                className={css`
+                    && {
+                        max-width: 100%;
+                        margin-right: 0;
                     }
-                }
-            }}
-        />
+                `}
+                items={TOC}
+                value={activeItem}
+                onChange={(anchorID) => {
+                    const domNode = document.getElementById(anchorID);
+                    if (domNode) {
+                        setActiveItem(anchorID);
+                        try {
+                            domNode.scrollIntoView({ block: 'center' });
+                        } catch (error) {
+                            // fallback to prevent browser crashing
+                            domNode.scrollIntoView();
+                        }
+                    }
+                }}
+            />
+        </div>
     );
 };
 export default TOCSwitcher;
