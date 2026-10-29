@@ -9,14 +9,16 @@ import Pause from '@material-ui/icons/Pause';
 import Close from '@material-ui/icons/Close';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import Replay from '@material-ui/icons/Replay';
 import Check from '@material-ui/icons/Check';
-import MenuBook from '@material-ui/icons/MenuBook';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { css } from 'emotion';
 import { useTheme } from 'emotion-theming';
 
 import { AudioContext } from './ServiceAudio';
+import playIcon from './assets/play.svg';
+import skipBackIcon from './assets/skip-back.svg';
+import closeIcon from './assets/close.svg';
+import collapseIcon from './assets/collapse.svg';
 
 import type { AppTheme } from 'styles/AppTheme';
 import { formatAudioTime } from 'domain/serviceRecordings';
@@ -50,14 +52,20 @@ const ServiceAudioPlayer = () => {
     `;
     const skipButtonClass = `${buttonClass} ${css`
         flex-direction: column;
-        width: 64px;
-        min-height: 80px;
+        width: 44px;
+        min-height: 52px;
+        gap: 3px;
         color: ${theme.colours.primary};
-        font-size: 16px;
-        & svg {
-            font-size: 48px;
-        }
+        font-size: 14px;
+        line-height: 1;
     `}`;
+    const skipIconClass = css`
+        display: block;
+        width: 21.984px;
+        height: 25.2206px;
+        background: currentColor;
+        mask: url(${skipBackIcon}) center / contain no-repeat;
+    `;
     const playButton = (
         <button
             type="button"
@@ -67,31 +75,45 @@ const ServiceAudioPlayer = () => {
             }}
             className={`${buttonClass} ${css`
                 position: relative;
-                width: ${expanded ? 112 : 44}px;
-                height: ${expanded ? 112 : 44}px;
-                background: ${theme.colours.primary};
+                width: ${expanded ? 61 : 44}px;
+                height: ${expanded ? 61 : 44}px;
+                background: ${expanded && !playing && !loading ? theme.colours.onPrimary : theme.colours.primary};
                 color: ${theme.colours.onPrimary};
                 border-radius: 50%;
                 & svg {
-                    font-size: ${expanded ? 56 : 24}px;
+                    font-size: ${expanded ? 30 : 24}px;
                 }
                 &:hover {
-                    background: ${theme.colours.primary};
+                    background: ${expanded && !playing && !loading ? theme.colours.onPrimary : theme.colours.primary};
                     opacity: 0.8;
                 }
             `}`}
         >
-            {playing || loading ? <Pause aria-hidden="true" /> : <PlayArrow aria-hidden="true" />}
+            {playing || loading ? (
+                <Pause aria-hidden="true" />
+            ) : expanded ? (
+                <span
+                    aria-hidden="true"
+                    className={css`
+                        position: absolute;
+                        inset: 0;
+                        background: ${theme.colours.primary};
+                        mask: url(${playIcon}) center / 61px 61px no-repeat;
+                    `}
+                />
+            ) : (
+                <PlayArrow aria-hidden="true" />
+            )}
             {loading && (
                 <CircularProgress
                     aria-hidden="true"
                     color="inherit"
-                    size={expanded ? 96 : 36}
+                    size={expanded ? 49 : 36}
                     thickness={2}
                     className={css`
                         position: absolute;
-                        top: ${expanded ? 8 : 4}px;
-                        left: ${expanded ? 8 : 4}px;
+                        top: ${expanded ? 6 : 4}px;
+                        left: ${expanded ? 6 : 4}px;
                         pointer-events: none;
                         @media (prefers-reduced-motion: reduce) {
                             &&,
@@ -417,15 +439,14 @@ const ServiceAudioPlayer = () => {
                         display: flex;
                         align-items: center;
                         gap: 8px;
-                        padding: 6px 12px;
+                        flex-shrink: 0;
+                        padding: 2px 4px;
+                        background: ${theme.colours.bgGrayLight};
                         border-bottom: 1px solid ${theme.colours.lineGray};
                         & button {
-                            width: 48px;
-                            height: 48px;
+                            width: 44px;
+                            height: 44px;
                             color: ${theme.colours.primary};
-                        }
-                        & svg {
-                            font-size: 32px;
                         }
                     `}
                 >
@@ -435,12 +456,20 @@ const ServiceAudioPlayer = () => {
                         onClick={() => audio.setMode('compact')}
                         className={buttonClass}
                     >
-                        <ExpandMore aria-hidden="true" />
+                        <span
+                            aria-hidden="true"
+                            className={css`
+                                width: 15.2222px;
+                                height: 9.4564px;
+                                background: currentColor;
+                                mask: url(${collapseIcon}) center / contain no-repeat;
+                            `}
+                        />
                     </button>
                     <span
                         className={css`
                             flex: 1;
-                            font-size: 16px;
+                            font-size: 13px;
                             text-align: center;
                         `}
                     >
@@ -453,7 +482,15 @@ const ServiceAudioPlayer = () => {
                         onClick={audio.closeAudio}
                         className={buttonClass}
                     >
-                        <Close aria-hidden="true" />
+                        <span
+                            aria-hidden="true"
+                            className={css`
+                                width: 12.5px;
+                                height: 12.5px;
+                                background: currentColor;
+                                mask: url(${closeIcon}) center / contain no-repeat;
+                            `}
+                        />
                     </button>
                 </div>
                 <div
@@ -465,10 +502,10 @@ const ServiceAudioPlayer = () => {
                         flex: 1;
                         flex-shrink: 0;
                         width: 100%;
-                        max-width: 480px;
+                        max-width: 420px;
                         box-sizing: border-box;
                         margin: auto;
-                        padding: 32px 24px;
+                        padding: 32px 17px;
                         text-align: center;
                         @media (max-height: 700px) {
                             padding-top: 24px;
@@ -493,7 +530,7 @@ const ServiceAudioPlayer = () => {
                         id="service-audio-title"
                         className={css`
                             margin: 0 0 8px;
-                            font-size: 26px;
+                            font-size: 23px;
                             font-weight: 400;
                             line-height: 1.3;
                         `}
@@ -608,12 +645,8 @@ const ServiceAudioPlayer = () => {
                             justify-content: space-between;
                             align-items: center;
                             width: 100%;
-                            max-width: 344px;
-                            margin: 32px auto;
-                            @media (max-height: 700px) {
-                                margin-top: 24px;
-                                margin-bottom: 24px;
-                            }
+                            max-width: 208px;
+                            margin: 24px auto;
                         `}
                     >
                         <button
@@ -622,7 +655,7 @@ const ServiceAudioPlayer = () => {
                             onClick={() => audio.seek(position - 15)}
                             className={skipButtonClass}
                         >
-                            <Replay aria-hidden="true" />
+                            <span aria-hidden="true" className={skipIconClass} />
                             <span>15</span>
                         </button>
                         {playButton}
@@ -632,11 +665,11 @@ const ServiceAudioPlayer = () => {
                             onClick={() => audio.seek(position + 15)}
                             className={skipButtonClass}
                         >
-                            <Replay
+                            <span
                                 aria-hidden="true"
-                                className={css`
+                                className={`${skipIconClass} ${css`
                                     transform: scaleX(-1);
-                                `}
+                                `}`}
                             />
                             <span>15</span>
                         </button>
@@ -644,26 +677,28 @@ const ServiceAudioPlayer = () => {
                     <div
                         className={css`
                             display: flex;
-                            justify-content: space-between;
-                            align-items: flex-end;
-                            gap: 12px;
+                            justify-content: center;
+                            align-items: center;
+                            flex-wrap: wrap;
+                            gap: 8px 20px;
                             width: 100%;
                         `}
                     >
                         <div
                             className={css`
                                 display: flex;
-                                flex-direction: column;
+                                align-items: center;
+                                gap: 6px;
                             `}
                         >
                             <label
                                 id="service-audio-speed-label"
                                 htmlFor="service-audio-speed"
                                 className={css`
-                                    font-size: 12px;
+                                    font-size: 14px;
                                     color: ${theme.colours.textSecondary};
                                     text-align: left;
-                                    margin: 0 0 2px 12px;
+                                    margin: 0;
                                 `}
                             >
                                 Скорость
@@ -698,23 +733,23 @@ const ServiceAudioPlayer = () => {
                                 }}
                                 className={css`
                                     align-self: flex-start;
-                                    min-width: 84px;
+                                    min-width: 64px;
                                     min-height: 44px;
-                                    background: ${theme.colours.bgGrayLight};
-                                    border-radius: 8px;
-                                    font-size: 16px;
+                                    border-radius: 6px;
+                                    font-size: 14px;
                                     font-variant-numeric: tabular-nums;
                                     & .MuiSelect-select {
-                                        padding: 10px 32px 10px 12px;
+                                        padding: 12px 24px 12px 8px;
                                         text-align: left;
                                     }
                                     & .MuiSelect-select:focus {
                                         background: transparent;
-                                        border-radius: 8px;
+                                        border-radius: 6px;
                                         outline: none;
                                     }
                                     & .MuiSelect-icon {
-                                        right: 6px;
+                                        right: 0;
+                                        font-size: 20px;
                                         color: ${theme.colours.primary};
                                     }
                                     & .MuiOutlinedInput-notchedOutline {
@@ -756,13 +791,13 @@ const ServiceAudioPlayer = () => {
                             type="button"
                             onClick={() => audio.setMode('compact')}
                             className={`${buttonClass} ${css`
-                                gap: 8px;
                                 color: ${theme.colours.primary};
-                                padding: 10px 0 10px 8px;
+                                padding: 10px 0;
                                 font-size: 14px;
+                                text-decoration: underline;
+                                text-underline-offset: 3px;
                             `}`}
                         >
-                            <MenuBook aria-hidden="true" fontSize="small" />
                             Вернуться к тексту
                         </button>
                     </div>
