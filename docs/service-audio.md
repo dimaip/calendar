@@ -4,7 +4,7 @@
 
 ## Reading and listening
 
-Audio mode is off when a service opens, including after reload with a saved listening position. The toolbar headphones and the banner at the beginning of the service both open the compact player without starting playback. The banner disappears while audio mode is active. Pressing the toolbar headphones again exits audio mode completely.
+Audio mode is off when a service opens, including after reload with a saved listening position. The toolbar headphones and the banner at the beginning of the service both open the compact player without starting playback. “Слушать аудиозапись” always opens at the beginning (0:00); the toolbar headphones restore the saved listening position. The banner disappears while audio mode is active. Pressing the toolbar headphones again exits audio mode completely.
 
 The compact progress bar supports tapping, dragging, and keyboard seeking without changing play/pause state. Its thin track has a larger touch area. The chevron expands to the full player for scrubbing, speed, and 15-second skips. Both views have an **×** exit button; the full player also has a collapse button and “Вернуться к тексту”. Collapsing keeps playback running. Exiting stops playback, clears word highlighting and text following, hides both player views, and releases the audio element and listeners. The banner returns, and the saved position and chosen speed are available when reopening. Audio files and timing data are not requested before entering audio mode. Leaving the service also pauses and saves progress per recording URL.
 

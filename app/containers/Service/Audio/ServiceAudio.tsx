@@ -75,7 +75,7 @@ export const ServiceAudioButton = () => {
             title={audio.active ? 'Выйти из аудиорежима' : 'Открыть аудиоплеер'}
             onClick={() => {
                 if (audio.active) audio.closeAudio();
-                else audio.setMode('compact');
+                else audio.openAudio();
             }}
             className={css`
                 display: inline-flex;
@@ -121,7 +121,7 @@ export const ServiceAudioEntry = () => {
         <button
             type="button"
             aria-label="Слушать аудиозапись"
-            onClick={() => audio.setMode('compact')}
+            onClick={() => audio.openAudio(0)}
             className={css`
                 display: flex;
                 align-items: center;

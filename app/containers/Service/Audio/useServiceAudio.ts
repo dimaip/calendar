@@ -28,9 +28,6 @@ export const useServiceAudio = (recording: ServiceRecording | undefined) => {
         audio.defaultPlaybackRate = rateRef.current;
         audio.playbackRate = rateRef.current;
         elementRef.current = audio;
-        const saved = readAudioPosition(recording);
-        positionRef.current = saved;
-        setPosition(saved);
         let lastSaved = 0;
 
         const save = () => saveAudioPosition(recording, positionRef.current);
@@ -136,6 +133,11 @@ export const useServiceAudio = (recording: ServiceRecording | undefined) => {
         if (elementRef.current && elementRef.current.readyState > 0) elementRef.current.currentTime = next;
     }, []);
 
+    const openAudio = (startPosition = recording ? readAudioPosition(recording) : 0) => {
+        seek(startPosition);
+        setMode('compact');
+    };
+
     const closeAudio = () => {
         playAttemptRef.current += 1;
         elementRef.current?.pause();
@@ -208,6 +210,7 @@ export const useServiceAudio = (recording: ServiceRecording | undefined) => {
         error,
         expanded,
         rate,
+        openAudio,
         setMode,
         togglePlayback,
         play,
