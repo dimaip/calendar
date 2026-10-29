@@ -22,9 +22,15 @@ function ScrollRestoration({ history, visitedUrl }: RouteComponentProps & Props)
     const handlePopStateChange = (): void => {
         setTimeout(() => {
             const { location } = history;
-            const { pathname } = location;
+            const { pathname, state } = location;
             const existingRecord = visitedUrl.get(pathname);
-            scrollTo(existingRecord || 0);
+            const startAtTop =
+                history.action !== 'POP' &&
+                state &&
+                typeof state === 'object' &&
+                'scrollToTop' in state &&
+                state.scrollToTop === true;
+            scrollTo(startAtTop ? 0 : existingRecord || 0);
         }, 100);
     };
 

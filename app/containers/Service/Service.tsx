@@ -11,6 +11,7 @@ import MDXProvider from './MDXProvider';
 import ParallelLanguageBar from './ParallelLanguageBar';
 import { LangContext } from './LangContext';
 import { ServiceContext } from './ServiceContext';
+import CommunionNavigation from './CommunionNavigation';
 import { ServiceAudioProvider, ServiceAudioButton, ServiceAudioEntry, ServiceAudioPlayer } from './Audio/ServiceAudio';
 
 import { getFeastInfo } from 'domain/getDayInfo';
@@ -42,7 +43,15 @@ const reloadOnFailedImport = (e) => {
 const toUpperCase = (name) => name.charAt(0).toUpperCase() + name.slice(1);
 
 const Service = () => {
-    const { serviceId: originalServiceId, date, prayerId } = useParams();
+    const {
+        serviceId: originalServiceId,
+        date,
+        prayerId,
+    } = useParams<{
+        serviceId: string;
+        date: string;
+        prayerId?: string;
+    }>();
     const { data: day } = useDay(date);
     const [windowWidth] = useWindowSize();
 
@@ -62,7 +71,7 @@ const Service = () => {
     useSyncCurrentScriptVersion('vespers');
 
     // Expand serviceId
-    let serviceId;
+    let serviceId: string | undefined;
 
     if (day?.readings?.[originalServiceId]) {
         if (originalServiceId === 'Литургия') {
@@ -100,6 +109,9 @@ const Service = () => {
     }, [serviceId]);
 
     const currentServiceId = serviceId || originalServiceId;
+    const liturgy = services.find(
+        (service) => service.enabled && service.id === (lpod ? 'lpod' : vasiliy ? 'vasiliy' : 'zlatoust')
+    );
     const { completionPromptTimeOfDay, dismissCompletionPrompt } = usePrayerTimer({
         date,
         serviceId: currentServiceId,
@@ -145,7 +157,7 @@ const Service = () => {
             )}
             {service?.lang && <LanguageSwitcher />}
             {!service?.hideTOC && <TOCSwitcher service={service} lang={langState.lang} />}
-            {service?.scriptEditor && <ScriptVersionSelector serviceId={serviceId} />}
+            {service?.scriptEditor && <ScriptVersionSelector serviceId={currentServiceId} />}
         </>
     );
 
@@ -237,6 +249,7 @@ const Service = () => {
                                 </div>
                             </>
                         </Zoom>
+                        <CommunionNavigation serviceId={currentServiceId} date={date} liturgy={liturgy} />
                         {customPrayerInputShown && (
                             <CustomPrayerInput
                                 onClose={() => {

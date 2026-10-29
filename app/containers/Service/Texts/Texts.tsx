@@ -44,7 +44,7 @@ export const bratMolitvoslovPrayers = [
     },
 ];
 
-interface ServiceInfo {
+export interface ServiceInfo {
     title: string;
     id: string;
     enabled: boolean;
