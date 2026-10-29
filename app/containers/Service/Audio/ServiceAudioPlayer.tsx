@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Headset from '@material-ui/icons/Headset';
 import PlayArrow from '@material-ui/icons/PlayArrow';
 import Pause from '@material-ui/icons/Pause';
@@ -19,6 +20,14 @@ import { AudioContext } from './ServiceAudio';
 
 import type { AppTheme } from 'styles/AppTheme';
 import { formatAudioTime } from 'domain/serviceRecordings';
+
+const statusClass = css`
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+`;
 
 const ServiceAudioPlayer = () => {
     const audio = useContext(AudioContext);
@@ -57,6 +66,7 @@ const ServiceAudioPlayer = () => {
                 void audio.togglePlayback();
             }}
             className={`${buttonClass} ${css`
+                position: relative;
                 width: ${expanded ? 112 : 44}px;
                 height: ${expanded ? 112 : 44}px;
                 background: ${theme.colours.primary};
@@ -72,6 +82,26 @@ const ServiceAudioPlayer = () => {
             `}`}
         >
             {playing || loading ? <Pause aria-hidden="true" /> : <PlayArrow aria-hidden="true" />}
+            {loading && (
+                <CircularProgress
+                    aria-hidden="true"
+                    color="inherit"
+                    size={expanded ? 96 : 36}
+                    thickness={2}
+                    className={css`
+                        position: absolute;
+                        top: ${expanded ? 8 : 4}px;
+                        left: ${expanded ? 8 : 4}px;
+                        pointer-events: none;
+                        @media (prefers-reduced-motion: reduce) {
+                            &&,
+                            & circle {
+                                animation: none;
+                            }
+                        }
+                    `}
+                />
+            )}
         </button>
     );
     const status = loading ? 'Загрузка…' : playing ? 'Воспроизведение' : 'Пауза';
@@ -355,16 +385,7 @@ const ServiceAudioPlayer = () => {
                                 {error}
                             </p>
                         )}
-                        <span
-                            className={css`
-                                position: absolute;
-                                width: 1px;
-                                height: 1px;
-                                overflow: hidden;
-                                clip-path: inset(50%);
-                            `}
-                            role="status"
-                        >
+                        <span className={statusClass} role="status">
                             {status}
                         </span>
                     </section>
@@ -574,6 +595,7 @@ const ServiceAudioPlayer = () => {
                             justify-content: space-between;
                             color: ${theme.colours.textSecondary};
                             font-size: 13px;
+                            line-height: 1.4;
                             font-variant-numeric: tabular-nums;
                         `}
                     >
@@ -756,17 +778,9 @@ const ServiceAudioPlayer = () => {
                             {error}
                         </p>
                     )}
-                    {loading && (
-                        <p
-                            role="status"
-                            className={css`
-                                font-size: 14px;
-                                margin-top: 12px;
-                            `}
-                        >
-                            Загрузка…
-                        </p>
-                    )}
+                    <span className={statusClass} role="status">
+                        {status}
+                    </span>
                 </div>
             </Dialog>
         </>
