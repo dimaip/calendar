@@ -2,6 +2,8 @@ import { useTheme } from 'emotion-theming';
 import { useEffect, useRef, useState } from 'react';
 import type { RefObject } from 'react';
 
+import { createServiceTextGeometry } from './serviceTextGeometry';
+
 import { findSpokenWord, serviceTextTokens } from 'domain/serviceAudioTimings';
 import type { ServiceAudioTimings } from 'domain/serviceAudioTimings';
 import type { AppTheme } from 'styles/AppTheme';
@@ -43,6 +45,7 @@ export const useServiceAudioText = (
         let words: TimedTextWord[] = [];
         let paragraphs: HTMLParagraphElement[] = [];
         let current: TimedTextWord | null = null;
+        let layoutChanged = true;
         let frame = 0;
         let scrollFrame = 0;
         let scrollTimer = 0;
@@ -50,6 +53,7 @@ export const useServiceAudioText = (
         // Route restoration and smooth scrolling can emit scroll events over many frames.
         let autoScrollUntil = performance.now() + 800;
         let lastScrollY = window.scrollY;
+        const geometry = createServiceTextGeometry(root);
         // Use ordinary elements instead of CSS Custom Highlights: WebKit can
         // leave painted fragments behind even after a registered range is cleared.
         // Document coordinates keep the highlight attached during native scrolling.
@@ -72,7 +76,7 @@ export const useServiceAudioText = (
             scrollFrame = 0;
             const { top, bottom } = readingBounds();
             const paragraph = paragraphs.find((element) => {
-                const rect = element.getBoundingClientRect();
+                const rect = geometry.getBoundingClientRect(element);
                 return rect.bottom > top + 12 && rect.top < bottom;
             });
             if (!paragraph) {
@@ -83,7 +87,7 @@ export const useServiceAudioText = (
             const candidates = words.filter((word) => word.paragraph === paragraph);
             const word =
                 candidates.find((candidate) => {
-                    const rect = candidate.range.getBoundingClientRect();
+                    const rect = geometry.getBoundingClientRect(candidate.range);
                     return rect.top >= top - 2 && rect.bottom <= bottom;
                 }) ?? null;
             setTarget(word);
@@ -101,11 +105,12 @@ export const useServiceAudioText = (
         const paint = () => {
             const word = started && !expanded && audio.readyState > 0 ? findSpokenWord(words, audio.currentTime) : null;
             const wordChanged = word !== current;
-            if (wordChanged) {
+            if (wordChanged || layoutChanged) {
+                layoutChanged = false;
                 current = word;
                 clearHighlight();
                 if (word) {
-                    for (const rect of Array.from(word.range.getClientRects())) {
+                    for (const rect of geometry.getClientRects(word.range)) {
                         if (!rect.width || !rect.height) continue;
                         const fragment = document.createElement('div');
                         Object.assign(fragment.style, {
@@ -122,7 +127,7 @@ export const useServiceAudioText = (
                 }
             }
             if (word && followingRef.current && !audio.paused && (wordChanged || alignOnNextWord)) {
-                const rect = word.range.getBoundingClientRect();
+                const rect = geometry.getBoundingClientRect(word.range);
                 const { top, bottom } = readingBounds();
                 const readingLine = top + (bottom - top) * 0.3;
                 // Advance with each new line, before the spoken text reaches the
@@ -188,7 +193,8 @@ export const useServiceAudioText = (
             queueReadingPosition();
         };
         const onResize = () => {
-            current = null;
+            geometry.refresh();
+            layoutChanged = true;
             paint();
             queueReadingPosition();
         };
@@ -202,7 +208,7 @@ export const useServiceAudioText = (
             if (word) {
                 const { top, bottom } = readingBounds();
                 autoScrollUntil = performance.now() + 800;
-                const distance = word.range.getBoundingClientRect().top - top - (bottom - top) * 0.3;
+                const distance = geometry.getBoundingClientRect(word.range).top - top - (bottom - top) * 0.3;
                 window.scrollBy({
                     top: distance,
                     behavior:
@@ -267,6 +273,12 @@ export const useServiceAudioText = (
         observer.observe(root, { childList: true, characterData: true, subtree: true });
         const resizeObserver = new ResizeObserver(onResize);
         resizeObserver.observe(root);
+        // CSS zoom can change without changing the observed content-box size,
+        // including while paused. Refresh when a zoom ancestor's styles change.
+        const zoomObserver = new MutationObserver(onResize);
+        for (let element: HTMLElement | null = root; element; element = element.parentElement) {
+            zoomObserver.observe(element, { attributes: true, attributeFilter: ['class', 'style'] });
+        }
         window.addEventListener('wheel', detach, { passive: true });
         window.addEventListener('touchmove', detach, { passive: true });
         window.addEventListener('keydown', onKey);
@@ -281,6 +293,7 @@ export const useServiceAudioText = (
         return () => {
             observer.disconnect();
             resizeObserver.disconnect();
+            zoomObserver.disconnect();
             clearHighlight();
             overlay.remove();
             window.cancelAnimationFrame(frame);
