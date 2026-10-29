@@ -3,8 +3,11 @@ import test from 'node:test';
 
 import { createServiceTextGeometry } from './serviceTextGeometry.ts';
 
-// Model both browser geometry contracts using fixed rendered coordinates. The
-// legacy WebKit contract divides viewport positions AND sizes by effective zoom.
+// Fixed document coordinates, measured at multiple viewport scroll positions.
+// Legacy WebKit divides DOCUMENT positions and sizes by effective zoom, then
+// subtracts the unscaled scroll offset (Document::convertAbsoluteToClientRects).
+// Confirmed in iOS WebKit: at 150%, scaling the scroll offset causes 150px drift
+// after scrolling 300px. A viewport-only scaling mock misses that regression.
 const browserGeometry = (t, scalesElements, scalesRanges) => {
     class Rect {
         constructor(x, y, width, height) {
@@ -25,10 +28,16 @@ const browserGeometry = (t, scalesElements, scalesRanges) => {
     };
     const outer = { parentElement: null, style: { zoom: '1' } };
     const root = { parentElement: outer, style: { zoom: '1' } };
-    const rendered = [new Rect(48, -120, 93, 30), new Rect(24, -80, 45, 30)];
+    const viewport = { scrollX: 60, scrollY: 600 };
+    const rendered = [new Rect(108, 480, 93, 30), new Rect(84, 520, 45, 30)];
     const browserRect = (rect, scales) => {
         const divisor = scales ? 1 : Number(root.style.zoom) * Number(outer.style.zoom);
-        return new Rect(rect.x / divisor, rect.y / divisor, rect.width / divisor, rect.height / divisor);
+        return new Rect(
+            rect.x / divisor - viewport.scrollX,
+            rect.y / divisor - viewport.scrollY,
+            rect.width / divisor,
+            rect.height / divisor
+        );
     };
     class TextRange {
         selectNodeContents() {
@@ -38,7 +47,7 @@ const browserGeometry = (t, scalesElements, scalesRanges) => {
             if (this.probe) {
                 return new Rect(0, 0, 12 * (scalesRanges ? Number(probe.style.zoom) || 1 : 1), 16);
             }
-            return browserRect(new Rect(24, -120, 117, 70), scalesRanges);
+            return browserRect(new Rect(84, 480, 117, 70), scalesRanges);
         }
         getClientRects() {
             return rendered.map((rect) => browserRect(rect, scalesRanges));
@@ -48,6 +57,7 @@ const browserGeometry = (t, scalesElements, scalesRanges) => {
         document: { body, createElement: () => probe, createRange: () => new TextRange() },
         Range: TextRange,
         DOMRect: Rect,
+        window: viewport,
         getComputedStyle(element) {
             styleReads += 1;
             return element.style;
@@ -64,13 +74,28 @@ const browserGeometry = (t, scalesElements, scalesRanges) => {
     return {
         root,
         outer,
+        viewport,
         range: new TextRange(),
-        paragraph: { getBoundingClientRect: () => browserRect(new Rect(24, -120, 330, 180), scalesElements) },
+        paragraph: { getBoundingClientRect: () => browserRect(new Rect(84, 480, 330, 180), scalesElements) },
         rendered,
         assertRects(geometry) {
-            assert.deepEqual(geometry.getClientRects(this.range), rendered);
-            assert.deepEqual(geometry.getBoundingClientRect(this.range), new Rect(24, -120, 117, 70));
-            assert.deepEqual(geometry.getBoundingClientRect(this.paragraph), new Rect(24, -120, 330, 180));
+            const actual = [
+                ...geometry.getClientRects(this.range),
+                geometry.getBoundingClientRect(this.range),
+                geometry.getBoundingClientRect(this.paragraph),
+            ];
+            const expected = [...rendered, new Rect(84, 480, 117, 70), new Rect(84, 480, 330, 180)].map((rect) =>
+                browserRect(rect, true)
+            );
+            assert.equal(actual.length, expected.length);
+            for (let index = 0; index < expected.length; index += 1) {
+                for (const key of Object.keys(expected[index])) {
+                    assert.ok(
+                        Math.abs(actual[index][key] - expected[index][key]) < 1e-8,
+                        `rectangle ${index} ${key}: expected ${expected[index][key]}, got ${actual[index][key]}`
+                    );
+                }
+            }
         },
         get probesRemoved() {
             return probesRemoved;
@@ -101,7 +126,16 @@ for (const scalesElements of [true, false]) {
                 browser.root.style.zoom = String(inner);
                 browser.outer.style.zoom = String(outer);
                 geometry.refresh();
-                browser.assertRects(geometry);
+                // Scrolling must not require a refresh of the zoom measurement.
+                for (const [scrollX, scrollY] of [
+                    [0, 0],
+                    [60, 600],
+                    [90, 900],
+                    [0, 300],
+                ]) {
+                    Object.assign(browser.viewport, { scrollX, scrollY });
+                    browser.assertRects(geometry);
+                }
             }
 
             const readsAfterRefresh = browser.styleReads;
