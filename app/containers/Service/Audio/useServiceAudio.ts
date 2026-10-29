@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { readAudioPosition, saveAudioPosition } from 'domain/serviceRecordings';
 import type { ServiceRecording } from 'domain/serviceRecordings';
+import { registerServiceAudioMediaSession } from 'domain/serviceAudioMediaSession';
 
 export const useServiceAudio = (recording: ServiceRecording | undefined) => {
     const [mode, setMode] = useState<'off' | 'compact' | 'expanded'>('off');
@@ -115,14 +116,18 @@ export const useServiceAudio = (recording: ServiceRecording | undefined) => {
         }
     }, []);
 
+    const pause = useCallback(() => {
+        playAttemptRef.current += 1;
+        elementRef.current?.pause();
+        setLoading(false);
+        setPlaying(false);
+    }, []);
+
     const togglePlayback = async () => {
         const audio = elementRef.current;
         if (!audio) return;
-        if (!audio.paused || loading) {
-            playAttemptRef.current += 1;
-            audio.pause();
-            setLoading(false);
-        } else await play();
+        if (!audio.paused || loading) pause();
+        else await play();
     };
 
     const seek = useCallback((seconds: number) => {
@@ -138,16 +143,13 @@ export const useServiceAudio = (recording: ServiceRecording | undefined) => {
         setMode('compact');
     };
 
-    const closeAudio = () => {
-        playAttemptRef.current += 1;
-        elementRef.current?.pause();
-        setLoading(false);
-        setPlaying(false);
+    const closeAudio = useCallback(() => {
+        pause();
         setStarted(false);
         setMode('off');
         setError('');
         if (recording) saveAudioPosition(recording, positionRef.current);
-    };
+    }, [pause, recording]);
 
     const changeRate = (value: number) => {
         rateRef.current = value;
@@ -159,44 +161,20 @@ export const useServiceAudio = (recording: ServiceRecording | undefined) => {
     };
 
     useEffect(() => {
-        if (!recording || !started || !('mediaSession' in navigator) || typeof MediaMetadata === 'undefined') return;
-        const session = navigator.mediaSession;
-        const metadata = new MediaMetadata({ title: recording.title, artist: 'Богослужение на русском языке' });
-        session.metadata = metadata;
-        const actions: MediaSessionAction[] = ['play', 'pause', 'seekbackward', 'seekforward', 'seekto'];
-        const handler: MediaSessionActionHandler = (event) => {
-            if (event.action === 'play')
-                void elementRef.current?.play().catch(() => setError('Не удалось включить запись.'));
-            if (event.action === 'pause') elementRef.current?.pause();
+        const audio = elementRef.current;
+        if (!recording || !started || !audio) return;
+        return registerServiceAudioMediaSession(audio, recording, (event) => {
+            if (event.action === 'play') void play();
+            if (event.action === 'pause') pause();
+            if (event.action === 'stop') closeAudio();
             if (event.action === 'seekto' && event.seekTime !== undefined) seek(event.seekTime);
-            if (event.action === 'seekbackward') seek(positionRef.current - (event.seekOffset ?? 15));
-            if (event.action === 'seekforward') seek(positionRef.current + (event.seekOffset ?? 15));
-        };
-        for (const action of actions) {
-            try {
-                session.setActionHandler(action, handler);
-            } catch {
-                // Some browsers support only a subset of media actions.
+            if (event.action === 'seekbackward' || event.action === 'seekforward') {
+                const current = audio.readyState > 0 ? audio.currentTime : positionRef.current;
+                const offset = event.seekOffset ?? 15;
+                seek(current + (event.action === 'seekbackward' ? -offset : offset));
             }
-        }
-        return () => {
-            if (session.metadata !== metadata) return;
-            for (const action of actions) {
-                try {
-                    session.setActionHandler(action, null);
-                } catch {
-                    // Unsupported media actions also reject cleanup.
-                }
-            }
-            session.metadata = null;
-            session.playbackState = 'none';
-        };
-    }, [recording, seek, started]);
-
-    useEffect(() => {
-        if (!started || !('mediaSession' in navigator)) return;
-        navigator.mediaSession.playbackState = playing ? 'playing' : 'paused';
-    }, [started, playing]);
+        });
+    }, [recording, started, play, pause, seek, closeAudio]);
 
     return {
         recording,

@@ -21,6 +21,14 @@ The player UI and the selected recording's timing data load in separate `service
 
 During compact playback, timestamp lookup uses binary search. Highlight updates and following-related layout reads run when the spoken word changes, rather than every animation frame. Scroll-position updates are throttled to five per second. Paused playback and the full player do not run a text animation loop.
 
+## System playback controls
+
+After playback starts, supported browsers receive the service title, language description, and existing app icon through the Media Session API. System play, pause, stop, seek, and 15-second skip commands use the same playback actions as the in-app player. Skip commands read the audio element's current time directly, so they do not depend on foreground UI updates. Stop exits audio mode; play restarts an ended recording from the beginning.
+
+Duration, position, and playback speed are reported on media events, including seeks, rate changes, pause, and playback resuming. The operating system advances its timeline between these updates; there is no extra polling loop. Unknown durations are cleared, unsupported actions are ignored individually, and missing position support does not affect playback. Exiting or leaving the service removes the listeners and system handlers and clears metadata and position state. Opening the compact player without pressing play does not claim the system controls.
+
+The operating system decides which controls appear. Real-device QA is still required in iPhone Safari, Chrome, and the installed PWA: start playback, lock the phone, pause/resume, skip/seek where offered, check the timeline after changing speed, and return to the app. Repeat after an interruption and confirm that exiting audio mode stops playback. Browser integration tests cannot verify the actual iOS lock-screen UI or background lifecycle.
+
 ## Generate timings locally
 
 Use Python 3.11 and ffmpeg, start the app with `yarn start`, then install tools in an isolated environment:
@@ -65,9 +73,9 @@ Review the generated timings by listening while following the text, particularly
 ## Checks
 
 ```sh
-node_modules/.bin/tsx --test app/domain/serviceRecordings.test.mjs app/domain/serviceAudioTimings.test.mjs
+node_modules/.bin/tsx --test app/domain/serviceRecordings.test.mjs app/domain/serviceAudioTimings.test.mjs app/domain/serviceAudioMediaSession.test.mjs
 python3 scripts/annotate-service-audio.test.py
 /tmp/service-audio-tools/bin/python scripts/align-service-words.test.py
 ```
 
-Annotation tests need only the standard library; alignment tests also need rapidfuzz. Frontend tests check normalization/DOM offsets, seeking and silent gaps, storage behavior, canonical word indices, and monotonic published timings.
+Annotation tests need only the standard library; alignment tests also need rapidfuzz. Frontend tests check normalization/DOM offsets, seeking and silent gaps, storage behavior, canonical word indices, monotonic published timings, and Media Session metadata, timeline updates, partial browser support, and cleanup.
