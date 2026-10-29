@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
 import Dialog from '@material-ui/core/Dialog';
+import Slide from '@material-ui/core/Slide';
+import type { SlideProps } from '@material-ui/core/Slide';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import CircularProgress from '@material-ui/core/CircularProgress';
@@ -32,13 +34,17 @@ const statusClass = css`
     clip-path: inset(50%);
 `;
 
+const PlayerTransition = React.forwardRef<unknown, SlideProps>(function PlayerTransition(props, ref) {
+    return <Slide {...props} direction="up" ref={ref} />;
+});
+
 const ServiceAudioPlayer = () => {
     const audio = useContext(AudioContext);
     const theme = useTheme<AppTheme>();
     const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)', { noSsr: true });
     if (!audio?.recording || !audio.active) return null;
     const { recording, position, duration, playing, loading, error, expanded, rate } = audio;
-    const transitionDuration = prefersReducedMotion ? 0 : expanded ? 220 : 160;
+    const transitionDuration = prefersReducedMotion ? 0 : expanded ? 340 : 280;
     const buttonClass = css`
         display: inline-flex;
         align-items: center;
@@ -422,6 +428,7 @@ const ServiceAudioPlayer = () => {
             <Dialog
                 open={expanded}
                 fullScreen
+                TransitionComponent={PlayerTransition}
                 transitionDuration={transitionDuration}
                 onClose={() => audio.setMode('compact')}
                 aria-labelledby="service-audio-title"
@@ -434,27 +441,6 @@ const ServiceAudioPlayer = () => {
                     className: css`
                         padding-top: env(safe-area-inset-top);
                         padding-bottom: env(safe-area-inset-bottom);
-                        animation: ${expanded ? 'serviceAudioExpand' : 'serviceAudioCollapse'} ${transitionDuration}ms
-                            ${expanded ? 'ease-out' : 'ease-in'} both;
-                        @keyframes serviceAudioExpand {
-                            from {
-                                transform: translateY(12px);
-                            }
-                            to {
-                                transform: translateY(0);
-                            }
-                        }
-                        @keyframes serviceAudioCollapse {
-                            from {
-                                transform: translateY(0);
-                            }
-                            to {
-                                transform: translateY(12px);
-                            }
-                        }
-                        @media (prefers-reduced-motion: reduce) {
-                            animation: none;
-                        }
                         & button:focus-visible {
                             outline: 2px solid ${theme.colours.primary};
                             outline-offset: 2px;
