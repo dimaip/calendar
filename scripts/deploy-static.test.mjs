@@ -58,10 +58,8 @@ test('assets precede shell; stable entrypoints get no-cache; old assets are neve
         assert.equal(args[0], 'put');
         assert.ok(args.includes('--add-header=Cache-Control:no-cache'));
     }
-    assert.deepEqual(
-        plan.assets.slice(2).map((args) => args[0]),
-        ['put', 'put']
-    );
+    assert.equal(plan.assets.length, 2);
+    assert.deepEqual(plan.shellAssets, ['built/main.12345678.js', 'built/main.12345678.css']);
 });
 
 test('preflight rejects missing, dev and inconsistent releases or unhashed build files', (t) => {
@@ -117,7 +115,7 @@ test('announce only after served shell verification; no uploads continue on fail
             return servedFile(
                 root,
                 file,
-                plan.shellChecks.slice(0, 2).includes(file) ? 'public, max-age=31536000, immutable' : 'no-cache'
+                plan.shellAssets.includes(file) ? 'public, max-age=31536000, immutable' : 'no-cache'
             );
         }
     };
@@ -130,6 +128,13 @@ test('announce only after served shell verification; no uploads continue on fail
         plan.shellChecks.length
     );
     assert.equal(calls.slice(firstAnnouncement).filter(([command]) => command === 'curl').length, 3);
+    const firstShellUpload = calls.findIndex(
+        ([command, args]) => command === 's3cmd' && args.at(-1) === 's3://molitva.app/index.html'
+    );
+    assert.equal(
+        calls.slice(0, firstShellUpload).filter(([command]) => command === 'curl').length,
+        plan.shellAssets.length
+    );
 
     const failed = [];
     assert.throws(
@@ -155,6 +160,116 @@ test('announce only after served shell verification; no uploads continue on fail
         /upload failed/
     );
     assert.equal(attempts, 1);
+});
+
+test('new assets upload once and unchanged assets never upload during a repeat deployment', (t) => {
+    const root = releaseFixture(t);
+    const plan = createDeploymentPlan(root);
+    const policy = 'public, max-age=31536000, immutable';
+    const css = 'built/main.12345678.css';
+    const remote = new Map([[css, { body: readFileSync(resolve(root, css)), policy }]]);
+    const uploadedAssets = [];
+    const requests = [];
+    const run = (command, args) => {
+        if (command === 'curl') {
+            const file = new URL(args.at(-1)).pathname.slice(1);
+            requests.push(file);
+            const stored = remote.get(file);
+            assert.ok(stored, `Must upload ${file} before verification`);
+            return Buffer.concat([stored.body, Buffer.from(`\n200\n${stored.policy}`)]);
+        }
+        if (args[0] === 'sync' && args.at(-1) === 's3://molitva.app/built/') {
+            for (const file of plan.shellAssets) {
+                const body = readFileSync(resolve(root, file));
+                if (!remote.get(file)?.body.equals(body)) {
+                    uploadedAssets.push(file);
+                    remote.set(file, { body, policy });
+                }
+            }
+        } else if (args[0] === 'put') {
+            const file = new URL(args.at(-1)).pathname.slice(1);
+            if (plan.shellAssets.includes(file)) uploadedAssets.push(file);
+            remote.set(file, {
+                body: readFileSync(resolve(root, file)),
+                policy: args.find((arg) => arg.startsWith('--add-header=Cache-Control:')).split(':')[1],
+            });
+        }
+    };
+    uploadDeployment(plan, run);
+    assert.deepEqual(uploadedAssets, ['built/main.12345678.js']);
+    assert.equal(requests.length, plan.shellChecks.length + plan.announcements.length);
+    uploadedAssets.length = 0;
+    requests.length = 0;
+    uploadDeployment(plan, run);
+    assert.deepEqual(uploadedAssets, []);
+    assert.equal(requests.length, plan.shellChecks.length + plan.announcements.length);
+});
+
+test('only incorrect cache headers trigger a repair, verified before publishing the shell', (t) => {
+    const root = releaseFixture(t);
+    const plan = createDeploymentPlan(root);
+    const broken = plan.shellAssets[0];
+    for (const incorrectPolicy of ['', 'no-cache']) {
+        const calls = [];
+        let repaired = false;
+        uploadDeployment(plan, (command, args) => {
+            const file = new URL(args.at(-1)).pathname.slice(1);
+            calls.push({ command, action: args[0], file });
+            if (command === 's3cmd' && args[0] === 'put' && file === broken) {
+                assert.ok(args.includes('--add-header=Cache-Control:public, max-age=31536000, immutable'));
+                repaired = true;
+            }
+            if (command === 'curl') {
+                return servedFile(
+                    root,
+                    file,
+                    file === broken && !repaired
+                        ? incorrectPolicy
+                        : plan.shellAssets.includes(file)
+                          ? 'public, max-age=31536000, immutable'
+                          : 'no-cache'
+                );
+            }
+        });
+        const firstShellUpload = calls.findIndex(({ action, file }) => action === 'put' && file === 'index.html');
+        assert.deepEqual(
+            calls.slice(0, firstShellUpload).filter(({ file }) => file === broken),
+            [
+                { command: 'curl', action: '--ipv4', file: broken },
+                { command: 's3cmd', action: 'put', file: broken },
+                { command: 'curl', action: '--ipv4', file: broken },
+            ]
+        );
+        assert.equal(calls.filter(({ action, file }) => action === 'put' && plan.shellAssets.includes(file)).length, 1);
+    }
+});
+
+test('bad asset responses and failed repairs block the shell without retrying PUTs', (t) => {
+    const root = releaseFixture(t);
+    const plan = createDeploymentPlan(root);
+    const broken = plan.shellAssets[0];
+    for (const failure of ['wrong bytes', 'not found', 'network', 'upload', 'unchanged header', 'corrupt repair']) {
+        const puts = [];
+        assert.throws(
+            () =>
+                uploadDeployment(plan, (command, args) => {
+                    if (command === 's3cmd' && args[0] === 'put') {
+                        puts.push(new URL(args.at(-1)).pathname.slice(1));
+                        if (failure === 'upload') throw new Error('repair upload failed');
+                    }
+                    if (command !== 'curl') return;
+                    if (failure === 'network') throw new Error('network failed');
+                    if (failure === 'not found') return Buffer.from('not found\n404\nno-cache');
+                    if (failure === 'wrong bytes' || (failure === 'corrupt repair' && puts.length)) {
+                        return Buffer.from('incorrect bytes\n200\npublic, max-age=31536000, immutable');
+                    }
+                    return servedFile(root, broken, 'no-cache');
+                }),
+            /failed/,
+            failure
+        );
+        assert.deepEqual(puts, ['upload', 'unchanged header', 'corrupt repair'].includes(failure) ? [broken] : []);
+    }
 });
 
 test('CLI rejects unknown modes before building or uploading', () => {

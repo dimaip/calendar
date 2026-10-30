@@ -69,10 +69,8 @@ export function createDeploymentPlan(root) {
                 `${resolve(root)}/`,
                 bucket,
             ],
-            // Sync skips unchanged bytes even when metadata is wrong. PUT the
-            // small set of shell assets to make their headers self-correcting.
-            ...shellAssets.map((file) => put(file, immutable)),
         ],
+        shellAssets,
         shell: ['index.html', 'service-worker.js'].map((file) => put(file, 'no-cache')),
         announcements: announcements.map((file) => put(file, 'no-cache')),
         shellChecks: [...shellAssets, 'index.html', 'service-worker.js'],
@@ -86,7 +84,7 @@ function runCommand(command, args, options = {}) {
     return result.stdout;
 }
 
-export function verifyDeployment(plan, files, run = runCommand) {
+export function verifyDeployment(plan, files, run = runCommand, { repairCacheHeaders = false } = {}) {
     for (const file of files) {
         const output = run(
             'curl',
@@ -119,11 +117,22 @@ export function verifyDeployment(plan, files, run = runCommand) {
             .trim();
         const status = output.subarray(statusSeparator + 1, headerSeparator).toString();
         const expectedPolicy = entrypoints.includes(file) ? 'no-cache' : immutable;
-        if (
-            status !== '200' ||
-            policy !== expectedPolicy ||
-            !output.subarray(0, statusSeparator).equals(readFileSync(resolve(plan.root, file)))
-        ) {
+        const matchesContent =
+            status === '200' && output.subarray(0, statusSeparator).equals(readFileSync(resolve(plan.root, file)));
+        if (!matchesContent || policy !== expectedPolicy) {
+            // Sync skips unchanged bytes even when metadata is wrong. Reuse this
+            // verification to repair only affected assets, then verify once more.
+            if (repairCacheHeaders && matchesContent && plan.shellAssets.includes(file)) {
+                console.log(`Repairing Cache-Control for ${file}`);
+                run('s3cmd', [
+                    'put',
+                    `--add-header=Cache-Control:${immutable}`,
+                    resolve(plan.root, file),
+                    `${bucket}${file}`,
+                ]);
+                verifyDeployment(plan, [file], run);
+                continue;
+            }
             throw new Error(`Production verification failed for ${file}: status ${status}, Cache-Control ${policy}`);
         }
         console.log(`Verified ${file}: ${policy}`);
@@ -131,10 +140,13 @@ export function verifyDeployment(plan, files, run = runCommand) {
 }
 
 export function uploadDeployment(plan, run = runCommand) {
-    for (const args of [...plan.assets, ...plan.shell]) run('s3cmd', args);
+    for (const args of plan.assets) run('s3cmd', args);
+    // Validate dependencies before exposing a shell that references them.
+    verifyDeployment(plan, plan.shellAssets, run, { repairCacheHeaders: true });
+    for (const args of plan.shell) run('s3cmd', args);
     // Do not announce a new version until its shell and controlling worker
     // are actually served with the intended bytes and headers.
-    verifyDeployment(plan, plan.shellChecks, run);
+    verifyDeployment(plan, ['index.html', 'service-worker.js'], run);
     for (const args of plan.announcements) run('s3cmd', args);
     verifyDeployment(plan, announcements, run);
 }
@@ -160,6 +172,9 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
             for (const args of [...plan.assets, ...plan.shell, ...plan.announcements]) {
                 console.log(['s3cmd', ...args].map((arg) => JSON.stringify(arg)).join(' '));
             }
+            console.log(
+                'After asset sync, verify shell assets and PUT only assets with incorrect Cache-Control; reverify repairs before uploading the shell.'
+            );
             console.log('Verify shell bytes/headers before announcing; verify version endpoints afterward.');
         } else if (mode[0] === '--verify-only') {
             verifyDeployment(plan, [...plan.shellChecks, ...announcements]);

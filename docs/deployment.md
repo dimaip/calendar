@@ -11,16 +11,21 @@ then uploads in this order:
    `Cache-Control: public, max-age=31536000, immutable`.
 2. Other static assets with their existing default policy. Old remote files
    are retained so an older installed app can still load its chunks.
-3. Shell JS/CSS via PUT, even if unchanged, to repair missing cache metadata.
+3. Verify shell JS/CSS against local bytes and the immutable cache policy.
+   Re-upload only assets whose bytes match but whose cache headers are incorrect,
+   then verify each repair. Correct assets, including those just uploaded by sync,
+   are not uploaded again. A missing asset, content mismatch or failed repair
+   stops the deployment before publishing the shell.
 4. `index.html`, then `service-worker.js`, with `Cache-Control: no-cache`.
-5. Verify the served shell, worker and shell assets against local bytes and
-   headers before publishing any version announcement.
+5. Verify the served shell and worker against local bytes and headers before
+   publishing any version announcement.
 6. `version`, `built/version`, and finally `built/version.json`, with
    `Cache-Control: no-cache`; verify these endpoints too.
 
-Headers are attached during upload. No metadata-only S3 copy permissions are
-needed. `no-cache` allows storage but requires HTTP revalidation; it does not
-disable the service worker's offline Cache API.
+Headers are attached during upload. Conditional repairs reuse the existing
+verification requests; only repaired files require an extra verification request.
+No metadata-only S3 copy permissions are needed. `no-cache` allows storage but
+requires HTTP revalidation; it does not disable the service worker's offline Cache API.
 
 ## Stable build layout
 
