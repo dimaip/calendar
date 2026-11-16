@@ -76,12 +76,19 @@ if (module.hot) {
 
 if (isProd) {
     serviceWorker.register();
+    window.addEventListener('online', serviceWorker.register);
 }
 if (isCapacitor()) {
-    precache();
+    void precache();
+    window.addEventListener('online', () => {
+        void precache();
+    });
 } else {
-    const precacheWorker = new Worker();
+    const precacheWorker: globalThis.Worker = new Worker();
     precacheWorker.postMessage('precache');
+    window.addEventListener('online', () => {
+        precacheWorker.postMessage('precache');
+    });
 }
 
 window.addEventListener('beforeinstallprompt', (e) => {

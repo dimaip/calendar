@@ -5,42 +5,40 @@ export function register() {
             return;
         }
 
-        window.addEventListener('load', () => {
-            const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+        const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
 
-            navigator.serviceWorker
-                .register(swUrl)
-                .then((registration) => {
-                    registration.onupdatefound = () => {
-                        const installingWorker = registration.installing;
-                        if (installingWorker == null) {
-                            return;
-                        }
-                        // Prevents Chrome's "Update on reload" from going into infinite loop
-                        let lockRefresh = false;
-                        installingWorker.onstatechange = () => {
-                            if (installingWorker.state === 'activated') {
-                                if (lockRefresh) {
-                                    return;
-                                }
-                                lockRefresh = true;
-                                // serviceWorker.controller points to the current SW. If it exists, it means it's an update.
-                                if (navigator.serviceWorker.controller) {
-                                    console.log('SW update activated', VERSION);
-                                    // Now that we now it's not a first app install, we could reload to get the fresh app assets.
-                                    // But let's not, not to annoy users... The actual refresh would happen via UpdatePrompt
-                                } else {
-                                    // @TODO: display a "Content is cached for offline use." message.
-                                    console.log('Fresh SW activated.', VERSION);
-                                }
+        navigator.serviceWorker
+            .register(swUrl)
+            .then((registration) => {
+                registration.onupdatefound = () => {
+                    const installingWorker = registration.installing;
+                    if (installingWorker == null) {
+                        return;
+                    }
+                    // Prevents Chrome's "Update on reload" from going into infinite loop
+                    let lockRefresh = false;
+                    installingWorker.onstatechange = () => {
+                        if (installingWorker.state === 'activated') {
+                            if (lockRefresh) {
+                                return;
                             }
-                        };
+                            lockRefresh = true;
+                            // serviceWorker.controller points to the current SW. If it exists, it means it's an update.
+                            if (navigator.serviceWorker.controller) {
+                                console.log('SW update activated', VERSION);
+                                // Now that we now it's not a first app install, we could reload to get the fresh app assets.
+                                // But let's not, not to annoy users... The actual refresh would happen via UpdatePrompt
+                            } else {
+                                // @TODO: display a "Content is cached for offline use." message.
+                                console.log('Fresh SW activated.', VERSION);
+                            }
+                        }
                     };
-                })
-                .catch((error) => {
-                    console.error('Error during service worker registration:', error);
-                });
-        });
+                };
+            })
+            .catch((error) => {
+                console.error('Error during service worker registration:', error);
+            });
     }
 }
 

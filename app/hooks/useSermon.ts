@@ -2,12 +2,12 @@ import { useQuery } from 'react-query';
 
 import { Sermon } from './useFilteredSermons';
 
+import cachedFetch from 'utils/cachedFetch';
+
 const fetchSermon = async (sermonId: string): Promise<Sermon | null> =>
-    fetch(`https://psmb.ru/s/${sermonId}.html?format=json`).then((response) => {
-        if (!response.ok) {
-            return null;
-        }
-        return (response.json() as unknown) as Sermon;
+    cachedFetch<Sermon>(`https://psmb.ru/s/${sermonId}.html?format=json`).catch((error: unknown) => {
+        if (error instanceof Error && error.cause instanceof Response) return null;
+        throw error;
     });
 
 const useSermon = (sermonId: string) =>

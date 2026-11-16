@@ -16,6 +16,16 @@ import Button from 'components/Button/Button';
 
 const useServiceAudioController = (recording: ServiceRecording | undefined) => {
     const controller = useServiceAudio(recording);
+    const [online, setOnline] = useState(() => navigator.onLine !== false);
+    useEffect(() => {
+        const updateOnline = () => setOnline(navigator.onLine !== false);
+        window.addEventListener('online', updateOnline);
+        window.addEventListener('offline', updateOnline);
+        return () => {
+            window.removeEventListener('online', updateOnline);
+            window.removeEventListener('offline', updateOnline);
+        };
+    }, []);
     const [language, setLanguage] = useRecoilState(langState);
     const [timings, setTimings] = useState<ServiceAudioTimings | null>(null);
     const [timingsError, setTimingsError] = useState(false);
@@ -49,7 +59,7 @@ const useServiceAudioController = (recording: ServiceRecording | undefined) => {
         text.followAudio(text.target.start);
         void controller.play();
     };
-    return { ...controller, text, listenFromHere, timingsError, setTimingAttempt, language, setLanguage };
+    return { ...controller, text, listenFromHere, timingsError, setTimingAttempt, language, setLanguage, online };
 };
 
 export const AudioContext = createContext<ReturnType<typeof useServiceAudioController> | null>(null);
@@ -72,7 +82,14 @@ export const ServiceAudioButton = () => {
     return (
         <Button
             aria-pressed={audio.active}
-            title={audio.active ? 'Выйти из аудиорежима' : 'Открыть аудиоплеер'}
+            disabled={!audio.online && !audio.active}
+            title={
+                !audio.online
+                    ? 'Аудиозапись доступна при подключении к интернету'
+                    : audio.active
+                      ? 'Выйти из аудиорежима'
+                      : 'Открыть аудиоплеер'
+            }
             onClick={() => {
                 if (audio.active) audio.closeAudio();
                 else audio.openAudio();
@@ -121,6 +138,7 @@ export const ServiceAudioEntry = () => {
         <button
             type="button"
             aria-label="Слушать аудиозапись"
+            disabled={!audio.online}
             onClick={() => audio.openAudio(0)}
             className={css`
                 display: flex;
@@ -164,7 +182,9 @@ export const ServiceAudioEntry = () => {
                         font-size: 12px;
                     `}
                 >
-                    На русском · {formatAudioTime(audio.recording.duration)}
+                    {audio.online
+                        ? `На русском · ${formatAudioTime(audio.recording.duration)}`
+                        : 'Для аудиозаписи нужен интернет'}
                 </small>
             </span>
         </button>
