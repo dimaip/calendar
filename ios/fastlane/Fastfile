@@ -92,6 +92,8 @@ platform :ios do
         wait_processing_timeout_duration: 1800
       )
     end
+    # The archive directory is gone. App Store submission uses the uploaded build number.
+    Fastlane::Actions.lane_context.delete(Fastlane::Actions::SharedValues::IPA_OUTPUT_PATH)
     build_number
   end
 
