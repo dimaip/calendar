@@ -127,7 +127,8 @@ platform :ios do
       workspace: "App/App.xcworkspace",
       scheme: "App",
       configuration: "Release",
-      xcargs: "MARKETING_VERSION=#{options.fetch(:version)}",
+      # Match the minimum supported iOS version of the App Store release.
+      xcargs: "MARKETING_VERSION=#{options.fetch(:version)} IPHONEOS_DEPLOYMENT_TARGET=13.0",
       output_directory: options.fetch(:directory),
       archive_path: File.join(options.fetch(:directory), "App.xcarchive"),
       # Sign at export using the installed distribution identity and profile.
