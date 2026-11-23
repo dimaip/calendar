@@ -103,18 +103,7 @@ platform :ios do
     unless profile_entitlements["beta-reports-active"] && profile_entitlements["application-identifier"] == application_identifier
       UI.user_error!("Use an App Store Connect distribution profile for #{APP_IDENTIFIER}.")
     end
-    UI.user_error!("Create the profile in the Apple Developer portal for manual signing.") if profile["IsXcodeManaged"]
-
     install_provisioning_profile(path: profile_path)
-
-    update_code_signing_settings(
-      path: "App/App.xcodeproj",
-      targets: ["App"],
-      build_configurations: ["Release"],
-      use_automatic_signing: false,
-      code_sign_identity: "Apple Distribution",
-      profile_name: profile.fetch("Name")
-    )
 
     update_plist(plist_path: "App/App/Info.plist", block: proc do |plist|
       plist["CFBundleVersion"] = options.fetch(:build_number)
@@ -141,12 +130,13 @@ platform :ios do
       xcargs: "MARKETING_VERSION=#{options.fetch(:version)}",
       output_directory: options.fetch(:directory),
       archive_path: File.join(options.fetch(:directory), "App.xcarchive"),
+      # Sign at export using the installed distribution identity and profile.
+      skip_codesigning: true,
       skip_profile_detection: true,
       export_method: "app-store",
       export_options: {
-        signingStyle: "manual",
-        signingCertificate: "Apple Distribution",
-        provisioningProfiles: { APP_IDENTIFIER => profile.fetch("Name") },
+        signingStyle: "automatic",
+        teamID: profile.fetch("TeamIdentifier").first,
         manageAppVersionAndBuildNumber: false
       }
     )

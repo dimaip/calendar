@@ -35,7 +35,7 @@ for `master` and set these environment secrets.
 | `ASC_KEY` | Contents of the downloaded `.p8` file |
 | `IOS_CERTIFICATE_BASE64` | Base64-encoded `.p12` containing the Apple Distribution certificate and its private key |
 | `IOS_CERTIFICATE_PASSWORD` | Password used to export the `.p12` |
-| `IOS_PROFILE_BASE64` | Base64-encoded App Store Connect provisioning profile for `com.pb.orthodox`, created in the Apple Developer portal with the distribution certificate |
+| `IOS_PROFILE_BASE64` | Base64-encoded App Store Connect provisioning profile for `com.pb.orthodox` that includes the distribution certificate |
 
 Keep the files out of the repository. GitHub CLI can read the files directly
 into the environment secrets.
