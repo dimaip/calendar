@@ -1,0 +1,154 @@
+require "tmpdir"
+
+default_platform(:ios)
+
+APP_IDENTIFIER = "com.pb.orthodox"
+
+platform :ios do
+  desc "Upload a build to TestFlight or submit an exact build for App Store review"
+  lane :release do
+    version = ENV.fetch("IOS_VERSION")
+    notes = ENV.fetch("IOS_RELEASE_NOTES", "").strip
+    submit_to_store = ENV.fetch("IOS_RELEASE_TARGET") == "app-store"
+    build_number = ENV.fetch("IOS_BUILD_NUMBER", "").strip
+
+    api_key = app_store_connect_api_key(
+      key_id: ENV.fetch("ASC_KEY_ID"),
+      issuer_id: ENV.fetch("ASC_ISSUER_ID"),
+      key_content: ENV.fetch("ASC_KEY")
+    )
+
+    if submit_to_store
+      app = Spaceship::ConnectAPI::App.find(APP_IDENTIFIER)
+      UI.user_error!("Could not find #{APP_IDENTIFIER} in App Store Connect.") unless app
+
+      draft = app.get_edit_app_store_version(platform: Spaceship::ConnectAPI::Platform::IOS)
+      if draft && draft.version_string != version
+        UI.user_error!("App Store Connect already has a draft for #{draft.version_string}. Finish that release before submitting #{version}.")
+      end
+
+      unless build_number.empty?
+        build = Spaceship::ConnectAPI::Build.all(
+          app_id: app.id,
+          version: version,
+          build_number: build_number,
+          platform: Spaceship::ConnectAPI::Platform::IOS
+        ).first
+        unless build && build.processing_state == Spaceship::ConnectAPI::Build::ProcessingState::VALID && !build.expired
+          UI.user_error!("iOS #{version} (build #{build_number}) is unavailable. Use the build number of a processed, active TestFlight build.")
+        end
+      end
+    end
+
+    if build_number.empty?
+      build_number = build_and_upload(version: version, notes: notes, api_key: api_key)
+    end
+
+    if submit_to_store
+      upload_to_app_store(
+        api_key: api_key,
+        app_identifier: APP_IDENTIFIER,
+        app_version: version,
+        build_number: build_number,
+        release_notes: { "default" => notes },
+        skip_binary_upload: true,
+        skip_screenshots: true,
+        force: true,
+        run_precheck_before_submit: false,
+        submit_for_review: true,
+        automatic_release: true
+      )
+    end
+
+    if ENV["GITHUB_STEP_SUMMARY"]
+      result = submit_to_store ? "submitted for App Review with automatic release" : "uploaded to TestFlight"
+      File.open(ENV.fetch("GITHUB_STEP_SUMMARY"), "a") do |summary|
+        summary.puts("iOS #{version} (build #{build_number}) #{result}.")
+      end
+    end
+  end
+
+  private_lane :build_and_upload do |options|
+    version = options.fetch(:version)
+    api_key = options.fetch(:api_key)
+    latest_build = latest_testflight_build_number(
+      api_key: api_key,
+      app_identifier: APP_IDENTIFIER,
+      version: version,
+      initial_build_number: 0
+    )
+    # A higher first component sorts after the existing build, including dotted build numbers.
+    build_number = (latest_build.to_i + 1).to_s
+
+    Dir.mktmpdir("calendar-ios-", ENV["RUNNER_TEMP"]) do |directory|
+      ipa = archive_release(version: version, build_number: build_number, directory: directory)
+      UI.message("Uploading iOS #{version} (build #{build_number}).")
+      upload_to_testflight(
+        api_key: api_key,
+        app_identifier: APP_IDENTIFIER,
+        ipa: ipa,
+        changelog: options.fetch(:notes).empty? ? nil : options.fetch(:notes),
+        skip_submission: true,
+        wait_processing_timeout_duration: 1800
+      )
+    end
+    build_number
+  end
+
+  private_lane :archive_release do |options|
+    profile_path = ENV.fetch("IOS_PROFILE_PATH")
+    profile = FastlaneCore::ProvisioningProfile.parse(profile_path)
+    profile_entitlements = profile.fetch("Entitlements")
+    application_identifier = "#{profile.fetch("ApplicationIdentifierPrefix").first}.#{APP_IDENTIFIER}"
+    unless profile_entitlements["beta-reports-active"] && profile_entitlements["application-identifier"] == application_identifier
+      UI.user_error!("Use an App Store Connect distribution profile for #{APP_IDENTIFIER}.")
+    end
+    UI.user_error!("Create the profile in the Apple Developer portal for manual signing.") if profile["IsXcodeManaged"]
+
+    install_provisioning_profile(path: profile_path)
+
+    update_code_signing_settings(
+      path: "App/App.xcodeproj",
+      targets: ["App"],
+      build_configurations: ["Release"],
+      use_automatic_signing: false,
+      code_sign_identity: "Apple Distribution",
+      profile_name: profile.fetch("Name")
+    )
+
+    update_plist(plist_path: "App/App/Info.plist", block: proc do |plist|
+      plist["CFBundleVersion"] = options.fetch(:build_number)
+      encryption = ENV.fetch("IOS_USES_NON_EXEMPT_ENCRYPTION", "")
+      code = ENV.fetch("IOS_ENCRYPTION_COMPLIANCE_CODE", "")
+      case encryption
+      when "true"
+        plist["ITSAppUsesNonExemptEncryption"] = true
+        plist["ITSEncryptionExportComplianceCode"] = code unless code.empty?
+      when "false"
+        plist["ITSAppUsesNonExemptEncryption"] = false
+        plist.delete("ITSEncryptionExportComplianceCode")
+      when ""
+        # Use the project's existing declaration, if present.
+      else
+        UI.user_error!("IOS_USES_NON_EXEMPT_ENCRYPTION must be true or false.")
+      end
+    end)
+
+    build_app(
+      workspace: "App/App.xcworkspace",
+      scheme: "App",
+      configuration: "Release",
+      xcargs: "MARKETING_VERSION=#{options.fetch(:version)}",
+      output_directory: options.fetch(:directory),
+      archive_path: File.join(options.fetch(:directory), "App.xcarchive"),
+      skip_profile_detection: true,
+      export_method: "app-store",
+      export_options: {
+        signingStyle: "manual",
+        signingCertificate: "Apple Distribution",
+        provisioningProfiles: { APP_IDENTIFIER => profile.fetch("Name") },
+        manageAppVersionAndBuildNumber: false
+      }
+    )
+  end
+end
