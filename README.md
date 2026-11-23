@@ -16,6 +16,10 @@ yarn start
 
 Or `yarn build` for production build.
 
+## iOS releases
+
+Use the [iOS release workflow](docs/ios-release.md) to upload to TestFlight or submit an App Store update.
+
 ## Service audio
 
 See [service recordings and word alignment](docs/service-audio.md) for playback behavior and the optional local annotation workflow.
