@@ -1,83 +1,32 @@
-import { Plugins } from '@capacitor/core';
-import 'capacitor-data-storage-sqlite';
+import { Capacitor, registerPlugin } from '@capacitor/core';
+import LocalForage from 'jeep-localforage';
 
-const { CapacitorDataStorageSqlite } = Plugins;
-
-const StorageAPIWrapper = (storage) => ({
-    openStore: (options, cb) => {
-        storage
-            .openStore(options)
-            .then(({ result }) => cb(result))
-            .catch(cb);
-    },
-    setTable: (table, cb) => {
-        storage
-            .setTable(table)
-            .then(({ result, message }) => cb(result, message))
-            .catch(cb);
-    },
-    getAllKeys: (cb) => {
-        storage
-            .keys()
-            .then(({ keys }) => cb(keys))
-            .catch(cb);
-    },
-    getAllValues: (cb) => {
-        storage
-            .values()
-            .then(({ values }) => cb(values))
-            .catch(cb);
-    },
-    getFilterValues: (filter, cb) => {
-        storage
-            .filtervalues(filter)
-            .then(({ values }) => cb(values))
-            .catch(cb);
-    },
-    getAllKeysValues: (cb) => {
-        storage
-            .keysvalues()
-            .then(({ keysvalues }) => cb(keysvalues))
-            .catch(cb);
-    },
-    getItem: (key, cb) => {
-        storage
-            .get({ key })
-            .then(({ value }) => cb(value))
-            .catch(cb);
-    },
-    setItem: (key, value, cb) => {
-        storage
-            .set({ key, value })
-            .then(({ result }) => cb(result))
-            .catch(cb);
-    },
-    isKey: (key, cb) => {
-        storage
-            .iskey({ key })
-            .then(({ result }) => cb(result))
-            .catch(cb);
-    },
-    removeItem: (key, cb) => {
-        storage
-            .remove({ key })
-            .then(({ result }) => cb(result))
-            .catch(cb);
-    },
-    clear: (cb) => {
-        storage
-            .clear()
-            .then(({ result }) => cb(result))
-            .catch(cb);
-    },
-    deleteStore: (options, cb) => {
-        storage
-            .deleteStore(options)
-            .then(({ result }) => cb(result))
-            .catch(cb);
-    },
+// Keep the database and table names used by the previous Capacitor plugin.
+const webStore = LocalForage.createInstance({
+    name: 'pbIDB',
+    storeName: 'requestsCache',
+    driver: [LocalForage.INDEXEDDB, LocalForage.WEBSQL],
 });
 
-const wrapper = new StorageAPIWrapper(CapacitorDataStorageSqlite);
+interface RequestCachePlugin {
+    get(options: { key: string }): Promise<{ value: string | null }>;
+    set(options: { key: string; value: string }): Promise<void>;
+}
 
-export default () => wrapper;
+const nativeStore = registerPlugin<RequestCachePlugin>('RequestCache');
+
+export default {
+    async getItem(key: string) {
+        if (Capacitor.getPlatform() === 'ios') {
+            return (await nativeStore.get({ key })).value;
+        }
+        return webStore.getItem<string>(key);
+    },
+    async setItem(key: string, value: string) {
+        if (Capacitor.getPlatform() === 'ios') {
+            await nativeStore.set({ key, value });
+        } else {
+            await webStore.setItem(key, value);
+        }
+    },
+};

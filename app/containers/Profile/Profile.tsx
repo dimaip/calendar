@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { css } from 'emotion';
 import { useQuery } from 'convex/react';
 import { useTheme } from 'emotion-theming';
@@ -649,8 +649,16 @@ const Inner = () => {
         }).filter((anchor) => anchor.date <= today),
     ].filter((anchor, index, anchors) => index === 0 || anchor.left !== anchors[index - 1].left));
 
+    const attemptedAutomaticSignIn = useRef(false);
     useEffect(() => {
-        if (!signingOut && !session.isLoading && !profile) {
+        if (
+            !signingOut &&
+            !session.isLoading &&
+            !profile &&
+            !session.signInFailed &&
+            !attemptedAutomaticSignIn.current
+        ) {
+            attemptedAutomaticSignIn.current = true;
             void session.signIn();
         }
     }, [profile, session, signingOut]);
@@ -659,7 +667,24 @@ const Inner = () => {
         return <Loader />;
     }
     if (!profile) {
-        return <Loader />;
+        return (
+            <div
+                className={css`
+                    padding: 24px 16px;
+                    color: ${text};
+                    background: ${pageBg};
+                `}
+            >
+                {session.signInFailed && <p role="alert">Не удалось войти. Попробуйте ещё раз.</p>}
+                <Button
+                    onClick={() => {
+                        void session.signIn();
+                    }}
+                >
+                    Войти
+                </Button>
+            </div>
+        );
     }
 
     const signOut = () => {

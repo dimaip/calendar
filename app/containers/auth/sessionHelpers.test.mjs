@@ -12,6 +12,8 @@ import {
 test('hasCodeInUrl detects callback params in search and hash', () => {
     assert.equal(hasCodeInUrl({ search: '?code=abc', hash: '' }), true);
     assert.equal(hasCodeInUrl({ search: '', hash: '#session_state=123' }), true);
+    assert.equal(hasCodeInUrl({ search: '?error=access_denied&state=abc', hash: '' }), true);
+    assert.equal(hasCodeInUrl({ search: '?error=unrelated', hash: '' }), false);
     assert.equal(hasCodeInUrl({ search: '', hash: '#/profile' }), false);
 });
 

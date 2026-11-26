@@ -1,21 +1,26 @@
 import React, { useEffect } from 'react';
 import { HashRouter } from 'react-router-dom';
 import Pullable from 'react-pullable';
-import ScrollRestoration from 'components/ScrollRestoration/ScrollRestoration';
+
 import 'styles/reset.css';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { Plugins } from '@capacitor/core';
+import { SplashScreen } from '@capacitor/splash-screen';
+import { Capacitor } from '@capacitor/core';
+import { captureException } from '@sentry/react';
 import { useSetRecoilState } from 'recoil';
-import pendingUpdateState from 'state/pendingUpdateState';
-import checkVersion from 'checkVersion';
-import precache from 'precache';
-import isDarkMode from 'utils/isDarkMode';
 
+import { startIosLiveUpdates } from '../iosLiveUpdates';
 import Routes from '../Routes';
 
 import { SyncWithDB } from './RecoilSync';
 import { AuthProvider } from './AuthProvider';
 import { ConvexClientProvider } from './HabitTracker/ConvexClientProvider';
+
+import pendingUpdateState from 'state/pendingUpdateState';
+import checkVersion from 'checkVersion';
+import precache from 'precache';
+import isDarkMode from 'utils/isDarkMode';
+import ScrollRestoration from 'components/ScrollRestoration/ScrollRestoration';
 
 const queryClient = new QueryClient({
     defaultOptions: {
@@ -36,7 +41,10 @@ export default () => {
             loader.style.display = 'none';
             reactRoot.style.display = 'block';
         }
-        void Plugins.SplashScreen.hide();
+        if (Capacitor.getPlatform() === 'ios') {
+            void SplashScreen.hide().catch(captureException);
+            void startIosLiveUpdates();
+        }
     }, []);
     const dark = isDarkMode();
     return (
