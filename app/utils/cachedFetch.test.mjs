@@ -23,16 +23,17 @@ function environment() {
     };
     const exports = {};
     const wrapper = {
-        openStore(_options, callback) {
-            callback(state.storeError ? new Error('Store unavailable') : true);
+        async getItem(key) {
+            if (state.storeError) throw new Error('Unable to open the store');
+            return values.get(key) ?? null;
         },
-        getItem(key, callback) {
-            callback(values.get(key) ?? null);
-        },
-        setItem(key, value, callback) {
-            writes.push(() => {
-                values.set(key, value);
-                callback(true);
+        async setItem(key, value) {
+            if (state.storeError) throw new Error('Unable to open the store');
+            await new Promise((resolve) => {
+                writes.push(() => {
+                    values.set(key, value);
+                    resolve();
+                });
             });
         },
     };
@@ -51,7 +52,7 @@ function environment() {
         JSON,
         require(id) {
             assert.equal(id, './StorageAPIWrapper');
-            return { default: () => wrapper };
+            return { default: wrapper };
         },
         navigator: {
             get onLine() {
@@ -137,7 +138,7 @@ test('a stalled network request times out rather than hanging the whole refresh'
 test('an error opening storage settles background work and rejects foreground work', async () => {
     const env = environment();
     env.state.storeError = true;
-    assert.equal(await env.cachedFetch('day', 'PREFETCH_RELOAD'), undefined);
+    assert.equal(await env.cachedFetch('day', 'PREFETCH_NORMAL'), undefined);
     await assert.rejects(env.cachedFetch('day'), /Unable to open/);
     assert.equal(env.requests.length, 0);
 });

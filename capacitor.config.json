@@ -1,10 +1,21 @@
 {
   "appId": "com.pb.orthodox",
   "appName": "ПБ",
-  "bundledWebRuntime": false,
-  "npmClient": "yarn",
   "webDir": "www",
+  "server": {
+    "hostname": "localhost",
+    "iosScheme": "capacitor"
+  },
   "ios": {
     "contentInset": "never"
+  },
+  "plugins": {
+    "CapacitorUpdater": {
+      "autoUpdate": false,
+      "statsUrl": "",
+      "appReadyTimeout": 20000,
+      "autoDeleteFailed": false,
+      "resetWhenUpdate": true
+    }
   }
 }

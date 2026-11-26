@@ -1,6 +1,11 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { User, UserManager, WebStorageStateStore } from 'oidc-client-ts';
+import { INavigator, IWindow, User, UserManager, WebStorageStateStore } from 'oidc-client-ts';
+import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
+
+import { iosAuthState, parseIosAuthCallback } from './auth/iosAuthCallback';
+
 import {
     buildLogoutUrl,
     getUserToken,
@@ -11,28 +16,50 @@ import {
 } from 'containers/auth/sessionHelpers';
 import { renewOidcUser } from 'utils/renewOidcUser';
 
+const useIosAuthCallback = Capacitor.getPlatform() === 'ios' && Capacitor.isPluginAvailable('App');
+const iosRedirectNavigator: INavigator = {
+    async prepare() {
+        return Promise.resolve<IWindow>({
+            async navigate({ url }) {
+                // Capacitor sends this external URL to the system browser. The WebView stays alive.
+                window.location.assign(url);
+                return Promise.resolve({ url });
+            },
+            close() {
+                // Safari is owned by the system and closes independently of this navigator.
+            },
+        });
+    },
+    async callback() {
+        return Promise.resolve();
+    },
+};
 const clientId = '229793417436135450@pb';
 const scope = 'offline_access openid profile email urn:zitadel:iam:org:id:229787051975770138';
 
-const userManager = new UserManager({
-    userStore: new WebStorageStateStore({ store: window.localStorage }),
-    authority: process.env.Z_URL || '',
-    client_id: clientId,
-    redirect_uri: process.env.PUBLIC_URL || '',
-    silent_redirect_uri: process.env.PUBLIC_URL,
-    post_logout_redirect_uri: process.env.PUBLIC_URL,
-    response_type: 'code',
-    scope,
-    loadUserInfo: true,
-    automaticSilentRenew: false,
-    includeIdTokenInSilentRenew: true,
-});
+const userManager = new UserManager(
+    {
+        userStore: new WebStorageStateStore({ store: window.localStorage }),
+        authority: process.env.Z_URL || '',
+        client_id: clientId,
+        redirect_uri: process.env.PUBLIC_URL || '',
+        silent_redirect_uri: process.env.PUBLIC_URL,
+        post_logout_redirect_uri: process.env.PUBLIC_URL,
+        response_type: 'code',
+        scope,
+        loadUserInfo: true,
+        automaticSilentRenew: false,
+        includeIdTokenInSilentRenew: true,
+    },
+    useIosAuthCallback ? iosRedirectNavigator : undefined
+);
 
 interface SessionContextValue {
     isAuthenticated: boolean;
     isLoading: boolean;
     profile: User['profile'] | null;
     signIn: () => Promise<void>;
+    signInFailed: boolean;
     signOut: () => Promise<void>;
     token: string | null;
     user: User | null;
@@ -50,6 +77,8 @@ const SessionProvider = ({ children }: { children: React.ReactNode }) => {
     // - expose an explicit "renew token" path for callers recovering from auth failure
     const history = useHistory();
     const [currentUser, setCurrentUser] = useState<User | null>(null);
+    const [signInFailed, setSignInFailed] = useState(false);
+    const signInPending = useRef(false);
     const [status, setStatus] = useState<SessionStatus>('loading');
     const [reauthRequired, setReauthRequired] = useState(false);
     const currentUserRef = useRef<User | null>(null);
@@ -63,6 +92,7 @@ const SessionProvider = ({ children }: { children: React.ReactNode }) => {
         reauthRequiredRef.current = false;
         setCurrentUser(user);
         setStatus('authenticated');
+        setSignInFailed(false);
         setReauthRequired(false);
     }, []);
 
@@ -142,9 +172,18 @@ const SessionProvider = ({ children }: { children: React.ReactNode }) => {
     }, [transitionToExpired]);
 
     const signIn = useCallback(async () => {
+        if (signInPending.current) return;
+        signInPending.current = true;
         reauthRequiredRef.current = false;
         setReauthRequired(false);
-        await userManager.signinRedirect();
+        setSignInFailed(false);
+        try {
+            await userManager.signinRedirect(useIosAuthCallback ? { url_state: iosAuthState } : undefined);
+        } catch {
+            setSignInFailed(true);
+        } finally {
+            signInPending.current = false;
+        }
     }, []);
 
     const signOut = useCallback(async () => {
@@ -166,8 +205,8 @@ const SessionProvider = ({ children }: { children: React.ReactNode }) => {
         let active = true;
 
         const bootstrap = async () => {
+            const isCallback = hasCodeInUrl(window.location);
             try {
-                const isCallback = hasCodeInUrl(window.location);
                 const user = isCallback ? await userManager.signinCallback() : await userManager.getUser();
 
                 if (!active) {
@@ -210,6 +249,11 @@ const SessionProvider = ({ children }: { children: React.ReactNode }) => {
                     return;
                 }
 
+                if (isCallback) {
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                    setSignInFailed(true);
+                    history.replace('/profile');
+                }
                 transitionToExpired({ requiresReauth: isTerminalRenewError(error) });
             }
         };
@@ -262,10 +306,45 @@ const SessionProvider = ({ children }: { children: React.ReactNode }) => {
             }
         });
 
-        void bootstrap();
+        const bootstrapped = bootstrap();
+        const seenCallbacks = new Set<string>();
+        const finishIosSignIn = async (url: string) => {
+            const callback = parseIosAuthCallback(url);
+            if (!callback || !active || seenCallbacks.has(callback.state)) return;
+            seenCallbacks.add(callback.state);
+
+            await bootstrapped;
+            if (!active) return;
+            try {
+                const user = await userManager.signinRedirectCallback(callback.url);
+                if (!active) return;
+                transitionToAuthenticated(user);
+            } catch {
+                if (!active) return;
+                setSignInFailed(true);
+            }
+            history.replace('/profile');
+        };
+        const iosListener = useIosAuthCallback
+            ? App.addListener('appUrlOpen', ({ url }) => {
+                  void finishIosSignIn(url);
+              })
+            : undefined;
+        if (iosListener) {
+            // The callback can launch a terminated app or resume an already running one.
+            void iosListener
+                .then(async () => App.getLaunchUrl())
+                .then(async (launch) => {
+                    if (launch) return finishIosSignIn(launch.url);
+                })
+                .catch(() => {
+                    if (active) setSignInFailed(true);
+                });
+        }
 
         return () => {
             active = false;
+            void iosListener?.then(async (listener) => listener.remove()).catch(() => undefined);
             removeUserLoaded();
             removeUserUnloaded();
             removeUserSignedOut();
@@ -284,11 +363,12 @@ const SessionProvider = ({ children }: { children: React.ReactNode }) => {
             profile: currentUser?.profile ?? null,
             renewToken,
             signIn,
+            signInFailed,
             signOut,
             token: getUserToken(currentUser),
             user: currentUser,
         }),
-        [currentUser, expire, getToken, renewToken, signIn, signOut, status]
+        [currentUser, expire, getToken, renewToken, signIn, signInFailed, signOut, status]
     );
 
     return <SessionContext.Provider value={value}>{children}</SessionContext.Provider>;
