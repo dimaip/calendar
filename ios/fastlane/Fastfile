@@ -45,6 +45,12 @@ platform :ios do
     end
 
     if submit_to_store
+      encryption = ENV.fetch("IOS_USES_NON_EXEMPT_ENCRYPTION", "")
+      submission_information = {}
+      if encryption == "true" || encryption == "false"
+        submission_information[:export_compliance_uses_encryption] = encryption == "true"
+      end
+
       upload_to_app_store(
         api_key: api_key,
         app_identifier: APP_IDENTIFIER,
@@ -56,7 +62,9 @@ platform :ios do
         force: true,
         run_precheck_before_submit: false,
         submit_for_review: true,
-        automatic_release: true
+        automatic_release: true,
+        phased_release: ENV.fetch("IOS_PHASED_RELEASE", "false") == "true",
+        submission_information: submission_information
       )
     end
 
